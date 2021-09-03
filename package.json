@@ -1,0 +1,22 @@
+{
+  "name": "minecraft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OscarNOW/minecraft.git"
+  },
+  "author": "Oscar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OscarNOW/minecraft/issues"
+  },
+  "homepage": "https://github.com/OscarNOW/minecraft#readme",
+  "dependencies": {
+    "minecraft-protocol": "^1.26.5"
+  }
+}
