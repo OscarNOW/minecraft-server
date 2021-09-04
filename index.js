@@ -1,48 +1,24 @@
-var mc = require('minecraft-protocol');
-var server = mc.createServer({
-    'online-mode': true,   // optional
-    encryption: true,      // optional
-    host: 'localhost',       // optional
-    port: 25565,           // optional
-    version: '1.16.3'
+const mc = require('./src/class');
+let chunk = new (mc.Chunk)();
+
+for (let x = 0; x < 16; x++)
+    for (let z = 0; z < 16; z++) {
+        for (let y = 1; y <= 99; y++)
+            chunk.setBlock('dirt', { x, y, z })
+        chunk.setBlock('stone', { x, y: 100, z })
+    }
+
+const server = new (mc.Server)({
+    motd: {
+        text: '&r&6&lHoi ik ben &nOscar',
+        players: 0
+    }
 });
-const mcData = require('minecraft-data')(server.version)
 
-server.on('login', client => {
-
-    let loginPacket = mcData.loginPacket
-
-    client.write('login', {
-        entityId: client.id,
-        isHardcore: false,
-        gameMode: 0,
-        previousGameMode: 255,
-        worldNames: loginPacket.worldNames,
-        dimensionCodec: loginPacket.dimensionCodec,
-        dimension: loginPacket.dimension,
-        worldName: 'minecraft:overworld',
-        hashedSeed: [0, 0],
-        maxPlayers: server.maxPlayers,
-        viewDistance: 10,
-        reducedDebugInfo: false,
-        enableRespawnScreen: true,
-        isDebug: false,
-        isFlat: false
-    });
-    client.write('position', {
-        x: 0,
-        y: 1.62,
-        z: 0,
-        yaw: 0,
-        pitch: 0,
-        flags: 0x00
-    });
-    var msg = {
-        translate: 'chat.type.announcement',
-        "with": [
-            'Server',
-            'Hello, world!'
-        ]
-    };
-    client.write("chat", { message: JSON.stringify(msg), position: 0, sender: '0' });
-});
+server.on('join', client => {
+    client.chunk(chunk, { x: 0, z: 0 })
+    client.chunk(chunk, { x: 0, z: -1 })
+    client.chunk(chunk, { x: -1, z: 0 })
+    client.chunk(chunk, { x: -1, z: -1 })
+    client.teleport({ x: 0, y: 120, z: 0 })
+})
