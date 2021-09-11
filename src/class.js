@@ -1,5 +1,5 @@
 const mc = require('minecraft-protocol');
-const version = '1.16.3';
+const version = '1.16.5';
 const mcData = require('minecraft-data')(version);
 const blocks = require('./blocks.json');
 const entities = require('./entities.json');
@@ -119,30 +119,33 @@ class Client {
                 })
         })
 
-        this.client.on('position', ({ x, y, z, onGround }) => {
-            if (!(this.position.x == x && this.position.y == y && this.position.z == z && this.position.onGround == onGround)) {
-                this.position.x = x;
-                this.position.y = y;
-                this.position.z = z;
-                this.position.onGround = onGround;
+        this.client.on('position', this.emitMove);
+        this.client.on('position_look', this.emitMove);
+        this.client.on('look', this.emitMove);
+        this.client.on('flying', this.emitMove);
 
-                this.events.move.forEach(val => {
-                    val();
-                })
+    }
+
+    emitMove(info) {
+        let changed = false;
+        [
+            'x',
+            'y',
+            'z',
+            'pitch',
+            'yaw',
+            'onGround'
+        ].forEach(val => {
+            if (info[val] !== undefined && this.position[val] != info[val]) {
+                changed = true;
+                this.position[val] = info[val];
             }
         });
 
-        this.client.on('look', ({ yaw, pitch }) => {
-            if (!(this.position.yaw == yaw && this.position.pitch == pitch)) {
-                this.position.yaw = yaw;
-                this.position.pitch = pitch;
-
-                this.events.move.forEach(val => {
-                    val();
-                })
-            }
-        })
-
+        if (changed)
+            this.events.move.forEach(val => {
+                val();
+            })
     }
 
     on(event, callback) {
@@ -180,6 +183,9 @@ class Client {
     }
 
     teleport({ x, y, z }) {
+        this.position.x = x;
+        this.position.y = y;
+        this.position.z = z;
         this.client.write('position', {
             x,
             y,

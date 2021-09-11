@@ -16,6 +16,7 @@ declare class Client {
         pitch: Number;
     };
     entities: Entity[];
+    private emitMove(info: Object): void;
     kick(reason: String): void;
     chat(message: String): void;
     chunk(chunk: Chunk, { x, z }: {
