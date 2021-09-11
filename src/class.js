@@ -5,6 +5,7 @@ const blocks = require('./blocks.json');
 const entities = require('./entities.json');
 const prismarineChunk = require('prismarine-chunk')(version);
 const Vec3 = require('vec3');
+const { v4: uuid } = require('uuid');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Server {
@@ -14,7 +15,8 @@ class Server {
         this.motd = { text: parsedText, players };
 
         this.events = {
-            join: []
+            join: [],
+            leave: []
         }
 
         this.server = mc.createServer({
@@ -47,7 +49,7 @@ class Server {
                 isDebug: false,
                 isFlat: false
             });
-            let customClient = new Client(client);
+            let customClient = new Client(client, this);
 
             this.events.join.forEach(val => {
                 val(customClient)
@@ -67,29 +69,43 @@ class Server {
 }
 
 class Client {
-    constructor(client) {
+    constructor(client, server) {
         this.client = client;
+        this.server = server;
 
         this.skin = this.client.profile.properties[0].value;
         this.username = this.client.username;
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
+
+        (async () => {
+            while (this.online)
+                await wait(500)
+
+            this.events.leave.forEach(val => {
+                val();
+            });
+            this.server.events.leave.forEach(val => {
+                val(this);
+            })
+        })();
+
         this.position = {
             x: null,
             y: null,
             z: null,
-            onGround: null
-        };
-        this.rotation = {
+            onGround: null,
             yaw: null,
             pitch: null
-        }
+        };
+
+        this.entities = [];
 
         this.events = {
             chat: [],
             command: [],
             move: [],
-            rotate: []
+            leave: []
         }
 
         this.client.on('chat', ({ message }) => {
@@ -117,11 +133,11 @@ class Client {
         });
 
         this.client.on('look', ({ yaw, pitch }) => {
-            if (!(this.rotation.yaw == yaw && this.rotation.pitch == pitch)) {
-                this.rotation.yaw = yaw;
-                this.rotation.pitch = pitch;
+            if (!(this.position.yaw == yaw && this.position.pitch == pitch)) {
+                this.position.yaw = yaw;
+                this.position.pitch = pitch;
 
-                this.events.rotate.forEach(val => {
+                this.events.move.forEach(val => {
                     val();
                 })
             }
@@ -174,20 +190,20 @@ class Client {
         });
     }
 
-    entity(name, { x, y, z }) {
-        let entity = getEntity(name);
-        if (entity === undefined) throw new Error(`Unknown entity "${name}"`);
+    entity(entity) {
+        this.entities.push(entity);
+        entity.clients.push(this);
 
         if (entity.living)
             this.client.write('spawn_entity_living', {
                 entityId: 1,
-                entityUUID: '7ea356f3-e7c8-4f7a-b5be-4551e63c5e54',
+                entityUUID: entity.uuid,
                 type: entity.id,
-                x,
-                y,
-                z,
-                yaw: 0,
-                pitch: 0,
+                x: entity.position.x,
+                y: entity.position.y,
+                z: entity.position.z,
+                yaw: entity.position.yaw,
+                pitch: entity.position.pitch,
                 headPitch: 0,
                 velocityX: 0,
                 velocityY: 0,
@@ -196,18 +212,72 @@ class Client {
         else
             this.client.write('spawn_entity', {
                 entityId: 3,
-                objectUUID: 'eb7b1ec7-9cda-43fa-97bb-ec4979c4813e',
+                objectUUID: entity.uuid,
                 type: entity.id,
-                x,
-                y,
-                z,
-                pitch: 0,
-                yaw: 0,
+                x: entity.position.x,
+                y: entity.position.y,
+                z: entity.position.z,
+                pitch: entity.position.pitch,
+                yaw: entity.position.yaw,
                 objectData: 0,
                 velocityX: 0,
                 velocityY: 0,
                 velocityZ: 0
             })
+    }
+
+    get online() {
+        return this.client.socket.readyState == 'open';
+    }
+}
+
+class Entity {
+    constructor(type, { x, y, z, yaw, pitch }) {
+        let e = getEntity(type);
+        if (e === undefined) throw new Error(`Unknown entity "${type}"`)
+
+        this.position = { x, y, z, yaw, pitch };
+        this.type = type;
+        this.living = e.living;
+        this.id = e.id;
+        this.clients = [];
+        this.uuid = uuid();
+    }
+
+    teleport({ x, y, z, yaw, pitch }) {
+        this.position = { x, y, z, yaw, pitch }
+        this.clients.forEach(val => {
+            if (this.living)
+                val.client.write('spawn_entity_living', {
+                    entityId: 1,
+                    entityUUID: this.uuid,
+                    type: this.id,
+                    x,
+                    y,
+                    z,
+                    yaw,
+                    pitch,
+                    headPitch: 0,
+                    velocityX: 0,
+                    velocityY: 0,
+                    velocityZ: 0
+                })
+            else
+                val.client.write('spawn_entity', {
+                    entityId: 3,
+                    objectUUID: this.uuid,
+                    type: this.id,
+                    x,
+                    y,
+                    z,
+                    pitch,
+                    yaw,
+                    objectData: 0,
+                    velocityX: 0,
+                    velocityY: 0,
+                    velocityZ: 0
+                })
+        })
     }
 }
 
@@ -245,14 +315,14 @@ function getBlockId(blockName) {
     return undefined;
 }
 
-function getEntity(entityName) {
-    if (entities[entityName])
-        return entities[entityName]
+function getEntity(type) {
+    if (entities[type])
+        return entities[type]
 
     return undefined;
 }
 
-module.exports = { Server, Chunk }
+module.exports = { Server, Chunk, Entity }
 
 let replacements = [
     '4',

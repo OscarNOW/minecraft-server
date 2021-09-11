@@ -20,10 +20,8 @@ const server = new (mc.Server)({
 
 server.on('join', client => {
 
-    let loadedChunks = [];
-    loadedChunks.push('0;0')
-    client.chunk(chunk, { x: 0, z: 0 })
-    client.entity('ender_dragon', { x: 10, y: 103, z: 10 })
+    let entity = new (mc.Entity)('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });
+    client.entity(entity);
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0 });
@@ -34,6 +32,9 @@ server.on('join', client => {
         client.chat(`§r§6§l${client.username}§r§6: §r§7${message}`)
     })
 
+    let loadedChunks = [];
+    loadedChunks.push('0;0')
+    client.chunk(chunk, { x: 0, z: 0 })
     client.on('move', () => {
         for (let xOffset = -10; xOffset <= 10; xOffset++)
             for (let zOffset = -10; zOffset <= 10; zOffset++) {
