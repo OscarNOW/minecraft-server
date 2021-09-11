@@ -13,6 +13,7 @@ class Server {
         let parsedText = parseColorText(text);
 
         this.motd = { text: parsedText, players };
+        this.clients = [];
 
         this.events = {
             join: [],
@@ -51,6 +52,8 @@ class Server {
             });
             let customClient = new Client(client, this);
 
+            this.clients.push(customClient);
+
             this.events.join.forEach(val => {
                 val(customClient)
             });
@@ -64,7 +67,7 @@ class Server {
     }
 
     get playerCount() {
-        return this.server.playerCount;
+        return this.clients.length;
     }
 }
 
@@ -82,6 +85,7 @@ class Client {
             while (this.online)
                 await wait(500)
 
+            this.server.clients = this.server.clients.filter(client => client.uuid != this.uuid);
             this.events.leave.forEach(val => {
                 val();
             });
@@ -119,10 +123,10 @@ class Client {
                 })
         })
 
-        this.client.on('position', this.emitMove);
-        this.client.on('position_look', this.emitMove);
-        this.client.on('look', this.emitMove);
-        this.client.on('flying', this.emitMove);
+        this.client.on('position', i => this.emitMove(i));
+        this.client.on('position_look', i => this.emitMove(i));
+        this.client.on('look', i => this.emitMove(i));
+        this.client.on('flying', i => this.emitMove(i));
 
     }
 

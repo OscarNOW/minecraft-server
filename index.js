@@ -18,6 +18,13 @@ const server = new (mc.Server)({
     }
 });
 
+(async () => {
+    while (true) {
+        await wait(500);
+        console.log(server.clients.length)
+    }
+})();
+
 server.on('join', client => {
 
     let entity = new (mc.Entity)('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });

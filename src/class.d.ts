@@ -63,6 +63,8 @@ export class Server {
             players: Number;
         };
     });
+    clients: Client[];
+    playerCount: Number;
     motd: {
         text: String;
         players: Number;
