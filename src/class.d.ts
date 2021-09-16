@@ -46,6 +46,13 @@ export class Entity {
     private uuid: String;
     private clients: Client[];
     type: entityType;
+    position: {
+        x: Number;
+        y: Number;
+        z: Number;
+        yaw: Number;
+        pitch: Number;
+    }
 
     teleport({ x, y, z, yaw, pitch }: {
         x: Number;
@@ -54,6 +61,8 @@ export class Entity {
         yaw: Number;
         pitch: Number;
     }): void;
+
+    private addClient(client: Client): void;
 }
 
 export class Server {

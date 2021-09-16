@@ -1,5 +1,5 @@
 const mc = require('minecraft-protocol');
-const version = '1.16.5';
+const version = '1.16.3';
 const mcData = require('minecraft-data')(version);
 const blocks = require('./blocks.json');
 const entities = require('./entities.json');
@@ -67,6 +67,9 @@ class Server {
     }
 
     get playerCount() {
+        if (this.server.playerCount != this.clients.length)
+            throw new Error('Internal error (x01)')
+
         return this.clients.length;
     }
 }
@@ -202,38 +205,7 @@ class Client {
 
     entity(entity) {
         this.entities.push(entity);
-        entity.clients.push(this);
-
-        if (entity.living)
-            this.client.write('spawn_entity_living', {
-                entityId: 1,
-                entityUUID: entity.uuid,
-                type: entity.id,
-                x: entity.position.x,
-                y: entity.position.y,
-                z: entity.position.z,
-                yaw: entity.position.yaw,
-                pitch: entity.position.pitch,
-                headPitch: 0,
-                velocityX: 0,
-                velocityY: 0,
-                velocityZ: 0
-            })
-        else
-            this.client.write('spawn_entity', {
-                entityId: 3,
-                objectUUID: entity.uuid,
-                type: entity.id,
-                x: entity.position.x,
-                y: entity.position.y,
-                z: entity.position.z,
-                pitch: entity.position.pitch,
-                yaw: entity.position.yaw,
-                objectData: 0,
-                velocityX: 0,
-                velocityY: 0,
-                velocityZ: 0
-            })
+        entity.addClient(this);
     }
 
     get online() {
@@ -255,39 +227,85 @@ class Entity {
     }
 
     teleport({ x, y, z, yaw, pitch }) {
-        this.position = { x, y, z, yaw, pitch }
-        this.clients.forEach(val => {
-            if (this.living)
-                val.client.write('spawn_entity_living', {
+        // console.log('teleporting', { x, y, z });
+        let samePosition =
+            this.position.x == x &&
+            this.position.y == y &&
+            this.position.z == z;
+
+        let sameRotation =
+            this.position.yaw == yaw &&
+            this.position.pitch == pitch;
+
+        if (samePosition && sameRotation) return
+        else if (samePosition)
+            this.clients.forEach(val => {
+                val.client.write('entity_look', {
                     entityId: 1,
-                    entityUUID: this.uuid,
-                    type: this.id,
-                    x,
-                    y,
-                    z,
+                    onGround: onGround({ x, y, z }),
                     yaw,
-                    pitch,
-                    headPitch: 0,
-                    velocityX: 0,
-                    velocityY: 0,
-                    velocityZ: 0
+                    pitch
                 })
-            else
-                val.client.write('spawn_entity', {
-                    entityId: 3,
-                    objectUUID: this.uuid,
-                    type: this.id,
-                    x,
-                    y,
-                    z,
-                    pitch,
+            })
+        else if (sameRotation)
+            this.clients.forEach(val => {
+                val.client.write('rel_entity_move', {
+                    entityId: 1,
+                    onGround: onGround({ x, y, z }),
+                    dX: x - this.position.x,
+                    dY: y - this.position.y,
+                    dZ: z - this.position.z
+                })
+            })
+        else
+            this.clients.forEach(val => {
+                val.client.write('entity_move_look', {
+                    entityId: 1,
+                    onGround: onGround({ x, y, z }),
+                    dX: x - this.position.x,
+                    dY: y - this.position.y,
+                    dZ: z - this.position.z,
                     yaw,
-                    objectData: 0,
-                    velocityX: 0,
-                    velocityY: 0,
-                    velocityZ: 0
+                    pitch
                 })
-        })
+            })
+
+        this.position = { x, y, z, yaw, pitch }
+    }
+
+    addClient(client) {
+        this.clients.push(client)
+        if (this.living)
+            client.client.write('spawn_entity_living', {
+                entityId: 1,
+                entityUUID: this.uuid,
+                type: this.id,
+                x: this.position.x,
+                y: this.position.y,
+                z: this.position.z,
+                yaw: this.position.yaw,
+                pitch: this.position.pitch,
+                headPitch: 0,
+                velocityX: 0,
+                velocityY: 0,
+                velocityZ: 0
+            })
+        else
+            client.client.write('spawn_entity', {
+                entityId: 3,
+                objectUUID: this.uuid,
+                type: this.id,
+                x: this.position.x,
+                y: this.position.y,
+                z: this.position.z,
+                pitch: this.position.pitch,
+                yaw: this.position.yaw,
+                objectData: 0,
+                velocityX: 0,
+                velocityY: 0,
+                velocityZ: 0
+            })
+
     }
 }
 
@@ -330,6 +348,10 @@ function getEntity(type) {
         return entities[type]
 
     return undefined;
+}
+
+function onGround({ x, y, z }) {
+    return true;
 }
 
 module.exports = { Server, Chunk, Entity }

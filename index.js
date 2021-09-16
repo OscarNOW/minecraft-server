@@ -1,4 +1,5 @@
 const mc = require('./src/class');
+const chunkLoad = 3;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 let chunk = new (mc.Chunk)();
 
@@ -18,13 +19,6 @@ const server = new (mc.Server)({
     }
 });
 
-(async () => {
-    while (true) {
-        await wait(500);
-        console.log(server.clients.length)
-    }
-})();
-
 server.on('join', client => {
 
     let entity = new (mc.Entity)('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });
@@ -32,7 +26,14 @@ server.on('join', client => {
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0 });
-    }, 1800)
+    }, 1800);
+
+    (async () => {
+        while (client.online) {
+            await wait(25);
+            entity.teleport({ x: entity.position.x, y: entity.position.y, z: entity.position.z - 0.2 })
+        }
+    })();
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)
     client.on('chat', message => {
@@ -43,8 +44,8 @@ server.on('join', client => {
     loadedChunks.push('0;0')
     client.chunk(chunk, { x: 0, z: 0 })
     client.on('move', () => {
-        for (let xOffset = -10; xOffset <= 10; xOffset++)
-            for (let zOffset = -10; zOffset <= 10; zOffset++) {
+        for (let xOffset = -chunkLoad; xOffset <= chunkLoad; xOffset++)
+            for (let zOffset = -chunkLoad; zOffset <= chunkLoad; zOffset++) {
 
                 let chunkX = Math.floor(client.position.x / 16) + xOffset;
                 let chunkZ = Math.floor(client.position.z / 16) + zOffset;
