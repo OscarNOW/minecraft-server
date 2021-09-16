@@ -28,13 +28,19 @@ declare class Client {
         y: Number;
         z: Number;
     }): void;
-    entity(entity: Entity): void;
+    entity(entityType: entityType, { x, y, z, yaw, pitch }: {
+        x: Number;
+        y: Number;
+        z: Number;
+        yaw: Number;
+        pitch: Number;
+    }): Number;
     on(event: 'chat' | 'command', callback: (message: String) => void): void;
     on(event: 'move' | 'leave', callback: () => void): void;
 }
 
-export class Entity {
-    constructor(type: entityType, { x, y, z, yaw, pitch }: {
+declare class Entity {
+    constructor(client: Client, type: entityType, { x, y, z, yaw, pitch }: {
         x: Number;
         y: Number;
         z: Number;
@@ -44,7 +50,7 @@ export class Entity {
     private living: Boolean;
     private id: Number;
     private uuid: String;
-    private clients: Client[];
+    client: Client;
     type: entityType;
     position: {
         x: Number;
@@ -61,8 +67,6 @@ export class Entity {
         yaw: Number;
         pitch: Number;
     }): void;
-
-    private addClient(client: Client): void;
 }
 
 export class Server {

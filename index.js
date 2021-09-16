@@ -21,8 +21,8 @@ const server = new (mc.Server)({
 
 server.on('join', client => {
 
-    let entity = new (mc.Entity)('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });
-    client.entity(entity);
+    let entityId = client.entity('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });
+    let entity = client.entities[entityId];
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0 });
