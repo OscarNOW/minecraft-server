@@ -21,19 +21,9 @@ const server = new (mc.Server)({
 
 server.on('join', client => {
 
-    let entityId = client.entity('ender_dragon', { x: 10, y: 103, z: 10, yaw: 0, pitch: 0 });
-    let entity = client.entities[entityId];
-
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0 });
     }, 1800);
-
-    (async () => {
-        while (client.online) {
-            await wait(25);
-            entity.teleport({ x: entity.position.x, y: entity.position.y, z: entity.position.z - 0.2 })
-        }
-    })();
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)
     client.on('chat', message => {

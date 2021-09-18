@@ -260,7 +260,8 @@ class Entity {
     }
 
     teleport({ x, y, z, yaw, pitch }) {
-        // console.log('teleporting', { x, y, z });
+        throw new Error('Not implemented')
+
         let samePosition =
             this.position.x == x &&
             this.position.y == y &&
@@ -274,14 +275,14 @@ class Entity {
         else if (samePosition)
             this.client.client.write('entity_look', {
                 entityId: 1,
-                onGround: onGround({ x, y, z }),
+                onGround: false,
                 yaw,
                 pitch
             })
         else if (sameRotation)
             this.client.client.write('rel_entity_move', {
                 entityId: 1,
-                onGround: onGround({ x, y, z }),
+                onGround: false,
                 dX: x - this.position.x,
                 dY: y - this.position.y,
                 dZ: z - this.position.z
@@ -289,7 +290,7 @@ class Entity {
         else
             this.client.client.write('entity_move_look', {
                 entityId: 1,
-                onGround: onGround({ x, y, z }),
+                onGround: false,
                 dX: x - this.position.x,
                 dY: y - this.position.y,
                 dZ: z - this.position.z,
@@ -346,10 +347,6 @@ function getEntity(type) {
         return entities[type]
 
     return undefined;
-}
-
-function onGround({ x, y, z }) {
-    return true;
 }
 
 module.exports = { Server, Chunk }
