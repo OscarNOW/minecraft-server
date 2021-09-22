@@ -106,7 +106,7 @@ class Client {
             pitch: null
         };
 
-        this.entities = [];
+        this.entities = {};
 
         this.events = {
             chat: [],
@@ -204,10 +204,29 @@ class Client {
     }
 
     entity(type, { x, y, z, yaw, pitch }) {
-        let entity = new Entity(this, type, { x, y, z, yaw, pitch });
+        let entityId = null;
+        for (let ii = 1; entityId === null; ii++)
+            if (!this.entities[ii])
+                entityId = ii;
 
-        this.entities.push(entity);
-        return this.entities.length - 1;
+        let entity = new Entity(this, type, entityId, { x, y, z, yaw, pitch });
+
+        this.entities[entityId] = entity;
+        return entityId;
+    }
+
+    window(window, horseId) {
+        if (window.windowId == 'EntityHorse')
+            if (!horseId)
+                throw new Error('No horseId given')
+            else if (!this.entities[horseId])
+                throw new Error(`Invalid entityId "${horseId}"`)
+            else
+                this.client.write('open_horse_window', {
+                    windowId: 1,
+                    nbSlots: 2,
+                    entityId: horseId
+                })
     }
 
     get online() {
@@ -216,22 +235,23 @@ class Client {
 }
 
 class Entity {
-    constructor(client, type, { x, y, z, yaw, pitch }) {
+    constructor(client, type, id, { x, y, z, yaw, pitch }) {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
         this.position = { x, y, z, yaw, pitch };
         this.type = type;
         this.living = e.living;
-        this.id = e.id;
+        this.typeId = e.id;
+        this.id = id;
         this.uuid = uuid();
         this.client = client;
 
         if (this.living)
             this.client.client.write('spawn_entity_living', {
-                entityId: 1,
+                entityId: this.id, //1
                 entityUUID: this.uuid,
-                type: this.id,
+                type: this.typeId,
                 x: this.position.x,
                 y: this.position.y,
                 z: this.position.z,
@@ -244,9 +264,9 @@ class Entity {
             })
         else
             this.client.client.write('spawn_entity', {
-                entityId: 3,
+                entityId: this.id, //3
                 objectUUID: this.uuid,
-                type: this.id,
+                type: this.typeId,
                 x: this.position.x,
                 y: this.position.y,
                 z: this.position.z,
@@ -300,12 +320,6 @@ class Entity {
 
         this.position = { x, y, z, yaw, pitch }
     }
-
-    addClient(client) {
-        this.clients.push(client)
-
-
-    }
 }
 
 class Chunk {
@@ -329,6 +343,31 @@ class Chunk {
     }
 }
 
+const windowNameIdMapping = {
+    'horse': 'EntityHorse',
+    'anvil': 'minecraft:anvil',
+    'beacon': 'minecraft:beacon',
+    'brewing_stand': 'minecraft:brewing_stand',
+    'chest': 'minecraft:chest',
+    'container': 'minecraft:container',
+    'crafting_table': 'minecraft:crafting_table',
+    'dispenser': 'minecraft:dispenser',
+    'dropper': 'minecraft:dropper',
+    'enchanting_table': 'minecraft:enchanting_table',
+    'furnace': 'minecraft:furnace',
+    'hopper': 'minecraft:hopper',
+    'villager': 'minecraft:villager'
+};
+
+class Window {
+    constructor(windowType) {
+        this.windowType = windowType;
+
+        if (!windowNameIdMapping[this.windowType]) throw new Error(`Unknown windowType "${windowType}"`)
+        this.windowId = windowNameIdMapping[this.windowType];
+    }
+}
+
 function getBlockId(blockName) {
     if (typeof blocks[blockName] == 'number')
         return blocks[blockName]
@@ -349,7 +388,7 @@ function getEntity(type) {
     return undefined;
 }
 
-module.exports = { Server, Chunk }
+module.exports = { Server, Chunk, Window }
 
 let replacements = [
     '4',

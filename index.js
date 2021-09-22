@@ -12,6 +12,8 @@ for (let x = 0; x < 16; x++)
         chunk.setBlock('grass_block', { x, y: 100, z })
     }
 
+let window = new (mc.Window)('horse');
+
 const server = new (mc.Server)({
     motd: {
         text: '&r&6&lHoi ik ben &nOscar',
@@ -20,9 +22,11 @@ const server = new (mc.Server)({
 });
 
 server.on('join', client => {
+    let horseId = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0 });
+        client.window(window, horseId);
     }, 1800);
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)
