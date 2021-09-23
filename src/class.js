@@ -227,6 +227,8 @@ class Client {
                     nbSlots: 2,
                     entityId: horseId
                 })
+        else
+            throw new Error(`Not implemented`)
     }
 
     get online() {
@@ -279,44 +281,24 @@ class Entity {
             })
     }
 
-    teleport({ x, y, z, yaw, pitch }) {
-        throw new Error('Not implemented')
+    move({ x, y, z, yaw: ya, pitch }) {
 
-        let samePosition =
-            this.position.x == x &&
-            this.position.y == y &&
-            this.position.z == z;
+        let yaw = ya;
+        if (yaw > 127)
+            yaw = -127;
 
-        let sameRotation =
-            this.position.yaw == yaw &&
-            this.position.pitch == pitch;
+        if (yaw < -127)
+            yaw = 127
 
-        if (samePosition && sameRotation) return
-        else if (samePosition)
-            this.client.client.write('entity_look', {
-                entityId: 1,
-                onGround: false,
-                yaw,
-                pitch
-            })
-        else if (sameRotation)
-            this.client.client.write('rel_entity_move', {
-                entityId: 1,
-                onGround: false,
-                dX: x - this.position.x,
-                dY: y - this.position.y,
-                dZ: z - this.position.z
-            })
-        else
-            this.client.client.write('entity_move_look', {
-                entityId: 1,
-                onGround: false,
-                dX: x - this.position.x,
-                dY: y - this.position.y,
-                dZ: z - this.position.z,
-                yaw,
-                pitch
-            })
+        this.client.client.write('entity_teleport', {
+            entityId: this.id,
+            x,
+            y,
+            z,
+            yaw,
+            pitch,
+            onGround: true
+        })
 
         this.position = { x, y, z, yaw, pitch }
     }

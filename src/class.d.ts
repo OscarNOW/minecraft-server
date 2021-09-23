@@ -16,7 +16,7 @@ declare class Client {
         pitch: number;
     };
     entities: {
-        [number: number]: Entity;
+        [entityId: number]: Entity;
     };
     private emitMove(info: object): void;
     kick(reason: string): void;
@@ -65,7 +65,7 @@ declare class Entity {
         pitch: number;
     }
 
-    teleport({ x, y, z, yaw, pitch }: {
+    move({ x, y, z, yaw, pitch }: {
         x: number;
         y: number;
         z: number;
