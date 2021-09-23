@@ -212,7 +212,7 @@ class Client {
         let entity = new Entity(this, type, entityId, { x, y, z, yaw, pitch });
 
         this.entities[entityId] = entity;
-        return entityId;
+        return entity;
     }
 
     window(window, horseId) {

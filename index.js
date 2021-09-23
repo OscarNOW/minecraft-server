@@ -20,12 +20,12 @@ const server = new (mc.Server)({
 });
 
 server.on('join', client => {
-    let enderDragonId = client.entity('ender_dragon', { x: 10, y: 105, z: 10, yaw: 0, pitch: 0 });
+    let enderDragon = client.entity('ender_dragon', { x: 10, y: 105, z: 10, yaw: 0, pitch: 0 });
 
     (async () => {
         while (client.online) {
             await wait(25);
-            client.entities[enderDragonId].move({ x: 10, y: 105, z: client.entities[enderDragonId].position.z - 0.1, yaw: 0, pitch: 0 });
+            enderDragon.move({ x: 10, y: 105, z: enderDragon.position.z - 0.1, yaw: 0, pitch: 0 });
         }
     })();
 
