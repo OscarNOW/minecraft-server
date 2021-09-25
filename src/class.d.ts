@@ -41,6 +41,7 @@ declare class Client {
     window(window: Window): void;
     on(event: 'chat' | 'command', callback: (message: string) => void): void;
     on(event: 'move' | 'leave', callback: () => void): void;
+    // player(): void;
 }
 
 declare class Entity {

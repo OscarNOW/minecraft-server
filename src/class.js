@@ -1,11 +1,13 @@
-const mc = require('minecraft-protocol');
 const version = '1.16.3';
+const mc = require('minecraft-protocol');
+const Vec3 = require('vec3');
+const { v4: uuid } = require('uuid');
+const http = require('http');
+const https = require('https');
+const prismarineChunk = require('prismarine-chunk')(version);
 const mcData = require('minecraft-data')(version);
 const blocks = require('./blocks.json');
 const entities = require('./entities.json');
-const prismarineChunk = require('prismarine-chunk')(version);
-const Vec3 = require('vec3');
-const { v4: uuid } = require('uuid');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Server {
@@ -234,6 +236,30 @@ class Client {
     get online() {
         return this.client.socket.readyState == 'open';
     }
+
+    player() {
+        throw new Error('Not implemented');
+        httpRequest({
+            host: 'sessionserver.mojang.com',
+            method: 'GET',
+            path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
+        }).then(inf => {
+            console.log(inf.properties)
+            this.client.write('player_info', {
+                action: 0,
+                data: [
+                    {
+                        UUID: this.uuid,
+                        name: this.username,
+                        properties: inf.properties,
+                        gamemode: 0,
+                        ping: this.ping,
+                        displayName: this.username
+                    }
+                ]
+            })
+        })
+    }
 }
 
 class Entity {
@@ -406,4 +432,36 @@ function parseColorText(string) {
         s = s.replace(`&${val}`, `§${val}`)
     })
     return s
+}
+
+function httpRequest(params, postData) {
+    return new Promise((resolve, reject) => {
+        var req = https.request(params, res => {
+            if (res.statusCode < 200 || res.statusCode >= 300)
+                return reject(new Error('statusCode=' + res.statusCode));
+
+            var body = [];
+            res.on('data', chunk => {
+                body.push(chunk);
+            });
+
+            res.on('end', function () {
+                try {
+                    body = JSON.parse(Buffer.concat(body).toString());
+                } catch (e) {
+                    reject(e);
+                }
+                resolve(body);
+            });
+        });
+
+        req.on('error', err => {
+            reject(err);
+        });
+
+        if (postData)
+            req.write(postData);
+
+        req.end();
+    });
 }
