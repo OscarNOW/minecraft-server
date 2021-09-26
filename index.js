@@ -22,7 +22,7 @@ const server = new (mc.Server)({
 server.on('join', client => {
 
     setTimeout(() => {
-        client.teleport({ x: 0, y: 120, z: 0 });
+        client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
     }, 1800);
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)

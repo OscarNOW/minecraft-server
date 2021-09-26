@@ -99,7 +99,7 @@ class Client {
             })
         })();
 
-        this.position = {
+        this.cachedPosition = {
             x: null,
             y: null,
             z: null,
@@ -135,6 +135,25 @@ class Client {
 
     }
 
+    get online() {
+        return this.client.socket.readyState == 'open';
+    }
+
+    set online(val) {
+        if (val === false)
+            throw new Error(`Can't set online, please use "Client.kick" for that`)
+        else
+            throw new Error("Can't set online")
+    }
+
+    get position() {
+        return this.cachedPosition;
+    }
+
+    set position(val) {
+        this.teleport(val)
+    }
+
     emitMove(info) {
         let changed = false;
         [
@@ -145,9 +164,9 @@ class Client {
             'yaw',
             'onGround'
         ].forEach(val => {
-            if (info[val] !== undefined && this.position[val] != info[val]) {
+            if (info[val] !== undefined && this.cachedPosition[val] != info[val]) {
                 changed = true;
-                this.position[val] = info[val];
+                this.cachedPosition[val] = info[val];
             }
         });
 
@@ -191,16 +210,13 @@ class Client {
         })
     }
 
-    teleport({ x, y, z }) {
-        this.position.x = x;
-        this.position.y = y;
-        this.position.z = z;
+    teleport({ x, y, z, yaw, pitch }) {
         this.client.write('position', {
             x,
             y,
             z,
-            yaw: 0,
-            pitch: 0,
+            yaw,
+            pitch,
             flags: 0x00
         });
     }
@@ -231,10 +247,6 @@ class Client {
                 })
         else
             throw new Error(`Not implemented`)
-    }
-
-    get online() {
-        return this.client.socket.readyState == 'open';
     }
 
     player() {
