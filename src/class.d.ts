@@ -87,18 +87,28 @@ declare class Entity {
 
 export class Server {
     constructor(serverOptions: {
-        motd: {
-            text: string;
-            players: number;
+        serverList(ip: string): {
+            version: string;
+            players: {
+                online: number;
+                max: number;
+                hover: string;
+            };
+            description: string;
         };
     });
     private events: object;
     private server: any;
     clients: Array<Client>;
     playerCount: number;
-    motd: {
-        text: string;
-        players: number;
+    serverList(ip: string): {
+        version: string;
+        players: {
+            online: number;
+            max: number;
+            hover: string;
+        };
+        description: string;
     };
     on(event: 'join' | 'leave', callback: (Client: Client) => void): void;
 }

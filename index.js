@@ -13,9 +13,16 @@ for (let x = 0; x < 16; x++)
     }
 
 const server = new (mc.Server)({
-    motd: {
-        text: '&r&6&lHoi ik ben &nOscar',
-        players: 0
+    serverList(ip) {
+        return {
+            version: '1.16.3',
+            players: {
+                online: server.playerCount,
+                max: 100,
+                hover: `Currently ${server.playerCount} online`
+            },
+            description: `Your ip is ${ip}`
+        }
     }
 });
 
@@ -52,7 +59,7 @@ server.on('join', client => {
         if (message.startsWith('tp')) {
 
             let coords = message.split(' ').slice(1);
-            client.teleport({ x: coords[0], y: coords[1], z: coords[2] })
+            client.teleport({ x: coords[0], y: coords[1], z: coords[2], yaw: 0, pitch: 0 })
 
         } else if (message.startsWith('summon')) {
 

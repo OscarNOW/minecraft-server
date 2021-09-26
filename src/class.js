@@ -11,10 +11,9 @@ const entities = require('./entities.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Server {
-    constructor({ motd: { text, players } }) {
-        let parsedText = parseColorText(text);
+    constructor({ serverList }) {
 
-        this.motd = { text: parsedText, players };
+        this.serverList = serverList;
         this.clients = [];
 
         this.events = {
@@ -26,8 +25,26 @@ class Server {
             encryption: true,
             host: 'localhost',
             version,
-            motd: parsedText,
-            maxPlayers: players
+            beforePing: (response, client) => {
+
+                let info = this.serverList(client.socket.remoteAddress);
+                let parsedText = parseColorText(info.description);
+
+                return {
+                    version: {
+                        name: info.version,
+                        protocol: response.version.protocol
+                    },
+                    players: {
+                        online: info.players.online,
+                        max: info.players.max,
+                        sample: info.players.hover.split('\n').map(val => {
+                            return { name: val, id: '00000000-0000-4000-0000-100000000000' }
+                        })
+                    },
+                    description: parsedText
+                }
+            }
         })
 
         this.server.on('login', async client => {
@@ -45,7 +62,7 @@ class Server {
                 dimension: mcData.loginPacket.dimension,
                 worldName: 'minecraft:overworld',
                 hashedSeed: [0, 0],
-                maxPlayers: players,
+                maxPlayers: 0,
                 viewDistance: 1000,
                 reducedDebugInfo: false,
                 enableRespawnScreen: true,
