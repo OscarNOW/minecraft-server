@@ -32,8 +32,8 @@ class Server {
 
                 return {
                     version: {
-                        name: info.version,
-                        protocol: response.version.protocol
+                        name: info.version.wrongMessage,
+                        protocol: info.version.version || response.version.protocol
                     },
                     players: {
                         online: info.players.online,

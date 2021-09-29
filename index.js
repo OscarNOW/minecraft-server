@@ -15,7 +15,10 @@ for (let x = 0; x < 16; x++)
 const server = new (mc.Server)({
     serverList(ip) {
         return {
-            version: '1.16.3',
+            version: {
+                wrongMessage: 'Please use version 1.16.3',
+                version: 753
+            },
             players: {
                 online: server.playerCount,
                 max: 100,
