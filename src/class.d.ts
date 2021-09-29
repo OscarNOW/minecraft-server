@@ -90,7 +90,7 @@ export class Server {
         serverList(ip: string): {
             version: {
                 wrongMessage: string,
-                version: string;
+                version: number;
             };
             players: {
                 online: number;
