@@ -88,7 +88,7 @@ class Server {
 
     get playerCount() {
         if (this.server.playerCount != this.clients.length)
-            throw new Error('Internal error (x01)')
+            throw new Error(`Internal error\n    at Clients length (${this.clients.length}) does not equal playercount (${this.server.playerCount})`)
 
         return this.clients.length;
     }
@@ -108,7 +108,7 @@ class Client {
             while (this.online)
                 await wait(500)
 
-            this.server.clients = this.server.clients.filter(client => client.uuid != this.uuid);
+            this.server.clients = this.server.clients.filter(client => client.online);
             this.events.leave.forEach(val => {
                 val();
             });

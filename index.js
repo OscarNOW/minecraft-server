@@ -12,23 +12,19 @@ for (let x = 0; x < 16; x++)
         chunk.setBlock('grass_block', { x, y: 100, z })
     }
 
-const server = new (mc.Server)({
-    serverList(ip) {
-        return {
-            versionMessage: 'Please use version 1.16.3',
-            players: {
-                online: server.playerCount,
-                max: 100,
-                hover: `Currently ${server.playerCount} online`
-            },
-            description: `Your ip is ${ip}`
-        }
-    }
-});
+const server = (new (mc.Server)({
+    serverList: ip => ({
+        versionMessage: 'Please use version 1.16.3',
+        players: {
+            online: 0,
+            max: 0,
+            hover: `Hi`
+        },
+        description: `Your ip is ${ip}`
+    })
+}));
 
 server.on('join', client => {
-
-    console.log(server)
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
@@ -73,4 +69,4 @@ server.on('join', client => {
             return client.chat('Unknown command');
         }
     })
-})
+});
