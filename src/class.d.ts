@@ -88,10 +88,7 @@ declare class Entity {
 export class Server {
     constructor(serverOptions: {
         serverList(ip: string): {
-            version: {
-                wrongMessage: string,
-                version: number;
-            };
+            versionMessage: string;
             players: {
                 online: number;
                 max: number;
@@ -105,10 +102,7 @@ export class Server {
     clients: Array<Client>;
     playerCount: number;
     serverList(ip: string): {
-        version: {
-            wrongMessage: string,
-            version: string;
-        };
+        versionMessage: string;
         players: {
             online: number;
             max: number;

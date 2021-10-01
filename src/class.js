@@ -8,6 +8,7 @@ const prismarineChunk = require('prismarine-chunk')(version);
 const mcData = require('minecraft-data')(version);
 const blocks = require('./blocks.json');
 const entities = require('./entities.json');
+const protocolVersions = require('./protocolVersions.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Server {
@@ -32,8 +33,8 @@ class Server {
 
                 return {
                     version: {
-                        name: info.version.wrongMessage,
-                        protocol: info.version.version || response.version.protocol
+                        name: info.versionMessage,
+                        protocol: protocolVersions[version]
                     },
                     players: {
                         online: info.players.online,

@@ -15,10 +15,7 @@ for (let x = 0; x < 16; x++)
 const server = new (mc.Server)({
     serverList(ip) {
         return {
-            version: {
-                wrongMessage: 'Please use version 1.16.3',
-                version: 753
-            },
+            versionMessage: 'Please use version 1.16.3',
             players: {
                 online: server.playerCount,
                 max: 100,
@@ -30,6 +27,8 @@ const server = new (mc.Server)({
 });
 
 server.on('join', client => {
+
+    console.log(server)
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
