@@ -251,16 +251,13 @@ class Client {
         return entity;
     }
 
-    window(window, horse) {
+    window(window) {
         if (window.windowId == 'EntityHorse')
-            if (!horse)
-                throw new Error('No horse given')
-            else
-                this.client.write('open_horse_window', {
-                    windowId: 1,
-                    nbSlots: 2,
-                    entityId: horse.id
-                })
+            this.client.write('open_horse_window', {
+                windowId: 1,
+                nbSlots: 2,
+                entityId: window.horse.id
+            })
         else
             throw new Error(`Not implemented`)
     }
@@ -397,11 +394,14 @@ const windowNameIdMapping = {
 };
 
 class Window {
-    constructor(windowType) {
+    constructor(windowType, horse) {
         this.windowType = windowType;
 
         if (!windowNameIdMapping[this.windowType]) throw new Error(`Unknown windowType "${windowType}"`)
+        if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
+
         this.windowId = windowNameIdMapping[this.windowType];
+        this.horse = windowType == 'horse' ? horse : null;
     }
 }
 
