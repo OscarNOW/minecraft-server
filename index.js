@@ -33,6 +33,10 @@ server.on('join', client => {
         client.window(window)
     }, 1800);
 
+    setTimeout(() => {
+        horse.position.y += 10
+    }, 5000)
+
     client.chat(`§r§6§l${client.username}§r§e joined the game`)
     client.on('chat', message => {
         client.chat(`§r§6§l${client.username}§r§6: §r§7${message}`)

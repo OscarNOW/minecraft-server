@@ -117,14 +117,22 @@ class Client {
             })
         })();
 
-        this.cachedPosition = {
+        // this.cachedPosition = {
+        //     x: null,
+        //     y: null,
+        //     z: null,
+        //     onGround: null,
+        //     yaw: null,
+        //     pitch: null
+        // };
+        let that = this;
+        this.cachedPosition = new ChangablePosition(i => that.teleport(i, that), {
             x: null,
             y: null,
             z: null,
-            onGround: null,
             yaw: null,
             pitch: null
-        };
+        })
 
         this.entities = {};
 
@@ -179,12 +187,12 @@ class Client {
             'y',
             'z',
             'pitch',
-            'yaw',
-            'onGround'
+            'yaw'
+            // ,'onGround'
         ].forEach(val => {
             if (info[val] !== undefined && this.cachedPosition[val] != info[val]) {
                 changed = true;
-                this.cachedPosition[val] = info[val];
+                this.cachedPosition.raw[val] = info[val];
             }
         });
 
@@ -228,8 +236,8 @@ class Client {
         })
     }
 
-    teleport({ x, y, z, yaw, pitch }) {
-        this.client.write('position', {
+    teleport({ x, y, z, yaw, pitch }, thisC) {
+        (thisC || this).client.write('position', {
             x,
             y,
             z,
@@ -293,7 +301,9 @@ class Entity {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        this.position = { x, y, z, yaw, pitch };
+        // this.position = { x, y, z, yaw, pitch };
+        let that = this;
+        this.cachedPosition = new ChangablePosition(i => that.move(i, that), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
         this.typeId = e.id;
@@ -333,16 +343,24 @@ class Entity {
             })
     }
 
-    move({ x, y, z, yaw: ya, pitch }) {
+    get position() {
+        return this.cachedPosition;
+    }
+
+    set position(v) {
+        this.move(v)
+    }
+
+    move({ x, y, z, yaw: ya, pitch }, thisC) {
 
         let yaw = ya;
         if (yaw > 127)
             yaw = -127;
 
         if (yaw < -127)
-            yaw = 127
+            yaw = 127;
 
-        this.client.client.write('entity_teleport', {
+        (thisC || this).client.client.write('entity_teleport', {
             entityId: this.id,
             x,
             y,
@@ -350,9 +368,9 @@ class Entity {
             yaw,
             pitch,
             onGround: true
-        })
+        });
 
-        this.position = { x, y, z, yaw, pitch }
+        (thisC || this).position.raw = { x, y, z, yaw, pitch }
     }
 }
 
@@ -402,6 +420,48 @@ class Window {
 
         this.windowId = windowNameIdMapping[this.windowType];
         this.horse = windowType == 'horse' ? horse : null;
+    }
+}
+
+class ChangablePosition {
+    constructor(onChange, position) {
+        this.onChange = onChange;
+        this.raw = position;
+    }
+    get x() {
+        return this.raw.x;
+    }
+    get y() {
+        return this.raw.y;
+    }
+    get z() {
+        return this.raw.z;
+    }
+    get yaw() {
+        return this.raw.yaw;
+    }
+    get pitch() {
+        return this.raw.pitch;
+    }
+    set x(newValue) {
+        this.raw.x = newValue;
+        this.onChange(this.raw);
+    }
+    set y(newValue) {
+        this.raw.y = newValue;
+        this.onChange(this.raw);
+    }
+    set z(newValue) {
+        this.raw.z = newValue;
+        this.onChange(this.raw);
+    }
+    set yaw(newValue) {
+        this.raw.yaw = newValue;
+        this.onChange(this.raw);
+    }
+    set pitch(newValue) {
+        this.raw.pitch = newValue;
+        this.onChange(this.raw);
     }
 }
 
