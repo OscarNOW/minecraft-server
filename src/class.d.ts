@@ -24,7 +24,7 @@ declare class Client {
         pitch: number;
     };
     entities: {
-        [entityId: number]: Entity;
+        [entityId: number]: SpawnedEntity;
     };
     private emitMove(info: object): void;
     kick(reason: string): void;
@@ -46,14 +46,14 @@ declare class Client {
         z: number;
         yaw: number;
         pitch: number;
-    }): Entity;
+    }): SpawnedEntity;
     window(window: Window): void;
     on(event: 'chat' | 'command', callback: (message: string) => void): void;
     on(event: 'move' | 'leave', callback: () => void): void;
     // player(): void;
 }
 
-declare class Entity {
+declare class SpawnedEntity {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
         y: number;
