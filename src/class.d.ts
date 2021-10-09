@@ -47,7 +47,7 @@ declare class Client {
         yaw: number;
         pitch: number;
     }): Entity;
-    window(window: Window, horseId: number): void;
+    window(window: Window, horse: Entity): void;
     window(window: Window): void;
     on(event: 'chat' | 'command', callback: (message: string) => void): void;
     on(event: 'move' | 'leave', callback: () => void): void;

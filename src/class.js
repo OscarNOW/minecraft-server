@@ -251,44 +251,43 @@ class Client {
         return entity;
     }
 
-    window(window, horseId) {
+    window(window, horse) {
         if (window.windowId == 'EntityHorse')
-            if (!horseId)
-                throw new Error('No horseId given')
-            else if (!this.entities[horseId])
-                throw new Error(`Invalid entityId "${horseId}"`)
+            if (!horse)
+                throw new Error('No horse given')
             else
                 this.client.write('open_horse_window', {
                     windowId: 1,
                     nbSlots: 2,
-                    entityId: horseId
+                    entityId: horse.id
                 })
         else
             throw new Error(`Not implemented`)
     }
 
     player() {
-        throw new Error('Not implemented');
-        httpRequest({
-            host: 'sessionserver.mojang.com',
-            method: 'GET',
-            path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
-        }).then(inf => {
-            console.log(inf.properties)
-            this.client.write('player_info', {
-                action: 0,
-                data: [
-                    {
-                        UUID: this.uuid,
-                        name: this.username,
-                        properties: inf.properties,
-                        gamemode: 0,
-                        ping: this.ping,
-                        displayName: this.username
-                    }
-                ]
-            })
+        throw new Error(`Not implemented`)
+        // httpRequest({
+        //     host: 'sessionserver.mojang.com',
+        //     method: 'GET',
+        //     path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
+        // }).then(inf => {
+        //     console.log(inf.properties)
+        this.client.write('player_info', {
+            action: 0,
+            data: [
+                {
+                    UUID: this.uuid,
+                    name: this.username,
+                    // properties: inf.properties,
+                    properties: [],
+                    gamemode: 0,
+                    ping: this.ping,
+                    displayName: this.username
+                }
+            ]
         })
+        // })
     }
 }
 
