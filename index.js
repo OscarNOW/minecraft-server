@@ -26,11 +26,10 @@ const server = (new (mc.Server)({
 
 server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
-    let window = new (mc.Window)('horse', horse);
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
-        client.window(window)
+        client.window('horse', horse)
     }, 1800);
 
     setTimeout(() => {

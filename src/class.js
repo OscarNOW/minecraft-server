@@ -11,6 +11,50 @@ const entities = require('./entities.json');
 const protocolVersions = require('./protocolVersions.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
+const windowNameIdMapping = {
+    'horse': 'EntityHorse',
+    'anvil': 'minecraft:anvil',
+    'beacon': 'minecraft:beacon',
+    'brewingStand': 'minecraft:brewing_stand',
+    'chest': 'minecraft:chest',
+    'container': 'minecraft:container',
+    'craftingTable': 'minecraft:crafting_table',
+    'dispenser': 'minecraft:dispenser',
+    'dropper': 'minecraft:dropper',
+    'enchanting_table': 'minecraft:enchanting_table',
+    'furnace': 'minecraft:furnace',
+    'hopper': 'minecraft:hopper',
+    'villager': 'minecraft:villager'
+};
+
+const textColorNameMapping = {
+    '4': 'darkRed',
+    'c': 'red',
+    '6': 'gold',
+    'e': 'yellow',
+    '2': 'darkGreen',
+    'a': 'green',
+    'b': 'aqua',
+    '3': 'darkAqua',
+    '1': 'darkBlue',
+    '9': 'blue',
+    'd': 'pink',
+    '5': 'purple',
+    'f': 'white',
+    '7': 'gray',
+    '8': 'darkGray',
+    '0': 'black'
+}
+
+const textModifierNameMapping = {
+    'r': 'reset',
+    'l': 'bold',
+    'o': 'italic',
+    'n': 'underline',
+    'm': 'strike',
+    'k': 'random'
+}
+
 class Server {
     constructor({ serverList }) {
 
@@ -259,12 +303,18 @@ class Client {
         return entity;
     }
 
-    window(window) {
-        if (window.windowId == 'EntityHorse')
+    window(windowType, horse) {
+
+        if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}"`)
+        if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
+
+        let windowId = windowNameIdMapping[windowType];
+
+        if (windowId == 'EntityHorse')
             this.client.write('open_horse_window', {
                 windowId: 1,
                 nbSlots: 2,
-                entityId: window.horse.id
+                entityId: horse.id
             })
         else
             throw new Error(`Not implemented`)
@@ -395,34 +445,6 @@ class Chunk {
     }
 }
 
-const windowNameIdMapping = {
-    'horse': 'EntityHorse',
-    'anvil': 'minecraft:anvil',
-    'beacon': 'minecraft:beacon',
-    'brewing_stand': 'minecraft:brewing_stand',
-    'chest': 'minecraft:chest',
-    'container': 'minecraft:container',
-    'crafting_table': 'minecraft:crafting_table',
-    'dispenser': 'minecraft:dispenser',
-    'dropper': 'minecraft:dropper',
-    'enchanting_table': 'minecraft:enchanting_table',
-    'furnace': 'minecraft:furnace',
-    'hopper': 'minecraft:hopper',
-    'villager': 'minecraft:villager'
-};
-
-class Window {
-    constructor(windowType, horse) {
-        this.windowType = windowType;
-
-        if (!windowNameIdMapping[this.windowType]) throw new Error(`Unknown windowType "${windowType}"`)
-        if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
-
-        this.windowId = windowNameIdMapping[this.windowType];
-        this.horse = windowType == 'horse' ? horse : null;
-    }
-}
-
 class ChangablePosition {
     constructor(onChange, position) {
         this.onChange = onChange;
@@ -465,6 +487,181 @@ class ChangablePosition {
     }
 }
 
+class Text {
+    constructor(text) {
+        if (typeof text == 'string')
+            this.array = Text.stringToArray(text);
+        else
+            this.array = Text.parseArray(text);
+    }
+    static arrayToString(a) {
+        let array = Text.parseArray(a);
+
+        let text = '§r';
+        let currentModifiers = [];
+        let currentColor = 'default';
+
+        array.forEach(val => {
+            if (val.text == '') return;
+
+            let modCanExtend = true;
+            currentModifiers.forEach(v => {
+                if (!val.modifiers.includes(v)) modCanExtend = false;
+            })
+            let newMod = [];
+            if (modCanExtend)
+                val.modifiers.forEach(v => {
+                    if (!currentModifiers.includes(v)) newMod.push(v);
+                })
+
+            if (val.color == currentColor)
+                if (modCanExtend) {
+                    newMod.forEach(v => {
+                        text += `§${Object.keys(textModifierNameMapping).find(key => textModifierNameMapping[key] == v)}`
+                    })
+                    text += val.text
+                } else {
+                    text += '§r'
+                    text += `§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}${val.text}`
+
+                    val.modifiers.forEach(v => {
+                        text += `§${Object.keys(textModifierNameMapping).find(key => textModifierNameMapping[key] == v)}`
+                    })
+
+                    text += val.text
+                }
+            else if (val.color == 'default') {
+                currentColor = 'default'
+                currentModifiers = val.modifiers
+                text += '§r'
+
+                val.modifiers.forEach(v => {
+                    text += `§${Object.keys(textModifierNameMapping).find(key => textModifierNameMapping[key] == v)}`
+                })
+                text += val.text;
+
+            } else {
+                currentColor = val.color;
+                currentModifiers = val.modifiers;
+
+                if (modCanExtend) {
+                    text += `§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}${val.text}`
+                    newMod.forEach(v => {
+                        text += `§${Object.keys(textModifierNameMapping).find(key => textModifierNameMapping[key] == v)}`
+                    })
+                } else {
+                    text += '§r'
+                    text += `§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}${val.text}`
+                    val.modifiers.forEach(v => {
+                        text += `§${Object.keys(textModifierNameMapping).find(key => textModifierNameMapping[key] == v)}`
+                    })
+                }
+
+            }
+        })
+
+        return text
+    }
+    static parseArray(text) {
+        let array = [];
+
+        if (typeof text == 'string')
+            array = [
+                {
+                    text,
+                    color: 'default',
+                    modifiers: []
+                }
+            ]
+        else
+            text.forEach(val => {
+                let obj;
+
+                if (typeof val == 'string')
+                    obj = {
+                        text: val,
+                        color: 'default',
+                        modifiers: []
+                    }
+                else {
+                    if (!val.text) throw new Error('No text property on array element');
+                    obj = {
+                        text: val.text,
+                        color: val.color || 'default',
+                        modifiers: val.modifiers || []
+                    };
+                }
+
+                array.push(obj);
+            });
+
+        return array;
+    }
+    static stringToArray(text) {
+        let arr = [];
+
+        let isModifier = false;
+        let current = '';
+        let currentColor = 'default';
+        let currentModifiers = [];
+
+        text.split('').forEach(val => {
+            if (isModifier) {
+                if (!textColorNameMapping[val] && !textModifierNameMapping[val])
+                    throw new Error(`Unknown color letter "${val}"`)
+                else
+                    if (textColorNameMapping[val]) {
+                        let copy = Object.assign([], currentModifiers);
+                        arr.push({
+                            text: current,
+                            color: currentColor,
+                            modifiers: copy
+                        })
+                        current = ''
+                        currentColor = textColorNameMapping[val]
+                    } else if (textModifierNameMapping[val] == 'reset') {
+                        let copy = Object.assign([], currentModifiers);
+                        arr.push({
+                            text: current,
+                            color: currentColor,
+                            modifiers: copy
+                        })
+                        current = '';
+                        currentColor = 'default';
+                        currentModifiers = [];
+                    } else {
+                        if (!currentModifiers.includes(textModifierNameMapping[val])) {
+                            let copy = Object.assign([], currentModifiers);
+                            arr.push({
+                                text: current,
+                                color: currentColor,
+                                modifiers: copy
+                            })
+                            current = '';
+                            currentModifiers.push(textModifierNameMapping[val])
+                        }
+                    }
+                return isModifier = false;
+            }
+
+            if (val == '§')
+                isModifier = true;
+            else
+                current += val;
+        })
+
+        arr.push({
+            text: current,
+            color: currentColor,
+            modifiers: currentModifiers
+        })
+
+        arr = arr.filter(val => val.text != '')
+
+        return arr
+    }
+}
+
 function getBlockId(blockName) {
     if (typeof blocks[blockName] == 'number')
         return blocks[blockName]
@@ -485,7 +682,7 @@ function getEntity(type) {
     return undefined;
 }
 
-module.exports = { Server, Chunk, Window }
+module.exports = { Server, Chunk }
 
 let replacements = [
     '4',
