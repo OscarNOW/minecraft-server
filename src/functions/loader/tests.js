@@ -13,10 +13,11 @@ fs.readdirSync(path.resolve(__dirname, '../../classes/exports/')).forEach(file =
 
 fs.readdirSync(path.resolve(__dirname, '../../classes/utils/')).forEach(file => {
     if (file.split('.').length == 2)
-        files.push({
-            class: file.split('.js')[0],
-            test: require(`../../classes/utils/${file.split('.js')[0]}.test.js`)
-        })
+        if (fs.existsSync(path.resolve(__dirname, `../../classes/utils/${file.split('.js')[0]}.test.js`)))
+            files.push({
+                class: file.split('.js')[0],
+                test: require(`../../classes/utils/${file.split('.js')[0]}.test.js`)
+            })
 })
 
 module.exports = files;
