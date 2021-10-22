@@ -1,5 +1,6 @@
-const Entity = require('./Entity');
-const ChangablePosition = require('./ChangablePosition');
+const Entity = require('./Entity').Entity;
+const ChangablePosition = require('./ChangablePosition').ChangablePosition;
+const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Client {
@@ -204,3 +205,5 @@ class Client {
         // })
     }
 }
+
+module.exports = { Client }

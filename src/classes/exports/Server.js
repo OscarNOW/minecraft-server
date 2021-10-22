@@ -2,6 +2,7 @@ const version = '1.16.3';
 const mc = require('minecraft-protocol');
 const mcData = require('minecraft-data')(version);
 const Client = require('../utils/Client').Client;
+const protocolVersions = require('../../data/protocolVersions.json')
 
 class Server {
     constructor({ serverList }) {

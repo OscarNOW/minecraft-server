@@ -1,3 +1,4 @@
+const version = '1.16.3'
 const prismarineChunk = require('prismarine-chunk')(version);
 const Vec3 = require('vec3');
 const blocks = require('../../data/blocks.json');

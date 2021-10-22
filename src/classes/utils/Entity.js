@@ -1,4 +1,4 @@
-const ChangablePosition = require('./ChangablePosition');
+const ChangablePosition = require('./ChangablePosition').ChangablePosition;
 const { v4: uuid } = require('uuid');
 const entities = require('../../data/entities.json');
 
@@ -86,3 +86,5 @@ function getEntity(type) {
 
     return undefined;
 }
+
+module.exports = { Entity };

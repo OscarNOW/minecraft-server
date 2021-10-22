@@ -59,6 +59,7 @@ server.on('join', client => {
             }
     })
 
+    return
     client.on('command', message => {
         if (message.startsWith('tp')) {
 
