@@ -1,2 +1,1 @@
-import exports from './functions/loader/classes';
-module.exports = exports;
+module.exports = require('./functions/loader/classes').exports;
