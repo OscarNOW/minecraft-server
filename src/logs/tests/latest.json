@@ -3,8 +3,8 @@
         {
             "got": 1,
             "expected": 2,
-            "class": "Text",
-            "index": 6
+            "class": "ChangablePosition",
+            "index": 0
         }
     ],
     "succeeded": [
@@ -43,6 +43,12 @@
             "got": "§r§n1§l2§r3",
             "class": "Text",
             "index": 5
+        },
+        {
+            "expected": "§r§nH§li§r§b!",
+            "got": "§r§nH§li§r§b!",
+            "class": "Text",
+            "index": 6
         }
     ]
 }

@@ -39,3 +39,5 @@ class ChangablePosition {
         this.onChange(this.raw);
     }
 }
+
+module.exports = { ChangablePosition };
