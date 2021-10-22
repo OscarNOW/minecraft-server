@@ -1,4 +1,4 @@
-const mc = require('./src/class');
+const mc = require('./src/index');
 const chunkLoad = 7;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 let chunk = new (mc.Chunk)();

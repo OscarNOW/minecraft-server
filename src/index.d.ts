@@ -125,9 +125,10 @@ export class Chunk {
 export class Text {
     constructor(text: string | optionalTextArray);
     array: textArray;
-    static stringToArray(text: String): textArray;
+    static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
+    static parseString(text: string): string;
 }
 
 type textArray = Array<{

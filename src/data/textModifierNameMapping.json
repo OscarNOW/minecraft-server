@@ -1,0 +1,8 @@
+{
+    "r": "reset",
+    "l": "bold",
+    "o": "italic",
+    "n": "underline",
+    "m": "strike",
+    "k": "random"
+}

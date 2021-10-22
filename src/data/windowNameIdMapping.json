@@ -1,0 +1,15 @@
+{
+    "horse": "EntityHorse",
+    "anvil": "minecraft:anvil",
+    "beacon": "minecraft:beacon",
+    "brewingStand": "minecraft:brewing_stand",
+    "chest": "minecraft:chest",
+    "container": "minecraft:container",
+    "craftingTable": "minecraft:crafting_table",
+    "dispenser": "minecraft:dispenser",
+    "dropper": "minecraft:dropper",
+    "enchanting_table": "minecraft:enchanting_table",
+    "furnace": "minecraft:furnace",
+    "hopper": "minecraft:hopper",
+    "villager": "minecraft:villager"
+}

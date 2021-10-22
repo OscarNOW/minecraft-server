@@ -1,0 +1,48 @@
+{
+    "failed": [
+        {
+            "got": 1,
+            "expected": 2,
+            "class": "Text",
+            "index": 6
+        }
+    ],
+    "succeeded": [
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 0
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 1
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 2
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 3
+        },
+        {
+            "expected": "§r§a§lhi",
+            "got": "§r§a§lhi",
+            "class": "Text",
+            "index": 4
+        },
+        {
+            "expected": "§r§n1§l2§r3",
+            "got": "§r§n1§l2§r3",
+            "class": "Text",
+            "index": 5
+        }
+    ]
+}

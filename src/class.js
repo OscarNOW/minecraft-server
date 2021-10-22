@@ -682,8 +682,6 @@ function getEntity(type) {
     return undefined;
 }
 
-module.exports = { Server, Chunk }
-
 let replacements = [
     '4',
     'c',
@@ -751,3 +749,5 @@ function httpRequest(params, postData) {
         req.end();
     });
 }
+
+module.exports = { Server, Chunk, Text }
