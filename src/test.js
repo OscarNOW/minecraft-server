@@ -110,9 +110,11 @@ const colors = {
 
 const verbose = process.argv.includes('--verbose')
 const debug = process.argv.includes('--debug')
+const silenceWarnings = process.argv.includes('--silence-warnings')
 let testsRun = 0;
 let testsFailed = [];
 let jsonOut = {
+    warnings: [],
     failed: [],
     succeeded: []
 };
@@ -173,6 +175,8 @@ if (debug) {
                 jsonOut.succeeded.push(o2);
             }
             index++;
+        }, text => {
+            jsonOut.warnings.push(text);
         })
     }
 
@@ -242,5 +246,10 @@ if (debug) {
         console.log(p)
 
         console.log()
+    }
+
+    if (!silenceWarnings & jsonOut.warnings.length > 0) {
+        jsonOut.warnings.forEach(console.log);
+        console.log();
     }
 })();
