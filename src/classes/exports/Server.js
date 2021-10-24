@@ -84,6 +84,10 @@ class Server {
 
         return this.clients.length;
     }
+
+    close() {
+        this.server.close();
+    }
 }
 
 module.exports = { Server };

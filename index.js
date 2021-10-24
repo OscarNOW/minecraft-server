@@ -12,7 +12,7 @@ for (let x = 0; x < 16; x++)
         chunk.setBlock('grass_block', { x, y: 100, z })
     }
 
-const server = (new (mc.Server)({
+const server = new (mc.Server)({
     serverList: ip => ({
         versionMessage: 'Please use version 1.16.3',
         players: {
@@ -22,9 +22,10 @@ const server = (new (mc.Server)({
         },
         description: `Your ip is ${ip}`
     })
-}));
+});
 
 server.on('join', client => {
+    console.log(`${client.username} joined`)
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     setTimeout(() => {

@@ -120,124 +120,127 @@ let jsonOut = {
 if (debug) {
     console.clear()
     console.log('LOGS START\n')
-}
+};
 
-files.forEach(val => {
-    let index = 0;
-    val.test((got, expected, id) => {
-        testsRun++;
-        if (JSON.stringify(got) != JSON.stringify(expected)) {
-            let o2 = {
-                got,
-                expected,
-                class: val.class,
-                index
-            };
-            if (id) o2.id = id;
-            jsonOut.failed.push(o2);
-            testsFailed.push({
-                class: val.class,
-                got:
-                    (stringify.general(got, false).length < preferredObjectLength) ?
-                        stringify.general(got, false) :
-                        (stringify.general(got, true).length < preferredObjectLength) ?
-                            stringify.general(got, true) :
-                            (stringify.general(got, false).length < maxObjectLength) ?
-                                stringify.general(got, false) :
-                                (stringify.general(got, true).length < maxObjectLength) ?
-                                    stringify.general(got, true) :
-                                    tof(got),
-                expected:
-                    (stringify.general(expected, false).length < preferredObjectLength) ?
-                        stringify.general(expected, false) :
-                        (stringify.general(expected, true).length < preferredObjectLength) ?
-                            stringify.general(expected, true) :
-                            (stringify.general(expected, false).length < maxObjectLength) ?
-                                stringify.general(expected, false) :
-                                (stringify.general(expected, true).length < maxObjectLength) ?
-                                    stringify.general(expected, true) :
-                                    tof(expected),
-                index,
-                id
-            })
-        } else {
-            let o2 = {
-                expected,
-                got,
-                class: val.class,
-                index
-            };
-            if (id) o2.id = id;
-            jsonOut.succeeded.push(o2);
-        }
-        index++;
-    })
-});
-
-if (debug) {
-    console.log()
-    console.log('LOGS END\nSUMMARY START')
-} else
-    console.clear();
-let sumText;
-if (testsRun == 0)
-    sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
-else if (testsFailed.length > 0)
-    sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length == 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
-else
-    sumText = `${colors.bg.green}${colors.fg.black}${colors.bold} ALL TESTS SUCCEEDED ${colors.reset}`
-if (!verbose) {
-    console.log(sumText)
-    console.log()
-}
-
-if (!verbose) {
-    if (testsFailed.length > 0)
-        console.log('/----------------------------\\')
-
-    testsFailed.forEach((val, ind) => {
-        let colArr = [];
-        let arr = [];
-
-        colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
-        arr.push(`|  FAILED `)
-        colArr.push(`| GOT:      ${colors.bg.magenta}${colors.fg.black} ${val.got} `)
-        arr.push(`| GOT:       ${val.got} `)
-        colArr.push(`| EXPECTED: ${colors.bg.magenta}${colors.fg.black} ${val.expected} `)
-        arr.push(`| EXPECTED:  ${val.expected} `)
-        colArr.push(`| CLASS:    ${colors.fg.yellow}${colors.bold}${val.class}`)
-        arr.push(`| CLASS:    ${val.class}`)
-        if (val.id) {
-            colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
-            arr.push(`| ID:       ${val.id} `)
-        } else {
-            colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
-            arr.push(`| INDEX:    ${val.index} `)
-        }
-
-        colArr.forEach((val, ind) => {
-            let spaces = '';
-            for (let ii = 0; ii < 29 - arr[ind].length; ii++)
-                spaces += ' ';
-
-            console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
+(async () => {
+    for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+        const val = files[fileIndex];
+        let index = 0;
+        await val.test((got, expected, id) => {
+            testsRun++;
+            if (JSON.stringify(got) != JSON.stringify(expected)) {
+                let o2 = {
+                    got,
+                    expected,
+                    class: val.class,
+                    index
+                };
+                if (id) o2.id = id;
+                jsonOut.failed.push(o2);
+                testsFailed.push({
+                    class: val.class,
+                    got:
+                        (stringify.general(got, false).length < preferredObjectLength) ?
+                            stringify.general(got, false) :
+                            (stringify.general(got, true).length < preferredObjectLength) ?
+                                stringify.general(got, true) :
+                                (stringify.general(got, false).length < maxObjectLength) ?
+                                    stringify.general(got, false) :
+                                    (stringify.general(got, true).length < maxObjectLength) ?
+                                        stringify.general(got, true) :
+                                        tof(got),
+                    expected:
+                        (stringify.general(expected, false).length < preferredObjectLength) ?
+                            stringify.general(expected, false) :
+                            (stringify.general(expected, true).length < preferredObjectLength) ?
+                                stringify.general(expected, true) :
+                                (stringify.general(expected, false).length < maxObjectLength) ?
+                                    stringify.general(expected, false) :
+                                    (stringify.general(expected, true).length < maxObjectLength) ?
+                                        stringify.general(expected, true) :
+                                        tof(expected),
+                    index,
+                    id
+                })
+            } else {
+                let o2 = {
+                    expected,
+                    got,
+                    class: val.class,
+                    index
+                };
+                if (id) o2.id = id;
+                jsonOut.succeeded.push(o2);
+            }
+            index++;
         })
+    }
 
-        if (ind == testsFailed.length - 1)
-            console.log('\\----------------------------/')
-        else
-            console.log('+----------------------------+')
-    })
-}
+    if (debug) {
+        console.log()
+        console.log('LOGS END\nSUMMARY START')
+    } else
+        console.clear();
+    let sumText;
+    if (testsRun == 0)
+        sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
+    else if (testsFailed.length > 0)
+        sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length == 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
+    else
+        sumText = `${colors.bg.green}${colors.fg.black}${colors.bold} ALL TESTS SUCCEEDED ${colors.reset}`
+    if (!verbose) {
+        console.log(sumText)
+        console.log()
+    }
 
-if (testsFailed.length > 0) {
-    console.log()
-    console.log(sumText)
+    if (!verbose) {
+        if (testsFailed.length > 0)
+            console.log('/----------------------------\\')
 
-    // let p = path.resolve(__dirname, `./logs/tests/${Math.floor(Math.random() * 100000)}.json`);
-    let p = path.resolve(__dirname, `./logs/tests/latest.json`);
-    fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
-    console.log(p)
+        testsFailed.forEach((val, ind) => {
+            let colArr = [];
+            let arr = [];
 
-    console.log()
-}
+            colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
+            arr.push(`|  FAILED `)
+            colArr.push(`| GOT:      ${colors.bg.magenta}${colors.fg.black} ${val.got} `)
+            arr.push(`| GOT:       ${val.got} `)
+            colArr.push(`| EXPECTED: ${colors.bg.magenta}${colors.fg.black} ${val.expected} `)
+            arr.push(`| EXPECTED:  ${val.expected} `)
+            colArr.push(`| CLASS:    ${colors.fg.yellow}${colors.bold}${val.class}`)
+            arr.push(`| CLASS:    ${val.class}`)
+            if (val.id) {
+                colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
+                arr.push(`| ID:       ${val.id} `)
+            } else {
+                colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
+                arr.push(`| INDEX:    ${val.index} `)
+            }
+
+            colArr.forEach((val, ind) => {
+                let spaces = '';
+                for (let ii = 0; ii < 29 - arr[ind].length; ii++)
+                    spaces += ' ';
+
+                console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
+            })
+
+            if (ind == testsFailed.length - 1)
+                console.log('\\----------------------------/')
+            else
+                console.log('+----------------------------+')
+        })
+    }
+
+    if (testsFailed.length > 0) {
+        console.log()
+        console.log(sumText)
+
+        // let p = path.resolve(__dirname, `./logs/tests/${Math.floor(Math.random() * 100000)}.json`);
+        let p = path.resolve(__dirname, `./logs/tests/latest.json`);
+        fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
+        console.log(p)
+
+        console.log()
+    }
+})();

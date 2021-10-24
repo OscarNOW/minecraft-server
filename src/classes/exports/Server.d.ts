@@ -26,4 +26,5 @@ export class Server {
         description: string;
     };
     on(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    close(): void;
 }
