@@ -249,7 +249,7 @@ if (debug) {
     }
 
     if (!silenceWarnings & jsonOut.warnings.length > 0) {
-        jsonOut.warnings.forEach(console.log);
+        jsonOut.warnings.forEach(v => console.log(v));
         console.log();
     }
 })();
