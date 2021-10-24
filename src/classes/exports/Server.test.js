@@ -34,11 +34,15 @@ module.exports = async (expect, warn) => {
     let leftClient;
 
     server.on('join', client => {
+        if (!loggedInText)
+            console.log(`Logged in as ${client.username}`)
         joined = true;
         joinedClient = client;
     })
 
     server.on('leave', client => {
+        if (!loggedInText)
+            console.log(`Logged in as ${client.username}`)
         left = true;
         leftClient = client;
     })
