@@ -79,9 +79,6 @@ class Server {
     }
 
     get playerCount() {
-        if (this.server.playerCount != this.clients.length)
-            throw new Error(`Internal error\n       Clients length (${this.clients.length}) does not equal playercount (${this.server.playerCount})`)
-
         return this.clients.length;
     }
 
