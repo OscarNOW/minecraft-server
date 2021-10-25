@@ -1,6 +1,7 @@
 const mineflayer = require('mineflayer');
 const fs = require('fs');
 const path = require('path');
+const mc = require('minecraft-protocol');
 const Server = require('./Server').Server;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
@@ -109,6 +110,7 @@ module.exports = async (expect, warn) => {
         }
     });
     console.log('[L] Bot 1 joined test server')
+    client1 = joinedClient;
 
     expect(joined, true);
     expect(left, false);
@@ -152,7 +154,21 @@ module.exports = async (expect, warn) => {
     expect(server.playerCount, 1);
     expect(server.server.playerCount, 1);
 
-    console.log('Closing test server')
+    client1.kick();
+    console.log('Bot 1 kicked');
+
+    console.log('Pinging test server')
+    let pinged = await ping();
+    let ip = '127.0.0.1';
+    expect(pinged.version.name, `#1#${ip}#1#`)
+    expect(pinged.players.online, 2)
+    expect(pinged.players.max, 3)
+    expect(pinged.players.sample[0].name, `#4#${ip}#4#`)
+    expect(pinged.players.sample[1].name, `#5#${ip}#5#`)
+    expect(pinged.description, `#6#${ip}#6#\n#7#${ip}#7#`)
+
+    await wait(500);
+    console.log('Closing test server');
     server.close();
 
     await wait(500);
@@ -177,5 +193,13 @@ function bot({ kicked }) {
         bot.on('kicked', kicked)
         // bot.on('error', error)
         bot.on('login', () => res(bot));
+    })
+}
+
+function ping() {
+    return mc.ping({
+        host: 'localhost',
+        port: '25565',
+        version: '1.16.3'
     })
 }
