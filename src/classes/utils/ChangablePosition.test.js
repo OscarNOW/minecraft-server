@@ -1,8 +1,8 @@
-const file = require('./ChangablePosition').ChangablePosition;
+const ChangablePosition = require('./ChangablePosition').ChangablePosition;
 
 module.exports = expect => {
     let updated = false;
-    let temp = new file(pos => {
+    let temp = new ChangablePosition(pos => {
         updated = true;
     }, {
         x: 1,

@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer');
 const fs = require('fs');
 const path = require('path');
-const file = require('./Server').Server;
+const Server = require('./Server').Server;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let credentials = null;
@@ -10,12 +10,12 @@ if (fs.existsSync(path.resolve(__dirname, `../../credentials/`)))
         credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../../credentials/microsoft.json`)))
 
 module.exports = async (expect, warn) => {
-    if (credentials === null) return warn("Can't test server without Microsoft account credentials. Create ./credentials/microsoft.json with username and password properties")
+    if (credentials === null) return warn("Can't test server class without Microsoft account credentials. Create ./credentials/microsoft.json with username and password properties")
 
     console.clear()
     console.log('Starting testing server')
 
-    const server = new file({
+    const server = new Server({
         serverList: ip => ({
             versionMessage: `#1#${ip}#1#`,
             players: {
