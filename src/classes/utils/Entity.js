@@ -9,7 +9,7 @@ class Entity {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        this.cachedPosition = new ChangablePosition(i => that.move(i, that), { x, y, z, yaw, pitch })
+        this.cachedPosition = new ChangablePosition(i => that.move.call(that, i), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
         this.typeId = e.id;
@@ -57,7 +57,7 @@ class Entity {
         this.move(v)
     }
 
-    move({ x, y, z, yaw: ya, pitch }, thisC) {
+    move({ x, y, z, yaw: ya, pitch }) {
 
         let yaw = ya;
         if (yaw > 127)
@@ -66,7 +66,7 @@ class Entity {
         if (yaw < -127)
             yaw = 127;
 
-        (thisC || this).client.client.write('entity_teleport', {
+        this.client.client.write('entity_teleport', {
             entityId: this.id,
             x,
             y,
@@ -76,7 +76,7 @@ class Entity {
             onGround: true
         });
 
-        (thisC || this).position.raw = { x, y, z, yaw, pitch }
+        this.position.raw = { x, y, z, yaw, pitch }
     }
 }
 

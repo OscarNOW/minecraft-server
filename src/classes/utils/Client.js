@@ -28,7 +28,7 @@ class Client {
             })
         })();
 
-        this.cachedPosition = new ChangablePosition(i => that.teleport(i, that), {
+        this.cachedPosition = new ChangablePosition(i => that.teleport.call(that, i), {
             x: null,
             y: null,
             z: null,
@@ -131,8 +131,8 @@ class Client {
         })
     }
 
-    teleport({ x, y, z, yaw, pitch }, thisC) {
-        (thisC || this).client.write('position', {
+    teleport({ x, y, z, yaw, pitch }) {
+        this.client.write('position', {
             x,
             y,
             z,
