@@ -28,14 +28,6 @@ class Client {
             })
         })();
 
-        // this.cachedPosition = {
-        //     x: null,
-        //     y: null,
-        //     z: null,
-        //     onGround: null,
-        //     yaw: null,
-        //     pitch: null
-        // };
         this.cachedPosition = new ChangablePosition(i => that.teleport(i, that), {
             x: null,
             y: null,
@@ -92,7 +84,6 @@ class Client {
             'z',
             'pitch',
             'yaw'
-            // ,'onGround'
         ].forEach(val => {
             if (info[val] !== undefined && this.cachedPosition[val] != info[val]) {
                 changed = true;
@@ -132,7 +123,7 @@ class Client {
             heightmaps: {
                 type: 'compound',
                 name: '',
-                value: {} // Client will accept fake heightmap
+                value: {}
             },
             bitMap: chunk.chunk.getMask(),
             chunkData: chunk.chunk.dump(),
@@ -182,12 +173,12 @@ class Client {
 
     player() {
         throw new Error(`Not implemented`)
-        // httpRequest({
-        //     host: 'sessionserver.mojang.com',
-        //     method: 'GET',
-        //     path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
-        // }).then(inf => {
-        //     console.log(inf.properties)
+        /*httpRequest({
+            host: 'sessionserver.mojang.com',
+            method: 'GET',
+            path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
+        }).then(inf => {
+            console.log(inf.properties)*/
         this.client.write('player_info', {
             action: 0,
             data: [

@@ -4,11 +4,11 @@ const entities = require('../../data/entities.json');
 
 class Entity {
     constructor(client, type, id, { x, y, z, yaw, pitch }) {
+        const that = this;
+
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        // this.position = { x, y, z, yaw, pitch };
-        let that = this;
         this.cachedPosition = new ChangablePosition(i => that.move(i, that), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
@@ -19,7 +19,7 @@ class Entity {
 
         if (this.living)
             this.client.client.write('spawn_entity_living', {
-                entityId: this.id, //1
+                entityId: this.id,
                 entityUUID: this.uuid,
                 type: this.typeId,
                 x: this.position.x,
@@ -34,7 +34,7 @@ class Entity {
             })
         else
             this.client.client.write('spawn_entity', {
-                entityId: this.id, //3
+                entityId: this.id,
                 objectUUID: this.uuid,
                 type: this.typeId,
                 x: this.position.x,

@@ -46,7 +46,6 @@ const stringify = {
         if (JSON.stringify(arr) == '[]') return '[]';
 
         let out = `[${short ? '' : ' '}`;
-        // out += arr.join(`,${short ? '' : ' '}`)
         arr.forEach((val, ind) => {
             out += `${ind == 0 ? '' : `,${short ? '' : ' '}`}${stringify.general(val, short)}`
         })
