@@ -1,6 +1,7 @@
 const ChangablePosition = require('./ChangablePosition').ChangablePosition;
 const { v4: uuid } = require('uuid');
 const entities = require('../../data/entities.json');
+const entityAnimations = require('../../data/entityAnimations.json');
 
 class Entity {
     constructor(client, type, id, { x, y, z, yaw, pitch }) {
@@ -77,6 +78,15 @@ class Entity {
         });
 
         this.position.raw = { x, y, z, yaw, pitch }
+    }
+
+    animation(animationType) {
+        if (entityAnimations[animationType] === undefined) throw new Error(`Unknown animationType "${animationType}"`)
+
+        this.client.client.write('animation', {
+            entityId: this.id,
+            animation: entityAnimations[animationType]
+        })
     }
 }
 

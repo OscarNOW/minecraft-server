@@ -29,11 +29,10 @@ server.on('join', client => {
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
-        client.window('horse', horse)
     }, 1800);
 
     setTimeout(() => {
-        horse.position.y += 10
+        horse.animation('flashRed')
     }, 5000)
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)
@@ -57,23 +56,5 @@ server.on('join', client => {
                 }
 
             }
-    })
-
-    return
-    client.on('command', message => {
-        if (message.startsWith('tp')) {
-
-            let coords = message.split(' ').slice(1);
-            client.teleport({ x: coords[0], y: coords[1], z: coords[2], yaw: 0, pitch: 0 })
-
-        } else if (message.startsWith('summon')) {
-
-            let entityType = message.split(' ').slice(1)[0];
-            let coords = message.split(' ').slice(2);
-            client.entity(entityType, { x: coords[0], y: coords[1], z: coords[2] });
-
-        } else {
-            return client.chat('Unknown command');
-        }
     })
 });

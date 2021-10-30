@@ -82,6 +82,8 @@ declare class Entity {
         yaw: number;
         pitch: number;
     }): void;
+
+    animation(animationType: entityAnimationType): void;
 }
 
 export class Server {
@@ -153,3 +155,5 @@ type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 
 type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
 
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
+
+type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
