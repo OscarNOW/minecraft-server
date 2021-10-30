@@ -1,10 +1,11 @@
 {
     "ar_sa": {
-        "englishName": "Arabic"
+        "englishName": "Arabic",
+        "menuName": "Afrikaans (Suid-Afrika)"
     },
     "ast_es": {
         "englishName": "Asturian",
-        "menuName": "Asturianu"
+        "menuName": "Asturianu (Asturies)"
     },
     "az_az": {
         "englishName": "Azerbaijani",
@@ -16,7 +17,7 @@
     },
     "bar": {
         "englishName": "Bavarian",
-        "menuName": "Boarisch"
+        "menuName": "Boarisch (Bayern)"
     },
     "be_by": {
         "englishName": "Belarusian",
@@ -32,7 +33,7 @@
     },
     "brb": {
         "englishName": "Brabantian",
-        "menuName": "Brabants"
+        "menuName": "Brabants (Nederland)"
     },
     "bs_ba": {
         "englishName": "Bosnian",
@@ -44,7 +45,7 @@
     },
     "cs_cz": {
         "englishName": "Czech",
-        "menuName": "Čeština (Česká Republika)"
+        "menuName": "Čeština (Česko)"
     },
     "cy_gb": {
         "englishName": "Welsh",
@@ -56,15 +57,15 @@
     },
     "de_at": {
         "englishName": "Austrian German",
-        "menuName": "Österreichisches Deitsch"
+        "menuName": "Deitsch (Österreich)"
     },
     "de_ch": {
         "englishName": "Swiss German",
-        "menuName": "Schwiizerdutsch"
+        "menuName": "Schwiizerdütsch (Schwiz)"
     },
     "de_de": {
         "englishName": "German",
-        "menuName": "Deutsch"
+        "menuName": "Deutsch (Deutschland)"
     },
     "el_gr": {
         "englishName": "Greek",
@@ -88,26 +89,27 @@
     },
     "en_pt": {
         "englishName": "Pirate English",
-        "menuName": "Pirate Speak"
+        "menuName": "Pirate Speak (The Seven Seas)"
     },
     "en_ud": {
         "englishName": "Upside down English ",
         "menuName": "ɥsᴉꞁᵷuƎ (uʍoᗡ ǝpᴉsd∩)"
     },
-    "Pre-release": {
-        "englishName": "en_us"
+    "en_us": {
+        "englishName": "English",
+        "menuName": "English (US)"
     },
     "enp": {
         "englishName": "Anglish",
-        "menuName": "Anglish"
+        "menuName": "Anglish (Foroned Kingdom)"
     },
     "enws": {
         "englishName": "Early Modern English",
-        "menuName": "Shakespearean English"
+        "menuName": "Shakespearean English (Kingdom of England)"
     },
     "eo_uy": {
         "englishName": "Esperanto",
-        "menuName": "Esperanto"
+        "menuName": "Esperanto (Esperantujo)"
     },
     "es_ar": {
         "englishName": "Argentinian Spanish",
@@ -125,8 +127,9 @@
         "englishName": "Spanish",
         "menuName": "Español (España)"
     },
-    "Alpha v0.12.1": {
-        "englishName": "es_mx"
+    "es_mx": {
+        "englishName": "Mexican Spanish",
+        "menuName": "Español (México)"
     },
     "es_uy": {
         "englishName": "Uruguayan Spanish",
@@ -138,11 +141,11 @@
     },
     "esan": {
         "englishName": "Andalusian",
-        "menuName": "Andalûh"
+        "menuName": "Andalûh (Andaluçía)"
     },
     "et_ee": {
         "englishName": "Estonian",
-        "menuName": "Eesti (Eesti)"
+        "menuName": "Eesti keel (Eesti)"
     },
     "eu_es": {
         "englishName": "Basque",
@@ -150,7 +153,7 @@
     },
     "fa_ir": {
         "englishName": "Persian",
-        "menuName": "فارسی (Fārsiy)"
+        "menuName": "فارسی (ایران)"
     },
     "fi_fi": {
         "englishName": "Finnish",
@@ -158,7 +161,7 @@
     },
     "fil_ph": {
         "englishName": "Filipino",
-        "menuName": "Filipino (Filipinas)"
+        "menuName": "Filipino (Pilipinas)"
     },
     "fo_fo": {
         "englishName": "Faroese",
@@ -166,7 +169,7 @@
     },
     "fr_ca": {
         "englishName": "Canadian French",
-        "menuName": "Français (Québec)"
+        "menuName": "Français (Canada)"
     },
     "fr_fr": {
         "englishName": "French",
@@ -174,7 +177,7 @@
     },
     "fra_de": {
         "englishName": "East Franconian",
-        "menuName": "Frängisch"
+        "menuName": "Fränggisch (Franggn)"
     },
     "fy_nl": {
         "englishName": "Frisian",
@@ -190,7 +193,11 @@
     },
     "gl_es": {
         "englishName": "Galician",
-        "menuName": "Galego (Galicia)"
+        "menuName": "Galego (Galicia / Galiza)"
+    },
+    "gv": {
+        "englishName": "Manx",
+        "menuName": "Gaelg (Ellan Vannin)"
     },
     "haw_us": {
         "englishName": "Hawaiian",
@@ -198,11 +205,11 @@
     },
     "he_il": {
         "englishName": "Hebrew",
-        "menuName": "עברית (Ivriyþ)"
+        "menuName": "עברית (לישראל)"
     },
     "hi_in": {
         "englishName": "Hindi",
-        "menuName": "हिन्दी (Hindī)"
+        "menuName": "ही (भारत)"
     },
     "hr_hr": {
         "englishName": "Croatian",
@@ -214,7 +221,7 @@
     },
     "hy_am": {
         "englishName": "Armenian",
-        "menuName": "Հայերեն (Hayeren)"
+        "menuName": "Հայերեն"
     },
     "id_id": {
         "englishName": "Indonesian",
@@ -222,11 +229,11 @@
     },
     "ig_ng": {
         "englishName": "Igbo",
-        "menuName": "Igbo (Naijiria)"
+        "menuName": "Igbo (Naigeria)"
     },
     "io_en": {
         "englishName": "Ido",
-        "menuName": "Ido"
+        "menuName": "Ido (Idia)"
     },
     "is_is": {
         "englishName": "Icelandic",
@@ -234,22 +241,23 @@
     },
     "isv": {
         "englishName": "Interslavic",
-        "menuName": "Medžuslovjansky"
+        "menuName": "Medžuslovjansky (Slovjanščina)"
     },
     "it_it": {
         "englishName": "Italian",
         "menuName": "Italiano (Italia)"
     },
     "ja_jp": {
-        "englishName": "Japanese"
+        "englishName": "Japanese",
+        "menuName": "日本語 (日本)"
     },
     "jbo_en": {
         "englishName": "Lojban",
-        "menuName": "la .lojban."
+        "menuName": "la .lojban. (la jbogu'e)"
     },
     "ka_ge": {
         "englishName": "Georgian",
-        "menuName": "ქართული (Kharthuli)"
+        "menuName": "ქართული"
     },
     "kk_kz": {
         "englishName": "Kazakh",
