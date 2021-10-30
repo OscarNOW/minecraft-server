@@ -62,13 +62,7 @@ class Server {
                 isDebug: false,
                 isFlat: false
             });
-            let customClient = new Client(client, this);
-
-            this.clients.push(customClient);
-
-            this.events.join.forEach(val => {
-                val(customClient)
-            });
+            new Client(client, this);
         });
 
     }

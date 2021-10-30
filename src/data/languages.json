@@ -1,0 +1,460 @@
+{
+    "ar_sa": {
+        "name": "Arabic"
+    },
+    "ast_es": {
+        "name": "Asturian",
+        "localName": "Asturianu"
+    },
+    "az_az": {
+        "name": "Azerbaijani",
+        "localName": "Azərbaycanca (Azərbaycan)"
+    },
+    "ba_ru": {
+        "name": "Bashkir",
+        "localName": "Башҡортса"
+    },
+    "bar": {
+        "name": "Bavarian",
+        "localName": "Boarisch"
+    },
+    "be_by": {
+        "name": "Belarusian",
+        "localName": "Беларуская (Беларусь)"
+    },
+    "bg_bg": {
+        "name": "Bulgarian",
+        "localName": "Български (България)"
+    },
+    "br_fr": {
+        "name": "Breton",
+        "localName": "Brezhoneg (Breizh)"
+    },
+    "brb": {
+        "name": "Brabantian",
+        "localName": "Brabants"
+    },
+    "bs_ba": {
+        "name": "Bosnian",
+        "localName": "Bosanski (Bosna i Hercegovina)"
+    },
+    "ca_es": {
+        "name": "Catalan",
+        "localName": "Català (Catalunya)"
+    },
+    "cs_cz": {
+        "name": "Czech",
+        "localName": "Čeština (Česká Republika)"
+    },
+    "cy_gb": {
+        "name": "Welsh",
+        "localName": "Cymraeg (Cymru)"
+    },
+    "da_dk": {
+        "name": "Danish",
+        "localName": "Dansk (Danmark)"
+    },
+    "de_at": {
+        "name": "Austrian German",
+        "localName": "Österreichisches Deitsch"
+    },
+    "de_ch": {
+        "name": "Swiss German",
+        "localName": "Schwiizerdutsch"
+    },
+    "de_de": {
+        "name": "German",
+        "localName": "Deutsch"
+    },
+    "el_gr": {
+        "name": "Greek",
+        "localName": "Ελληνικά (Ελλάδα)"
+    },
+    "en_au": {
+        "name": "Australian English",
+        "localName": "English (Australia)"
+    },
+    "en_ca": {
+        "name": "Canadian English",
+        "localName": "English (Canada)"
+    },
+    "en_gb": {
+        "name": "British English",
+        "localName": "English (United Kingdom)"
+    },
+    "en_nz": {
+        "name": "New Zealand English",
+        "localName": "English (New Zealand)"
+    },
+    "en_pt": {
+        "name": "Pirate English",
+        "localName": "Pirate Speak"
+    },
+    "en_ud": {
+        "name": "Upside down English ",
+        "localName": "ɥsᴉꞁᵷuƎ (uʍoᗡ ǝpᴉsd∩)"
+    },
+    "Pre-release": {
+        "name": "en_us"
+    },
+    "enp": {
+        "name": "Modern English minus borrowed words<ref>In other words, only Old English etymology. See [[Wikipedia:Linguistic purism in English]].</ref>",
+        "localName": "Anglish"
+    },
+    "enws": {
+        "name": "Early Modern English",
+        "localName": "Shakespearean English"
+    },
+    "eo_uy": {
+        "name": "Esperanto",
+        "localName": "Esperanto"
+    },
+    "es_ar": {
+        "name": "Argentinian Spanish",
+        "localName": "Español (Argentina)"
+    },
+    "es_cl": {
+        "name": "Chilean Spanish",
+        "localName": "Español (Chile)"
+    },
+    "es_ec": {
+        "name": "Ecuadorian Spanish",
+        "localName": "Español (Ecuador)"
+    },
+    "es_es": {
+        "name": "Spanish",
+        "localName": "Español (España)"
+    },
+    "Alpha v0.12.1": {
+        "name": "es_mx"
+    },
+    "es_uy": {
+        "name": "Uruguayan Spanish",
+        "localName": "Español (Uruguay)"
+    },
+    "es_ve": {
+        "name": "Venezuelan Spanish",
+        "localName": "Español (Venezuela)"
+    },
+    "esan": {
+        "name": "Andalusian",
+        "localName": "Andalûh"
+    },
+    "et_ee": {
+        "name": "Estonian",
+        "localName": "Eesti (Eesti)"
+    },
+    "eu_es": {
+        "name": "Basque",
+        "localName": "Euskara (Euskal Herria)"
+    },
+    "fa_ir": {
+        "name": "Persian",
+        "localName": "فارسی (Fārsiy)"
+    },
+    "fi_fi": {
+        "name": "Finnish",
+        "localName": "Suomi (Suomi)"
+    },
+    "fil_ph": {
+        "name": "Filipino",
+        "localName": "Filipino (Filipinas)"
+    },
+    "fo_fo": {
+        "name": "Faroese",
+        "localName": "Føroyskt (Føroyar)"
+    },
+    "fr_ca": {
+        "name": "Canadian French",
+        "localName": "Français (Québec)"
+    },
+    "fr_fr": {
+        "name": "French",
+        "localName": "Français (France)"
+    },
+    "fra_de": {
+        "name": "East Franconian",
+        "localName": "Frängisch"
+    },
+    "fy_nl": {
+        "name": "Frisian",
+        "localName": "Frysk (Fryslân)"
+    },
+    "ga_ie": {
+        "name": "Irish",
+        "localName": "Gaeilge (Éire)"
+    },
+    "gd_gb": {
+        "name": "Scottish Gaelic",
+        "localName": "Gàidhlig (Alba)"
+    },
+    "gl_es": {
+        "name": "Galician",
+        "localName": "Galego (Galicia)"
+    },
+    "haw_us": {
+        "name": "Hawaiian",
+        "localName": "ʻŌlelo Hawaiʻi (Hawai‘i)"
+    },
+    "he_il": {
+        "name": "Hebrew",
+        "localName": "עברית (Ivriyþ)"
+    },
+    "hi_in": {
+        "name": "Hindi",
+        "localName": "हिन्दी (Hindī)"
+    },
+    "hr_hr": {
+        "name": "Croatian",
+        "localName": "Hrvatski (Hrvatska)"
+    },
+    "hu_hu": {
+        "name": "Hungarian",
+        "localName": "Magyar (Magyarország)"
+    },
+    "hy_am": {
+        "name": "Armenian",
+        "localName": "Հայերեն (Hayeren)"
+    },
+    "id_id": {
+        "name": "Indonesian",
+        "localName": "Bahasa Indonesia (Indonesia)"
+    },
+    "ig_ng": {
+        "name": "Igbo",
+        "localName": "Igbo (Naijiria)"
+    },
+    "io_en": {
+        "name": "Ido",
+        "localName": "Ido"
+    },
+    "is_is": {
+        "name": "Icelandic",
+        "localName": "Íslenska (Ísland)"
+    },
+    "isv": {
+        "name": "Interslavic",
+        "localName": "Medžuslovjansky"
+    },
+    "it_it": {
+        "name": "Italian",
+        "localName": "Italiano (Italia)"
+    },
+    "ja_jp": {
+        "name": "Japanese"
+    },
+    "jbo_en": {
+        "name": "Lojban",
+        "localName": "la .lojban."
+    },
+    "ka_ge": {
+        "name": "Georgian",
+        "localName": "ქართული (Kharthuli)"
+    },
+    "kk_kz": {
+        "name": "Kazakh",
+        "localName": "Қазақша (Qazaqşa)"
+    },
+    "kn_in": {
+        "name": "Kannada",
+        "localName": "ಕನ್ನಡ (Kannađa)"
+    },
+    "ko_kr": {
+        "name": "Korean"
+    },
+    "ksh": {
+        "name": "Kölsch/Ripuarian",
+        "localName": "Kölsch/Ripoarisch"
+    },
+    "kw_gb": {
+        "name": "Cornish",
+        "localName": "Kernewek (Kernow)"
+    },
+    "la_la": {
+        "name": "Latin",
+        "localName": "Latina (Latium)"
+    },
+    "lb_lu": {
+        "name": "Luxembourgish",
+        "localName": "Lëtzebuergesch (Lëtzebuerg)"
+    },
+    "li_li": {
+        "name": "Limburgish",
+        "localName": "Limburgs"
+    },
+    "lol_us": {
+        "name": "LOLCAT"
+    },
+    "lt_lt": {
+        "name": "Lithuanian",
+        "localName": "Lietuvių"
+    },
+    "lv_lv": {
+        "name": "Latvian",
+        "localName": "Latviešu (Latvija)"
+    },
+    "lzh": {
+        "name": "Classical Chinese"
+    },
+    "mk_mk": {
+        "name": "Macedonian"
+    },
+    "mn_mn": {
+        "name": "Mongolian"
+    },
+    "ms_my": {
+        "name": "Malay",
+        "localName": "Bahasa Melayu (Malaysia)"
+    },
+    "mt_mt": {
+        "name": "Maltese",
+        "localName": "Malti (Malta)"
+    },
+    "nds_de": {
+        "name": "Low German",
+        "localName": "Platdüütsk"
+    },
+    "nl_be": {
+        "name": "Dutch, Flemish",
+        "localName": "Vlaams (Vlaanderen)"
+    },
+    "nl_nl": {
+        "name": "Dutch",
+        "localName": "Nederlands (Nederland)"
+    },
+    "nn_no": {
+        "name": "Norwegian Nynorsk",
+        "localName": "Norsk nynorsk (Norge)"
+    },
+    "oc_fr": {
+        "name": "Occitan",
+        "localName": "Occitan"
+    },
+    "ovd": {
+        "name": "Elfdalian",
+        "localName": "Övdalsk"
+    },
+    "pl_pl": {
+        "name": "Polish",
+        "localName": "Polski (Polska)"
+    },
+    "pt_br": {
+        "name": "Brazilian Portuguese",
+        "localName": "Português (Brasil)"
+    },
+    "pt_pt": {
+        "name": "Portuguese",
+        "localName": "Português (Portugal)"
+    },
+    "qya_aa": {
+        "name": "Quenya (Form of Elvish from LOTR)",
+        "localName": "Quenya"
+    },
+    "ro_ro": {
+        "name": "Romanian",
+        "localName": "Română (România)"
+    },
+    "rpr": {
+        "name": "Russian (Pre-revolutionary)",
+        "localName": "Дореформенный русскiй (Doreformennɨĭ russkiĭ)"
+    },
+    "ru_ru": {
+        "name": "Russian",
+        "localName": "Русский (Russkiy)"
+    },
+    "se_no": {
+        "name": "Northern Sami",
+        "localName": "Davvisámegiella"
+    },
+    "sk_sk": {
+        "name": "Slovak",
+        "localName": "Slovenčina (Slovensko)"
+    },
+    "sl_si": {
+        "name": "Slovenian",
+        "localName": "Slovenščina (Slovenija)"
+    },
+    "so_so": {
+        "name": "Somali",
+        "localName": "Af-Soomaali (Soomaaliya)"
+    },
+    "sq_al": {
+        "name": "Albanian",
+        "localName": "Shqip (Shqiperia)"
+    },
+    "sr_sp": {
+        "name": "Serbian (Cyrillic/Latin)",
+        "localName": "Српски/Srpski"
+    },
+    "sv_se": {
+        "name": "Swedish",
+        "localName": "Svenska (Sverige)"
+    },
+    "sxu": {
+        "name": "Upper Saxon German",
+        "localName": "Säggs'sch"
+    },
+    "szl": {
+        "name": "Silesian",
+        "localName": "Ślōnskŏ"
+    },
+    "ta_in": {
+        "name": "Tamil",
+        "localName": "தமிழ் (Tamił)"
+    },
+    "th_th": {
+        "name": "Thai",
+        "localName": "ไทย (thay)"
+    },
+    "tl_ph": {
+        "name": "Tagalog",
+        "localName": "Tagalog (Pilipinas)"
+    },
+    "tlh_aa": {
+        "name": "Klingon",
+        "localName": "tlhIngan Hol (tlhIngan wo')"
+    },
+    "tok": {
+        "name": "toki pona (ma pona)"
+    },
+    "tr_tr": {
+        "name": "Turkish",
+        "localName": "Türkçe (Türkiye)"
+    },
+    "tt_ru": {
+        "name": "Tatar"
+    },
+    "uk_ua": {
+        "name": "Ukrainian",
+        "localName": "Українська (Ukrayins'ka)"
+    },
+    "val_es": {
+        "name": "Valencian",
+        "localName": "Català (Valencià)"
+    },
+    "vec_it": {
+        "name": "Venetian",
+        "localName": "Vèneto"
+    },
+    "vi_vn": {
+        "name": "Vietnamese",
+        "localName": "Tiếng Việt (Việt Nam)"
+    },
+    "yi_de": {
+        "name": "Yiddish",
+        "localName": "ייִדיש (Yidiš)"
+    },
+    "yo_ng": {
+        "name": "Yoruba",
+        "localName": "Yorùbá"
+    },
+    "zh_cn": {
+        "name": "Chinese Simplified (China; Mandarin)"
+    },
+    "zh_hk": {
+        "name": "Chinese Traditional (Hong Kong; Mix)"
+    },
+    "zh_tw": {
+        "name": "Chinese Traditional (Taiwan; Mandarin)"
+    }
+}

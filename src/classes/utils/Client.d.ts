@@ -19,6 +19,12 @@ export class Client {
     uuid: string;
     ping: number;
     online: boolean;
+    locale: {
+        code: string;
+        name: string;
+        localName?: string;
+    };
+    viewDistance: number;
     position: {
         x: number;
         y: number;

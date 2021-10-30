@@ -1,11 +1,13 @@
 const Entity = require('./Entity').Entity;
 const ChangablePosition = require('./ChangablePosition').ChangablePosition;
 const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
+const languages = require('../../data/languages.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Client {
     constructor(client, server) {
         const that = this;
+        let joined = false;
 
         this.client = client;
         this.server = server;
@@ -54,6 +56,30 @@ class Client {
         this.client.on('position_look', i => this.emitMove(i));
         this.client.on('look', i => this.emitMove(i));
         this.client.on('flying', i => this.emitMove(i));
+
+        this.client.on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
+            if (!languages[locale]) throw new Error(`Unknown language code "${locale}"`)
+            let obj = {
+                code: locale,
+                name: languages[locale].name
+            };
+
+            if (languages[locale].localName) obj.localName = languages[locale].localName;
+
+            this.locale = obj;
+            this.viewDistance = viewDistance;
+
+            if (!joined) {
+                joined = true;
+                this.server.clients.push(this);
+                this.server.events.join.forEach(val => val(this));
+            }
+
+            console.log({
+                username: this.username,
+                chatFlags
+            })
+        })
 
     }
 
