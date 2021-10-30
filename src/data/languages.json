@@ -142,16 +142,19 @@
         "menuName": "Español (España)"
     },
     "es_mx": {
-        "englishName": "Mexican Spanish",
-        "menuName": "Español (México)"
+        "englishName": "Spanish",
+        "menuName": "Español (México)",
+        "region": "Mexico"
     },
     "es_uy": {
         "englishName": "Uruguayan Spanish",
-        "menuName": "Español (Uruguay)"
+        "menuName": "Español (Uruguay)",
+        "region": "Uruguay"
     },
     "es_ve": {
-        "englishName": "Venezuelan Spanish",
-        "menuName": "Español (Venezuela)"
+        "englishName": "Spanish",
+        "menuName": "Español (Venezuela)",
+        "region": "Venezuela"
     },
     "esan": {
         "englishName": "Andalusian",
@@ -182,12 +185,14 @@
         "menuName": "Føroyskt (Føroyar)"
     },
     "fr_ca": {
-        "englishName": "Canadian French",
-        "menuName": "Français (Canada)"
+        "englishName": "French",
+        "menuName": "Français (Canada)",
+        "region": "Canada"
     },
     "fr_fr": {
         "englishName": "French",
-        "menuName": "Français (France)"
+        "menuName": "Français (France)",
+        "region": "France"
     },
     "fra_de": {
         "englishName": "East Franconian",
@@ -310,8 +315,9 @@
         "menuName": "Lombard (Lombardia)"
     },
     "lol_us": {
-        "englishName": "LOLCAT",
-        "menuName": "LOLCAT (Kingdom of Cats)"
+        "englishName": "English",
+        "menuName": "LOLCAT (Kingdom of Cats)",
+        "version": "LOLCAT"
     },
     "lt_lt": {
         "englishName": "Lithuanian",
@@ -346,8 +352,9 @@
         "menuName": "Malti (Malta)"
     },
     "nds_de": {
-        "englishName": "Low German",
-        "menuName": "Plattdüütsch (Düütschland)"
+        "englishName": "German",
+        "menuName": "Plattdüütsch (Düütschland)",
+        "version": "Low"
     },
     "nl_be": {
         "englishName": "Flemish",
@@ -355,7 +362,8 @@
     },
     "nl_nl": {
         "englishName": "Dutch",
-        "menuName": "Nederlands (Nederland)"
+        "menuName": "Nederlands (Nederland)",
+        "region": "Nederland"
     },
     "nn_no": {
         "englishName": "Norwegian Nynorsk",
@@ -378,12 +386,14 @@
         "menuName": "Polski (Polska)"
     },
     "pt_br": {
-        "englishName": "Brazilian Portuguese",
-        "menuName": "Português (Brasil)"
+        "englishName": "Portuguese",
+        "menuName": "Português (Brasil)",
+        "region": "Brazil"
     },
     "pt_pt": {
         "englishName": "Portuguese",
-        "menuName": "Português (Portugal)"
+        "menuName": "Português (Portugal)",
+        "region": "Portugal"
     },
     "qya_aa": {
         "englishName": "Quenya",
@@ -434,8 +444,9 @@
         "menuName": "Oschdallgaiarisch (Allgai)"
     },
     "sxu": {
-        "englishName": "Upper Saxon German",
-        "menuName": "Säggs'sch (Saggsn)"
+        "englishName": "German",
+        "menuName": "Säggs'sch (Saggsn)",
+        "region": "Saxony"
     },
     "szl": {
         "englishName": "Silesian",
