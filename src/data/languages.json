@@ -97,12 +97,14 @@
     "en_pt": {
         "englishName": "English",
         "menuName": "Pirate Speak (The Seven Seas)",
-        "version": "Pirate"
+        "version": "Pirate",
+        "funny": true
     },
     "en_ud": {
         "englishName": "English ",
         "menuName": "ɥsᴉꞁᵷuƎ (uʍoᗡ ǝpᴉsd∩)",
-        "version": "Upside down"
+        "version": "Upside down",
+        "funny": true
     },
     "en_us": {
         "englishName": "English",
@@ -116,7 +118,8 @@
     "enws": {
         "englishName": "English",
         "menuName": "Shakespearean English (Kingdom of England)",
-        "version": "Shakespeare"
+        "version": "Shakespeare",
+        "funny": true
     },
     "eo_uy": {
         "englishName": "Esperanto",
@@ -317,7 +320,8 @@
     "lol_us": {
         "englishName": "English",
         "menuName": "LOLCAT (Kingdom of Cats)",
-        "version": "LOLCAT"
+        "version": "LOLCAT",
+        "funny": true
     },
     "lt_lt": {
         "englishName": "Lithuanian",
@@ -328,8 +332,9 @@
         "menuName": "Latviešu (Latvija)"
     },
     "lzh": {
-        "englishName": "Classical Chinese",
-        "menuName": "文言 (華夏)"
+        "englishName": "Chinese",
+        "menuName": "文言 (華夏)",
+        "version": "Classic"
     },
     "mi_nz": {
         "englishName": "Māori",
@@ -501,15 +506,18 @@
         "menuName": "Yorùbá (Nàìjíríà)"
     },
     "zh_cn": {
-        "englishName": "Chinese Simplified",
-        "menuName": "简体中文 (中国)"
+        "englishName": "Chinese",
+        "menuName": "简体中文 (中国)",
+        "version": "Simplified"
     },
     "zh_hk": {
-        "englishName": "Chinese Traditional",
-        "menuName": "繁體中文 (香港)"
+        "englishName": "Chinese",
+        "menuName": "繁體中文 (香港)",
+        "version": "Traditional"
     },
     "zh_tw": {
-        "englishName": "Chinese Traditional",
-        "menuName": "繁體中文 (台灣)"
+        "englishName": "Chinese",
+        "menuName": "繁體中文 (台灣)",
+        "version": "Traditional"
     }
 }
