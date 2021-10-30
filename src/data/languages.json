@@ -261,18 +261,19 @@
     },
     "kk_kz": {
         "englishName": "Kazakh",
-        "menuName": "Қазақша (Qazaqşa)"
+        "menuName": "Казакша (Казакстан)"
     },
     "kn_in": {
         "englishName": "Kannada",
-        "menuName": "ಕನ್ನಡ (Kannađa)"
+        "menuName": "ಕನ್ನಡ"
     },
     "ko_kr": {
-        "englishName": "Korean"
+        "englishName": "Korean",
+        "menuName": "한국어 (대한민국)"
     },
     "ksh": {
         "englishName": "Kölsch/Ripuarian",
-        "menuName": "Kölsch/Ripoarisch"
+        "menuName": "Kölsch/Ripoarisch (Rhingland)"
     },
     "kw_gb": {
         "englishName": "Cornish",
@@ -288,27 +289,39 @@
     },
     "li_li": {
         "englishName": "Limburgish",
-        "menuName": "Limburgs"
+        "menuName": "Limburgs (Limburg)"
+    },
+    "lmo_it": {
+        "englishName": "Lombard",
+        "menuName": "Lombard (Lombardia)"
     },
     "lol_us": {
-        "englishName": "LOLCAT"
+        "englishName": "LOLCAT",
+        "menuName": "LOLCAT (Kingdom of Cats)"
     },
     "lt_lt": {
         "englishName": "Lithuanian",
-        "menuName": "Lietuvių"
+        "menuName": "Lietuvių (Lietuva)"
     },
     "lv_lv": {
         "englishName": "Latvian",
         "menuName": "Latviešu (Latvija)"
     },
     "lzh": {
-        "englishName": "Classical Chinese"
+        "englishName": "Classical Chinese",
+        "menuName": "文言 (華夏)"
+    },
+    "mi_nz": {
+        "englishName": "Māori",
+        "menuName": "Te Reo Māori (Aotearoa)"
     },
     "mk_mk": {
-        "englishName": "Macedonian"
+        "englishName": "Macedonian",
+        "menuName": "Македонски (Македонија)"
     },
     "mn_mn": {
-        "englishName": "Mongolian"
+        "englishName": "Mongolian",
+        "menuName": "Монгол (Монгол Улс)"
     },
     "ms_my": {
         "englishName": "Malay",
@@ -320,11 +333,11 @@
     },
     "nds_de": {
         "englishName": "Low German",
-        "menuName": "Platdüütsk"
+        "menuName": "Plattdüütsch (Düütschland)"
     },
     "nl_be": {
-        "englishName": "Dutch, Flemish",
-        "menuName": "Vlaams (Vlaanderen)"
+        "englishName": "Flemish",
+        "menuName": "Vlaams (België)"
     },
     "nl_nl": {
         "englishName": "Dutch",
@@ -332,15 +345,19 @@
     },
     "nn_no": {
         "englishName": "Norwegian Nynorsk",
-        "menuName": "Norsk nynorsk (Norge)"
+        "menuName": "Norsk nynorsk (Noreg)"
+    },
+    "no_no": {
+        "englishName": "Norwegian Bokmål",
+        "menuName": "Norsk Bokmål (Norge)"
     },
     "oc_fr": {
         "englishName": "Occitan",
-        "menuName": "Occitan"
+        "menuName": "Occitan (Occitània)"
     },
     "ovd": {
         "englishName": "Elfdalian",
-        "menuName": "Övdalsk"
+        "menuName": "Övdalska (Swerre)"
     },
     "pl_pl": {
         "englishName": "Polish",
@@ -355,24 +372,24 @@
         "menuName": "Português (Portugal)"
     },
     "qya_aa": {
-        "englishName": "Quenya (Form of Elvish from LOTR)",
-        "menuName": "Quenya"
+        "englishName": "Quenya",
+        "menuName": "Quenya (Arda)"
     },
     "ro_ro": {
         "englishName": "Romanian",
         "menuName": "Română (România)"
     },
     "rpr": {
-        "englishName": "Russian (Pre-revolutionary)",
-        "menuName": "Дореформенный русскiй (Doreformennɨĭ russkiĭ)"
+        "englishName": "Russian",
+        "menuName": "Дореформенный русскiй (русь)"
     },
     "ru_ru": {
         "englishName": "Russian",
-        "menuName": "Русский (Russkiy)"
+        "menuName": "Русский (Россия)"
     },
     "se_no": {
         "englishName": "Northern Sami",
-        "menuName": "Davvisámegiella"
+        "menuName": "Davvisámegiella (Sápmi)"
     },
     "sk_sk": {
         "englishName": "Slovak",
@@ -388,31 +405,35 @@
     },
     "sq_al": {
         "englishName": "Albanian",
-        "menuName": "Shqip (Shqiperia)"
+        "menuName": "Shqip (Shqipëri)"
     },
     "sr_sp": {
-        "englishName": "Serbian (Cyrillic/Latin)",
-        "menuName": "Српски/Srpski"
+        "englishName": "Serbian",
+        "menuName": "Српски (Србија)"
     },
     "sv_se": {
         "englishName": "Swedish",
         "menuName": "Svenska (Sverige)"
     },
+    "swg": {
+        "englishName": "Allgovian German",
+        "menuName": "Oschdallgaiarisch (Allgai)"
+    },
     "sxu": {
         "englishName": "Upper Saxon German",
-        "menuName": "Säggs'sch"
+        "menuName": "Säggs'sch (Saggsn)"
     },
     "szl": {
         "englishName": "Silesian",
-        "menuName": "Ślōnskŏ"
+        "menuName": "Ślōnskŏ (Gōrny Ślōnsk)"
     },
     "ta_in": {
         "englishName": "Tamil",
-        "menuName": "தமிழ் (Tamił)"
+        "menuName": "தமிழ (இநந்தலிய)"
     },
     "th_th": {
         "englishName": "Thai",
-        "menuName": "ไทย (thay)"
+        "menuName": "ไทย (ประเทศไทย)"
     },
     "tl_ph": {
         "englishName": "Tagalog",
@@ -422,27 +443,25 @@
         "englishName": "Klingon",
         "menuName": "tlhIngan Hol (tlhIngan wo')"
     },
-    "tok": {
-        "englishName": "toki pona (ma pona)"
-    },
     "tr_tr": {
         "englishName": "Turkish",
         "menuName": "Türkçe (Türkiye)"
     },
     "tt_ru": {
-        "englishName": "Tatar"
+        "englishName": "Tatar",
+        "menuName": "Татарча (Расай)"
     },
     "uk_ua": {
         "englishName": "Ukrainian",
-        "menuName": "Українська (Ukrayins'ka)"
+        "menuName": "Українська (Україна)"
     },
     "val_es": {
         "englishName": "Valencian",
-        "menuName": "Català (Valencià)"
+        "menuName": "Català (Valencià) (Comunitat Valenciana)"
     },
     "vec_it": {
         "englishName": "Venetian",
-        "menuName": "Vèneto"
+        "menuName": "Vèneto (Veneto)"
     },
     "vi_vn": {
         "englishName": "Vietnamese",
@@ -450,19 +469,22 @@
     },
     "yi_de": {
         "englishName": "Yiddish",
-        "menuName": "ייִדיש (Yidiš)"
+        "menuName": "יידיש (לאשכנזישע יידן)"
     },
     "yo_ng": {
         "englishName": "Yoruba",
-        "menuName": "Yorùbá"
+        "menuName": "Yorùbá (Nàìjíríà)"
     },
     "zh_cn": {
-        "englishName": "Chinese Simplified (China; Mandarin)"
+        "englishName": "Chinese Simplified",
+        "menuName": "简体中文 (中国)"
     },
     "zh_hk": {
-        "englishName": "Chinese Traditional (Hong Kong; Mix)"
+        "englishName": "Chinese Traditional",
+        "menuName": "繁體中文 (香港)"
     },
     "zh_tw": {
-        "englishName": "Chinese Traditional (Taiwan; Mandarin)"
+        "englishName": "Chinese Traditional",
+        "menuName": "繁體中文 (台灣)"
     }
 }
