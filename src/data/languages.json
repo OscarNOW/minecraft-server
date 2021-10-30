@@ -56,72 +56,86 @@
         "menuName": "Dansk (Danmark)"
     },
     "de_at": {
-        "englishName": "Austrian German",
-        "menuName": "Deitsch (Österreich)"
+        "englishName": "German",
+        "menuName": "Deitsch (Österreich)",
+        "region": "Austria"
     },
     "de_ch": {
-        "englishName": "Swiss German",
-        "menuName": "Schwiizerdütsch (Schwiz)"
+        "englishName": "German",
+        "menuName": "Schwiizerdütsch (Schwiz)",
+        "region": "Switzerland"
     },
     "de_de": {
         "englishName": "German",
-        "menuName": "Deutsch (Deutschland)"
+        "menuName": "Deutsch (Deutschland)",
+        "region": "Germany"
     },
     "el_gr": {
         "englishName": "Greek",
         "menuName": "Ελληνικά (Ελλάδα)"
     },
     "en_au": {
-        "englishName": "Australian English",
-        "menuName": "English (Australia)"
+        "englishName": "English",
+        "menuName": "English (Australia)",
+        "region": "Australia"
     },
     "en_ca": {
-        "englishName": "Canadian English",
-        "menuName": "English (Canada)"
+        "englishName": "English",
+        "menuName": "English (Canada)",
+        "region": "Canada"
     },
     "en_gb": {
-        "englishName": "British English",
-        "menuName": "English (United Kingdom)"
+        "englishName": "English",
+        "menuName": "English (United Kingdom)",
+        "region": "United Kingdom"
     },
     "en_nz": {
-        "englishName": "New Zealand English",
-        "menuName": "English (New Zealand)"
+        "englishName": "English",
+        "menuName": "English (New Zealand)",
+        "region": "New Zealand"
     },
     "en_pt": {
-        "englishName": "Pirate English",
-        "menuName": "Pirate Speak (The Seven Seas)"
+        "englishName": "English",
+        "menuName": "Pirate Speak (The Seven Seas)",
+        "version": "Pirate"
     },
     "en_ud": {
-        "englishName": "Upside down English ",
-        "menuName": "ɥsᴉꞁᵷuƎ (uʍoᗡ ǝpᴉsd∩)"
+        "englishName": "English ",
+        "menuName": "ɥsᴉꞁᵷuƎ (uʍoᗡ ǝpᴉsd∩)",
+        "version": "Upside down"
     },
     "en_us": {
         "englishName": "English",
-        "menuName": "English (US)"
+        "menuName": "English (US)",
+        "region": "United States"
     },
     "enp": {
         "englishName": "Anglish",
         "menuName": "Anglish (Foroned Kingdom)"
     },
     "enws": {
-        "englishName": "Early Modern English",
-        "menuName": "Shakespearean English (Kingdom of England)"
+        "englishName": "English",
+        "menuName": "Shakespearean English (Kingdom of England)",
+        "version": "Shakespeare"
     },
     "eo_uy": {
         "englishName": "Esperanto",
         "menuName": "Esperanto (Esperantujo)"
     },
     "es_ar": {
-        "englishName": "Argentinian Spanish",
-        "menuName": "Español (Argentina)"
+        "englishName": "Spanish",
+        "menuName": "Español (Argentina)",
+        "region": "Argentina"
     },
     "es_cl": {
-        "englishName": "Chilean Spanish",
-        "menuName": "Español (Chile)"
+        "englishName": "Spanish",
+        "menuName": "Español (Chile)",
+        "region": "Chile"
     },
     "es_ec": {
-        "englishName": "Ecuadorian Spanish",
-        "menuName": "Español (Ecuador)"
+        "englishName": "Spanish",
+        "menuName": "Español (Ecuador)",
+        "region": "Ecuador"
     },
     "es_es": {
         "englishName": "Spanish",
