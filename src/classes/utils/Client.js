@@ -58,13 +58,14 @@ class Client {
         this.client.on('flying', i => this.emitMove(i));
 
         this.client.on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
-            if (!languages[locale]) throw new Error(`Unknown language code "${locale}"`)
+            let langCode = locale.toLowerCase();
+            if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}"`)
             let obj = {
-                code: locale,
-                name: languages[locale].name
+                code: langCode,
+                name: languages[langCode].name
             };
 
-            if (languages[locale].localName) obj.localName = languages[locale].localName;
+            if (languages[langCode].localName) obj.localName = languages[langCode].localName;
 
             this.locale = obj;
             this.viewDistance = viewDistance;

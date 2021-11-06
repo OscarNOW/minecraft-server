@@ -114,10 +114,10 @@ module.exports = async (expect, warn) => {
 
     expect(joined, true);
     expect(left, false);
-    expect(client1.uuid, joinedClient.uuid);
+    expect(client1?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, false);
-    expect(server.playerCount, 1);
-    expect(server.server.playerCount, 1);
+    expect(server?.playerCount, 1);
+    expect(server?.server?.playerCount, 1);
 
     joined = false;
     joinedClient = null;
@@ -135,11 +135,11 @@ module.exports = async (expect, warn) => {
 
     expect(joined, true);
     expect(left, false);
-    expect(client1.uuid, joinedClient.uuid);
+    expect(client1?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, false);
     expect(bot2Kicked, false);
-    expect(server.playerCount, 2);
-    expect(server.server.playerCount, 2);
+    expect(server?.playerCount, 2);
+    expect(server?.server?.playerCount, 2);
 
     console.log('Bot 2 kicked')
     random = Math.floor(Math.random() * 100);
@@ -150,9 +150,9 @@ module.exports = async (expect, warn) => {
     expect(left, true);
     expect(bot2Kicked, true);
     expect(bot2KickedReason, random);
-    expect(leftClient.uuid, client1.uuid);
-    expect(server.playerCount, 1);
-    expect(server.server.playerCount, 1);
+    expect(leftClient?.uuid, client1?.uuid);
+    expect(server?.playerCount, 1);
+    expect(server?.server?.playerCount, 1);
 
     client1.kick();
     console.log('Bot 1 kicked');
@@ -160,12 +160,12 @@ module.exports = async (expect, warn) => {
     console.log('Pinging test server')
     let pinged = await ping();
     let ip = '127.0.0.1';
-    expect(pinged.version.name, `#1#${ip}#1#`)
-    expect(pinged.players.online, 2)
-    expect(pinged.players.max, 3)
-    expect(pinged.players.sample[0].name, `#4#${ip}#4#`)
-    expect(pinged.players.sample[1].name, `#5#${ip}#5#`)
-    expect(pinged.description, `#6#${ip}#6#\n#7#${ip}#7#`)
+    expect(pinged?.version?.name, `#1#${ip}#1#`)
+    expect(pinged?.players?.online, 2)
+    expect(pinged?.players?.max, 3)
+    expect(pinged?.players?.sample?.[0]?.name, `#4#${ip}#4#`)
+    expect(pinged?.players?.sample?.[1]?.name, `#5#${ip}#5#`)
+    expect(pinged?.description, `#6#${ip}#6#\n#7#${ip}#7#`)
 
     await wait(500);
     console.log('Closing test server');
