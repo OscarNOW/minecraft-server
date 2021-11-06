@@ -154,7 +154,7 @@ module.exports = async (expect, warn) => {
     expect(server?.playerCount, 1);
     expect(server?.server?.playerCount, 1);
 
-    client1.kick();
+    client1?.kick?.();
     console.log('Bot 1 kicked');
 
     console.log('Pinging test server')
