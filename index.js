@@ -25,7 +25,6 @@ const server = new (mc.Server)({
 });
 
 server.on('join', client => {
-    // console.log(client.visibleSkinParts)
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     setTimeout(() => {
