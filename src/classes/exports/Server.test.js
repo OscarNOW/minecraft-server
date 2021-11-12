@@ -12,6 +12,7 @@ if (fs.existsSync(path.resolve(__dirname, `../../credentials/`)))
 
 module.exports = async (expect, warn) => {
     if (credentials === null) return warn("Can't test server class without Microsoft account credentials. Create ./credentials/microsoft.json with username and password properties")
+    return warn('Not implemented')
 
     console.clear()
     console.log('Starting testing server')
@@ -39,6 +40,7 @@ module.exports = async (expect, warn) => {
             console.log(`Logged in as ${client.username}`)
             loggedInText = true;
         }
+        console.log('[S] Bot joined test server')
         joined = true;
         joinedClient = client;
     })
@@ -48,6 +50,7 @@ module.exports = async (expect, warn) => {
             console.log(`Logged in as ${client.username}`)
             loggedInText = true;
         }
+        console.log('[S] Bot left test server')
         left = true;
         leftClient = client;
     })
@@ -68,7 +71,6 @@ module.exports = async (expect, warn) => {
             bot1KickedReason = JSON.parse(reason).text;
         }
     });
-    console.log('[L] Bot 1 joined test server')
 
     expect(joined, true);
     expect(left, false);
@@ -81,7 +83,6 @@ module.exports = async (expect, warn) => {
     expect(left, false);
     expect(bot1Kicked, false);
 
-    console.log('[L] Bot 1 kicked')
     let random = Math.floor(Math.random() * 1000);
     joinedClient.kick(random);
 
@@ -109,7 +110,6 @@ module.exports = async (expect, warn) => {
             bot1KickedReason = JSON.parse(reason).text;
         }
     });
-    console.log('[L] Bot 1 joined test server')
     client1 = joinedClient;
 
     expect(joined, true);
@@ -131,7 +131,6 @@ module.exports = async (expect, warn) => {
             bot2KickedReason = JSON.parse(reason).text;
         }
     })
-    console.log('[L] Bot 2 joined test server')
 
     expect(joined, true);
     expect(left, false);
@@ -141,7 +140,6 @@ module.exports = async (expect, warn) => {
     expect(server?.playerCount, 2);
     expect(server?.server?.playerCount, 2);
 
-    console.log('Bot 2 kicked')
     random = Math.floor(Math.random() * 100);
     joinedClient.kick(random);
 
@@ -155,7 +153,6 @@ module.exports = async (expect, warn) => {
     expect(server?.server?.playerCount, 1);
 
     client1?.kick?.();
-    console.log('Bot 1 kicked');
 
     console.log('Pinging test server')
     let pinged = await ping();

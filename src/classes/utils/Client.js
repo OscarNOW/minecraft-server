@@ -76,10 +76,10 @@ class Client {
                 this.server.events.join.forEach(val => val(this));
             }
 
-            console.log({
-                username: this.username,
-                chatFlags
-            })
+            // console.log({
+            //     username: this.username,
+            //     chatFlags
+            // })
         })
 
     }
