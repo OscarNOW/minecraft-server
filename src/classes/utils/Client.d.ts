@@ -20,10 +20,26 @@ export class Client {
     ping: number;
     online: boolean;
     locale: {
-        code: string;
-        name: string;
-        localName?: string;
+        langCode: string;
+        englishName: string;
+        menuName: string;
+        version?: string;
+        region?: string;
     };
+    chatSettings: {
+        visible: 'all' | 'commands' | 'none';
+        colors: boolean;
+    };
+    visibleSkinParts: {
+        cape: boolean;
+        torso: boolean;
+        leftArm: boolean;
+        rightArm: boolean;
+        leftLeg: boolean;
+        rightLeg: boolean;
+        hat: boolean;
+    };
+    mainHand = 'left' | 'right';
     viewDistance: number;
     position: {
         x: number;

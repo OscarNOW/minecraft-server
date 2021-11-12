@@ -60,26 +60,53 @@ class Client {
         this.client.on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
             let langCode = locale.toLowerCase();
             if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}"`)
-            let obj = {
-                code: langCode,
-                name: languages[langCode].name
-            };
-
-            if (languages[langCode].localName) obj.localName = languages[langCode].localName;
+            let obj = languages[langCode];
+            obj.langCode = langCode;
 
             this.locale = obj;
             this.viewDistance = viewDistance;
+
+            if (chatFlags === 0)
+                this.chatSettings = {
+                    visible: 'all',
+                    colors: chatColors
+                };
+            else if (chatFlags === 1)
+                this.chatSettings = {
+                    visible: 'commands',
+                    colors: chatColors
+                };
+            else if (chatFlags === 2)
+                this.chatSettings = {
+                    visible: 'none',
+                    colors: chatColors
+                };
+            else
+                throw new Error(`Unknown chatFlags "${chatFlags}"`)
+
+            let bsp = Number(skinParts).toString(2).split('').map(bit => bit === 1)
+            this.visibleSkinParts = {
+                cape: bsp[0],
+                torso: bsp[1],
+                leftArm: bsp[2],
+                rightArm: bsp[3],
+                leftLeg: bsp[4],
+                rightLeg: bsp[5],
+                hat: bsp[6]
+            }
+
+            if (mainHand === 0)
+                this.mainHand = 'left'
+            else if (mainHand === 1)
+                this.mainHand = 'right'
+            else
+                throw new Error(`Unknown mainHand "${mainHand}"`)
 
             if (!joined) {
                 joined = true;
                 this.server.clients.push(this);
                 this.server.events.join.forEach(val => val(this));
             }
-
-            // console.log({
-            //     username: this.username,
-            //     chatFlags
-            // })
         })
 
     }
