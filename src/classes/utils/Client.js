@@ -84,15 +84,15 @@ class Client {
             else
                 throw new Error(`Unknown chatFlags "${chatFlags}"`)
 
-            let bsp = Number(skinParts).toString(2).split('').map(bit => bit === 1)
+            let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
             this.visibleSkinParts = {
-                cape: bsp[0],
-                torso: bsp[1],
-                leftArm: bsp[2],
+                cape: bsp[6],
+                torso: bsp[5],
+                leftArm: bsp[4],
                 rightArm: bsp[3],
-                leftLeg: bsp[4],
-                rightLeg: bsp[5],
-                hat: bsp[6]
+                leftLeg: bsp[2],
+                rightLeg: bsp[1],
+                hat: bsp[0]
             }
 
             if (mainHand === 0)
