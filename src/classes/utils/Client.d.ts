@@ -73,6 +73,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }): Entity;
+    difficulty(difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'): void;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
     on(event: 'chat', callback: (message: string) => void): void;

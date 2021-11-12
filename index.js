@@ -25,6 +25,7 @@ const server = new (mc.Server)({
 });
 
 server.on('join', client => {
+    client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     setTimeout(() => {
@@ -33,6 +34,7 @@ server.on('join', client => {
 
     setTimeout(() => {
         horse.animation('flashRed')
+        client.difficulty('normal');
     }, 5000)
 
     client.chat(`§r§6§l${client.username}§r§e joined the game`)

@@ -208,6 +208,16 @@ class Client {
         return entity;
     }
 
+    difficulty(difficulty) {
+        if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
+            throw new Error(`Unknown difficulty "${difficulty}"`)
+
+        this.client.write('difficulty', {
+            difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == difficulty),
+            difficultyLocked: true
+        })
+    }
+
     window(windowType, horse) {
 
         if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}"`)
