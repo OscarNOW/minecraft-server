@@ -1,5 +1,6 @@
 declare class Client {
     private constructor(client: any, server: Server);
+    private emitMove(info: object): void;
     private client: any;
     private events: object
     private cachedPosition: {
@@ -15,6 +16,7 @@ declare class Client {
     uuid: string;
     ping: number;
     online: boolean;
+    slot: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
     locale: {
         langCode: string;
         englishName: string;
@@ -48,7 +50,6 @@ declare class Client {
     entities: {
         [entityId: number]: Entity;
     };
-    private emitMove(info: object): void;
     kick(reason: string): void;
     chat(message: string): void;
     chunk(chunk: Chunk, chunkPosition: {
@@ -72,8 +73,8 @@ declare class Client {
     difficulty(difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'): void;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
-    on(event: 'chat' | 'command', callback: (message: string) => void): void;
-    on(event: 'move' | 'leave', callback: () => void): void;
+    on(event: 'chat', callback: (message: string) => void): void;
+    on(event: 'move' | 'leave' | 'slotChange', callback: () => void): void;
 }
 
 declare class Entity {

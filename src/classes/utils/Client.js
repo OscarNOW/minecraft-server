@@ -7,7 +7,14 @@ const wait = ms => new Promise(res => setTimeout(res, ms));
 class Client {
     constructor(client, server) {
         const that = this;
-        let joined = false;
+
+        this.canUsed = false;
+        this.readyStates = {
+            socketOpen: false,
+            clientSettings: false
+        }
+        this.joinedPacketSent = false;
+        this.leftPacketSent = false;
 
         this.client = client;
         this.server = server;
@@ -16,19 +23,11 @@ class Client {
         this.username = this.client.username;
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
+        this.slot = null;
 
-        (async () => {
-            while (this.online)
-                await wait(500)
-
-            this.server.clients = this.server.clients.filter(client => client.online);
-            this.events.leave.forEach(val => {
-                val();
-            });
-            this.server.events.leave.forEach(val => {
-                val(this);
-            })
-        })();
+        this.client.socket.addListener('close', () => {
+            this.updateCanUsed();
+        })
 
         this.cachedPosition = new ChangablePosition(i => that.teleport.call(that, i), {
             x: null,
@@ -43,7 +42,8 @@ class Client {
         this.events = {
             chat: [],
             move: [],
-            leave: []
+            leave: [],
+            slotChange: []
         }
 
         this.client.on('chat', ({ message }) => {
@@ -52,10 +52,19 @@ class Client {
             })
         })
 
-        this.client.on('position', i => this.emitMove(i));
-        this.client.on('position_look', i => this.emitMove(i));
-        this.client.on('look', i => this.emitMove(i));
-        this.client.on('flying', i => this.emitMove(i));
+        this.client.on('held_item_slot', ({ slotId }) => {
+            if (slotId < 0 || slotId > 8)
+                throw new Error(`Unknown slotId "${slotId}"`)
+
+            this.slot = slotId + 1;
+
+            this.events.slotChange.forEach(val => val());
+        })
+
+        this.client.on('position', i => this.emitMove.call(this, i));
+        this.client.on('position_look', i => this.emitMove.call(this, i));
+        this.client.on('look', i => this.emitMove.call(this, i));
+        this.client.on('flying', i => this.emitMove.call(this, i));
 
         this.client.on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
             let langCode = locale.toLowerCase();
@@ -102,13 +111,36 @@ class Client {
             else
                 throw new Error(`Unknown mainHand "${mainHand}"`)
 
-            if (!joined) {
-                joined = true;
-                this.server.clients.push(this);
-                this.server.events.join.forEach(val => val(this));
-            }
+            this.readyStates.clientSettings = true;
+            this.updateCanUsed();
         })
 
+    }
+
+    updateCanUsed() {
+        this.readyStates.socketOpen = this.online;
+        let canUsed = true;
+        for (const val of Object.values(this.readyStates))
+            if (!val) canUsed = false;
+
+        this.canUsed = canUsed;
+        if (this.canUsed && !this.joinedPacketSent && !this.leftPacketSent) {
+            this.joinedPacketSent = true;
+
+            this.server.clients.push(this);
+            this.server.events.join.forEach(val => val(this));
+
+        } else if (!canUsed && !this.leftPacketSent && this.joinedPacketSent) {
+            this.leftPacketSent = true;
+
+            this.server.clients = this.server.clients.filter(client => client.canUsed);
+            this.events.leave.forEach(val => {
+                val();
+            });
+            this.server.events.leave.forEach(val => {
+                val(this);
+            });
+        }
     }
 
     get online() {
@@ -131,6 +163,9 @@ class Client {
     }
 
     emitMove(info) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         let changed = false;
         [
             'x',
@@ -152,15 +187,24 @@ class Client {
     }
 
     on(event, callback) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         if (!this.events[event]) throw new Error(`Invalid event "${event}"`)
         this.events[event].push(callback);
     }
 
     kick(reason) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         this.client.end(reason);
     }
 
     chat(message) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         this.client.write('chat', {
             message: JSON.stringify({ translate: message }),
             position: 0,
@@ -169,6 +213,9 @@ class Client {
     }
 
     chunk(chunk, { x, z }) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         this.client.write('map_chunk', {
             x,
             z,
@@ -186,6 +233,9 @@ class Client {
     }
 
     teleport({ x, y, z, yaw, pitch }) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         this.client.write('position', {
             x,
             y,
@@ -197,6 +247,9 @@ class Client {
     }
 
     entity(type, { x, y, z, yaw, pitch }) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         let entityId = null;
         for (let ii = 1; entityId === null; ii++)
             if (!this.entities[ii])
@@ -209,6 +262,9 @@ class Client {
     }
 
     difficulty(difficulty) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
             throw new Error(`Unknown difficulty "${difficulty}"`)
 
@@ -219,6 +275,8 @@ class Client {
     }
 
     window(windowType, horse) {
+        if (!this.canUsed)
+            throw new Error("Can't be used")
 
         if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}"`)
         if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
@@ -237,6 +295,9 @@ class Client {
 
     player() {
         throw new Error(`Not implemented`)
+        if (!this.canUsed)
+            throw new Error("Can't be used")
+
         /*httpRequest({
             host: 'sessionserver.mojang.com',
             method: 'GET',

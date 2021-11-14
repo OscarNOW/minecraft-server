@@ -42,6 +42,10 @@ server.on('join', client => {
         client.chat(`§r§6§l${client.username}§r§6: §r§7${message}`)
     })
 
+    client.on('slotChange', () => {
+        client.chat(`Slot changed to ${client.slot}`)
+    });
+
     let loadedChunks = [];
     loadedChunks.push('0;0')
     client.chunk(chunk, { x: 0, z: 0 })
