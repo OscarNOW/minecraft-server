@@ -29,7 +29,7 @@ class Client {
             this.updateCanUsed();
         })
 
-        this.cachedPosition = new ChangablePosition(i => that.teleport.call(that, i), {
+        this._position = new ChangablePosition(i => that.teleport.call(that, i), {
             x: null,
             y: null,
             z: null,
@@ -155,7 +155,7 @@ class Client {
     }
 
     get position() {
-        return this.cachedPosition;
+        return this._position;
     }
 
     set position(val) {
@@ -174,9 +174,9 @@ class Client {
             'pitch',
             'yaw'
         ].forEach(val => {
-            if (info[val] !== undefined && this.cachedPosition[val] != info[val]) {
+            if (info[val] !== undefined && this._position[val] != info[val]) {
                 changed = true;
-                this.cachedPosition.raw[val] = info[val];
+                this._position.raw[val] = info[val];
             }
         });
 
