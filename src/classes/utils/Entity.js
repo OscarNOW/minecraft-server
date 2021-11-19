@@ -18,6 +18,10 @@ class Entity {
         this.uuid = uuid();
         this.client = client;
 
+        this.events = {
+            interaction: []
+        }
+
         if (this.living)
             this.client.client.write('spawn_entity_living', {
                 entityId: this.id,
@@ -87,6 +91,11 @@ class Entity {
             entityId: this.id,
             animation: entityAnimations[animationType]
         })
+    }
+
+    on(event, callback) {
+        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
+        this.events[event].push(callback);
     }
 }
 

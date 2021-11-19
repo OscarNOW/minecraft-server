@@ -24,6 +24,7 @@ class Client {
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
         this._slot = null;
+        this.sneaking = null;
 
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
@@ -45,6 +46,38 @@ class Client {
             leave: [],
             slotChange: []
         }
+
+        this.client.on('use_entity', obj => {
+            if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
+            if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}"`)
+            this.sneaking = obj.sneaking;
+
+            if (obj.mouse == 2)
+                this.entities[obj.target].events.interact.forEach(val => {
+                    val(
+                        'rightMouse',
+                        obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left'),
+                        {
+                            x: obj.x,
+                            y: obj.y,
+                            z: obj.z
+                        }
+                    )
+                })
+            else if (obj.mouse == 0)
+                this.entities[obj.target].events.interact.forEach(val => {
+                    val(
+                        'rightMouse',
+                        obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left')
+                    )
+                })
+            else if (obj.mouse == 1)
+                this.entities[obj.target].events.interact.forEach(val => {
+                    val('leftMouse')
+                })
+            else
+                throw new Error(`Unknown mouse "${obj.mouse}"`)
+        })
 
         this.client.on('chat', ({ message }) => {
             this.events.chat.forEach(val => {
@@ -114,6 +147,10 @@ class Client {
             this.updateCanUsed();
         })
 
+    }
+
+    get sneaking() {
+        throw new Error('Not implemented')
     }
 
     updateCanUsed() {
@@ -202,7 +239,7 @@ class Client {
         if (!this.canUsed)
             throw new Error("Can't be used")
 
-        if (!this.events[event]) throw new Error(`Invalid event "${event}"`)
+        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
         this.events[event].push(callback);
     }
 

@@ -68,7 +68,7 @@ class Server {
     }
 
     on(event, callback) {
-        if (!this.events[event]) throw new Error(`Invalid event "${event}"`)
+        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
         this.events[event].push(callback);
     }
 

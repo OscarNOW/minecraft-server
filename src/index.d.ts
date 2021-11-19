@@ -108,6 +108,16 @@ declare class Entity {
     }): void;
 
     animation(animationType: entityAnimationType): void;
+
+    on(event: 'interact', callback: (
+        type: 'leftMouse' | 'rightMouse',
+        position?: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand?: 'left' | 'right'
+    ) => void): void;
 }
 
 export class Server {

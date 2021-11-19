@@ -4,22 +4,13 @@ type Chunk = import('../exports/Chunk').Chunk;
 
 export class Client {
     private constructor(client: any, server: Server);
-    private emitMove(info: object): void;
-    private client: any;
-    private events: object
-    private cachedPosition: {
-        x: number;
-        y: number;
-        z: number;
-        onGround: boolean;
-        yaw: number;
-        pitch: number;
-    };
+
     server: Server;
     username: string;
     uuid: string;
     ping: number;
     online: boolean;
+    sneaking: boolean;
     slot: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
     locale: {
         langCode: string;
