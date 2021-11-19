@@ -30,7 +30,7 @@ export class Entity {
 
     animation(animationType: entityAnimationType): void;
 
-    on(event: 'interact', callback: (
+    on(event: 'interaction', callback: (
         type: 'leftMouse' | 'rightMouse',
         hand?: 'left' | 'right',
         position?: {

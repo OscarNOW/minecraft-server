@@ -24,7 +24,7 @@ class Client {
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
         this._slot = null;
-        this.sneaking = null;
+        // this.sneaking = null;
 
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
@@ -48,12 +48,12 @@ class Client {
         }
 
         this.client.on('use_entity', obj => {
-            if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
             if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}"`)
-            this.sneaking = obj.sneaking;
+            // this.sneaking = obj.sneaking;
 
-            if (obj.mouse == 2)
-                this.entities[obj.target].events.interact.forEach(val => {
+            if (obj.mouse == 2) {
+                if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
+                this.entities[obj.target].events.interaction.forEach(val => {
                     val(
                         'rightMouse',
                         obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left'),
@@ -64,16 +64,30 @@ class Client {
                         }
                     )
                 })
-            else if (obj.mouse == 0)
-                this.entities[obj.target].events.interact.forEach(val => {
+            } else if (obj.mouse == 0) {
+                if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
+                this.entities[obj.target].events.interaction.forEach(val => {
                     val(
                         'rightMouse',
-                        obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left')
+                        obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left'),
+                        {
+                            x: undefined,
+                            y: undefined,
+                            z: undefined
+                        }
                     )
                 })
-            else if (obj.mouse == 1)
-                this.entities[obj.target].events.interact.forEach(val => {
-                    val('leftMouse')
+            } else if (obj.mouse == 1)
+                this.entities[obj.target].events.interaction.forEach(val => {
+                    val(
+                        'leftMouse',
+                        undefined,
+                        {
+                            x: undefined,
+                            y: undefined,
+                            z: undefined
+                        }
+                    )
                 })
             else
                 throw new Error(`Unknown mouse "${obj.mouse}"`)
@@ -147,10 +161,6 @@ class Client {
             this.updateCanUsed();
         })
 
-    }
-
-    get sneaking() {
-        throw new Error('Not implemented')
     }
 
     updateCanUsed() {

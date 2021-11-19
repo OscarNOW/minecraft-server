@@ -28,6 +28,13 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
+    horse.on('interaction', (type, hand, { x, y, z }) => {
+        if (type == 'leftMouse')
+            horse.animation('critical')
+        else
+            horse.animation('flashRed')
+    })
+
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
     }, 1800);

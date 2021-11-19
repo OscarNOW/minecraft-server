@@ -109,14 +109,14 @@ declare class Entity {
 
     animation(animationType: entityAnimationType): void;
 
-    on(event: 'interact', callback: (
+    on(event: 'interaction', callback: (
         type: 'leftMouse' | 'rightMouse',
+        hand?: 'left' | 'right',
         position?: {
             x: number;
             y: number;
             z: number;
-        },
-        hand?: 'left' | 'right'
+        }
     ) => void): void;
 }
 
