@@ -53,9 +53,8 @@ class Client {
 
             if (obj.mouse == 2) {
                 if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
-                this.entities[obj.target].events.interaction.forEach(val => {
+                this.entities[obj.target].events.rightClick.forEach(val => {
                     val(
-                        'rightMouse',
                         obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left'),
                         {
                             x: obj.x,
@@ -66,9 +65,8 @@ class Client {
                 })
             } else if (obj.mouse == 0) {
                 if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
-                this.entities[obj.target].events.interaction.forEach(val => {
+                this.entities[obj.target].events.rightClick.forEach(val => {
                     val(
-                        'rightMouse',
                         obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left'),
                         {
                             x: undefined,
@@ -78,17 +76,7 @@ class Client {
                     )
                 })
             } else if (obj.mouse == 1)
-                this.entities[obj.target].events.interaction.forEach(val => {
-                    val(
-                        'leftMouse',
-                        undefined,
-                        {
-                            x: undefined,
-                            y: undefined,
-                            z: undefined
-                        }
-                    )
-                })
+                this.entities[obj.target].events.leftClick.forEach(val => { val() })
             else
                 throw new Error(`Unknown mouse "${obj.mouse}"`)
         })

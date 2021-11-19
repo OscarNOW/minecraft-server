@@ -19,7 +19,8 @@ class Entity {
         this.client = client;
 
         this.events = {
-            interaction: []
+            leftClick: [],
+            rightClick: []
         }
 
         if (this.living)

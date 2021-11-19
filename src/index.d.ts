@@ -85,9 +85,7 @@ declare class Entity {
         yaw: number;
         pitch: number;
     });
-    private living: boolean;
-    private typeId: number;
-    private uuid: string;
+
     id: number;
     client: Client;
     type: entityType;
@@ -109,9 +107,9 @@ declare class Entity {
 
     animation(animationType: entityAnimationType): void;
 
-    on(event: 'interaction', callback: (
-        type: 'leftMouse' | 'rightMouse',
-        hand?: 'left' | 'right',
+    on(event: 'leftClick', callback: () => void): void;
+    on(event: 'rightClick', callback: (
+        hand: 'left' | 'right',
         position?: {
             x: number;
             y: number;
