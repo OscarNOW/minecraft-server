@@ -23,7 +23,7 @@ class Client {
         this.username = this.client.username;
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
-        this.slot = null;
+        this._slot = null;
 
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
@@ -56,9 +56,11 @@ class Client {
             if (slotId < 0 || slotId > 8)
                 throw new Error(`Unknown slotId "${slotId}"`)
 
-            this.slot = slotId + 1;
+            let changed = slotId + 1 != this._slot;
+            this._slot = slotId + 1;
 
-            this.events.slotChange.forEach(val => val());
+            if (changed)
+                this.events.slotChange.forEach(val => val());
         })
 
         this.client.on('position', i => this.emitMove.call(this, i));
@@ -159,7 +161,20 @@ class Client {
     }
 
     set position(val) {
-        this.teleport(val)
+        this.teleport(val);
+    }
+
+    get slot() {
+        return this._slot;
+    }
+
+    set slot(slot) {
+        if (slot < 1 || slot > 9)
+            throw new Error(`Unknown slot "${slot}"`)
+
+        this.client.write('held_item_slot', {
+            slot: slot - 1
+        })
     }
 
     emitMove(info) {
