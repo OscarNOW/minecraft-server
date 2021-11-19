@@ -56,11 +56,8 @@ class Client {
             if (slotId < 0 || slotId > 8)
                 throw new Error(`Unknown slotId "${slotId}"`)
 
-            let changed = slotId + 1 != this._slot;
             this._slot = slotId + 1;
-
-            if (changed)
-                this.events.slotChange.forEach(val => val());
+            this.events.slotChange.forEach(val => val());
         })
 
         this.client.on('position', i => this.emitMove.call(this, i));
