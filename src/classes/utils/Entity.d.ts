@@ -32,12 +32,12 @@ export class Entity {
 
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (
-        hand: 'left' | 'right',
-        position?: {
+        position: {
             x: number;
             y: number;
             z: number;
-        }
+        },
+        hand: 'left' | 'right'
     ) => void): void;
 }
 

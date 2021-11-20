@@ -28,11 +28,15 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    horse.on('interaction', (type, hand, { x, y, z }) => {
-        if (type == 'leftMouse')
-            horse.animation('critical')
-        else
-            horse.animation('flashRed')
+    horse.on('leftClick', () => {
+        client.chat(`Horse slapped`)
+        horse.animation('critical')
+        horse.animation('flashRed')
+    })
+
+    horse.on('rightClick', (hand, { x, y, z }) => {
+        client.chat(`Horse clicked with ${hand} hand at ${Math.round(x)}, ${Math.round(y)}, ${Math.round(z)}`)
+        horse.animation('flashRed')
     })
 
     setTimeout(() => {
