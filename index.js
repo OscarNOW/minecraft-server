@@ -34,7 +34,7 @@ server.on('join', client => {
         horse.animation('flashRed')
     })
 
-    horse.on('rightClick', (hand, { x, y, z }) => {
+    horse.on('rightClick', ({ x, y, z }, hand) => {
         client.chat(`Horse clicked with ${hand} hand at ${Math.round(x)}, ${Math.round(y)}, ${Math.round(z)}`)
         horse.animation('flashRed')
     })
