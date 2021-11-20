@@ -17,4 +17,21 @@ module.exports = expect => {
         { text: '3', color: 'default', modifiers: [] },
     ]), '§r§n1§l2§r3')
     expect(t.parseString('§r§r§r§r§nH§li§r§a§r§b!§k'), '§r§nH§li§r§b!')
+
+    let o = new t([{ text: 'hi', modifiers: ['bold'], color: 'green' }]);
+    expect(o.string, '§r§a§lhi')
+
+    o.array = [
+        { text: '1', color: 'default', modifiers: ['underline'] },
+        { text: '2', color: 'default', modifiers: ['underline', 'bold'] },
+        { text: '3', color: 'default', modifiers: [] },
+    ];
+    expect(o.string, '§r§n1§l2§r3')
+
+    o.string = '§r§r§r§r§nH§li§r§a§r';
+    expect(o.string, '§r§nH§li')
+    expect(o.array, [
+        { text: 'H', color: 'default', modifiers: ['underline'] },
+        { text: 'i', color: 'default', modifiers: ['underline', 'bold'] }
+    ])
 }

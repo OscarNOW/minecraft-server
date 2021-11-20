@@ -1,15 +1,32 @@
 const { textModifierNameMapping, textColorNameMapping } = require('../../functions/loader/data');
 
-throw new Error(`New feature: auto change other properties when changing one`)
-
 class Text {
     constructor(text) {
         if (typeof text == 'string')
-            this.array = Text.stringToArray(text);
+            this._array = Text.stringToArray(text);
         else
-            this.array = Text.parseArray(text);
-        this.string = Text.arrayToString(this.array);
+            this._array = Text.parseArray(text);
+        this._string = Text.arrayToString(this.array);
     }
+
+    get array() {
+        return this._array;
+    }
+
+    get string() {
+        return this._string;
+    }
+
+    set array(val) {
+        this._array = Text.parseArray(val);
+        this._string = Text.arrayToString(this.array);
+    }
+
+    set string(val) {
+        this._string = Text.parseString(val);
+        this._array = Text.stringToArray(this.string);
+    }
+
     static arrayToString(a) {
         let array = this.parseArray(a);
 
