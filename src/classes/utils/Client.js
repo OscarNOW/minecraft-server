@@ -171,13 +171,6 @@ class Client {
         return this.client.socket.readyState == 'open';
     }
 
-    set online(val) {
-        if (val === false)
-            throw new Error(`Can't set online, please use "<Client>.kick" for that`)
-        else
-            throw new Error("Can't set online")
-    }
-
     get position() {
         return this._position;
     }
