@@ -1,5 +1,7 @@
 const { textModifierNameMapping, textColorNameMapping } = require('../../functions/loader/data');
 
+throw new Error(`New feature: auto change other properties when changing one`)
+
 class Text {
     constructor(text) {
         if (typeof text == 'string')

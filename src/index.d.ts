@@ -1,44 +1,38 @@
 declare class Client {
     private constructor(client: any, server: Server);
-    private emitMove(info: object): void;
-    private client: any;
-    private events: object
-    private cachedPosition: {
-        x: number;
-        y: number;
-        z: number;
-        onGround: boolean;
-        yaw: number;
-        pitch: number;
+
+    readonly server: Server;
+    readonly username: string;
+    readonly uuid: string;
+    readonly ping: number;
+    readonly online: boolean;
+    readonly locale: {
+        readonly langCode: string;
+        readonly englishName: string;
+        readonly menuName: string;
+        readonly version?: string;
+        readonly region?: string;
     };
-    server: Server;
-    username: string;
-    uuid: string;
-    ping: number;
-    online: boolean;
+    readonly chatSettings: {
+        readonly visible: 'all' | 'commands' | 'none';
+        readonly colors: boolean;
+    };
+    readonly visibleSkinParts: {
+        readonly cape: boolean;
+        readonly torso: boolean;
+        readonly leftArm: boolean;
+        readonly rightArm: boolean;
+        readonly leftLeg: boolean;
+        readonly rightLeg: boolean;
+        readonly hat: boolean;
+    };
+    readonly mainHand: 'left' | 'right';
+    readonly viewDistance: number;
+    readonly entities: {
+        readonly [entityId: number]: Entity;
+    };
+
     slot: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-    locale: {
-        langCode: string;
-        englishName: string;
-        menuName: string;
-        version?: string;
-        region?: string;
-    };
-    chatSettings: {
-        visible: 'all' | 'commands' | 'none';
-        colors: boolean;
-    };
-    visibleSkinParts: {
-        cape: boolean;
-        torso: boolean;
-        leftArm: boolean;
-        rightArm: boolean;
-        leftLeg: boolean;
-        rightLeg: boolean;
-        hat: boolean;
-    };
-    mainHand = 'left' | 'right';
-    viewDistance: number;
     position: {
         x: number;
         y: number;
@@ -47,9 +41,7 @@ declare class Client {
         yaw: number;
         pitch: number;
     };
-    entities: {
-        [entityId: number]: Entity;
-    };
+
     kick(reason: string): void;
     chat(message: string): void;
     chunk(chunk: Chunk, chunkPosition: {
@@ -86,9 +78,10 @@ declare class Entity {
         pitch: number;
     });
 
-    id: number;
-    client: Client;
-    type: entityType;
+    readonly id: number;
+    readonly client: Client;
+    readonly type: entityType;
+
     position: {
         x: number;
         y: number;
@@ -109,12 +102,12 @@ declare class Entity {
 
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (
-        hand: 'left' | 'right',
-        position?: {
+        position: {
             x: number;
             y: number;
             z: number;
-        }
+        },
+        hand: 'left' | 'right'
     ) => void): void;
 }
 
@@ -132,8 +125,8 @@ export class Server {
     });
     private events: object;
     private server: any;
-    clients: Array<Client>;
-    playerCount: number;
+    readonly clients: Array<Client>;
+    readonly playerCount: number;
     serverList(ip: string): {
         versionMessage: string;
         players: {
@@ -160,6 +153,7 @@ export class Chunk {
 export class Text {
     constructor(text: string | optionalTextArray);
     array: textArray;
+    string: string;
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;

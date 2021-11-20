@@ -14,8 +14,8 @@ export class Server {
     });
     private events: object;
     private server: any;
-    clients: Array<Client>;
-    playerCount: number;
+    readonly clients: Array<Client>;
+    readonly playerCount: number;
     serverList(ip: string): {
         versionMessage: string;
         players: {

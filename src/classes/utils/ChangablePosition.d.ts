@@ -1,7 +1,7 @@
 export class ChangablePosition {
     constructor(onChange: (position: position) => void, position: position);
+    private raw: position;
     onChange: (position: position) => void;
-    raw: position;
     x: number;
     y: number;
     z: number;

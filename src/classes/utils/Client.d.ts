@@ -5,35 +5,38 @@ type Chunk = import('../exports/Chunk').Chunk;
 export class Client {
     private constructor(client: any, server: Server);
 
-    server: Server;
-    username: string;
-    uuid: string;
-    ping: number;
-    online: boolean;
-    sneaking: boolean;
+    readonly server: Server;
+    readonly username: string;
+    readonly uuid: string;
+    readonly ping: number;
+    readonly online: boolean;
+    readonly locale: {
+        readonly langCode: string;
+        readonly englishName: string;
+        readonly menuName: string;
+        readonly version?: string;
+        readonly region?: string;
+    };
+    readonly chatSettings: {
+        readonly visible: 'all' | 'commands' | 'none';
+        readonly colors: boolean;
+    };
+    readonly visibleSkinParts: {
+        readonly cape: boolean;
+        readonly torso: boolean;
+        readonly leftArm: boolean;
+        readonly rightArm: boolean;
+        readonly leftLeg: boolean;
+        readonly rightLeg: boolean;
+        readonly hat: boolean;
+    };
+    readonly mainHand: 'left' | 'right';
+    readonly viewDistance: number;
+    readonly entities: {
+        readonly [entityId: number]: Entity;
+    };
+
     slot: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-    locale: {
-        langCode: string;
-        englishName: string;
-        menuName: string;
-        version?: string;
-        region?: string;
-    };
-    chatSettings: {
-        visible: 'all' | 'commands' | 'none';
-        colors: boolean;
-    };
-    visibleSkinParts: {
-        cape: boolean;
-        torso: boolean;
-        leftArm: boolean;
-        rightArm: boolean;
-        leftLeg: boolean;
-        rightLeg: boolean;
-        hat: boolean;
-    };
-    mainHand = 'left' | 'right';
-    viewDistance: number;
     position: {
         x: number;
         y: number;
@@ -42,9 +45,7 @@ export class Client {
         yaw: number;
         pitch: number;
     };
-    entities: {
-        [entityId: number]: Entity;
-    };
+
     kick(reason: string): void;
     chat(message: string): void;
     chunk(chunk: Chunk, chunkPosition: {

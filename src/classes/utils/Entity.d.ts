@@ -9,9 +9,10 @@ export class Entity {
         pitch: number;
     });
 
-    id: number;
-    client: Client;
-    type: entityType;
+    readonly id: number;
+    readonly client: Client;
+    readonly type: entityType;
+
     position: {
         x: number;
         y: number;
