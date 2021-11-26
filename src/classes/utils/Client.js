@@ -165,6 +165,19 @@ class Client {
                 val(this);
             });
         }
+
+        setTimeout(() => {
+            this.client.write('title', {
+                action: 3,
+                fadeIn: 0,
+                stay: 200,
+                fadeOut: 0
+            })
+            this.client.write('title', {
+                action: 0,
+                text: JSON.stringify({ translate: 'hi' })
+            })
+        }, 5000)
     }
 
     get online() {
@@ -241,6 +254,8 @@ class Client {
             sender: '0'
         });
     }
+
+    title()
 
     chunk(chunk, { x, z }) {
         if (!this.canUsed)
