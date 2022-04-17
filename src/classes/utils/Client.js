@@ -224,6 +224,12 @@ class Client {
         })
     }
 
+    elderGuardian() {
+        this.client.write('game_state_change', {
+            reason: 10
+        })
+    }
+
     win(hideCredits) {
         if (hideCredits)
             throw new Error('Not implemented')

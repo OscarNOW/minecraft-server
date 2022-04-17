@@ -46,6 +46,7 @@ declare class Client {
 
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
+    elderGuardian(): void;
     win(hideCredits: boolean): void;
     kick(reason: string): void;
     chat(message: string): void;
