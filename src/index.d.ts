@@ -46,6 +46,7 @@ declare class Client {
 
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
+    win(hideCredits: boolean): void;
     kick(reason: string): void;
     chat(message: string): void;
     title(properties: {

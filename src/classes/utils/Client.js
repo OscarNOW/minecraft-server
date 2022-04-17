@@ -224,6 +224,16 @@ class Client {
         })
     }
 
+    win(hideCredits) {
+        if (hideCredits)
+            throw new Error('Not implemented')
+
+        this.client.write('game_state_change', {
+            reason: 4,
+            gameMode: hideCredits ? 0 : 1
+        })
+    }
+
     emitMove(info) {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)

@@ -39,21 +39,13 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    horse.on('leftClick', () => {
-        client.gamemode = 'spectator';
-    })
-
-    horse.on('rightClick', () => {
-        client.darkSky = !client.darkSky;
-    })
-
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
     }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
     let loadedChunks = [];
     let loadingChunks = []
-    let prioLoadingChunks = ['0;0'];
+    let prioLoadingChunks = [{ x: 0, z: 0, instant: true }];
 
     (async () => {
         while (client.online) {
