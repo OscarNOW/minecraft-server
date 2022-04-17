@@ -40,10 +40,7 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        if (client.gamemode == 'survival')
-            client.gamemode = 'creative'
-        else
-            client.gamemode = 'survival'
+        client.gamemode = 'spectator';
     })
 
     horse.on('rightClick', () => {
@@ -72,8 +69,8 @@ server.on('join', client => {
                 }
 
                 let debugMessage = [loadingChunks.length > settings.chunkLoadBusyThreshold ? '@' : ' ', '   ', loadingChunks.length, '   ', require('util').inspect(loadingChunks[0])].join('')
-                console.log(debugMessage)
-                client.chat(debugMessage)
+                // console.log(debugMessage)
+                // client.chat(debugMessage)
 
                 loadedChunks.push(`${loadingChunks[0].x};${loadingChunks[0].z}`)
                 if (client.online)
@@ -99,8 +96,8 @@ server.on('join', client => {
                 }
 
                 let debugMessage = [prioLoadingChunks[0].instant ? '&' : prioLoadingChunks.length > settings.prioChunkLoadBusyThreshold ? '@' : ' ', '## ', prioLoadingChunks.length, '   ', require('util').inspect(prioLoadingChunks[0])].join('')
-                console.log(debugMessage)
-                client.chat(debugMessage)
+                // console.log(debugMessage)
+                // client.chat(debugMessage)
 
                 loadedChunks.push(`${prioLoadingChunks[0].x};${prioLoadingChunks[0].z}`)
                 if (client.online)
