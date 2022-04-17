@@ -9,6 +9,10 @@ class Text {
         this._string = Text.arrayToString(this.array);
     }
 
+    toString() {
+        return this.string;
+    }
+
     get array() {
         return this._array;
     }

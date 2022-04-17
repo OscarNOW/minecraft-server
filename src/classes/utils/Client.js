@@ -228,7 +228,7 @@ class Client {
         if (!this.canUsed)
             throw new Error("Can't be used")
 
-        this.client.end(reason);
+        this.client.end(`${reason}`);
     }
 
     chat(message) {
@@ -236,7 +236,7 @@ class Client {
             throw new Error("Can't be used")
 
         this.client.write('chat', {
-            message: JSON.stringify({ translate: message }),
+            message: JSON.stringify({ translate: `${message}` }),
             position: 0,
             sender: '0'
         });
@@ -254,7 +254,7 @@ class Client {
         })
         this.client.write('title', {
             action: 0,
-            text: JSON.stringify({ translate: title })
+            text: JSON.stringify({ translate: `${title}` })
         })
     }
 

@@ -29,23 +29,36 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.title({
-            fadeIn: 20, stay: 200, fadeOut: 20, title: new (mc.Text)([
-                {
-                    color: 'green',
-                    text: client.username
-                },
-                {
-                    text: ` ${Math.floor(Math.random() * 100)}`,
-                    modifiers: ['random']
-                }
-            ]).string
-        })
+        client.kick(new (mc.Text)([
+            {
+                text: "You can't slap ",
+                color: 'red',
+                modifiers: ['bold']
+            },
+            {
+                text: 'horse',
+                color: 'green',
+                modifiers: ['underline', 'italic']
+            }
+        ]))
+    })
+
+    client.title({
+        fadeIn: 0, stay: 200, fadeOut: 20, title: new (mc.Text)([
+            {
+                color: 'green',
+                text: client.username
+            },
+            {
+                text: ` ${Math.floor(Math.random() * 100)}`,
+                modifiers: ['random']
+            }
+        ])
     })
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
-    }, 1900);
+    }, 2500);
 
     let loadedChunks = [];
     loadedChunks.push('0;0')
