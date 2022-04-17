@@ -242,17 +242,29 @@ class Client {
         });
     }
 
-    title({ fadeIn, stay, fadeOut, text }) {
+    title(properties) {
+        let { fadeIn, stay, fadeOut, title, subTitle } = properties || {};
+
+        this.client.write('title', {
+            action: 5
+        })
+
         this.client.write('title', {
             action: 3,
-            fadeIn: fadeIn ?? 0,
-            stay,
-            fadeOut: fadeOut ?? 0
+            fadeIn: fadeIn ?? 10,
+            stay: stay ?? 40,
+            fadeOut: fadeOut ?? 10
         })
+
         this.client.write('title', {
             action: 0,
-            text: JSON.stringify({ translate: `${text}` })
+            text: JSON.stringify({ translate: `${(title && title !== '') ? title : ''}` })
         })
+        if (subTitle && subTitle !== '')
+            this.client.write('title', {
+                action: 1,
+                text: JSON.stringify({ translate: `${subTitle}` })
+            })
     }
 
     actionBar(text) {

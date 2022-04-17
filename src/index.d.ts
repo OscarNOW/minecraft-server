@@ -48,7 +48,8 @@ declare class Client {
         fadeIn?: number;
         stay: number;
         fadeOut?: number;
-        text: string;
+        title?: string;
+        subTitle?: string;
     }): void;
     actionBar(text: string): void;
     chunk(chunk: Chunk, chunkPosition: {

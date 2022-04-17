@@ -29,17 +29,19 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.actionBar(new Text([{ text: 'Green ', color: 'green' }, { text: 'Red ', color: 'red' }, { text: 'Bold', modifiers: ['bold'] }]))
+        client.title({
+            title: new Text([{ text: 'GREEN', modifiers: ['bold'], color: 'green' }]),
+            subTitle: new Text([{ text: 'RED', modifiers: ['bold'], color: 'red' }])
+        })
     })
 
-    client.title({
-        stay: 400,
-        text: 'Title test'
+    horse.on('rightClick', () => {
+        client.title()
     })
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
-    }, 2500);
+    }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
     let loadedChunks = [];
     loadedChunks.push('0;0')
