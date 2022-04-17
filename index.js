@@ -1,5 +1,16 @@
 const { Chunk, Server, Text } = require('./src/index');
-const chunkLoad = 7;
+
+const settings = {
+    chunkLoad: 7,
+    chunkLoadWait: 50,
+    chunkLoadBusyThreshold: 1000,
+    chunkLoadBusyWait: 10,
+    prioChunkLoad: 3,
+    prioChunkLoadWait: 3,
+    prioChunkLoadBusyThreshold: 100,
+    prioChunkLoadBusyWait: 0
+}
+
 const wait = ms => new Promise(res => setTimeout(res, ms));
 let chunk = new Chunk()
 
@@ -44,19 +55,84 @@ server.on('join', client => {
     }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
     let loadedChunks = [];
-    loadedChunks.push('0;0')
-    client.chunk(chunk, { x: 0, z: 0 })
+    let loadingChunks = []
+    let prioLoadingChunks = ['0;0'];
+
+    (async () => {
+        while (client.online) {
+            if (loadingChunks.length > settings.chunkLoadBusyThreshold)
+                await wait(settings.chunkLoadBusyWait)
+            else
+                await wait(settings.chunkLoadWait)
+
+            if (loadingChunks[0]) {
+                if (loadedChunks.includes(`${loadingChunks[0].x};${loadingChunks[0].y}`) || prioLoadingChunks.find(v => v.x == loadingChunks[0].x && v.y == loadingChunks[0].y)) {
+                    loadingChunks.shift();
+                    continue;
+                }
+
+                // console.log(loadingChunks.length > settings.chunkLoadBusyThreshold ? '@' : ' ', '    ', loadingChunks.length, '    ', loadingChunks[0])
+
+                loadedChunks.push(`${loadingChunks[0].x};${loadingChunks[0].z}`)
+                if (client.online)
+                    client.chunk(chunk, loadingChunks[0])
+
+                loadingChunks.shift();
+            }
+        }
+    })();
+
+    (async () => {
+        while (client.online) {
+            if ((!prioLoadingChunks[0]) || !prioLoadingChunks[0].instant)
+                if (prioLoadingChunks.length > settings.prioChunkLoadBusyThreshold)
+                    await wait(settings.prioChunkLoadBusyWait)
+                else
+                    await wait(settings.prioChunkLoadWait)
+
+            if (prioLoadingChunks[0]) {
+                if (loadedChunks.includes(`${prioLoadingChunks[0].x};${prioLoadingChunks[0].y}`)) {
+                    prioLoadingChunks.shift();
+                    continue;
+                }
+
+                // console.log(prioLoadingChunks[0].instant ? '&' : prioLoadingChunks.length > settings.prioChunkLoadBusyThreshold ? '@' : ' ', '### ', prioLoadingChunks.length, '    ', prioLoadingChunks[0])
+
+                loadedChunks.push(`${prioLoadingChunks[0].x};${prioLoadingChunks[0].z}`)
+                if (client.online)
+                    client.chunk(chunk, prioLoadingChunks[0])
+
+                prioLoadingChunks.shift();
+            }
+        }
+    })();
+
     client.on('move', () => {
-        for (let xOffset = -chunkLoad; xOffset <= chunkLoad; xOffset++)
-            for (let zOffset = -chunkLoad; zOffset <= chunkLoad; zOffset++) {
+        for (let xOffset = -settings.prioChunkLoad; xOffset <= settings.prioChunkLoad; xOffset++)
+            for (let zOffset = -settings.prioChunkLoad; zOffset <= settings.prioChunkLoad; zOffset++) {
 
                 let chunkX = Math.floor(client.position.x / 16) + xOffset;
                 let chunkZ = Math.floor(client.position.z / 16) + zOffset;
 
-                if (!loadedChunks.includes(`${chunkX};${chunkZ}`)) {
-                    loadedChunks.push(`${chunkX};${chunkZ}`)
-                    client.chunk(chunk, { x: chunkX, z: chunkZ })
-                }
+                if (!loadedChunks.includes(`${chunkX};${chunkZ}`) && !prioLoadingChunks.find(v => v.x == chunkX && v.z == chunkZ))
+                    prioLoadingChunks.push({ x: chunkX, z: chunkZ })
+
+            }
+
+        for (let xOffset = -settings.chunkLoad; xOffset <= settings.chunkLoad; xOffset++)
+            for (let zOffset = -settings.chunkLoad; zOffset <= settings.chunkLoad; zOffset++) {
+
+                let chunkX = Math.floor(client.position.x / 16) + xOffset;
+                let chunkZ = Math.floor(client.position.z / 16) + zOffset;
+
+                let instant = Math.floor(client.position.x / 16) == 0 && Math.floor(client.position.z / 16) == 0;
+                // let instant = false;
+
+                if ((!loadedChunks.includes(`${chunkX};${chunkZ}`)) && (!loadingChunks.find(v => v.x == chunkX && v.z == chunkZ)) && (!prioLoadingChunks.find(v => v.x == chunkX && v.z == chunkZ)))
+                    if (instant)
+                        prioLoadingChunks.push({ x: chunkX, z: chunkZ, instant })
+                    else
+                        loadingChunks.push({ x: chunkX, z: chunkZ })
 
             }
     })

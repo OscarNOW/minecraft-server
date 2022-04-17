@@ -16,16 +16,21 @@ module.exports = async (expect, warn) => {
     console.clear()
     console.log('Starting testing server')
 
+    let serverPingAmount = 0;
     const server = new Server({
-        serverList: ip => ({
-            versionMessage: `#1#${ip}#1#`,
-            players: {
-                online: 2,
-                max: 3,
-                hover: `#4#${ip}#4#\n#5#${ip}#5#`
-            },
-            description: `#6#${ip}#6#\n#7#${ip}#7#`
-        })
+        serverList: ip => {
+            serverPingAmount++;
+
+            return {
+                versionMessage: `#1#${ip}#1#`,
+                players: {
+                    online: 2,
+                    max: 3,
+                    hover: `#4#${ip}#4#\n#5#${ip}#5#`
+                },
+                description: `#6#${ip}#6#\n#7#${ip}#7#`
+            }
+        }
     });
 
     let loggedInText = false;
@@ -154,8 +159,10 @@ module.exports = async (expect, warn) => {
     client1?.kick?.();
 
     console.log('Pinging test server')
+    serverPingAmount = 0;
     let pinged = await ping();
     let ip = '127.0.0.1';
+    expect(serverPingAmount, 1)
     expect(pinged?.version?.name, `#1#${ip}#1#`)
     expect(pinged?.players?.online, 2)
     expect(pinged?.players?.max, 3)
