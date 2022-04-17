@@ -3,7 +3,7 @@ const { Chunk, Server, Text } = require('./src/index');
 const settings = {
     chunkLoad: 7,
     chunkLoadWait: 50,
-    chunkLoadBusyThreshold: 1000,
+    chunkLoadBusyThreshold: 100,
     chunkLoadBusyWait: 10,
     prioChunkLoad: 3,
     prioChunkLoadWait: 3,
@@ -40,14 +40,14 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.title({
-            title: new Text([{ text: 'GREEN', modifiers: ['bold'], color: 'green' }]),
-            subTitle: new Text([{ text: 'RED', modifiers: ['bold'], color: 'red' }])
-        })
+        if (client.gamemode == 'survival')
+            client.gamemode = 'creative'
+        else
+            client.gamemode = 'survival'
     })
 
     horse.on('rightClick', () => {
-        client.title()
+        client.darkSky = !client.darkSky;
     })
 
     setTimeout(() => {
@@ -71,7 +71,9 @@ server.on('join', client => {
                     continue;
                 }
 
-                // console.log(loadingChunks.length > settings.chunkLoadBusyThreshold ? '@' : ' ', '    ', loadingChunks.length, '    ', loadingChunks[0])
+                let debugMessage = [loadingChunks.length > settings.chunkLoadBusyThreshold ? '@' : ' ', '   ', loadingChunks.length, '   ', require('util').inspect(loadingChunks[0])].join('')
+                console.log(debugMessage)
+                client.chat(debugMessage)
 
                 loadedChunks.push(`${loadingChunks[0].x};${loadingChunks[0].z}`)
                 if (client.online)
@@ -96,7 +98,9 @@ server.on('join', client => {
                     continue;
                 }
 
-                // console.log(prioLoadingChunks[0].instant ? '&' : prioLoadingChunks.length > settings.prioChunkLoadBusyThreshold ? '@' : ' ', '### ', prioLoadingChunks.length, '    ', prioLoadingChunks[0])
+                let debugMessage = [prioLoadingChunks[0].instant ? '&' : prioLoadingChunks.length > settings.prioChunkLoadBusyThreshold ? '@' : ' ', '## ', prioLoadingChunks.length, '   ', require('util').inspect(prioLoadingChunks[0])].join('')
+                console.log(debugMessage)
+                client.chat(debugMessage)
 
                 loadedChunks.push(`${prioLoadingChunks[0].x};${prioLoadingChunks[0].z}`)
                 if (client.online)

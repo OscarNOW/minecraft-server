@@ -24,7 +24,8 @@ class Client {
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
         this._slot = null;
-        // this.sneaking = null;
+        this._darkSky = false;
+        this._gamemode = 'survival';
 
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
@@ -184,17 +185,48 @@ class Client {
     }
 
     set slot(slot) {
-        if (slot < 1 || slot > 9)
+        if (slot < 0 || slot > 8)
             throw new Error(`Unknown slot "${slot}"`)
 
         this.client.write('held_item_slot', {
-            slot: slot - 1
+            slot: slot
+        })
+    }
+
+    get darkSky() {
+        return this._darkSky;
+    }
+
+    set darkSky(darkSky) {
+        if (darkSky != false && darkSky != true)
+            throw new Error(`darkSky has to be true or false. Received "${darkSky}"`)
+
+        this._darkSky = darkSky;
+
+        this.client.write('game_state_change', {
+            reason: darkSky ? 2 : 1
+        })
+    }
+
+    get gamemode() {
+        return this._gamemode;
+    }
+
+    set gamemode(gamemode) {
+        if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
+            throw new Error(`Unknown gamemode "${gamemode}"`)
+
+        this._gamemode = gamemode;
+
+        this.client.write('game_state_change', {
+            reason: 3,
+            gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
     }
 
     emitMove(info) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         let changed = false;
         [
@@ -218,7 +250,7 @@ class Client {
 
     on(event, callback) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
         this.events[event].push(callback);
@@ -226,14 +258,14 @@ class Client {
 
     kick(reason) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.end(`${reason}`);
     }
 
     chat(message) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('chat', {
             message: JSON.stringify({ translate: `${message}` }),
@@ -276,7 +308,7 @@ class Client {
 
     chunk(chunk, { x, z }) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('map_chunk', {
             x,
@@ -296,7 +328,7 @@ class Client {
 
     teleport({ x, y, z, yaw, pitch }) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('position', {
             x,
@@ -310,7 +342,7 @@ class Client {
 
     entity(type, { x, y, z, yaw, pitch }) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         let entityId = null;
         for (let ii = 1; entityId === null; ii++)
@@ -325,7 +357,7 @@ class Client {
 
     difficulty(difficulty) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
             throw new Error(`Unknown difficulty "${difficulty}"`)
@@ -338,7 +370,7 @@ class Client {
 
     window(windowType, horse) {
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}"`)
         if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
@@ -358,7 +390,7 @@ class Client {
     player() {
         throw new Error(`Not implemented`)
         if (!this.canUsed)
-            throw new Error("Can't be used")
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
 
         /*httpRequest({
             host: 'sessionserver.mojang.com',

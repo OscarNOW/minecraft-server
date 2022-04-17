@@ -32,7 +32,7 @@ declare class Client {
         readonly [entityId: number]: Entity;
     };
 
-    slot: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+    slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
         x: number;
         y: number;
@@ -41,6 +41,10 @@ declare class Client {
         yaw: number;
         pitch: number;
     };
+
+    darkSky: boolean;
+
+    gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
     kick(reason: string): void;
     chat(message: string): void;
