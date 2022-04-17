@@ -1,1 +1,502 @@
-{}
+{
+    "warnings": [],
+    "failed": [
+        {
+            "got": false,
+            "expected": true,
+            "class": "Server",
+            "index": 4
+        },
+        {
+            "got": 0,
+            "expected": 1,
+            "class": "Server",
+            "index": 7
+        },
+        {
+            "got": false,
+            "expected": true,
+            "class": "Server",
+            "index": 17
+        },
+        {
+            "got": 0,
+            "expected": 1,
+            "class": "Server",
+            "index": 21
+        },
+        {
+            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
+            "class": "Server",
+            "index": 25
+        },
+        {
+            "got": 1,
+            "expected": 2,
+            "class": "Server",
+            "index": 28
+        },
+        {
+            "got": false,
+            "expected": true,
+            "class": "Server",
+            "index": 31
+        },
+        {
+            "expected": 41,
+            "class": "Server",
+            "index": 32
+        },
+        {
+            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
+            "class": "Server",
+            "index": 33
+        }
+    ],
+    "succeeded": [
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 0
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 1
+        },
+        {
+            "expected": 0,
+            "got": 0,
+            "class": "Server",
+            "index": 2
+        },
+        {
+            "expected": 0,
+            "got": 0,
+            "class": "Server",
+            "index": 3
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 5
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 6
+        },
+        {
+            "expected": 1,
+            "got": 1,
+            "class": "Server",
+            "index": 8
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 9
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 10
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "Server",
+            "index": 11
+        },
+        {
+            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
+            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
+            "class": "Server",
+            "index": 12
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "Server",
+            "index": 13
+        },
+        {
+            "expected": 328,
+            "got": 328,
+            "class": "Server",
+            "index": 14
+        },
+        {
+            "expected": 0,
+            "got": 0,
+            "class": "Server",
+            "index": 15
+        },
+        {
+            "expected": 0,
+            "got": 0,
+            "class": "Server",
+            "index": 16
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 18
+        },
+        {
+            "class": "Server",
+            "index": 19
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 20
+        },
+        {
+            "expected": 1,
+            "got": 1,
+            "class": "Server",
+            "index": 22
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "Server",
+            "index": 23
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 24
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 26
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "Server",
+            "index": 27
+        },
+        {
+            "expected": 2,
+            "got": 2,
+            "class": "Server",
+            "index": 29
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "Server",
+            "index": 30
+        },
+        {
+            "expected": 1,
+            "got": 1,
+            "class": "Server",
+            "index": 34
+        },
+        {
+            "expected": 1,
+            "got": 1,
+            "class": "Server",
+            "index": 35
+        },
+        {
+            "expected": "#1#127.0.0.1#1#",
+            "got": "#1#127.0.0.1#1#",
+            "class": "Server",
+            "index": 36
+        },
+        {
+            "expected": 2,
+            "got": 2,
+            "class": "Server",
+            "index": 37
+        },
+        {
+            "expected": 3,
+            "got": 3,
+            "class": "Server",
+            "index": 38
+        },
+        {
+            "expected": "#4#127.0.0.1#4#",
+            "got": "#4#127.0.0.1#4#",
+            "class": "Server",
+            "index": 39
+        },
+        {
+            "expected": "#5#127.0.0.1#5#",
+            "got": "#5#127.0.0.1#5#",
+            "class": "Server",
+            "index": 40
+        },
+        {
+            "expected": "#6#127.0.0.1#6#\n#7#127.0.0.1#7#",
+            "got": "#6#127.0.0.1#6#\n#7#127.0.0.1#7#",
+            "class": "Server",
+            "index": 41
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 0
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 1
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 2
+        },
+        {
+            "expected": [],
+            "got": [],
+            "class": "Text",
+            "index": 3
+        },
+        {
+            "expected": "§r§a§lhi",
+            "got": "§r§a§lhi",
+            "class": "Text",
+            "index": 4
+        },
+        {
+            "expected": "§r§n1§l2§r3",
+            "got": "§r§n1§l2§r3",
+            "class": "Text",
+            "index": 5
+        },
+        {
+            "expected": "§r§nH§li§r§b!",
+            "got": "§r§nH§li§r§b!",
+            "class": "Text",
+            "index": 6
+        },
+        {
+            "expected": "§r§a§lhi",
+            "got": "§r§a§lhi",
+            "class": "Text",
+            "index": 7
+        },
+        {
+            "expected": "§r§n1§l2§r3",
+            "got": "§r§n1§l2§r3",
+            "class": "Text",
+            "index": 8
+        },
+        {
+            "expected": "§r§nH§li",
+            "got": "§r§nH§li",
+            "class": "Text",
+            "index": 9
+        },
+        {
+            "expected": [
+                {
+                    "text": "H",
+                    "color": "default",
+                    "modifiers": [
+                        "underline"
+                    ]
+                },
+                {
+                    "text": "i",
+                    "color": "default",
+                    "modifiers": [
+                        "underline",
+                        "bold"
+                    ]
+                }
+            ],
+            "got": [
+                {
+                    "text": "H",
+                    "color": "default",
+                    "modifiers": [
+                        "underline"
+                    ]
+                },
+                {
+                    "text": "i",
+                    "color": "default",
+                    "modifiers": [
+                        "underline",
+                        "bold"
+                    ]
+                }
+            ],
+            "class": "Text",
+            "index": 10
+        },
+        {
+            "expected": 1,
+            "got": 1,
+            "class": "ChangablePosition",
+            "index": 0
+        },
+        {
+            "expected": 2,
+            "got": 2,
+            "class": "ChangablePosition",
+            "index": 1
+        },
+        {
+            "expected": 3,
+            "got": 3,
+            "class": "ChangablePosition",
+            "index": 2
+        },
+        {
+            "expected": 4,
+            "got": 4,
+            "class": "ChangablePosition",
+            "index": 3
+        },
+        {
+            "expected": 5,
+            "got": 5,
+            "class": "ChangablePosition",
+            "index": 4
+        },
+        {
+            "expected": 6,
+            "got": 6,
+            "class": "ChangablePosition",
+            "index": 5
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangablePosition",
+            "index": 6
+        },
+        {
+            "expected": 7,
+            "got": 7,
+            "class": "ChangablePosition",
+            "index": 7
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangablePosition",
+            "index": 8
+        },
+        {
+            "expected": 8,
+            "got": 8,
+            "class": "ChangablePosition",
+            "index": 9
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangablePosition",
+            "index": 10
+        },
+        {
+            "expected": 9,
+            "got": 9,
+            "class": "ChangablePosition",
+            "index": 11
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangablePosition",
+            "index": 12
+        },
+        {
+            "expected": 10,
+            "got": 10,
+            "class": "ChangablePosition",
+            "index": 13
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangablePosition",
+            "index": 14
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "ChangablePosition",
+            "index": 15
+        },
+        {
+            "expected": 11,
+            "got": 11,
+            "class": "ChangablePosition",
+            "index": 16
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "ChangablePosition",
+            "index": 17
+        },
+        {
+            "expected": 12,
+            "got": 12,
+            "class": "ChangablePosition",
+            "index": 18
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "ChangablePosition",
+            "index": 19
+        },
+        {
+            "expected": 13,
+            "got": 13,
+            "class": "ChangablePosition",
+            "index": 20
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "ChangablePosition",
+            "index": 21
+        },
+        {
+            "expected": 14,
+            "got": 14,
+            "class": "ChangablePosition",
+            "index": 22
+        },
+        {
+            "expected": false,
+            "got": false,
+            "class": "ChangablePosition",
+            "index": 23
+        },
+        {
+            "expected": 15,
+            "got": 15,
+            "class": "ChangablePosition",
+            "index": 24
+        }
+    ]
+}

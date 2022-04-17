@@ -165,19 +165,6 @@ class Client {
                 val(this);
             });
         }
-
-        setTimeout(() => {
-            this.client.write('title', {
-                action: 3,
-                fadeIn: 0,
-                stay: 200,
-                fadeOut: 0
-            })
-            this.client.write('title', {
-                action: 0,
-                text: JSON.stringify({ translate: 'hi' })
-            })
-        }, 5000)
     }
 
     get online() {
@@ -255,7 +242,21 @@ class Client {
         });
     }
 
-    title()
+    title({ fadeIn, stay, fadeOut, title }) {
+        this.client.write('title', {
+            action: 5 //reset
+        })
+        this.client.write('title', {
+            action: 3,
+            fadeIn,
+            stay,
+            fadeOut
+        })
+        this.client.write('title', {
+            action: 0,
+            text: JSON.stringify({ translate: title })
+        })
+    }
 
     chunk(chunk, { x, z }) {
         if (!this.canUsed)

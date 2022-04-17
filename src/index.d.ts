@@ -44,6 +44,12 @@ declare class Client {
 
     kick(reason: string): void;
     chat(message: string): void;
+    title(properties: {
+        fadeIn: number;
+        stay: number;
+        fadeOut: number;
+        title: string;
+    }): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;

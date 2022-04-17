@@ -11,11 +11,15 @@ fs.readdirSync('./src/classes/exports/').forEach(file => {
         let done = false;
         let bracketCount = 0;
         let exported = '';
-        let exporting = true;
+        let exporting = false;
 
-        const c = contents.split('');
+        const c = contents.split('').filter(v => v != '\r');
         c.forEach((v, i) => {
             if (done) return;
+
+            if (file == 'Text.d.ts')
+                console.log({ done, exporting, v, bracketCount })
+
             if (exporting) {
                 if (v == '{') bracketCount++;
                 if (v == '}') bracketCount--;
@@ -41,12 +45,13 @@ fs.readdirSync('./src/classes/exports/').forEach(file => {
 
                 if (matches) {
                     exporting = true;
-                    exported += v;
+                    exported += c[i];
                 }
             }
         })
 
-        console.log(exported)
+        // if (file == 'Text.d.ts')
+        //     console.log(exported)
     }
 })
 

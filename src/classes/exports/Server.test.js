@@ -12,7 +12,6 @@ if (fs.existsSync(path.resolve(__dirname, `../../credentials/`)))
 
 module.exports = async (expect, warn) => {
     if (credentials === null) return warn("Can't test server class without Microsoft account credentials. Create ./credentials/microsoft.json with username and password properties")
-    return warn('Not implemented')
 
     console.clear()
     console.log('Starting testing server')
@@ -185,7 +184,7 @@ function bot({ kicked }) {
         })
 
         bot.on('kicked', kicked)
-        bot.on('login', () => res(bot));
+        bot.on('login', () => setTimeout(() => res(bot), 1000));
     })
 }
 

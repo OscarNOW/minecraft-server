@@ -29,33 +29,23 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.chat(`Horse slapped`)
-        horse.animation('critical')
-        horse.animation('flashRed')
-    })
-
-    horse.on('rightClick', ({ x, y, z }, hand) => {
-        client.chat(`Horse clicked with ${hand} hand at ${Math.round(x)}, ${Math.round(y)}, ${Math.round(z)}`)
-        horse.animation('flashRed')
+        client.title({
+            fadeIn: 20, stay: 200, fadeOut: 20, title: new (mc.Text)([
+                {
+                    color: 'green',
+                    text: client.username
+                },
+                {
+                    text: ` ${Math.floor(Math.random() * 100)}`,
+                    modifiers: ['random']
+                }
+            ]).string
+        })
     })
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
-    }, 1800);
-
-    setTimeout(() => {
-        horse.animation('flashRed')
-        client.difficulty('normal');
-    }, 5000)
-
-    client.chat(`§r§6§l${client.username}§r§e joined the game`)
-    client.on('chat', message => {
-        client.chat(`§r§6§l${client.username}§r§6: §r§7${message}`)
-    })
-
-    client.on('slotChange', () => {
-        client.chat(`Slot changed to ${client.slot}`)
-    });
+    }, 1900);
 
     let loadedChunks = [];
     loadedChunks.push('0;0')
