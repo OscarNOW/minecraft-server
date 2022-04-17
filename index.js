@@ -1,7 +1,7 @@
-const mc = require('./src/index');
+const { Chunk, Server, Text } = require('./src/index');
 const chunkLoad = 7;
 const wait = ms => new Promise(res => setTimeout(res, ms));
-let chunk = new (mc.Chunk)();
+let chunk = new Chunk()
 
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++) {
@@ -12,7 +12,7 @@ for (let x = 0; x < 16; x++)
         chunk.setBlock('grass_block', { x, y: 100, z })
     }
 
-const server = new (mc.Server)({
+const server = new Server({
     serverList: ip => ({
         versionMessage: 'Please use version 1.16.3',
         players: {
@@ -29,31 +29,12 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.kick(new (mc.Text)([
-            {
-                text: "You can't slap ",
-                color: 'red',
-                modifiers: ['bold']
-            },
-            {
-                text: 'horse',
-                color: 'green',
-                modifiers: ['underline', 'italic']
-            }
-        ]))
+        client.actionBar(new Text([{ text: 'Green ', color: 'green' }, { text: 'Red ', color: 'red' }, { text: 'Bold', modifiers: ['bold'] }]))
     })
 
     client.title({
-        fadeIn: 0, stay: 200, fadeOut: 20, title: new (mc.Text)([
-            {
-                color: 'green',
-                text: client.username
-            },
-            {
-                text: ` ${Math.floor(Math.random() * 100)}`,
-                modifiers: ['random']
-            }
-        ])
+        stay: 400,
+        text: 'Title test'
     })
 
     setTimeout(() => {

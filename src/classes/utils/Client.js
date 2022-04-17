@@ -242,19 +242,23 @@ class Client {
         });
     }
 
-    title({ fadeIn, stay, fadeOut, title }) {
-        this.client.write('title', {
-            action: 5 //reset
-        })
+    title({ fadeIn, stay, fadeOut, text }) {
         this.client.write('title', {
             action: 3,
-            fadeIn,
+            fadeIn: fadeIn ?? 0,
             stay,
-            fadeOut
+            fadeOut: fadeOut ?? 0
         })
         this.client.write('title', {
             action: 0,
-            text: JSON.stringify({ translate: `${title}` })
+            text: JSON.stringify({ translate: `${text}` })
+        })
+    }
+
+    actionBar(text) {
+        this.client.write('title', {
+            action: 2,
+            text: JSON.stringify({ translate: `${text}` })
         })
     }
 

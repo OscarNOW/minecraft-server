@@ -49,11 +49,12 @@ export class Client {
     kick(reason: string): void;
     chat(message: string): void;
     title(properties: {
-        fadeIn: number;
+        fadeIn?: number;
         stay: number;
-        fadeOut: number;
-        title: string;
+        fadeOut?: number;
+        text: string;
     }): void;
+    actionBar(text: string): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;

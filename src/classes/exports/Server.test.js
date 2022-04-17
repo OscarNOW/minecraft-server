@@ -82,7 +82,7 @@ module.exports = async (expect, warn) => {
     expect(left, false);
     expect(bot1Kicked, false);
 
-    let random = Math.floor(Math.random() * 1000);
+    let random = `${Math.floor(Math.random() * 1000)}`;
     joinedClient.kick(random);
 
     await wait(500);
@@ -139,7 +139,7 @@ module.exports = async (expect, warn) => {
     expect(server?.playerCount, 2);
     expect(server?.server?.playerCount, 2);
 
-    random = Math.floor(Math.random() * 100);
+    random = `${Math.floor(Math.random() * 100)}`;
     joinedClient.kick(random);
 
     await wait(500);
