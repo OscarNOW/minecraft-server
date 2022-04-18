@@ -224,6 +224,24 @@ class Client {
         })
     }
 
+    demo(message) {
+        let messages = {
+            startScreen: 0,
+            movement: 101,
+            jump: 102,
+            inventory: 103,
+            endScreenshot: 104
+        };
+
+        if (messages[message] === undefined)
+            throw new Error(`Unknown message "${message}"`)
+
+        this.client.write('game_state_change', {
+            reason: 5,
+            gameMode: messages[message]
+        })
+    }
+
     elderGuardian() {
         this.client.write('game_state_change', {
             reason: 10

@@ -46,6 +46,7 @@ declare class Client {
 
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
+    demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
     win(hideCredits: boolean): void;
     kick(reason: string): void;
