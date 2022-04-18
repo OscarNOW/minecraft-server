@@ -40,7 +40,11 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     horse.on('leftClick', () => {
-        client.demo('startScreen')
+        client.health--;
+    })
+
+    horse.on('rightClick', () => {
+        client.health++;
     })
 
     setTimeout(() => {

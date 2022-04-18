@@ -32,6 +32,9 @@ class Client {
         this._slot = null;
         this._darkSky = false;
         this._gamemode = 'survival';
+        this._health = 20;
+        this._food = 20;
+        this._foodSaturation = 5;
 
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
@@ -172,6 +175,63 @@ class Client {
                 val(this);
             });
         }
+    }
+
+    get health() {
+        return this._health;
+    }
+
+    get food() {
+        return this._food;
+    }
+
+    get foodSaturation() {
+        return this._foodSaturation;
+    }
+
+    set health(h) {
+        const health = parseInt(h);
+
+        if (isNaN(health) || health < 0 || health > 20)
+            throw new Error(`Health must be an integer between 0 and 20, received "${h}"`)
+
+        this.client.write('update_health', {
+            health,
+            food: this._food,
+            foodSaturation: this._foodSaturation
+        })
+
+        this._health = health;
+    }
+
+    set food(f) {
+        const food = parseInt(f);
+
+        if (!isNaN(food) || food < 0 || food > 20)
+            throw new Error(`Food must be an integer between 0 and 20, received "${f}"`)
+
+        this.client.write('update_health', {
+            health: this._health,
+            food: food,
+            foodSaturation: this._foodSaturation
+        })
+
+        this._food = food;
+    }
+
+    set foodSaturation(fs) {
+        const foodSaturation = parseInt(fs);
+
+        if (!isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
+            throw new Error(`Food must be an integer between 0 and 5, received "${fs}"`)
+
+        this.client.write('update_health', {
+            health: this._health,
+            food: this._food,
+            foodSaturation: foodSaturation
+        })
+
+        this._foodSaturation = foodSaturation;
     }
 
     get online() {
