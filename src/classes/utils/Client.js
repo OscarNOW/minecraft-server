@@ -207,7 +207,7 @@ class Client {
     set food(f) {
         const food = parseInt(f);
 
-        if (!isNaN(food) || food < 0 || food > 20)
+        if (isNaN(food) || food < 0 || food > 20)
             throw new Error(`Food must be an integer between 0 and 20, received "${f}"`)
 
         this.client.write('update_health', {
@@ -222,7 +222,7 @@ class Client {
     set foodSaturation(fs) {
         const foodSaturation = parseInt(fs);
 
-        if (!isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
+        if (isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
             throw new Error(`Food must be an integer between 0 and 5, received "${fs}"`)
 
         this.client.write('update_health', {
