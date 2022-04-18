@@ -2,6 +2,7 @@ const Entity = require('./Entity').Entity;
 const ChangablePosition = require('./ChangablePosition').ChangablePosition;
 const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
 const languages = require('../../data/languages.json');
+const items = require('../../data/items.json');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 class Client {
@@ -304,6 +305,16 @@ class Client {
         this.client.write('game_state_change', {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
+        })
+    }
+
+    coolDown(item, length = 60) {
+        if (!items[item])
+            throw new Error(`Unknown item "${item}" (${typeof item})`)
+
+        this.client.write('set_cooldown', {
+            itemID: items[item].id,
+            cooldownTicks: length
         })
     }
 

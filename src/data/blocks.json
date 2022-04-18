@@ -1,8 +1,8 @@
 {
+    "unknown": "air",
     "dirt": "coarse_dirt",
     "cobblestone": null,
     "air": 762,
-    "unknown": "air",
     "stone": 0,
     "granite": 1,
     "polished_granite": 2,
