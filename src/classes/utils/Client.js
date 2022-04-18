@@ -29,6 +29,7 @@ class Client {
         this.username = this.client.username;
         this.uuid = this.client.uuid;
         this.ping = this.client.latency;
+        this._respawnScreen = true;
         this._slot = null;
         this._darkSky = false;
         this._gamemode = 'survival';
@@ -58,11 +59,11 @@ class Client {
         }
 
         this.client.on('use_entity', obj => {
-            if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}"`)
+            if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}" (${typeof obj.target})`)
             // this.sneaking = obj.sneaking;
 
             if (obj.mouse == 2) {
-                if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}"`)
+                if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}" (${typeof obj.hand})`)
                 this.entities[obj.target].events.rightClick.forEach(val => {
                     val(
                         {
@@ -78,7 +79,7 @@ class Client {
             else if (obj.mouse == 1)
                 this.entities[obj.target].events.leftClick.forEach(val => { val() })
             else
-                throw new Error(`Unknown mouse "${obj.mouse}"`)
+                throw new Error(`Unknown mouse "${obj.mouse}" (${typeof obj.mouse})`)
         })
 
         this.client.on('chat', ({ message }) => {
@@ -89,7 +90,7 @@ class Client {
 
         this.client.on('held_item_slot', ({ slotId }) => {
             if (slotId < 0 || slotId > 8)
-                throw new Error(`Unknown slotId "${slotId}"`)
+                throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
 
             this._slot = slotId + 1;
             this.events.slotChange.forEach(val => val());
@@ -102,7 +103,7 @@ class Client {
 
         this.client.on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
             let langCode = locale.toLowerCase();
-            if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}"`)
+            if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}" (${typeof langCode})`)
             let obj = languages[langCode];
             obj.langCode = langCode;
 
@@ -125,7 +126,7 @@ class Client {
                     colors: chatColors
                 };
             else
-                throw new Error(`Unknown chatFlags "${chatFlags}"`)
+                throw new Error(`Unknown chatFlags "${chatFlags}" (${typeof chatFlags})`)
 
             let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
             this.visibleSkinParts = {
@@ -143,7 +144,7 @@ class Client {
             else if (mainHand === 1)
                 this.mainHand = 'right'
             else
-                throw new Error(`Unknown mainHand "${mainHand}"`)
+                throw new Error(`Unknown mainHand "${mainHand}" (${typeof mainHand})`)
 
             this.readyStates.clientSettings = true;
             this.updateCanUsed();
@@ -177,6 +178,22 @@ class Client {
         }
     }
 
+    get respawnScreen() {
+        return this._respawnScreen;
+    }
+
+    set respawnScreen(respawnScreen) {
+        if (respawnScreen !== true && respawnScreen !== false)
+            throw new Error(`Expected respawnScreen to be a boolean, received "${respawnScreen}" (${typeof respawnScreen})`)
+
+        this.client.write('game_state_change', {
+            reason: 11,
+            gameMode: respawnScreen ? 0 : 1
+        })
+
+        this._respawnScreen = respawnScreen;
+    }
+
     get health() {
         return this._health;
     }
@@ -193,7 +210,7 @@ class Client {
         const health = parseInt(h);
 
         if (isNaN(health) || health < 0 || health > 20)
-            throw new Error(`Health must be an integer between 0 and 20, received "${h}"`)
+            throw new Error(`Health must be an integer between 0 and 20, received "${h}" (${typeof h})`)
 
         this.client.write('update_health', {
             health,
@@ -208,7 +225,7 @@ class Client {
         const food = parseInt(f);
 
         if (isNaN(food) || food < 0 || food > 20)
-            throw new Error(`Food must be an integer between 0 and 20, received "${f}"`)
+            throw new Error(`Food must be an integer between 0 and 20, received "${f}" (${typeof f})`)
 
         this.client.write('update_health', {
             health: this._health,
@@ -223,7 +240,7 @@ class Client {
         const foodSaturation = parseInt(fs);
 
         if (isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
-            throw new Error(`Food must be an integer between 0 and 5, received "${fs}"`)
+            throw new Error(`Food must be an integer between 0 and 5, received "${fs}" (${typeof fs})`)
 
         this.client.write('update_health', {
             health: this._health,
@@ -251,11 +268,11 @@ class Client {
     }
 
     set slot(slot) {
-        if (slot < 0 || slot > 8)
-            throw new Error(`Unknown slot "${slot}"`)
+        if (isNaN(parseInt(slot)) || slot < 0 || slot > 8)
+            throw new Error(`Unknown slot "${slot}" (${typeof slot})`)
 
         this.client.write('held_item_slot', {
-            slot: slot
+            slot: parseInt(slot)
         })
     }
 
@@ -265,7 +282,7 @@ class Client {
 
     set darkSky(darkSky) {
         if (darkSky != false && darkSky != true)
-            throw new Error(`darkSky has to be true or false. Received "${darkSky}"`)
+            throw new Error(`Expected darkSky to be a boolean, received "${darkSky}" (${typeof darkSky})`)
 
         this._darkSky = darkSky;
 
@@ -280,7 +297,7 @@ class Client {
 
     set gamemode(gamemode) {
         if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
-            throw new Error(`Unknown gamemode "${gamemode}"`)
+            throw new Error(`Unknown gamemode "${gamemode}" (${typeof gamemode})`)
 
         this._gamemode = gamemode;
 
@@ -288,6 +305,10 @@ class Client {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
+    }
+
+    kill() {
+        this.health = 0;
     }
 
     demo(message) {
@@ -300,7 +321,7 @@ class Client {
         };
 
         if (messages[message] === undefined)
-            throw new Error(`Unknown message "${message}"`)
+            throw new Error(`Unknown message "${message}" (${typeof message})`)
 
         this.client.write('game_state_change', {
             reason: 5,
@@ -326,7 +347,7 @@ class Client {
 
     emitMove(info) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         let changed = false;
         [
@@ -350,22 +371,22 @@ class Client {
 
     on(event, callback) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
+        if (!this.events[event]) throw new Error(`Unknown event "${event}" (${typeof event})`)
         this.events[event].push(callback);
     }
 
     kick(reason) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.end(`${reason}`);
     }
 
     chat(message) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('chat', {
             message: JSON.stringify({ translate: `${message}` }),
@@ -408,7 +429,7 @@ class Client {
 
     chunk(chunk, { x, z }) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('map_chunk', {
             x,
@@ -428,7 +449,7 @@ class Client {
 
     teleport({ x, y, z, yaw, pitch }) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         this.client.write('position', {
             x,
@@ -442,7 +463,7 @@ class Client {
 
     entity(type, { x, y, z, yaw, pitch }) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         let entityId = null;
         for (let ii = 1; entityId === null; ii++)
@@ -457,10 +478,10 @@ class Client {
 
     difficulty(difficulty) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
-            throw new Error(`Unknown difficulty "${difficulty}"`)
+            throw new Error(`Unknown difficulty "${difficulty}" (${typeof difficulty})`)
 
         this.client.write('difficulty', {
             difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == difficulty),
@@ -470,9 +491,9 @@ class Client {
 
     window(windowType, horse) {
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}"`)
+        if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}" (${typeof windowType})`)
         if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
 
         let windowId = windowNameIdMapping[windowType];
@@ -490,7 +511,7 @@ class Client {
     player() {
         throw new Error(`Not implemented`)
         if (!this.canUsed)
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to recieve this packet.' : 'This is because the Client is no longer online'}`)
+            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         /*httpRequest({
             host: 'sessionserver.mojang.com',
