@@ -38,8 +38,6 @@ class Client {
         this._food = 20;
         this._foodSaturation = 5;
 
-        this._diggingFace;
-
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
         })
@@ -61,10 +59,11 @@ class Client {
             slotChange: [],
             digStart: [],
             digCancel: [],
-            blockBroken: []
+            blockBroken: [],
+            itemDropped: []
         }
 
-        this.client.on('block_dig', ({ status, location: { x, y, z }, face: f }) => {
+        this.client.on('block_dig', ({ status, location: { x, y, z }, face }) => {
             let faces = {
                 0: '-Y',
                 1: '+Y',
@@ -74,12 +73,8 @@ class Client {
                 5: '+X'
             };
 
-            let face = status == 1 ? this._diggingFace : f;
-
-            if (!faces[face])
+            if (status == 1 && !faces[face])
                 throw new Error(`Unknown face "face" (${typeof face})`)
-
-            this._diggingFace = face;
 
             if (status == 0)
                 this.events.digStart.forEach(val => {
@@ -87,12 +82,21 @@ class Client {
                 })
             else if (status == 1)
                 this.events.digCancel.forEach(val => {
-                    val({ x, y, z }, faces[face])
+                    val({ x, y, z })
                 })
             else if (status == 2)
                 this.events.blockBroken.forEach(val => {
-                    val({ x, y, z }, faces[face])
+                    val({ x, y, z })
                 })
+            else if (status == 3)
+                this.events.itemDropped.forEach(val => {
+                    val(true)
+                })
+            else if (status == 4)
+                this.events.itemDropped.forEach(val => {
+                    val(false)
+                })
+
             // else
             //     console.log(new Error(`Unknown status "${status}" (${typeof status})`))
         })

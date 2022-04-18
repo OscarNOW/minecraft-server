@@ -39,17 +39,11 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('digStart', ({ x, y, z }, blockFace) => {
-        console.log(1, { x, y, z, blockFace })
+    client.on('itemDropped', stack => {
+        console.log('itemDropped', { stack })
     })
 
-    client.on('digCancel', ({ x, y, z }, blockFace) => {
-        console.log(2, { x, y, z, blockFace })
-    })
-
-    client.on('blockBroken', ({ x, y, z }, blockFace) => {
-        console.log(3, { x, y, z, blockFace })
-    })
+    client.on('chat', m => eval(m))
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });

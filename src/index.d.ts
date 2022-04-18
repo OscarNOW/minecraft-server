@@ -92,11 +92,17 @@ declare class Client {
     window(windowType: 'horse', horse: Entity): void;
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'move' | 'leave' | 'slotChange', callback: () => void): void;
-    on(event: 'digStart' | 'digCancel' | 'blockBroken', callback: (location: {
+    on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
         z: number;
     }, blockFace: blockFace) => void): void;
+    on(event: 'digCancel' | 'blockBroken', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    on(event: 'itemDropped', callback: (stack: boolean) => void): void;
 }
 
 declare class Entity {
