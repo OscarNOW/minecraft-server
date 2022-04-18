@@ -59,8 +59,9 @@ class Client {
             slotChange: [],
             digStart: [],
             digCancel: [],
-            blockBroken: [],
-            itemDropped: []
+            blockBreak: [],
+            itemDrop: [],
+            itemHandSwap: []
         }
 
         this.client.on('block_dig', ({ status, location: { x, y, z }, face }) => {
@@ -85,20 +86,23 @@ class Client {
                     val({ x, y, z })
                 })
             else if (status == 2)
-                this.events.blockBroken.forEach(val => {
+                this.events.blockBreak.forEach(val => {
                     val({ x, y, z })
                 })
             else if (status == 3)
-                this.events.itemDropped.forEach(val => {
+                this.events.itemDrop.forEach(val => {
                     val(true)
                 })
             else if (status == 4)
-                this.events.itemDropped.forEach(val => {
+                this.events.itemDrop.forEach(val => {
                     val(false)
                 })
-
-            // else
-            //     console.log(new Error(`Unknown status "${status}" (${typeof status})`))
+            else if (status == 5)
+                throw new Error('Not implemented')
+            else if (status == 6)
+                this.events.itemHandSwap.forEach(val => val())
+            else
+                throw new Error(`Unknown status "${status}" (${typeof status})`)
         })
 
         this.client.on('use_entity', obj => {

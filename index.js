@@ -39,11 +39,23 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('itemDropped', stack => {
-        console.log('itemDropped', { stack })
+    client.on('itemHandSwap', () => {
+        console.log('swap', new Date().getSeconds())
     })
 
-    client.on('chat', m => eval(m))
+    client.on('chat', async m => {
+        let ret;
+        try {
+            ret = eval(m)
+        } catch (e) {
+            ret = e;
+        }
+
+        if (ret instanceof Promise) ret = await ret;
+        ret = `${ret}`;
+
+        client.chat(ret);
+    })
 
     setTimeout(() => {
         client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
