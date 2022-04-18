@@ -10,6 +10,10 @@ export class Client {
     readonly uuid: string;
     readonly ping: number;
     readonly online: boolean;
+    readonly textures: {
+        skin: string;
+        cape?: string;
+    };
     readonly locale: {
         readonly langCode: string;
         readonly englishName: string;
