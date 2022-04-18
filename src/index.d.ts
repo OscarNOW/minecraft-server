@@ -92,6 +92,11 @@ declare class Client {
     window(windowType: 'horse', horse: Entity): void;
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'move' | 'leave' | 'slotChange', callback: () => void): void;
+    on(event: 'digStart' | 'digCancel' | 'blockBroken', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
 }
 
 declare class Entity {
@@ -210,3 +215,5 @@ type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' |
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
 
 type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
+
+type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;

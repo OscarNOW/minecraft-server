@@ -38,6 +38,8 @@ class Client {
         this._food = 20;
         this._foodSaturation = 5;
 
+        this._diggingFace;
+
         this.client.socket.addListener('close', () => {
             this.updateCanUsed();
         })
@@ -56,8 +58,44 @@ class Client {
             chat: [],
             move: [],
             leave: [],
-            slotChange: []
+            slotChange: [],
+            digStart: [],
+            digCancel: [],
+            blockBroken: []
         }
+
+        this.client.on('block_dig', ({ status, location: { x, y, z }, face: f }) => {
+            let faces = {
+                0: '-Y',
+                1: '+Y',
+                2: '-Z',
+                3: '+Z',
+                4: '-X',
+                5: '+X'
+            };
+
+            let face = status == 1 ? this._diggingFace : f;
+
+            if (!faces[face])
+                throw new Error(`Unknown face "face" (${typeof face})`)
+
+            this._diggingFace = face;
+
+            if (status == 0)
+                this.events.digStart.forEach(val => {
+                    val({ x, y, z }, faces[face])
+                })
+            else if (status == 1)
+                this.events.digCancel.forEach(val => {
+                    val({ x, y, z }, faces[face])
+                })
+            else if (status == 2)
+                this.events.blockBroken.forEach(val => {
+                    val({ x, y, z }, faces[face])
+                })
+            // else
+            //     console.log(new Error(`Unknown status "${status}" (${typeof status})`))
+        })
 
         this.client.on('use_entity', obj => {
             if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}" (${typeof obj.target})`)
