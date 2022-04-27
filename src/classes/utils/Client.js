@@ -29,6 +29,7 @@ class Client {
 
         this.username = this.client.username;
         this.uuid = this.client.uuid;
+        this.entityId = this.client.id;
         this.ping = this.client.latency;
         this._respawnScreen = true;
         this._slot = null;
@@ -354,7 +355,13 @@ class Client {
         })
     }
 
-    coolDown(item, length = 60) {
+    resetCamera() {
+        this.client.write('camera', {
+            cameraId: this.entityId
+        })
+    }
+
+    cooldown(item, length = 60) {
         if (!items[item])
             throw new Error(`Unknown item "${item}" (${typeof item})`)
 

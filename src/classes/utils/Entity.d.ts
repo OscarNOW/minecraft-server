@@ -21,6 +21,8 @@ export class Entity {
         pitch: number;
     }
 
+    camera(): void;
+
     move(position: {
         x: number;
         y: number;

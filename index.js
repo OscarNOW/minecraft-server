@@ -39,22 +39,12 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('itemHandSwap', () => {
-        console.log('swap', new Date().getSeconds())
+    horse.on('leftClick', () => {
+        horse.camera()
     })
 
-    client.on('chat', async m => {
-        let ret;
-        try {
-            ret = eval(m)
-        } catch (e) {
-            ret = e;
-        }
-
-        if (ret instanceof Promise) ret = await ret;
-        ret = `${ret}`;
-
-        client.chat(ret);
+    client.on('slotChange', () => {
+        client.resetCamera()
     })
 
     setTimeout(() => {

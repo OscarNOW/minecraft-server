@@ -4,6 +4,7 @@ declare class Client {
     readonly server: Server;
     readonly username: string;
     readonly uuid: string;
+    readonly entityId: number;
     readonly ping: number;
     readonly online: boolean;
     readonly textures: {
@@ -54,7 +55,8 @@ declare class Client {
     food: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
 
-    coolDown(item: itemType, length?: number = 60): void;
+    resetCamera(): void;
+    cooldown(item: itemType, length?: number = 60): void;
     kill(): void;
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
@@ -125,6 +127,8 @@ declare class Entity {
         yaw: number;
         pitch: number;
     }
+
+    camera(): void;
 
     move(position: {
         x: number;
