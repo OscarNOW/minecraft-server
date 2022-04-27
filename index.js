@@ -39,12 +39,12 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('chat', message => {
-        client.blockBreakAnimation({
-            x: Math.floor(client.position.x),
-            y: Math.floor(client.position.y) - 1,
-            z: Math.floor(client.position.z)
-        }, parseInt(message))
+    horse.on('leftClick', () => {
+        client.explosion(client.position, {
+            x: Math.random() * 1.5,
+            y: Math.random() * 1.5,
+            z: Math.random() * 1.5
+        }, 1, [])
     })
 
     setTimeout(() => {

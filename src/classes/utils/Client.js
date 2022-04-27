@@ -355,6 +355,23 @@ class Client {
         })
     }
 
+    explosion(location, playerVelocity, strength, destroyedBlocks) {
+        this.client.write('explosion', {
+            x: location.x,
+            y: location.y,
+            z: location.z,
+            radius: strength,
+            affectedBlockOffsets: destroyedBlocks.map(destroyedBlock => ({
+                x: destroyedBlock.xOffset,
+                y: destroyedBlock.yOffset,
+                z: destroyedBlock.zOffset
+            })),
+            playerMotionX: playerVelocity.x,
+            playerMotionY: playerVelocity.y,
+            playerMotionZ: playerVelocity.z
+        })
+    }
+
     blockBreakAnimation(location, stage) {
         if (stage < 0 || stage > 10)
             throw new Error(`Unknown stage "${stage}" (${typeof stage})`)
