@@ -39,12 +39,12 @@ server.on('join', client => {
     client.difficulty('easy');
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    horse.on('leftClick', () => {
-        horse.camera()
-    })
-
-    client.on('slotChange', () => {
-        client.resetCamera()
+    client.on('chat', message => {
+        client.blockBreakAnimation({
+            x: Math.floor(client.position.x),
+            y: Math.floor(client.position.y) - 1,
+            z: Math.floor(client.position.z)
+        }, parseInt(message))
     })
 
     setTimeout(() => {

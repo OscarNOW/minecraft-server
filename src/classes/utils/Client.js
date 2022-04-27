@@ -355,6 +355,17 @@ class Client {
         })
     }
 
+    blockBreakAnimation(location, stage) {
+        if (stage < 0 || stage > 10)
+            throw new Error(`Unknown stage "${stage}" (${typeof stage})`)
+
+        this.client.write('block_break_animation', {
+            entityId: Math.floor(Math.random() * 1000),
+            location: location,
+            destroyStage: stage == 0 ? 10 : stage - 1
+        })
+    }
+
     resetCamera() {
         this.client.write('camera', {
             cameraId: this.entityId
