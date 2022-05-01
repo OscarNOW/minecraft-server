@@ -15,7 +15,6 @@ class Chunk {
 
     setBlock(block, { x, y, z }) {
         let blockId = getBlockId(block);
-        if (blockId === null) throw new Error(`Unknown block "${block}"`);
 
         this.chunk.setBlockType(new Vec3(x, y, z), blockId);
         this.chunk.setBlockData(new Vec3(x, y, z), 1);
@@ -31,10 +30,7 @@ function getBlockId(blockName) {
     if (typeof blocks[blockName] == 'string')
         return getBlockId(blocks[blockName])
 
-    if (blocks[blockName] === null)
-        return null;
-
-    return undefined;
+    throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
 }
 
 module.exports = { Chunk };

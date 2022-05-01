@@ -1,0 +1,8 @@
+{
+    "present": "bool",
+    "presentTrue?": {
+        "itemId": "varint",
+        "itemCount": "i8",
+        "nbtData": "void || nbt"
+    }
+}

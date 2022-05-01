@@ -1,0 +1,19 @@
+{
+    "block_marker": { //also block??
+        "blockState": "varint"
+    },
+    "dust": {
+        "red": "number",
+        "green": "number",
+        "blue": "number",
+        "scale": "number"
+    },
+    "falling_dust": {
+        "blockState": "varint"
+    },
+    "item": {
+        "item": "slot"
+    },
+    //where is vibration??
+    "else": "void"
+}

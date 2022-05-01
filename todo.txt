@@ -1,0 +1,3 @@
+block ids not correct (blue_ice or packed_ice)
+implement color class
+implement error class

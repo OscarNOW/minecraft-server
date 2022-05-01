@@ -1,9 +1,21 @@
 const Entity = require('./Entity').Entity;
 const ChangablePosition = require('./ChangablePosition').ChangablePosition;
+
 const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
 const languages = require('../../data/languages.json');
 const items = require('../../data/items.json');
-const wait = ms => new Promise(res => setTimeout(res, ms));
+const particles = require('../../data/particles.json');
+const blocks = require('../../data/blocks.json');
+
+function getBlockId(blockName) {
+    if (typeof blocks[blockName] == 'number')
+        return blocks[blockName]
+
+    if (typeof blocks[blockName] == 'string')
+        return getBlockId(blocks[blockName])
+
+    throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
+}
 
 class Client {
     constructor(client, server) {
@@ -353,6 +365,67 @@ class Client {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
+    }
+
+    particle(particleName, visibleFromFar, particleAmount, { x, y, z }, spread, data1, data2, data3) {
+        if (!particles[particleName]) throw new Error(`Unknown particleName "${particleName}" (${typeof particleName})`)
+
+        if (!particles[particleName].requireData)
+            this.client.write('world_particles', {
+                particleId: particles[particleName].id,
+                longDistance: visibleFromFar,
+                x,
+                y,
+                z,
+                offsetX: spread.x,
+                offsetY: spread.y,
+                offsetZ: spread.z,
+                particleData: 0, //?
+                particles: particleAmount
+            })
+        else if (['block', 'block_marker', 'falling_dust'].includes(particleName))
+            throw new Error('Not implemented')
+        /*
+        see /temp/prismarineType/particleData.jsonc
+        data: {
+            blockState: getBlockId(data1)
+        }
+
+        block: only barrier??
+        block_marker: kicks client: 'expected text to be a string, was an object'
+        falling_dust: kicks client: 'expected text to be a string, was an object'
+        */
+
+        else if (particleName == 'dust')
+            throw new Error('Not implemented')
+        /*
+        see /temp/prismarineType/particleData.jsonc
+        data: {
+            red: data1.red,
+            green: data1.green,
+            blue: data1.blue,
+            scale: data2
+        }
+
+        kicks client: 'expected text to be a string. was an object'
+        */
+
+        else if (particleName == 'item') //needs to be tested & what is item
+            throw new Error('Not implemented')
+        /*
+        see /temp/prismarineType/particleData.jsonc
+        data: {
+            present: true,
+            itemId: items[data1].id,
+            itemCount: data2
+        }
+
+        kicks client: 'expected text to be a string. was an object'
+        */
+
+        else if (particleName == 'vibration') //Not in prismarine documentation
+            throw new Error('Not implemented')
+
     }
 
     explosion(location, playerVelocity, strength, destroyedBlocks) {

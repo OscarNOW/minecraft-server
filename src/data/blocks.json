@@ -1,7 +1,7 @@
 {
     "unknown": "air",
     "dirt": "coarse_dirt",
-    "cobblestone": null,
+    "cobblestone": "stone",
     "air": 762,
     "stone": 0,
     "granite": 1,

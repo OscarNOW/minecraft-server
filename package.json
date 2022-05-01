@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OscarNOW/minecraft#readme",
   "dependencies": {
+    "json-comments": "^0.2.1",
     "minecraft-protocol": "^1.26.5",
     "mineflayer": "^3.11.2",
     "prismarine-chunk": "^1.26.0",
