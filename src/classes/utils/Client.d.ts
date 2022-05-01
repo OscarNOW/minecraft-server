@@ -91,7 +91,7 @@ export class Client {
         block: blockType
     ): void;
     particle(
-        particleName: 'dust', //dust does what?
+        particleName: 'dust',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -112,7 +112,7 @@ export class Client {
         scale: number
     ): void;
     particle(
-        particleName: 'item', //item does what?
+        particleName: 'item',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -127,10 +127,10 @@ export class Client {
         },
         item: itemType, //need to replace item and itemAmount with slot object
         itemAmount: number
-        //need to implemented NBT
+        //need to implement NBT
     ): void;
     particle(
-        particleName: 'vibration', //vibration does what?
+        particleName: 'vibration',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -144,12 +144,12 @@ export class Client {
             z: number;
         },
         ticks: number,
-        origin: { //maybe better naming for this
+        origin: {
             x: number;
             y: number;
             z: number;
         },
-        destination: Entity | { //What does this mean??
+        destination: Entity | {
             x: number;
             y: number;
             z: number;
