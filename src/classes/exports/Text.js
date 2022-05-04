@@ -45,6 +45,7 @@ class Text {
             currentModifiers.forEach(v => {
                 if (!val.modifiers.includes(v)) modCanExtend = false;
             })
+
             let newMod = [];
             if (modCanExtend)
                 val.modifiers.forEach(v => {
@@ -101,7 +102,7 @@ class Text {
             }
         })
 
-        return text
+        return text;
     }
     static parseArray(text) {
         let array = [];

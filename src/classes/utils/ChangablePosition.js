@@ -1,42 +1,42 @@
 class ChangablePosition {
     constructor(onChange, position) {
-        this.onChange = onChange;
-        this.raw = position;
+        this._onChange = onChange;
+        this._ = position;
     }
     get x() {
-        return this.raw.x;
+        return this._.x;
     }
     get y() {
-        return this.raw.y;
+        return this._.y;
     }
     get z() {
-        return this.raw.z;
+        return this._.z;
     }
     get yaw() {
-        return this.raw.yaw;
+        return this._.yaw;
     }
     get pitch() {
-        return this.raw.pitch;
+        return this._.pitch;
     }
-    set x(newValue) {
-        this.raw.x = newValue;
-        this.onChange(this.raw);
+    set x(_) {
+        this._.x = _;
+        this._onChange(this._);
     }
-    set y(newValue) {
-        this.raw.y = newValue;
-        this.onChange(this.raw);
+    set y(_) {
+        this._.y = _;
+        this._onChange(this._);
     }
-    set z(newValue) {
-        this.raw.z = newValue;
-        this.onChange(this.raw);
+    set z(_) {
+        this._.z = _;
+        this._onChange(this._);
     }
-    set yaw(newValue) {
-        this.raw.yaw = newValue;
-        this.onChange(this.raw);
+    set yaw(_) {
+        this._.yaw = _;
+        this._onChange(this._);
     }
-    set pitch(newValue) {
-        this.raw.pitch = newValue;
-        this.onChange(this.raw);
+    set pitch(_) {
+        this._.pitch = _;
+        this._onChange(this._);
     }
 }
 

@@ -1,5 +1,5 @@
 const Entity = require('./Entity').Entity;
-const ChangablePosition = require('./ChangablePosition').ChangablePosition;
+const { ChangablePosition } = require('./ChangablePosition');
 
 const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
 const languages = require('../../data/languages.json');
@@ -524,7 +524,7 @@ class Client {
         ].forEach(val => {
             if (info[val] !== undefined && this._position[val] != info[val]) {
                 changed = true;
-                this._position.raw[val] = info[val];
+                this._position._[val] = info[val];
             }
         });
 

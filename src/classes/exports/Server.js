@@ -1,7 +1,7 @@
 const version = '1.16.3';
 const mc = require('minecraft-protocol');
 const mcData = require('minecraft-data')(version);
-const Client = require('../utils/Client').Client;
+const { Client } = require('../utils/Client');
 const protocolVersions = require('../../data/protocolVersions.json')
 
 class Server {
@@ -43,7 +43,7 @@ class Server {
         this.server.on('login', async client => {
 
             if (client.version != version)
-                return client.end(`Please use version ${version}`)
+                return client.end(`Please use version ${version}`) //customizable message
 
             client.write('login', {
                 entityId: client.id,
@@ -62,6 +62,7 @@ class Server {
                 isDebug: false,
                 isFlat: false
             });
+
             new Client(client, this);
         });
 

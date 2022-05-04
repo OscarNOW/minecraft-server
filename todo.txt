@@ -1,3 +1,10 @@
 block ids not correct (blue_ice or packed_ice)
-implement color class
 implement error class
+ -5 Implement test for ChangableRgb
+ -4 Implement types for ChangableRgb
+ -6 Implement test for ChangableHsl
+ -3 Implement types for ChangableHsl
+ -1 Implement test for Color
+ -2 Implement types for Color
+Improve text class
+Resolve comments
