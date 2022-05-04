@@ -43,23 +43,23 @@ module.exports = expect => {
     expect(updated, true);
     updated = false;
 
-    temp.raw.x = 11;
+    temp._.x = 11;
     expect(updated, false);
     expect(temp.x, 11);
 
-    temp.raw.y = 12;
+    temp._.y = 12;
     expect(updated, false);
     expect(temp.y, 12);
 
-    temp.raw.z = 13;
+    temp._.z = 13;
     expect(updated, false);
     expect(temp.z, 13);
 
-    temp.raw.yaw = 14;
+    temp._.yaw = 14;
     expect(updated, false);
     expect(temp.yaw, 14);
 
-    temp.raw.pitch = 15;
+    temp._.pitch = 15;
     expect(updated, false);
     expect(temp.pitch, 15);
 }
