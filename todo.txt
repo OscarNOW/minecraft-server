@@ -1,4 +1,4 @@
 block ids not correct (blue_ice or packed_ice)
 implement error class
 Improve text class
-Resolve comments
+ - Resolve comments

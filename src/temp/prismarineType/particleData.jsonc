@@ -1,5 +1,5 @@
 {
-    "block_marker": { //also block??
+    "block_marker": {
         "blockState": "varint"
     },
     "dust": {
@@ -14,6 +14,5 @@
     "item": {
         "item": "slot"
     },
-    //where is vibration??
     "else": "void"
 }

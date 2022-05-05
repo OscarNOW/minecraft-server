@@ -87,7 +87,7 @@ declare class Client {
         block: blockType
     ): void;
     particle(
-        particleName: 'dust', //dust does what?
+        particleName: 'dust',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -100,7 +100,7 @@ declare class Client {
             y: number;
             z: number;
         },
-        color: /*Color | */{ //Need to implement Color class
+        color: Color | {
             red: number;
             green: number;
             blue: number;
@@ -108,7 +108,7 @@ declare class Client {
         scale: number
     ): void;
     particle(
-        particleName: 'item', //item does what?
+        particleName: 'item',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -121,12 +121,11 @@ declare class Client {
             y: number;
             z: number;
         },
-        item: itemType, //need to replace item and itemAmount with slot object
+        item: itemType,
         itemAmount: number
-        //need to implemented NBT
     ): void;
     particle(
-        particleName: 'vibration', //vibration does what?
+        particleName: 'vibration',
         visibleFromFar: boolean,
         particleAmount: number,
         position: {
@@ -140,12 +139,12 @@ declare class Client {
             z: number;
         },
         ticks: number,
-        origin: { //maybe better naming for this
+        origin: {
             x: number;
             y: number;
             z: number;
         },
-        destination: Entity | { //What does this mean??
+        destination: Entity | {
             x: number;
             y: number;
             z: number;
@@ -179,8 +178,8 @@ declare class Client {
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
     win(hideCredits: boolean): void;
-    kick(reason: string): void; //Allow Text possible?? check if modifiers work in kick screen
-    chat(message: string): void; //Also allow Text class passed in
+    kick(reason: string | Text): void;
+    chat(message: string | Text): void;
     title(properties: {
         fadeIn?: number;
         stay: number;
@@ -188,7 +187,7 @@ declare class Client {
         title?: string;
         subTitle?: string;
     }): void;
-    actionBar(text: string): void; //Also allow Text class
+    actionBar(text: string | Text): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;
@@ -210,7 +209,7 @@ declare class Client {
     difficulty(difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'): void;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
-    on(event: 'chat', callback: (message: string) => void): void; //Maybe also pass Text class instead of string
+    on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;

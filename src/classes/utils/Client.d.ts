@@ -1,6 +1,8 @@
-type Server = import('../exports/Server').Server;
 type Entity = import('./Entity').Entity;
+type Text = import('../exports/Text').Text;
+type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
+type Color = import('../exports/Color').Color;
 
 export class Client {
     private constructor(client: any, server: Server);
@@ -104,7 +106,7 @@ export class Client {
             y: number;
             z: number;
         },
-        color: /*Color | */{ //Need to implement Color class
+        color: Color | {
             red: number;
             green: number;
             blue: number;
@@ -125,9 +127,8 @@ export class Client {
             y: number;
             z: number;
         },
-        item: itemType, //need to replace item and itemAmount with slot object
+        item: itemType,
         itemAmount: number
-        //need to implement NBT
     ): void;
     particle(
         particleName: 'vibration',
@@ -183,8 +184,8 @@ export class Client {
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
     win(hideCredits: boolean): void;
-    kick(reason: string): void; //Allow Text possible?? check if modifiers work in kick screen
-    chat(message: string): void; //Also allow Text class passed in
+    kick(reason: string | Text): void;
+    chat(message: string | Text): void;
     title(properties: {
         fadeIn?: number;
         stay: number;
@@ -192,7 +193,7 @@ export class Client {
         title?: string;
         subTitle?: string;
     }): void;
-    actionBar(text: string): void; //Also allow Text class
+    actionBar(text: string | Text): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;
@@ -214,7 +215,7 @@ export class Client {
     difficulty(difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'): void;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
-    on(event: 'chat', callback: (message: string) => void): void; //Maybe also pass Text class instead of string
+    on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;

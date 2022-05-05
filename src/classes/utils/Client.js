@@ -120,7 +120,6 @@ class Client {
 
         this.client.on('use_entity', obj => {
             if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}" (${typeof obj.target})`)
-            // this.sneaking = obj.sneaking;
 
             if (obj.mouse == 2) {
                 if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}" (${typeof obj.hand})`)
@@ -380,7 +379,7 @@ class Client {
                 offsetX: spread.x,
                 offsetY: spread.y,
                 offsetZ: spread.z,
-                particleData: 0, //?
+                particleData: 0,
                 particles: particleAmount
             })
         else if (['block', 'block_marker', 'falling_dust'].includes(particleName))
@@ -410,7 +409,7 @@ class Client {
         kicks client: 'expected text to be a string. was an object'
         */
 
-        else if (particleName == 'item') //needs to be tested & what is item
+        else if (particleName == 'item')
             throw new Error('Not implemented')
         /*
         see /temp/prismarineType/particleData.jsonc
