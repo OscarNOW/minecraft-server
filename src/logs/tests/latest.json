@@ -1,17 +1,33 @@
 {
-    "warnings": [],
+    "warnings": [
+        "Skipping test server..."
+    ],
     "failed": [
         {
-            "got": "#aN",
-            "expected": "#0d9dba",
-            "class": "Color",
-            "index": 10
+            "got": 1,
+            "expected": 2,
+            "class": "fail",
+            "index": 0
         },
         {
-            "got": "#aN",
-            "expected": "#0d00ba",
-            "class": "Color",
-            "index": 17
+            "got": {
+                "foo": "bar"
+            },
+            "expected": {
+                "foo": "baz"
+            },
+            "class": "fail",
+            "index": 1
+        },
+        {
+            "got": {
+                "a": "short"
+            },
+            "expected": {
+                "a": "super very long text"
+            },
+            "class": "fail",
+            "index": 2
         }
     ],
     "succeeded": [
@@ -76,6 +92,12 @@
             "index": 9
         },
         {
+            "expected": "#0d9dba",
+            "got": "#0d9dba",
+            "class": "Color",
+            "index": 10
+        },
+        {
             "expected": 0.5279383429672447,
             "got": 0.5279383429672447,
             "class": "Color",
@@ -110,6 +132,12 @@
             "got": 186,
             "class": "Color",
             "index": 16
+        },
+        {
+            "expected": "#0d00ba",
+            "got": "#0d00ba",
+            "class": "Color",
+            "index": 17
         },
         {
             "expected": 0.67831541218638,
@@ -340,264 +368,6 @@
             "index": 55
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 0
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 1
-        },
-        {
-            "expected": 0,
-            "got": 0,
-            "class": "Server",
-            "index": 2
-        },
-        {
-            "expected": 0,
-            "got": 0,
-            "class": "Server",
-            "index": 3
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 4
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 5
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 6
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 7
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 8
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 9
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 10
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 11
-        },
-        {
-            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "class": "Server",
-            "index": 12
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 13
-        },
-        {
-            "expected": "640",
-            "got": "640",
-            "class": "Server",
-            "index": 14
-        },
-        {
-            "expected": 0,
-            "got": 0,
-            "class": "Server",
-            "index": 15
-        },
-        {
-            "expected": 0,
-            "got": 0,
-            "class": "Server",
-            "index": 16
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 17
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 18
-        },
-        {
-            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "class": "Server",
-            "index": 19
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 20
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 21
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 22
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 23
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 24
-        },
-        {
-            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "class": "Server",
-            "index": 25
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 26
-        },
-        {
-            "expected": false,
-            "got": false,
-            "class": "Server",
-            "index": 27
-        },
-        {
-            "expected": 2,
-            "got": 2,
-            "class": "Server",
-            "index": 28
-        },
-        {
-            "expected": 2,
-            "got": 2,
-            "class": "Server",
-            "index": 29
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 30
-        },
-        {
-            "expected": true,
-            "got": true,
-            "class": "Server",
-            "index": 31
-        },
-        {
-            "expected": "83",
-            "got": "83",
-            "class": "Server",
-            "index": 32
-        },
-        {
-            "expected": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "got": "4e251f1b-5d8f-42a4-8d09-15e08ebb575a",
-            "class": "Server",
-            "index": 33
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 34
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 35
-        },
-        {
-            "expected": 1,
-            "got": 1,
-            "class": "Server",
-            "index": 36
-        },
-        {
-            "expected": "#1#127.0.0.1#1#",
-            "got": "#1#127.0.0.1#1#",
-            "class": "Server",
-            "index": 37
-        },
-        {
-            "expected": 2,
-            "got": 2,
-            "class": "Server",
-            "index": 38
-        },
-        {
-            "expected": 3,
-            "got": 3,
-            "class": "Server",
-            "index": 39
-        },
-        {
-            "expected": "#4#127.0.0.1#4#",
-            "got": "#4#127.0.0.1#4#",
-            "class": "Server",
-            "index": 40
-        },
-        {
-            "expected": "#5#127.0.0.1#5#",
-            "got": "#5#127.0.0.1#5#",
-            "class": "Server",
-            "index": 41
-        },
-        {
-            "expected": "#6#127.0.0.1#6#\n#7#127.0.0.1#7#",
-            "got": "#6#127.0.0.1#6#\n#7#127.0.0.1#7#",
-            "class": "Server",
-            "index": 42
-        },
-        {
             "expected": [],
             "got": [],
             "class": "Text",
@@ -698,6 +468,60 @@
         {
             "expected": 1,
             "got": 1,
+            "class": "ChangableHsl",
+            "index": 0
+        },
+        {
+            "expected": 2,
+            "got": 2,
+            "class": "ChangableHsl",
+            "index": 1
+        },
+        {
+            "expected": 3,
+            "got": 3,
+            "class": "ChangableHsl",
+            "index": 2
+        },
+        {
+            "expected": 4,
+            "got": 4,
+            "class": "ChangableHsl",
+            "index": 3
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangableHsl",
+            "index": 4
+        },
+        {
+            "expected": 5,
+            "got": 5,
+            "class": "ChangableHsl",
+            "index": 5
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangableHsl",
+            "index": 6
+        },
+        {
+            "expected": 6,
+            "got": 6,
+            "class": "ChangableHsl",
+            "index": 7
+        },
+        {
+            "expected": true,
+            "got": true,
+            "class": "ChangableHsl",
+            "index": 8
+        },
+        {
+            "expected": 1,
+            "got": 1,
             "class": "ChangablePosition",
             "index": 0
         },
@@ -786,64 +610,58 @@
             "index": 14
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "ChangablePosition",
-            "index": 15
+            "expected": 1,
+            "got": 1,
+            "class": "ChangableRgb",
+            "index": 0
         },
         {
-            "expected": 11,
-            "got": 11,
-            "class": "ChangablePosition",
-            "index": 16
+            "expected": 2,
+            "got": 2,
+            "class": "ChangableRgb",
+            "index": 1
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "ChangablePosition",
-            "index": 17
+            "expected": 3,
+            "got": 3,
+            "class": "ChangableRgb",
+            "index": 2
         },
         {
-            "expected": 12,
-            "got": 12,
-            "class": "ChangablePosition",
-            "index": 18
+            "expected": 4,
+            "got": 4,
+            "class": "ChangableRgb",
+            "index": 3
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "ChangablePosition",
-            "index": 19
+            "expected": true,
+            "got": true,
+            "class": "ChangableRgb",
+            "index": 4
         },
         {
-            "expected": 13,
-            "got": 13,
-            "class": "ChangablePosition",
-            "index": 20
+            "expected": 5,
+            "got": 5,
+            "class": "ChangableRgb",
+            "index": 5
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "ChangablePosition",
-            "index": 21
+            "expected": true,
+            "got": true,
+            "class": "ChangableRgb",
+            "index": 6
         },
         {
-            "expected": 14,
-            "got": 14,
-            "class": "ChangablePosition",
-            "index": 22
+            "expected": 6,
+            "got": 6,
+            "class": "ChangableRgb",
+            "index": 7
         },
         {
-            "expected": false,
-            "got": false,
-            "class": "ChangablePosition",
-            "index": 23
-        },
-        {
-            "expected": 15,
-            "got": 15,
-            "class": "ChangablePosition",
-            "index": 24
+            "expected": true,
+            "got": true,
+            "class": "ChangableRgb",
+            "index": 8
         }
     ]
 }

@@ -2,4 +2,3 @@ block ids not correct (blue_ice or packed_ice)
 implement error class
 Improve text class
 Resolve comments
-Improve test printing with 'util'.inspect node module

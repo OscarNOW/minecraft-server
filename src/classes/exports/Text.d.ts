@@ -1,7 +1,9 @@
 export class Text {
     constructor(text: string | optionalTextArray);
+
     array: textArray;
     string: string;
+
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;

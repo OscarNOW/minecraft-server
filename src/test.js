@@ -3,79 +3,12 @@ const preferredObjectLength = 14;
 const files = require('./functions/loader/tests');
 const fs = require('fs');
 const path = require('path');
+const { inspect } = require('util');
 
-function tof(obj) {
-    if (['string', 'bigint', 'boolean', 'function', 'symbol'].includes(typeof obj)) return typeof obj;
-    if (typeof obj == 'number')
-        if (isNaN(obj))
-            return 'none'
-        else
-            return 'number'
-    else if (typeof obj == 'object')
-        if (JSON.stringify(obj).startsWith('{'))
-            return 'object'
-        else if (JSON.stringify(obj).startsWith('['))
-            return 'array'
-        else if (obj === null)
-            return 'none'
-        else
-            throw new Error('Unknown object type')
-    else if (typeof obj == 'undefined')
-        return 'none'
-}
-
-const stringify = {
-    general(obj, short) {
-        let type = tof(obj);
-        if (stringify[type]) return stringify[type](obj, short);
-        return `${obj}`;
-    },
-    object(obj, short) {
-        if (JSON.stringify(obj) == '{}') return '{}';
-
-        let out = `{${short ? '' : ' '}`;
-        for (const [key, value] of Object.entries(obj))
-            if (out == `{${short ? '' : ' '}`)
-                out += `${key}: ${stringify.general(value, short)}`
-            else
-                out += `,${short ? '' : ' '}${key}: ${stringify.general(value, short)}`
-        out += `${short ? '' : ' '}}`
-        return out
-    },
-    array(arr, short) {
-        if (JSON.stringify(arr) == '[]') return '[]';
-
-        let out = `[${short ? '' : ' '}`;
-        arr.forEach((val, ind) => {
-            out += `${ind == 0 ? '' : `,${short ? '' : ' '}`}${stringify.general(val, short)}`
-        })
-        out += `${short ? '' : ' '}]`
-        return out
-    },
-    string(str, short) {
-        if (str === '' | str.includes(',') | str.includes('"') | str.includes("'") | str.includes('`'))
-            if (short)
-                if (!str.includes("'"))
-                    return `'${str}'`
-                else if (!str.includes('"'))
-                    return `"${str}"`
-                else if (!str.includes('`'))
-                    return `\`${str}\``
-                else
-                    return `'${str}'`
-            else
-                if (!str.includes('"'))
-                    return `"${str}"`
-                else if (!str.includes("'"))
-                    return `'${str}'`
-                else if (!str.includes('`'))
-                    return `\`${str}\``
-                else
-                    return `"${str}""`
-        else
-            return str
-    }
-}
+const stringify = obj => ({
+    text: inspect(obj, undefined, undefined, false),
+    color: inspect(obj, undefined, undefined, true)
+})
 
 const colors = {
     reset: "\x1b[0m",
@@ -140,26 +73,8 @@ if (debug) {
                 jsonOut.failed.push(o2);
                 testsFailed.push({
                     class: val.class,
-                    got:
-                        (stringify.general(got, false).length < preferredObjectLength) ?
-                            stringify.general(got, false) :
-                            (stringify.general(got, true).length < preferredObjectLength) ?
-                                stringify.general(got, true) :
-                                (stringify.general(got, false).length < maxObjectLength) ?
-                                    stringify.general(got, false) :
-                                    (stringify.general(got, true).length < maxObjectLength) ?
-                                        stringify.general(got, true) :
-                                        tof(got),
-                    expected:
-                        (stringify.general(expected, false).length < preferredObjectLength) ?
-                            stringify.general(expected, false) :
-                            (stringify.general(expected, true).length < preferredObjectLength) ?
-                                stringify.general(expected, true) :
-                                (stringify.general(expected, false).length < maxObjectLength) ?
-                                    stringify.general(expected, false) :
-                                    (stringify.general(expected, true).length < maxObjectLength) ?
-                                        stringify.general(expected, true) :
-                                        tof(expected),
+                    got: stringify(got),
+                    expected: stringify(expected),
                     index,
                     id
                 })
@@ -184,6 +99,7 @@ if (debug) {
         console.log('LOGS END\nSUMMARY START')
     } else
         console.clear();
+
     let sumText;
     if (testsRun == 0)
         sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
@@ -206,11 +122,11 @@ if (debug) {
 
             colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
             arr.push(`|  FAILED `)
-            colArr.push(`| GOT:      ${colors.bg.magenta}${colors.fg.black} ${val.got} `)
-            arr.push(`| GOT:       ${val.got} `)
-            colArr.push(`| EXPECTED: ${colors.bg.magenta}${colors.fg.black} ${val.expected} `)
-            arr.push(`| EXPECTED:  ${val.expected} `)
-            colArr.push(`| CLASS:    ${colors.fg.yellow}${colors.bold}${val.class}`)
+            colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
+            arr.push(`| GOT:       ${val.got.text} `)
+            colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
+            arr.push(`| EXPECTED:  ${val.expected.text} `)
+            colArr.push(`| CLASS:    ${colors.fg.yellow}${val.class}`)
             arr.push(`| CLASS:    ${val.class}`)
             if (val.id) {
                 colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
@@ -239,7 +155,6 @@ if (debug) {
         console.log()
         console.log(sumText)
 
-        // let p = path.resolve(__dirname, `./logs/tests/${Math.floor(Math.random() * 100000)}.json`);
         let p = path.resolve(__dirname, `./logs/tests/latest.json`);
         fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
         console.log(p)
@@ -248,6 +163,7 @@ if (debug) {
     }
 
     if (!silenceWarnings & jsonOut.warnings.length > 0) {
+        console.log(`${colors.bg.yellow}${colors.fg.black} WARNINGS ${colors.reset}`)
         jsonOut.warnings.forEach(v => console.log(v));
         console.log();
     }
