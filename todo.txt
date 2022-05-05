@@ -4,7 +4,6 @@ Implement test for ChangableRgb
 Implement types for ChangableRgb
 Implement test for ChangableHsl
 Implement types for ChangableHsl
- - Implement test for Color
 Implement types for Color
 Improve text class
 Resolve comments

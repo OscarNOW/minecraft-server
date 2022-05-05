@@ -35,7 +35,7 @@ class Color {
     set rgb(rgb) {
         this._rgb._ = rgb;
         this._hsl._ = Color.rgbToHsl(this._rgb)
-        this._hex = Color.rgbToHex(this._hex)
+        this._hex = Color.rgbToHex(this._rgb)
     }
 
     set hsl(hsl) {
