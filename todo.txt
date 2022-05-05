@@ -1,8 +1,6 @@
 block ids not correct (blue_ice or packed_ice)
 implement error class
-Implement test for ChangableRgb
 Implement types for ChangableRgb
-Implement test for ChangableHsl
 Implement types for ChangableHsl
 Implement types for Color
 Improve text class
