@@ -1,4 +1,4 @@
-const { Chunk, Server, Text } = require('./src/index');
+const { Chunk, Server, Text, Color } = require('./src/index');
 
 const settings = {
     chunkLoad: 7,
