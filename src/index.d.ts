@@ -224,6 +224,22 @@ declare class Client {
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
 }
 
+declare class InformationClient {
+    private constructor(client: any, server: Server);
+
+    readonly server: Server;
+    readonly username: string;
+    readonly uuid: string;
+    readonly entityId: number;
+    readonly ping: number;
+    readonly textures: {
+        skin: string;
+        cape?: string;
+    };
+
+    kick(reason: string | Text): void;
+}
+
 declare class Entity {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
@@ -267,7 +283,6 @@ declare class Entity {
         hand: 'left' | 'right'
     ) => void): void;
 }
-
 export class Server {
     constructor(serverOptions: {
         serverList(ip: string): {
@@ -279,11 +294,8 @@ export class Server {
             };
             description: string;
         };
+        wrongVersionConnect(client: InformationClient): void;
     });
-    private events: object;
-    private server: any;
-    readonly clients: Array<Client>;
-    readonly playerCount: number;
     serverList(ip: string): {
         versionMessage: string;
         players: {
@@ -293,6 +305,14 @@ export class Server {
         };
         description: string;
     };
+    wrongVersionConnect(client: InformationClient): void;
+
+    private events: object;
+    private server: any;
+
+    readonly clients: Array<Client>;
+    readonly playerCount: number;
+
     on(event: 'join' | 'leave', callback: (Client: Client) => void): void;
     close(): void;
 }

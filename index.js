@@ -32,7 +32,10 @@ const server = new Server({
             hover: `Hi`
         },
         description: `Your ip is ${ip}`
-    })
+    }),
+    wrongVersionConnect: client => {
+        client.kick('wrong version')
+    }
 });
 
 server.on('join', client => {

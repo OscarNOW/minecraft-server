@@ -1,13 +1,16 @@
 const version = '1.16.3';
 const mc = require('minecraft-protocol');
 const mcData = require('minecraft-data')(version);
-const { Client } = require('../utils/Client');
 const protocolVersions = require('../../data/protocolVersions.json')
 
+const { Client } = require('../utils/Client');
+const { InformationClient } = require('../utils/InformationClient');
+
 class Server {
-    constructor({ serverList }) {
+    constructor({ serverList, wrongVersionConnect }) {
 
         this.serverList = serverList;
+        this.wrongVersionConnect = wrongVersionConnect;
         this.clients = [];
 
         this.events = {
@@ -42,8 +45,8 @@ class Server {
 
         this.server.on('login', async client => {
 
-            if (client.version != version)
-                return client.end(`Please use version ${version}`) //customizable message
+            if (client.version != version) //Possibly put check earlier??
+                this.wrongVersionConnect(new InformationClient(client, this))
 
             client.write('login', {
                 entityId: client.id,
