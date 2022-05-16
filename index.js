@@ -24,7 +24,7 @@ for (let x = 0; x < 16; x++)
     }
 
 const server = new Server({
-    serverList: (ip, version) => ({
+    serverList: ({ ip, version }) => ({
         wrongVersionMessage: 'Please use version 1.16.3',
         players: {
             online: 0,
@@ -33,9 +33,7 @@ const server = new Server({
         },
         description: `ip: ${ip}\nversion: ${version}`
     }),
-    wrongVersionConnect: version => {
-        return `Correct version: 1.16.3\nYour version: ${version}`
-    }
+    wrongVersionConnect: ({ version, ip }) => `Please use 1.16.3!\nYour version: ${version}\nYour ip: ${ip}`
 });
 
 server.on('join', client => {

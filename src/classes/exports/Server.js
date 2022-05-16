@@ -29,7 +29,10 @@ class Server {
             version,
             beforePing: (response, client) => {
 
-                let info = this.serverList(client.socket.remoteAddress, serverListVersions[client.socket.remoteAddress]);
+                let info = this.serverList({
+                    ip: client.socket.remoteAddress,
+                    version: serverListVersions[client.socket.remoteAddress]
+                });
 
                 return {
                     version: {
@@ -56,7 +59,7 @@ class Server {
 
             client.on('state', state => {
                 if (state == 'login')
-                    state = 'login';
+                    clientState = 'login'
                 else if (state == 'status')
                     clientState = 'status'
             })
@@ -69,7 +72,7 @@ class Server {
                     clientVersions[client.uuid] = clientVersion;
 
                     if (clientVersion != version) {
-                        let ret = this.wrongVersionConnect(clientVersion); //add ip parameter
+                        let ret = this.wrongVersionConnect({ version: clientVersion, ip: client.socket.remoteAddress });
                         if (typeof ret == 'string')
                             client.end(ret)
                         else if (ret !== null)

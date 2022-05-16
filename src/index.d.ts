@@ -271,7 +271,7 @@ declare class Entity {
 
 export class Server {
     constructor(serverOptions: {
-        serverList(ip: string, version: version): {
+        serverList({ ip, version }: { ip: string, version: version }): {
             wrongVersionMessage: string;
             players: {
                 online: number;
@@ -280,9 +280,9 @@ export class Server {
             };
             description: string;
         };
-        wrongVersionConnect(version: version): string | null;
+        wrongVersionConnect({ ip, version }: { ip: string, version: version }): string | null;
     });
-    serverList(ip: string, version: version): {
+    serverList({ ip, version }: { ip: string, version: version }): {
         wrongVersionMessage: string;
         players: {
             online: number;
@@ -291,7 +291,7 @@ export class Server {
         };
         description: string;
     };
-    wrongVersionConnect(version: version): string | null;
+    wrongVersionConnect({ ip, version }: { ip: string, version: version }): string | null;
 
     private events: object;
     private server: any;
