@@ -2,7 +2,7 @@ type Client = import('../utils/Client').Client;
 
 export class Server {
     constructor(serverOptions: {
-        serverList(ip: string): {
+        serverList(ip: string, version: version): {
             wrongVersionMessage: string;
             players: {
                 online: number;
@@ -13,7 +13,7 @@ export class Server {
         };
         wrongVersionConnect(version: version): string | null;
     });
-    serverList(ip: string): {
+    serverList(ip: string, version: version): {
         wrongVersionMessage: string;
         players: {
             online: number;

@@ -21,13 +21,15 @@ class Server {
             leave: []
         }
 
+        let serverListVersions = {};
+
         this.server = mc.createServer({
             encryption: true,
             host: 'localhost',
             version,
-            beforePing: (response, client) => { //add option to change motd when wrong version
+            beforePing: (response, client) => {
 
-                let info = this.serverList(client.socket.remoteAddress);
+                let info = this.serverList(client.socket.remoteAddress, serverListVersions[client.socket.remoteAddress]);
 
                 return {
                     version: {
@@ -46,30 +48,37 @@ class Server {
             }
         })
 
-        const clientVersions = {};
+        let clientVersions = {};
 
         this.server.on('connection', client => {
-            let stop = false;
+            let clientState = null;
             let clientVersion;
 
             client.on('state', state => {
-                if (state != 'login')
-                    stop = true;
+                if (state == 'login')
+                    state = 'login';
+                else if (state == 'status')
+                    clientState = 'status'
             })
 
             client.on('set_protocol', ({ protocolVersion }) => {
-                if (stop) return;
-
                 clientVersion = getVersionFromProtocol(protocolVersion)
-                clientVersions[client.uuid] = clientVersion;
 
-                if (clientVersion != version) {
-                    let ret = this.wrongVersionConnect(clientVersion);
-                    if (typeof ret == 'string')
-                        client.end(ret)
-                    else if (ret !== null)
-                        throw new Error(`Unknown return from wrongVersionConnect "${ret}" (${typeof ret}). It has to be a string or null. `)
-                }
+                if (clientState == 'login') {
+
+                    clientVersions[client.uuid] = clientVersion;
+
+                    if (clientVersion != version) {
+                        let ret = this.wrongVersionConnect(clientVersion); //add ip parameter
+                        if (typeof ret == 'string')
+                            client.end(ret)
+                        else if (ret !== null)
+                            throw new Error(`Unknown return from wrongVersionConnect "${ret}" (${typeof ret}). It has to be a string or null. `)
+                    }
+
+                } else if (clientState == 'status')
+                    serverListVersions[client.socket.remoteAddress] = clientVersion;
+
             })
         })
 
