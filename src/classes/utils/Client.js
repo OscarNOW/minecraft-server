@@ -18,7 +18,7 @@ function getBlockId(blockName) {
 }
 
 class Client {
-    constructor(client, server) {
+    constructor(client, server, version) {
         const that = this;
 
         this.canUsed = false;
@@ -43,6 +43,7 @@ class Client {
         this.uuid = this.client.uuid;
         this.entityId = this.client.id;
         this.ping = this.client.latency;
+        this.version = version;
         this._respawnScreen = true;
         this._slot = null;
         this._darkSky = false;

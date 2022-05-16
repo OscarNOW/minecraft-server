@@ -4,7 +4,10 @@ const mcData = require('minecraft-data')(version);
 const protocolVersions = require('../../data/protocolVersions.json')
 
 const { Client } = require('../utils/Client');
-const { InformationClient } = require('../utils/InformationClient');
+
+function getVersionFromProtocol(protocol) {
+    return Object.keys(protocolVersions).find(x => protocolVersions[x] == protocol) ?? 'newer'
+}
 
 class Server {
     constructor({ serverList, wrongVersionConnect }) {
@@ -22,13 +25,13 @@ class Server {
             encryption: true,
             host: 'localhost',
             version,
-            beforePing: (response, client) => {
+            beforePing: (response, client) => { //add option to change motd when wrong version
 
                 let info = this.serverList(client.socket.remoteAddress);
 
                 return {
                     version: {
-                        name: info.versionMessage,
+                        name: info.wrongVersionMessage,
                         protocol: protocolVersions[version]
                     },
                     players: {
@@ -43,10 +46,34 @@ class Server {
             }
         })
 
-        this.server.on('login', async client => {
+        const clientVersions = {};
 
-            if (client.version != version) //Possibly put check earlier??
-                this.wrongVersionConnect(new InformationClient(client, this))
+        this.server.on('connection', client => {
+            let stop = false;
+            let clientVersion;
+
+            client.on('state', state => {
+                if (state != 'login')
+                    stop = true;
+            })
+
+            client.on('set_protocol', ({ protocolVersion }) => {
+                if (stop) return;
+
+                clientVersion = getVersionFromProtocol(protocolVersion)
+                clientVersions[client.uuid] = clientVersion;
+
+                if (clientVersion != version) {
+                    let ret = this.wrongVersionConnect(clientVersion);
+                    if (typeof ret == 'string')
+                        client.end(ret)
+                    else if (ret !== null)
+                        throw new Error(`Unknown return from wrongVersionConnect "${ret}" (${typeof ret}). It has to be a string or null. `)
+                }
+            })
+        })
+
+        this.server.on('login', async client => {
 
             client.write('login', {
                 entityId: client.id,
@@ -66,7 +93,7 @@ class Server {
                 isFlat: false
             });
 
-            new Client(client, this);
+            new Client(client, this, clientVersions[client.uuid]);
         });
 
     }

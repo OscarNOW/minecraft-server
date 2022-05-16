@@ -1,4 +1,5 @@
 block ids not correct (blue_ice or packed_ice)
 implement error class
 Improve text class
- - Resolve comments
+Resolve comments
+move functions to separate functions folder

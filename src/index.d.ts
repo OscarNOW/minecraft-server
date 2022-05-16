@@ -1,5 +1,5 @@
 declare class Client {
-    private constructor(client: any, server: Server);
+    private constructor(client: any, server: Server, version: version);
 
     readonly server: Server;
     readonly username: string;
@@ -7,6 +7,7 @@ declare class Client {
     readonly entityId: number;
     readonly ping: number;
     readonly online: boolean;
+    readonly version: version;
     readonly textures: {
         skin: string;
         cape?: string;
@@ -224,22 +225,6 @@ declare class Client {
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
 }
 
-declare class InformationClient {
-    private constructor(client: any, server: Server);
-
-    readonly server: Server;
-    readonly username: string;
-    readonly uuid: string;
-    readonly entityId: number;
-    readonly ping: number;
-    readonly textures: {
-        skin: string;
-        cape?: string;
-    };
-
-    kick(reason: string | Text): void;
-}
-
 declare class Entity {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
@@ -283,10 +268,11 @@ declare class Entity {
         hand: 'left' | 'right'
     ) => void): void;
 }
+
 export class Server {
     constructor(serverOptions: {
         serverList(ip: string): {
-            versionMessage: string;
+            wrongVersionMessage: string;
             players: {
                 online: number;
                 max: number;
@@ -294,10 +280,10 @@ export class Server {
             };
             description: string;
         };
-        wrongVersionConnect(client: InformationClient): void;
+        wrongVersionConnect(version: version): string | null;
     });
     serverList(ip: string): {
-        versionMessage: string;
+        wrongVersionMessage: string;
         players: {
             online: number;
             max: number;
@@ -305,7 +291,7 @@ export class Server {
         };
         description: string;
     };
-    wrongVersionConnect(client: InformationClient): void;
+    wrongVersionConnect(version: version): string | null;
 
     private events: object;
     private server: any;
@@ -329,8 +315,10 @@ export class Chunk {
 
 export class Text {
     constructor(text: string | optionalTextArray);
+
     array: textArray;
     string: string;
+
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
