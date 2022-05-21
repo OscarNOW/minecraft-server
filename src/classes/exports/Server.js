@@ -34,17 +34,24 @@ class Server {
                     version: serverListVersions[client.socket.remoteAddress]
                 });
 
+                let playerHover = [];
+                if (typeof info.players.hover == 'string')
+                    playerHover = info.players.hover.split('\n').map(val => {
+                        return { name: val, id: '00000000-0000-4000-8000-000000000000' }
+                    })
+                else
+                    for (const value of Object.values(info.players.hover))
+                        playerHover.push({ name: value.name, id: value.uuid })
+
                 return {
                     version: {
-                        name: info.wrongVersionMessage,
-                        protocol: protocolVersions[version]
+                        name: info.version.wrongText,
+                        protocol: protocolVersions[info.version.correct]
                     },
                     players: {
                         online: info.players.online,
                         max: info.players.max,
-                        sample: info.players.hover.split('\n').map(val => {
-                            return { name: val, id: '00000000-0000-4000-0000-100000000000' }
-                        })
+                        sample: playerHover
                     },
                     description: info.description
                 }

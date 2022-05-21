@@ -3,3 +3,4 @@ implement error class
 Improve text class
 Resolve comments
 move functions to separate functions folder
+Implement legacy ping

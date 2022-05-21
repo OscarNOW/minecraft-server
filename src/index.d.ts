@@ -272,22 +272,34 @@ declare class Entity {
 export class Server {
     constructor(serverOptions: {
         serverList({ ip, version }: { ip: string, version: version }): {
-            wrongVersionMessage: string;
+            version: {
+                wrongText: string;
+                correct: version;
+            };
             players: {
                 online: number;
                 max: number;
-                hover: string;
+                hover: string | Array<{
+                    name: string;
+                    uuid: string;
+                }>;
             };
             description: string;
         };
         wrongVersionConnect({ ip, version }: { ip: string, version: version }): string | null;
     });
     serverList({ ip, version }: { ip: string, version: version }): {
-        wrongVersionMessage: string;
+        version: {
+            wrongText: string;
+            correct: version;
+        };
         players: {
             online: number;
             max: number;
-            hover: string;
+            hover: string | Array<{
+                name: string;
+                uuid: string;
+            }>;
         };
         description: string;
     };

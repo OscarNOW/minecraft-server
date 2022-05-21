@@ -25,11 +25,14 @@ for (let x = 0; x < 16; x++)
 
 const server = new Server({
     serverList: ({ ip, version }) => ({
-        wrongVersionMessage: 'Please use version 1.16.3',
+        version: {
+            wrongText: 'Please use version 1.16.3',
+            correct: '1.16.3'
+        },
         players: {
             online: 0,
             max: 0,
-            hover: `Hi`
+            hover: 'Hi\n2\n3'
         },
         description: `ip: ${ip}\nversion: ${version}`
     }),
