@@ -40,7 +40,6 @@ declare class Client {
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
-        readonly onGround: boolean;
         x: number;
         y: number;
         z: number;

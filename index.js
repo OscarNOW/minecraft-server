@@ -44,7 +44,13 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     setTimeout(() => {
-        client.teleport({ x: 0, y: 120, z: 0, yaw: 0, pitch: 0 });
+        client.position = {
+            x: 0,
+            y: 120,
+            z: 0,
+            yaw: 0,
+            pitch: 0
+        };
     }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
     let loadedChunks = [];
