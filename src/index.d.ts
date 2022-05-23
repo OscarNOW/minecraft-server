@@ -40,10 +40,10 @@ declare class Client {
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
+        readonly onGround: boolean;
         x: number;
         y: number;
         z: number;
-        onGround: boolean;
         yaw: number;
         pitch: number;
     };
@@ -175,7 +175,6 @@ declare class Client {
     }, stage: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): void;
     resetCamera(): void;
     cooldown(item: itemType, length?: number): void;
-    kill(): void;
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
     win(hideCredits: boolean): void;
@@ -192,13 +191,6 @@ declare class Client {
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;
-    }): void;
-    teleport(position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
     }): void;
     entity(entityType: entityType, position: {
         x: number;
