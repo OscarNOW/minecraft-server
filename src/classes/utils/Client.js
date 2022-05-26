@@ -7,6 +7,8 @@ const items = require('../../data/items.json');
 const particles = require('../../data/particles.json');
 const blocks = require('../../data/blocks.json');
 
+const { EventEmitter } = require('events');
+
 const ps = Object.fromEntries([ // privateSymbols
     'canUsed',
     'readyStates',
@@ -36,8 +38,10 @@ function getBlockId(blockName) {
     throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
 }
 
-class Client {
+class Client extends EventEmitter {
     constructor(client, server, version) {
+        super();
+
         const that = this;
 
         this[ps.canUsed] = false;
@@ -85,17 +89,17 @@ class Client {
 
         this.entities = {};
 
-        this.events = {
-            chat: [],
-            move: [],
-            leave: [],
-            slotChange: [],
-            digStart: [],
-            digCancel: [],
-            blockBreak: [],
-            itemDrop: [],
-            itemHandSwap: []
-        }
+        this.events = [
+            'chat',
+            'move',
+            'leave',
+            'slotChange',
+            'digStart',
+            'digCancel',
+            'blockBreak',
+            'itemDrop',
+            'itemHandSwap'
+        ]
 
         this[ps.client].on('block_dig', ({ status, location: { x, y, z }, face }) => {
             let faces = {
@@ -111,29 +115,19 @@ class Client {
                 throw new Error(`Unknown face "face" (${typeof face})`)
 
             if (status == 0)
-                this.events.digStart.forEach(val => {
-                    val({ x, y, z }, faces[face])
-                })
+                this.emit('digStart', { x, y, z }, faces[face])
             else if (status == 1)
-                this.events.digCancel.forEach(val => {
-                    val({ x, y, z })
-                })
+                this.emit('digCancel', { x, y, z })
             else if (status == 2)
-                this.events.blockBreak.forEach(val => {
-                    val({ x, y, z })
-                })
+                this.emit('blockBreak', { x, y, z })
             else if (status == 3)
-                this.events.itemDrop.forEach(val => {
-                    val(true)
-                })
+                this.emit('itemDrop', true)
             else if (status == 4)
-                this.events.itemDrop.forEach(val => {
-                    val(false)
-                })
+                this.emit('itemDrop', false)
             else if (status == 5)
                 throw new Error('Not implemented')
             else if (status == 6)
-                this.events.itemHandSwap.forEach(val => val())
+                this.emit('itemHandSwap')
             else
                 throw new Error(`Unknown status "${status}" (${typeof status})`)
         })
@@ -162,9 +156,7 @@ class Client {
         })
 
         this[ps.client].on('chat', ({ message }) => {
-            this.events.chat.forEach(val => {
-                val(message);
-            })
+            this.emit('chat', message);
         })
 
         this[ps.client].on('held_item_slot', ({ slotId }) => {
@@ -172,7 +164,7 @@ class Client {
                 throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
 
             this[ps._slot] = slotId + 1;
-            this.events.slotChange.forEach(val => val());
+            this.emit('slotChange');
         })
 
         this[ps.client].on('position', i => this[ps.emitMove].call(this, i));
@@ -247,9 +239,7 @@ class Client {
                 this[ps.leftPacketSent] = true;
 
                 this.server.clients = this.server.clients.filter(client => client.canUsed);
-                this.events.leave.forEach(val => {
-                    val();
-                });
+                this.emit('leave');
                 this.server.events.leave.forEach(val => {
                     val(this);
                 });
@@ -271,15 +261,53 @@ class Client {
             });
 
             if (changed)
-                this.events.move.forEach(val => {
-                    val();
-                })
+                this.emit('move');
         }
     }
 
+    addListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.addListener(event, callback);
+    }
+
     on(event, callback) {
-        if (!this.events[event]) throw new Error(`Unknown event "${event}" (${typeof event})`)
-        this.events[event].push(callback);
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.on(event, callback);
+    }
+
+    once(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.once(event, callback);
+    }
+
+    prependListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependListener(event, callback);
+    }
+
+    prependOnceListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependOnceListener(event, callback);
+    }
+
+    off(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.off(event, callback);
+    }
+
+    removeListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeListener(event, callback);
+    }
+
+    removeAllListeners(event) {
+        if (event != undefined && !this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeAllListeners(event);
+    }
+
+    rawListeners(event) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.rawListeners(event);
     }
 
     get respawnScreen() {

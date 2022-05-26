@@ -1,4 +1,6 @@
-declare class Client {
+import { EventEmitter } from 'events';
+
+declare class Client extends EventEmitter {
     private constructor(client: any, server: Server, version: version);
 
     readonly server: Server;
@@ -201,6 +203,7 @@ declare class Client {
     difficulty(difficulty: 'peaceful' | 'easy' | 'normal' | 'hard'): void;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
+
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
@@ -214,6 +217,92 @@ declare class Client {
         z: number;
     }) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    once(event: 'chat', callback: (message: string) => void): void;
+    once(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    once(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    once(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    once(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    addListener(event: 'chat', callback: (message: string) => void): void;
+    addListener(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    addListener(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    addListener(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    addListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    prependListener(event: 'chat', callback: (message: string) => void): void;
+    prependListener(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    prependListener(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    prependListener(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    prependListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    prependOnceListener(event: 'chat', callback: (message: string) => void): void;
+    prependOnceListener(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    prependOnceListener(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    prependOnceListener(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    prependOnceListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    off(event: 'chat', callback: (message: string) => void): void;
+    off(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    off(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    off(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    off(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    removeListener(event: 'chat', callback: (message: string) => void): void;
+    removeListener(event: 'move' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    removeListener(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    removeListener(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    removeListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+
+    removeAllListeners(event?: 'chat' | 'move' | 'leave' | 'slotChange' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
 }
 
 declare class Entity {
@@ -223,11 +312,12 @@ declare class Entity {
         z: number;
         yaw: number;
         pitch: number;
-    });
+    }, sendPacket: (packetName: string, packet: object) => void);
 
     readonly id: number;
     readonly client: Client;
     readonly type: entityType;
+    readonly living: boolean;
 
     position: {
         x: number;
