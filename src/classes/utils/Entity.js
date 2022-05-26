@@ -116,12 +116,7 @@ class Entity extends EventEmitter {
         return this[ps._position];
     }
 
-    set position(v) {
-        this.move(v)
-    }
-
-    move({ x, y, z, yaw: ya, pitch }) {
-
+    set position({ x, y, z, yaw: ya, pitch }) {
         let yaw = ya;
         if (yaw > 127)
             yaw = -127;
@@ -139,7 +134,7 @@ class Entity extends EventEmitter {
             onGround: true
         });
 
-        this.position.raw = { x, y, z, yaw, pitch }
+        this.position._ = { x, y, z, yaw, pitch }
     }
 
     animation(animationType) {

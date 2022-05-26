@@ -6,4 +6,4 @@ move functions to separate functions folder
 Implement legacy ping
 Implement favicon
 Use data loader instead of require()
-Remove duplicate code of Entity.move and Entity set position
+Use EventEmitter for Server class
