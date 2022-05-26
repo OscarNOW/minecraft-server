@@ -5,7 +5,7 @@ Resolve comments
 move functions to separate functions folder
 Implement legacy ping
 Implement favicon
- - Move private Entity functions with Symbol
+Change name of Client.events to with Symbol
 Use built in eventEmitter instead of own for Client
 Use built in eventEmitter instead of own for Entity
 Use data loader instead of require()

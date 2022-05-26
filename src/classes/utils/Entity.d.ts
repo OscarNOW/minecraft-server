@@ -12,6 +12,7 @@ export class Entity {
     readonly id: number;
     readonly client: Client;
     readonly type: entityType;
+    readonly living: boolean;
 
     position: {
         x: number;

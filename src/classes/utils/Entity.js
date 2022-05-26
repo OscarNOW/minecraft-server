@@ -3,6 +3,13 @@ const { v4: uuid } = require('uuid');
 const entities = require('../../data/entities.json');
 const entityAnimations = require('../../data/entityAnimations.json');
 
+const ps = Object.fromEntries([ // privateSymbols
+    '_position',
+    'typeId',
+    'uuid',
+    'sendPacket'
+].map(name => [name, Symbol(name)]));
+
 class Entity {
     constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
         const that = this;
@@ -10,15 +17,15 @@ class Entity {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        this.cachedPosition = new ChangablePosition(i => that.move.call(that, i), { x, y, z, yaw, pitch })
+        this[ps._position] = new ChangablePosition(i => that.move.call(that, i), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
-        this.typeId = e.id;
+        this[ps.typeId] = e.id;
         this.id = id;
-        this.uuid = uuid();
+        this[ps.uuid] = uuid();
         this.client = client;
 
-        this.sendPacket = sendPacket;
+        this[ps.sendPacket] = sendPacket;
 
         this.events = {
             leftClick: [],
@@ -26,10 +33,10 @@ class Entity {
         }
 
         if (this.living)
-            this.sendPacket('spawn_entity_living', {
+            this[ps.sendPacket]('spawn_entity_living', {
                 entityId: this.id,
-                entityUUID: this.uuid,
-                type: this.typeId,
+                entityUUID: this[ps.uuid],
+                type: this[ps.typeId],
                 x: this.position.x,
                 y: this.position.y,
                 z: this.position.z,
@@ -41,10 +48,10 @@ class Entity {
                 velocityZ: 0
             })
         else
-            this.sendPacket('spawn_entity', {
+            this[ps.sendPacket]('spawn_entity', {
                 entityId: this.id,
-                objectUUID: this.uuid,
-                type: this.typeId,
+                objectUUID: this[ps.uuid],
+                type: this[ps.typeId],
                 x: this.position.x,
                 y: this.position.y,
                 z: this.position.z,
@@ -58,7 +65,7 @@ class Entity {
     }
 
     get position() {
-        return this.cachedPosition;
+        return this[ps._position];
     }
 
     set position(v) {
@@ -74,7 +81,7 @@ class Entity {
         if (yaw < -127)
             yaw = 127;
 
-        this.sendPacket('entity_teleport', {
+        this[ps.sendPacket]('entity_teleport', {
             entityId: this.id,
             x,
             y,
@@ -90,14 +97,14 @@ class Entity {
     animation(animationType) {
         if (entityAnimations[animationType] === undefined) throw new Error(`Unknown animationType "${animationType}"`)
 
-        this.sendPacket('animation', {
+        this[ps.sendPacket]('animation', {
             entityId: this.id,
             animation: entityAnimations[animationType]
         })
     }
 
     camera() {
-        this.sendPacket('camera', {
+        this[ps.sendPacket]('camera', {
             cameraId: this.id
         })
     }
