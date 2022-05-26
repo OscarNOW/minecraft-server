@@ -458,7 +458,7 @@ export class Server extends EventEmitter {
     off(event: 'join' | 'leave', callback: (Client: Client) => void): void;
     removeListener(event: 'join' | 'leave', callback: (Client: Client) => void): void;
     removeAllListeners(event?: 'join' | 'leave'): void;
-    rawListeners(event: 'join' | 'leave'): void;
+    rawListeners(event: 'join' | 'leave'): ((client: Client) => void)[];
 }
 
 export class Chunk {

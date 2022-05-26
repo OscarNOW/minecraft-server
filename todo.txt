@@ -6,4 +6,5 @@ move functions to separate functions folder
 Implement legacy ping
 Implement favicon
 Use data loader instead of require()
-Fix return type for rawListeners
+Fix return type for rawListeners for Client
+Fix return type for rawListeners for Entity
