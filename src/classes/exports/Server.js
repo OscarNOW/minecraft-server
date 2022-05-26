@@ -1,25 +1,28 @@
 const version = '1.16.3';
-const mc = require('minecraft-protocol');
-const mcData = require('minecraft-data')(version);
-const protocolVersions = require('../../data/protocolVersions.json')
 
 const { Client } = require('../utils/Client');
+
+const protocolVersions = require('../../data/protocolVersions.json')
+
+const mc = require('minecraft-protocol');
+const mcData = require('minecraft-data')(version);
+const { EventEmitter } = require('events');
 
 function getVersionFromProtocol(protocol) {
     return Object.keys(protocolVersions).find(x => protocolVersions[x] == protocol) ?? 'newer'
 }
 
-class Server {
+class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect }) {
 
         this.serverList = serverList;
         this.wrongVersionConnect = wrongVersionConnect;
         this.clients = [];
 
-        this.events = {
-            join: [],
-            leave: []
-        }
+        this.events = [
+            'join',
+            'leave'
+        ];
 
         let serverListVersions = {};
 
@@ -93,33 +96,54 @@ class Server {
         })
 
         this.server.on('login', async client => {
-
-            client.write('login', {
-                entityId: client.id,
-                isHardcore: false,
-                gameMode: 0,
-                previousGameMode: 255,
-                worldNames: mcData.loginPacket.worldNames,
-                dimensionCodec: mcData.loginPacket.dimensionCodec,
-                dimension: mcData.loginPacket.dimension,
-                worldName: 'minecraft:overworld',
-                hashedSeed: [0, 0],
-                maxPlayers: 0,
-                viewDistance: 1000,
-                reducedDebugInfo: false,
-                enableRespawnScreen: true,
-                isDebug: false,
-                isFlat: false
-            });
-
             new Client(client, this, clientVersions[client.uuid]);
         });
 
     }
 
+    addListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.addListener(event, callback);
+    }
+
     on(event, callback) {
-        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
-        this.events[event].push(callback);
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.on(event, callback);
+    }
+
+    once(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.once(event, callback);
+    }
+
+    prependListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependListener(event, callback);
+    }
+
+    prependOnceListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependOnceListener(event, callback);
+    }
+
+    off(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.off(event, callback);
+    }
+
+    removeListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeListener(event, callback);
+    }
+
+    removeAllListeners(event) {
+        if (event != undefined && !this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeAllListeners(event);
+    }
+
+    rawListeners(event) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.rawListeners(event);
     }
 
     get playerCount() {

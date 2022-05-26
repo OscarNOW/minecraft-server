@@ -42,6 +42,24 @@ class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
 
+        client.write('login', {
+            entityId: client.id,
+            isHardcore: false,
+            gameMode: 0,
+            previousGameMode: 255,
+            worldNames: mcData.loginPacket.worldNames,
+            dimensionCodec: mcData.loginPacket.dimensionCodec,
+            dimension: mcData.loginPacket.dimension,
+            worldName: 'minecraft:overworld',
+            hashedSeed: [0, 0],
+            maxPlayers: 0,
+            viewDistance: 1000,
+            reducedDebugInfo: false,
+            enableRespawnScreen: true,
+            isDebug: false,
+            isFlat: false
+        });
+
         const that = this;
 
         this[ps.canUsed] = false;
@@ -233,16 +251,14 @@ class Client extends EventEmitter {
                 this[ps.joinedPacketSent] = true;
 
                 this.server.clients.push(this);
-                this.server.events.join.forEach(val => val(this));
+                this.server.emit('join', this);
 
             } else if (!canUsed && !this[ps.leftPacketSent] && this[ps.joinedPacketSent]) {
                 this[ps.leftPacketSent] = true;
 
                 this.server.clients = this.server.clients.filter(client => client.canUsed);
                 this.emit('leave');
-                this.server.events.leave.forEach(val => {
-                    val(this);
-                });
+                this.server.emit('leave', this);
             }
         }
         this[ps.emitMove] = info => {

@@ -406,7 +406,7 @@ declare class Entity extends EventEmitter {
     rawListeners(event: 'leftClick' | 'rightClick'): void;
 }
 
-export class Server {
+export class Server extends EventEmitter {
     constructor(serverOptions: {
         serverList({ ip, version }: { ip: string, version: version }): {
             version: {
@@ -448,8 +448,17 @@ export class Server {
     readonly clients: Array<Client>;
     readonly playerCount: number;
 
-    on(event: 'join' | 'leave', callback: (Client: Client) => void): void;
     close(): void;
+
+    on(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    addListener(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    once(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    prependListener(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    prependOnceListener(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    off(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    removeListener(event: 'join' | 'leave', callback: (Client: Client) => void): void;
+    removeAllListeners(event?: 'join' | 'leave'): void;
+    rawListeners(event: 'join' | 'leave'): void;
 }
 
 export class Chunk {

@@ -6,4 +6,4 @@ move functions to separate functions folder
 Implement legacy ping
 Implement favicon
 Use data loader instead of require()
-Use EventEmitter for Server class
+Fix return type for rawListeners
