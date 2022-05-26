@@ -4,3 +4,6 @@ Improve text class
 Resolve comments
 move functions to separate functions folder
 Implement legacy ping
+Implement favicon
+Move private Client functions with Symbol
+Implement once for client

@@ -212,6 +212,10 @@ class Client {
 
     }
 
+    sendPacket(name, packet) {
+        this.client.write(name, packet);
+    }
+
     updateCanUsed() {
         this.readyStates.socketOpen = this.online;
         let canUsed = true;
@@ -249,7 +253,7 @@ class Client {
         if (respawnScreen !== true && respawnScreen !== false)
             throw new Error(`Unknown respawnScreen, expected true or false, received "${respawnScreen}" (${typeof respawnScreen})`)
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: 11,
             gameMode: respawnScreen ? 0 : 1
         })
@@ -278,7 +282,7 @@ class Client {
         if (isNaN(health) || health < 0 || health > 20)
             throw new Error(`Unknown health, expected an integer between 0 and 20, received "${h}" (${typeof h})`)
 
-        this.client.write('update_health', {
+        this.sendPacket('update_health', {
             health,
             food: this._food,
             foodSaturation: this._foodSaturation
@@ -296,7 +300,7 @@ class Client {
         if (isNaN(food) || food < 0 || food > 20)
             throw new Error(`Unknown food, expected an integer between 0 and 20, received "${f}" (${typeof f})`)
 
-        this.client.write('update_health', {
+        this.sendPacket('update_health', {
             health: this._health,
             food: food,
             foodSaturation: this._foodSaturation
@@ -314,7 +318,7 @@ class Client {
         if (isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
             throw new Error(`Unknown foodSaturation, expected an integer between 0 and 5, received "${fs}" (${typeof fs})`)
 
-        this.client.write('update_health', {
+        this.sendPacket('update_health', {
             health: this._health,
             food: this._food,
             foodSaturation: foodSaturation
@@ -335,7 +339,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('position', {
+        this.sendPacket('position', {
             x: x || this.position.x,
             y: y || this.position.y,
             z: z || this.position.z,
@@ -356,7 +360,7 @@ class Client {
         if (isNaN(parseInt(slot)) || slot < 0 || slot > 8)
             throw new Error(`Unknown slot, expected an integer between 0 and 8, received "${slot}" (${typeof slot})`)
 
-        this.client.write('held_item_slot', {
+        this.sendPacket('held_item_slot', {
             slot: parseInt(slot)
         })
     }
@@ -374,7 +378,7 @@ class Client {
 
         this._darkSky = darkSky;
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: darkSky ? 2 : 1
         })
     }
@@ -392,7 +396,7 @@ class Client {
 
         this._gamemode = gamemode;
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
@@ -405,7 +409,7 @@ class Client {
         if (!particles[particleName]) throw new Error(`Unknown particleName "${particleName}" (${typeof particleName})`)
 
         if (!particles[particleName].requireData)
-            this.client.write('world_particles', {
+            this.sendPacket('world_particles', {
                 particleId: particles[particleName].id,
                 longDistance: visibleFromFar,
                 x,
@@ -466,7 +470,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('explosion', {
+        this.sendPacket('explosion', {
             x: location.x,
             y: location.y,
             z: location.z,
@@ -489,7 +493,7 @@ class Client {
         if (stage < 0 || stage > 10)
             throw new Error(`Unknown stage "${stage}" (${typeof stage})`)
 
-        this.client.write('block_break_animation', {
+        this.sendPacket('block_break_animation', {
             entityId: Math.floor(Math.random() * 1000),
             location: location,
             destroyStage: stage == 0 ? 10 : stage - 1
@@ -500,7 +504,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('camera', {
+        this.sendPacket('camera', {
             cameraId: this.entityId
         })
     }
@@ -512,7 +516,7 @@ class Client {
         if (!items[item])
             throw new Error(`Unknown item "${item}" (${typeof item})`)
 
-        this.client.write('set_cooldown', {
+        this.sendPacket('set_cooldown', {
             itemID: items[item].id,
             cooldownTicks: length
         })
@@ -533,7 +537,7 @@ class Client {
         if (messages[message] === undefined)
             throw new Error(`Unknown message "${message}" (${typeof message})`)
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: 5,
             gameMode: messages[message]
         })
@@ -543,7 +547,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: 10
         })
     }
@@ -555,7 +559,7 @@ class Client {
         if (hideCredits)
             throw new Error('Not implemented')
 
-        this.client.write('game_state_change', {
+        this.sendPacket('game_state_change', {
             reason: 4,
             gameMode: hideCredits ? 0 : 1
         })
@@ -598,7 +602,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('chat', {
+        this.sendPacket('chat', {
             message: JSON.stringify({ translate: `${message}` }),
             position: 0,
             sender: '0'
@@ -611,23 +615,23 @@ class Client {
 
         let { fadeIn, stay, fadeOut, title, subTitle } = properties || {};
 
-        this.client.write('title', {
+        this.sendPacket('title', {
             action: 5
         })
 
-        this.client.write('title', {
+        this.sendPacket('title', {
             action: 3,
             fadeIn: fadeIn ?? 10,
             stay: stay ?? 40,
             fadeOut: fadeOut ?? 10
         })
 
-        this.client.write('title', {
+        this.sendPacket('title', {
             action: 0,
             text: JSON.stringify({ translate: `${(title && title !== '') ? title : ''}` })
         })
         if (subTitle && subTitle !== '')
-            this.client.write('title', {
+            this.sendPacket('title', {
                 action: 1,
                 text: JSON.stringify({ translate: `${subTitle}` })
             })
@@ -637,7 +641,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('title', {
+        this.sendPacket('title', {
             action: 2,
             text: JSON.stringify({ translate: `${text}` })
         })
@@ -647,7 +651,7 @@ class Client {
         if (!this.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this.client.write('map_chunk', {
+        this.sendPacket('map_chunk', {
             x,
             z,
             groundUp: true,
@@ -685,7 +689,7 @@ class Client {
         if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
             throw new Error(`Unknown difficulty "${difficulty}" (${typeof difficulty})`)
 
-        this.client.write('difficulty', {
+        this.sendPacket('difficulty', {
             difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == difficulty),
             difficultyLocked: true
         })
@@ -701,7 +705,7 @@ class Client {
         let windowId = windowNameIdMapping[windowType];
 
         if (windowId == 'EntityHorse')
-            this.client.write('open_horse_window', {
+            this.sendPacket('open_horse_window', {
                 windowId: 1,
                 nbSlots: 2,
                 entityId: horse.id
@@ -721,7 +725,7 @@ class Client {
             path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
         }).then(inf => {
             console.log(inf.properties)*/
-        this.client.write('player_info', {
+        this.sendPacket('player_info', {
             action: 0,
             data: [
                 {
