@@ -4,7 +4,7 @@ const entities = require('../../data/entities.json');
 const entityAnimations = require('../../data/entityAnimations.json');
 
 class Entity {
-    constructor(client, type, id, { x, y, z, yaw, pitch }) {
+    constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
         const that = this;
 
         let e = getEntity(type);
@@ -18,13 +18,15 @@ class Entity {
         this.uuid = uuid();
         this.client = client;
 
+        this.sendPacket = sendPacket;
+
         this.events = {
             leftClick: [],
             rightClick: []
         }
 
         if (this.living)
-            this.client.client.write('spawn_entity_living', {
+            this.sendPacket('spawn_entity_living', {
                 entityId: this.id,
                 entityUUID: this.uuid,
                 type: this.typeId,
@@ -39,7 +41,7 @@ class Entity {
                 velocityZ: 0
             })
         else
-            this.client.client.write('spawn_entity', {
+            this.sendPacket('spawn_entity', {
                 entityId: this.id,
                 objectUUID: this.uuid,
                 type: this.typeId,
@@ -72,7 +74,7 @@ class Entity {
         if (yaw < -127)
             yaw = 127;
 
-        this.client.client.write('entity_teleport', {
+        this.sendPacket('entity_teleport', {
             entityId: this.id,
             x,
             y,
@@ -88,14 +90,14 @@ class Entity {
     animation(animationType) {
         if (entityAnimations[animationType] === undefined) throw new Error(`Unknown animationType "${animationType}"`)
 
-        this.client.client.write('animation', {
+        this.sendPacket('animation', {
             entityId: this.id,
             animation: entityAnimations[animationType]
         })
     }
 
     camera() {
-        this.client.client.write('camera', {
+        this.sendPacket('camera', {
             cameraId: this.id
         })
     }

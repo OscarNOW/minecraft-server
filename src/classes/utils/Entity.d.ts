@@ -7,7 +7,7 @@ export class Entity {
         z: number;
         yaw: number;
         pitch: number;
-    });
+    }, sendPacket: (packetName: string, packet: object) => void);
 
     readonly id: number;
     readonly client: Client;
