@@ -1,7 +1,10 @@
-const ChangablePosition = require('./ChangablePosition').ChangablePosition;
-const { v4: uuid } = require('uuid');
+const { ChangablePosition } = require('./ChangablePosition');
+
 const entities = require('../../data/entities.json');
 const entityAnimations = require('../../data/entityAnimations.json');
+
+const { v4: uuid } = require('uuid');
+const { EventEmitter } = require('events');
 
 const ps = Object.fromEntries([ // privateSymbols
     '_position',
@@ -10,7 +13,7 @@ const ps = Object.fromEntries([ // privateSymbols
     'sendPacket'
 ].map(name => [name, Symbol(name)]));
 
-class Entity {
+class Entity extends EventEmitter {
     constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
         const that = this;
 
@@ -27,10 +30,10 @@ class Entity {
 
         this[ps.sendPacket] = sendPacket;
 
-        this.events = {
-            leftClick: [],
-            rightClick: []
-        }
+        this.events = [
+            'leftClick',
+            'rightClick'
+        ]
 
         if (this.living)
             this[ps.sendPacket]('spawn_entity_living', {
@@ -62,6 +65,51 @@ class Entity {
                 velocityY: 0,
                 velocityZ: 0
             })
+    }
+
+    addListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.addListener(event, callback);
+    }
+
+    on(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.on(event, callback);
+    }
+
+    once(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.once(event, callback);
+    }
+
+    prependListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependListener(event, callback);
+    }
+
+    prependOnceListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.prependOnceListener(event, callback);
+    }
+
+    off(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.off(event, callback);
+    }
+
+    removeListener(event, callback) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeListener(event, callback);
+    }
+
+    removeAllListeners(event) {
+        if (event != undefined && !this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.removeAllListeners(event);
+    }
+
+    rawListeners(event) {
+        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        return super.rawListeners(event);
     }
 
     get position() {
@@ -107,11 +155,6 @@ class Entity {
         this[ps.sendPacket]('camera', {
             cameraId: this.id
         })
-    }
-
-    on(event, callback) {
-        if (!this.events[event]) throw new Error(`Unknown event "${event}"`)
-        this.events[event].push(callback);
     }
 }
 

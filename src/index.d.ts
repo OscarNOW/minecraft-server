@@ -303,9 +303,10 @@ declare class Client extends EventEmitter {
     removeListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     removeAllListeners(event?: 'chat' | 'move' | 'leave' | 'slotChange' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
+    rawListeners(event: 'chat' | 'move' | 'leave' | 'slotChange' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
 }
 
-declare class Entity {
+declare class Entity extends EventEmitter {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
         y: number;
@@ -348,6 +349,69 @@ declare class Entity {
         },
         hand: 'left' | 'right'
     ) => void): void;
+
+    addListener(event: 'leftClick', callback: () => void): void;
+    addListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    prependListener(event: 'leftClick', callback: () => void): void;
+    prependListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    prependOnceListener(event: 'leftClick', callback: () => void): void;
+    prependOnceListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    off(event: 'leftClick', callback: () => void): void;
+    off(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    removeListener(event: 'leftClick', callback: () => void): void;
+    removeListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void): void;
+
+    removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
+    rawListeners(event: 'leftClick' | 'rightClick'): void;
 }
 
 export class Server {
