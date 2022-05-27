@@ -184,7 +184,7 @@ export class Client extends EventEmitter {
     cooldown(item: itemType, length?: number): void;
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
-    win(hideCredits: boolean): void;
+    win(showCredits: boolean): void;
     kick(reason: string | Text): void;
     chat(message: string | Text): void;
     title(properties: {

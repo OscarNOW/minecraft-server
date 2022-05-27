@@ -10,3 +10,4 @@ Fix return type for rawListeners for Client
  - Split client into multiple files
 Use Object.freeze
 Make sure all fs uses path.resolve
+Look into observers and maybe replace events with observers (or similar)
