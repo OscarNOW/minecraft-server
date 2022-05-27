@@ -46,7 +46,7 @@ server.on('join', client => {
     client.on('chat', client.chat);
 
     horse.on('leftClick', () => {
-        client.explosion(client.position, { x: 0, y: 0, z: 0 }, 10, [])
+        client.blockBreakAnimation({ x: client.position.x, y: client.position.y - 1, z: client.position.z }, 5)
     })
 
     setTimeout(() => {
