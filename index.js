@@ -45,8 +45,10 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
+    client.on('slotChange', client.resetCamera)
+
     horse.on('leftClick', () => {
-        client.blockBreakAnimation({ x: client.position.x, y: client.position.y - 1, z: client.position.z }, 5)
+        horse.camera()
     })
 
     setTimeout(() => {
