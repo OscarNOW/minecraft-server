@@ -7,4 +7,4 @@ Implement legacy ping
 Implement favicon
 Use data loader instead of require()
 Fix return type for rawListeners for Client
-Fix return type for rawListeners for Entity
+Change hand to isRightHand

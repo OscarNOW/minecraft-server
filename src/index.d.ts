@@ -402,8 +402,17 @@ declare class Entity extends EventEmitter {
         hand: 'left' | 'right'
     ) => void): void;
 
+    rawListeners(event: 'leftClick'): (() => void)[];
+    rawListeners(event: 'rightClick'): ((
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        hand: 'left' | 'right'
+    ) => void)[];
+
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
-    rawListeners(event: 'leftClick' | 'rightClick'): void;
 }
 
 export class Server extends EventEmitter {
