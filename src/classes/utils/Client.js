@@ -375,14 +375,6 @@ class Client extends EventEmitter {
         return this[this.ps._health];
     }
 
-    get food() {
-        return this[this.ps._food];
-    }
-
-    get foodSaturation() {
-        return this[this.ps._foodSaturation];
-    }
-
     set health(h) {
         if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
@@ -401,6 +393,10 @@ class Client extends EventEmitter {
         this[this.ps._health] = health;
     }
 
+    get food() {
+        return this[this.ps._food];
+    }
+
     set food(f) {
         if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
@@ -417,6 +413,10 @@ class Client extends EventEmitter {
         })
 
         this[this.ps._food] = food;
+    }
+
+    get foodSaturation() {
+        return this[this.ps._foodSaturation];
     }
 
     set foodSaturation(fs) {
@@ -510,21 +510,6 @@ class Client extends EventEmitter {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
-    }
-
-    entity(type, { x, y, z, yaw, pitch }) {
-        if (!this[this.ps.canUsed])
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
-
-        let entityId = null;
-        for (let ii = 1; entityId === null; ii++)
-            if (!this.entities[ii])
-                entityId = ii;
-
-        let entity = new Entity(this, type, entityId, { x, y, z, yaw, pitch }, this[this.ps.sendPacket]);
-
-        this.entities[entityId] = entity;
-        return entity;
     }
 
     difficulty(difficulty) {
