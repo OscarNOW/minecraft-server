@@ -45,8 +45,6 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
-    client.test(new Date().getMinutes());
-
     setTimeout(() => {
         client.position = {
             x: 0,

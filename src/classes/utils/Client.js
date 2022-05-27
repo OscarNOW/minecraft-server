@@ -60,42 +60,42 @@ class Client extends EventEmitter {
         super();
         const that = this;
 
-        this[ps.canUsed] = false;
-        this[ps.readyStates] = {
+        this[this.ps.canUsed] = false;
+        this[this.ps.readyStates] = {
             socketOpen: false,
             clientSettings: false
         }
-        this[ps.joinedPacketSent] = false;
-        this[ps.leftPacketSent] = false;
+        this[this.ps.joinedPacketSent] = false;
+        this[this.ps.leftPacketSent] = false;
 
-        this[ps.client] = client;
+        this[this.ps.client] = client;
         this.server = server;
 
-        let textures = JSON.parse(Buffer.from(this[ps.client].profile.properties[0].value, 'base64').toString()).textures;
+        let textures = JSON.parse(Buffer.from(this[this.ps.client].profile.properties[0].value, 'base64').toString()).textures;
         this.textures = {
             skin: textures.SKIN.url
         };
         if (textures.CAPE)
             this.textures.cape = textures.CAPE.url;
 
-        this.username = this[ps.client].username;
-        this.uuid = this[ps.client].uuid;
-        this.entityId = this[ps.client].id;
-        this.ping = this[ps.client].latency;
+        this.username = this[this.ps.client].username;
+        this.uuid = this[this.ps.client].uuid;
+        this.entityId = this[this.ps.client].id;
+        this.ping = this[this.ps.client].latency;
         this.version = version;
-        this[ps._respawnScreen] = true;
-        this[ps._slot] = null;
-        this[ps._darkSky] = false;
-        this[ps._gamemode] = 'survival';
-        this[ps._health] = 20;
-        this[ps._food] = 20;
-        this[ps._foodSaturation] = 5;
+        this[this.ps._respawnScreen] = true;
+        this[this.ps._slot] = null;
+        this[this.ps._darkSky] = false;
+        this[this.ps._gamemode] = 'survival';
+        this[this.ps._health] = 20;
+        this[this.ps._food] = 20;
+        this[this.ps._foodSaturation] = 5;
 
-        this[ps.client].socket.addListener('close', () => {
-            this[ps.updateCanUsed]();
+        this[this.ps.client].socket.addListener('close', () => {
+            this[this.ps.updateCanUsed]();
         })
 
-        this[ps._position] = new ChangablePosition(i => that.teleport.call(that, i), {
+        this[this.ps._position] = new ChangablePosition(i => that.teleport.call(that, i), {
             x: null,
             y: null,
             z: null,
@@ -105,29 +105,29 @@ class Client extends EventEmitter {
 
         this.entities = {};
 
-        this[ps.sendPacket] = (name, packet) => this[ps.client].write(name, packet);
-        this[ps.updateCanUsed] = () => {
-            this[ps.readyStates].socketOpen = this.online;
+        this[this.ps.sendPacket] = (name, packet) => this[this.ps.client].write(name, packet);
+        this[this.ps.updateCanUsed] = () => {
+            this[this.ps.readyStates].socketOpen = this.online;
             let canUsed = true;
-            for (const val of Object.values(this[ps.readyStates]))
+            for (const val of Object.values(this[this.ps.readyStates]))
                 if (!val) canUsed = false;
 
-            this[ps.canUsed] = canUsed;
-            if (this[ps.canUsed] && !this[ps.joinedPacketSent] && !this[ps.leftPacketSent]) {
-                this[ps.joinedPacketSent] = true;
+            this[this.ps.canUsed] = canUsed;
+            if (this[this.ps.canUsed] && !this[this.ps.joinedPacketSent] && !this[this.ps.leftPacketSent]) {
+                this[this.ps.joinedPacketSent] = true;
 
                 this.server.clients.push(this);
                 this.server.emit('join', this);
 
-            } else if (!canUsed && !this[ps.leftPacketSent] && this[ps.joinedPacketSent]) {
-                this[ps.leftPacketSent] = true;
+            } else if (!canUsed && !this[this.ps.leftPacketSent] && this[this.ps.joinedPacketSent]) {
+                this[this.ps.leftPacketSent] = true;
 
                 this.server.clients = this.server.clients.filter(client => client.canUsed);
                 this.emit('leave');
                 this.server.emit('leave', this);
             }
         }
-        this[ps.emitMove] = info => {
+        this[this.ps.emitMove] = info => {
             let changed = false;
             [
                 'x',
@@ -136,9 +136,9 @@ class Client extends EventEmitter {
                 'pitch',
                 'yaw'
             ].forEach(val => {
-                if (info[val] !== undefined && this[ps._position][val] != info[val]) {
+                if (info[val] !== undefined && this[this.ps._position][val] != info[val]) {
                     changed = true;
-                    this[ps._position]._[val] = info[val];
+                    this[this.ps._position]._[val] = info[val];
                 }
             });
 
@@ -155,7 +155,7 @@ class Client extends EventEmitter {
             )
             , this);
 
-        this[ps.sendPacket]('login', {
+        this[this.ps.sendPacket]('login', {
             entityId: client.id,
             isHardcore: false,
             gameMode: 0,
@@ -173,7 +173,7 @@ class Client extends EventEmitter {
             isFlat: false
         });
 
-        this[ps.client].on('block_dig', ({ status, location: { x, y, z }, face }) => {
+        this[this.ps.client].on('block_dig', ({ status, location: { x, y, z }, face }) => {
             let faces = {
                 0: '-Y',
                 1: '+Y',
@@ -204,7 +204,7 @@ class Client extends EventEmitter {
                 throw new Error(`Unknown status "${status}" (${typeof status})`)
         })
 
-        this[ps.client].on('use_entity', obj => {
+        this[this.ps.client].on('use_entity', obj => {
             if (!this.entities[obj.target]) throw new Error(`Unknown target "${obj.target}" (${typeof obj.target})`)
 
             if (obj.mouse == 2) {
@@ -222,24 +222,24 @@ class Client extends EventEmitter {
                 throw new Error(`Unknown mouse "${obj.mouse}" (${typeof obj.mouse})`)
         })
 
-        this[ps.client].on('chat', ({ message }) => {
+        this[this.ps.client].on('chat', ({ message }) => {
             this.emit('chat', message);
         })
 
-        this[ps.client].on('held_item_slot', ({ slotId }) => {
+        this[this.ps.client].on('held_item_slot', ({ slotId }) => {
             if (slotId < 0 || slotId > 8)
                 throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
 
-            this[ps._slot] = slotId + 1;
+            this[this.ps._slot] = slotId + 1;
             this.emit('slotChange');
         })
 
-        this[ps.client].on('position', i => this[ps.emitMove].call(this, i));
-        this[ps.client].on('position_look', i => this[ps.emitMove].call(this, i));
-        this[ps.client].on('look', i => this[ps.emitMove].call(this, i));
-        this[ps.client].on('flying', i => this[ps.emitMove].call(this, i));
+        this[this.ps.client].on('position', i => this[this.ps.emitMove].call(this, i));
+        this[this.ps.client].on('position_look', i => this[this.ps.emitMove].call(this, i));
+        this[this.ps.client].on('look', i => this[this.ps.emitMove].call(this, i));
+        this[this.ps.client].on('flying', i => this[this.ps.emitMove].call(this, i));
 
-        this[ps.client].on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
+        this[this.ps.client].on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
             let langCode = locale.toLowerCase();
             if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}" (${typeof langCode})`)
             let obj = languages[langCode];
@@ -284,9 +284,27 @@ class Client extends EventEmitter {
             else
                 throw new Error(`Unknown mainHand "${mainHand}" (${typeof mainHand})`)
 
-            this[ps.readyStates].clientSettings = true;
-            this[ps.updateCanUsed]();
+            this[this.ps.readyStates].clientSettings = true;
+            this[this.ps.updateCanUsed]();
         })
+    }
+
+    get ps() {
+        let callPath = new Error().stack.split('\n')[2];
+
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (callPath.startsWith(folderPath))
+            return ps;
+        else
+            return undefined;
     }
 
     addListener(event, callback) {
@@ -335,38 +353,38 @@ class Client extends EventEmitter {
     }
 
     get respawnScreen() {
-        return this[ps._respawnScreen];
+        return this[this.ps._respawnScreen];
     }
 
     set respawnScreen(respawnScreen) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (respawnScreen !== true && respawnScreen !== false)
             throw new Error(`Unknown respawnScreen, expected true or false, received "${respawnScreen}" (${typeof respawnScreen})`)
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: 11,
             gameMode: respawnScreen ? 0 : 1
         })
 
-        this[ps._respawnScreen] = respawnScreen;
+        this[this.ps._respawnScreen] = respawnScreen;
     }
 
     get health() {
-        return this[ps._health];
+        return this[this.ps._health];
     }
 
     get food() {
-        return this[ps._food];
+        return this[this.ps._food];
     }
 
     get foodSaturation() {
-        return this[ps._foodSaturation];
+        return this[this.ps._foodSaturation];
     }
 
     set health(h) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         const health = parseInt(h);
@@ -374,17 +392,17 @@ class Client extends EventEmitter {
         if (isNaN(health) || health < 0 || health > 20)
             throw new Error(`Unknown health, expected an integer between 0 and 20, received "${h}" (${typeof h})`)
 
-        this[ps.sendPacket]('update_health', {
+        this[this.ps.sendPacket]('update_health', {
             health,
-            food: this[ps._food],
-            foodSaturation: this[ps._foodSaturation]
+            food: this[this.ps._food],
+            foodSaturation: this[this.ps._foodSaturation]
         })
 
-        this[ps._health] = health;
+        this[this.ps._health] = health;
     }
 
     set food(f) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         const food = parseInt(f);
@@ -392,17 +410,17 @@ class Client extends EventEmitter {
         if (isNaN(food) || food < 0 || food > 20)
             throw new Error(`Unknown food, expected an integer between 0 and 20, received "${f}" (${typeof f})`)
 
-        this[ps.sendPacket]('update_health', {
-            health: this[ps._health],
+        this[this.ps.sendPacket]('update_health', {
+            health: this[this.ps._health],
             food: food,
-            foodSaturation: this[ps._foodSaturation]
+            foodSaturation: this[this.ps._foodSaturation]
         })
 
-        this[ps._food] = food;
+        this[this.ps._food] = food;
     }
 
     set foodSaturation(fs) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         const foodSaturation = parseInt(fs);
@@ -410,28 +428,28 @@ class Client extends EventEmitter {
         if (isNaN(foodSaturation) || foodSaturation < 0 || foodSaturation > 5)
             throw new Error(`Unknown foodSaturation, expected an integer between 0 and 5, received "${fs}" (${typeof fs})`)
 
-        this[ps.sendPacket]('update_health', {
-            health: this[ps._health],
-            food: this[ps._food],
+        this[this.ps.sendPacket]('update_health', {
+            health: this[this.ps._health],
+            food: this[this.ps._food],
             foodSaturation: foodSaturation
         })
 
-        this[ps._foodSaturation] = foodSaturation;
+        this[this.ps._foodSaturation] = foodSaturation;
     }
 
     get online() {
-        return this[ps.client].socket.readyState == 'open';
+        return this[this.ps.client].socket.readyState == 'open';
     }
 
     get position() {
-        return this[ps._position];
+        return this[this.ps._position];
     }
 
     set position({ x, y, z, yaw, pitch }) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('position', {
+        this[this.ps.sendPacket]('position', {
             x: x || this.position.x,
             y: y || this.position.y,
             z: z || this.position.z,
@@ -442,66 +460,66 @@ class Client extends EventEmitter {
     }
 
     get slot() {
-        return this[ps._slot];
+        return this[this.ps._slot];
     }
 
     set slot(slot) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (isNaN(parseInt(slot)) || slot < 0 || slot > 8)
             throw new Error(`Unknown slot, expected an integer between 0 and 8, received "${slot}" (${typeof slot})`)
 
-        this[ps.sendPacket]('held_item_slot', {
+        this[this.ps.sendPacket]('held_item_slot', {
             slot: parseInt(slot)
         })
     }
 
     get darkSky() {
-        return this[ps._darkSky];
+        return this[this.ps._darkSky];
     }
 
     set darkSky(darkSky) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (darkSky != false && darkSky != true)
             throw new Error(`Unknown darkSky, expected true or false, received "${darkSky}" (${typeof darkSky})`)
 
-        this[ps._darkSky] = darkSky;
+        this[this.ps._darkSky] = darkSky;
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: darkSky ? 2 : 1
         })
     }
 
     get gamemode() {
-        return this[ps._gamemode];
+        return this[this.ps._gamemode];
     }
 
     set gamemode(gamemode) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
             throw new Error(`Unknown gamemode "${gamemode}" (${typeof gamemode})`)
 
-        this[ps._gamemode] = gamemode;
+        this[this.ps._gamemode] = gamemode;
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
     }
 
     particle(particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!particles[particleName]) throw new Error(`Unknown particleName "${particleName}" (${typeof particleName})`)
 
         if (!particles[particleName].requireData)
-            this[ps.sendPacket]('world_particles', {
+            this[this.ps.sendPacket]('world_particles', {
                 particleId: particles[particleName].id,
                 longDistance: visibleFromFar,
                 x,
@@ -559,10 +577,10 @@ class Client extends EventEmitter {
     }
 
     explosion(location, playerVelocity, strength, destroyedBlocks) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('explosion', {
+        this[this.ps.sendPacket]('explosion', {
             x: location.x,
             y: location.y,
             z: location.z,
@@ -579,13 +597,13 @@ class Client extends EventEmitter {
     }
 
     blockBreakAnimation(location, stage) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (stage < 0 || stage > 10)
             throw new Error(`Unknown stage "${stage}" (${typeof stage})`)
 
-        this[ps.sendPacket]('block_break_animation', {
+        this[this.ps.sendPacket]('block_break_animation', {
             entityId: Math.floor(Math.random() * 1000),
             location: location,
             destroyStage: stage == 0 ? 10 : stage - 1
@@ -593,29 +611,29 @@ class Client extends EventEmitter {
     }
 
     resetCamera() {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('camera', {
+        this[this.ps.sendPacket]('camera', {
             cameraId: this.entityId
         })
     }
 
     cooldown(item, length = 60) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!items[item])
             throw new Error(`Unknown item "${item}" (${typeof item})`)
 
-        this[ps.sendPacket]('set_cooldown', {
+        this[this.ps.sendPacket]('set_cooldown', {
             itemID: items[item].id,
             cooldownTicks: length
         })
     }
 
     demo(message) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         let messages = {
@@ -629,46 +647,46 @@ class Client extends EventEmitter {
         if (messages[message] === undefined)
             throw new Error(`Unknown message "${message}" (${typeof message})`)
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: 5,
             gameMode: messages[message]
         })
     }
 
     elderGuardian() {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: 10
         })
     }
 
     win(hideCredits) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (hideCredits)
             throw new Error('Not implemented')
 
-        this[ps.sendPacket]('game_state_change', {
+        this[this.ps.sendPacket]('game_state_change', {
             reason: 4,
             gameMode: hideCredits ? 0 : 1
         })
     }
 
     kick(reason) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.client].end(`${reason}`);
+        this[this.ps.client].end(`${reason}`);
     }
 
     chat(message) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('chat', {
+        this[this.ps.sendPacket]('chat', {
             message: JSON.stringify({ translate: `${message}` }),
             position: 0,
             sender: '0'
@@ -676,48 +694,48 @@ class Client extends EventEmitter {
     }
 
     title(properties) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         let { fadeIn, stay, fadeOut, title, subTitle } = properties || {};
 
-        this[ps.sendPacket]('title', {
+        this[this.ps.sendPacket]('title', {
             action: 5
         })
 
-        this[ps.sendPacket]('title', {
+        this[this.ps.sendPacket]('title', {
             action: 3,
             fadeIn: fadeIn ?? 10,
             stay: stay ?? 40,
             fadeOut: fadeOut ?? 10
         })
 
-        this[ps.sendPacket]('title', {
+        this[this.ps.sendPacket]('title', {
             action: 0,
             text: JSON.stringify({ translate: `${(title && title !== '') ? title : ''}` })
         })
         if (subTitle && subTitle !== '')
-            this[ps.sendPacket]('title', {
+            this[this.ps.sendPacket]('title', {
                 action: 1,
                 text: JSON.stringify({ translate: `${subTitle}` })
             })
     }
 
     actionBar(text) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('title', {
+        this[this.ps.sendPacket]('title', {
             action: 2,
             text: JSON.stringify({ translate: `${text}` })
         })
     }
 
     chunk(chunk, { x, z }) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
-        this[ps.sendPacket]('map_chunk', {
+        this[this.ps.sendPacket]('map_chunk', {
             x,
             z,
             groundUp: true,
@@ -734,7 +752,7 @@ class Client extends EventEmitter {
     }
 
     entity(type, { x, y, z, yaw, pitch }) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         let entityId = null;
@@ -742,27 +760,27 @@ class Client extends EventEmitter {
             if (!this.entities[ii])
                 entityId = ii;
 
-        let entity = new Entity(this, type, entityId, { x, y, z, yaw, pitch }, this[ps.sendPacket]);
+        let entity = new Entity(this, type, entityId, { x, y, z, yaw, pitch }, this[this.ps.sendPacket]);
 
         this.entities[entityId] = entity;
         return entity;
     }
 
     difficulty(difficulty) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!['peaceful', 'easy', 'normal', 'hard'].includes(difficulty))
             throw new Error(`Unknown difficulty "${difficulty}" (${typeof difficulty})`)
 
-        this[ps.sendPacket]('difficulty', {
+        this[this.ps.sendPacket]('difficulty', {
             difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == difficulty),
             difficultyLocked: true
         })
     }
 
     window(windowType, horse) {
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}" (${typeof windowType})`)
@@ -771,7 +789,7 @@ class Client extends EventEmitter {
         let windowId = windowNameIdMapping[windowType];
 
         if (windowId == 'EntityHorse')
-            this[ps.sendPacket]('open_horse_window', {
+            this[this.ps.sendPacket]('open_horse_window', {
                 windowId: 1,
                 nbSlots: 2,
                 entityId: horse.id
@@ -782,7 +800,7 @@ class Client extends EventEmitter {
 
     player() {
         throw new Error(`Not implemented`)
-        if (!this[ps.canUsed])
+        if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         /*httpRequest({
@@ -791,7 +809,7 @@ class Client extends EventEmitter {
             path: `/session/minecraft/profile/${this.uuid}?unsigned=false`
         }).then(inf => {
             console.log(inf.properties)*/
-        this[ps.sendPacket]('player_info', {
+        this[this.ps.sendPacket]('player_info', {
             action: 0,
             data: [
                 {
