@@ -15,6 +15,8 @@ const ps = Object.fromEntries([ // privateSymbols
 
 class Entity extends EventEmitter {
     constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
+        super();
+
         const that = this;
 
         let e = getEntity(type);

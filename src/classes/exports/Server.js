@@ -14,6 +14,7 @@ function getVersionFromProtocol(protocol) {
 
 class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect }) {
+        super();
 
         this.serverList = serverList;
         this.wrongVersionConnect = wrongVersionConnect;
