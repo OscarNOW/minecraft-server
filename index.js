@@ -45,9 +45,8 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
-    client.gamemode = 'creative';
     horse.on('leftClick', () => {
-        client.cooldown('oak_planks', 20);
+        client.demo('startScreen')
     })
 
     setTimeout(() => {
