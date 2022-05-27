@@ -6,8 +6,13 @@ const languages = require('../../data/languages.json');
 const items = require('../../data/items.json');
 const particles = require('../../data/particles.json');
 const blocks = require('../../data/blocks.json');
+const version = require('../../data/version.json');
 
+const mcData = require('minecraft-data')(version)
 const { EventEmitter } = require('events');
+const { inject } = require('../../functions/inject.js');
+const fs = require('fs');
+const path = require('path');
 
 const ps = Object.fromEntries([ // privateSymbols
     'canUsed',
@@ -38,28 +43,21 @@ function getBlockId(blockName) {
     throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
 }
 
+const events = [
+    'chat',
+    'move',
+    'leave',
+    'slotChange',
+    'digStart',
+    'digCancel',
+    'blockBreak',
+    'itemDrop',
+    'itemHandSwap'
+];
+
 class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
-
-        client.write('login', {
-            entityId: client.id,
-            isHardcore: false,
-            gameMode: 0,
-            previousGameMode: 255,
-            worldNames: mcData.loginPacket.worldNames,
-            dimensionCodec: mcData.loginPacket.dimensionCodec,
-            dimension: mcData.loginPacket.dimension,
-            worldName: 'minecraft:overworld',
-            hashedSeed: [0, 0],
-            maxPlayers: 0,
-            viewDistance: 1000,
-            reducedDebugInfo: false,
-            enableRespawnScreen: true,
-            isDebug: false,
-            isFlat: false
-        });
-
         const that = this;
 
         this[ps.canUsed] = false;
@@ -107,17 +105,73 @@ class Client extends EventEmitter {
 
         this.entities = {};
 
-        this.events = [
-            'chat',
-            'move',
-            'leave',
-            'slotChange',
-            'digStart',
-            'digCancel',
-            'blockBreak',
-            'itemDrop',
-            'itemHandSwap'
-        ]
+        this[ps.sendPacket] = (name, packet) => this[ps.client].write(name, packet);
+        this[ps.updateCanUsed] = () => {
+            this[ps.readyStates].socketOpen = this.online;
+            let canUsed = true;
+            for (const val of Object.values(this[ps.readyStates]))
+                if (!val) canUsed = false;
+
+            this[ps.canUsed] = canUsed;
+            if (this[ps.canUsed] && !this[ps.joinedPacketSent] && !this[ps.leftPacketSent]) {
+                this[ps.joinedPacketSent] = true;
+
+                this.server.clients.push(this);
+                this.server.emit('join', this);
+
+            } else if (!canUsed && !this[ps.leftPacketSent] && this[ps.joinedPacketSent]) {
+                this[ps.leftPacketSent] = true;
+
+                this.server.clients = this.server.clients.filter(client => client.canUsed);
+                this.emit('leave');
+                this.server.emit('leave', this);
+            }
+        }
+        this[ps.emitMove] = info => {
+            let changed = false;
+            [
+                'x',
+                'y',
+                'z',
+                'pitch',
+                'yaw'
+            ].forEach(val => {
+                if (info[val] !== undefined && this[ps._position][val] != info[val]) {
+                    changed = true;
+                    this[ps._position]._[val] = info[val];
+                }
+            });
+
+            if (changed)
+                this.emit('move');
+        }
+
+
+        inject(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/'))
+                .filter(a => a.endsWith('.js'))
+                .map(a => require(`./Client/${a}`))
+            )
+            , this);
+
+        this[ps.sendPacket]('login', {
+            entityId: client.id,
+            isHardcore: false,
+            gameMode: 0,
+            previousGameMode: 255,
+            worldNames: mcData.loginPacket.worldNames,
+            dimensionCodec: mcData.loginPacket.dimensionCodec,
+            dimension: mcData.loginPacket.dimension,
+            worldName: 'minecraft:overworld',
+            hashedSeed: [0, 0],
+            maxPlayers: 0,
+            viewDistance: 1000,
+            reducedDebugInfo: false,
+            enableRespawnScreen: true,
+            isDebug: false,
+            isFlat: false
+        });
 
         this[ps.client].on('block_dig', ({ status, location: { x, y, z }, face }) => {
             let faces = {
@@ -233,91 +287,50 @@ class Client extends EventEmitter {
             this[ps.readyStates].clientSettings = true;
             this[ps.updateCanUsed]();
         })
-
-        this[ps.sendPacket] = (name, packet) => this[ps.client].write(name, packet);
-        this[ps.updateCanUsed] = () => {
-            this[ps.readyStates].socketOpen = this.online;
-            let canUsed = true;
-            for (const val of Object.values(this[ps.readyStates]))
-                if (!val) canUsed = false;
-
-            this[ps.canUsed] = canUsed;
-            if (this[ps.canUsed] && !this[ps.joinedPacketSent] && !this[ps.leftPacketSent]) {
-                this[ps.joinedPacketSent] = true;
-
-                this.server.clients.push(this);
-                this.server.emit('join', this);
-
-            } else if (!canUsed && !this[ps.leftPacketSent] && this[ps.joinedPacketSent]) {
-                this[ps.leftPacketSent] = true;
-
-                this.server.clients = this.server.clients.filter(client => client.canUsed);
-                this.emit('leave');
-                this.server.emit('leave', this);
-            }
-        }
-        this[ps.emitMove] = info => {
-            let changed = false;
-            [
-                'x',
-                'y',
-                'z',
-                'pitch',
-                'yaw'
-            ].forEach(val => {
-                if (info[val] !== undefined && this[ps._position][val] != info[val]) {
-                    changed = true;
-                    this[ps._position]._[val] = info[val];
-                }
-            });
-
-            if (changed)
-                this.emit('move');
-        }
     }
 
     addListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.addListener(event, callback);
     }
 
     on(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.on(event, callback);
     }
 
     once(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.once(event, callback);
     }
 
     prependListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.prependListener(event, callback);
     }
 
     prependOnceListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.prependOnceListener(event, callback);
     }
 
     off(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.off(event, callback);
     }
 
     removeListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.removeListener(event, callback);
     }
 
     removeAllListeners(event) {
-        if (event != undefined && !this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (event != undefined && !events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.removeAllListeners(event);
     }
 
     rawListeners(event) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.rawListeners(event);
     }
 

@@ -1,11 +1,9 @@
-const version = '1.16.3';
-
 const { Client } = require('../utils/Client');
 
 const protocolVersions = require('../../data/protocolVersions.json')
+const version = require('../../data/version.json');
 
 const mc = require('minecraft-protocol');
-const mcData = require('minecraft-data')(version);
 const { EventEmitter } = require('events');
 
 function getVersionFromProtocol(protocol) {
