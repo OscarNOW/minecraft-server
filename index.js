@@ -46,7 +46,7 @@ server.on('join', client => {
     client.on('chat', client.chat);
 
     horse.on('leftClick', () => {
-        client.demo('startScreen')
+        client.elderGuardian()
     })
 
     setTimeout(() => {
