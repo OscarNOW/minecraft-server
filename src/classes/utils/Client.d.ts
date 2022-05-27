@@ -40,7 +40,7 @@ export class Client extends EventEmitter {
         readonly rightLeg: boolean;
         readonly hat: boolean;
     };
-    readonly mainHand: 'left' | 'right';
+    readonly rightHanded: boolean;
     readonly viewDistance: number;
     readonly entities: {
         readonly [entityId: number]: Entity;

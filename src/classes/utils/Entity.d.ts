@@ -35,7 +35,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand
     ) => void): void;
 
     addListener(event: 'leftClick', callback: () => void): void;
@@ -45,7 +45,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     once(event: 'leftClick', callback: () => void): void;
@@ -55,7 +55,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     prependListener(event: 'leftClick', callback: () => void): void;
@@ -65,7 +65,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     prependOnceListener(event: 'leftClick', callback: () => void): void;
@@ -75,7 +75,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     off(event: 'leftClick', callback: () => void): void;
@@ -85,7 +85,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     removeListener(event: 'leftClick', callback: () => void): void;
@@ -95,7 +95,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     rawListeners(event: 'leftClick'): (() => void)[];
@@ -105,7 +105,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void)[];
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
@@ -113,4 +113,4 @@ export class Entity extends EventEmitter {
 
 type entityType = 'area_effect_cloud' | 'armor_stand' | 'arrow' | 'bat' | 'bee' | 'blaze' | 'boat' | 'cat' | 'cave_spider' | 'chicken' | 'cod' | 'cow' | 'creeper' | 'dolphin' | 'donkey' | 'dragon_fireball' | 'drowned' | 'elder_guardian' | 'end_crystal' | 'ender_dragon' | 'enderman' | 'endermite' | 'evoker' | 'evoker_fangs' | 'experience_orb' | 'eye_of_ender' | 'falling_block' | 'firework_rocket' | 'fox' | 'ghast' | 'giant' | 'guardian' | 'hoglin' | 'horse' | 'husk' | 'illusioner' | 'iron_golem' | 'item' | 'item_frame' | 'fireball' | 'leash_knot' | 'lightning_bolt' | 'llama' | 'llama_spit' | 'magma_cube' | 'minecart' | 'chest_minecart' | 'command_block_minecart' | 'furnace_minecart' | 'hopper_minecart' | 'spawner_minecart' | 'tnt_minecart' | 'mule' | 'mooshroom' | 'ocelot' | 'painting' | 'panda' | 'parrot' | 'phantom' | 'pig' | 'piglin' | 'piglin_brute' | 'pillager' | 'polar_bear' | 'tnt' | 'pufferfish' | 'rabbit' | 'ravager' | 'salmon' | 'sheep' | 'shulker' | 'shulker_bullet' | 'silverfish' | 'skeleton' | 'skeleton_horse' | 'slime' | 'small_fireball' | 'snow_golem' | 'snowball' | 'spectral_arrow' | 'spider' | 'squid' | 'stray' | 'strider' | 'egg' | 'ender_pearl' | 'experience_bottle' | 'potion' | 'trident' | 'trader_llama' | 'tropical_fish' | 'turtle' | 'vex' | 'villager' | 'vindicator' | 'wandering_trader' | 'witch' | 'wither' | 'wither_skeleton' | 'wither_skull' | 'wolf' | 'zoglin' | 'zombie' | 'zombie_horse' | 'zombie_villager' | 'zombified_piglin' | 'player' | 'fishing_bobber';
 
-type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
+type entityAnimationType = 'swingMainisMainHand' | 'flashRed' | 'leaveBed' | 'swingOffisMainHand' | 'critical' | 'magicCritical';

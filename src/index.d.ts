@@ -34,7 +34,7 @@ declare class Client extends EventEmitter {
         readonly rightLeg: boolean;
         readonly hat: boolean;
     };
-    readonly mainHand: 'left' | 'right';
+    readonly rightHanded: boolean;
     readonly viewDistance: number;
     readonly entities: {
         readonly [entityId: number]: Entity;
@@ -339,7 +339,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand
     ) => void): void;
 
     addListener(event: 'leftClick', callback: () => void): void;
@@ -349,7 +349,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     once(event: 'leftClick', callback: () => void): void;
@@ -359,7 +359,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     prependListener(event: 'leftClick', callback: () => void): void;
@@ -369,7 +369,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     prependOnceListener(event: 'leftClick', callback: () => void): void;
@@ -379,7 +379,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     off(event: 'leftClick', callback: () => void): void;
@@ -389,7 +389,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     removeListener(event: 'leftClick', callback: () => void): void;
@@ -399,7 +399,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void): void;
 
     rawListeners(event: 'leftClick'): (() => void)[];
@@ -409,7 +409,7 @@ declare class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        hand: 'left' | 'right'
+        isMainHand: boolean
     ) => void)[];
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;

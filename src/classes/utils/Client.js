@@ -155,20 +155,15 @@ class Client extends EventEmitter {
 
             if (obj.mouse == 2) {
                 if (obj.hand != 0 && obj.hand != 1) throw new Error(`Unknown hand "${obj.hand}" (${typeof obj.hand})`)
-                this.entities[obj.target].events.rightClick.forEach(val => {
-                    val(
-                        {
-                            x: obj.x,
-                            y: obj.y,
-                            z: obj.z
-                        },
-                        obj.hand == 0 ? this.mainHand : (this.mainHand == 'left' ? 'right' : 'left')
-                    )
-                })
+                this.entities[obj.target].emit('rightClick', {
+                    x: obj.x,
+                    y: obj.y,
+                    z: obj.z
+                }, obj.hand == 0)
             } else if (obj.mouse == 0)
                 return
             else if (obj.mouse == 1)
-                this.entities[obj.target].events.leftClick.forEach(val => { val() })
+                this.entities[obj.target].emit('leftClick');
             else
                 throw new Error(`Unknown mouse "${obj.mouse}" (${typeof obj.mouse})`)
         })
@@ -229,9 +224,9 @@ class Client extends EventEmitter {
             }
 
             if (mainHand === 0)
-                this.mainHand = 'left'
+                this.rightHanded = false
             else if (mainHand === 1)
-                this.mainHand = 'right'
+                this.rightHanded = true
             else
                 throw new Error(`Unknown mainHand "${mainHand}" (${typeof mainHand})`)
 
