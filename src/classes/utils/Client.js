@@ -28,6 +28,7 @@ const ps = Object.fromEntries([ // privateSymbols
     '_food',
     '_foodSaturation',
     '_position',
+    '_difficulty',
     'sendPacket',
     'updateCanUsed',
     'emitMove'
@@ -90,6 +91,7 @@ class Client extends EventEmitter {
         this[this.ps._health] = 20;
         this[this.ps._food] = 20;
         this[this.ps._foodSaturation] = 5;
+        this[this.ps._difficulty] = 'normal'
 
         this[this.ps.client].socket.addListener('close', () => {
             this[this.ps.updateCanUsed]();
@@ -512,7 +514,11 @@ class Client extends EventEmitter {
         })
     }
 
-    difficulty(difficulty) {
+    get difficulty() {
+        return this[this.ps._difficulty];
+    }
+
+    set difficulty(difficulty) {
         if (!this[this.ps.canUsed])
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
@@ -523,6 +529,8 @@ class Client extends EventEmitter {
             difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == difficulty),
             difficultyLocked: true
         })
+
+        this[this.ps._difficulty] = difficulty;
     }
 
     window(windowType, horse) {
