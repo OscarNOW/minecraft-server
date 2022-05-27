@@ -45,6 +45,10 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
+    horse.on('leftClick', () => {
+        client.particle('smoke', true, 1000, client.position, { x: 3, y: 3, z: 3 })
+    })
+
     setTimeout(() => {
         client.position = {
             x: 0,
