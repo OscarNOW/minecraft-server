@@ -1,10 +1,6 @@
-const { Entity } = require('./Entity');
 const { ChangablePosition } = require('./ChangablePosition');
 
-const windowNameIdMapping = require('../../data/windowNameIdMapping.json');
 const languages = require('../../data/languages.json');
-const items = require('../../data/items.json');
-const particles = require('../../data/particles.json');
 const blocks = require('../../data/blocks.json');
 const version = require('../../data/version.json');
 
@@ -33,16 +29,6 @@ const ps = Object.fromEntries([ // privateSymbols
     'updateCanUsed',
     'emitMove'
 ].map(name => [name, Symbol(name)]));
-
-function getBlockId(blockName) {
-    if (typeof blocks[blockName] == 'number')
-        return blocks[blockName]
-
-    if (typeof blocks[blockName] == 'string')
-        return getBlockId(blocks[blockName])
-
-    throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
-}
 
 const events = [
     'chat',
