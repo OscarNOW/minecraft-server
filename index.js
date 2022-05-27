@@ -45,10 +45,9 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
-    client.on('slotChange', client.resetCamera)
-
+    client.gamemode = 'creative';
     horse.on('leftClick', () => {
-        horse.camera()
+        client.cooldown('oak_planks', 20);
     })
 
     setTimeout(() => {
