@@ -189,11 +189,11 @@ export class Client extends EventEmitter {
     chat(message: string | Text): void;
     title(properties: {
         fadeIn?: number;
-        stay: number;
+        stay?: number;
         fadeOut?: number;
-        title?: string;
-        subTitle?: string;
-    }): void;
+        title?: string | Text;
+        subTitle?: string | Text;
+    } | string | Text): void;
     actionBar(text: string | Text): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
