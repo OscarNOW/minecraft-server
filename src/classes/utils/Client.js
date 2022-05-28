@@ -135,9 +135,9 @@ class Client extends EventEmitter {
 
         inject(
             Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/'))
+                .readdirSync(path.resolve(__dirname, './Client/functions/public/'))
                 .filter(a => a.endsWith('.js'))
-                .map(a => require(`./Client/${a}`))
+                .map(a => require(`./Client/functions/public/${a}`))
             )
             , this);
 

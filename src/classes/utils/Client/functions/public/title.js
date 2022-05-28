@@ -1,4 +1,4 @@
-const { Text } = require('../../exports/Text');
+const { Text } = require('../../../../exports/Text');
 
 module.exports = {
     title: function (p) {

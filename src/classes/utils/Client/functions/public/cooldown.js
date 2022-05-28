@@ -1,4 +1,4 @@
-const items = require('../../../data/items.json');
+const items = require('../../../../../data/items.json');
 
 module.exports = {
     cooldown: function (item, length = 60) {
