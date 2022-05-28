@@ -43,7 +43,7 @@ server.on('join', client => {
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('chat', client.chat);
+    client.observe(client.slot, () => client.chat(client.slot + 1))
 
     setTimeout(() => {
         client.position = {
@@ -112,7 +112,7 @@ server.on('join', client => {
         }
     })();
 
-    client.on('positionChange', () => {
+    client.observe(client.position, () => {
         for (let xOffset = -settings.prioChunkLoad; xOffset <= settings.prioChunkLoad; xOffset++)
             for (let zOffset = -settings.prioChunkLoad; zOffset <= settings.prioChunkLoad; zOffset++) {
 

@@ -2,12 +2,10 @@ block ids not correct (blue_ice or packed_ice)
 implement error class
 Improve text class
 Resolve comments
-move functions to separate functions folder
 Implement legacy ping
 Implement favicon
 Use data loader instead of require()
 Fix return type for rawListeners for Client
- - Look into observers and maybe replace events with observers (or similar)
 Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed
-Fire event when settings packet received
+ - Fire event when settings packet received

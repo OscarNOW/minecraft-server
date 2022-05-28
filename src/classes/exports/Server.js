@@ -37,7 +37,9 @@ class Server extends EventEmitter {
                 });
 
                 let playerHover = [];
-                if (typeof info.players.hover == 'string')
+                if (info.players.hover === undefined)
+                    playerHover = undefined;
+                else if (typeof info.players.hover == 'string')
                     playerHover = info.players.hover.split('\n').map(val => {
                         return { name: val, id: '00000000-0000-4000-8000-000000000000' }
                     })

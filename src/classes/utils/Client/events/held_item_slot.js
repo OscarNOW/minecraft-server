@@ -4,6 +4,6 @@ module.exports = {
             throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
 
         this[this.ps._slot] = slotId;
-        this.emit('slotChange');
+        this[this.ps.emitObservable]('slot');
     }
 }

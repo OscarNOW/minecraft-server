@@ -25,19 +25,24 @@ const ps = Object.fromEntries([ // privateSymbols
     '_difficulty',
     'sendPacket',
     'updateCanUsed',
-    'emitMove'
+    'emitMove',
+    'observables',
+    'emitObservable'
 ].map(name => [name, Symbol(name)]));
 
 const events = Object.freeze([
     'chat',
-    'positionChange',
     'leave',
-    'slotChange',
     'digStart',
     'digCancel',
     'blockBreak',
     'itemDrop',
     'itemHandSwap'
+]);
+
+const observables = Object.freeze([
+    'position',
+    'slot'
 ]);
 
 class Client extends EventEmitter {
@@ -52,6 +57,8 @@ class Client extends EventEmitter {
         }
         this[this.ps.joinedPacketSent] = false;
         this[this.ps.leftPacketSent] = false;
+
+        this[this.ps.observables] = Object.fromEntries(observables.map(v => [v, []]))
 
         this[this.ps.client] = client;
         this.server = server;
@@ -129,7 +136,11 @@ class Client extends EventEmitter {
             });
 
             if (changed)
-                this.emit('positionChange');
+                this[this.ps.emitObservable]('position');
+        }
+
+        this[this.ps.emitObservable] = type => {
+            this[this.ps.observables][type].forEach(cb => cb())
         }
 
 
@@ -167,6 +178,13 @@ class Client extends EventEmitter {
             isDebug: false,
             isFlat: false
         });
+    }
+
+    observe(variable, cb) {
+        if (!variable.type) throw new Error(`Can't observe "${variable}" (${typeof variable})`)
+        if (!observables.includes(variable.type)) throw new Error(`Can't observe "${variable}" (${typeof variable})`)
+
+        this[this.ps.observables][variable.type].push(cb);
     }
 
     get ps() {
@@ -340,7 +358,13 @@ class Client extends EventEmitter {
     }
 
     get slot() {
-        return this[this.ps._slot];
+        let slot = this[this.ps._slot];
+        return Object.freeze({
+            toString() {
+                return slot
+            },
+            type: 'slot'
+        });
     }
 
     set slot(slot) {
