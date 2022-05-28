@@ -170,11 +170,6 @@ class Client extends EventEmitter {
             isFlat: false
         });
 
-        this[this.ps.client].on('position', i => this[this.ps.emitMove].call(this, i));
-        this[this.ps.client].on('position_look', i => this[this.ps.emitMove].call(this, i));
-        this[this.ps.client].on('look', i => this[this.ps.emitMove].call(this, i));
-        this[this.ps.client].on('flying', i => this[this.ps.emitMove].call(this, i));
-
         this[this.ps.client].on('settings', ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) => {
             let langCode = locale.toLowerCase();
             if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}" (${typeof langCode})`)
