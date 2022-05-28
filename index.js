@@ -44,6 +44,7 @@ server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
     client.on('chat', client.chat);
+    client.on('digStart', () => client.chat('aa'))
 
     setTimeout(() => {
         client.position = {
