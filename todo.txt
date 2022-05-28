@@ -11,3 +11,5 @@ Use Object.freeze
 Make sure all fs uses path.resolve
 Look into observers and maybe replace events with observers (or similar)
 Split client get and set into multiple files
+Look better at packet order when Client joining and canUsed
+Fire event when settings packet received

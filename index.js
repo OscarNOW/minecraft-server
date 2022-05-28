@@ -40,10 +40,9 @@ const server = new Server({
 });
 
 server.on('join', client => {
+
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
-
-    client.on('move', () => client.chat(client.position.x))
 
     client.on('chat', client.chat);
 
