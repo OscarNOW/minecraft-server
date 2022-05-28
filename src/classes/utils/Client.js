@@ -170,14 +170,6 @@ class Client extends EventEmitter {
             isFlat: false
         });
 
-        this[this.ps.client].on('held_item_slot', ({ slotId }) => {
-            if (slotId < 0 || slotId > 8)
-                throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
-
-            this[this.ps._slot] = slotId + 1;
-            this.emit('slotChange');
-        })
-
         this[this.ps.client].on('position', i => this[this.ps.emitMove].call(this, i));
         this[this.ps.client].on('position_look', i => this[this.ps.emitMove].call(this, i));
         this[this.ps.client].on('look', i => this[this.ps.emitMove].call(this, i));

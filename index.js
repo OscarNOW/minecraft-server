@@ -43,7 +43,8 @@ server.on('join', client => {
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    horse.on('leftClick', () => client.chat('a'))
+    client.on('slotChange', () => client.chat(client.slot))
+    horse.on('leftClick', () => client.slot = 0)
 
     client.on('chat', client.chat);
 
