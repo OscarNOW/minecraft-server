@@ -143,6 +143,15 @@ class Client extends EventEmitter {
             )
             , this);
 
+        for (const [key, value] of Object.entries(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/events/'))
+                .filter(a => a.endsWith('.js'))
+                .map(a => require(`./Client/events/${a}`))
+            )
+        ))
+            this[this.ps.client].on(key, value.bind(this))
+
         this[this.ps.sendPacket]('login', {
             entityId: client.id,
             isHardcore: false,
@@ -208,10 +217,6 @@ class Client extends EventEmitter {
                 this.entities[obj.target].emit('leftClick');
             else
                 throw new Error(`Unknown mouse "${obj.mouse}" (${typeof obj.mouse})`)
-        })
-
-        this[this.ps.client].on('chat', ({ message }) => {
-            this.emit('chat', message);
         })
 
         this[this.ps.client].on('held_item_slot', ({ slotId }) => {

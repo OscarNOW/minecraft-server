@@ -45,10 +45,6 @@ server.on('join', client => {
 
     client.on('chat', client.chat);
 
-    horse.on('leftClick', () => {
-        client.window('horse', horse);
-    })
-
     setTimeout(() => {
         client.position = {
             x: 0,
