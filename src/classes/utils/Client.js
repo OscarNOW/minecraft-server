@@ -30,7 +30,7 @@ const ps = Object.fromEntries([ // privateSymbols
 
 const events = Object.freeze([
     'chat',
-    'move',
+    'positionChange',
     'leave',
     'slotChange',
     'digStart',
@@ -57,11 +57,11 @@ class Client extends EventEmitter {
         this.server = server;
 
         let textures = JSON.parse(Buffer.from(this[this.ps.client].profile.properties[0].value, 'base64').toString()).textures;
-        this.textures = Object.freeze({
+        this.textures = {
             skin: textures.SKIN.url
-        });
-        if (textures.CAPE)
-            this.textures.cape = textures.CAPE.url;
+        };
+        if (textures.CAPE) this.textures.cape = textures.CAPE.url;
+        Object.freeze(this.textures);
 
         this.username = this[this.ps.client].username;
         this.uuid = this[this.ps.client].uuid;
@@ -75,11 +75,11 @@ class Client extends EventEmitter {
         this[this.ps._health] = 20;
         this[this.ps._food] = 20;
         this[this.ps._foodSaturation] = 5;
-        this[this.ps._difficulty] = 'normal'
+        this[this.ps._difficulty] = 'normal';
 
         this[this.ps.client].socket.addListener('close', () => {
             this[this.ps.updateCanUsed]();
-        })
+        });
 
         this[this.ps._position] = new ChangablePosition(i => that.teleport.call(that, i), {
             x: null,
@@ -87,7 +87,7 @@ class Client extends EventEmitter {
             z: null,
             yaw: null,
             pitch: null
-        })
+        });
 
         this.entities = {};
 
@@ -129,7 +129,7 @@ class Client extends EventEmitter {
             });
 
             if (changed)
-                this.emit('move');
+                this.emit('positionChange');
         }
 
 

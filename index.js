@@ -112,7 +112,7 @@ server.on('join', client => {
         }
     })();
 
-    client.on('move', () => {
+    client.on('positionChange', () => {
         for (let xOffset = -settings.prioChunkLoad; xOffset <= settings.prioChunkLoad; xOffset++)
             for (let zOffset = -settings.prioChunkLoad; zOffset <= settings.prioChunkLoad; zOffset++) {
 

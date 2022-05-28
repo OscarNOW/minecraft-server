@@ -22,7 +22,7 @@ class Entity extends EventEmitter {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        this[ps._position] = new ChangablePosition(i => that.move.call(that, i), { x, y, z, yaw, pitch })
+        this[ps._position] = new ChangablePosition(i => that.position = i, { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
         this[ps.typeId] = e.id;
