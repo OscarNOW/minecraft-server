@@ -13,4 +13,4 @@ fs.readdirSync(path.resolve(__dirname, '../../classes/utils/')).forEach(file => 
         utils = { ...utils, ...require(`../../classes/utils/${file}`) }
 })
 
-module.exports = { exports: e, utils };
+module.exports = Object.freeze({ exports: e, utils });

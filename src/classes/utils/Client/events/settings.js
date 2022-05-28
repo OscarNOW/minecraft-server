@@ -12,25 +12,25 @@ module.exports = {
         this.viewDistance = viewDistance;
 
         if (chatFlags === 0)
-            this.chatSettings = {
+            this.chatSettings = Object.freeze({
                 visible: 'all',
                 colors: chatColors
-            };
+            });
         else if (chatFlags === 1)
-            this.chatSettings = {
+            this.chatSettings = Object.freeze({
                 visible: 'commands',
                 colors: chatColors
-            };
+            });
         else if (chatFlags === 2)
-            this.chatSettings = {
+            this.chatSettings = Object.freeze({
                 visible: 'none',
                 colors: chatColors
-            };
+            });
         else
             throw new Error(`Unknown chatFlags "${chatFlags}" (${typeof chatFlags})`)
 
         let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
-        this.visibleSkinParts = {
+        this.visibleSkinParts = Object.freeze({
             cape: bsp[6],
             torso: bsp[5],
             leftArm: bsp[4],
@@ -38,7 +38,7 @@ module.exports = {
             leftLeg: bsp[2],
             rightLeg: bsp[1],
             hat: bsp[0]
-        }
+        })
 
         if (mainHand === 0)
             this.rightHanded = false

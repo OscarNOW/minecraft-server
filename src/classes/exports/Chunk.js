@@ -33,4 +33,4 @@ function getBlockId(blockName) {
     throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
 }
 
-module.exports = { Chunk };
+module.exports = Object.freeze({ Chunk });

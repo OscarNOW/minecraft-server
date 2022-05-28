@@ -20,4 +20,4 @@ fs.readdirSync(path.resolve(__dirname, '../../classes/utils/')).forEach(file => 
             })
 })
 
-module.exports = files;
+module.exports = Object.freeze({ ...files });

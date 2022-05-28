@@ -10,6 +10,11 @@ function getVersionFromProtocol(protocol) {
     return Object.keys(protocolVersions).find(x => protocolVersions[x] == protocol) ?? 'newer'
 }
 
+const events = Object.freeze([
+    'join',
+    'leave'
+])
+
 class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect }) {
         super();
@@ -17,11 +22,6 @@ class Server extends EventEmitter {
         this.serverList = serverList;
         this.wrongVersionConnect = wrongVersionConnect;
         this.clients = [];
-
-        this.events = [
-            'join',
-            'leave'
-        ];
 
         let serverListVersions = {};
 
@@ -101,47 +101,47 @@ class Server extends EventEmitter {
     }
 
     addListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.addListener(event, callback);
     }
 
     on(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.on(event, callback);
     }
 
     once(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.once(event, callback);
     }
 
     prependListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.prependListener(event, callback);
     }
 
     prependOnceListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.prependOnceListener(event, callback);
     }
 
     off(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.off(event, callback);
     }
 
     removeListener(event, callback) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.removeListener(event, callback);
     }
 
     removeAllListeners(event) {
-        if (event != undefined && !this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (event != undefined && !events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.removeAllListeners(event);
     }
 
     rawListeners(event) {
-        if (!this.events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
+        if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.rawListeners(event);
     }
 
@@ -154,4 +154,4 @@ class Server extends EventEmitter {
     }
 }
 
-module.exports = { Server };
+module.exports = Object.freeze({ Server });

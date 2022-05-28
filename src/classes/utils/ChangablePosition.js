@@ -40,4 +40,4 @@ class ChangablePosition {
     }
 }
 
-module.exports = { ChangablePosition };
+module.exports = Object.freeze({ ChangablePosition });

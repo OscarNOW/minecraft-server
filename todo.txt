@@ -7,8 +7,6 @@ Implement legacy ping
 Implement favicon
 Use data loader instead of require()
 Fix return type for rawListeners for Client
-Use Object.freeze
-Make sure all fs uses path.resolve
 Look into observers and maybe replace events with observers (or similar)
 Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed

@@ -10,7 +10,7 @@ const stringify = obj => ({
     color: inspect(obj, undefined, undefined, true)
 })
 
-const colors = {
+const colors = Object.freeze({
     reset: "\x1b[0m",
     bold: "\x1b[1m",
     dim: "\x1b[2m",
@@ -38,7 +38,7 @@ const colors = {
         cyan: "\x1b[46m",
         white: "\x1b[47m"
     }
-}
+});
 
 const verbose = process.argv.includes('--verbose')
 const debug = process.argv.includes('--debug')

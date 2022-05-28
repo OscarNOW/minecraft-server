@@ -28,7 +28,7 @@ const ps = Object.fromEntries([ // privateSymbols
     'emitMove'
 ].map(name => [name, Symbol(name)]));
 
-const events = [
+const events = Object.freeze([
     'chat',
     'move',
     'leave',
@@ -38,7 +38,7 @@ const events = [
     'blockBreak',
     'itemDrop',
     'itemHandSwap'
-];
+]);
 
 class Client extends EventEmitter {
     constructor(client, server, version) {
@@ -57,9 +57,9 @@ class Client extends EventEmitter {
         this.server = server;
 
         let textures = JSON.parse(Buffer.from(this[this.ps.client].profile.properties[0].value, 'base64').toString()).textures;
-        this.textures = {
+        this.textures = Object.freeze({
             skin: textures.SKIN.url
-        };
+        });
         if (textures.CAPE)
             this.textures.cape = textures.CAPE.url;
 
@@ -412,4 +412,4 @@ class Client extends EventEmitter {
     }
 }
 
-module.exports = { Client }
+module.exports = Object.freeze({ Client })

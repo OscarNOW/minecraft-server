@@ -28,4 +28,4 @@ class ChangableHsl {
     }
 }
 
-module.exports = { ChangableHsl };
+module.exports = Object.freeze({ ChangableHsl });

@@ -27,4 +27,4 @@ class ChangableRgb {
     }
 }
 
-module.exports = { ChangableRgb };
+module.exports = Object.freeze({ ChangableRgb });

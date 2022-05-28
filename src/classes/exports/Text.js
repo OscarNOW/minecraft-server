@@ -196,4 +196,4 @@ class Text {
     }
 }
 
-module.exports = { Text };
+module.exports = Object.freeze({ Text });

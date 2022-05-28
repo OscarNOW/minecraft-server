@@ -162,4 +162,4 @@ function getEntity(type) {
     return undefined;
 }
 
-module.exports = { Entity };
+module.exports = Object.freeze({ Entity });

@@ -6,4 +6,4 @@ fs.readdirSync(path.resolve(__dirname, '../../data/')).forEach(file => {
     data[file.split('.json')[0]] = require(`../../data/${file}`)
 })
 
-module.exports = data;
+module.exports = Object.freeze({ ...data });
