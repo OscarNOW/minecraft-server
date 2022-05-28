@@ -1,7 +1,5 @@
 const { ChangablePosition } = require('./ChangablePosition');
 
-const languages = require('../../data/languages.json');
-const blocks = require('../../data/blocks.json');
 const version = require('../../data/version.json');
 
 const mcData = require('minecraft-data')(version)
