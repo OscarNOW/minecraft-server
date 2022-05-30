@@ -9,3 +9,5 @@ Fix return type for rawListeners for Client
 Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed
  - Fire event when settings packet received
+Implement base class which includes EventEmitter, privateSymbols and observers
+Implement privateSymbols for ChangablePosition

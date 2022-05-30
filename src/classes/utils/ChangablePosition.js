@@ -2,8 +2,6 @@ class ChangablePosition {
     constructor(onChange, position) {
         this._onChange = onChange;
         this._ = position;
-
-        this.type = 'position';
     }
     get x() {
         return this._.x;

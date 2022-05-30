@@ -42,7 +42,14 @@ const events = Object.freeze([
 
 const observables = Object.freeze([
     'position',
-    'slot'
+    'slot',
+    'health',
+    'food',
+    'foodSaturation',
+    'darkSky',
+    'respawnScreen',
+    'gamemode',
+    'difficulty'
 ]);
 
 class Client extends EventEmitter {
@@ -76,7 +83,7 @@ class Client extends EventEmitter {
         this.ping = this[this.ps.client].latency;
         this.version = version;
         this[this.ps._respawnScreen] = true;
-        this[this.ps._slot] = null;
+        this[this.ps._slot] = 0;
         this[this.ps._darkSky] = false;
         this[this.ps._gamemode] = 'survival';
         this[this.ps._health] = 20;
@@ -88,7 +95,7 @@ class Client extends EventEmitter {
             this[this.ps.updateCanUsed]();
         });
 
-        this[this.ps._position] = new ChangablePosition(i => that.teleport.call(that, i), {
+        this[this.ps._position] = new ChangablePosition(i => that.position = i, {
             x: null,
             y: null,
             z: null,
@@ -180,11 +187,10 @@ class Client extends EventEmitter {
         });
     }
 
-    observe(variable, cb) {
-        if (!variable.type) throw new Error(`Can't observe "${variable}" (${typeof variable})`)
-        if (!observables.includes(variable.type)) throw new Error(`Can't observe "${variable}" (${typeof variable})`)
+    observe(observable, cb) {
+        if (!observables.includes(observable)) throw new Error(`Unknown observable "${observable}" (${typeof observable})`);
 
-        this[this.ps.observables][variable.type].push(cb);
+        this[this.ps.observables][observable].push(cb);
     }
 
     get ps() {
@@ -251,7 +257,7 @@ class Client extends EventEmitter {
     }
 
     get respawnScreen() {
-        return this[this.ps._respawnScreen];
+        return this[this.ps._respawnScreen]
     }
 
     set respawnScreen(respawnScreen) {
@@ -267,10 +273,11 @@ class Client extends EventEmitter {
         })
 
         this[this.ps._respawnScreen] = respawnScreen;
+        this[this.ps.emitObservable]('respawnScreen');
     }
 
     get health() {
-        return this[this.ps._health];
+        return this[this.ps._health]
     }
 
     set health(h) {
@@ -289,10 +296,11 @@ class Client extends EventEmitter {
         })
 
         this[this.ps._health] = health;
+        this[this.ps.emitObservable]('health');
     }
 
     get food() {
-        return this[this.ps._food];
+        return this[this.ps._food]
     }
 
     set food(f) {
@@ -306,15 +314,16 @@ class Client extends EventEmitter {
 
         this[this.ps.sendPacket]('update_health', {
             health: this[this.ps._health],
-            food: food,
+            food,
             foodSaturation: this[this.ps._foodSaturation]
         })
 
         this[this.ps._food] = food;
+        this[this.ps.emitObservable]('food');
     }
 
     get foodSaturation() {
-        return this[this.ps._foodSaturation];
+        return this[this.ps._foodSaturation]
     }
 
     set foodSaturation(fs) {
@@ -329,10 +338,11 @@ class Client extends EventEmitter {
         this[this.ps.sendPacket]('update_health', {
             health: this[this.ps._health],
             food: this[this.ps._food],
-            foodSaturation: foodSaturation
+            foodSaturation
         })
 
         this[this.ps._foodSaturation] = foodSaturation;
+        this[this.ps.emitObservable]('foodSaturation');
     }
 
     get online() {
@@ -340,7 +350,7 @@ class Client extends EventEmitter {
     }
 
     get position() {
-        return this[this.ps._position];
+        return this[this.ps._position]
     }
 
     set position({ x, y, z, yaw, pitch }) {
@@ -348,23 +358,17 @@ class Client extends EventEmitter {
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         this[this.ps.sendPacket]('position', {
-            x: x || this.position.x,
-            y: y || this.position.y,
-            z: z || this.position.z,
-            yaw: yaw || this.position.yaw,
-            pitch: pitch || this.position.pitch,
+            x: x ?? this.position.x,
+            y: y ?? this.position.y,
+            z: z ?? this.position.z,
+            yaw: yaw ?? this.position.yaw,
+            pitch: pitch ?? this.position.pitch,
             flags: 0x00
         });
     }
 
     get slot() {
-        let slot = this[this.ps._slot];
-        return Object.freeze({
-            toString() {
-                return slot
-            },
-            type: 'slot'
-        });
+        return this[this.ps._slot]
     }
 
     set slot(slot) {
@@ -380,7 +384,7 @@ class Client extends EventEmitter {
     }
 
     get darkSky() {
-        return this[this.ps._darkSky];
+        return this[this.ps._darkSky]
     }
 
     set darkSky(darkSky) {
@@ -390,15 +394,16 @@ class Client extends EventEmitter {
         if (darkSky != false && darkSky != true)
             throw new Error(`Unknown darkSky, expected true or false, received "${darkSky}" (${typeof darkSky})`)
 
-        this[this.ps._darkSky] = darkSky;
-
         this[this.ps.sendPacket]('game_state_change', {
             reason: darkSky ? 2 : 1
         })
+
+        this[this.ps._darkSky] = darkSky;
+        this[this.ps.emitObservable]('darkSky');
     }
 
     get gamemode() {
-        return this[this.ps._gamemode];
+        return this[this.ps._gamemode]
     }
 
     set gamemode(gamemode) {
@@ -408,16 +413,17 @@ class Client extends EventEmitter {
         if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
             throw new Error(`Unknown gamemode "${gamemode}" (${typeof gamemode})`)
 
-        this[this.ps._gamemode] = gamemode;
-
         this[this.ps.sendPacket]('game_state_change', {
             reason: 3,
             gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
         })
+
+        this[this.ps._gamemode] = gamemode;
+        this[this.ps.emitObservable]('gamemode');
     }
 
     get difficulty() {
-        return this[this.ps._difficulty];
+        return this[this.ps._difficulty]
     }
 
     set difficulty(difficulty) {
@@ -433,6 +439,7 @@ class Client extends EventEmitter {
         })
 
         this[this.ps._difficulty] = difficulty;
+        this[this.ps.emitObservable]('difficulty');
     }
 }
 
