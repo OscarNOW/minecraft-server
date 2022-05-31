@@ -1,8 +1,13 @@
+const ps = Object.freeze(Object.fromEntries([
+    '_onChange'
+].map(a => [a, Symbol(a)])))
+
 class ChangablePosition {
     constructor(onChange, position) {
-        this._onChange = onChange;
+        this[ps._onChange] = onChange;
         this._ = position;
     }
+
     get x() {
         return this._.x;
     }
@@ -20,23 +25,23 @@ class ChangablePosition {
     }
     set x(_) {
         this._.x = _;
-        this._onChange(this._);
+        this[ps._onChange(this._)];
     }
     set y(_) {
         this._.y = _;
-        this._onChange(this._);
+        this[ps._onChange](this._);
     }
     set z(_) {
         this._.z = _;
-        this._onChange(this._);
+        this[ps._onChange](this._);
     }
     set yaw(_) {
         this._.yaw = _;
-        this._onChange(this._);
+        this[ps._onChange](this._);
     }
     set pitch(_) {
         this._.pitch = _;
-        this._onChange(this._);
+        this[ps._onChange](this._);
     }
 }
 
