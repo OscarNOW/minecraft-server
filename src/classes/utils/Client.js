@@ -8,6 +8,32 @@ const { inject } = require('../../functions/inject.js');
 const fs = require('fs');
 const path = require('path');
 
+const globalGet = Object.assign({},
+    Object.entries(
+        fs
+            .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+            .filter(v => v.endsWith('.js'))
+            .map(v => v.split('.js')[0])
+            .map(v => require(`./Client/properties/dynamic/${v}`))
+            .reduce((a, b) => ({ ...a, ...b }))
+    )
+        .map(([name, { get, set }]) => Object.fromEntries([[name, get]]))
+        .reduce((a, b) => ({ ...a, ...b }))
+);
+
+const globalSet = Object.assign({},
+    Object.entries(
+        fs
+            .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+            .filter(v => v.endsWith('.js'))
+            .map(v => v.split('.js')[0])
+            .map(v => require(`./Client/properties/dynamic/${v}`))
+            .reduce((a, b) => ({ ...a, ...b }))
+    )
+        .map(([name, { get, set }]) => Object.fromEntries([[name, set]]))
+        .reduce((a, b) => ({ ...a, ...b }))
+);
+
 const ps = Object.fromEntries([ // privateSymbols
     'canUsed',
     'readyStates',
@@ -27,7 +53,9 @@ const ps = Object.fromEntries([ // privateSymbols
     'updateCanUsed',
     'emitMove',
     'observables',
-    'emitObservable'
+    'emitObservable',
+    'get',
+    'set'
 ].map(name => [name, Symbol(name)]));
 
 const events = Object.freeze([
@@ -40,7 +68,7 @@ const events = Object.freeze([
     'itemHandSwap'
 ]);
 
-const observables = Object.freeze([
+const observables = Object.freeze(Object.fromEntries([
     'position',
     'slot',
     'health',
@@ -50,7 +78,7 @@ const observables = Object.freeze([
     'respawnScreen',
     'gamemode',
     'difficulty'
-]);
+].map(v => [v, []])));
 
 class Client extends EventEmitter {
     constructor(client, server, version) {
@@ -65,7 +93,10 @@ class Client extends EventEmitter {
         this[this.ps.joinedPacketSent] = false;
         this[this.ps.leftPacketSent] = false;
 
-        this[this.ps.observables] = Object.fromEntries(observables.map(v => [v, []]))
+        this[this.ps.observables] = observables;
+
+        this[this.ps.get] = Object.fromEntries(Object.entries(globalGet).map(v => [v[0], v[1].bind(this)]))
+        this[this.ps.set] = Object.fromEntries(Object.entries(globalSet).map(v => [v[0], v[1].bind(this)]))
 
         this[this.ps.client] = client;
         this.server = server;
@@ -188,7 +219,8 @@ class Client extends EventEmitter {
     }
 
     observe(observable, cb) {
-        if (!observables.includes(observable)) throw new Error(`Unknown observable "${observable}" (${typeof observable})`);
+        if (!this[this.ps.observables][observable])
+            throw new Error(`Unknown observable "${observable}" (${typeof observable})`);
 
         this[this.ps.observables][observable].push(cb);
     }
@@ -207,8 +239,9 @@ class Client extends EventEmitter {
 
         if (callPath.startsWith(folderPath))
             return ps;
-        else
+        else {
             return undefined;
+        }
     }
 
     addListener(event, callback) {
@@ -277,26 +310,11 @@ class Client extends EventEmitter {
     }
 
     get health() {
-        return this[this.ps._health]
+        return this[this.ps.get]['health']();
     }
 
     set health(h) {
-        if (!this[this.ps.canUsed])
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
-
-        const health = parseInt(h);
-
-        if (isNaN(health) || health < 0 || health > 20)
-            throw new Error(`Unknown health, expected an integer between 0 and 20, received "${h}" (${typeof h})`)
-
-        this[this.ps.sendPacket]('update_health', {
-            health,
-            food: this[this.ps._food],
-            foodSaturation: this[this.ps._foodSaturation]
-        })
-
-        this[this.ps._health] = health;
-        this[this.ps.emitObservable]('health');
+        return this[this.ps.set]['health'](h);
     }
 
     get food() {
