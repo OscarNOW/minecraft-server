@@ -290,31 +290,19 @@ class Client extends EventEmitter {
     }
 
     get respawnScreen() {
-        return this[this.ps._respawnScreen]
+        return this[this.ps.get]['respawnScreen']();
     }
 
-    set respawnScreen(respawnScreen) {
-        if (!this[this.ps.canUsed])
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
-
-        if (respawnScreen !== true && respawnScreen !== false)
-            throw new Error(`Unknown respawnScreen, expected true or false, received "${respawnScreen}" (${typeof respawnScreen})`)
-
-        this[this.ps.sendPacket]('game_state_change', {
-            reason: 11,
-            gameMode: respawnScreen ? 0 : 1
-        })
-
-        this[this.ps._respawnScreen] = respawnScreen;
-        this[this.ps.emitObservable]('respawnScreen');
+    set respawnScreen(v) {
+        return this[this.ps.set]['respawnScreen'](v);
     }
 
     get health() {
         return this[this.ps.get]['health']();
     }
 
-    set health(h) {
-        return this[this.ps.set]['health'](h);
+    set health(v) {
+        return this[this.ps.set]['health'](v);
     }
 
     get food() {
