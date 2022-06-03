@@ -244,6 +244,10 @@ class Client extends EventEmitter {
         }
     }
 
+    get online() {
+        return this[this.ps.client].socket.readyState == 'open';
+    }
+
     addListener(event, callback) {
         if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.addListener(event, callback);
@@ -321,26 +325,12 @@ class Client extends EventEmitter {
         return this[this.ps.set]['foodSaturation'](v);
     }
 
-    get online() {
-        return this[this.ps.client].socket.readyState == 'open';
-    }
-
     get position() {
-        return this[this.ps._position]
+        return this[this.ps.get]['position']();
     }
 
-    set position({ x, y, z, yaw, pitch }) {
-        if (!this[this.ps.canUsed])
-            throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
-
-        this[this.ps.sendPacket]('position', {
-            x: x ?? this.position.x,
-            y: y ?? this.position.y,
-            z: z ?? this.position.z,
-            yaw: yaw ?? this.position.yaw,
-            pitch: pitch ?? this.position.pitch,
-            flags: 0x00
-        });
+    set position(v) {
+        return this[this.ps.set]['position'](v);
     }
 
     get slot() {
