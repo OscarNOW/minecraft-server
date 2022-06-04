@@ -10,3 +10,6 @@ Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
+Change darkSky to clearSky
+Change respawnScreen to showRespawnScreen
+Change this[this.ps.example] to this.p.example
