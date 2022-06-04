@@ -4,7 +4,6 @@ const version = require('../../data/version.json');
 
 const mcData = require('minecraft-data')(version)
 const { EventEmitter } = require('events');
-const { inject } = require('../../functions/inject.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -182,13 +181,23 @@ class Client extends EventEmitter {
         }
 
 
-        inject(
-            Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/functions/public/'))
-                .filter(a => a.endsWith('.js'))
-                .map(a => require(`./Client/functions/public/${a}`))
+        Object.defineProperties(this,
+            Object.fromEntries(
+                Object.entries(
+                    Object.assign({}, ...fs
+                        .readdirSync(path.resolve(__dirname, './Client/methods/public/'))
+                        .filter(v => v.endsWith('.js'))
+                        .map(v => require(`./Client/methods/public/${v}`))
+                    )
+                )
+                    .map(v => [v[0], {
+                        configurable: false,
+                        enumerable: true,
+                        writable: false,
+                        value: v[1]
+                    }])
             )
-            , this);
+        )
 
         for (const [key, value] of Object.entries(
             Object.assign({}, ...fs
