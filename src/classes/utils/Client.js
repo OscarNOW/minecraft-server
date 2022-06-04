@@ -152,7 +152,6 @@ class Client extends EventEmitter {
         this[this.ps._respawnScreen] = true;
         this[this.ps._slot] = 0;
         this[this.ps._darkSky] = false;
-        this[this.ps._gamemode] = 'survival';
 
         for (const { init } of Object.values(
             Object.assign({}, ...fs

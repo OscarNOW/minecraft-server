@@ -17,6 +17,9 @@ module.exports = {
 
             this[this.ps._gamemode] = gamemode;
             this[this.ps.emitObservable]('gamemode');
+        },
+        init: function () {
+            this[this.ps._gamemode] = 'survival';
         }
     }
 }
