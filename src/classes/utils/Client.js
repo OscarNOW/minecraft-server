@@ -7,32 +7,6 @@ const { EventEmitter } = require('events');
 const fs = require('fs');
 const path = require('path');
 
-const globalGet = Object.assign({},
-    Object.entries(
-        fs
-            .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
-            .filter(v => v.endsWith('.js'))
-            .map(v => v.split('.js')[0])
-            .map(v => require(`./Client/properties/dynamic/${v}`))
-            .reduce((a, b) => ({ ...a, ...b }))
-    )
-        .map(([name, { get, set }]) => Object.fromEntries([[name, get]]))
-        .reduce((a, b) => ({ ...a, ...b }))
-);
-
-const globalSet = Object.assign({},
-    Object.entries(
-        fs
-            .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
-            .filter(v => v.endsWith('.js'))
-            .map(v => v.split('.js')[0])
-            .map(v => require(`./Client/properties/dynamic/${v}`))
-            .reduce((a, b) => ({ ...a, ...b }))
-    )
-        .map(([name, { get, set }]) => Object.fromEntries([[name, set]]))
-        .reduce((a, b) => ({ ...a, ...b }))
-);
-
 const ps = Object.fromEntries([ // privateSymbols
     'canUsed',
     'readyStates',
@@ -52,9 +26,7 @@ const ps = Object.fromEntries([ // privateSymbols
     'updateCanUsed',
     'emitMove',
     'observables',
-    'emitObservable',
-    'get',
-    'set'
+    'emitObservable'
 ].map(name => [name, Symbol(name)]));
 
 const events = Object.freeze([
@@ -93,9 +65,6 @@ class Client extends EventEmitter {
         this[this.ps.leftPacketSent] = false;
 
         this[this.ps.observables] = observables;
-
-        this[this.ps.get] = Object.fromEntries(Object.entries(globalGet).map(v => [v[0], v[1].bind(this)]))
-        this[this.ps.set] = Object.fromEntries(Object.entries(globalSet).map(v => [v[0], v[1].bind(this)]))
 
         this[this.ps.client] = client;
         this.server = server;
@@ -181,6 +150,7 @@ class Client extends EventEmitter {
         }
 
 
+        //Inject public methods
         Object.defineProperties(this,
             Object.fromEntries(
                 Object.entries(
@@ -190,15 +160,35 @@ class Client extends EventEmitter {
                         .map(v => require(`./Client/methods/public/${v}`))
                     )
                 )
-                    .map(v => [v[0], {
+                    .map(([name, value]) => [name, {
                         configurable: false,
                         enumerable: true,
                         writable: false,
-                        value: v[1]
+                        value
                     }])
             )
         )
 
+        //Inject dynamic properties
+        Object.defineProperties(this,
+            Object.fromEntries(
+                Object.entries(
+                    Object.assign({}, ...fs
+                        .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+                        .filter(v => v.endsWith('.js'))
+                        .map(v => require(`./Client/properties/dynamic/${v}`))
+                    )
+                )
+                    .map(([name, { get, set }]) => [name, {
+                        configurable: false,
+                        enumerable: true,
+                        get: get.bind(this),
+                        set: set.bind(this)
+                    }])
+            )
+        )
+
+        //Inject events
         for (const [key, value] of Object.entries(
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/events/'))
@@ -207,6 +197,7 @@ class Client extends EventEmitter {
             )
         ))
             this[this.ps.client].on(key, value.bind(this))
+
 
         this[this.ps.sendPacket]('login', {
             entityId: client.id,
@@ -300,78 +291,6 @@ class Client extends EventEmitter {
     rawListeners(event) {
         if (!events.includes(event)) throw new Error(`Unknown event "${event}" (${typeof event})`)
         return super.rawListeners(event);
-    }
-
-    get respawnScreen() {
-        return this[this.ps.get]['respawnScreen']();
-    }
-
-    set respawnScreen(v) {
-        return this[this.ps.set]['respawnScreen'](v);
-    }
-
-    get health() {
-        return this[this.ps.get]['health']();
-    }
-
-    set health(v) {
-        return this[this.ps.set]['health'](v);
-    }
-
-    get food() {
-        return this[this.ps.get]['food']();
-    }
-
-    set food(v) {
-        return this[this.ps.set]['food'](v);
-    }
-
-    get foodSaturation() {
-        return this[this.ps.get]['foodSaturation']();
-    }
-
-    set foodSaturation(v) {
-        return this[this.ps.set]['foodSaturation'](v);
-    }
-
-    get position() {
-        return this[this.ps.get]['position']();
-    }
-
-    set position(v) {
-        return this[this.ps.set]['position'](v);
-    }
-
-    get slot() {
-        return this[this.ps.get]['slot']();
-    }
-
-    set slot(v) {
-        return this[this.ps.set]['slot'](v);
-    }
-
-    get darkSky() {
-        return this[this.ps.get]['darkSky']();
-    }
-
-    set darkSky(v) {
-        return this[this.ps.set]['darkSky'](v);
-    }
-
-    get gamemode() {
-        return this[this.ps.get]['gamemode']();
-    }
-
-    set gamemode(v) {
-        return this[this.ps.set]['gamemode'](v);
-    }
-
-    get difficulty() {
-        return this[this.ps.get]['difficulty']();
-    }
-
-    set difficulty(v) {
-        return this[this.ps.set]['difficulty'](v);
     }
 }
 
