@@ -59,6 +59,8 @@ declare class Client extends EventEmitter {
 
     difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
+    observe(type: 'position' | 'slot' | 'health' | 'food' | 'foodSaturation' | 'darkSky' | 'respawnScreen' | 'gamemode' | 'difficulty', callback: () => void): void;
+
     particle(
         particleName: noDataParticle,
         visibleFromFar: boolean,
@@ -206,7 +208,7 @@ declare class Client extends EventEmitter {
     window(windowType: 'horse', horse: Entity): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
-    on(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -220,7 +222,7 @@ declare class Client extends EventEmitter {
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     once(event: 'chat', callback: (message: string) => void): void;
-    once(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    once(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     once(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -234,7 +236,7 @@ declare class Client extends EventEmitter {
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     addListener(event: 'chat', callback: (message: string) => void): void;
-    addListener(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    addListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     addListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -248,7 +250,7 @@ declare class Client extends EventEmitter {
     addListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     prependListener(event: 'chat', callback: (message: string) => void): void;
-    prependListener(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    prependListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     prependListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -262,7 +264,7 @@ declare class Client extends EventEmitter {
     prependListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     prependOnceListener(event: 'chat', callback: (message: string) => void): void;
-    prependOnceListener(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    prependOnceListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     prependOnceListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -276,7 +278,7 @@ declare class Client extends EventEmitter {
     prependOnceListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     off(event: 'chat', callback: (message: string) => void): void;
-    off(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    off(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     off(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -290,7 +292,7 @@ declare class Client extends EventEmitter {
     off(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     removeListener(event: 'chat', callback: (message: string) => void): void;
-    removeListener(event: 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap', callback: () => void): void;
+    removeListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
     removeListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -303,8 +305,8 @@ declare class Client extends EventEmitter {
     }) => void): void;
     removeListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
-    removeAllListeners(event?: 'chat' | 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
-    rawListeners(event: 'chat' | 'positionChange' | 'leave' | 'slotChange' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
+    removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
+    rawListeners(event: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
 }
 
 declare class Entity extends EventEmitter {
