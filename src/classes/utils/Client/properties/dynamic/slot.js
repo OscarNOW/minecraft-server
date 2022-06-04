@@ -13,6 +13,9 @@ module.exports = {
             this[this.ps.sendPacket]('held_item_slot', {
                 slot: parseInt(slot)
             })
+        },
+        init: function () {
+            this[this.ps._slot] = 0;
         }
     }
 }
