@@ -149,8 +149,6 @@ class Client extends EventEmitter {
         )
 
         //Initialize dynamic properties
-        this[this.ps._respawnScreen] = true;
-
         for (const { init } of Object.values(
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))

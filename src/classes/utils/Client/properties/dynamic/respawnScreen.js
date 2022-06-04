@@ -17,6 +17,9 @@ module.exports = {
 
             this[this.ps._respawnScreen] = respawnScreen;
             this[this.ps.emitObservable]('respawnScreen');
+        },
+        init: function () {
+            this[this.ps._respawnScreen] = true;
         }
     }
 }
