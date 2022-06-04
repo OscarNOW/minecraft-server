@@ -74,11 +74,6 @@ class Client extends EventEmitter {
         Object.freeze(this.textures);
 
         this.entities = {};
-
-        this.username = this[this.ps.client].username;
-        this.uuid = this[this.ps.client].uuid;
-        this.entityId = this[this.ps.client].id;
-        this.ping = this[this.ps.client].latency;
         this.version = version;
 
         this[this.ps.client].socket.addListener('close', () => {
@@ -147,6 +142,29 @@ class Client extends EventEmitter {
                     }])
             )
         )
+
+        //Inject static properties
+        this.uuid = this[this.ps.client].uuid;
+        this.entityId = this[this.ps.client].id;
+        this.ping = this[this.ps.client].latency;
+
+        Object.defineProperties(this,
+            Object.fromEntries(
+                Object.entries(
+                    Object.assign({}, ...fs
+                        .readdirSync(path.resolve(__dirname, './Client/properties/static/'))
+                        .filter(v => v.endsWith('.js'))
+                        .map(v => require(`./Client/properties/static/${v}`))
+                    )
+                )
+                    .map(([name, get]) => [name, {
+                        configurable: false,
+                        enumerable: true,
+                        writable: false,
+                        value: get.call(this)
+                    }])
+            )
+        );
 
         //Initialize dynamic properties
         for (const { init } of Object.values(
