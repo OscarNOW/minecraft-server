@@ -145,7 +145,6 @@ class Client extends EventEmitter {
 
         //Inject static properties
         this.uuid = this[this.ps.client].uuid;
-        this.entityId = this[this.ps.client].id;
 
         Object.defineProperties(this,
             Object.fromEntries(
