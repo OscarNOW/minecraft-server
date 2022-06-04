@@ -156,7 +156,6 @@ class Client extends EventEmitter {
         this[this.ps._health] = 20;
         this[this.ps._food] = 20;
         this[this.ps._foodSaturation] = 5;
-        this[this.ps._difficulty] = 'normal';
 
         for (const { init } of Object.values(
             Object.assign({}, ...fs

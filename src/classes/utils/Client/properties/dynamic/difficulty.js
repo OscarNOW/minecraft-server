@@ -17,6 +17,9 @@ module.exports = {
 
             this[this.ps._difficulty] = difficulty;
             this[this.ps.emitObservable]('difficulty');
+        },
+        init: function () {
+            this[this.ps._difficulty] = 'normal';
         }
     }
 }
