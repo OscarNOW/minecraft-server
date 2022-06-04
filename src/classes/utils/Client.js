@@ -1,5 +1,3 @@
-const { ChangablePosition } = require('./ChangablePosition');
-
 const version = require('../../data/version.json');
 
 const mcData = require('minecraft-data')(version)
@@ -54,7 +52,6 @@ const observables = Object.freeze(Object.fromEntries([
 class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
-        const that = this;
 
         this[this.ps.canUsed] = false;
         this[this.ps.readyStates] = {
@@ -76,33 +73,17 @@ class Client extends EventEmitter {
         if (textures.CAPE) this.textures.cape = textures.CAPE.url;
         Object.freeze(this.textures);
 
+        this.entities = {};
+
         this.username = this[this.ps.client].username;
         this.uuid = this[this.ps.client].uuid;
         this.entityId = this[this.ps.client].id;
         this.ping = this[this.ps.client].latency;
         this.version = version;
-        this[this.ps._respawnScreen] = true;
-        this[this.ps._slot] = 0;
-        this[this.ps._darkSky] = false;
-        this[this.ps._gamemode] = 'survival';
-        this[this.ps._health] = 20;
-        this[this.ps._food] = 20;
-        this[this.ps._foodSaturation] = 5;
-        this[this.ps._difficulty] = 'normal';
 
         this[this.ps.client].socket.addListener('close', () => {
             this[this.ps.updateCanUsed]();
         });
-
-        this[this.ps._position] = new ChangablePosition(i => that.position = i, {
-            x: null,
-            y: null,
-            z: null,
-            yaw: null,
-            pitch: null
-        });
-
-        this.entities = {};
 
         this[this.ps.sendPacket] = (name, packet) => this[this.ps.client].write(name, packet);
         this[this.ps.updateCanUsed] = () => {
@@ -144,11 +125,9 @@ class Client extends EventEmitter {
             if (changed)
                 this[this.ps.emitObservable]('position');
         }
-
         this[this.ps.emitObservable] = type => {
             this[this.ps.observables][type].forEach(cb => cb())
         }
-
 
         //Inject public methods
         Object.defineProperties(this,
@@ -168,6 +147,25 @@ class Client extends EventEmitter {
                     }])
             )
         )
+
+        //Initialize dynamic properties
+        this[this.ps._respawnScreen] = true;
+        this[this.ps._slot] = 0;
+        this[this.ps._darkSky] = false;
+        this[this.ps._gamemode] = 'survival';
+        this[this.ps._health] = 20;
+        this[this.ps._food] = 20;
+        this[this.ps._foodSaturation] = 5;
+        this[this.ps._difficulty] = 'normal';
+
+        for (const { init } of Object.values(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+                .filter(v => v.endsWith('.js'))
+                .map(v => require(`./Client/properties/dynamic/${v}`))
+            )
+        ))
+            init?.call?.(this);
 
         //Inject dynamic properties
         Object.defineProperties(this,
@@ -189,14 +187,14 @@ class Client extends EventEmitter {
         )
 
         //Inject events
-        for (const [key, value] of Object.entries(
+        for (const [eventName, eventCallback] of Object.entries(
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/events/'))
                 .filter(a => a.endsWith('.js'))
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this[this.ps.client].on(key, value.bind(this))
+            this[this.ps.client].on(eventName, eventCallback.bind(this))
 
 
         this[this.ps.sendPacket]('login', {

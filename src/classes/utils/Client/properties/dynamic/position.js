@@ -1,3 +1,5 @@
+const { ChangablePosition } = require('../../../ChangablePosition.js')
+
 module.exports = {
     position: {
         get: function () {
@@ -14,6 +16,15 @@ module.exports = {
                 yaw: yaw ?? this.position.yaw,
                 pitch: pitch ?? this.position.pitch,
                 flags: 0x00
+            });
+        },
+        init: function () {
+            this[this.ps._position] = new ChangablePosition((function (i) { this.position = i }).bind(this), {
+                x: null,
+                y: null,
+                z: null,
+                yaw: null,
+                pitch: null
             });
         }
     }
