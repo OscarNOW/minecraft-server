@@ -154,7 +154,6 @@ class Client extends EventEmitter {
         this[this.ps._darkSky] = false;
         this[this.ps._gamemode] = 'survival';
         this[this.ps._health] = 20;
-        this[this.ps._food] = 20;
 
         for (const { init } of Object.values(
             Object.assign({}, ...fs

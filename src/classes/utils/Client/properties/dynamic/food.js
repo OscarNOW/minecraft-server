@@ -20,6 +20,9 @@ module.exports = {
 
             this[this.ps._food] = food;
             this[this.ps.emitObservable]('food');
+        },
+        init: function () {
+            this[this.ps._food] = 20;
         }
     }
 }
