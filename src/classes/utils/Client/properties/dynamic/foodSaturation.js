@@ -20,6 +20,9 @@ module.exports = {
 
             this[this.ps._foodSaturation] = foodSaturation;
             this[this.ps.emitObservable]('foodSaturation');
+        },
+        init: function () {
+            this[this.ps._foodSaturation] = 5;
         }
     }
 }
