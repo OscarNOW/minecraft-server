@@ -13,3 +13,4 @@ Implement loader for Client functions public, get, set
 Change darkSky to clearSky
 Change respawnScreen to showRespawnScreen
 Change this[this.ps.example] to this.p.example
+Use Object.defineProperty instead of assignment

@@ -1,18 +1,6 @@
 const { Chunk, Server, Text } = require('./src/index');
 
-const settings = {
-    chunkLoad: 7,
-    chunkLoadWait: 50,
-    chunkLoadBusyThreshold: 100,
-    chunkLoadBusyWait: 10,
-    prioChunkLoad: 3,
-    prioChunkLoadWait: 3,
-    prioChunkLoadBusyThreshold: 100,
-    prioChunkLoadBusyWait: 0
-}
-
-const wait = ms => new Promise(res => setTimeout(res, ms));
-let chunk = new Chunk()
+let chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++) {
