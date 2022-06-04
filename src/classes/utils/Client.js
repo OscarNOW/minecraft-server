@@ -218,13 +218,6 @@ class Client extends EventEmitter {
         });
     }
 
-    observe(observable, cb) {
-        if (!this[this.ps.observables][observable])
-            throw new Error(`Unknown observable "${observable}" (${typeof observable})`);
-
-        this[this.ps.observables][observable].push(cb);
-    }
-
     get ps() {
         let callPath = new Error().stack.split('\n')[2];
 
