@@ -16,6 +16,9 @@ module.exports = {
 
             this[this.ps._darkSky] = darkSky;
             this[this.ps.emitObservable]('darkSky');
+        },
+        init: function () {
+            this[this.ps._darkSky] = false;
         }
     }
 }

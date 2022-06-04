@@ -151,7 +151,6 @@ class Client extends EventEmitter {
         //Initialize dynamic properties
         this[this.ps._respawnScreen] = true;
         this[this.ps._slot] = 0;
-        this[this.ps._darkSky] = false;
 
         for (const { init } of Object.values(
             Object.assign({}, ...fs
