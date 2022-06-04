@@ -182,8 +182,8 @@ class Client extends EventEmitter {
                     .map(([name, { get, set }]) => [name, {
                         configurable: false,
                         enumerable: true,
-                        get: get.bind(this),
-                        set: set.bind(this)
+                        get: get?.bind?.(this),
+                        set: set?.bind?.(this)
                     }])
             )
         )
@@ -242,10 +242,6 @@ class Client extends EventEmitter {
         else {
             return undefined;
         }
-    }
-
-    get online() {
-        return this[this.ps.client].socket.readyState == 'open';
     }
 
     addListener(event, callback) {
