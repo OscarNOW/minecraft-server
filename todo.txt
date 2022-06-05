@@ -12,5 +12,4 @@ Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
 Change darkSky to clearSky
 Change respawnScreen to showRespawnScreen
- - Change this.p.example] to this.p.example
- - Use Object.defineProperty instead of assignment
+ - Move private methods and properties into separate files
