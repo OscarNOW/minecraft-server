@@ -75,24 +75,6 @@ class Client extends EventEmitter {
                 this.server.emit('leave', this);
             }
         }
-        this.p.emitMove = info => {
-            let changed = false;
-            [
-                'x',
-                'y',
-                'z',
-                'pitch',
-                'yaw'
-            ].forEach(val => {
-                if (info[val] !== undefined && this.p._position[val] != info[val]) {
-                    changed = true;
-                    this.p._position._[val] = info[val];
-                }
-            });
-
-            if (changed)
-                this.p.emitObservable('position');
-        }
 
         //Inject private methods
         Object.entries(
