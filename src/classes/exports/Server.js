@@ -62,7 +62,7 @@ class Server extends EventEmitter {
             }
         })
 
-        let clientVersions = {};
+        let clientVersions = new WeakMap();
 
         this.server.on('connection', client => {
             let clientState = null;
@@ -80,7 +80,7 @@ class Server extends EventEmitter {
 
                 if (clientState == 'login') {
 
-                    clientVersions[client.uuid] = clientVersion;
+                    clientVersions.set(client, clientVersion);
 
                     if (clientVersion != version) {
                         let ret = this.wrongVersionConnect({ version: clientVersion, ip: client.socket.remoteAddress });
@@ -97,7 +97,7 @@ class Server extends EventEmitter {
         })
 
         this.server.on('login', async client => {
-            new Client(client, this, clientVersions[client.uuid]);
+            new Client(client, this, clientVersions.get(client));
         });
 
     }
