@@ -53,6 +53,10 @@ class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
 
+        this[this.ps.client] = client;
+        this.server = server;
+        this.version = version;
+
         this[this.ps.canUsed] = false;
         this[this.ps.readyStates] = {
             socketOpen: false,
@@ -62,19 +66,7 @@ class Client extends EventEmitter {
         this[this.ps.leftPacketSent] = false;
 
         this[this.ps.observables] = observables;
-
-        this[this.ps.client] = client;
-        this.server = server;
-
-        let textures = JSON.parse(Buffer.from(this[this.ps.client].profile.properties[0].value, 'base64').toString()).textures;
-        this.textures = {
-            skin: textures.SKIN.url
-        };
-        if (textures.CAPE) this.textures.cape = textures.CAPE.url;
-        Object.freeze(this.textures);
-
         this.entities = {};
-        this.version = version;
 
         this[this.ps.client].socket.addListener('close', () => {
             this[this.ps.updateCanUsed]();
