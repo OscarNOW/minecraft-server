@@ -93,9 +93,6 @@ class Client extends EventEmitter {
             if (changed)
                 this.p.emitObservable('position');
         }
-        this.p.emitObservable = type => {
-            this.p.observables[type].forEach(cb => cb())
-        }
 
         //Inject private methods
         Object.entries(

@@ -13,3 +13,4 @@ Implement loader for Client functions public, get, set
 Change darkSky to clearSky
 Change respawnScreen to showRespawnScreen
  - Move private methods and properties into separate files
+Add changed value as argument for observe callback
