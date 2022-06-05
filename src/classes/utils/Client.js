@@ -17,23 +17,16 @@ const events = Object.freeze([
     'itemHandSwap'
 ]);
 
-const observables = Object.freeze(Object.fromEntries([
-    'position',
-    'slot',
-    'health',
-    'food',
-    'foodSaturation',
-    'darkSky',
-    'respawnScreen',
-    'gamemode',
-    'difficulty'
-].map(v => [v, []])));
-
 class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
 
-        this[_p] = {};
+        Object.defineProperty(this, _p, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: {}
+        })
 
         this.p.client = client;
         this.server = server;
@@ -47,12 +40,22 @@ class Client extends EventEmitter {
         this.p.joinedPacketSent = false;
         this.p.leftPacketSent = false;
 
-        this.p.observables = observables;
         this.entities = {};
 
         this.p.client.socket.addListener('close', () => {
             this.p.updateCanUsed();
         });
+
+        //Inject private static properties
+        Object.entries(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/properties/private/static/'))
+                .filter(v => v.endsWith('.js'))
+                .map(v => require(`./Client/properties/private/static/${v}`))
+            )
+        ).forEach(([key, value]) =>
+            this.p[key] = value.call(this)
+        )
 
         //Inject private methods
         Object.entries(
@@ -63,17 +66,6 @@ class Client extends EventEmitter {
             )
         ).forEach(([key, value]) =>
             this.p[key] = value.bind(this)
-        )
-
-        //Inject private static properties
-        Object.entries(
-            Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/properties/private/static/'))
-                .filter(v => v.endsWith('.js'))
-                .map(v => require(`./Client/properties/private/static/${v}`))
-            )
-        ).forEach(([key, value]) =>
-            this.p[key] = value
         )
 
         //Inject public methods
