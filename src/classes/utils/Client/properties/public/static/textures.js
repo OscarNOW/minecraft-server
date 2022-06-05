@@ -1,6 +1,6 @@
 module.exports = {
     textures: function () {
-        let minecraftTextures = JSON.parse(Buffer.from(this[this.ps.client].profile.properties[0].value, 'base64').toString()).textures;
+        let minecraftTextures = JSON.parse(Buffer.from(this.p.client.profile.properties[0].value, 'base64').toString()).textures;
 
         let textures = {
             skin: minecraftTextures.SKIN.url

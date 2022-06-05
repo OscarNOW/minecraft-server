@@ -1,7 +1,7 @@
 module.exports = {
     online: {
         get: function () {
-            return this[this.ps.client].socket.readyState == 'open';
+            return this.p.client.socket.readyState == 'open';
         }
     }
 }

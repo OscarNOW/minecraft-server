@@ -2,13 +2,13 @@ const particles = require('../../../../../data/particles.json');
 
 module.exports = {
     particle: function (particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {
-        if (!this[this.ps.canUsed])
+        if (!this.p.canUsed)
             throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
         if (!particles[particleName]) throw new Error(`Unknown particleName "${particleName}" (${typeof particleName})`)
 
         if (!particles[particleName].requireData)
-            this[this.ps.sendPacket]('world_particles', {
+            this.p.sendPacket('world_particles', {
                 particleId: particles[particleName].id,
                 longDistance: visibleFromFar,
                 x,
@@ -56,7 +56,7 @@ module.exports = {
             itemId: items[data1].id,
             itemCount: data2
         }
-
+        
         kicks client: 'expected text to be a string. was an object'
         */
 

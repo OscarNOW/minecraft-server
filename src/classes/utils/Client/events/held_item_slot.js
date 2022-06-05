@@ -3,7 +3,7 @@ module.exports = {
         if (slotId < 0 || slotId > 8)
             throw new Error(`Unknown slotId "${slotId}" (${typeof slotId})`)
 
-        this[this.ps._slot] = slotId;
-        this[this.ps.emitObservable]('slot');
+        this.p._slot = slotId;
+        this.p.emitObservable('slot');
     }
 }

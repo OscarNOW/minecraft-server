@@ -5,27 +5,7 @@ const { EventEmitter } = require('events');
 const fs = require('fs');
 const path = require('path');
 
-const ps = Object.fromEntries([ // privateSymbols
-    'canUsed',
-    'readyStates',
-    'joinedPacketSent',
-    'leftPacketSent',
-    'client',
-    '_respawnScreen',
-    '_slot',
-    '_darkSky',
-    '_gamemode',
-    '_health',
-    '_food',
-    '_foodSaturation',
-    '_position',
-    '_difficulty',
-    'sendPacket',
-    'updateCanUsed',
-    'emitMove',
-    'observables',
-    'emitObservable'
-].map(name => [name, Symbol(name)]));
+const _p = Symbol('_privates');
 
 const events = Object.freeze([
     'chat',
@@ -53,48 +33,49 @@ class Client extends EventEmitter {
     constructor(client, server, version) {
         super();
 
-        this[this.ps.client] = client;
+        this[_p] = {};
+
+        this.p.client = client;
         this.server = server;
         this.version = version;
 
-        this[this.ps.canUsed] = false;
-        this[this.ps.readyStates] = {
+        this.p.canUsed = false;
+        this.p.readyStates = {
             socketOpen: false,
             clientSettings: false
         }
-        this[this.ps.joinedPacketSent] = false;
-        this[this.ps.leftPacketSent] = false;
+        this.p.joinedPacketSent = false;
+        this.p.leftPacketSent = false;
 
-        this[this.ps.observables] = observables;
+        this.p.observables = observables;
         this.entities = {};
 
-        this[this.ps.client].socket.addListener('close', () => {
-            this[this.ps.updateCanUsed]();
+        this.p.client.socket.addListener('close', () => {
+            this.p.updateCanUsed();
         });
 
-        this[this.ps.sendPacket] = (name, packet) => this[this.ps.client].write(name, packet);
-        this[this.ps.updateCanUsed] = () => {
-            this[this.ps.readyStates].socketOpen = this.online;
+        this.p.updateCanUsed = () => {
+            this.p.readyStates.socketOpen = this.online;
             let canUsed = true;
-            for (const val of Object.values(this[this.ps.readyStates]))
+            for (const val of Object.values(this.p.readyStates))
                 if (!val) canUsed = false;
 
-            this[this.ps.canUsed] = canUsed;
-            if (this[this.ps.canUsed] && !this[this.ps.joinedPacketSent] && !this[this.ps.leftPacketSent]) {
-                this[this.ps.joinedPacketSent] = true;
+            this.p.canUsed = canUsed;
+            if (this.p.canUsed && !this.p.joinedPacketSent && !this.p.leftPacketSent) {
+                this.p.joinedPacketSent = true;
 
                 this.server.clients.push(this);
                 this.server.emit('join', this);
 
-            } else if (!canUsed && !this[this.ps.leftPacketSent] && this[this.ps.joinedPacketSent]) {
-                this[this.ps.leftPacketSent] = true;
+            } else if (!canUsed && !this.p.leftPacketSent && this.p.joinedPacketSent) {
+                this.p.leftPacketSent = true;
 
                 this.server.clients = this.server.clients.filter(client => client.canUsed);
                 this.emit('leave');
                 this.server.emit('leave', this);
             }
         }
-        this[this.ps.emitMove] = info => {
+        this.p.emitMove = info => {
             let changed = false;
             [
                 'x',
@@ -103,18 +84,40 @@ class Client extends EventEmitter {
                 'pitch',
                 'yaw'
             ].forEach(val => {
-                if (info[val] !== undefined && this[this.ps._position][val] != info[val]) {
+                if (info[val] !== undefined && this.p._position[val] != info[val]) {
                     changed = true;
-                    this[this.ps._position]._[val] = info[val];
+                    this.p._position._[val] = info[val];
                 }
             });
 
             if (changed)
-                this[this.ps.emitObservable]('position');
+                this.p.emitObservable('position');
         }
-        this[this.ps.emitObservable] = type => {
-            this[this.ps.observables][type].forEach(cb => cb())
+        this.p.emitObservable = type => {
+            this.p.observables[type].forEach(cb => cb())
         }
+
+        //Inject private methods
+        Object.entries(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/methods/private/'))
+                .filter(v => v.endsWith('.js'))
+                .map(v => require(`./Client/methods/private/${v}`))
+            )
+        ).forEach(([key, value]) =>
+            this.p[key] = value.bind(this)
+        )
+
+        //Inject private static properties
+        Object.entries(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/properties/private/static/'))
+                .filter(v => v.endsWith('.js'))
+                .map(v => require(`./Client/properties/private/static/${v}`))
+            )
+        ).forEach(([key, value]) =>
+            this.p[key] = value
+        )
 
         //Inject public methods
         Object.defineProperties(this,
@@ -135,14 +138,14 @@ class Client extends EventEmitter {
             )
         )
 
-        //Inject static properties
+        //Inject public static properties
         Object.defineProperties(this,
             Object.fromEntries(
                 Object.entries(
                     Object.assign({}, ...fs
-                        .readdirSync(path.resolve(__dirname, './Client/properties/static/'))
+                        .readdirSync(path.resolve(__dirname, './Client/properties/public/static/'))
                         .filter(v => v.endsWith('.js'))
-                        .map(v => require(`./Client/properties/static/${v}`))
+                        .map(v => require(`./Client/properties/public/static/${v}`))
                     )
                 )
                     .map(([name, get]) => [name, {
@@ -154,24 +157,24 @@ class Client extends EventEmitter {
             )
         );
 
-        //Initialize dynamic properties
+        //Initialize public dynamic properties
         for (const { init } of Object.values(
             Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+                .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
                 .filter(v => v.endsWith('.js'))
-                .map(v => require(`./Client/properties/dynamic/${v}`))
+                .map(v => require(`./Client/properties/public/dynamic/${v}`))
             )
         ))
             init?.call?.(this);
 
-        //Inject dynamic properties
+        //Inject public dynamic properties
         Object.defineProperties(this,
             Object.fromEntries(
                 Object.entries(
                     Object.assign({}, ...fs
-                        .readdirSync(path.resolve(__dirname, './Client/properties/dynamic/'))
+                        .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
                         .filter(v => v.endsWith('.js'))
-                        .map(v => require(`./Client/properties/dynamic/${v}`))
+                        .map(v => require(`./Client/properties/public/dynamic/${v}`))
                     )
                 )
                     .map(([name, { get, set }]) => [name, {
@@ -191,10 +194,10 @@ class Client extends EventEmitter {
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this[this.ps.client].on(eventName, eventCallback.bind(this))
+            this.p.client.on(eventName, eventCallback.bind(this))
 
 
-        this[this.ps.sendPacket]('login', {
+        this.p.sendPacket('login', {
             entityId: client.id,
             isHardcore: false,
             gameMode: 0,
@@ -213,7 +216,7 @@ class Client extends EventEmitter {
         });
     }
 
-    get ps() {
+    get p() {
         let callPath = new Error().stack.split('\n')[2];
 
         if (callPath.includes('('))
@@ -226,7 +229,7 @@ class Client extends EventEmitter {
         let folderPath = path.resolve(__dirname, '../../');
 
         if (callPath.startsWith(folderPath))
-            return ps;
+            return this[_p];
         else {
             return undefined;
         }

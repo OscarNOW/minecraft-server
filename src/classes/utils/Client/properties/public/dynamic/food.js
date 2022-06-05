@@ -1,10 +1,10 @@
 module.exports = {
     food: {
         get: function () {
-            return this[this.ps._food]
+            return this.p._food
         },
         set: function (f) {
-            if (!this[this.ps.canUsed])
+            if (!this.p.canUsed)
                 throw new Error(`This action can't be performed on this Client right now. ${this.online ? 'This may be because the Client is no longer online or that the client is not ready to receive this packet.' : 'This is because the Client is no longer online'}`)
 
             const food = parseInt(f);
@@ -12,17 +12,17 @@ module.exports = {
             if (isNaN(food) || food < 0 || food > 20)
                 throw new Error(`Unknown food, expected an integer between 0 and 20, received "${f}" (${typeof f})`)
 
-            this[this.ps.sendPacket]('update_health', {
-                health: this[this.ps._health],
+            this.p.sendPacket('update_health', {
+                health: this.p._health,
                 food,
-                foodSaturation: this[this.ps._foodSaturation]
+                foodSaturation: this.p._foodSaturation
             })
 
-            this[this.ps._food] = food;
-            this[this.ps.emitObservable]('food');
+            this.p._food = food;
+            this.p.emitObservable('food');
         },
         init: function () {
-            this[this.ps._food] = 20;
+            this.p._food = 20;
         }
     }
 }

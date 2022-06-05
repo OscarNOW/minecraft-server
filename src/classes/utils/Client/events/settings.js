@@ -47,7 +47,7 @@ module.exports = {
         else
             throw new Error(`Unknown mainHand "${mainHand}" (${typeof mainHand})`)
 
-        this[this.ps.readyStates].clientSettings = true;
-        this[this.ps.updateCanUsed]();
+        this.p.readyStates.clientSettings = true;
+        this.p.updateCanUsed();
     }
 }
