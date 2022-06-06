@@ -32,8 +32,6 @@ class Client extends EventEmitter {
         this.server = server;
         this.version = version;
 
-        this.entities = {};
-
         this.p.client.socket.addListener('close', () => {
             this.p.updateCanUsed();
         });
