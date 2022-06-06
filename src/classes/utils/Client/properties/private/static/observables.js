@@ -11,7 +11,5 @@ const observables = Object.freeze(Object.fromEntries([
 ].map(v => [v, []])));
 
 module.exports = {
-    observables: function () {
-        return observables;
-    }
+    observables: () => observables
 }
