@@ -65,7 +65,17 @@ export class Client extends EventEmitter {
 
     difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
-    observe(type: 'position' | 'slot' | 'health' | 'food' | 'foodSaturation' | 'darkSky' | 'showRespawnScreen' | 'gamemode' | 'difficulty', callback: () => void): void;
+    observe(type: 'slot' | 'health' | 'food' | 'foodSaturation', callback: (changedValue: number) => void): void;
+    observe(type: 'darkSky' | 'showRespawnScreen', callback: (changedValue: boolean) => void): void;
+    observe(type: 'position', callback: (changedValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
+    observe(type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    observe(type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     particle(
         particleName: noDataParticle,
