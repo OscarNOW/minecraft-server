@@ -4,7 +4,7 @@ const observables = Object.freeze(Object.fromEntries([
     'health',
     'food',
     'foodSaturation',
-    'darkSky',
+    'clearSky',
     'showRespawnScreen',
     'gamemode',
     'difficulty'
