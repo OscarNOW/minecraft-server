@@ -5,7 +5,7 @@ const observables = Object.freeze(Object.fromEntries([
     'food',
     'foodSaturation',
     'darkSky',
-    'respawnScreen',
+    'showRespawnScreen',
     'gamemode',
     'difficulty'
 ].map(v => [v, []])));

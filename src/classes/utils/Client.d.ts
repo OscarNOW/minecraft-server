@@ -56,7 +56,7 @@ export class Client extends EventEmitter {
     };
 
     darkSky: boolean;
-    respawnScreen: boolean;
+    showRespawnScreen: boolean;
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
@@ -65,7 +65,7 @@ export class Client extends EventEmitter {
 
     difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
-    observe(type: 'position' | 'slot' | 'health' | 'food' | 'foodSaturation' | 'darkSky' | 'respawnScreen' | 'gamemode' | 'difficulty', callback: () => void): void;
+    observe(type: 'position' | 'slot' | 'health' | 'food' | 'foodSaturation' | 'darkSky' | 'showRespawnScreen' | 'gamemode' | 'difficulty', callback: () => void): void;
 
     particle(
         particleName: noDataParticle,
