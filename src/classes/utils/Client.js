@@ -72,7 +72,7 @@ class Client extends EventEmitter {
                         configurable: false,
                         enumerable: true,
                         writable: false,
-                        value
+                        value: value.bind(this)
                     }])
             )
         )
@@ -169,9 +169,8 @@ class Client extends EventEmitter {
 
         if (callPath.startsWith(folderPath))
             return this[_p];
-        else {
-            return undefined;
-        }
+        else
+            return undefined
     }
 
     addListener(event, callback) {

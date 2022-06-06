@@ -12,6 +12,4 @@ Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
 Change darkSky to clearSky
 Change respawnScreen to showRespawnScreen
- - Move private methods and properties into separate files
-Add changed value as argument for observe callback
 Send different packets to client when changing client position based on what changed
