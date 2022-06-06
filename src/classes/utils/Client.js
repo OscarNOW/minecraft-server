@@ -32,14 +32,6 @@ class Client extends EventEmitter {
         this.server = server;
         this.version = version;
 
-        this.p.canUsed = false;
-        this.p.readyStates = {
-            socketOpen: false,
-            clientSettings: false
-        }
-        this.p.joinedPacketSent = false;
-        this.p.leftPacketSent = false;
-
         this.entities = {};
 
         this.p.client.socket.addListener('close', () => {
