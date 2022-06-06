@@ -10,4 +10,3 @@ Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
-Send different packets to client when changing client position based on what changed
