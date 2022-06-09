@@ -61,7 +61,8 @@ class Server extends EventEmitter {
                     },
                     description: info.description ?? ''
                 }
-            }
+            },
+            hideErrors: true
         })
 
         this.server.on('connection', client => {
