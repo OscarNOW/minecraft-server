@@ -430,39 +430,38 @@ declare class Entity extends EventEmitter {
 
 export class Server extends EventEmitter {
     constructor(serverOptions: {
-        serverList({ ip, version }: { ip: string, version: version }): {
-            version: {
-                wrongText: string;
-                correct: version;
+        serverList(info: {
+            ip: string,
+            version: version | null,
+            connection: {
+                host: string | null,
+                port: number | null
+            },
+            legacy: boolean
+        }): {
+            version?: {
+                wrongText?: string;
+                correct?: version;
             };
             players: {
                 online: number;
                 max: number;
-                hover: string | Array<{
+                hover?: string | Array<{
                     name: string;
                     uuid: string;
                 }>;
             };
-            description: string;
+            description?: string;
         };
-        wrongVersionConnect({ ip, version }: { ip: string, version: version }): string | null;
+        wrongVersionConnect(info: {
+            ip: string,
+            version: version,
+            connection: {
+                host: string | null,
+                port: number | null
+            }
+        }): string | null;
     });
-    serverList({ ip, version }: { ip: string, version: version }): {
-        version: {
-            wrongText: string;
-            correct: version;
-        };
-        players: {
-            online: number;
-            max: number;
-            hover: string | Array<{
-                name: string;
-                uuid: string;
-            }>;
-        };
-        description: string;
-    };
-    wrongVersionConnect({ ip, version }: { ip: string, version: version }): string | null;
 
     private events: object;
     private server: any;

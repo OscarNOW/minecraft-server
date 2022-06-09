@@ -11,7 +11,7 @@ export class Server extends EventEmitter {
                 host: string | null,
                 port: number | null
             },
-            legacyPing: boolean
+            legacy: boolean
         }): {
             version?: {
                 wrongText?: string;
@@ -33,8 +33,7 @@ export class Server extends EventEmitter {
             connection: {
                 host: string | null,
                 port: number | null
-            },
-            legacyPing: boolean
+            }
         }): string | null;
     });
 

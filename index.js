@@ -15,7 +15,7 @@ const server = new Server({
     serverList: ({ ip, version, connection: { host, port }, legacy }) => ({
         version: {
             wrongText: 'Use 1.16.3',
-            correct: '1.16.3'
+            correct: legacy ? '1.6.4' : '1.16.3'
         },
         players: {
             online: 0,
@@ -24,7 +24,7 @@ const server = new Server({
         },
         description: legacy ? `${ip} ${version} ${host} ${port}` : `Beautiful server`
     }),
-    wrongVersionConnect: ({ ip, version, connection: { host, port }, legacy }) => `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`
+    wrongVersionConnect: ({ ip, version, connection: { host, port } }) => `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}`
 });
 
 server.on('join', client => {

@@ -16,8 +16,8 @@ const events = Object.freeze([
     'leave'
 ])
 
-
 let clientEarlyInformation = new WeakMap();
+let clientLegacyPing = new WeakMap();
 
 class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect }) {
@@ -35,8 +35,8 @@ class Server extends EventEmitter {
             maxPlayers: 0,
             beforePing: (response, client) => {
 
-                let info = this.serverList(clientEarlyInformation.get(client));
-                let pingVersion = info.version?.correct ?? serverVersion;
+                let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
+                let infoVersion = info.version?.correct ?? serverVersion;
 
                 let playerHover = [];
                 if (info.players.hover === undefined)
@@ -51,8 +51,8 @@ class Server extends EventEmitter {
 
                 return {
                     version: {
-                        name: info.version?.wrongText ?? pingVersion,
-                        protocol: protocolVersions.new[pingVersion] ?? 0
+                        name: info.version?.wrongText ?? infoVersion,
+                        protocol: protocolVersions.new[infoVersion] ?? 0
                     },
                     players: {
                         online: info.players.online,
@@ -68,7 +68,7 @@ class Server extends EventEmitter {
         this.server.on('connection', client => {
             let clientState = null;
 
-            client.on('packet', ({ payload }, { name, state }, _, buffer) => {
+            client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
                 if (
                     name == 'legacy_server_list_ping' &&
                     state == 'handshaking' &&
@@ -86,9 +86,9 @@ class Server extends EventEmitter {
                     connection: {
                         host: serverHost,
                         port: serverPort
-                    },
-                    legacyPing: false
+                    }
                 });
+                clientLegacyPing.set(client, false)
 
                 if (clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) {
                     let ret = this.wrongVersionConnect(clientEarlyInformation.get(client));
@@ -185,11 +185,11 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
         connection: {
             host: hostname,
             port
-        },
-        legacyPing: true
+        }
     })
+    clientLegacyPing.set(client, true)
 
-    let info = serverList(clientEarlyInformation.get(client));
+    let info = serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
     let infoVersion = info.version?.correct ?? serverVersion;
 
     const responseString = '\xa7' + [1,

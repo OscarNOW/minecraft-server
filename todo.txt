@@ -13,3 +13,5 @@ Update types for version (server list) with legacy versions
 Change protocolVersions from object to array with {protocol, legacy, version}
 Implement wrongVersionConnect for legacy clients
 Add connection hostname & port to Client class
+Test legacy ping with version 1.4
+Test legacy ping with version 1.3
