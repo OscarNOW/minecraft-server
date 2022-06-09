@@ -1,3 +1,4 @@
-Our: fe  0101     fa  000b   004d0043007c00500069006e00670048006f00730074 0019         4e               0009   006c006f00630061006c0068006f00730074 000063dd
-Doc: fe  01       fa  000b   004d0043007c00500069006e00670048006f00730074 0019         49               0009   006c006f00630061006c0068006f00730074 000063dd
-     id  payload  id  length                 MC|PingHost                  length rest  protocol version length               hostname                port
+Our: fe     0101     fa     000b         004d0043007c00500069006e00670048006f00730074     0019            4e            0009      006c006f00630061006c0068006f00730074 000063dd
+Doc: fe     01       fa     000b         004d0043007c00500069006e00670048006f00730074     0019            49            0009      006c006f00630061006c0068006f00730074 000063dd
+    const  payload  const  length next                    const                       length rest  protocol version  length next               hostname                  port
+              1                 11                      MC|PingHost                       25              73              9                    localhost                25565

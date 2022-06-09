@@ -13,3 +13,4 @@ Update types for version (server list) with legacy versions
 Change protocolVersions from object to array with {protocol, legacy, version}
 Implement wrongVersionConnect for legacy clients
 Hide annoying console warning when legacy pinged
+Add connection hostname & port to Client class

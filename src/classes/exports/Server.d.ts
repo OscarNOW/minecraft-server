@@ -6,12 +6,12 @@ export class Server extends EventEmitter {
     constructor(serverOptions: {
         serverList(info: {
             ip: string,
-            version: version,
+            version: version | null,
             connection: {
-                host: string,
-                port: number
+                host: string | null,
+                port: number | null
             },
-            legacy: boolean
+            legacyPing: boolean
         }): {
             version?: {
                 wrongText?: string;
@@ -31,9 +31,10 @@ export class Server extends EventEmitter {
             ip: string,
             version: version,
             connection: {
-                host: string,
-                port: number
-            }
+                host: string | null,
+                port: number | null
+            },
+            legacyPing: boolean
         }): string | null;
     });
 

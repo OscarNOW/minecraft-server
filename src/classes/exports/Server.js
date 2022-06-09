@@ -1,9 +1,10 @@
 const { Client } = require('../utils/Client');
 
 const protocolVersions = require('../../data/protocolVersions.json')
-const version = require('../../data/version.json');
+const serverVersion = require('../../data/version.json');
 
 const mc = require('minecraft-protocol');
+const endianToggle = require('endian-toggle')
 const { EventEmitter } = require('events');
 
 function getVersionFromProtocol(protocol, legacy) {
@@ -15,6 +16,9 @@ const events = Object.freeze([
     'leave'
 ])
 
+
+let clientEarlyInformation = new WeakMap();
+
 class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect }) {
         super();
@@ -23,18 +27,16 @@ class Server extends EventEmitter {
         this.wrongVersionConnect = wrongVersionConnect;
         this.clients = [];
 
-        let clientInfos = new WeakMap();
-
         this.server = mc.createServer({
             encryption: true,
             host: 'localhost',
-            version,
+            version: serverVersion,
             motd: '',
             maxPlayers: 0,
             beforePing: (response, client) => {
 
-                let info = this.serverList(clientInfos.get(client));
-                let pingVersion = info.version?.correct ?? version;
+                let info = this.serverList(clientEarlyInformation.get(client));
+                let pingVersion = info.version?.correct ?? serverVersion;
 
                 let playerHover = [];
                 if (info.players.hover === undefined)
@@ -64,108 +66,43 @@ class Server extends EventEmitter {
 
         this.server.on('connection', client => {
             let clientState = null;
-            let clientVersion;
 
-            client.on('packet', (json, { size, name, state }, buffer, fullBuffer) => {
+            client.on('packet', ({ payload }, { name, state }, _, buffer) => {
                 if (
                     name == 'legacy_server_list_ping' &&
                     state == 'handshaking' &&
-                    json.payload == 1
-                ) {
-
-                    function hex_to_ascii(str1) {
-                        var hex = str1.toString();
-                        var str = '';
-                        for (var n = 0; n < hex.length; n += 2) {
-                            str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-                        }
-                        return str;
-                    }
-
-                    let clientInf = fullBuffer.toString('hex');
-
-                    const mcPingHost = '004d0043007c00500069006e00670048006f00730074';
-                    const lengthRest = clientInf.slice(clientInf.indexOf(mcPingHost) + mcPingHost.length, clientInf.indexOf(mcPingHost) + mcPingHost.length + 4);
-                    let protocol = clientInf.slice(clientInf.indexOf(mcPingHost + lengthRest) + mcPingHost.length + lengthRest.length, clientInf.indexOf(mcPingHost + lengthRest) + mcPingHost.length + lengthRest.length + 2)
-                    const lengthHostname = clientInf.slice(clientInf.indexOf(mcPingHost + lengthRest + protocol) + mcPingHost.length + lengthRest.length + protocol.length, clientInf.indexOf(mcPingHost + lengthRest + protocol) + mcPingHost.length + lengthRest.length + protocol.length + 4)
-                    let hostname = clientInf.slice(clientInf.indexOf(lengthRest + protocol + lengthHostname) + lengthRest.length + protocol.length + lengthHostname.length, clientInf.length - 8)
-                    let port = clientInf.slice(clientInf.length - 8, clientInf.length)
-
-                    protocol = parseInt(protocol, 16)
-                    hostname = hex_to_ascii(hostname).split('\x00').join('')
-                    port = parseInt(port, 16)
-
-                    clientInfos.set(client, {
-                        ip: client.socket.remoteAddress,
-                        version: getVersionFromProtocol(protocol, true),
-                        connection: {
-                            host: hostname,
-                            port
-                        },
-                        legacy: true
-                    })
-
-                    const endianToggle = function (buf, bits) {
-                        var output = Buffer.alloc(buf.length);
-                        if (bits % 8 !== 0) throw new Error('bits must be a multiple of 8');
-                        var bytes = bits / 8;
-                        if (buf.length % bytes !== 0) throw new Error((buf.length % bytes) + ' non-aligned trailing bytes');
-                        for (var i = 0; i < buf.length; i += bytes)
-                            for (var j = 0; j < bytes; j++)
-                                output[i + bytes - j - 1] = buf[i + j];
-                        return output;
-                    };
-
-                    let returnInfo = this.serverList(clientInfos.get(client));
-                    let returnVersion = returnInfo.version?.correct ?? version;
-
-                    const responseString = '\xa7' + [1,
-                        protocolVersions.legacy[returnVersion] ?? 127,
-                        returnInfo.version?.wrongText ?? returnVersion,
-                        returnInfo.description ?? '',
-                        `${returnInfo.players.online}`,
-                        `${returnInfo.players.max}`
-                    ].join('\0')
-                    const b = Buffer.alloc(2);
-                    b.writeUInt16BE(responseString.length);
-                    const raw = Buffer.concat([Buffer.from('ff', 'hex'), b, endianToggle(Buffer.from(responseString, 'utf16le'), 16)])
-                    client.socket.write(raw)
-                }
+                    payload == 1
+                )
+                    handleLegacyPing(buffer, client, this.serverList);
             })
 
-            client.on('state', state => {
-                if (state == 'login')
-                    clientState = 'login'
-                else if (state == 'status')
-                    clientState = 'status'
-            })
+            client.on('state', state => clientState = state)
 
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
-                clientVersion = getVersionFromProtocol(protocolVersion, false)
-
-                clientInfos.set(client, {
+                clientEarlyInformation.set(client, {
                     ip: client.socket.remoteAddress,
-                    version: clientVersion,
+                    version: getVersionFromProtocol(protocolVersion, false),
                     connection: {
                         host: serverHost,
                         port: serverPort
                     },
-                    legacy: false
+                    legacyPing: false
                 });
 
-                if (clientState == 'login' && clientVersion != version) {
-                    let ret = this.wrongVersionConnect(clientInfos.get(client));
+                if (clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) {
+                    let ret = this.wrongVersionConnect(clientEarlyInformation.get(client));
+
                     if (typeof ret == 'string')
                         client.end(ret)
                     else if (ret !== null)
-                        throw new Error(`Unknown return from wrongVersionConnect "${ret}" (${typeof ret}). It has to be a string or null. `)
+                        throw new Error(`Unknown typeof return from wrongVersionConnect, expected string or null, got "${typeof ret}" (${ret})`)
                 }
 
             })
         })
 
         this.server.on('login', async client => {
-            new Client(client, this, clientInfos.get(client).version);
+            new Client(client, this, clientEarlyInformation.get(client).version);
         });
 
     }
@@ -223,5 +160,77 @@ class Server extends EventEmitter {
         this.server.close();
     }
 }
+
+function hexToString(hex) {
+    let out = '';
+    for (let ii = 0; ii < hex.length; ii += 2)
+        out += String.fromCharCode(parseInt(hex.substr(ii, 2), 16));
+
+    return out.split('\x00').join('');
+}
+
+function hexToNumber(hex) {
+    return parseInt(hex, 16);
+}
+
+function handleLegacyPing(request, client, serverList) {
+    respondToLegacyPing(parseLegacyPing(request), client, serverList);
+}
+
+function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
+    clientEarlyInformation.set(client, {
+        ip: client.socket.remoteAddress,
+        version: protocol ? getVersionFromProtocol(protocol, true) : null,
+        connection: {
+            host: hostname,
+            port
+        },
+        legacyPing: true
+    })
+
+    let info = serverList(clientEarlyInformation.get(client));
+    let infoVersion = info.version?.correct ?? serverVersion;
+
+    const responseString = '\xa7' + [1,
+        protocolVersions.legacy[infoVersion] ?? 127,
+        info.version?.wrongText ?? infoVersion,
+        info.description ?? '',
+        `${info.players.online}`,
+        `${info.players.max}`
+    ].join('\0');
+
+    const buffer = Buffer.alloc(2);
+    buffer.writeUInt16BE(responseString.length);
+
+    const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(responseString, 'utf16le'), 16)])
+    client.socket.write(responseBuffer)
+}
+
+function parseLegacyPing(requestLeft) {
+    requestLeft = requestLeft.toString('hex').split('');
+    let request = [];
+
+    /* 0 */ request.push(requestLeft.splice(0, 2).join('')) //fe
+    /* 1 */ request.push(hexToNumber(requestLeft.splice(0, requestLeft.join('').indexOf('fa')).join(''))) //payload
+    /* 2 */ request.push(requestLeft.splice(0, 2).join('')) //fa
+
+    if (requestLeft.length == 0) return { protocol: null, hostname: null, port: null } //The client didn't send any information
+
+    /* 3 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //000b (=11) length of following string
+    /* 4 */ request.push(hexToString(requestLeft.splice(0, request[3] * 4).join(''))) // MC|PingHost
+    /* 5 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //length of rest of request
+    /* 6 */ request.push(hexToNumber(requestLeft.splice(0, 2).join(''))) //protocol version
+    /* 7 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //length of following string
+    /* 8 */ request.push(hexToString(requestLeft.splice(0, request[7] * 4).join(''))) //hostname
+    /* 9 */ request.push(hexToNumber(requestLeft.splice(0, 8).join(''))) //port
+
+    return {
+        protocol: request[6],
+        hostname: request[8],
+        port: request[9]
+    }
+}
+
+
 
 module.exports = Object.freeze({ Server });

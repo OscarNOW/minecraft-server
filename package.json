@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OscarNOW/minecraft#readme",
   "dependencies": {
+    "endian-toggle": "^0.0.0",
     "json-comments": "^0.2.1",
     "minecraft-protocol": "^1.26.5",
     "mineflayer": "^3.11.2",
