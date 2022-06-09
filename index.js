@@ -12,19 +12,19 @@ for (let x = 0; x < 16; x++)
     }
 
 const server = new Server({
-    serverList: ({ ip, version }) => ({
+    serverList: ({ ip, version, connection: { host, port }, legacy }) => ({
         version: {
-            wrongText: 'Please use version 1.16.3',
+            wrongText: 'Use 1.16.3',
             correct: '1.16.3'
         },
         players: {
             online: 0,
             max: 0,
-            hover: 'Hi\n2\n3'
+            hover: `ip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`
         },
-        description: `ip: ${ip}\nversion: ${version}`
+        description: legacy ? `${ip} ${version} ${host} ${port}` : `Beautiful server`
     }),
-    wrongVersionConnect: ({ version, ip }) => `Please use 1.16.3!\nYour version: ${version}\nYour ip: ${ip}`
+    wrongVersionConnect: ({ ip, version, connection: { host, port }, legacy }) => `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`
 });
 
 server.on('join', client => {

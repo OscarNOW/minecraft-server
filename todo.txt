@@ -1,12 +1,15 @@
 block ids not correct (blue_ice or packed_ice)
-implement error class
-Improve text class
-Resolve comments
-Implement legacy ping
+implement error class/function
+add lazy loading to text class
+add lazy loading to rgb class
+ - Implement legacy ping
 Implement favicon
 Use data loader instead of require()
 Fix return type for rawListeners for Client
-Split client get and set into multiple files
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
+Update types for version (server list) with legacy versions
+Change protocolVersions from object to array with {protocol, legacy, version}
+Implement wrongVersionConnect for legacy clients
+Hide annoying console warning when legacy pinged
