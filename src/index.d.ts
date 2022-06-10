@@ -315,8 +315,21 @@ declare class Client extends EventEmitter {
     }) => void): void;
     removeListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
+    rawListeners(event: 'chat'): ((message: string) => void)[];
+    rawListeners(event: 'leave' | 'itemHandSwap'): (() => void)[];
+    rawListeners(event: 'digStart'): ((location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void)[];
+    rawListeners(event: 'digCancel' | 'blockBreak'): ((location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void)[];
+    rawListeners(event: 'itemDrop'): ((stack: boolean) => void)[];
+
     removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
-    rawListeners(event: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
 }
 
 declare class Entity extends EventEmitter {
