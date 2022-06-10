@@ -8,5 +8,4 @@ Fix return type for rawListeners for Client
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
-Update types for version (server list) to include legacy versions and 'legacy'
 Add connection hostname & port to Client class
