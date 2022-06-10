@@ -24,7 +24,7 @@ const server = new Server({
         },
         description: new Text([{ text: legacy ? `${ip} ${version} ${host} ${port}` : `Beautiful server`, color: 'green', modifiers: ['bold', 'underline'] }])
     }),
-    wrongVersionConnect: ({ ip, version, connection: { host, port } }) => new Text([{ text: `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}`, color: 'green', modifiers: ['bold', 'italic'] }])
+    wrongVersionConnect: ({ ip, version, connection: { host, port }, legacy }) => new Text([{ text: `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`, color: 'green', modifiers: ['bold', 'italic'] }])
 });
 
 server.on('join', client => {

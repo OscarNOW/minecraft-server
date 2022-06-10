@@ -459,7 +459,8 @@ export class Server extends EventEmitter {
             connection: {
                 host: string | null,
                 port: number | null
-            }
+            },
+            legacy: boolean
         }): string | Text | null;
     });
 

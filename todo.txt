@@ -2,7 +2,6 @@ block ids not correct (blue_ice or packed_ice)
 implement error class/function
 add lazy loading to text class
 add lazy loading to rgb class
- - Implement legacy ping
 Implement favicon
 Use data loader instead of require()
 Fix return type for rawListeners for Client

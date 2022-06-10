@@ -92,7 +92,7 @@ class Server extends EventEmitter {
                 clientLegacyPing.set(client, false)
 
                 if ((clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) || isLegacy) { //Check for wrongVersion doesn't work when legacy
-                    let endReason = `${this.wrongVersionConnect(clientEarlyInformation.get(client))}`;
+                    let endReason = `${this.wrongVersionConnect({ ...clientEarlyInformation.get(client), legacy: isLegacy })}`;
 
                     if (typeof endReason == 'string')
                         if (isLegacy) {
