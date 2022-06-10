@@ -34,7 +34,6 @@ class Server extends EventEmitter {
             motd: '',
             maxPlayers: 0,
             beforePing: (response, client) => {
-
                 let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
                 let infoVersion = info.version?.correct ?? serverVersion;
 
@@ -43,7 +42,7 @@ class Server extends EventEmitter {
                     playerHover = undefined;
                 else if (typeof info.players.hover == 'string')
                     playerHover = info.players.hover.split('\n').map(val => {
-                        return { name: val, id: '00000000-0000-4000-8000-000000000000' }
+                        return { name: `${val}`, id: '00000000-0000-4000-8000-000000000000' }
                     })
                 else
                     for (const value of Object.values(info.players.hover))
@@ -51,7 +50,7 @@ class Server extends EventEmitter {
 
                 return {
                     version: {
-                        name: info.version?.wrongText ?? infoVersion,
+                        name: `${info.version?.wrongText ?? infoVersion}`,
                         protocol: protocolVersions.new[infoVersion] ?? 0
                     },
                     players: {
@@ -59,7 +58,7 @@ class Server extends EventEmitter {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: info.description ?? ''
+                    description: `${info.description}` ?? ''
                 }
             },
             hideErrors: true
@@ -74,29 +73,39 @@ class Server extends EventEmitter {
                     state == 'handshaking' &&
                     payload == 1
                 )
-                    handleLegacyPing(buffer, client, this.serverList);
+                    handleLegacyPing(buffer, client, this.serverList)
             })
 
             client.on('state', state => clientState = state)
 
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
+                const isLegacy = serverHost == '';
+
                 clientEarlyInformation.set(client, {
                     ip: client.socket.remoteAddress,
-                    version: getVersionFromProtocol(protocolVersion, false),
+                    version: isLegacy ? 'legacy' : getVersionFromProtocol(protocolVersion, false),
                     connection: {
-                        host: serverHost,
-                        port: serverPort
+                        host: isLegacy ? null : serverHost,
+                        port: isLegacy ? null : serverPort
                     }
                 });
                 clientLegacyPing.set(client, false)
 
-                if (clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) {
-                    let ret = this.wrongVersionConnect(clientEarlyInformation.get(client));
+                if ((clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                    let endReason = `${this.wrongVersionConnect(clientEarlyInformation.get(client))}`;
 
-                    if (typeof ret == 'string')
-                        client.end(ret)
-                    else if (ret !== null)
-                        throw new Error(`Unknown typeof return from wrongVersionConnect, expected string or null, got "${typeof ret}" (${ret})`)
+                    if (typeof endReason == 'string')
+                        if (isLegacy) {
+                            const buffer = Buffer.alloc(2);
+                            buffer.writeUInt16BE(endReason.length);
+
+                            const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(endReason, 'utf16le'), 16)])
+
+                            return client.socket.write(responseBuffer)
+                        } else
+                            client.end(endReason)
+                    else if (endReason !== null)
+                        throw new Error(`Unknown typeof return from wrongVersionConnect, expected string or null, got "${typeof endReason}" (${endReason})`)
                 }
 
             })
@@ -193,9 +202,9 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     let infoVersion = info.version?.correct ?? serverVersion;
 
     const responseString = '\xa7' + [1,
-        protocolVersions.legacy[infoVersion] ?? 127,
-        info.version?.wrongText ?? infoVersion,
-        info.description ?? '',
+        parseInt(protocolVersions.legacy[infoVersion] ?? 127),
+        `${info.version?.wrongText ?? infoVersion}`,
+        `${info.description ?? ''}`,
         `${info.players.online}`,
         `${info.players.max}`
     ].join('\0');

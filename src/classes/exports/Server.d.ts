@@ -14,7 +14,7 @@ export class Server extends EventEmitter {
             legacy: boolean
         }): {
             version?: {
-                wrongText?: string;
+                wrongText?: string | Text;
                 correct?: version;
             };
             players: {
@@ -25,7 +25,7 @@ export class Server extends EventEmitter {
                     uuid: string;
                 }>;
             };
-            description?: string;
+            description?: string | Text;
         };
         wrongVersionConnect(info: {
             ip: string,
@@ -34,7 +34,7 @@ export class Server extends EventEmitter {
                 host: string | null,
                 port: number | null
             }
-        }): string | null;
+        }): string | Text | null;
     });
 
     private events: object;

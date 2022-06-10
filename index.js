@@ -22,9 +22,9 @@ const server = new Server({
             max: 0,
             hover: `ip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`
         },
-        description: legacy ? `${ip} ${version} ${host} ${port}` : `Beautiful server`
+        description: new Text([{ text: legacy ? `${ip} ${version} ${host} ${port}` : `Beautiful server`, color: 'green', modifiers: ['bold', 'underline'] }])
     }),
-    wrongVersionConnect: ({ ip, version, connection: { host, port } }) => `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}`
+    wrongVersionConnect: ({ ip, version, connection: { host, port } }) => new Text([{ text: `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}`, color: 'green', modifiers: ['bold', 'italic'] }])
 });
 
 server.on('join', client => {

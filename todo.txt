@@ -9,9 +9,8 @@ Fix return type for rawListeners for Client
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers
 Implement loader for Client functions public, get, set
-Update types for version (server list) with legacy versions
+Update types for version (server list) to include legacy versions and 'legacy'
 Change protocolVersions from object to array with {protocol, legacy, version}
-Implement wrongVersionConnect for legacy clients
 Add connection hostname & port to Client class
 Test legacy ping with version 1.4
 Test legacy ping with version 1.3
