@@ -2,11 +2,13 @@ const { textModifierNameMapping, textColorNameMapping } = require('../../functio
 
 class Text {
     constructor(text) {
-        if (typeof text == 'string')
-            this._array = Text.stringToArray(text);
-        else
+        if (typeof text == 'string') {
+            this._string = Text.parseString(text);
+            this._array = null;
+        } else {
             this._array = Text.parseArray(text);
-        this._string = Text.arrayToString(this.array);
+            this._string = null;
+        }
     }
 
     toString() {
@@ -14,21 +16,27 @@ class Text {
     }
 
     get array() {
+        if (this._array === null)
+            this._array = Text.stringToArray(this._string);
+
         return this._array;
     }
 
     get string() {
+        if (this._string === null)
+            this._string = Text.arrayToString(this._array)
+
         return this._string;
     }
 
     set array(val) {
         this._array = Text.parseArray(val);
-        this._string = Text.arrayToString(this.array);
+        this._string = null
     }
 
     set string(val) {
         this._string = Text.parseString(val);
-        this._array = Text.stringToArray(this.string);
+        this._array = null;
     }
 
     static arrayToString(a) {
@@ -105,6 +113,8 @@ class Text {
         return text;
     }
     static parseArray(text) {
+        if (!Array.isArray(text))
+            text = [text]
         let array = [];
 
         text.forEach(val => {

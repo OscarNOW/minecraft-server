@@ -31,7 +31,9 @@ server.on('join', client => {
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('chat', a => eval(a))
+    client.on('chat', text =>
+        client.chat(new Text({ text, color: 'green', modifiers: ['bold', 'italic'] }))
+    )
 
     setTimeout(() => {
         client.position = {
