@@ -1,7 +1,12 @@
-const version = '1.16.3'
+const version = require('../../data/version.json')
+
 const prismarineChunk = require('prismarine-chunk')(version);
 const Vec3 = require('vec3');
-const blocks = require('../../data/blocks.json');
+
+const JSON5 = require('JSON5');
+const fs = require('fs')
+const path = require('path')
+const blocks = JSON5.parse(fs.readFileSync(path.resolve(__dirname, '../../data/blocks.json')).toString())
 
 class Chunk {
     constructor() {
