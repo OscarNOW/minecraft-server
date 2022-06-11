@@ -3,22 +3,39 @@ const { ChangableHsl } = require('../utils/ChangableHsl.js');
 
 class Color {
     constructor(input) {
-        let rgb;
+        this._rgbCached = false;
+        this._hslCached = false;
+        this._hexCached = false;
+
+        let rgb = {
+            r: 0,
+            g: 0,
+            b: 0
+        };
+        let hsl = {
+            h: 0,
+            s: 0,
+            l: 0
+        };
+        let hex = '#000000';
 
         if (typeof input == 'string')
-            if (input.startsWith('#'))
-                rgb = Color.hexToRgb(input)
-            else
+            if (input.startsWith('#')) {
+                this._hexCached = true;
+                hex = input
+            } else
                 throw new Error(`Unknown Color input "${input}" (${typeof input}). If you want to use hex, please start the string with "#"`)
-        else if (input.r && input.g && input.b)
+        else if (input.r && input.g && input.b) {
+            this._rgbCached = true;
             rgb = {
                 r: input.r,
                 g: input.g,
                 b: input.b
             }
-        else if (input.h && input.s && input.l)
-            rgb = Color.hslToRgb(input)
-        else
+        } else if (input.h && input.s && input.l) {
+            this._hslCached = true;
+            hsl = input;
+        } else
             throw new Error(`Unknown Color input "${input}" (${typeof input})`)
 
         this._rgb = new ChangableRgb(rgb => {
@@ -27,38 +44,59 @@ class Color {
 
         this._hsl = new ChangableHsl(hsl => {
             this.hsl = hsl;
-        }, Color.rgbToHsl(rgb))
+        }, hsl)
 
-        this.hex = Color.rgbToHex(rgb)
+        this._hex = hex;
     }
 
     set rgb(rgb) {
         this._rgb._ = rgb;
-        this._hsl._ = Color.rgbToHsl(this._rgb)
-        this._hex = Color.rgbToHex(this._rgb)
+
+        this._rgbCached = true;
+        this._hslCached = false;
+        this._hexCached = false;
     }
 
     set hsl(hsl) {
         this._hsl._ = hsl;
-        this._rgb._ = Color.hslToRgb(this._hsl)
-        this._hex = Color.rgbToHex(this._rgb)
+
+        this._rgbCached = false;
+        this._hslCached = true;
+        this._hexCached = false;
     }
 
     set hex(hex) {
         this._hex = hex;
-        this._rgb._ = Color.hexToRgb(this._hex)
-        this._hsl._ = Color.rgbToHsl(this._rgb)
+
+        this._rgbCached = false;
+        this._hslCached = false;
+        this._hexCached = true;
     }
 
     get hsl() {
+        if (!this._hslCached)
+            this.hsl._ = Color.rgbToHsl(this.rgb)
+
+        this._hslCached = true
         return this._hsl;
     }
 
     get hex() {
+        if (!this._hexCached)
+            this.hex = Color.rgbToHex(this.rgb)
+
+        this._hexCached = true
         return this._hex;
     }
 
     get rgb() {
+        if (!this._rgbCached)
+            if (this._hexCached)
+                this._rgb._ = Color.hexToRgb(this.hex)
+            else
+                this._hsl._ = Color.hslToRgb(this.hsl)
+
+        this._rgbCached = true
         return this._rgb;
     }
 

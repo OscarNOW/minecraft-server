@@ -3,9 +3,9 @@ export class ChangableHsl {
     private _: hsl;
     private _onChange: (newHsl: hsl) => void;
 
-    r: number;
-    g: number;
-    b: number;
+    h: number;
+    s: number;
+    l: number;
 }
 
 type hsl = {

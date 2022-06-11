@@ -1,6 +1,4 @@
 implement error class/function
- - add lazy loading to text class
-add lazy loading to rgb class
 Implement general changable class with defineProperties instead of separates
 Implement favicon
 Look better at packet order when Client joining and canUsed
