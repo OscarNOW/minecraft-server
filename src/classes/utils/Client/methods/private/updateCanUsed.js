@@ -15,7 +15,7 @@ module.exports = {
         } else if (!canUsed && !this.p.leftPacketSent && this.p.joinedPacketSent) {
             this.p.leftPacketSent = true;
 
-            this.server.clients = this.server.clients.filter(client => client.canUsed);
+            this.server.clients = this.server.clients.filter(client => client != this);
             this.emit('leave');
             this.server.emit('leave', this);
         }

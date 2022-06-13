@@ -6,3 +6,4 @@ Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
 Implement loader for Client functions public, get, set
 Add connection hostname & port to Client class
+Look at login packet

@@ -28,12 +28,20 @@ const server = new Server({
 });
 
 server.on('join', client => {
+    console.log(`${client.username} joined`, server.clients.map(a => a.username))
+})
+
+server.on('leave', client => {
+    console.log(`${client.username} left`, server.clients.map(a => a.username))
+})
+
+server.on('join', client => {
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('chat', text =>
-        client.chat(new Text({ text, color: 'green', modifiers: ['bold', 'italic'] }))
-    )
+    client.on('chat', msg => {
+        server.clients.forEach(a => a.chat(`<${client.username}> ${msg}`))
+    })
 
     setTimeout(() => {
         client.position = {
