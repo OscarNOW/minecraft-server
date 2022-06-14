@@ -1,3 +1,4 @@
+block ids not correct (end_portal)
 implement error class/function
 Implement general changable class with defineProperties instead of separates
 Implement favicon
@@ -7,3 +8,4 @@ Use data loader instead of require()
 Implement loader for Client functions public, get, set
 Add connection hostname & port to Client class
 Look at login packet
+Implement syntax for default values

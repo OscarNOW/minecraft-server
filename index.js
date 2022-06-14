@@ -8,7 +8,8 @@ for (let x = 0; x < 16; x++)
             chunk.setBlock('stone', { x, y, z })
         for (let y = 98; y <= 99; y++)
             chunk.setBlock('dirt', { x, y, z })
-        chunk.setBlock('grass_block', { x, y: 100, z })
+        chunk.setBlock('packed_ice', { x, y: 100, z })
+        chunk.setBlock('glass', { x, y: 103, z })
     }
 
 const server = new Server({
@@ -28,20 +29,10 @@ const server = new Server({
 });
 
 server.on('join', client => {
-    console.log(`${client.username} joined`, server.clients.map(a => a.username))
-})
-
-server.on('leave', client => {
-    console.log(`${client.username} left`, server.clients.map(a => a.username))
-})
-
-server.on('join', client => {
     client.difficulty = 'easy'
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    client.on('chat', msg => {
-        server.clients.forEach(a => a.chat(`<${client.username}> ${msg}`))
-    })
+    client.on('chat', a => eval(a))
 
     setTimeout(() => {
         client.position = {

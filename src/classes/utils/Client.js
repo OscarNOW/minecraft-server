@@ -1,4 +1,5 @@
 const version = require('../../data/version.json');
+const dimensionCodec = require('../../data/dimensionCodec.json')
 
 const mcData = require('minecraft-data')(version)
 const { EventEmitter } = require('events');
@@ -135,15 +136,32 @@ class Client extends EventEmitter {
         ))
             this.p.client.on(eventName, eventCallback.bind(this))
 
-
         this.p.sendPacket('login', {
             entityId: client.id,
             isHardcore: false,
             gameMode: 0,
             previousGameMode: 255,
-            worldNames: mcData.loginPacket.worldNames,
-            dimensionCodec: mcData.loginPacket.dimensionCodec,
-            dimension: mcData.loginPacket.dimension,
+            worldNames: ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end'],
+            dimensionCodec,
+            dimension: {
+                type: 'compound',
+                name: '',
+                value: {
+                    bed_works: { type: 'byte', value: 1 },
+                    has_ceiling: { type: 'byte', value: 0 },
+                    coordinate_scale: { type: 'double', value: 1 },
+                    piglin_safe: { type: 'byte', value: 0 },
+                    has_skylight: { type: 'byte', value: 1 },
+                    ultrawarm: { type: 'byte', value: 0 },
+                    infiniburn: { type: 'string', value: 'minecraft:infiniburn_overworld' },
+                    effects: { type: 'string', value: 'minecraft:overworld' },
+                    has_raids: { type: 'byte', value: 1 },
+                    ambient_light: { type: 'float', value: 0 },
+                    logical_height: { type: 'int', value: 256 },
+                    natural: { type: 'byte', value: 1 },
+                    respawn_anchor_works: { type: 'byte', value: 0 }
+                }
+            },
             worldName: 'minecraft:overworld',
             hashedSeed: [0, 0],
             maxPlayers: 0,
