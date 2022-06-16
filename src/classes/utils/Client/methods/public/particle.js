@@ -1,4 +1,4 @@
-const particles = require('../../../../../data/particles.json');
+const particles = require('../../../../../data/static/particles.json');
 
 module.exports = {
     particle: function (particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {

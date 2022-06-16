@@ -47,6 +47,14 @@ types = {
     )
 }
 
+types = {
+    ...types, ...Object.assign({}, ...fs
+        .readdirSync(path.resolve(__dirname, './data/types/'))
+        .filter(a => a.endsWith('.js'))
+        .map(a => require(`./data/types/${a}`))
+    )
+}
+
 types = Object.fromEntries(Object.entries(types)
     .sort((a, b) => a[1].length - b[1].length)
 )

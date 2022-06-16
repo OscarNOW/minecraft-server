@@ -1,7 +1,7 @@
 const { Client } = require('../utils/Client');
 
-const protocolVersions = require('../../data/protocolVersions.json')
-const serverVersion = require('../../data/version.json');
+const protocolVersions = require('../../data/static/protocolVersions.json')
+const serverVersion = require('../../data/static/version.json');
 
 const mc = require('minecraft-protocol');
 const endianToggle = require('endian-toggle')
