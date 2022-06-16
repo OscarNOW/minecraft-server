@@ -7,14 +7,14 @@ module.exports = {
             x,
             z,
             groundUp: true,
-            biomes: chunk.chunk.dumpBiomes !== undefined ? chunk.chunk.dumpBiomes() : undefined,
+            biomes: chunk._chunk.dumpBiomes !== undefined ? chunk._chunk.dumpBiomes() : undefined,
             heightmaps: {
                 type: 'compound',
                 name: '',
                 value: {}
             },
-            bitMap: chunk.chunk.getMask(),
-            chunkData: chunk.chunk.dump(),
+            bitMap: chunk._chunk.getMask(),
+            chunkData: chunk._chunk.dump(),
             blockEntities: []
         })
     }

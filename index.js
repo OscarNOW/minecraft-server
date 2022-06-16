@@ -5,11 +5,7 @@ let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++) {
         for (let y = 1; y <= 98; y++)
-            chunk.setBlock('stone', { x, y, z })
-        for (let y = 98; y <= 99; y++)
-            chunk.setBlock('dirt', { x, y, z })
-        chunk.setBlock('packed_ice', { x, y: 100, z })
-        chunk.setBlock('glass', { x, y: 103, z })
+            chunk.setBlock({ x, y: 100, z }, 'note_block', { instrument: 'flute', note: 20, powered: true })
     }
 
 const server = new Server({

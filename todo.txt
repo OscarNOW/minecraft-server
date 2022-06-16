@@ -1,4 +1,3 @@
-block ids not correct (end_portal)
 implement error class/function
 Implement general changable class with defineProperties instead of separates
 Implement favicon
@@ -9,3 +8,5 @@ Implement loader for Client functions public, get, set
 Add connection hostname & port to Client class
 Look at login packet
 Implement syntax for default values
+Implement Update view position
+Update types for Chunk
