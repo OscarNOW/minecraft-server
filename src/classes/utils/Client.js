@@ -1,5 +1,5 @@
-const version = require('../../data/static/version.json');
-const dimensionCodec = require('../../data/static/dimensionCodec.json')
+const version = require('../../data/version.json');
+const dimensionCodec = require('../../data/dimensionCodec.json')
 
 const mcData = require('minecraft-data')(version)
 const { EventEmitter } = require('events');

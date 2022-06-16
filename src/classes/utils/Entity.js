@@ -1,7 +1,7 @@
 const { ChangablePosition } = require('./ChangablePosition');
 
-const entities = require('../../data/static/entities.json');
-const entityAnimations = require('../../data/static/entityAnimations.json');
+const entities = require('../../data/entities.json');
+const entityAnimations = require('../../data/entityAnimations.json');
 
 const { v4: uuid } = require('uuid');
 const { EventEmitter } = require('events');

@@ -49,9 +49,9 @@ types = {
 
 types = {
     ...types, ...Object.assign({}, ...fs
-        .readdirSync(path.resolve(__dirname, './data/types/'))
-        .filter(a => a.endsWith('.js'))
-        .map(a => require(`./data/types/${a}`))
+        .readdirSync(path.resolve(__dirname, './data/'))
+        .filter(a => a.endsWith('.types.js'))
+        .map(a => require(`./data/${a}`))
     )
 }
 

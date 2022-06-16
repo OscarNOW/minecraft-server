@@ -1,4 +1,4 @@
-const languages = require('../../../../data/static/languages.json');
+const languages = require('../../../../data/languages.json');
 
 module.exports = {
     settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {

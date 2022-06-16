@@ -1,4 +1,4 @@
-const windowNameIdMapping = require('../../../../../data/static/windowNameIdMapping.json');
+const windowNameIdMapping = require('../../../../../data/windowNameIdMapping.json');
 
 module.exports = {
     window: function (windowType, horse) {

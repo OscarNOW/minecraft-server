@@ -562,8 +562,8 @@ declare class Entity extends EventEmitter {
 }
 
 
+type foo = 'bar';
 type hex = string;
-type test = 'hi' | 'ho';
 type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;
 type rgb = {
     r: number;
