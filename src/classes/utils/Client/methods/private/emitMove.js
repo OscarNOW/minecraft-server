@@ -1,5 +1,12 @@
 module.exports = {
     emitMove: function (info) {
+        let oldChunk = {
+            x: Math.floor(this.position.x / 16),
+            z: Math.floor(this.position.z / 16)
+        }
+
+        let oldY = parseInt(this.position.y);
+
         let changed = false;
         [
             'x',
@@ -13,6 +20,24 @@ module.exports = {
                 this.p._position._[val] = info[val];
             }
         });
+
+        let newChunk = {
+            x: Math.floor(this.position.x / 16),
+            z: Math.floor(this.position.z / 16)
+        }
+
+        let newY = parseInt(this.position.y);
+
+        let viewPositionUpdate = false;
+        if (newChunk.x != oldChunk.x) viewPositionUpdate = true;
+        if (newChunk.z != oldChunk.z) viewPositionUpdate = true;
+        if (oldY != newY) viewPositionUpdate = true;
+
+        if (viewPositionUpdate)
+            this.p.sendPacket('update_view_position', {
+                chunkX: newChunk.x,
+                chunkZ: newChunk.z
+            })
 
         if (changed)
             this.p.emitObservable('position');
