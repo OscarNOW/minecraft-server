@@ -4,8 +4,8 @@ let chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++) {
-        for (let y = 1; y <= 98; y++)
-            chunk.setBlock({ x, y: 100, z }, 'note_block', { instrument: 'flute', note: 20, powered: true })
+        for (let y = 0; y <= 100; y++)
+            chunk.setBlock({ x, y, z }, 'dirt')
     }
 
 const server = new Server({

@@ -11,3 +11,4 @@ Implement syntax for default values
     Change first set position to default
 Implement Update view position
 Update types for Chunk setBlock
+Implement type generators instead of hard coding
