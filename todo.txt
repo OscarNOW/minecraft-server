@@ -8,5 +8,6 @@ Implement loader for Client functions public, get, set
 Add connection hostname & port to Client class
 Look at login packet
 Implement syntax for default values
+    Change first set position to default
 Implement Update view position
-Update types for Chunk
+Update types for Chunk setBlock

@@ -1,61 +1,138 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-let data = {};
-let utilClasses = {};
-let localClasses = {};
+let exportClasses =
+    fs
+        .readdirSync(path.resolve(__dirname, './classes/exports/'))
+        .filter(a => a.endsWith('.d.ts'))
+        .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/exports/${a}`)).toString())
+        .map(a => extractClass(a))
 
-fs.readdirSync('./src/classes/exports/').forEach(file => {
-    if (file.split('.').length == 3 && file.endsWith('.d.ts')) {
-        let contents = fs.readFileSync(`./src/classes/exports/${file}`).toString();
-        let done = false;
-        let bracketCount = 0;
-        let exported = '';
-        let exporting = false;
+let utilClasses =
+    fs
+        .readdirSync(path.resolve(__dirname, './classes/utils/'))
+        .filter(a => a.endsWith('.d.ts'))
+        .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/utils/${a}`)).toString())
+        .map(a => extractClass(a))
 
-        const c = contents.split('').filter(v => v != '\r');
-        c.forEach((v, i) => {
-            if (done) return;
+let types = {};
 
-            if (file == 'Text.d.ts')
-                console.log({ done, exporting, v, bracketCount })
+types = {
+    ...types, ...Object.fromEntries(
+        fs
+            .readdirSync(path.resolve(__dirname, './classes/exports/'))
+            .filter(a => a.endsWith('.d.ts'))
+            .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/exports/${a}`)).toString())
+            .map(extractTypes)
+            .flat()
+            .map(a => ([a.substring(5).split(' ')[0], a]))
+            .map(([key, value]) => [key, value.substring(key.length + 8)])
+            .map(([key, value]) => [key, value.substring(0, value.length - 1)])
+            .filter(([key, value]) => key != '')
+    )
+}
 
-            if (exporting) {
-                if (v == '{') bracketCount++;
-                if (v == '}') bracketCount--;
+types = {
+    ...types, ...Object.fromEntries(
+        fs
+            .readdirSync(path.resolve(__dirname, './classes/utils/'))
+            .filter(a => a.endsWith('.d.ts'))
+            .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/utils/${a}`)).toString())
+            .map(extractTypes)
+            .flat()
+            .map(a => ([a.substring(5).split(' ')[0], a]))
+            .map(([key, value]) => [key, value.substring(key.length + 8)])
+            .map(([key, value]) => [key, value.substring(0, value.length - 1)])
+            .filter(([key, value]) => key != '')
+    )
+}
 
-                if (v == '}' && bracketCount == 1) {
-                    exported += v;
-                    exporting = false;
-                    done = true;
-                }
+types = Object.fromEntries(Object.entries(types)
+    .sort((a, b) => a[1].length - b[1].length)
+)
 
-                return exported += v;
-            }
+let out = `import { EventEmitter } from 'events';`
 
-            if (i + 6 <= contents.split('').length - 1) {
-                let matches = true;
+for (const exportClass of exportClasses)
+    out += `\n\nexport ${exportClass}`;
 
-                if (c[i] != 'c') matches = false;
-                if (c[i + 1] != 'l') matches = false;
-                if (c[i + 2] != 'a') matches = false;
-                if (c[i + 3] != 's') matches = false;
-                if (c[i + 4] != 's') matches = false;
-                if (c[i + 5] != ' ') matches = false;
+for (const utilClass of utilClasses)
+    out += `\n\ndeclare ${utilClass}`;
 
-                if (matches) {
-                    exporting = true;
-                    exported += c[i];
-                }
-            }
-        })
+out += `\n\n\n`
 
-        // if (file == 'Text.d.ts')
-        //     console.log(exported)
+for (const [name, value] of Object.entries(types))
+    out += `type ${name} = ${value};\n${value.length > 200 ? '\n' : ''}`
+
+fs.writeFileSync(path.resolve(__dirname, './index.d.ts'), out)
+
+function extractClass(text) {
+    text = text.substring(text.indexOf('export class ') + 7).split('')
+
+    let braceCount = 0;
+    let started = false;
+    let end;
+
+    for (const letterIndex in text) {
+        const letter = text[letterIndex]
+
+        if (letter == '{') braceCount++;
+        if (letter == '}') braceCount--;
+
+        if (braceCount != 0) started = true;
+        if (braceCount == 0 && started) {
+            end = parseInt(letterIndex) + 1;
+            break;
+        }
     }
-})
 
-// fs.readdirSync(path.resolve(__dirname, '../../classes/utils/')).forEach(file => {
-//     if (file.split('.').length == 2)
-//         utils = { ...utils, ...require(`../../classes/utils/${file}`) }
-// })
+    return text.join('').substring(0, end)
+}
+
+function extractTypes(text) {
+    return getAllIndexes(text, 'type')
+        .map(start => text.substring(start))
+        .map(text => removeEndFromType(text))
+        .filter(a => !a.includes('import'))
+}
+
+function removeEndFromType(text) {
+    let textUntilColon = text.substring(0, text.indexOf(';') + 1);
+
+    if (!textUntilColon.includes('{')) return textUntilColon;
+
+    let braceCount = 0;
+    let out = '';
+
+    for (const letterIndex in text) {
+        const letter = text.split('')[letterIndex];
+
+        if (letter == '{') braceCount++;
+        if (letter == '}') braceCount--;
+
+        out += letter;
+
+        if (braceCount == 0 && letter == ';')
+            break;
+
+    }
+
+    if (!out.endsWith(';'))
+        throw new Error(`Type definition doesn't end with semicolon.\n    at type ${out.split(' ')[1]} = \n`)
+
+    return out;
+}
+
+function getAllIndexes(str, val) {
+    let indexes = [];
+    let i = 0;
+
+    while (i != -1) {
+        i = str.indexOf(val, i + 1)
+
+        if (i != -1)
+            indexes.push(i);
+    }
+
+    return indexes;
+}

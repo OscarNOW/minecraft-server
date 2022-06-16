@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cls && node ./src/test"
+    "test": "node ./src/test",
+    "compile": "node ./src/compile"
   },
   "repository": {
     "type": "git",

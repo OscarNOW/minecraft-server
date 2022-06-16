@@ -12,4 +12,4 @@ type hsl = {
     h: number;
     s: number;
     l: number;
-}
+};

@@ -14,4 +14,4 @@ type position = {
     z: number;
     yaw: number;
     pitch: number;
-}
+};
