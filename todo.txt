@@ -10,4 +10,9 @@ Look at login packet
 Implement syntax for default values
     Change first set position to default
 Update types for Chunk setBlock (+update blockType type)
-    - Use type generators instead of hard coding types
+Use type generators instead of hard coding types
+-Work on branding
+    https://www.youtube.com/watch?v=8ygb6rIgoKs
+    https://www.youtube.com/watch?v=E6NO0rgFub4
+    https://www.npmjs.com/package/module-best-practices
+Update tests
