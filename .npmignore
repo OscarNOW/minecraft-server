@@ -1,0 +1,8 @@
+node_modules/
+credentials/
+.vscode/
+logs/
+*.test.js
+test.js
+compile.js
+temp/

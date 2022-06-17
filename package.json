@@ -1,31 +1,39 @@
 {
-  "name": "minecraft-server",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "node ./src/test",
-    "compile": "node ./src/compile"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OscarNOW/minecraft.git"
-  },
-  "author": "Oscar",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OscarNOW/minecraft/issues"
-  },
-  "homepage": "https://github.com/OscarNOW/minecraft#readme",
-  "dependencies": {
-    "endian-toggle": "^0.0.0",
-    "json5": "^2.2.1",
-    "minecraft-protocol": "^1.35.0",
-    "prismarine-chunk": "^1.31.0",
-    "uuid": "^8.3.2",
-    "vec3": "^0.1.7"
-  },
-  "devDependencies": {
-    "mineflayer": "^4.3.0"
-  }
+    "name": "minecraft-server",
+    "version": "0.0.0",
+    "description": "An object oriented library that helps you create Minecraft servers.",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "scripts": {
+        "test": "node test",
+        "compile": "node compile"
+    },
+    "keywords": [
+        "minecraft",
+        "server",
+        "library",
+        "protocol",
+        "wrapper"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/OscarNOW/minecraft.git"
+    },
+    "author": "Oscar",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/OscarNOW/minecraft/issues"
+    },
+    "homepage": "https://github.com/OscarNOW/minecraft#readme",
+    "dependencies": {
+        "endian-toggle": "^0.0.0",
+        "json5": "^2.2.1",
+        "minecraft-protocol": "^1.35.0",
+        "prismarine-chunk": "^1.31.0",
+        "uuid": "^8.3.2",
+        "vec3": "^0.1.7"
+    },
+    "devDependencies": {
+        "mineflayer": "^4.3.0"
+    }
 }
