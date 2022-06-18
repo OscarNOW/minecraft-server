@@ -13,5 +13,26 @@ Update types for Chunk setBlock (+update blockType type)
 Use type generators instead of hard coding types
 Update tests
 -Work on branding
-    https://www.youtube.com/watch?v=8ygb6rIgoKs
-    https://www.youtube.com/watch?v=E6NO0rgFub4
+
+    Configure pull request tags
+
+    Readme 
+        +https://www.youtube.com/watch?v=E6NO0rgFub4
+        https://www.youtube.com/watch?v=a8CwpGARAsQ
+        https://www.youtube.com/watch?v=yXY3f9jw7fg
+        https://www.youtube.com/watch?v=RZ5vduluea4
+
+
+        Strong title
+        Intro paragraph
+            Keywords for SEO
+        Visual / Demo
+        Installation and usage
+        Contribute
+            Contributor expectations
+            Bug
+                Reference to security policy
+                Look if issue already reported
+                Create issue
+            Feature
+                Tests
