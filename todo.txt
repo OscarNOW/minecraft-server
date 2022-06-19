@@ -23,7 +23,7 @@ Update tests
 
     Readme 
         +Title / Banner
-        Badges (https://shields.io/)
+        +Badges (https://shields.io/)
             Downloads
             Stars
             Contributors

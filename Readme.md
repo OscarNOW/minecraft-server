@@ -1,6 +1,12 @@
 # ![Minecraft Server](/assets/Minecraft%20Server.png)
 
-###### Badges todo
+![NPM downloads](https://img.shields.io/npm/dt/minecraft-server)
+![GitHub stars](https://img.shields.io/github/stars/OscarNOW/minecraft)
+![GitHub contributors](https://img.shields.io/github/contributors/OscarNOW/minecraft)
+![GitHub forks](https://img.shields.io/github/forks/OscarNOW/minecraft)
+![GitHub issues](https://img.shields.io/github/issues-raw/OscarNOW/minecraft)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/OscarNOW/minecraft?label=pull-requests)
+[![Open in vscode](https://img.shields.io/badge/open-vscode-brightgreen?link=https://github.dev/OscarNOW/minecraft)](https://github.dev/OscarNOW/minecraft)
 
 An object oriented library that helps you create Minecraft servers.
 
