@@ -5,8 +5,8 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "test": "node test",
-        "compile": "node compile"
+        "test": "node ./scripts/test",
+        "compile": "node ./scripts/compile"
     },
     "keywords": [
         "minecraft",

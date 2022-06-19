@@ -72,7 +72,7 @@ out += `\n\n\n`
 for (const [name, value] of Object.entries(types))
     out += `type ${name} = ${value};\n${value.length > 200 ? '\n' : ''}`
 
-fs.writeFileSync(path.resolve(__dirname, './index.d.ts'), out)
+fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
 function extractClass(text) {
     text = text.substring(text.indexOf('export class ') + 7).split('')

@@ -14,25 +14,41 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    Configure pull request tags
+    https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors
+
+    Create documentation
+        https://github.com/TypeStrong/typedoc
+
+    SECURITY.md
 
     Readme 
-        +https://www.youtube.com/watch?v=E6NO0rgFub4
-        https://www.youtube.com/watch?v=a8CwpGARAsQ
-        https://www.youtube.com/watch?v=yXY3f9jw7fg
-        https://www.youtube.com/watch?v=RZ5vduluea4
-
-
-        Strong title
-        Intro paragraph
-            Keywords for SEO
+        Title / Banner
+        Badges (https://shields.io/)
+            Downloads
+            Stars
+            Contributors
+            Forks
+            Issues
+            Pull-requests
+            Open in vscode
+        Intro
+            Description sentence
+            Paragraph
+                Keywords for SEO
+                Why this exists
+                Some key features
         Visual / Demo
         Installation and usage
+            Demo code (https://carbon.now.sh/)
         Contribute
             Contributor expectations
+                First open issue to discuss whether good idea
             Bug
                 Reference to security policy
                 Look if issue already reported
                 Create issue
             Feature
                 Tests
+        License
+            Reference to license.md file
+            explanation of license
