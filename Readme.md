@@ -1,4 +1,4 @@
-# ![Minecraft Server](https://www.dropbox.com/s/zsn4hy8yl85uqwb/Minecraft%20Server.png?dl=1)
+# ![Minecraft Server](/assets/Minecraft%20Server.png)
 
 ###### Badges todo
 
@@ -80,4 +80,4 @@ If you found a security vulnerability, please do not make a public issue. Instea
 ## License
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
-![Explanation of ISC license](https://www.dropbox.com/s/upuogyhoddtvzup/ISC%20license.png?dl=1)
+![Explanation of ISC license](/assets/ISC%20license.png)
