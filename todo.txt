@@ -14,14 +14,14 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors
+    Update repo name to 'minecraft-server'
 
     Create documentation
         https://github.com/TypeStrong/typedoc
 
     SECURITY.md
 
-    Readme 
+    -Readme 
         Title / Banner
         Badges (https://shields.io/)
             Downloads
@@ -40,6 +40,8 @@ Update tests
         Visual / Demo
         Installation and usage
             Demo code (https://carbon.now.sh/)
+        More information
+            Terms
         Contribute
             Contributor expectations
                 First open issue to discuss whether good idea
