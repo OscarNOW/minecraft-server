@@ -21,8 +21,8 @@ Update tests
 
     SECURITY.md
 
-    -Readme 
-        Title / Banner
+    Readme 
+        +Title / Banner
         Badges (https://shields.io/)
             Downloads
             Stars
@@ -31,7 +31,7 @@ Update tests
             Issues
             Pull-requests
             Open in vscode
-        Intro
+        +Intro
             Description sentence
             Paragraph
                 Keywords for SEO
@@ -40,9 +40,9 @@ Update tests
         Visual / Demo
         Installation and usage
             Demo code (https://carbon.now.sh/)
-        More information
+        +More information
             Terms
-        Contribute
+        +Contribute
             Contributor expectations
                 First open issue to discuss whether good idea
             Bug
@@ -51,6 +51,6 @@ Update tests
                 Create issue
             Feature
                 Tests
-        License
+        +License
             Reference to license.md file
             explanation of license
