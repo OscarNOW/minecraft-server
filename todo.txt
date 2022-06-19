@@ -38,7 +38,7 @@ Update tests
                 Why this exists
                 Some key features
         Visual / Demo
-        Installation and usage
+        +Installation and usage
             Demo code (https://carbon.now.sh/)
         +More information
             Terms

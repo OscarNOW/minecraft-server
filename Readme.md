@@ -9,7 +9,26 @@ This is a library that gives you access to an easy to use API that you can use t
 ## **Installation and usage**
 1. Install with npm by running `npm i minecraft-server`
 1. Example code:
-![Code](assets/code.svg)
+```js
+const { Server } = require('minecraft-server');
+const server = new Server()
+
+server.on('join', client => {
+
+    client.position = {
+        x: 0,
+        y: 120,
+        z: 0,
+        yaw: 0,
+        pitch: 0
+    };
+
+    client.chat(`Welcome to the server, ${client.username}!`)
+
+    client.on('chat', message => console.log(`<${client.username}> ${message}`))
+
+});
+```
 
 For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft/tree/main/examples).
 
