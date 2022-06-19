@@ -6,7 +6,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/OscarNOW/minecraft)
 ![GitHub issues](https://img.shields.io/github/issues-raw/OscarNOW/minecraft)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/OscarNOW/minecraft?label=pull-requests)
-[![Open in vscode](https://img.shields.io/badge/open-vscode-brightgreen?link=https://github.dev/OscarNOW/minecraft)](https://github.dev/OscarNOW/minecraft)
+[![Open in vscode](https://img.shields.io/badge/open%20in-vscode-brightgreen?link=https://github.dev/OscarNOW/minecraft)](https://github.dev/OscarNOW/minecraft)
 
 An object oriented library that helps you create Minecraft servers.
 
