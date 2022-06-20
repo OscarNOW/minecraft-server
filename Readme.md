@@ -3,7 +3,7 @@
 <p align="center">
 <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
 <img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
-<a href="https://github.dev/OscarNOW/minecraft-server">
+<a href="https://vscode.dev/github/OscarNOW/minecraft-server">
 <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
 </a>
 </p>
