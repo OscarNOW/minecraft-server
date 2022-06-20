@@ -14,43 +14,9 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    Update repo name to 'minecraft-server'
+    -Update repo name to 'minecraft-server'
 
     Create documentation
         https://github.com/TypeStrong/typedoc
 
     SECURITY.md
-
-    Readme 
-        +Title / Banner
-        +Badges (https://shields.io/)
-            Downloads
-            Stars
-            Contributors
-            Forks
-            Issues
-            Pull-requests
-            Open in vscode
-        +Intro
-            Description sentence
-            Paragraph
-                Keywords for SEO
-                Why this exists
-                Some key features
-        Visual / Demo
-        +Installation and usage
-            Demo code (https://carbon.now.sh/)
-        +More information
-            Terms
-        +Contribute
-            Contributor expectations
-                First open issue to discuss whether good idea
-            Bug
-                Reference to security policy
-                Look if issue already reported
-                Create issue
-            Feature
-                Tests
-        +License
-            Reference to license.md file
-            explanation of license
