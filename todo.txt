@@ -14,8 +14,6 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    Reduce badge count
-
     Update repo name to 'minecraft-server'
 
     Create documentation
