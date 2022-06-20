@@ -18,14 +18,14 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/OscarNOW/minecraft.git"
+        "url": "git+https://github.com/OscarNOW/minecraft-server.git"
     },
     "author": "Oscar",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/OscarNOW/minecraft/issues"
+        "url": "https://github.com/OscarNOW/minecraft-server/issues/new/choose"
     },
-    "homepage": "https://github.com/OscarNOW/minecraft#readme",
+    "homepage": "https://github.com/OscarNOW/minecraft-server#readme",
     "dependencies": {
         "endian-toggle": "^0.0.0",
         "json5": "^2.2.1",

@@ -2,8 +2,8 @@
 
 <p align="center">
 <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
-<img src="https://img.shields.io/github/contributors/OscarNOW/minecraft" alt="Github contributors">
-<a href="https://github.dev/OscarNOW/minecraft">
+<img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
+<a href="https://github.dev/OscarNOW/minecraft-server">
 <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
 </a>
 </p>
@@ -36,7 +36,7 @@ server.on('join', client => {
 });
 ```
 
-For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft/tree/main/examples).
+For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
 
 ## **Terms**
 
@@ -81,10 +81,10 @@ If you want to contribute, whether it's a new feature or bug fix, make sure you 
 If you want to add a new feature to the library, first, make sure to first create an issue that explains the new feature. Then if it's approved and if you want to, create a pull request that resolves the issue. You don't actually have to implement the feature yourself.
 
 ### Security vulnerability
-If you found a security vulnerability, please do not make a public issue. Instead [create a new security advisory](https://github.com/OscarNOW/minecraft/security/advisories/new). For more information, please see [`SECURITY.md`](https://github.com/OscarNOW/minecraft/blob/main/SECURITY.md).
+If you found a security vulnerability, please do not make a public issue. Instead [create a new security advisory](https://github.com/OscarNOW/minecraft-server/security/advisories/new). For more information, please see [`SECURITY.md`](https://github.com/OscarNOW/minecraft-server/blob/main/SECURITY.md).
 
 ## License
-For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
+For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
 ![Explanation of ISC license](/assets/ISC%20license_dark.png#gh-dark-mode-only)
 ![Explanation of ISC license](/assets/ISC%20license_light.png#gh-light-mode-only)

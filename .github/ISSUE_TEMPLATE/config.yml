@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Question
-    url: https://github.com/OscarNOW/minecraft/discussions/new?category=questions
+    url: https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions
     about: Ask a question
