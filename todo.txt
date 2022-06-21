@@ -14,9 +14,12 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    -Update repo name to 'minecraft-server'
-
     Create documentation
         https://github.com/TypeStrong/typedoc
 
-    SECURITY.md
+    -SECURITY.md
+        https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository
+        https://snyk.io/blog/ten-git-hub-security-best-practices#4-add-a-securitymd-file
+
+        Versions and known security vulnerabilities
+        How to report security vulnerability
