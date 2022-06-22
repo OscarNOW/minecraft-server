@@ -1,0 +1,1 @@
+type hi = 'foo' | 'bar' | 'baz';

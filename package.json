@@ -6,7 +6,9 @@
     "types": "index.d.ts",
     "scripts": {
         "test": "node ./scripts/test",
-        "compile": "node ./scripts/compile"
+        "types": "node ./scripts/types",
+        "docs": "cd .\\scripts && docs.bat",
+        "compile": "npm run types && npm run docs && cls"
     },
     "keywords": [
         "minecraft",
@@ -35,6 +37,7 @@
         "vec3": "^0.1.7"
     },
     "devDependencies": {
-        "mineflayer": "^4.3.0"
+        "mineflayer": "^4.3.0",
+        "typedoc": "^0.22.17"
     }
 }

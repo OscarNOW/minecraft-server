@@ -1,0 +1,103 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>minecraft-server</title><meta name="description" content="Documentation for minecraft-server"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">minecraft-server</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>minecraft-server </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#" id="" style="color: inherit; text-decoration: none;">
+  <h1><img src="/assets/Minecraft%20Server.png" alt="Minecraft Server"></h1>
+</a>
+<p align="center">
+<img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
+<img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
+<a href="https://vscode.dev/github/OscarNOW/minecraft-server">
+<img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
+</a>
+</p>
+
+<p>An object oriented library that helps you create Minecraft servers.</p>
+<p>This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. You have full control over the protocol and everything that is being sent to the client. This means you can customize everything, and that it&#39;s very easy to have different clients see completely different things. However, when you have full control over everything that&#39;s being sent to the client, it&#39;s more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.</p>
+
+<a href="#installation-and-usage" id="installation-and-usage" style="color: inherit; text-decoration: none;">
+  <h2><strong>Installation and usage</strong></h2>
+</a>
+<ol>
+<li>Install with npm by running <code>npm i minecraft-server</code></li>
+<li>Example code:</li>
+</ol>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> { </span><span class="hl-2">Server</span><span class="hl-1"> } = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;minecraft-server&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">server</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-3">Server</span><span class="hl-1">()</span><br/><br/><span class="hl-5">server</span><span class="hl-1">.</span><span class="hl-3">on</span><span class="hl-1">(</span><span class="hl-4">&#39;join&#39;</span><span class="hl-1">, </span><span class="hl-5">client</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> {</span><br/><br/><span class="hl-1">    </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-5">position</span><span class="hl-1"> = {</span><br/><span class="hl-1">        </span><span class="hl-5">x:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">y:</span><span class="hl-1"> </span><span class="hl-6">120</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">z:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">yaw:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">pitch:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">    };</span><br/><br/><span class="hl-1">    </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-3">chat</span><span class="hl-1">(</span><span class="hl-4">`Welcome to the server, </span><span class="hl-0">${</span><span class="hl-5">client</span><span class="hl-7">.</span><span class="hl-5">username</span><span class="hl-0">}</span><span class="hl-4">!`</span><span class="hl-1">)</span><br/><br/><span class="hl-1">    </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-3">on</span><span class="hl-1">(</span><span class="hl-4">&#39;chat&#39;</span><span class="hl-1">, </span><span class="hl-5">message</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-4">`&lt;</span><span class="hl-0">${</span><span class="hl-5">client</span><span class="hl-7">.</span><span class="hl-5">username</span><span class="hl-0">}</span><span class="hl-4">&gt; </span><span class="hl-0">${</span><span class="hl-5">message</span><span class="hl-0">}</span><span class="hl-4">`</span><span class="hl-1">))</span><br/><br/><span class="hl-1">});</span>
+</code></pre>
+<p>For more examples, please see <a href="https://github.com/OscarNOW/minecraft-server/tree/main/examples">the examples folder</a>.</p>
+
+<a href="#terms" id="terms" style="color: inherit; text-decoration: none;">
+  <h2><strong>Terms</strong></h2>
+</a>
+
+<a href="#client" id="client" style="color: inherit; text-decoration: none;">
+  <h3>Client</h3>
+</a>
+<p>A client is a person that is (going to be) connected to the server.</p>
+
+<a href="#player" id="player" style="color: inherit; text-decoration: none;">
+  <h3>Player</h3>
+</a>
+<p>A player is just a type of <a href="#entity">entity</a>. It is the thing that a <a href="#client">client</a> sees, when they see other people. Each <a href="#client">client</a> has it&#39;s own players. Here&#39;s an example: </p>
+<ul>
+<li>Notch (<a href="#client">Client</a>)<ul>
+<li>jeb_ (Player)</li>
+</ul>
+</li>
+<li>jeb_ (<a href="#player">Client</a>)<ul>
+<li>Notch (Player)</li>
+</ul>
+</li>
+</ul>
+<p>In this case, there are two <a href="#client">Clients</a> online; <code>Notch</code> and <code>jeb_</code> and they both see eachother. A player doesn&#39;t have to be a <a href="#client">client</a>, it could also be a <a href="#npc">NPC</a>. Here&#39;s an example of that:</p>
+<ul>
+<li>Notch (<a href="#client">Client</a>)<ul>
+<li>jeb_ (Player)</li>
+<li>Hub (Player)</li>
+</ul>
+</li>
+<li>jeb_ (<a href="#player">Client</a>)<ul>
+<li>Hub (Player)</li>
+</ul>
+</li>
+</ul>
+<p>Here <code>Notch</code> sees <code>jeb_</code>, but <code>jeb_</code> doesn&#39;t see <code>Notch</code>. Both <code>jeb_</code> and <code>Notch</code> see the <a href="#npc">NPC</a> <code>Hub</code>. Hub isn&#39;t a <a href="#client">Client</a> that is connected to the server, but is seen by <code>Notch</code> and <code>jeb_</code> as a player.</p>
+
+<a href="#npc" id="npc" style="color: inherit; text-decoration: none;">
+  <h3>NPC</h3>
+</a>
+<p>Non player character, a <a href="#player">player</a> who appears as a real human, but is just virtual and isn&#39;t connected to the server.</p>
+
+<a href="#entity" id="entity" style="color: inherit; text-decoration: none;">
+  <h3>Entity</h3>
+</a>
+<p>Entities include all dynamic, moving objects throughout the Minecraft world. Some examples of entities are:</p>
+<ul>
+<li>Pigs</li>
+<li>Armor stands</li>
+<li>Minecarts</li>
+<li><a href="#player">Players</a></li>
+<li>Falling blocks</li>
+</ul>
+
+<a href="#contribute" id="contribute" style="color: inherit; text-decoration: none;">
+  <h2>Contribute</h2>
+</a>
+<p>If this is your first time contributing to an open-source project, don&#39;t worry. We&#39;ll help you through the whole process. If you have any questions, please let us know!</p>
+
+<a href="#expectations" id="expectations" style="color: inherit; text-decoration: none;">
+  <h3>Expectations</h3>
+</a>
+<p>If you want to contribute, whether it&#39;s a new feature or bug fix, make sure you first search if there already is an issue open for your contribution.</p>
+<p>If you want to add a new feature to the library, first, make sure to first create an issue that explains the new feature. Then if it&#39;s approved and if you want to, create a pull request that resolves the issue. You don&#39;t actually have to implement the feature yourself.</p>
+
+<a href="#security-vulnerability" id="security-vulnerability" style="color: inherit; text-decoration: none;">
+  <h3>Security vulnerability</h3>
+</a>
+<p>If you found a security vulnerability, please do not make a public issue. Instead <a href="https://github.com/OscarNOW/minecraft-server/security/advisories/new">create a new security advisory</a>. For more information, please see <a href="https://github.com/OscarNOW/minecraft-server/blob/main/SECURITY.md"><code>SECURITY.md</code></a>.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>For the full license, see <a href="https://github.com/OscarNOW/minecraft-server/blob/main/license.md"><code>license.md</code></a>.This library uses <a href="https://opensource.org/licenses/ISC">the ISC license</a>.</p>
+<p><img src="/assets/ISC%20license_dark.png#gh-dark-mode-only" alt="Explanation of ISC license">
+<img src="/assets/ISC%20license_light.png#gh-light-mode-only" alt="Explanation of ISC license"></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-type-alias"><a href="modules.html#hi" class="tsd-kind-icon">hi</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

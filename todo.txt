@@ -14,5 +14,5 @@ Use type generators instead of hard coding types
 Update tests
 -Work on branding
 
-    Create documentation
-        https://github.com/TypeStrong/typedoc
+    -Create documentation
+        https://github.com/TypeStrong/typedoc        
