@@ -18,4 +18,4 @@ pause
 cls
 
 echo Generating documentation...
-typedoc ./index.d.ts --readme ./Readme.md --out ../../docs/ --plugin ../../node_modules/typedoc-theme-hierarchy/dist/index.js --theme hierarchy --name "minecraft-server" --disableSources
+typedoc ./index.d.ts --readme ./Readme.md --out ../../docs/ --plugin ../../node_modules/typedoc-theme-hierarchy/dist/index.js --theme hierarchy --name "minecraft-server" --disableSources --sort visibility --sort static-first --sort alphabetical --gitRemote origin --hideGenerator
