@@ -1,1 +1,1 @@
-type hi = 'foo' | 'bar' | 'baz';
+type hi = 'foo' | 'bar';

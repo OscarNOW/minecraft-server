@@ -38,6 +38,7 @@
     },
     "devDependencies": {
         "mineflayer": "^4.3.0",
-        "typedoc": "^0.22.17"
+        "typedoc": "^0.22.17",
+        "typedoc-theme-hierarchy": "^1.2.1"
     }
 }
