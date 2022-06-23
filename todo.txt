@@ -15,4 +15,6 @@ Update tests
 -Work on branding
 
     -Create documentation
-        https://github.com/TypeStrong/typedoc        
+        https://github.com/TypeStrong/typedoc
+
+https://github.com/PrismarineJS/node-minecraft-protocol/pull/993
