@@ -3,4 +3,4 @@ title Generate docs
 cls
 
 xcopy ..\..\assets\*.* ..\..\docs\assets\
-node generateAfter
+node transformAfter
