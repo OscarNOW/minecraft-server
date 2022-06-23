@@ -90,4 +90,4 @@ If you found a security vulnerability, please do not make a public issue. Instea
 ## License
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
-[![ISC license](/minecraft-server/assets/ISC%20license_docs.png)](https://github.com/OscarNOW/minecraft-server/blob/main/minecraft-server/assets/ISC%20license_dark.png)
+[![ISC license](/minecraft-server/assets/ISC%20license_docs.png)](https://github.com/OscarNOW/minecraft-server/blob/main/minecraft-server/assets/ISC%2520license_dark.png)
