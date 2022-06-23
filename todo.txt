@@ -12,9 +12,8 @@ Implement syntax for default values
 Update types for Chunk setBlock (+update blockType type)
 Use type generators instead of hard coding types
 Update tests
--Work on branding
 
-    -Create documentation
-        https://github.com/TypeStrong/typedoc
+-Create documentation
+    Automatically add name in right menu    
 
 https://github.com/PrismarineJS/node-minecraft-protocol/pull/993
