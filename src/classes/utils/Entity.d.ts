@@ -35,7 +35,7 @@ export class Entity extends EventEmitter {
             y: number;
             z: number;
         },
-        isMainHand
+        isMainHand: boolean
     ) => void): void;
 
     addListener(event: 'leftClick', callback: () => void): void;
