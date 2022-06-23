@@ -6,7 +6,7 @@ readme = readme.replace(/\r\n/g, '\n').split('\n').filter(a => !a.includes('#gh-
 
 let licensePosition = readme.split('\n').findIndex(a => a.includes('ISC%20license_dark.png'));
 readme = readme.split('\n')
-readme[licensePosition] = `[![ISC license](/assets/ISC%20license_docs.png)](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%2520license_dark.png)`
+readme[licensePosition] = `![ISC license](/assets/ISC%20license_docs.png)`
 readme = readme.join('\n')
 
 readme = readme.replace(/\/assets\//g, '/minecraft-server/assets/');
