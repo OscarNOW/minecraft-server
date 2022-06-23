@@ -1,16 +1,20 @@
 # ![Minecraft Server](/assets/Minecraft%20Server.png)
 
 <p align="center">
-<img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
-<img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
-<a href="https://vscode.dev/github/OscarNOW/minecraft-server">
-<img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
-</a>
+    <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
+    <img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
+    <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
+        <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
+    </a>
 </p>
+
+[Github](https://github.com/OscarNOW/minecraft-server/)
+[NPM](https://www.npmjs.com/package/minecraft-server)
+[Docs](https://oscarnow.github.io/minecraft-server/)
 
 An object oriented library that helps you create Minecraft servers.
 
-This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. You have full control over the protocol and everything that is being sent to the client. This means you can customize everything, and that it's very easy to have different clients see completely different things. However, when you have full control over everything that's being sent to the client, it's more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.
+This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types for everything. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you can customize everything, and that it's very easy to have different clients see completely different things. However, when you have full control over everything that's being sent to the client, it's more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.
 
 ## **Installation and usage**
 1. Install with npm by running `npm i minecraft-server`
