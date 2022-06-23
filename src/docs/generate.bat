@@ -14,7 +14,7 @@ cd src
 cd docs
 
 cls
-node transform
+node transformBefore
 cls
 
 echo Generating documentation...
