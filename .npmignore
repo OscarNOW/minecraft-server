@@ -14,6 +14,7 @@ src/compile.js
 src/types.js
 src/functions/loader/tests.js
 src/docs/
+docs/
 src/temp/
 todo.txt
 user.js

@@ -3,4 +3,4 @@ title Generate docs
 cls
 
 cd ..\src\docs\
-generate
+generate.bat && xcopy ..\..\assets\*.* ..\..\docs\assets\
