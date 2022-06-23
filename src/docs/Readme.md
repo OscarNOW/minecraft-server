@@ -1,4 +1,4 @@
-# ![Minecraft Server](/assets/Minecraft%20Server.png)
+# ![Minecraft Server](/minecraft-server/assets/Minecraft%20Server.png)
 
 <p align="center">
     <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
@@ -90,5 +90,5 @@ If you found a security vulnerability, please do not make a public issue. Instea
 ## License
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
-![Explanation of ISC license](/assets/ISC%20license_dark.png#gh-dark-mode-only)
-![Explanation of ISC license](/assets/ISC%20license_light.png#gh-light-mode-only)
+![Explanation of ISC license](/minecraft-server/assets/ISC%20license_dark.png#gh-dark-mode-only)
+![Explanation of ISC license](/minecraft-server/assets/ISC%20license_light.png#gh-light-mode-only)
