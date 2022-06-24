@@ -26,7 +26,11 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
 ['index.html', 'modules.html', ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`)]
     .forEach(file => {
         let content = fs.readFileSync(path.resolve(__dirname, `../../docs/${file}`)).toString();
-        content = content.replace(menu, newMenu);
+
+        let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
+        thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
+
+        content = content.replace(thisMenu, newMenu);
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     })
 
