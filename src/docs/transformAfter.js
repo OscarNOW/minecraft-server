@@ -21,9 +21,14 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
 
     let page = `${isClass ? `classes/${name}.html` : `modules.html#${name}`}`
     newMenu = newMenu.replace(value, `${page}" data-id="/${page}">${name}</a>`);
-})
+});
 
-fs.writeFileSync(path.resolve(__dirname, '../../docs/index.html'), newMenu);
+['index.html', 'modules.html', ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`)]
+    .forEach(file => {
+        let content = fs.readFileSync(path.resolve(__dirname, `../../docs/${file}`)).toString();
+        content = content.replace(menu, newMenu);
+        fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
+    })
 
 function getAllIndexes(str, val) {
     let indexes = [];
