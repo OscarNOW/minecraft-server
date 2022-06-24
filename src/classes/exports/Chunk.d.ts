@@ -1,9 +1,9 @@
 export class Chunk {
     private chunk: any;
     constructor();
-    setBlock(block: blockType, location: {
+    setBlock(location: {
         x: number;
         y: number;
         z: number;
-    }): Chunk;
+    }, block: blockType, state: blockState): Chunk;
 }

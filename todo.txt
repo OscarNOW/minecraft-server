@@ -9,11 +9,7 @@ Add connection hostname & port to Client class
 Look at login packet
 Implement syntax for default values
     Change first set position to default
-Update types for Chunk setBlock (+update blockType type)
 Use type generators instead of hard coding types
 Update tests
-
--Create documentation
-    Automatically add name in right menu    
-
-https://github.com/PrismarineJS/node-minecraft-protocol/pull/993
+Add examples to docs
+Combine types in blockState
