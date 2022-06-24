@@ -9,7 +9,8 @@ let menu = fs.readFileSync(path.resolve(__dirname, '../../docs/index.html')).toS
 menu = menu.substring(menu.indexOf('<div class="tree-content">'));
 menu = menu.substring(0, menu.indexOf('</div>') + 6);
 
-let newMenu = menu;
+let newTopMenu = menu;
+let newClassMenu = menu;
 
 getAllIndexes(menu, `<li><a class="category__link js-category-link category__link--ts" href="`).forEach(index => {
     let value = menu.substring(index + `<li><a class="category__link js-category-link category__link--ts" href="`.length);
@@ -19,8 +20,11 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
     let isClass = name.includes('/')
     name = (isClass ? name.split('/')[1].split('.html')[0] : name.split('#')[1])
 
-    let page = `${isClass ? `classes/${name}.html` : `modules.html#${name}`}`
-    newMenu = newMenu.replace(value, `${page}" data-id="/${page}">${name}</a>`);
+    let topPageUrl = `${isClass ? `classes/${name}.html` : `modules.html#${name}`}`
+    newTopMenu = newTopMenu.replace(value, `${topPageUrl}" data-id="/${topPageUrl}">${name}</a>`);
+
+    let classPageUrl = `${isClass ? `/${name}.html` : `../modules.html#${name}`}`
+    newClassMenu = newClassMenu.replace(value, `${classPageUrl}" data-id="/${classPageUrl}">${name}</a>`);
 });
 
 ['index.html', 'modules.html', ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`)]
@@ -30,7 +34,11 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
         let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
         thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
 
-        content = content.replace(thisMenu, newMenu);
+        if (file.startsWith('classes/'))
+            content = content.replace(thisMenu, newClassMenu);
+        else
+            content = content.replace(thisMenu, newTopMenu);
+
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     })
 
