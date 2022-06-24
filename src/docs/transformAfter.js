@@ -23,7 +23,7 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
     let topPageUrl = `${isClass ? `classes/${name}.html` : `modules.html#${name}`}`
     newTopMenu = newTopMenu.replace(value, `${topPageUrl}" data-id="/${topPageUrl}">${name}</a>`);
 
-    let classPageUrl = `${isClass ? `/${name}.html` : `../modules.html#${name}`}`
+    let classPageUrl = `${isClass ? `${name}.html` : `../modules.html#${name}`}`
     newClassMenu = newClassMenu.replace(value, `${classPageUrl}" data-id="/${classPageUrl}">${name}</a>`);
 });
 
