@@ -98,8 +98,6 @@ declare class ChangableHsl {
     h: number;
     s: number;
     l: number;
-
-    hello: 'test';
 }
 
 declare class ChangablePosition {
