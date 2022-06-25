@@ -19,7 +19,7 @@ const events = Object.freeze([
 ]);
 
 class Client extends EventEmitter {
-    constructor(client, server, { version, connection: { host, port } }, defaultClientProperties = () => ({})) {
+    constructor(client, server, { version, connection: { host, port }, ip }, defaultClientProperties = () => ({})) {
         super();
 
         Object.defineProperty(this, _p, {
@@ -32,6 +32,11 @@ class Client extends EventEmitter {
         this.p.client = client;
         this.server = server;
         this.version = version;
+        this.ip = ip;
+        this.connection = {
+            host,
+            port
+        }
 
         this.p.client.socket.addListener('close', () => {
             this.p.updateCanUsed();

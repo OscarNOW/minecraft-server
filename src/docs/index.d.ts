@@ -157,6 +157,11 @@ declare class Client {
     readonly ping: number;
     readonly online: boolean;
     readonly version: newVersion;
+    readonly ip: string;
+    readonly connection: {
+        host: string;
+        port: number
+    };
     readonly textures: {
         skin: string;
         cape?: string;

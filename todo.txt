@@ -4,7 +4,5 @@ Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
 Implement loader for Client functions public, get, set
-Add connection hostname & port to Client class
 Update tests
 Add examples to docs
-set reducedDebugInfo?
