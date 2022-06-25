@@ -16,11 +16,17 @@ let clientEarlyInformation = new WeakMap();
 let clientLegacyPing = new WeakMap();
 
 class Server extends EventEmitter {
-    constructor({ serverList, wrongVersionConnect }) {
+    constructor({ serverList, wrongVersionConnect, defaultClientProperties }) {
         super();
 
-        this.serverList = serverList;
-        this.wrongVersionConnect = wrongVersionConnect;
+        this.serverList = serverList ?? (() => ({
+            players: {
+                online: this.playerCount,
+                max: 100
+            }
+        }));
+        this.wrongVersionConnect = wrongVersionConnect ?? (() => `Please use version ${serverVersion}`);
+        this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
         this.server = mc.createServer({
@@ -34,9 +40,9 @@ class Server extends EventEmitter {
                 let infoVersion = info.version?.correct ?? serverVersion;
 
                 let playerHover = [];
-                if (info.players.hover === undefined)
+                if (info?.players?.hover === undefined)
                     playerHover = undefined;
-                else if (typeof info.players.hover == 'string')
+                else if (typeof info?.players?.hover == 'string')
                     playerHover = info.players.hover.split('\n').map(val => {
                         return { name: `${val}`, id: '00000000-0000-4000-8000-000000000000' }
                     })
@@ -46,7 +52,7 @@ class Server extends EventEmitter {
 
                 return {
                     version: {
-                        name: `${info.version?.wrongText ?? infoVersion}`,
+                        name: `${info?.version?.wrongText ?? infoVersion}`,
                         protocol: protocolVersions.find(a => a.legacy == false && a.version == infoVersion).protocol ?? 0
                     },
                     players: {
@@ -54,7 +60,7 @@ class Server extends EventEmitter {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: `${info.description}` ?? ''
+                    description: `${info?.description ?? ''}`
                 }
             },
             hideErrors: true
@@ -108,7 +114,7 @@ class Server extends EventEmitter {
         })
 
         this.server.on('login', async client => {
-            new Client(client, this, clientEarlyInformation.get(client).version);
+            new Client(client, this, clientEarlyInformation.get(client), this.defaultClientProperties);
         });
 
     }

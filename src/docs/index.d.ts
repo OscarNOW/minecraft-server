@@ -25,7 +25,7 @@ export class Color {
 
 export class Server {
     constructor(serverOptions: {
-        serverList(info: {
+        serverList?(info: {
             ip: string,
             version: version | null,
             connection: {
@@ -48,7 +48,7 @@ export class Server {
             };
             description?: string | Text;
         };
-        wrongVersionConnect(info: {
+        wrongVersionConnect?(info: {
             ip: string,
             version: newVersion | 'legacy',
             connection: {
@@ -57,6 +57,26 @@ export class Server {
             },
             legacy: boolean
         }): string | Text | null;
+        defaultClientProperties?(client: Client): {
+            slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+            position: {
+                x: number;
+                y: number;
+                z: number;
+                yaw?: number;
+                pitch?: number;
+            };
+
+            clearSky?: boolean;
+            showRespawnScreen?: boolean;
+            gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+
+            health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+            food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+            foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
+
+            difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+        };
     });
 
     private events: object;
@@ -108,7 +128,33 @@ declare class Changable {
 }
 
 declare class Client {
-    private constructor(client: any, server: Server, version: newVersion);
+    private constructor(client: any, server: Server, earlyInformation: {
+        version: newVersion;
+        ip: string;
+        connection: {
+            host: string;
+            port: number;
+        }
+    }, defaultClientProperties?: (client: Client) => {
+        slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+        position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw?: number;
+            pitch?: number;
+        };
+
+        clearSky?: boolean;
+        showRespawnScreen?: boolean;
+        gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+
+        health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+        food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+        foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
+
+        difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+    });
 
     readonly server: Server;
     readonly username: string;

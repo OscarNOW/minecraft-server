@@ -4,7 +4,7 @@ type Client = import('../utils/Client').Client;
 
 export class Server extends EventEmitter {
     constructor(serverOptions: {
-        serverList(info: {
+        serverList?(info: {
             ip: string,
             version: version | null,
             connection: {
@@ -27,7 +27,7 @@ export class Server extends EventEmitter {
             };
             description?: string | Text;
         };
-        wrongVersionConnect(info: {
+        wrongVersionConnect?(info: {
             ip: string,
             version: newVersion | 'legacy',
             connection: {
@@ -36,6 +36,26 @@ export class Server extends EventEmitter {
             },
             legacy: boolean
         }): string | Text | null;
+        defaultClientProperties?(client: Client): {
+            slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+            position: {
+                x: number;
+                y: number;
+                z: number;
+                yaw?: number;
+                pitch?: number;
+            };
+
+            clearSky?: boolean;
+            showRespawnScreen?: boolean;
+            gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+
+            health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+            food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+            foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
+
+            difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+        };
     });
 
     private events: object;

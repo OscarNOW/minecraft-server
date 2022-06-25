@@ -15,8 +15,11 @@ class Changable {
 
     }
 
-    setRaw(values) {
-        this[rawValuesSymbol] = values;
+    setRaw(valuesOrKey, value) {
+        if (value !== undefined)
+            this[rawValuesSymbol][valuesOrKey] = value
+        else
+            this[rawValuesSymbol] = valuesOrKey;
     }
 }
 

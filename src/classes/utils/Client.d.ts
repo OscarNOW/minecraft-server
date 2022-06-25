@@ -7,7 +7,33 @@ type Chunk = import('../exports/Chunk').Chunk;
 type Color = import('../exports/Color').Color;
 
 export class Client extends EventEmitter {
-    private constructor(client: any, server: Server, version: newVersion);
+    private constructor(client: any, server: Server, earlyInformation: {
+        version: newVersion;
+        ip: string;
+        connection: {
+            host: string;
+            port: number;
+        }
+    }, defaultClientProperties?: (client: Client) => {
+        slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+        position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw?: number;
+            pitch?: number;
+        };
+
+        clearSky?: boolean;
+        showRespawnScreen?: boolean;
+        gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+
+        health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+        food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+        foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
+
+        difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+    });
 
     readonly server: Server;
     readonly username: string;

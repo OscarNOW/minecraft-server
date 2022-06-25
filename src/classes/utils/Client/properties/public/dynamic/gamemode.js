@@ -1,5 +1,12 @@
+let defaultGamemode = 'survival';
+
 module.exports = {
     gamemode: {
+        info: {
+            loginPacket: {
+                gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(defaultGamemode)
+            }
+        },
         get: function () {
             return this.p._gamemode
         },
@@ -21,8 +28,16 @@ module.exports = {
             this.p._gamemode = gamemode;
             this.p.emitObservable('gamemode');
         },
+        setDefault: function (gamemode) {
+            if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
+                throw new Error(`Unknown gamemode "${gamemode}" (${typeof gamemode})`)
+
+            this.p._gamemode = gamemode;
+
+            return { gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode) }
+        },
         init: function () {
-            this.p._gamemode = 'survival';
+            this.p._gamemode = defaultGamemode;
         }
     }
 }

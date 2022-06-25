@@ -17,7 +17,7 @@ module.exports = {
         ].forEach(val => {
             if (info[val] !== undefined && this.p._position[val] != info[val]) {
                 changed = true;
-                this.p._position._[val] = info[val];
+                this.p._position.setRaw(val, info[val]);
             }
         });
 

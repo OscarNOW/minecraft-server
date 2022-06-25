@@ -19,7 +19,7 @@ const events = Object.freeze([
 ]);
 
 class Client extends EventEmitter {
-    constructor(client, server, version) {
+    constructor(client, server, { version, connection: { host, port } }, defaultClientProperties = () => ({})) {
         super();
 
         Object.defineProperty(this, _p, {
@@ -108,15 +108,15 @@ class Client extends EventEmitter {
             init?.call?.(this);
 
         //Inject public dynamic properties
+        let pubDynProperties = Object.assign({}, ...fs
+            .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
+            .filter(v => v.endsWith('.js'))
+            .map(v => require(`./Client/properties/public/dynamic/${v}`))
+        );
+
         Object.defineProperties(this,
             Object.fromEntries(
-                Object.entries(
-                    Object.assign({}, ...fs
-                        .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
-                        .filter(v => v.endsWith('.js'))
-                        .map(v => require(`./Client/properties/public/dynamic/${v}`))
-                    )
-                )
+                Object.entries(pubDynProperties)
                     .map(([name, { get, set }]) => [name, {
                         configurable: false,
                         enumerable: true,
@@ -136,10 +136,12 @@ class Client extends EventEmitter {
         ))
             this.p.client.on(eventName, eventCallback.bind(this))
 
-        this.p.sendPacket('login', {
+        //Set default public dynamic properties
+        this.p.defaultProperties = defaultClientProperties(this);
+
+        let loginPacket = {
             entityId: client.id,
             isHardcore: false,
-            gameMode: 0,
             previousGameMode: 255,
             worldNames: ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end'],
             dimensionCodec,
@@ -170,7 +172,38 @@ class Client extends EventEmitter {
             enableRespawnScreen: true,
             isDebug: false,
             isFlat: false
-        });
+        };
+
+        for (const [key, value] of Object.entries(this.p.defaultProperties)) {
+            if (!pubDynProperties[key])
+                if (this[key])
+                    throw new Error(`"${key}" doesn't allow a default value`)
+                else
+                    throw new Error(`Unknown default key "${key}" (${typeof value})`)
+
+            let file = pubDynProperties[key];
+
+            if (!file.setDefault)
+                throw new Error(`Property "${key}" doesn't allow a default value`)
+
+            let ret = file.setDefault.call(this, value);
+            if (file.info?.loginPacket)
+                for (const [key, value] of Object.entries(ret))
+                    loginPacket[key] = value;
+        }
+
+        fs
+            .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
+            .filter(a => a.endsWith('.js'))
+            .map(a => require(`./Client/properties/public/dynamic/${a}`))
+            .filter(a => a.info?.loginPacket)
+            .forEach(file => {
+                for (const [key, value] of Object.entries(file.loginPacket))
+                    if (!loginPacket[key])
+                        loginPacket[key] = value;
+            })
+
+        this.p.sendPacket('login', loginPacket);
     }
 
     get p() {
