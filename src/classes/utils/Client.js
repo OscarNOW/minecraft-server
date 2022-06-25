@@ -137,6 +137,8 @@ class Client extends EventEmitter {
             this.p.client.on(eventName, eventCallback.bind(this))
 
         //Set default public dynamic properties
+        let callAfterLogin = [];
+
         this.p.defaultProperties = defaultClientProperties(this);
 
         let loginPacket = {
@@ -187,8 +189,13 @@ class Client extends EventEmitter {
                 else
                     throw new Error(`Property "${key}" doesn't allow a default value`)
 
-            let ret = file.setRaw.call(this, value, true);
-            if (file.info?.loginPacket)
+            let ret;
+            if (file.info?.callAfterLogin)
+                callAfterLogin.push(() => file.setRaw.call(this, value, true))
+            else
+                ret = file.setRaw.call(this, value, true);
+
+            if (file.info?.loginPacket && ret)
                 for (const [key, value] of Object.entries(ret))
                     loginPacket[key] = value;
         }
@@ -208,6 +215,8 @@ class Client extends EventEmitter {
             })
 
         this.p.sendPacket('login', loginPacket);
+
+        callAfterLogin.forEach(a => a());
     }
 
     get p() {

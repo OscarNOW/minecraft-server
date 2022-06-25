@@ -3,6 +3,7 @@
     "defaults": {
         "gamemode": 0,
         "showRespawnScreen": true,
-        "reducedDebugInfo": false
+        "reducedDebugInfo": false,
+        "clearSky": true
     }
 }
