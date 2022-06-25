@@ -58,17 +58,9 @@ export class Server {
             legacy: boolean
         }): string | Text | null;
         defaultClientProperties?(client: Client): {
-            reducedDebugInfo?: boolean;
-
             slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-            position?: {
-                x: number;
-                y: number;
-                z: number;
-                yaw?: number;
-                pitch?: number;
-            };
 
+            reducedDebugInfo?: boolean;
             clearSky?: boolean;
             showRespawnScreen?: boolean;
             gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';

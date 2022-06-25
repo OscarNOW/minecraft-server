@@ -5,9 +5,6 @@ Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
 Implement loader for Client functions public, get, set
 Add connection hostname & port to Client class
--Implement syntax for default values
-    -Look at login packet
-    Change first set position to default
 Update tests
 Add examples to docs
 set reducedDebugInfo?

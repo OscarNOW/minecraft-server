@@ -23,7 +23,7 @@ const server = new Server({
     }),
     wrongVersionConnect: ({ ip, version, connection: { host, port }, legacy }) => new Text([{ text: `Wrong version\nip: ${ip}\nversion: ${version}\nhost: ${host}\nport: ${port}\nlegacy: ${legacy}`, color: 'green', modifiers: ['bold', 'italic'] }]),
     defaultClientProperties: client => ({
-        slot: 4
+        gamemode: 'creative'
     })
 });
 
