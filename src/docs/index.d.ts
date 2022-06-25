@@ -576,6 +576,7 @@ type hsl = {
     l: number;
 };
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
+type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
 type textArray = Array<{
     text: string;
     color: textColor;
@@ -588,7 +589,6 @@ type position = {
     yaw: number;
     pitch: number;
 };
-type entityAnimationType = 'swingMainisMainHand' | 'flashRed' | 'leaveBed' | 'swingOffisMainHand' | 'critical' | 'magicCritical';
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
 type optionalTextArray = Array<{

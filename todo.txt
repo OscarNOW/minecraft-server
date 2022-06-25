@@ -9,6 +9,5 @@ Add connection hostname & port to Client class
 Look at login packet
 Implement syntax for default values
     Change first set position to default
-Use type generators instead of hard coding types
 Update tests
 Add examples to docs

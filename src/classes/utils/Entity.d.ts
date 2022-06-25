@@ -110,5 +110,3 @@ export class Entity extends EventEmitter {
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
 }
-
-type entityAnimationType = 'swingMainisMainHand' | 'flashRed' | 'leaveBed' | 'swingOffisMainHand' | 'critical' | 'magicCritical';
