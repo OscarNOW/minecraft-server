@@ -1,5 +1,3 @@
-const { defaults } = require('../../../../../../settings.json')
-
 module.exports = {
     clearSky: {
         info: {
@@ -36,7 +34,7 @@ module.exports = {
             this.p._clearSky = value;
         },
         init: function () {
-            this.p._clearSky = defaults.clearSky;
+            this.p._clearSky = true;
         }
     }
 }
