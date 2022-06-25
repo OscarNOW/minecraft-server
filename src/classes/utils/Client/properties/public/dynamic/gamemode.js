@@ -1,10 +1,10 @@
-let defaultGamemode = 'survival';
+let _default = 'survival';
 
 module.exports = {
     gamemode: {
         info: {
             loginPacket: {
-                gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(defaultGamemode)
+                gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(_default)
             }
         },
         get: function () {
@@ -37,7 +37,7 @@ module.exports = {
             return { gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode) }
         },
         init: function () {
-            this.p._gamemode = defaultGamemode;
+            this.p._gamemode = _default;
         }
     }
 }

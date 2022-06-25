@@ -1,5 +1,12 @@
+let _default = true;
+
 module.exports = {
     showRespawnScreen: {
+        info: {
+            loginPacket: {
+                enableRespawnScreen: _default
+            }
+        },
         get: function () {
             return this.p._showRespawnScreen
         },
@@ -21,8 +28,16 @@ module.exports = {
             this.p._showRespawnScreen = showRespawnScreen;
             this.p.emitObservable('showRespawnScreen');
         },
+        setDefault: function (showRespawnScreen) {
+            if (showRespawnScreen !== true && showRespawnScreen !== false)
+                throw new Error(`Unknown showRespawnScreen, expected true or false, received "${showRespawnScreen}" (${typeof showRespawnScreen})`)
+
+            this.p._showRespawnScreen = showRespawnScreen;
+
+            return { enableRespawnScreen: showRespawnScreen ? 0 : 1 }
+        },
         init: function () {
-            this.p._showRespawnScreen = true;
+            this.p._showRespawnScreen = _default;
         }
     }
 }

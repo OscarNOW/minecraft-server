@@ -169,7 +169,6 @@ class Client extends EventEmitter {
             maxPlayers: 0,
             viewDistance: 1000,
             reducedDebugInfo: false,
-            enableRespawnScreen: true,
             isDebug: false,
             isFlat: false
         };
@@ -196,10 +195,12 @@ class Client extends EventEmitter {
             .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
             .filter(a => a.endsWith('.js'))
             .map(a => require(`./Client/properties/public/dynamic/${a}`))
+            .map(a => Object.values(a))
+            .flat()
             .filter(a => a.info?.loginPacket)
             .forEach(file => {
-                for (const [key, value] of Object.entries(file.loginPacket))
-                    if (!loginPacket[key])
+                for (const [key, value] of Object.entries(file.info.loginPacket))
+                    if (loginPacket[key] === undefined)
                         loginPacket[key] = value;
             })
 
