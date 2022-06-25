@@ -1,24 +1,24 @@
-const t = require('./Text').Text;
+const Text = require('./Text').Text;
 
 module.exports = expect => {
-    expect(t.stringToArray(''), [])
-    expect(t.parseArray([
+    expect(Text.stringToArray(''), [])
+    expect(Text.parseArray([
         '',
         { text: '', color: 'green', modifiers: ['bold'] },
         { text: '', color: 'green', modifiers: ['bold', 'underline'] },
         { text: '', color: 'blue', modifiers: [] }
     ]), [])
-    expect(t.stringToArray('§r§r§r§r'), [])
-    expect(t.parseArray([{ text: '', modifiers: ['bold', 'underline'], color: 'green' }]), [])
-    expect(t.arrayToString([{ text: 'hi', modifiers: ['bold'], color: 'green' }]), '§r§a§lhi')
-    expect(t.arrayToString([
+    expect(Text.stringToArray('§r§r§r§r'), [])
+    expect(Text.parseArray([{ text: '', modifiers: ['bold', 'underline'], color: 'green' }]), [])
+    expect(Text.arrayToString([{ text: 'hi', modifiers: ['bold'], color: 'green' }]), '§r§a§lhi')
+    expect(Text.arrayToString([
         { text: '1', color: 'default', modifiers: ['underline'] },
         { text: '2', color: 'default', modifiers: ['underline', 'bold'] },
         { text: '3', color: 'default', modifiers: [] },
     ]), '§r§n1§l2§r3')
-    expect(t.parseString('§r§r§r§r§nH§li§r§a§r§b!§k'), '§r§nH§li§r§b!')
+    expect(Text.parseString('§r§r§r§r§nH§li§r§a§r§b!§k'), '§r§nH§li§r§b!')
 
-    let o = new t([{ text: 'hi', modifiers: ['bold'], color: 'green' }]);
+    let o = new Text([{ text: 'hi', modifiers: ['bold'], color: 'green' }]);
     expect(o.string, '§r§a§lhi')
 
     o.array = [

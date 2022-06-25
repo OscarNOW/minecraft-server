@@ -90,34 +90,21 @@ export class Text {
     static parseString(text: string): string;
 }
 
-declare class ChangableHsl {
-    constructor(onChange: (newHsl: hsl) => void, startHsl: hsl);
-    private _: hsl;
-    private _onChange: (newHsl: hsl) => void;
+declare class Changable {
+    constructor(
+        changeCallback: (values: {
+            [valueName: string | symbol]: any;
+        }) => void,
+        startValues: {
+            [valueName: string | symbol]: any;
+        }
+    );
 
-    h: number;
-    s: number;
-    l: number;
-}
+    setRaw(values: {
+        [valueName: string | symbol]: any;
+    }): void;
 
-declare class ChangablePosition {
-    constructor(onChange: (newPosition: position) => void, startPosition: position);
-
-    x: number;
-    y: number;
-    z: number;
-    yaw: number;
-    pitch: number;
-}
-
-declare class ChangableRgb {
-    constructor(onChange: (newRgb: rgb) => void, startRgb: rgb);
-    private _: rgb;
-    private _onChange: (newRgb: rgb) => void;
-
-    r: number;
-    g: number;
-    b: number;
+    [valueName: string | symbol]: any;
 }
 
 declare class Client extends EventEmitter {
@@ -582,13 +569,6 @@ type textArray = Array<{
     color: textColor;
     modifiers: Array<textModifier>;
 }>;
-type position = {
-    x: number;
-    y: number;
-    z: number;
-    yaw: number;
-    pitch: number;
-};
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
 type optionalTextArray = Array<{

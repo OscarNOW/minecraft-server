@@ -1,5 +1,4 @@
-implement error class/function
-Implement general changable class with defineProperties instead of separates
+implement error class/function 
 Implement favicon
 Look better at packet order when Client joining and canUsed
 Implement base class which includes EventEmitter, privateSymbols and observers

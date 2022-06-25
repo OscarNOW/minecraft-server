@@ -1,5 +1,4 @@
-const { ChangableRgb } = require('../utils/ChangableRgb.js');
-const { ChangableHsl } = require('../utils/ChangableHsl.js');
+const { Changable } = require('../utils/Changable.js');
 
 class Color {
     constructor(input) {
@@ -38,11 +37,11 @@ class Color {
         } else
             throw new Error(`Unknown Color input "${input}" (${typeof input})`)
 
-        this._rgb = new ChangableRgb(rgb => {
+        this._rgb = new Changable(rgb => {
             this.rgb = rgb;
         }, rgb);
 
-        this._hsl = new ChangableHsl(hsl => {
+        this._hsl = new Changable(hsl => {
             this.hsl = hsl;
         }, hsl)
 

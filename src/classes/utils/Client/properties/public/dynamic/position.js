@@ -1,4 +1,4 @@
-const { ChangablePosition } = require('../../../../ChangablePosition.js');
+const { Changable } = require('../../../../Changable.js');
 
 const teleportPromises = new Map();
 
@@ -44,7 +44,7 @@ module.exports = {
             return promise;
         },
         init: function () {
-            this.p._position = new ChangablePosition((function (i) { this.position = i }).bind(this), {
+            this.p._position = new Changable((function (i) { this.position = i }).bind(this), {
                 x: null,
                 y: null,
                 z: null,

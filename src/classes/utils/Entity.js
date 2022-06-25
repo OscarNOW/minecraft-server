@@ -1,4 +1,4 @@
-const { ChangablePosition } = require('./ChangablePosition');
+const { Changable } = require('./Changable.js');
 
 const entities = require('../../data/entities.json');
 const entityAnimations = require('../../data/entityAnimations.json');
@@ -22,7 +22,7 @@ class Entity extends EventEmitter {
         let e = getEntity(type);
         if (e === undefined) throw new Error(`Unknown entity "${type}"`)
 
-        this[ps._position] = new ChangablePosition(i => that.position = i, { x, y, z, yaw, pitch })
+        this[ps._position] = new Changable(i => that.position = i, { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
         this[ps.typeId] = e.id;
@@ -136,7 +136,7 @@ class Entity extends EventEmitter {
             onGround: true
         });
 
-        this.position._ = { x, y, z, yaw, pitch }
+        this.position.setRaw({ x, y, z, yaw, pitch })
     }
 
     animation(animationType) {
