@@ -1,4 +1,4 @@
-const version = require('../../data/version.json')
+const { version } = require('../../settings.json')
 
 const pChunk = require('prismarine-chunk')(version);
 const { Vec3 } = require('vec3');

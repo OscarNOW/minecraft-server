@@ -1,11 +1,11 @@
-let _default = 'survival';
+const { defaults } = require('../../../../../../settings.json');
 
 module.exports = {
     gamemode: {
         info: {
-            loginPacket: {
-                gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(_default)
-            }
+            loginPacket: [
+                'gameMode'
+            ]
         },
         get: function () {
             return this.p._gamemode
@@ -28,16 +28,22 @@ module.exports = {
             this.p._gamemode = gamemode;
             this.p.emitObservable('gamemode');
         },
-        setDefault: function (gamemode) {
+        setRaw: function (gamemode, loginPacket) {
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(gamemode))
                 throw new Error(`Unknown gamemode "${gamemode}" (${typeof gamemode})`)
 
             this.p._gamemode = gamemode;
 
-            return { gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode) }
+            if (loginPacket)
+                return { gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode) }
+            else
+                this.p.sendPacket('game_state_change', {
+                    reason: 3,
+                    gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(gamemode)
+                })
         },
         init: function () {
-            this.p._gamemode = _default;
+            this.p._gamemode = defaults.gamemode;
         }
     }
 }

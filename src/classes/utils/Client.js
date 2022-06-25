@@ -1,4 +1,4 @@
-const version = require('../../data/version.json');
+const { version, defaults } = require('../../settings.json');
 const dimensionCodec = require('../../data/dimensionCodec.json')
 
 const mcData = require('minecraft-data')(version)
@@ -182,10 +182,13 @@ class Client extends EventEmitter {
 
             let file = pubDynProperties[key];
 
-            if (!file.setDefault)
-                throw new Error(`Property "${key}" doesn't allow a default value`)
+            if (!file.setRaw)
+                if (!file.set)
+                    throw new Error(`Can't set "${key}"`)
+                else
+                    throw new Error(`Property "${key}" doesn't allow a default value`)
 
-            let ret = file.setDefault.call(this, value);
+            let ret = file.setRaw.call(this, value, true);
             if (file.info?.loginPacket)
                 for (const [key, value] of Object.entries(ret))
                     loginPacket[key] = value;
@@ -199,9 +202,10 @@ class Client extends EventEmitter {
             .flat()
             .filter(a => a.info?.loginPacket)
             .forEach(file => {
-                for (const [key, value] of Object.entries(file.info.loginPacket))
+                file.info.loginPacket.forEach(key => {
                     if (loginPacket[key] === undefined)
-                        loginPacket[key] = value;
+                        loginPacket[key] = defaults[key];
+                })
             })
 
         this.p.sendPacket('login', loginPacket);
