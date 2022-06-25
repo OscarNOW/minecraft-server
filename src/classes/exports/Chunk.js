@@ -31,8 +31,8 @@ function getStateId(blockName, state = {}) {
 
     let stateIds = [];
     block.states.forEach(({ name, values }) => {
-        if (state[name] === undefined) throw new Error(`Please the state "${name}" for the block "${blockName}", expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
-        if (values.indexOf(state[name]) === -1) throw new Error(`Unknown state for "${name}", expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
+        if (state[name] === undefined) throw new Error(`Expected "${name}" state for block "${blockName}", expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
+        if (values.indexOf(state[name]) === -1) throw new Error(`Unknown "${name}" state for block "${blockName}" , expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
 
         stateIds.push(values.indexOf(state[name]))
     })

@@ -12,4 +12,3 @@ Implement syntax for default values
 Use type generators instead of hard coding types
 Update tests
 Add examples to docs
-Combine types in blockState
