@@ -37,6 +37,8 @@ export class Server extends EventEmitter {
             legacy: boolean
         }): string | Text | null;
         defaultClientProperties?(client: Client): {
+            reducedDebugInfo: boolean;
+
             slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
             position: {
                 x: number;

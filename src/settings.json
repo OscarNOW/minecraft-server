@@ -2,6 +2,7 @@
     "version": "1.16.3",
     "defaults": {
         "gamemode": 0,
-        "showRespawnScreen": true
+        "showRespawnScreen": true,
+        "reducedDebugInfo": false
     }
 }

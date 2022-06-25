@@ -68,6 +68,7 @@ export class Client extends EventEmitter {
     };
     readonly rightHanded: boolean;
     readonly viewDistance: number;
+    readonly reducedDebugInfo: boolean;
     readonly entities: {
         readonly [entityId: number]: Entity;
     };

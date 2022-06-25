@@ -17,8 +17,8 @@ module.exports = {
                 else
                     throw new Error(`Can't perform this action on an offline player`)
 
-            if (![true, false].includes(value))
-                throw new Error(`Unknown showRespawnScreen, expected true or false, received "${value}" (${typeof value})`)
+            if (typeof value != 'boolean')
+                throw new Error(`Unknown showRespawnScreen, expected a boolean, received "${value}" (${typeof value})`)
 
             this.p.sendPacket('game_state_change', {
                 reason: 11,
@@ -29,8 +29,8 @@ module.exports = {
             this.p.emitObservable('showRespawnScreen');
         },
         setRaw: function (value, loginPacket) {
-            if (value !== true && value !== false)
-                throw new Error(`Unknown showRespawnScreen, expected true or false, received "${value}" (${typeof value})`)
+            if (typeof value != 'boolean')
+                throw new Error(`Unknown showRespawnScreen, expected a boolean, received "${value}" (${typeof value})`)
 
             this.p._showRespawnScreen = value;
 

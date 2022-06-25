@@ -10,3 +10,4 @@ Add connection hostname & port to Client class
     Change first set position to default
 Update tests
 Add examples to docs
+set reducedDebugInfo?

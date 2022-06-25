@@ -168,7 +168,6 @@ class Client extends EventEmitter {
             hashedSeed: [0, 0],
             maxPlayers: 0,
             viewDistance: 1000,
-            reducedDebugInfo: false,
             isDebug: false,
             isFlat: false
         };
