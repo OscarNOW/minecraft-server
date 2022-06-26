@@ -112,10 +112,12 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let injection =
                 `
-                <div class="tsd-signatures">
-                    <h4>Examples</h4>
-                    ${examples.join('<br>\n')}
-                </div>
+                <ul class="tsd-signatures">
+                    <li>
+                        <h4>Examples</h4>
+                        ${examples.join('<br>\n')}
+                    </li>
+                </ul>
                 `
 
             file = file.substring(0, index) + injection + file.substring(index);
