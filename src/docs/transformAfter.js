@@ -86,8 +86,8 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
             let index = -1;
 
             let flags = [
-                '<span class="tsd-flag ts-flagPrivate">Private</span>',
-                '<span class="tsd-flag ts-flagReadonly">Readonly</span>'
+                '<span class="tsd-flag ts-flagPrivate">Private</span> ',
+                '<span class="tsd-flag ts-flagReadonly">Readonly</span> '
             ]
 
             for (flags of combinations(flags)) {
