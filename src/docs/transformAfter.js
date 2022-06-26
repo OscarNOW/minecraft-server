@@ -168,6 +168,13 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
     fs.writeFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`), file);
 }
 
+console.log('Writing overwrites...')
+fs.readdirSync(path.resolve(__dirname, './overwrites/')).forEach(fileName => {
+    let file = fs.readFileSync(path.resolve(__dirname, `./overwrites/${fileName}`)).toString();
+
+    fs.writeFileSync(path.resolve(__dirname, `../../docs/${fileName}`), file);
+})
+
 console.log('Done')
 
 function getAllIndexes(str, val) {
