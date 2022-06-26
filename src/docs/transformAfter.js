@@ -113,7 +113,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
             let injection =
                 `                
                 <ul class="tsd-signatures tsd-descriptions" style="border-bottom: none">
-                    <li class="tsd-description" style="padding-left: 20px; padding-top: 1em; padding-bottom: 1em;">                        
+                    <li class="tsd-description" style="padding-left: 20px; padding-top: 1em; padding-bottom: 1em; padding-right: 20px;">                        
                         <h4>Examples</h4>
                         ${examples.join('<br>\n')}                        
                     </li>
