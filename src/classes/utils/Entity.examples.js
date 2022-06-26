@@ -1,16 +1,9 @@
 module.exports = {
-    properties: {
-        living: [
-            {
-                code: `
-console.log(entity.living)
+    constructor: [
+        {
+            code: `
+console.log(2)
 `
-            },
-            {
-                code: `
-client.chat(entity.living)
-`
-            }
-        ]
-    }
+        }
+    ]
 }

@@ -25,7 +25,13 @@ examples = {
     ...examples, ...Object.fromEntries(fs
         .readdirSync(path.resolve(__dirname, '../classes/utils/'))
         .filter(a => a.endsWith('.examples.js'))
-        .map(a => [a.split('.examples.js')[0], require(`../classes/utils/${a}`)])
+        .map(a => [a.split('.examples.js')[0],
+        Object.fromEntries(
+            Object.entries(
+                require(`../classes/utils/${a}`)
+            )
+                .map(([key, value]) => key == 'constructor' ? ['constructors', { constructor: value }] : [key, value])
+        )])
     )
 }
 

@@ -92,15 +92,9 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Entity|properties|living|0
+;Entity|constructors|constructor|0
 ```js
 
-console.log(entity.living)
-
-```
-:Entity|properties|living|1
-```js
-
-client.chat(entity.living)
+console.log(2)
 
 ```
