@@ -101,28 +101,35 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let sectioned = file.substring(index);
 
-            index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
-            sectioned = file.substring(index)
+            if (type == 'methods') {
+                index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
+                sectioned = file.substring(index)
 
-            let ulCount = 1
+                let ulCount = 1
 
-            for (i in sectioned.split('')) {
-                let ind = parseInt(i);
+                for (i in sectioned.split('')) {
+                    let ind = parseInt(i);
 
-                let str =
-                    sectioned.split('')[ind + 0] +
-                    sectioned.split('')[ind + 1] +
-                    sectioned.split('')[ind + 2] +
-                    sectioned.split('')[ind + 3] +
-                    sectioned.split('')[ind + 4];
+                    let str =
+                        sectioned.split('')[ind + 0] +
+                        sectioned.split('')[ind + 1] +
+                        sectioned.split('')[ind + 2] +
+                        sectioned.split('')[ind + 3] +
+                        sectioned.split('')[ind + 4];
 
-                if (str.startsWith('<ul')) ulCount++;
-                if (str.startsWith('</ul>')) ulCount--;
+                    if (str.startsWith('<ul')) ulCount++;
+                    if (str.startsWith('</ul>')) ulCount--;
 
-                if (ulCount == 0) {
-                    index += ind + 5;
-                    break;
+                    if (ulCount == 0) {
+                        index += ind + 5;
+                        break;
+                    }
                 }
+            } else if (type == 'properties') {
+                index += sectioned.indexOf('<div class="tsd-signature tsd-kind-icon">')
+                sectioned = file.substring(index)
+
+                index += sectioned.indexOf('</div>') + 6;
             }
 
             let injection =

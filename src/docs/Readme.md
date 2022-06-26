@@ -92,19 +92,7 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Entity|methods|animation|0
-```js
-
-entity.animation('flashRed')
-
-```
-:Entity|methods|animation|1
-```js
-
-entity.animation('critical')
-
-```
-:Entity|properties|living|0
+;Entity|properties|living|0
 ```js
 
 console.log(entity.living)
