@@ -105,7 +105,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
                 if (str.startsWith('</ul>')) ulCount--;
 
                 if (ulCount == 0) {
-                    index += ind + 4;
+                    index += ind + 5;
                     break;
                 }
             }
