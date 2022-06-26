@@ -12,5 +12,14 @@ entity.animation('critical')
 `
             }
         ]
+    },
+    properties: {
+        living: [
+            {
+                code: `
+console.log(entity.living)
+`
+            }
+        ]
     }
 }

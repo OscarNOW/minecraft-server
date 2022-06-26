@@ -104,3 +104,9 @@ entity.animation('flashRed')
 entity.animation('critical')
 
 ```
+:Entity|properties|living|0
+```js
+
+console.log(entity.living)
+
+```
