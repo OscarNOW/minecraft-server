@@ -1,17 +1,21 @@
 const { Server, Text } = require('minecraft-server');
 const server = new Server({
+
     serverList: ({ ip, connection: { host, port }, version }) => ({
+
         description: new Text([
             { text: `Connected through: `, color: 'gray' },
             { text: `${host}:${port}`, color: 'white', modifiers: ['bold'] },
             { text: `\nYour ip: `, color: 'gray' },
             { text: ip, color: 'white', modifiers: ['bold'] }
         ]),
+
         players: {
             online: server.playerCount,
             max: Math.floor(Math.random() * 100) + 5,
             hover: `More\nthan\n1\nline!`
         },
+
         version: {
             wrongText: 'Wrong version!',
 
@@ -20,5 +24,7 @@ const server = new Server({
                 when the version of the client is unknown                           */
             correct: version == null ? '1.16.3' : version
         }
+
     })
+
 })

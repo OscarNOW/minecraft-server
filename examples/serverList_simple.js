@@ -1,6 +1,8 @@
 const { Server } = require('minecraft-server');
 const server = new Server({
+
     serverList: ({ ip }) => ({
+
         description: `My server\nYour ip is ${ip}`,
         players: {
             online: server.playerCount,
@@ -9,5 +11,7 @@ const server = new Server({
         version: {
             wrongText: 'Please use 1.16.3'
         }
+
     })
+
 })
