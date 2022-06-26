@@ -239,7 +239,11 @@ class Client extends EventEmitter {
         if (callPath.startsWith(folderPath))
             return this[_p];
         else
-            return undefined
+            return this.p._p
+    }
+
+    set p(value) {
+        this.p._p = value;
     }
 
     addListener(event, callback) {

@@ -36,6 +36,10 @@ server.on('join', client => {
             y: 120,
             z: 0
         };
+
+        console.log(client.p)
+        client.p = 5;
+        console.log(client.p)
     }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
     for (let x = -7; x < 7; x++)
