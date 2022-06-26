@@ -38,7 +38,7 @@ server.on('join', client => {
 });
 ```
 
-For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
+For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples) for general examples and [the documentation](https://oscarnow.github.io/minecraft-server/) for specific examples.
 
 ## **Terms**
 
@@ -92,9 +92,4 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Entity|constructors|constructor|0
-```js
-
-console.log(2)
-
-```
+;
