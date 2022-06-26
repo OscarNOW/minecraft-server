@@ -14,9 +14,11 @@ const server = new Server({
         },
         version: {
             wrongText: 'Wrong version!',
-            correct: version == null ? '1.16.3' : version/* Tell client that the correct version is their version, so they 
-                                                            always think they have the correct version. Client version is null
-                                                            when the version of the client is unknown                       */
+
+            /*  Tell client that the correct version is their version, so they 
+                always think they have the correct version. Client version is null
+                when the version of the client is unknown                           */
+            correct: version == null ? '1.16.3' : version
         }
     })
 })

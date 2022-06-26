@@ -95,7 +95,13 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Server|constructors|constructor|0
+;Server|methods|close|0
+```js
+
+server.close()
+
+```
+:Server|constructors|constructor|0
 ```js
 const { Server } = require('minecraft-server');
 const server = new Server()
@@ -149,9 +155,11 @@ const server = new Server({
         },
         version: {
             wrongText: 'Wrong version!',
-            correct: version == null ? '1.16.3' : version/* Tell client that the correct version is their version, so they 
-                                                            always think they have the correct version. Client version is null
-                                                            when the version of the client is unknown                       */
+
+            /*  Tell client that the correct version is their version, so they 
+                always think they have the correct version. Client version is null
+                when the version of the client is unknown                           */
+            correct: version == null ? '1.16.3' : version
         }
     })
 })
