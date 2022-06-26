@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+console.log('Transforming customCss after...')
 let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/assets/custom.css')).toString()
 customCss = customCss.replace('.category__link--ts', '.none');
 fs.writeFileSync(path.resolve(__dirname, '../../docs/assets/custom.css'), customCss);
 
+console.log('Generating menu...')
 let menu = fs.readFileSync(path.resolve(__dirname, '../../docs/index.html')).toString()
 menu = menu.substring(menu.indexOf('<div class="tree-content">'));
 menu = menu.substring(0, menu.indexOf('</div>') + 6);
@@ -30,8 +32,11 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
 newClassMenu = newClassMenu.replace(/classes\//g, '../classes/');
 newClassMenu = newClassMenu.replace(/modules\.html/g, '../modules.html');
 
+console.log('Writing menu...');
 ['index.html', 'modules.html', ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`)]
     .forEach(file => {
+        console.log(`   ${file}`)
+
         let content = fs.readFileSync(path.resolve(__dirname, `../../docs/${file}`)).toString();
 
         let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
@@ -45,11 +50,13 @@ newClassMenu = newClassMenu.replace(/modules\.html/g, '../modules.html');
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     });
 
+console.log('Transforming readme after...')
 let index = fs.readFileSync(path.resolve(__dirname, '../../docs/index.html')).toString();
 
 let examplesStart = index.indexOf('<p>;')
 let examplesEnd = index.indexOf('</div>', examplesStart)
 
+console.log('Parsing examples...')
 let examples = index;
 
 examples = examples.substring(examples.indexOf('<p>;') + 4)
@@ -76,10 +83,14 @@ examples.forEach(example => {
     parsedExamples[k0][k1][k2][k3] = value;
 })
 
+console.log('Removing examples from readme...')
 index = index.replace(index.substring(examplesStart, examplesEnd), '')
 fs.writeFileSync(path.resolve(__dirname, '../../docs/index.html'), index);
 
+console.log('Injecting examples...')
 for (const [className, classData] of Object.entries(parsedExamples)) {
+    console.log(`   ${className}`)
+
     let file = fs.readFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`)).toString();
 
     for (const [type, typeData] of Object.entries(classData))
@@ -105,29 +116,30 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
             let sectioned = file.substring(index);
 
             if (type == 'methods' || type == 'constructors') {
-                index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
+                index += sectioned.indexOf('<ul class="tsd-descriptions">')
                 sectioned = file.substring(index)
+
+                let ii = 0;
 
                 let ulCount = 1
 
-                for (i in sectioned.split('')) {
-                    let ind = parseInt(i);
+                while (true) {
+                    if (ulCount == 0) break;
 
-                    let str =
-                        sectioned.split('')[ind + 0] +
-                        sectioned.split('')[ind + 1] +
-                        sectioned.split('')[ind + 2] +
-                        sectioned.split('')[ind + 3] +
-                        sectioned.split('')[ind + 4];
+                    let start = sectioned.indexOf('<ul', ii + 3)
+                    let end = sectioned.indexOf('</ul>', ii) + 3
 
-                    if (str.startsWith('<ul')) ulCount++;
-                    if (str.startsWith('</ul>')) ulCount--;
-
-                    if (ulCount == 0) {
-                        index += ind + 5;
-                        break;
-                    }
+                    if ((end === -1 && start !== -1) || start < end) {
+                        ii = start
+                        ulCount++
+                    } else if ((start === -1 && end !== -1) || end < start) {
+                        ii = end
+                        ulCount--
+                    } else if (start === -1 && end === -1)
+                        throw new Error(`No matching </ul> for <ul> at ${index} in docs/classes/${className}.html`)
                 }
+
+                index += ii + 5
             } else if (type == 'properties') {
                 index += sectioned.indexOf('<div class="tsd-signature tsd-kind-icon">')
                 sectioned = file.substring(index)
@@ -150,6 +162,8 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`), file);
 }
+
+console.log('Done')
 
 function getAllIndexes(str, val) {
     let indexes = [];

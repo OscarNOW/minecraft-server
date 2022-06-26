@@ -95,4 +95,64 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;
+;Server|constructors|constructor|0
+```js
+const { Server } = require('minecraft-server');
+const server = new Server()
+
+server.on('join', client => {
+
+    client.position = {
+        x: 0,
+        y: 0,
+        z: 0
+    };
+
+    client.chat(`Welcome to the server, ${client.username}!`)
+
+    console.log(`${client.username} joined`)
+    client.on('chat', message => console.log(`<${client.username}> ${message}`))
+
+});
+```
+:Server|constructors|constructor|1
+```js
+const { Server } = require('minecraft-server');
+const server = new Server({
+    serverList: ({ ip }) => ({
+        description: `My server\nYour ip is ${ip}`,
+        players: {
+            online: server.playerCount,
+            max: 100
+        },
+        version: {
+            wrongText: 'Please use 1.16.3'
+        }
+    })
+})
+```
+:Server|constructors|constructor|2
+```js
+const { Server, Text } = require('minecraft-server');
+const server = new Server({
+    serverList: ({ ip, connection: { host, port }, version }) => ({
+        description: new Text([
+            { text: `Connected through: `, color: 'gray' },
+            { text: `${host}:${port}`, color: 'white', modifiers: ['bold'] },
+            { text: `\nYour ip: `, color: 'gray' },
+            { text: ip, color: 'white', modifiers: ['bold'] }
+        ]),
+        players: {
+            online: server.playerCount,
+            max: Math.floor(Math.random() * 100) + 5,
+            hover: `More\nthan\n1\nline!`
+        },
+        version: {
+            wrongText: 'Wrong version!',
+            correct: version == null ? '1.16.3' : version/* Tell client that the correct version is their version, so they 
+                                                            always think they have the correct version. Client version is null
+                                                            when the version of the client is unknown                       */
+        }
+    })
+})
+```

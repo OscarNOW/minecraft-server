@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+console.log('Transforming readme before...')
+
 let readme = fs.readFileSync(path.resolve(__dirname, './Readme.md')).toString()
 
 readme = readme.replace(/\r\n/g, '\n').split('\n').filter(a => !a.includes('#gh-light-mode-only')).join('\n');
@@ -11,13 +13,20 @@ readme = readme.join('\n')
 
 readme = readme.replace(/\/assets\//g, '/minecraft-server/assets/');
 
+console.log('Getting examples...')
 let examples = {};
 
 examples = {
     ...examples, ...Object.fromEntries(fs
         .readdirSync(path.resolve(__dirname, '../classes/exports/'))
         .filter(a => a.endsWith('.examples.js'))
-        .map(a => [a.split('.examples.js')[0], require(`../classes/exports/${a}`)])
+        .map(a => [a.split('.examples.js')[0],
+        Object.fromEntries(
+            Object.entries(
+                require(`../classes/exports/${a}`)
+            )
+                .map(([key, value]) => key == 'constructor' ? ['constructors', { constructor: value }] : [key, value])
+        )])
     )
 }
 
@@ -41,6 +50,7 @@ readme += `
 
 ;`
 
+console.log('Parsing examples...')
 let parsedExamples = [];
 
 for (const [k1, v1] of Object.entries(examples)) {
@@ -67,6 +77,7 @@ readme += parsedExamples.join('\n:')
 
 fs.writeFileSync(path.resolve(__dirname, './Readme.md'), readme);
 
+console.log('Transforming types...')
 let types = fs.readFileSync(path.resolve(__dirname, './index.d.ts')).toString()
 types = types.replace(/extends EventEmitter /g, '');
 fs.writeFileSync(path.resolve(__dirname, './index.d.ts'), types);
