@@ -5,6 +5,11 @@ module.exports = {
                 code: `
 console.log(entity.living)
 `
+            },
+            {
+                code: `
+client.chat(entity.living)
+`
             }
         ]
     }
