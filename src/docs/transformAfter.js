@@ -110,7 +110,15 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
                 }
             }
 
-            file = file.substring(0, index) + examples.join('\n') + file.substring(index);
+            let injection =
+                `
+                <div class="tsd-signatures">
+                    <h4>Examples</h4>
+                    ${examples.join('<br>\n')}
+                </div>
+                `
+
+            file = file.substring(0, index) + injection + file.substring(index);
         }
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`), file);
