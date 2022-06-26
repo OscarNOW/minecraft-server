@@ -62,13 +62,14 @@ examples = examples.map(a => a.replace(/<\/p>/g, ''));
 
 let parsedExamples = {};
 examples.forEach(example => {
+
     let key = example.split('\n')[0];
     let value = example.split('\n').slice(1).join('\n');
 
     let k0 = key.split('|')[0];
-    if (!parsedExamples[k0]) parsedExamples[k0] = {};
+    if (!parsedExamples[k0]) parsedExamples[k0] = Object.create(null); //Object.create(null) to allow 'constructor' as valid key
     let k1 = key.split('|')[1];
-    if (!parsedExamples[k0][k1]) parsedExamples[k0][k1] = {};
+    if (!parsedExamples[k0][k1]) parsedExamples[k0][k1] = Object.create(null); //Object.create(null) to allow 'constructor' as valid key
     let k2 = key.split('|')[2];
     if (!parsedExamples[k0][k1][k2]) parsedExamples[k0][k1][k2] = [];
     let k3 = key.split('|')[3];
@@ -103,7 +104,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let sectioned = file.substring(index);
 
-            if (type == 'methods') {
+            if (type == 'methods' || type == 'constructors') {
                 index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
                 sectioned = file.substring(index)
 
