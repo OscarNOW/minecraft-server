@@ -16,7 +16,7 @@ let clientEarlyInformation = new WeakMap();
 let clientLegacyPing = new WeakMap();
 
 class Server extends EventEmitter {
-    constructor({ serverList, wrongVersionConnect, defaultClientProperties }) {
+    constructor({ serverList, wrongVersionConnect, defaultClientProperties } = {}) {
         super();
 
         this.serverList = serverList ?? (() => ({

@@ -12,9 +12,12 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
+| :warning: WARNING: Unfortunately, the only current supported Minecraft version is `1.16.3` |
+| ------------------------------------------------------------------------------------------ |
+
 An object oriented library that helps you create Minecraft servers.
 
-This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types for everything. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you can customize everything, and that it's very easy to have different clients see completely different things. However, when you have full control over everything that's being sent to the client, it's more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.
+This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you can customize everything, and that it's very easy to have different clients see completely different things. However, when you have full control over everything that's being sent to the client, it's more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.
 
 ## **Installation and usage**
 1. Install with npm by running `npm i minecraft-server`
