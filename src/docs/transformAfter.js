@@ -83,6 +83,8 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
     for (const [type, typeData] of Object.entries(classData))
         for (const [name, examples] of Object.entries(typeData)) {
+            if (examples.length == 0) continue;
+
             let index = -1;
 
             let flags = [
@@ -134,9 +136,9 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let injection =
                 `                
-                <ul class="tsd-signatures tsd-descriptions" style="border-bottom: none">
+                <ul class="tsd-signatures tsd-descriptions" style="border-bottom: none${type == 'properties' ? '; border-top: none' : ''}">
                     <li class="tsd-description" style="padding-left: 20px; padding-top: 1em; padding-bottom: 1em; padding-right: 20px;">                        
-                        <h4>Examples</h4>
+                        <h4>Example${examples.length > 1 ? 's' : ''}</h4>
                         ${examples.join('<br>\n')}                        
                     </li>
                 </ul>
