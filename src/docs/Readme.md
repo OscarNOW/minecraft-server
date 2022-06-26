@@ -12,7 +12,7 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
-| :warning: WARNING: Unfortunately, the only current supported Minecraft version is `1.16.3` |
+| ⚠ WARNING: Unfortunately, the only current supported Minecraft version is `1.16.3` |
 | ------------------------------------------------------------------------------------------ |
 
 An object oriented library that helps you create Minecraft servers.
