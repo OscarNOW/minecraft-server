@@ -8,7 +8,7 @@
         "test": "node ./scripts/test",
         "types": "node ./scripts/types",
         "docs": "cd .\\scripts && docs.bat",
-        "compile": "npm run types && npm run docs && cls"
+        "compile": "npm run types && npm run docs && cls && echo Successfully compiled"
     },
     "keywords": [
         "minecraft",

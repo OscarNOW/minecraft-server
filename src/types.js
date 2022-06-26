@@ -74,6 +74,8 @@ for (const [name, value] of Object.entries(types))
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
+console.log('Successfully generated types')
+
 function extractClass(text) {
     text = text.substring(text.indexOf('export class ') + 7).split('')
 
