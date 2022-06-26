@@ -95,13 +95,7 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Server|methods|close|0
-```js
-
-server.close()
-
-```
-:Server|constructors|constructor|0
+;Server|constructors|constructor|0
 ```js
 const { Server } = require('minecraft-server');
 const server = new Server()
@@ -122,26 +116,6 @@ server.on('join', client => {
 });
 ```
 :Server|constructors|constructor|1
-```js
-const { Server } = require('minecraft-server');
-const server = new Server({
-
-    serverList: ({ ip }) => ({
-
-        description: `My server\nYour ip is ${ip}`,
-        players: {
-            online: server.playerCount,
-            max: 100
-        },
-        version: {
-            wrongText: 'Please use 1.16.3'
-        }
-
-    })
-
-})
-```
-:Server|constructors|constructor|2
 ```js
 const { Server, Text } = require('minecraft-server');
 const server = new Server({
@@ -173,4 +147,41 @@ const server = new Server({
     })
 
 })
+```
+:Server|constructors|constructor|2
+```js
+
+const { Server } = require('./')
+const server = new Server({
+
+    serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
+        description: `Hi there!\n${ legacy? "You've sent a legacy ping": "You've sent a normal ping" }`,
+        players: {
+            online: server.playerCount,
+            max: 100,
+            hover: [ip, `${ host }: ${ port }`, version].join('\n')
+        },
+        version: {
+            wrongText: 'Please use version 1.16.3',
+            correct: '1.16.3'
+        }
+    }),
+
+    wrongVersionConnect: ({ ip, connection: { host, port }, version, legacy }) =>
+        `You've connected with the wrong version!\nYour version: ${version}\nCorrect version: 1.16.3`,
+
+    defaultClientProperties: client => ({
+        clearSky: true,
+        difficulty: client.username == 'notch' ? 'hard' : 'normal',
+        food: 20,
+        foodSaturation: 5,
+        gamemode: 'survival',
+        health: 20,
+        reducedDebugInfo: false,
+        showRespawnScreen: true,
+        slot: 0
+    })
+
+})
+
 ```
