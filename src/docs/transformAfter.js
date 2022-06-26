@@ -83,7 +83,22 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
     for (const [type, typeData] of Object.entries(classData))
         for (const [name, examples] of Object.entries(typeData)) {
-            let index = file.indexOf(`<h3 class="tsd-anchor-link">${name}`)
+            let index = -1;
+
+            let flags = [
+                '<span class="tsd-flag ts-flagPrivate">Private</span>',
+                '<span class="tsd-flag ts-flagReadonly">Readonly</span>'
+            ]
+
+            for (flags of combinations(flags)) {
+                index = file.indexOf(`<h3 class="tsd-anchor-link">${flags.join('')}${name}`)
+                if (index !== -1)
+                    break;
+            }
+
+            if (index === -1)
+                throw new Error(`Couldn't find ${type} ${className}.${name}`)
+
             let sectioned = file.substring(index);
 
             index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
@@ -138,4 +153,24 @@ function getAllIndexes(str, val) {
     }
 
     return indexes;
+}
+
+function combinations(arr) {
+    let out = [];
+
+    for (let i = 0; i < Math.pow(2, arr.length); i++) {
+        let our = [];
+        let binary = dec2bin(i);
+        if (binary.length == 1) binary = `0${binary}`
+
+        arr.filter((_, i) => binary[i] == '1').forEach(v => our.push(v));
+
+        out.push(our)
+    }
+
+    return out;
+}
+
+function dec2bin(dec) {
+    return (dec >>> 0).toString(2);
 }
