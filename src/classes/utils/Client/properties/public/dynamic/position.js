@@ -31,6 +31,8 @@ module.exports = {
                 }, 5000)
             })
 
+            this.p.positionSet = true;
+
             this.p.sendPacket('position', {
                 x: x ?? this.position.x,
                 y: y ?? this.position.y,
@@ -44,12 +46,14 @@ module.exports = {
             return promise;
         },
         init: function () {
+            this.p.positionSet = false;
+
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), {
-                x: null,
-                y: null,
-                z: null,
-                yaw: null,
-                pitch: null
+                x: 0,
+                y: 0,
+                z: 0,
+                yaw: 0, //suddenly becomes -180??
+                pitch: 0
             });
         },
         confirm: function (teleportId) {

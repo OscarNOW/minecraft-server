@@ -6,9 +6,7 @@ server.on('join', client => {
     client.position = {
         x: 0,
         y: 120,
-        z: 0,
-        yaw: 0,
-        pitch: 0
+        z: 0
     };
 
     client.chat(`Welcome to the server, ${client.username}!`)

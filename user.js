@@ -30,16 +30,11 @@ const server = new Server({
 server.on('join', client => {
     let horse = client.entity('horse', { x: 10, y: 101, z: 10, yaw: 0, pitch: 0 });
 
-    console.log(client.connection)
-    console.log(client.ip)
-
     setTimeout(() => {
         client.position = {
             x: 0,
             y: 120,
-            z: 0,
-            yaw: 0,
-            pitch: 0
+            z: 0
         };
     }, 3000); //Look if client sends packet when ready to be teleported, instead of arbitrary wait
 
