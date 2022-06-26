@@ -43,7 +43,78 @@ newClassMenu = newClassMenu.replace(/modules\.html/g, '../modules.html');
             content = content.replace(thisMenu, newTopMenu);
 
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
-    })
+    });
+
+let index = fs.readFileSync(path.resolve(__dirname, '../../docs/index.html')).toString();
+
+let examplesStart = index.indexOf('<p>;')
+let examplesEnd = index.indexOf('</div>', examplesStart)
+
+let examples = index;
+
+examples = examples.substring(examples.indexOf('<p>;') + 4)
+examples = examples.substring(0, examples.indexOf('</div>'))
+
+examples = examples.split('<p>:')
+
+examples = examples.map(a => a.replace(/<p>/g, ''));
+examples = examples.map(a => a.replace(/<\/p>/g, ''));
+
+let parsedExamples = {};
+examples.forEach(example => {
+    let key = example.split('\n')[0];
+    let value = example.split('\n').slice(1).join('\n');
+
+    let k0 = key.split('|')[0];
+    if (!parsedExamples[k0]) parsedExamples[k0] = {};
+    let k1 = key.split('|')[1];
+    if (!parsedExamples[k0][k1]) parsedExamples[k0][k1] = {};
+    let k2 = key.split('|')[2];
+    if (!parsedExamples[k0][k1][k2]) parsedExamples[k0][k1][k2] = [];
+    let k3 = key.split('|')[3];
+    parsedExamples[k0][k1][k2][k3] = value;
+})
+
+index = index.replace(index.substring(examplesStart, examplesEnd), '')
+fs.writeFileSync(path.resolve(__dirname, '../../docs/index.html'), index);
+
+for (const [className, classData] of Object.entries(parsedExamples)) {
+    let file = fs.readFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`)).toString();
+
+    for (const [type, typeData] of Object.entries(classData))
+        for (const [name, examples] of Object.entries(typeData)) {
+            let index = file.indexOf(`<h3 class="tsd-anchor-link">${name}`)
+            let sectioned = file.substring(index);
+
+            index += sectioned.indexOf('<ul class="tsd-descriptions">') + 3
+            sectioned = file.substring(index)
+
+            let ulCount = 1
+
+            for (i in sectioned.split('')) {
+                let ind = parseInt(i);
+
+                let str =
+                    sectioned.split('')[ind + 0] +
+                    sectioned.split('')[ind + 1] +
+                    sectioned.split('')[ind + 2] +
+                    sectioned.split('')[ind + 3] +
+                    sectioned.split('')[ind + 4];
+
+                if (str.startsWith('<ul')) ulCount++;
+                if (str.startsWith('</ul>')) ulCount--;
+
+                if (ulCount == 0) {
+                    index += ind + 4;
+                    break;
+                }
+            }
+
+            file = file.substring(0, index) + examples.join('\n') + file.substring(index);
+        }
+
+    fs.writeFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`), file);
+}
 
 function getAllIndexes(str, val) {
     let indexes = [];
