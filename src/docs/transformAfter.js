@@ -169,11 +169,8 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 }
 
 console.log('Writing overwrites...')
-fs.readdirSync(path.resolve(__dirname, './overwrites/')).forEach(fileName => {
-    let file = fs.readFileSync(path.resolve(__dirname, `./overwrites/${fileName}`)).toString();
-
-    fs.writeFileSync(path.resolve(__dirname, `../../docs/${fileName}`), file);
-})
+console.log('   style.css')
+fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
 
 console.log('Done')
 
