@@ -139,7 +139,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
                         throw new Error(`No matching </ul> for <ul> at ${index} in docs/classes/${className}.html`)
                 }
 
-                index += ii + 3
+                index += ii + 2
             } else if (type == 'properties') {
                 index += sectioned.indexOf('<div class="tsd-signature tsd-kind-icon">')
                 sectioned = file.substring(index)
