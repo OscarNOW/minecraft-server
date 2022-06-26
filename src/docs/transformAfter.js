@@ -115,7 +115,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let sectioned = file.substring(index);
 
-            if (type == 'methods' || type == 'constructors') {
+            if (type == 'methods') {
                 index += sectioned.indexOf('<ul class="tsd-descriptions">')
                 sectioned = file.substring(index)
 
@@ -140,6 +140,11 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
                 }
 
                 index += ii + 2
+            } else if (type == 'constructors') {
+                index += sectioned.indexOf('<ul class="tsd-descriptions">')
+                sectioned = file.substring(index)
+
+                index += sectioned.indexOf('</section>')
             } else if (type == 'properties') {
                 index += sectioned.indexOf('<div class="tsd-signature tsd-kind-icon">')
                 sectioned = file.substring(index)
