@@ -116,7 +116,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
             let sectioned = file.substring(index);
 
             if (type == 'methods') {
-                index += sectioned.indexOf('<ul class="tsd-descriptions">')
+                index += sectioned.indexOf('<ul class="tsd-descriptions')
                 sectioned = file.substring(index)
 
                 let ii = 0;
