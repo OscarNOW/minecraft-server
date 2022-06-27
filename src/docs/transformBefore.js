@@ -10,8 +10,8 @@ let licensePosition = readme.split('\n').findIndex(a => a.includes('ISC%20licens
 readme = readme.split('\n')
 readme[licensePosition] = `
 <picture>
-    <source srcset="/assets/ISC license/docs/light.png" media="(prefers-color-scheme: light)">
-    <img src="/assets/ISC license/docs/dark.png">
+    <source srcset="/assets/ISC license/docs/dark.png" media="(prefers-color-scheme: dark)">
+    <img src="/assets/ISC license/docs/light.png">
 </picture>
 `
 readme = readme.join('\n')

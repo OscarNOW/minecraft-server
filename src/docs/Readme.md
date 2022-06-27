@@ -93,8 +93,8 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 <picture>
-    <source srcset="/minecraft-server/assets/ISC license/docs/light.png" media="(prefers-color-scheme: light)">
-    <img src="/minecraft-server/assets/ISC license/docs/dark.png">
+    <source srcset="/minecraft-server/assets/ISC license/docs/dark.png" media="(prefers-color-scheme: dark)">
+    <img src="/minecraft-server/assets/ISC license/docs/light.png">
 </picture>
 
 
