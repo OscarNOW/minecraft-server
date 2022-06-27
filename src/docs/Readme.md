@@ -228,6 +228,10 @@ changable.b = 7; // onChange called { a: 5, b: 7 }
 console.log(changable.a); // 5
 
 ```
+:Client|methods|kick|0
+```js
+console.log('Test')
+```
 :Client|methods|observe|0
 ```js
 
