@@ -752,14 +752,6 @@ footer .tsd-legend {
     line-height: 1.333em;
 }
 
-.tsd-index-panel ul.tsd-index-list {
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    -ms-column-count: 1;
-    -o-column-count: 1;
-    column-count: 1;
-}
-
 .tsd-index-panel ul.tsd-index-list li {
     -webkit-page-break-inside: avoid;
     -moz-page-break-inside: avoid;
