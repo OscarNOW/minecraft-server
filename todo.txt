@@ -3,6 +3,5 @@ Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
-Implement loader for Client functions public, get, set
 Update tests
 -Write examples
