@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('Transforming customCss after...')
+console.log('Transforming customCss...')
 let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/assets/custom.css')).toString()
 customCss = customCss.replace('.category__link--ts', '.none');
 fs.writeFileSync(path.resolve(__dirname, '../../docs/assets/custom.css'), customCss);
@@ -50,7 +50,7 @@ console.log('Writing menu...');
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     });
 
-console.log('Transforming readme after...')
+console.log('Transforming readme...')
 let index = fs.readFileSync(path.resolve(__dirname, '../../docs/index.html')).toString();
 
 let examplesStart = index.indexOf('<p>;')

@@ -2,7 +2,7 @@
 title Generate docs
 cls
 
-xcopy ..\..\assets\*.* ..\..\docs\assets\
+xcopy ..\..\assets\*.* ..\..\docs\assets\ /E /H /C /I
 
 cls
 node transformAfter
