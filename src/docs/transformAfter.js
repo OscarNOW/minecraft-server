@@ -47,6 +47,9 @@ console.log('Writing menu...');
         else
             content = content.replace(thisMenu, newTopMenu);
 
+
+        content = `<script defer src="/assets/custom2.js">` + content
+
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     });
 
@@ -171,6 +174,8 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 console.log('Writing overwrites...')
 console.log('   style.css')
 fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
+console.log('   custom2.js')
+fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/custom2.js`), fs.readFileSync(path.resolve(__dirname, `./overwrites/custom2.js`)).toString());
 
 console.log('Done')
 
