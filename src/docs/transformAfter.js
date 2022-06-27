@@ -168,9 +168,9 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
     fs.writeFileSync(path.resolve(__dirname, `../../docs/classes/${className}.html`), file);
 }
 
-console.log('Writing overwrites...')
-console.log('   style.css')
-fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
+// console.log('Writing overwrites...')
+// console.log('   style.css')
+// fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
 
 console.log('Done')
 
