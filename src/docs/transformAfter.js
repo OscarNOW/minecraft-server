@@ -48,7 +48,7 @@ console.log('Writing menu...');
             content = content.replace(thisMenu, newTopMenu);
 
 
-        content = `<script defer src="/assets/custom2.js">` + content
+        content = `<script defer src="/minecraft-server/assets/custom2.js">` + content
 
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     });
