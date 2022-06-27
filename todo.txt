@@ -5,3 +5,4 @@ Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
 Update tests
 -Write examples
+Change file structure so that every class gets its own folder

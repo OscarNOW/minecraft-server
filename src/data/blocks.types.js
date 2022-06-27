@@ -11,7 +11,7 @@ blockStates.forEach(([name, values]) => {
 module.exports = {
     blockType: `'${require('./blocks.json').map(a => a.name).join("' | '")}'`,
     blockState: `{
-        ${newBlockStates.map(([name, values]) => `${name}: ${convertToTypes(values)};`).join('\n    ')}
+        ${newBlockStates.map(([name, values]) => `${name}?: ${convertToTypes(values)};`).join('\n    ')}
     }`
 }
 

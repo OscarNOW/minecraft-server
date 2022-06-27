@@ -95,7 +95,16 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 
 
-;Server|constructors|constructor|0
+;Chunk|methods|setBlock|0
+```js
+
+for(let x = 0; x < 16; x++)
+    for(let z = 0; z < 16; z++)
+        for(let y = 0; y < 100; y++)
+            chunk.setBlock({ x, y, z }, 'grass_block', { snowy: false });
+
+```
+:Server|constructors|constructor|0
 ```js
 const { Server } = require('minecraft-server');
 const server = new Server()
@@ -195,13 +204,10 @@ function onChange(value) {
 const changable = new Changable(onChange, { a: 1, b: 2 });
 
 changable.setRaw({ a: 5, b: 7 }); // onChange not called
-
 console.log(changable.a); // 5
 
-changable.setRaw('b', 2); //onChange not called
-
+changable.setRaw('b', 2); //onChange not called3
 console.log(changable.b); // 2
-
 
 ```
 :Changable|constructors|constructor|0
@@ -214,10 +220,8 @@ function onChange(value) {
 const changable = new Changable(onChange, { a: 1, b: 2 });
 
 changable.a = 5; // onChange called { a: 5, b: 2 }
-
 changable.b = 7; // onChange called { a: 5, b: 7 }
 
 console.log(changable.a); // 5
-
 
 ```
