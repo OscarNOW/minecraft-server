@@ -1549,3 +1549,17 @@ img {
 .tsd-anchor-link:hover>.tsd-anchor-icon svg {
     visibility: visible;
 }
+
+.darkImg {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .lightImg {
+        display: none;
+    }
+
+    .darkImg {
+        display: block;
+    }
+}

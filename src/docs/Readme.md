@@ -92,10 +92,8 @@ If you found a security vulnerability, please do not make a public issue. Instea
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
 
-<picture>
-    <source srcset="/minecraft-server/assets/ISC license/docs/dark.png" media="(prefers-color-scheme: dark)">
-    <img src="/minecraft-server/assets/ISC license/docs/light.png">
-</picture>
+<div class="darkImg"><img src="/minecraft-server/assets/ISC license/docs/dark.png" alt="ISC License explanation"></div> 
+<div class="lightImg"><img src="/minecraft-server/assets/ISC license/docs/light.png" alt="ISC License explanation"></div>
 
 
 
