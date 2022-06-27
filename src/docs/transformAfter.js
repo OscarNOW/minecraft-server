@@ -47,7 +47,7 @@ console.log('Writing menu...');
         else
             content = content.replace(thisMenu, newTopMenu);
 
-        content = content.replace('<link rel="stylesheet" href="assets/style.css"/>', '<script defer src="/minecraft-server/assets/custom2.js"></script><link rel="stylesheet" href="assets/style.css" />')
+        content = content.replace('<link rel="stylesheet"', '<script defer src="/minecraft-server/assets/custom2.js"></script><link rel="stylesheet"')
 
         fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
     });
