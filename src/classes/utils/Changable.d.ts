@@ -11,6 +11,7 @@ export class Changable {
     setRaw(values: {
         [valueName: string | symbol]: any;
     }): void;
+    setRaw(key: string | symbol, value: any): void;
 
     [valueName: string | symbol]: any;
 }
