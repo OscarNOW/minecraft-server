@@ -1374,10 +1374,6 @@ ul.tsd-type-parameters .tsd-comment {
     width: 100%;
 }
 
-.tsd-page-toolbar--hide {
-    transform: translateY(-100%);
-}
-
 .tsd-select .tsd-select-list li:before,
 .tsd-select .tsd-select-label:before,
 .tsd-widget:before {
