@@ -228,7 +228,7 @@ changable.b = 7; // onChange called { a: 5, b: 7 }
 console.log(changable.a); // 5
 
 ```
-:Client|properties|0|0
+:Client|properties|online|0
 ```js
 
 console.log(client.online)
