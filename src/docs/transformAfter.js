@@ -105,7 +105,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
             ]
 
             for (flags of combinations(flags)) {
-                index = file.indexOf(`<h3 class="tsd-anchor-link">${flags.join('')}${name}`)
+                index = file.indexOf(`<h3 class="tsd-anchor-link">${flags.join('')}${name.split(/(?=[A-Z])/).join('<wbr/>')}`)
                 if (index !== -1)
                     break;
             }
