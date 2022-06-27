@@ -115,32 +115,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let sectioned = file.substring(index);
 
-            if (type == 'methods') {
-                index += sectioned.indexOf('<ul class="tsd-descriptions')
-                sectioned = file.substring(index)
-
-                let ii = 0;
-
-                let ulCount = 1
-
-                while (true) {
-                    if (ulCount == 0) break;
-
-                    let start = sectioned.indexOf('<ul', ii + 3)
-                    let end = sectioned.indexOf('</ul>', ii) + 3
-
-                    if ((end === -1 && start !== -1) || start < end) {
-                        ii = start
-                        ulCount++
-                    } else if ((start === -1 && end !== -1) || end < start) {
-                        ii = end
-                        ulCount--
-                    } else if (start === -1 && end === -1)
-                        throw new Error(`No matching </ul> for <ul> at ${index} in docs/classes/${className}.html`)
-                }
-
-                index += ii + 2
-            } else if (type == 'constructors') {
+            if (type == 'constructors' || type == 'methods') {
                 index += sectioned.indexOf('<ul class="tsd-descriptions">')
                 sectioned = file.substring(index)
 
