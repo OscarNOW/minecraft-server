@@ -4,9 +4,6 @@ Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()
 Update tests
--Write examples
 Change file structure so that every class gets its own folder
 Add screenshots to documentation
 Create FAQ
-Create todo with all packets in Excel
-Implement brand
