@@ -52,7 +52,7 @@ module.exports = {
                 x: 0,
                 y: 0,
                 z: 0,
-                yaw: 0, //suddenly becomes -180??
+                yaw: 0,
                 pitch: 0
             });
         },

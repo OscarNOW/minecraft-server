@@ -28,11 +28,7 @@ const server = new Server()
 
 server.on('join', client => {
 
-    client.position = {
-        x: 0,
-        y: 120,
-        z: 0
-    };
+    client.position = {};  //This is needed to spawn in the client. If you don't specify where to spawn it, it'll spawn at `x: 0, y: 0, z: 0, yaw: 0, pitch: 0`.
 
     client.chat(`Welcome to the server, ${client.username}!`)
 
@@ -201,6 +197,38 @@ const server = new Server({
         slot: 0
     })
 
+})
+
+```
+:Text|constructors|constructor|0
+```js
+
+const { Text, Server } = require('minecraft-server');
+const message = new Text([
+    {
+        text: 'Hello ',
+        color: 'darkGreen',
+        modifiers: [
+            'bold',
+            'italic'
+        ]
+    },
+    {
+        text: 'world',
+        color: 'purple',
+        modifiers: [
+            'underline',
+            'strike'
+        ]
+    }
+])
+
+const server = new Server()
+
+server.on('join', client => {
+    client.position = {}
+
+    client.chat(message)
 })
 
 ```
