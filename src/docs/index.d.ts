@@ -271,11 +271,7 @@ declare class Client {
             y: number;
             z: number;
         },
-        color: Color | {
-            r: number;
-            g: number;
-            b: number;
-        },
+        color: Color | rgb,
         scale: number
     ): void;
     particle(
