@@ -5,6 +5,7 @@ src/credentials/
 .github/
 SECURITY.md
 examples/
+*.examples.js
 scripts/
 src/logs/
 *.test.js
@@ -20,3 +21,5 @@ todo.txt
 user.js
 src/classes/exports/*.d.ts
 src/classes/utils/*.d.ts
+~$packets.xlsx
+packets.xlsx
