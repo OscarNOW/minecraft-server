@@ -39,11 +39,11 @@ module.exports = {
         else if (particleName == 'dust')
             throw new Error('Not implemented')
         /*
-        see /temp/prismarineType/particleData.jsonc
+        see /src/temp/prismarineType/particleData.jsonc
         data: {
-            red: data1.red,
-            green: data1.green,
-            blue: data1.blue,
+            red: data1.r,
+            green: data1.g,
+            blue: data1.b,
             scale: data2
         }
 

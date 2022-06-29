@@ -9,9 +9,9 @@ client.particle(
     client.position,
     { x: 1, y: 1, z: 1 },
     {
-        red: 64,
-        green: 73,
-        blue: 82
+        r: 64,
+        g: 73,
+        b: 82
     },
     1
 );

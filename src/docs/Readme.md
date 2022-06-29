@@ -107,6 +107,33 @@ for(let x = 0; x < 16; x++)
             chunk.setBlock({ x, y, z }, 'grass_block', { snowy: false });
 
 ```
+:Color|constructors|constructor|0
+```js
+
+const { Color } = require('./');
+
+//All same color
+const color1 = new Color(20, 30, 80);
+const color2 = new Color({ r: 20, g: 30, b: 80 });
+const color3 = new Color('#141e50');
+const color4 = new Color({ h: 0.3688, s: 0.6, l: 0.2 })
+
+```
+:Color|constructors|constructor|1
+```js
+
+const { Color } = require('./');
+
+const color = new Color(20, 30, 80);
+console.log(color.rgb) // { r: 20, g: 30, b: 80 }
+console.log(color.hex) // "#141e50"
+
+color.rgb.g = 40;
+
+console.log(color.rgb) // { r: 20, g: 40, b: 80 }
+console.log(color.hex) // "#142850"
+
+```
 :Server|constructors|constructor|0
 ```js
 const { Server } = require('minecraft-server');
@@ -228,12 +255,25 @@ changable.b = 7; // onChange called { a: 5, b: 7 }
 console.log(changable.a); // 5
 
 ```
-:Client|methods|kick|0
-```js
-console.log('Test')
-```
 :Client|methods|observe|0
 ```js
-
 client.observe('slot', slot => console.log(`Client switched slot to ${slot}`))
+```
+:Client|methods|particle|0
+```js
+
+client.particle(
+    'dust',
+    true,
+    100,
+    client.position,
+    { x: 1, y: 1, z: 1 },
+    {
+        r: 64,
+        g: 73,
+        b: 82
+    },
+    1
+);
+
 ```

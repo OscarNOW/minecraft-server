@@ -12,6 +12,7 @@ export class Chunk {
 
 export class Color {
     constructor(color: hex | rgb | hsl);
+    constructor(red: number, green: number, blue: number);
 
     hex: hex;
     rgb: rgb;
@@ -271,9 +272,9 @@ declare class Client {
             z: number;
         },
         color: Color | {
-            red: number;
-            green: number;
-            blue: number;
+            r: number;
+            g: number;
+            b: number;
         },
         scale: number
     ): void;

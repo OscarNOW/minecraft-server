@@ -81,7 +81,7 @@ class Color {
 
     get hsl() {
         if (!this._hslCached)
-            this.hsl._ = Color.rgbToHsl(this.rgb)
+            this._hsl.setRaw(Color.rgbToHsl(this.rgb))
 
         this._hslCached = true
         return this._hsl;
@@ -98,9 +98,9 @@ class Color {
     get rgb() {
         if (!this._rgbCached)
             if (this._hexCached)
-                this._rgb._ = Color.hexToRgb(this.hex)
+                this._rgb.setRaw(Color.hexToRgb(this.hex))
             else
-                this._hsl._ = Color.hslToRgb(this.hsl)
+                this._hsl.setRaw(Color.hslToRgb(this.hsl))
 
         this._rgbCached = true
         return this._rgb;

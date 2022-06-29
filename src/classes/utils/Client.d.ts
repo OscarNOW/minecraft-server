@@ -155,9 +155,9 @@ export class Client extends EventEmitter {
             z: number;
         },
         color: Color | {
-            red: number;
-            green: number;
-            blue: number;
+            r: number;
+            g: number;
+            b: number;
         },
         scale: number
     ): void;
