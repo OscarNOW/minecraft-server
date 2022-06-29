@@ -136,26 +136,6 @@ console.log(color.hex) // "#142850"
 ```
 :Server|constructors|constructor|0
 ```js
-const { Server } = require('minecraft-server');
-const server = new Server()
-
-server.on('join', client => {
-
-    client.position = {
-        x: 0,
-        y: 0,
-        z: 0
-    };
-
-    client.chat(`Welcome to the server, ${client.username}!`)
-
-    console.log(`${client.username} joined`)
-    client.on('chat', message => console.log(`<${client.username}> ${message}`))
-
-});
-```
-:Server|constructors|constructor|1
-```js
 const { Server, Text } = require('minecraft-server');
 const server = new Server({
 
@@ -187,7 +167,7 @@ const server = new Server({
 
 })
 ```
-:Server|constructors|constructor|2
+:Server|constructors|constructor|1
 ```js
 
 const { Server } = require('./')

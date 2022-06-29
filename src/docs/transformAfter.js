@@ -101,6 +101,7 @@ for (const [className, classData] of Object.entries(parsedExamples)) {
 
             let flags = [
                 '<span class="tsd-flag ts-flagPrivate">Private</span> ',
+                '<span class="tsd-flag ts-flagStatic">Static</span> ',
                 '<span class="tsd-flag ts-flagReadonly">Readonly</span> '
             ]
 

@@ -7,3 +7,4 @@ Update tests
 -Write examples
 Change file structure so that every class gets its own folder
 Add screenshots to documentation
+Create FAQ
