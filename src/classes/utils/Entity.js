@@ -140,7 +140,8 @@ class Entity extends EventEmitter {
     }
 
     animation(animationType) {
-        if (entityAnimations[animationType] === undefined) throw new Error(`Unknown animationType "${animationType}"`)
+        if (entityAnimations[animationType] === undefined)
+            throw new Error(`Unknown animationType "${animationType}"`)
 
         this[ps.sendPacket]('animation', {
             entityId: this.id,
