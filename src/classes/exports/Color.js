@@ -1,7 +1,7 @@
 const { Changable } = require('../utils/Changable.js');
 
 class Color {
-    constructor(input) {
+    constructor(input, i2, i3) {
         this._rgbCached = false;
         this._hslCached = false;
         this._hexCached = false;
@@ -18,7 +18,14 @@ class Color {
         };
         let hex = '#000000';
 
-        if (typeof input == 'string')
+        if ((i2 !== undefined) && (i3 !== undefined)) {
+            this._rgbCached = true;
+            rgb = {
+                r: input,
+                g: i2,
+                b: i3
+            }
+        } else if (typeof input == 'string')
             if (input.startsWith('#')) {
                 this._hexCached = true;
                 hex = input

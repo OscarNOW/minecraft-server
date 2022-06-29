@@ -1,5 +1,6 @@
 export class Color {
     constructor(color: hex | rgb | hsl);
+    constructor(red: number, green: number, blue: number);
 
     hex: hex;
     rgb: rgb;
