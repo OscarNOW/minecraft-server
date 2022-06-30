@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+console.log('Getting export classes...')
+
 let exportClasses =
     fs
         .readdirSync(path.resolve(__dirname, './classes/exports/'))
@@ -8,12 +10,30 @@ let exportClasses =
         .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/exports/${a}`)).toString())
         .map(a => extractClass(a))
 
+console.log(fs
+    .readdirSync(path.resolve(__dirname, './classes/exports/'))
+    .filter(a => a.endsWith('.d.ts'))
+    .map(a => `    ${a}`)
+    .join('\n')
+)
+
+console.log('Getting util classes...')
+
 let utilClasses =
     fs
         .readdirSync(path.resolve(__dirname, './classes/utils/'))
         .filter(a => a.endsWith('.d.ts'))
         .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/utils/${a}`)).toString())
         .map(a => extractClass(a))
+
+console.log(fs
+    .readdirSync(path.resolve(__dirname, './classes/utils/'))
+    .filter(a => a.endsWith('.d.ts'))
+    .map(a => `    ${a}`)
+    .join('\n')
+)
+
+console.log('Getting types...')
 
 let types = {};
 
@@ -55,9 +75,14 @@ types = {
     )
 }
 
+console.log(Object.keys(types).map(a => `    ${a}`).join('\n'))
+console.log('Sorting types...')
+
 types = Object.fromEntries(Object.entries(types)
     .sort((a, b) => a[1].length - b[1].length)
 )
+
+console.log('Generating output...')
 
 let out = `import { EventEmitter } from 'events';`
 
@@ -100,7 +125,7 @@ function extractClass(text) {
 }
 
 function extractTypes(text) {
-    return getAllIndexes(text, 'type')
+    return getAllIndexes(text, 'type ')
         .map(start => text.substring(start))
         .map(text => removeEndFromType(text))
         .filter(a => !a.includes('import'))

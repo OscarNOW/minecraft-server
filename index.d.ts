@@ -74,8 +74,8 @@ export class Server extends EventEmitter {
         };
     });
 
-    private events: object;
     private server: any;
+    private intervals: NodeJS.Timer[];
 
     readonly clients: Array<Client>;
     readonly playerCount: number;
@@ -481,6 +481,48 @@ declare class Client extends EventEmitter {
     rawListeners(event: 'itemDrop'): ((stack: boolean) => void)[];
 
     removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
+}
+
+declare class CustomError {
+    constructor(
+        type: 'expectationNotMet',
+        causer: 'client' | 'libraryUser' | 'library',
+        names: string[][],
+        expectationInfo: {
+            got: any;
+            expectationType: 'value';
+            expectation: any[];
+        } | {
+            got: any;
+            expectationType: 'type';
+            expectation: string;
+            externalLink?: string;
+        },
+        context?: Function);
+
+    type: 'expectationNotMet';
+    cause: 'client' | 'libraryUser';
+    names: {
+        value: string;
+        function: string;
+        class: string;
+    };
+    expectationInfo: {
+        got: any;
+        expectationType: 'value';
+        expectation: any[];
+    } | {
+        got: any;
+        expectationType: 'type';
+        expectation: string;
+        externalLink?: string;
+    };
+    context: Function;
+
+    error: Error;
+    toString(): Error;
+
+    private generateMessage(): string;
 }
 
 declare class Entity extends EventEmitter {

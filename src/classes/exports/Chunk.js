@@ -29,7 +29,7 @@ class Chunk {
 }
 
 function getStateId(blockName, state = {}, { function: func }) {
-    let block = getBlock(blockName)
+    let block = getBlock.call(this, blockName, { function: func })
     if (!block.states) return block.minStateId;
 
     let stateIds = [];
@@ -39,7 +39,7 @@ function getStateId(blockName, state = {}, { function: func }) {
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'state', ''],
                     ['for the block "', blockName, '"'],
-                    ['in the function ', 'setBlock', ''],
+                    ['in the function ', func, ''],
                     ['in the class ', this.constructor.name, ''],
                 ], [true, false].sort().join(',') == values.sort().join(',') ? {
                     got: state[name],
@@ -70,11 +70,21 @@ function getStateId(blockName, state = {}, { function: func }) {
     return stateId
 }
 
-function getBlock(blockName) {
+function getBlock(blockName, { function: func }) {
     let block = blocks.find(({ name }) => name == blockName)
     if (block) return block
 
-    throw new Error(`Unknown blockName "${blockName}" (${typeof blockName})`);
+    /* -- Look at stack trace for location -- */ throw new
+        CustomError('expectationNotMet', 'libraryUser', [
+            ['', 'blockName', ''],
+            ['in the function ', func, ''],
+            ['in the class ', this.constructor.name, ''],
+        ], {
+            got: blockName,
+            expectationType: 'type',
+            expectation: 'blockType',
+            externalLink: 'https://oscarnow.github.io/minecraft-server/modules.html#blockType'
+        }, this[func]).toString()
 }
 
 module.exports = Object.freeze({ Chunk });

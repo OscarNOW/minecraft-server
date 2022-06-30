@@ -1,4 +1,4 @@
 const { Chunk } = require('.');
 let chunk = new Chunk();
 
-chunk.setBlock({ x: 0, y: 0, z: 0 }, 'grass_block')
+chunk.setBlock({ x: 0, y: 0, z: 0 }, 'hello')

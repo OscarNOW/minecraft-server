@@ -2,7 +2,7 @@ export class CustomError {
     constructor(
         type: 'expectationNotMet',
         causer: 'client' | 'libraryUser' | 'library',
-        names: Array<Array<string, string>>,
+        names: string[][],
         expectationInfo: {
             got: any;
             expectationType: 'value';
@@ -10,7 +10,8 @@ export class CustomError {
         } | {
             got: any;
             expectationType: 'type';
-            expectation: 'string' | 'number' | 'boolean' | 'object' | 'array' | 'function' | 'undefined' | 'null';
+            expectation: string;
+            externalLink?: string;
         },
         context?: Function);
 
@@ -28,7 +29,8 @@ export class CustomError {
     } | {
         got: any;
         expectationType: 'type';
-        expectation: 'string' | 'number' | 'boolean' | 'object' | 'array' | 'function' | 'undefined' | 'null';
+        expectation: string;
+        externalLink?: string;
     };
     context: Function;
 
