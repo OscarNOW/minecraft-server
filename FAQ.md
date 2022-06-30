@@ -15,7 +15,7 @@ server.on('join', client => {
 })
 ```
 
-If you don't specify where to spawn the client in the `client.position = {}` line, it will spawn at x: 0, y: 0, z: 0, yaw: 0, pitch: 0. If you want the client to spawn at a different location, you can do that like this:
+If you don't specify where to spawn the client in the `client.position = {}` line, it will spawn at `x: 0, y: 0, z: 0, yaw: 0, pitch: 0`. If you want the client to spawn at a different location, you can do that like this:
 ```js
 server.on('join', client => {
     //Send chunks here (optional)
