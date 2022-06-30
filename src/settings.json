@@ -9,5 +9,8 @@
         "gamemode": 0,
         "showRespawnScreen": true,
         "reducedDebugInfo": false
+    },
+    "links": {
+        "docs": "https://oscarnow.github.io/minecraft-server/"
     }
 }

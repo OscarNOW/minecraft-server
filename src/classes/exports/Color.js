@@ -40,7 +40,7 @@ class Color {
                         got: input,
                         expectationType: 'type',
                         expectation: 'string | rgb | hsl',
-                        externalLink: 'https://oscarnow.github.io/minecraft-server/classes/Color.html#constructor'
+                        externalLink: '{docs}classes/Color.html#constructor'
                     }, this.constructor).toString()
         else if (input.r && input.g && input.b) {
             this._rgbCached = true;
@@ -62,7 +62,7 @@ class Color {
                     got: input,
                     expectationType: 'type',
                     expectation: 'string | rgb | hsl',
-                    externalLink: 'https://oscarnow.github.io/minecraft-server/classes/Color.html#constructor'
+                    externalLink: '{docs}classes/Color.html#constructor'
                 }, this.constructor).toString()
 
         this._rgb = new Changable(rgb => {

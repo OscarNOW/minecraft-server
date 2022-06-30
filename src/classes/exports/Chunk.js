@@ -83,7 +83,7 @@ function getBlock(blockName, { function: func }) {
             got: blockName,
             expectationType: 'type',
             expectation: 'blockType',
-            externalLink: 'https://oscarnow.github.io/minecraft-server/modules.html#blockType'
+            externalLink: '{docs}modules.html#blockType'
         }, this[func]).toString()
 }
 
