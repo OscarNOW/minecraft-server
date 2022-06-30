@@ -1,9 +1,4 @@
-const { Server } = require('.');
-const server = new Server()
+const { Chunk } = require('.');
+let chunk = new Chunk();
 
-server.on('join', client => {
-
-    client.position = {};
-    client.on('chat', client.chat)
-
-});
+chunk.setBlock({ x: 0, y: 0, z: 0 }, 'grass_block')

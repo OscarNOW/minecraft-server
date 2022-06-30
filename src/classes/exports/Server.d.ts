@@ -52,8 +52,8 @@ export class Server extends EventEmitter {
         };
     });
 
-    private events: object;
     private server: any;
+    private intervals: NodeJS.Timer[];
 
     readonly clients: Array<Client>;
     readonly playerCount: number;

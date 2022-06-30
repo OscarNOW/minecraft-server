@@ -2,11 +2,14 @@ const { version } = require('../../settings.json')
 
 const pChunk = require('prismarine-chunk')(version);
 const { Vec3 } = require('vec3');
-
 const JSON5 = require('JSON5');
 const fs = require('fs')
 const path = require('path')
+
+const { CustomError } = require('../utils/CustomError.js');
+
 const blocks = JSON5.parse(fs.readFileSync(path.resolve(__dirname, '../../data/blocks.json')).toString())
+
 
 class Chunk {
     constructor() {
@@ -19,20 +22,34 @@ class Chunk {
     }
 
     setBlock({ x, y, z }, blockName, state = {}) {
-        this._chunk.setBlockStateId(new Vec3(x, y, z), getStateId(blockName, state));
+        this._chunk.setBlockStateId(new Vec3(x, y, z), getStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         return this;
     }
 }
 
-function getStateId(blockName, state = {}) {
+function getStateId(blockName, state = {}, { function: func }) {
     let block = getBlock(blockName)
     if (!block.states) return block.minStateId;
 
     let stateIds = [];
     block.states.forEach(({ name, values }) => {
-        if (state[name] === undefined) throw new Error(`Expected "${name}" state for block "${blockName}", expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
-        if (values.indexOf(state[name]) === -1) throw new Error(`Unknown "${name}" state for block "${blockName}" , expected one of ${require('util').inspect(values, { color: true })}, but got "${state[name]}" (${typeof state[name]})`)
+        if (values.indexOf(state[name]) === -1)
+            /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'state', ''],
+                    ['for the block "', blockName, '"'],
+                    ['in the function ', 'setBlock', ''],
+                    ['in the class ', this.constructor.name, ''],
+                ], [true, false].sort().join(',') == values.sort().join(',') ? {
+                    got: state[name],
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                } : {
+                    got: state[name],
+                    expectationType: 'value',
+                    expectation: values
+                }, this[func]).toString()
 
         stateIds.push(values.indexOf(state[name]))
     })

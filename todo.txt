@@ -1,4 +1,4 @@
-implement error class/function 
+-implement error class/function 
 implement event when error is happening
 Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
