@@ -1,14 +1,11 @@
 const { textModifierNameMapping, textColorNameMapping } = require('../../functions/loader/data');
+const { CustomError } = require('../utils/CustomError.js');
 
 class Text {
     constructor(text) {
-        if (typeof text == 'string') {
-            this._string = Text.parseString(text);
-            this._array = null;
-        } else {
-            this._array = Text.parseArray(text);
-            this._string = null;
-        }
+        this._input = text;
+        this._string = null;
+        this._array = null
     }
 
     toString() {
@@ -16,6 +13,15 @@ class Text {
     }
 
     get array() {
+        if (this._input)
+            if (typeof this._input == 'string') {
+                this._string = Text.parseString(this._input);
+                this._input = null;
+            } else {
+                this._array = Text.parseArray(this._input);
+                this._input = null;
+            }
+
         if (this._array === null)
             this._array = Text.stringToArray(this._string);
 
@@ -23,6 +29,15 @@ class Text {
     }
 
     get string() {
+        if (this._input)
+            if (typeof this._input == 'string') {
+                this._string = Text.parseString(this._input);
+                this._input = null;
+            } else {
+                this._array = Text.parseArray(this._input);
+                this._input = null;
+            }
+
         if (this._string === null)
             this._string = Text.arrayToString(this._array)
 
@@ -30,12 +45,16 @@ class Text {
     }
 
     set array(val) {
-        this._array = Text.parseArray(val);
+        this._input = val;
+
+        this._array = null;
         this._string = null
     }
 
     set string(val) {
-        this._string = Text.parseString(val);
+        this._input = val;
+
+        this._string = null;
         this._array = null;
     }
 
@@ -151,7 +170,16 @@ class Text {
         text.split('').forEach(val => {
             if (isModifier) {
                 if (!textColorNameMapping[val] && !textModifierNameMapping[val])
-                    throw new Error(`Unknown color letter "${val}"`)
+                        /* -- Look at stack trace for location -- */ throw new
+                        CustomError('expectationNotMet', 'libraryUser', [
+                            ['', 'colorLetter', ''],
+                            ['in the function ', 'stringToArray', ''],
+                            ['in the class ', this.constructor.name, ''],
+                        ], {
+                            got: val,
+                            expectationType: 'value',
+                            expectation: Object.keys(textColorNameMapping).concat(Object.keys(textModifierNameMapping)),
+                        }, Text.stringToArray).toString()
                 else
                     if (textColorNameMapping[val]) {
                         let copy = Object.assign([], currentModifiers);

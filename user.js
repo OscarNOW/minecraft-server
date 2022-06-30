@@ -1,4 +1,8 @@
-const { Server } = require('.');
-const server = new Server();
+const { Text } = require('.');
+const text = new Text('§lHello World');
 
-server.on('hello', () => { })
+console.log(`${text}`)
+
+text.string = '§.Hello World'
+
+console.log(`${text}`)
