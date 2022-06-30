@@ -1,2 +1,4 @@
-const { Color } = require('.');
-let color = new Color('hello')
+const { Server } = require('.');
+const server = new Server();
+
+server.on('hello', () => { })
