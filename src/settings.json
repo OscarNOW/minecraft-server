@@ -1,5 +1,10 @@
 {
     "version": "1.16.3",
+    "timing": {
+        "clientKeepAliveKick": 30000,
+        "sendKeepAliveInterval": 3000,
+        "teleportConfirmationKick": 5000
+    },
     "defaults": {
         "gamemode": 0,
         "showRespawnScreen": true,

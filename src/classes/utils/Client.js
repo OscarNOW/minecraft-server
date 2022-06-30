@@ -222,6 +222,34 @@ class Client extends EventEmitter {
         this.p.sendPacket('login', loginPacket);
 
         callAfterLogin.forEach(a => a());
+
+        let clientKeepAliveKick = 30000;
+        let sendKeepAliveInterval = 4000;
+
+        let keepAlivePromises = {};
+        setInterval(() => {
+            let currentId = Math.floor(Math.random() * 1000);
+            new Promise((res, rej) => {
+                keepAlivePromises[currentId] = { res, rej, resolved: false };
+
+                setTimeout(() => {
+                    if (!keepAlivePromises[currentId].resolved)
+                        rej(new Error(`Client didn't respond to keep alive packet in time`));
+
+                    delete keepAlivePromises[currentId];
+                }, clientKeepAliveKick)
+            })
+
+            this.p.sendPacket('keep_alive', {
+                keepAliveId: BigInt(currentId)
+            })
+        }, sendKeepAliveInterval)
+
+        this.p.client.on('keep_alive', ({ keepAliveId }) => {
+            keepAlivePromises[keepAliveId[1]].resolved = true;
+            keepAlivePromises[keepAliveId[1]].res();
+        })
+
     }
 
     get p() {

@@ -1,4 +1,5 @@
 implement error class/function 
+implement event when error is happening
 Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
@@ -6,4 +7,4 @@ Use data loader instead of require()
 Update tests
 Change file structure so that every class gets its own folder
 Add screenshots to documentation
--Create FAQ
+Create separate guide

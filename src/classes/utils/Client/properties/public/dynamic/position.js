@@ -1,4 +1,5 @@
 const { Changable } = require('../../../../Changable.js');
+const { timing } = require('../../../../../../settings.json')
 
 const teleportPromises = new Map();
 
@@ -15,7 +16,7 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             const teleportId = Math.floor(Math.random() * 1000);
-            const promise = new Promise((res, rej) => {
+            new Promise((res, rej) => {
                 let obj = teleportPromises.get(this) || {};
                 obj[teleportId] = {
                     res,
@@ -28,7 +29,7 @@ module.exports = {
                 setTimeout(() => {
                     if (!teleportPromises.get(this)[teleportId].resolved)
                         rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
-                }, 5000)
+                }, timing.teleportConfirmationKick)
             })
 
             this.p.positionSet = true;
@@ -42,8 +43,6 @@ module.exports = {
                 flags: 0x00,
                 teleportId
             });
-
-            return promise;
         },
         init: function () {
             this.p.positionSet = false;

@@ -35,6 +35,7 @@ class Server extends EventEmitter {
             version: serverVersion,
             motd: '',
             maxPlayers: 0,
+            keepAlive: false,
             beforePing: (response, client) => {
                 let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
                 let infoVersion = info.version?.correct ?? serverVersion;
