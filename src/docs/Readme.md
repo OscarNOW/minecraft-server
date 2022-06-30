@@ -12,8 +12,8 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
-| ⚠ WARNING: Unfortunately, the only current supported Minecraft version is `1.16.3` |
-| ------------------------------------------------------------------------------------------ |
+| ⚠ WARNING: The only current supported Minecraft version for this library is `1.16.3` |
+| -------------------------------------------------------------------------------------------- |
 
 An object oriented library that helps you create Minecraft servers.
 
@@ -29,8 +29,8 @@ const server = new Server()
 server.on('join', client => {
 
     // This is necessary to spawn in the client. If you don't
-    // specify where to spawn it, the client will spawn at:
-    // x: 0, y: 0, z: 0, yaw: 0, pitch: 0
+    // specify where to spawn it in this line, the client will
+    // spawn at:           x: 0, y: 0, z: 0, yaw: 0, pitch: 0
     client.position = {};
 
     client.chat(`Welcome to the server, ${client.username}!`)
@@ -41,6 +41,8 @@ server.on('join', client => {
 ```
 
 For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples) for general examples and [the documentation](https://oscarnow.github.io/minecraft-server/) for specific examples.
+
+If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
 ## **Terms**
 
@@ -231,8 +233,8 @@ const server = new Server()
 server.on('join', client => {
 
     // This is necessary to spawn in the client. If you don't
-    // specify where to spawn it, the client will spawn at:
-    // x: 0, y: 0, z: 0, yaw: 0, pitch: 0
+    // specify where to spawn it in this line, the client will
+    // spawn at:           x: 0, y: 0, z: 0, yaw: 0, pitch: 0
     client.position = {}
 
     client.chat(message)
