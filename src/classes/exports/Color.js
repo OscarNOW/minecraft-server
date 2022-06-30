@@ -1,4 +1,5 @@
 const { Changable } = require('../utils/Changable.js');
+const { CustomError } = require('../utils/CustomError.js');
 
 class Color {
     constructor(input, i2, i3) {
@@ -30,7 +31,17 @@ class Color {
                 this._hexCached = true;
                 hex = input
             } else
-                throw new Error(`Unknown Color input "${input}" (${typeof input}). If you want to use hex, please start the string with "#"`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'input', ''],
+                        ['in the ', 'constructor', ' of'],
+                        ['the class ', this.constructor.name, ''],
+                    ], {
+                        got: input,
+                        expectationType: 'type',
+                        expectation: 'string | rgb | hsl',
+                        externalLink: 'https://oscarnow.github.io/minecraft-server/classes/Color.html#constructor'
+                    }, this.constructor).toString()
         else if (input.r && input.g && input.b) {
             this._rgbCached = true;
             rgb = {
@@ -42,7 +53,17 @@ class Color {
             this._hslCached = true;
             hsl = input;
         } else
-            throw new Error(`Unknown Color input "${input}" (${typeof input})`)
+            /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'input', ''],
+                    ['in the ', 'constructor', ' of'],
+                    ['the class ', this.constructor.name, ''],
+                ], {
+                    got: input,
+                    expectationType: 'type',
+                    expectation: 'string | rgb | hsl',
+                    externalLink: 'https://oscarnow.github.io/minecraft-server/classes/Color.html#constructor'
+                }, this.constructor).toString()
 
         this._rgb = new Changable(rgb => {
             this.rgb = rgb;
