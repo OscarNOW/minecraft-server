@@ -173,7 +173,7 @@ class Text {
                         /* -- Look at stack trace for location -- */ throw new
                         CustomError('expectationNotMet', 'libraryUser', [
                             ['', 'colorLetter', ''],
-                            ['in the function ', 'stringToArray', ''],
+                            ['in the function "', 'stringToArray', '"'],
                             ['in the class ', this.constructor.name, ''],
                         ], {
                             got: val,

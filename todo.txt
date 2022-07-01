@@ -8,3 +8,5 @@ Update tests
 Change file structure so that every class gets its own folder
 Add screenshots to documentation
 Create separate guide
+Implement same lazy loading from Text to Color
+removeAllErrors not correct with types

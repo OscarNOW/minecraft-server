@@ -39,7 +39,7 @@ function getStateId(blockName, state = {}, { function: func }) {
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'state', ''],
                     ['for the block "', blockName, '"'],
-                    ['in the function ', func, ''],
+                    ['in the function "', func, '"'],
                     ['in the class ', this.constructor.name, ''],
                 ], [true, false].sort().join(',') == values.sort().join(',') ? {
                     got: state[name],
@@ -77,7 +77,7 @@ function getBlock(blockName, { function: func }) {
     /* -- Look at stack trace for location -- */ throw new
         CustomError('expectationNotMet', 'libraryUser', [
             ['', 'blockName', ''],
-            ['in the function ', func, ''],
+            ['in the function "', func, '"'],
             ['in the class ', this.constructor.name, ''],
         ], {
             got: blockName,

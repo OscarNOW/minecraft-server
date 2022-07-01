@@ -1,8 +1,9 @@
-const { Text } = require('.');
-const text = new Text('§lHello World');
+const { Server } = require('.');
+const server = new Server();
 
-console.log(`${text}`)
+server.on('join', client => {
+    client.position = {}
 
-text.string = '§.Hello World'
-
-console.log(`${text}`)
+    let horse = client.entity('horse', client.position)
+    horse.animation('hello')
+})

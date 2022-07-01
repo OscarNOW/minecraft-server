@@ -136,12 +136,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'addListener', ''],
+                    ['in the function "', 'addListener', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.addListener).toString()
 
         return super.addListener(event, callback);
@@ -152,12 +152,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'on', ''],
+                    ['in the function "', 'on', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.on).toString()
 
         return super.on(event, callback);
@@ -168,12 +168,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'once', ''],
+                    ['in the function "', 'once', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.once).toString()
 
         return super.once(event, callback);
@@ -184,12 +184,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'prependListener', ''],
+                    ['in the function "', 'prependListener', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.prependListener).toString()
 
         return super.prependListener(event, callback);
@@ -200,12 +200,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'prependOnceListener', ''],
+                    ['in the function "', 'prependOnceListener', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.prependOnceListener).toString()
 
         return super.prependOnceListener(event, callback);
@@ -216,12 +216,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'off', ''],
+                    ['in the function "', 'off', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.off).toString()
 
         return super.off(event, callback);
@@ -232,12 +232,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'removeListener', ''],
+                    ['in the function "', 'removeListener', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.removeListener).toString()
 
         return super.removeListener(event, callback);
@@ -248,12 +248,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'removeAllListeners', ''],
+                    ['in the function "', 'removeAllListeners', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.removeAllListeners).toString()
 
         return super.removeAllListeners(event);
@@ -264,12 +264,12 @@ class Server extends EventEmitter {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
-                    ['in the function ', 'rawListeners', ''],
+                    ['in the function "', 'rawListeners', '"'],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: event,
                     expectationType: 'value',
-                    expectation: ['join', 'leave']
+                    expectation: events
                 }, this.rawListeners).toString()
 
         return super.rawListeners(event);
