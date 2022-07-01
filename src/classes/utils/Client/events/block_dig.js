@@ -1,3 +1,5 @@
+const { CustomError } = require('../../CustomError.js')
+
 const faces = Object.freeze({
     0: '-Y',
     1: '+Y',
@@ -9,11 +11,21 @@ const faces = Object.freeze({
 
 module.exports = {
     block_dig: function ({ status, location: { x, y, z }, face }) {
-        if (status == 1 && !faces[face])
-            throw new Error(`Unknown face "face" (${typeof face})`)
-
         if (status == 0)
-            this.emit('digStart', { x, y, z }, faces[face])
+            if (faces[face])
+                this.emit('digStart', { x, y, z }, faces[face])
+            else
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'client', [
+                        ['', 'face', ''],
+                        ['in the event ', 'block_dig', '']
+                        ['in the class ', this.constructor.name, '']
+                    ], {
+                        got: face,
+                        expectationType: 'value',
+                        expectation: Object.keys(faces)
+                    }).toString()
+
         else if (status == 1)
             this.emit('digCancel', { x, y, z })
         else if (status == 2)
@@ -27,6 +39,15 @@ module.exports = {
         else if (status == 6)
             this.emit('itemHandSwap')
         else
-            throw new Error(`Unknown status "${status}" (${typeof status})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'status', ''],
+                    ['in the event ', 'block_dig', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: status,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5, 6]
+                }).toString()
     }
 }

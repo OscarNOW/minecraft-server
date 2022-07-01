@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 571:
+/***/ 893:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -11,13 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 923:
+/***/ 555:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HierarchyManager = void 0;
-const StateManager_1 = __webpack_require__(802);
+const StateManager_1 = __webpack_require__(498);
 class HierarchyManager {
     constructor() {
         this.stateManager = new StateManager_1.StateManager();
@@ -124,22 +124,21 @@ class HierarchyManager {
         }
     }
     openCurrentPath() {
-        var _a;
         const pathname = window.location.pathname.replace('/docs', '');
         const activeElement = document.querySelector(`.js-category-link[data-id="${pathname}"]`);
         if (!activeElement) {
             return null;
         }
         activeElement.classList.add('_active');
-        let parent = activeElement === null || activeElement === void 0 ? void 0 : activeElement.closest(this.listSelector);
-        // eslint-disable-next-line no-constant-condition
+        let parent = activeElement.closest(this.listSelector);
+        // eslint-disable-next-line no-constant-condition,@typescript-eslint/no-unnecessary-condition
         while (true) {
             if (!parent) {
                 break;
             }
             const id = parent.dataset.id || '';
             this.openPath(id);
-            parent = (_a = parent.parentNode) === null || _a === void 0 ? void 0 : _a.closest(this.listSelector);
+            parent = parent.parentNode.closest(this.listSelector);
         }
         return activeElement;
     }
@@ -149,7 +148,7 @@ exports.HierarchyManager = HierarchyManager;
 
 /***/ }),
 
-/***/ 802:
+/***/ 498:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -160,7 +159,9 @@ class StateManager {
         this.openedPathLsKey = 'opened-path-state';
         this.openedPaths = [];
         const lsOpenedPathState = localStorage.getItem('opened-path-state');
-        this.openedPaths = lsOpenedPathState ? JSON.parse(lsOpenedPathState) : [];
+        this.openedPaths = lsOpenedPathState
+            ? JSON.parse(lsOpenedPathState)
+            : [];
     }
     /**
      * Добавляет path в стейт.
@@ -237,8 +238,8 @@ var exports = __webpack_exports__;
 var __webpack_unused_export__;
 
 __webpack_unused_export__ = ({ value: true });
-__webpack_require__(571);
-const HierarchyManager_1 = __webpack_require__(923);
+__webpack_require__(893);
+const HierarchyManager_1 = __webpack_require__(555);
 const hierarchyManager = new HierarchyManager_1.HierarchyManager();
 hierarchyManager.init();
 

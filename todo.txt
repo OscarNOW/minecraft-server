@@ -9,4 +9,7 @@ Change file structure so that every class gets its own folder
 Add screenshots to documentation
 Create separate guide
 Implement same lazy loading from Text to Color
-removeAllErrors not correct with types
+-removeAllErrors not correct with types
+Make Client.set slot modulo the input. So that if you do `client.slot = 13` it will become 4
+Create custom 'Not implemented' error
+Create custom 'Action cant be performed right now' error

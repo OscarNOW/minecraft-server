@@ -3,7 +3,17 @@ const languages = require('../../../../data/languages.json');
 module.exports = {
     settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {
         let langCode = locale.toLowerCase();
-        if (!languages[langCode]) throw new Error(`Unknown language code "${langCode}" (${typeof langCode})`)
+        if (!languages[langCode])
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'language code', ''],
+                    ['in the event ', 'settings', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: langCode,
+                    expectationType: 'value',
+                    expectation: Object.keys(languages)
+                }).toString()
 
         let obj = languages[langCode];
         obj.langCode = langCode;
@@ -27,7 +37,16 @@ module.exports = {
                 colors: chatColors
             });
         else
-            throw new Error(`Unknown chatFlags "${chatFlags}" (${typeof chatFlags})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'chatFlags', ''],
+                    ['in the event ', 'settings', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: chatFlags,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2]
+                }).toString()
 
         let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
         this.visibleSkinParts = Object.freeze({
@@ -45,7 +64,16 @@ module.exports = {
         else if (mainHand === 1)
             this.rightHanded = true
         else
-            throw new Error(`Unknown mainHand "${mainHand}" (${typeof mainHand})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'mainHand', ''],
+                    ['in the event ', 'settings', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: langCode,
+                    expectationType: 'value',
+                    expectation: [0, 1]
+                }).toString()
 
         this.p.readyStates.clientSettings = true;
         this.p.updateCanUsed();

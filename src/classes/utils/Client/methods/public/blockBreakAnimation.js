@@ -7,7 +7,16 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (stage < 0 || stage > 10)
-            throw new Error(`Unknown stage "${stage}" (${typeof stage})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'stage', ''],
+                    ['in the function ', 'blockBreakAnimation', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: stage,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                }).toString()
 
         this.p.sendPacket('block_break_animation', {
             entityId: Math.floor(Math.random() * 1000),
