@@ -2,7 +2,7 @@ implement event when error is happening
 Create custom 'Not implemented' error
 Create custom 'Action cant be performed right now' error
 Create custom 'Cant set' error
-Implement favicon
+-Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
 Use data loader instead of require()

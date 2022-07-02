@@ -8,7 +8,9 @@
     "defaults": {
         "gamemode": 0,
         "showRespawnScreen": true,
-        "reducedDebugInfo": false
+        "reducedDebugInfo": false,
+        "maxPlayers": 100,
+        "motd": ""
     },
     "links": {
         "docs": "https://oscarnow.github.io/minecraft-server"

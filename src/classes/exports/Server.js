@@ -3,6 +3,7 @@ const { CustomError } = require('../utils/CustomError.js');
 
 const protocolVersions = require('../../data/versions.json')
 const { version: serverVersion } = require('../../settings.json');
+const settings = require('../../settings.json')
 
 const mc = require('minecraft-protocol');
 const endianToggle = require('endian-toggle')
@@ -23,7 +24,7 @@ class Server extends EventEmitter {
         this.serverList = serverList ?? (() => ({
             players: {
                 online: this.playerCount,
-                max: 100
+                max: settings.defaults.maxPlayers
             }
         }));
         this.wrongVersionConnect = wrongVersionConnect ?? (() => `Please use version ${serverVersion}`);
@@ -36,9 +37,10 @@ class Server extends EventEmitter {
             encryption: true,
             host: 'localhost',
             version: serverVersion,
-            motd: '',
-            maxPlayers: 0,
+            motd: settings.defaults.motd,
+            maxPlayers: settings.defaults.maxPlayers,
             keepAlive: false,
+            hideErrors: true,
             beforePing: (response, client) => {
                 let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
                 let infoVersion = info.version?.correct ?? serverVersion;
@@ -64,10 +66,9 @@ class Server extends EventEmitter {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: `${info?.description ?? ''}`
+                    description: `${info?.description ?? settings.defaults.motd}`
                 }
-            },
-            hideErrors: true
+            }
         })
 
         this.server.on('connection', client => {
