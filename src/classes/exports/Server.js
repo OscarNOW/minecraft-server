@@ -70,7 +70,7 @@ class Server extends EventEmitter {
                     description: { //Chat component
                         text: `${info.description}`
                     },
-                    favicon: ''
+                    favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
                 }
             }
         })

@@ -48,6 +48,7 @@ export class Server {
                 }>;
             };
             description?: string | Text;
+            favicon?: Buffer;
         };
         wrongVersionConnect?(info: {
             ip: string,

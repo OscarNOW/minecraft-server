@@ -17,8 +17,9 @@ src/docs/
 docs/
 src/temp/
 todo.txt
-user.js
+user/
 src/classes/exports/*.d.ts
 src/classes/utils/*.d.ts
 ~$packets.xlsx
 packets.xlsx
+FAQ.md
