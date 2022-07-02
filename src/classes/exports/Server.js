@@ -318,7 +318,6 @@ class Server extends EventEmitter {
 
     close() {
         this.server.close();
-
         this.intervals.forEach(interval => clearInterval(interval));
     }
 }

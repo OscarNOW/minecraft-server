@@ -236,7 +236,7 @@ class Client extends EventEmitter {
         let sendKeepAliveInterval = 4000;
 
         let keepAlivePromises = {};
-        setInterval(() => {
+        this.server.intervals.push(setInterval(() => {
             let currentId = Math.floor(Math.random() * 1000);
             new Promise((res, rej) => {
                 keepAlivePromises[currentId] = { res, rej, resolved: false };
@@ -252,12 +252,15 @@ class Client extends EventEmitter {
             this.p.sendPacket('keep_alive', {
                 keepAliveId: BigInt(currentId)
             })
-        }, sendKeepAliveInterval)
+        }, sendKeepAliveInterval))
 
         this.p.client.on('keep_alive', ({ keepAliveId }) => {
             keepAlivePromises[keepAliveId[1]].resolved = true;
             keepAlivePromises[keepAliveId[1]].res();
         })
+
+        this.server.close()
+        return
 
     }
 

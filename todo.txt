@@ -18,4 +18,3 @@ Move client.window('horse') to horse.openWindow()
 Fix ISC license image in docs
 Implement pattern recognition in CustomError. So that [1,2,3,4,5] becomes 'An integer between 1 and 5'
 Split Color and Text into different packages
-server.close() doesn't stop code
