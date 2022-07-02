@@ -11,7 +11,8 @@ const server = new Server({
         version: {
             wrongText: 'Please use version 1.16.3',
             correct: '1.16.3'
-        }
+        },
+        favicon: fs.readFileSync('./favicon.png')
     }),
 
     wrongVersionConnect: ({ ip, connection: { host, port }, version, legacy }) =>

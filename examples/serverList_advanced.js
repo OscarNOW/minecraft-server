@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { Server, Text } = require('minecraft-server');
 const server = new Server({
 
@@ -23,7 +24,9 @@ const server = new Server({
                 always think they have the correct version. Client version is null
                 when the version of the client is unknown                           */
             correct: version == null ? '1.16.3' : version
-        }
+        },
+
+        favicon: fs.readFileSync('./favicon.png')
 
     })
 
