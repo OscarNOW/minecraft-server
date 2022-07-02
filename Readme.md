@@ -40,7 +40,7 @@ server.on('join', client => {
 });
 ```
 
-For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples) for general examples and [the documentation](https://oscarnow.github.io/minecraft-server/) for specific examples.
+For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
