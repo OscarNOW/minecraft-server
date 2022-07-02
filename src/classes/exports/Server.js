@@ -8,6 +8,7 @@ const settings = require('../../settings.json')
 const mc = require('minecraft-protocol');
 const endianToggle = require('endian-toggle')
 const { EventEmitter } = require('events');
+const imageSize = require('image-size');
 
 const events = Object.freeze([
     'join',
@@ -56,6 +57,37 @@ class Server extends EventEmitter {
                 else
                     for (const value of Object.values(info.players.hover))
                         playerHover.push({ name: value.name, id: value.uuid })
+
+                if (info.favicon) {
+                    let imageInfo = imageSize(info.favicon);
+
+                    if (imageInfo.type != 'png')
+                            /* -- Look at stack trace for location -- */ throw new
+                            CustomError('expectationNotMet', 'libraryUser', [
+                                ['', 'image type', ''],
+                                ['in the function "', 'serverList', '"'],
+                                ['in the ', 'constructor', ' of'],
+                                ['the class ', this.constructor.name, ''],
+                            ], {
+                                got: imageInfo.type,
+                                expectationType: 'value',
+                                expectation: ['png']
+                            }, this.constructor).toString()
+
+                    if (imageInfo.width != 64 || imageInfo.height != 64)
+                            /* -- Look at stack trace for location -- */ throw new
+                            CustomError('expectationNotMet', 'libraryUser', [
+                                ['', 'image dimensions', ''],
+                                ['in the function "', 'serverList', '"'],
+                                ['in the ', 'constructor', ' of'],
+                                ['the class ', this.constructor.name, ''],
+                            ], {
+                                got: `${imageInfo.width}x${imageInfo.height}`,
+                                expectationType: 'value',
+                                expectation: ['64x64']
+                            }, this.constructor).toString()
+
+                }
 
                 return {
                     version: {

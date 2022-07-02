@@ -30,6 +30,7 @@
     "homepage": "https://github.com/OscarNOW/minecraft-server#readme",
     "dependencies": {
         "endian-toggle": "^0.0.0",
+        "image-size": "^1.0.1",
         "json5": "^2.2.1",
         "minecraft-protocol": "^1.35.0",
         "prismarine-chunk": "^1.31.0",
