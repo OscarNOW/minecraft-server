@@ -17,9 +17,9 @@ export class Server extends EventEmitter {
                 wrongText?: string | Text;
                 correct?: version;
             };
-            players: {
-                online: number;
-                max: number;
+            players?: {
+                online?: number;
+                max?: number;
                 hover?: string | Array<{
                     name: string;
                     uuid: string;

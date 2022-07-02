@@ -21,12 +21,7 @@ class Server extends EventEmitter {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties } = {}) {
         super();
 
-        this.serverList = serverList ?? (() => ({
-            players: {
-                online: this.playerCount,
-                max: settings.defaults.maxPlayers
-            }
-        }));
+        this.serverList = serverList ?? (() => ({}));
         this.wrongVersionConnect = wrongVersionConnect ?? (() => `Please use version ${serverVersion}`);
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
@@ -44,6 +39,12 @@ class Server extends EventEmitter {
             beforePing: (response, client) => {
                 let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
                 let infoVersion = info.version?.correct ?? serverVersion;
+
+                if (!info) info = {};
+                if (!info.players) info.players = {};
+                if (info.players.max === undefined) info.players.max = settings.defaults.maxPlayers;
+                if (info.players.online === undefined) info.players.online = this.playerCount;
+                if (info.description === undefined) info.description = settings.defaults.motd;
 
                 let playerHover = [];
                 if (info?.players?.hover === undefined)
@@ -66,7 +67,10 @@ class Server extends EventEmitter {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: `${info?.description ?? settings.defaults.motd}`
+                    description: { //Chat component
+                        text: `${info.description}`
+                    },
+                    favicon: ''
                 }
             }
         })
