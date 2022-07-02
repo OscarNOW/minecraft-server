@@ -12,7 +12,16 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')
-                throw new Error(`Unknown reducedDebugInfo, expected a boolean, received "${value}" (${typeof value})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'reducedDebugInfo', ''],
+                        ['in the function "', 'setRaw reducedDebugInfo', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: value,
+                        expectationType: 'type',
+                        expectation: 'boolean'
+                    }).toString()
 
             this.p._reducedDebugInfo = value;
 

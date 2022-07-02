@@ -18,7 +18,16 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
-                throw new Error(`Unknown gamemode "${value}" (${typeof value})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'gamemode', ''],
+                        ['in the function "', 'set gamemode', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: value,
+                        expectationType: 'value',
+                        expectation: ['survival', 'creative', 'adventure', 'spectator']
+                    }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: 3,
@@ -30,7 +39,16 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
-                throw new Error(`Unknown gamemode "${value}" (${typeof value})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'gamemode', ''],
+                        ['in the function "', 'setRaw gamemode', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: value,
+                        expectationType: 'value',
+                        expectation: ['survival', 'creative', 'adventure', 'spectator']
+                    }).toString()
 
             this.p._gamemode = value;
 

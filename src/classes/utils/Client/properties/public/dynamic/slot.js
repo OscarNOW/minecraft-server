@@ -16,7 +16,16 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 8)
-                throw new Error(`Unknown slot, expected an integer between 0 and 8, received "${v}" (${typeof v})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'slot', ''],
+                        ['in the function "', 'set slot', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: v,
+                        expectationType: 'type',
+                        expectation: 'boolean'
+                    }).toString()
 
             this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
@@ -27,7 +36,16 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 8)
-                throw new Error(`Unknown slot, expected an integer between 0 and 8, received "${v}" (${typeof v})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'slot', ''],
+                        ['in the function "', 'setRaw slot', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: v,
+                        expectationType: 'type',
+                        expectation: 'boolean'
+                    }).toString()
 
             this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
