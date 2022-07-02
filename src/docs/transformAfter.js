@@ -25,13 +25,18 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
     newTopMenu = newTopMenu.replace(value, `${url}" data-id="/${url}">${name}</a>`);
 });
 
-let newClassMenu = newTopMenu;
+let newInnerMenu = newTopMenu;
 
-newClassMenu = newClassMenu.replace(/classes\//g, '../classes/');
-newClassMenu = newClassMenu.replace(/types\//g, '../types/');
+newInnerMenu = newInnerMenu.replace(/classes\//g, '../classes/');
+newInnerMenu = newInnerMenu.replace(/types\//g, '../types/');
 
 console.log('Writing menu...');
-['index.html', 'modules.html', ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`)]
+[
+    'index.html',
+    'modules.html',
+    ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`),
+    ...fs.readdirSync(path.resolve(__dirname, '../../docs/types')).map(file => `types/${file}`)
+]
     .forEach(file => {
         console.log(`   ${file}`)
 
@@ -40,8 +45,8 @@ console.log('Writing menu...');
         let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
         thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
 
-        if (file.startsWith('classes/'))
-            content = content.replace(thisMenu, newClassMenu);
+        if (file.includes('/'))
+            content = content.replace(thisMenu, newInnerMenu);
         else
             content = content.replace(thisMenu, newTopMenu);
 
@@ -49,8 +54,8 @@ console.log('Writing menu...');
     });
 
 console.log('Writing overwrites...')
-// console.log('   style.css')
-// fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
+console.log('   style.css')
+fs.writeFileSync(path.resolve(__dirname, `../../docs/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
 
 console.log('Done')
 
