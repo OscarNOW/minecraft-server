@@ -1,20 +1,20 @@
-implement event when error is happening
-Create custom 'Not implemented' error
-Create custom 'Action cant be performed right now' error
-Create custom 'Cant set' error
-Look better at packet order when Client joining and canUsed (use callAfterLogin)
-Implement base class which includes EventEmitter, privateSymbols and observers
+implement error event for Server and Client
+Expand CustomError
+    Not implemented
+    Action can't be performed right now
+    Can't set
+Reimplement canUsed
 Use data loader instead of require()
-Update tests
+Make tests work
 Change file structure so that every class gets its own folder
-Add screenshots to documentation
-Create separate guide
+Create guide
     Update readme
     Put examples in guide
-Implement same lazy loading from Text to Color
-Make Client.set slot modulo the input. So that if you do `client.slot = 13` it will become 4
+    Add screenshots
+Make Client.(set slot) modulo the input. So that if you do `client.slot = 13` it will become 4
 Move demo ids into separate data file
 Move client.window('horse') to horse.openWindow()
+    Make Horse class that inherits Entity
 Fix ISC license image in docs
-Implement pattern recognition in CustomError. So that [1,2,3,4,5] becomes 'An integer between 1 and 5'
+Implement pattern recognition in CustomError. So that [1,2,3,4,5] becomes 'An integer between 1 and 5' and ['png'] becomes "'png'"
 Split Color and Text into different packages
