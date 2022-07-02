@@ -340,7 +340,7 @@ declare class Client extends EventEmitter {
         z: number;
     }, stage: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): void;
     resetCamera(): void;
-    cooldown(item: itemType, length?: number): void;
+    cooldown(item: itemType, tickAmount?: number): void;
     demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;

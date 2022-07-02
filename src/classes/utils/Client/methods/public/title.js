@@ -14,7 +14,22 @@ module.exports = {
         else if (typeof p == 'string' || p instanceof Text)
             properties = { title: p };
         else
-            throw new Error(`Unknown p "${p}" (${typeof p})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'properties', ''],
+                    ['in the function "', 'title', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: p,
+                    expectationType: 'type',
+                    expectation: `string | Text | {
+                        fadeIn?: number;
+                        stay?: number;
+                        fadeOut?: number;
+                        title?: string | Text;
+                        subTitle?: string | Text;
+                    }`
+                }, this.title).toString()
 
         let { fadeIn, stay, fadeOut, title, subTitle } = properties;
 

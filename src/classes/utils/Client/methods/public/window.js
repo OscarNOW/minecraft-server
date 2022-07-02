@@ -1,4 +1,5 @@
 const windowNameIdMapping = require('../../../../../data/windowNameIdMapping.json');
+const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
     window: function (windowType, horse) {
@@ -8,8 +9,29 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (!windowNameIdMapping[windowType]) throw new Error(`Unknown windowType "${windowType}" (${typeof windowType})`)
-        if (windowType == 'horse' && !horse) throw new Error(`No horse given`)
+        if (!windowNameIdMapping[windowType])
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'windowType', ''],
+                    ['in the function "', 'title', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: windowType,
+                    expectationType: 'value',
+                    expectation: Object.keys(windowNameIdMapping)
+                }, this.window).toString()
+        if (windowType == 'horse' && !horse)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'horse', ''],
+                    ['in the function "', 'title', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: horse,
+                    expectationType: 'type',
+                    expectation: 'Entity',
+                    externalLink: `{docs}/classes/Entity.html`
+                }, this.window).toString()
 
         let windowId = windowNameIdMapping[windowType];
 

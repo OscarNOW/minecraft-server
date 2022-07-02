@@ -83,7 +83,7 @@ function getBlock(blockName, { function: func }) {
             got: blockName,
             expectationType: 'type',
             expectation: 'blockType',
-            externalLink: '{docs}modules.html#blockType'
+            externalLink: '{docs}/types/blockType.html'
         }, this[func]).toString()
 }
 

@@ -14,7 +14,16 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (typeof value != 'boolean')
-                throw new Error(`Unknown clearSky, expected a boolean, received "${value}" (${typeof value})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'clearSky', ''],
+                        ['in the function "', 'set clearSky', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: value,
+                        expectationType: 'type',
+                        expectation: 'boolean'
+                    }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: value ? 1 : 2
@@ -25,7 +34,16 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')
-                throw new Error(`Unknown clearSky, expected a boolean, received "${value}" (${typeof value})`)
+                    /* -- Look at stack trace for location -- */ throw new
+                    CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'clearSky', ''],
+                        ['in the function "', 'setRaw clearSky', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: value,
+                        expectationType: 'type',
+                        expectation: 'boolean'
+                    }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: value ? 1 : 2

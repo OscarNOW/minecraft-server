@@ -1,4 +1,5 @@
 const items = require('../../../../../data/items.json');
+const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
     cooldown: function (item, length = 60) {
@@ -9,7 +10,17 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (!items[item])
-            throw new Error(`Unknown item "${item}" (${typeof item})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'item', ''],
+                    ['in the function "', 'cooldown', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: item,
+                    expectationType: 'type',
+                    expectation: 'itemType',
+                    externalLink: '{docs}/types/itemType.html'
+                }, this.cooldown).toString()
 
         this.p.sendPacket('set_cooldown', {
             itemID: items[item].id,

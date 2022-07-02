@@ -8,7 +8,17 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (!particles[particleName]) throw new Error(`Unknown particleName "${particleName}" (${typeof particleName})`)
+        if (!particles[particleName])
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'particleName', ''],
+                    ['in the function "', 'particle', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: particleName,
+                    expectationType: 'value',
+                    expectation: Object.keys(particles)
+                }, this.demo).toString()
 
         if (!particles[particleName].requireData)
             this.p.sendPacket('world_particles', {

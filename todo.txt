@@ -15,4 +15,6 @@ Create separate guide
     Put examples in guide
 Implement same lazy loading from Text to Color
 Make Client.set slot modulo the input. So that if you do `client.slot = 13` it will become 4
-Check if doc links are still correct
+Move demo ids into separate data file
+Move client.window('horse') to horse.openWindow()
+Fix ISC license image in docs

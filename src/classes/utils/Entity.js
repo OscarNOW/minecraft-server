@@ -31,12 +31,12 @@ class Entity extends EventEmitter {
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'type', ''],
                     ['in the ', 'constructor', ' of'],
-                    ['the class ', this.constructor.name, ''],
+                    ['in the class ', this.constructor.name, ''],
                 ], {
                     got: type,
                     expectationType: 'type',
                     expectation: 'entityType',
-                    externalLink: 'https://oscarnow.github.io/minecraft-server/modules.html#entityType'
+                    externalLink: '{docs}/types/entityType.html'
                 }, this.constructor).toString()
 
         this[ps._position] = new Changable(i => that.position = i, { x, y, z, yaw, pitch })

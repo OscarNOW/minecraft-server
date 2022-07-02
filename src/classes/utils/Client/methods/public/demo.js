@@ -1,3 +1,13 @@
+const { CustomError } = require('../../../CustomError.js');
+
+const messages = Object.freeze({
+    startScreen: 0,
+    movement: 101,
+    jump: 102,
+    inventory: 103,
+    endScreenshot: 104
+});
+
 module.exports = {
     demo: function (message) {
         if (!this.p.canUsed)
@@ -6,16 +16,17 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        let messages = {
-            startScreen: 0,
-            movement: 101,
-            jump: 102,
-            inventory: 103,
-            endScreenshot: 104
-        };
-
         if (messages[message] === undefined)
-            throw new Error(`Unknown message "${message}" (${typeof message})`)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'message', ''],
+                    ['in the function "', 'cooldown', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: message,
+                    expectationType: 'value',
+                    expectation: Object.keys(message)
+                }, this.demo).toString()
 
         this.p.sendPacket('game_state_change', {
             reason: 5,
