@@ -637,13 +637,13 @@ dl.tsd-comment-tag-group p {
 
 .tsd-filter-input {
     display: flex;
-    width: -moz-fit-content;
     width: fit-content;
+    width: -moz-fit-content;
     align-items: center;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
     cursor: pointer;
 }
 
@@ -975,10 +975,10 @@ a.tsd-index-link {
     align-items: center;
     vertical-align: middle;
     margin-bottom: 0;
+    user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    user-select: none;
 }
 
 .tsd-accordion-summary {
@@ -1033,14 +1033,12 @@ a.tsd-index-link {
     }
 
     .menu-sticky-wrap {
-        position: -webkit-sticky;
         position: sticky;
-        height: calc(100vh - 4rem);
-        top: 4rem;
+        height: calc(100vh - 2.5rem);
+        top: 2.5rem;
         right: 0;
-        padding: 0 1.5rem;
         padding-top: 1rem;
-        margin-top: 3rem;
+        padding-bottom: 1rem;
         transition: 0.3s ease-in-out;
         transition-property: top, padding-top, padding, height;
         overflow-y: auto;
@@ -1049,6 +1047,8 @@ a.tsd-index-link {
     .col-menu {
         border-left: 1px solid var(--color-accent);
     }
+
+    .col-menu--hide {}
 
     .col-menu .tsd-navigation:not(:last-child) {
         padding-bottom: 1.75rem;

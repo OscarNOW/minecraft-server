@@ -1,6 +1,8 @@
 -implement error class/function 
 removeAllErrors not correct with types
 implement event when error is happening
+Create custom 'Not implemented' error
+Create custom 'Action cant be performed right now' error
 Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
@@ -13,6 +15,4 @@ Create separate guide
     Put examples in guide
 Implement same lazy loading from Text to Color
 Make Client.set slot modulo the input. So that if you do `client.slot = 13` it will become 4
-Create custom 'Not implemented' error
-Create custom 'Action cant be performed right now' error
 Check if doc links are still correct
