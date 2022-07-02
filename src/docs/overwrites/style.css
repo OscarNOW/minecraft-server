@@ -637,13 +637,13 @@ dl.tsd-comment-tag-group p {
 
 .tsd-filter-input {
     display: flex;
-    width: fit-content;
     width: -moz-fit-content;
+    width: fit-content;
     align-items: center;
-    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    user-select: none;
     cursor: pointer;
 }
 
@@ -975,10 +975,10 @@ a.tsd-index-link {
     align-items: center;
     vertical-align: middle;
     margin-bottom: 0;
-    user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    user-select: none;
 }
 
 .tsd-accordion-summary {
@@ -1033,8 +1033,9 @@ a.tsd-index-link {
     }
 
     .menu-sticky-wrap {
+        position: -webkit-sticky;
         position: sticky;
-        height: calc(100vh - 2rem);
+        height: calc(100vh - 4rem);
         top: 4rem;
         right: 0;
         padding: 0 1.5rem;
@@ -1047,10 +1048,6 @@ a.tsd-index-link {
 
     .col-menu {
         border-left: 1px solid var(--color-accent);
-    }
-
-    .col-menu--hide {
-        top: 1rem;
     }
 
     .col-menu .tsd-navigation:not(:last-child) {

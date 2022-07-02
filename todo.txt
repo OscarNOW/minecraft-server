@@ -10,8 +10,7 @@ Change file structure so that every class gets its own folder
 Add screenshots to documentation
 Create separate guide
     Update readme
-    And put examples in guide
-Make docs work with examples again (without examples)
+    Put examples in guide
 Implement same lazy loading from Text to Color
 Make Client.set slot modulo the input. So that if you do `client.slot = 13` it will become 4
 Create custom 'Not implemented' error
