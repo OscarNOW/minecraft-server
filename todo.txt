@@ -1,4 +1,3 @@
-removeAllErrors not correct with types
 implement event when error is happening
 Create custom 'Not implemented' error
 Create custom 'Action cant be performed right now' error

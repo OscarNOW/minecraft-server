@@ -194,7 +194,7 @@ class Entity extends EventEmitter {
     }
 
     removeAllListeners(event) {
-        if (!events.includes(event))
+        if (event !== undefined && !events.includes(event))
             /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'event', ''],
