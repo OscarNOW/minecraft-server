@@ -1,22 +1,12 @@
-const fs = require('fs')
-const path = require('path')
-
-module.exports = {
-    constructor: [
-        {
-            code: fs.readFileSync(path.resolve(__dirname, '../../../examples/serverList_advanced.js')).toString()
-        },
-        {
-            code: `
-const { Server } = require('./')
+const { Server } = require('minecraft-server')
 const server = new Server({
 
     serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
-        description: \`Hi there!\\n\${ legacy? "You've sent a legacy ping": "You've sent a normal ping" }\`,
+        description: `Hi there!\n${legacy ? "You've sent a legacy ping" : "You've sent a normal ping"}`,
         players: {
             online: server.playerCount,
             max: 100,
-            hover: [ip, \`\${ host }: \${ port }\`, version].join('\\n')
+            hover: [ip, `${host}: ${port}`, version].join('\n')
         },
         version: {
             wrongText: 'Please use version 1.16.3',
@@ -25,7 +15,7 @@ const server = new Server({
     }),
 
     wrongVersionConnect: ({ ip, connection: { host, port }, version, legacy }) =>
-        \`You've connected with the wrong version!\\nYour version: \${version}\\nCorrect version: 1.16.3\`,
+        `You've connected with the wrong version!\nYour version: ${version}\nCorrect version: 1.16.3`,
 
     defaultClientProperties: client => ({
         clearSky: true,
@@ -40,7 +30,3 @@ const server = new Server({
     })
 
 })
-`
-        }
-    ]
-}

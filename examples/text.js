@@ -1,7 +1,3 @@
-module.exports = {
-    constructor: [
-        {
-            code: `
 const { Text, Server } = require('minecraft-server');
 const message = new Text([
     {
@@ -33,7 +29,3 @@ server.on('join', client => {
 
     client.chat(message)
 })
-`
-        }
-    ]
-}
