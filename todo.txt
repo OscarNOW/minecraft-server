@@ -3,7 +3,6 @@ implement event when error is happening
 Create custom 'Not implemented' error
 Create custom 'Action cant be performed right now' error
 Create custom 'Cant set' error
-Check if CustomError is defined everywhere
 Implement favicon
 Look better at packet order when Client joining and canUsed (use callAfterLogin)
 Implement base class which includes EventEmitter, privateSymbols and observers
@@ -20,3 +19,4 @@ Move demo ids into separate data file
 Move client.window('horse') to horse.openWindow()
 Fix ISC license image in docs
 Implement pattern recognition in CustomError. So that [1,2,3,4,5] becomes 'An integer between 1 and 5'
+Move individual example files to examples folder

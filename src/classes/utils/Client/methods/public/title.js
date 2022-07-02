@@ -1,4 +1,5 @@
 const { Text } = require('../../../../exports/Text');
+const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
     title: function (p) {

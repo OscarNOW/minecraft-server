@@ -1,3 +1,5 @@
+const { CustomError } = require('../../../CustomError.js');
+
 module.exports = {
     observe: function (observable, cb) {
         if (!this.p.observables[observable])

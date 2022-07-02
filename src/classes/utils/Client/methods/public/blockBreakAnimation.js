@@ -1,3 +1,5 @@
+const { CustomError } = require('../../../CustomError.js');
+
 module.exports = {
     blockBreakAnimation: function (location, stage) {
         if (!this.p.canUsed)
@@ -8,7 +10,7 @@ module.exports = {
 
         if (stage < 0 || stage > 10)
                 /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'client', [
+                CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'stage', ''],
                     ['in the function ', 'blockBreakAnimation', '']
                     ['in the class ', this.constructor.name, '']

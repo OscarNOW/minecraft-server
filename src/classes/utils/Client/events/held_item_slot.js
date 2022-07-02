@@ -1,3 +1,5 @@
+const { CustomError } = require('../../CustomError.js');
+
 module.exports = {
     held_item_slot: function ({ slotId }) {
         if (slotId < 0 || slotId > 8)

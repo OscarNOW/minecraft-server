@@ -1,3 +1,5 @@
+const { CustomError } = require('../../CustomError.js');
+
 module.exports = {
     use_entity: function (obj) {
         if (!this.entities[obj.target])

@@ -1,3 +1,5 @@
+const { CustomError } = require('../../../../CustomError.js');
+
 module.exports = {
     slot: {
         info: {
