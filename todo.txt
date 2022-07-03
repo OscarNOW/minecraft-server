@@ -17,4 +17,3 @@ Move client.window('horse') to horse.openWindow()
     Update Client windowType to different name
 Fix ISC license image in docs
 Split Color and Text into different packages
-Test for log4j
