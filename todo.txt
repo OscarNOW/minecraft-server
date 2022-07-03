@@ -15,5 +15,4 @@ Move demo ids into separate data file
 Move client.window('horse') to horse.openWindow()
     Make Horse class that inherits Entity
     Update Client windowType to different name
--Fix ISC license image in docs
 Split Color and Text into different packages
