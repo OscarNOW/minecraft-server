@@ -243,6 +243,7 @@ dd {
 
 .col-4 {
     flex: 0 0 25%;
+    overflow-x: hidden;
 }
 
 .col-8 {
