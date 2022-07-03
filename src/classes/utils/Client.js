@@ -259,9 +259,6 @@ class Client extends EventEmitter {
             keepAlivePromises[keepAliveId[1]].res();
         })
 
-        this.server.close()
-        return
-
     }
 
     get p() {

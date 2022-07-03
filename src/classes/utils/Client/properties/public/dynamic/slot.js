@@ -25,8 +25,8 @@ module.exports = {
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: v,
-                        expectationType: 'type',
-                        expectation: 'boolean'
+                        expectationType: 'value',
+                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     }).toString()
 
             this.p._slot = value;
@@ -45,8 +45,8 @@ module.exports = {
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: v,
-                        expectationType: 'type',
-                        expectation: 'boolean'
+                        expectationType: 'value',
+                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     }).toString()
 
             this.p._slot = value;
