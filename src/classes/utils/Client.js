@@ -232,11 +232,12 @@ class Client extends EventEmitter {
 
         callAfterLogin.forEach(a => a());
 
+        //Keep alive packets
         let clientKeepAliveKick = 30000;
         let sendKeepAliveInterval = 4000;
 
         let keepAlivePromises = {};
-        this.server.intervals.push(setInterval(() => {
+        this.p.intervals.push(setInterval(() => {
             let currentId = Math.floor(Math.random() * 1000000);
             while (keepAlivePromises[currentId])
                 currentId = Math.floor(Math.random() * 1000000);

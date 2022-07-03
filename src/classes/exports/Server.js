@@ -27,8 +27,6 @@ class Server extends EventEmitter {
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
-        this.intervals = [];
-
         this.server = mc.createServer({
             encryption: true,
             host: 'localhost',
@@ -317,8 +315,8 @@ class Server extends EventEmitter {
     }
 
     close() {
+        this.clients.forEach(client => client.shutdown());
         this.server.close();
-        this.intervals.forEach(interval => clearInterval(interval));
     }
 }
 
