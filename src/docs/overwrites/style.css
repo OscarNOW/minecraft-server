@@ -1463,3 +1463,17 @@ img {
     border-radius: 999rem;
     border: 0.25rem solid var(--color-icon-background);
 }
+
+.darkImg {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .darkImg {
+        display: block;
+    }
+
+    .lightImg {
+        display: none;
+    }
+}
