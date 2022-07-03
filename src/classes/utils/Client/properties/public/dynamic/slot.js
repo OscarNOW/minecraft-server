@@ -15,9 +15,9 @@ module.exports = {
                 else
                     throw new Error(`Can't perform this action on an offline player`)
 
-            const value = parseInt(v);
+            let value = parseInt(v);
 
-            if (isNaN(value) || value < 0 || value > 8)
+            if (isNaN(value))
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'libraryUser', [
                         ['', 'slot', ''],
@@ -25,9 +25,11 @@ module.exports = {
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        expectationType: 'type',
+                        expectation: 'number'
                     }).toString()
+
+            value = value % 9;
 
             this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
@@ -35,9 +37,9 @@ module.exports = {
             })
         },
         setRaw: function (v) {
-            const value = parseInt(v);
+            let value = parseInt(v);
 
-            if (isNaN(value) || value < 0 || value > 8)
+            if (isNaN(value))
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'libraryUser', [
                         ['', 'slot', ''],
@@ -45,9 +47,11 @@ module.exports = {
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        expectationType: 'type',
+                        expectation: 'number'
                     }).toString()
+
+            value = value % 9;
 
             this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
