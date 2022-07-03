@@ -1,7 +1,7 @@
 const { Changable } = require('../../../../Changable.js');
 const { timing } = require('../../../../../../settings.json')
 
-const teleportPromises = new Map();
+const teleportPromises = new WeakMap();
 
 module.exports = {
     position: {
@@ -15,7 +15,10 @@ module.exports = {
                 else
                     throw new Error(`Can't perform this action on an offline player`)
 
-            const teleportId = Math.floor(Math.random() * 1000);
+            let teleportId = Math.floor(Math.random() * 1000000);
+            while (teleportPromises.get(this)?.[teleportId])
+                teleportId = Math.floor(Math.random() * 1000000);
+
             new Promise((res, rej) => {
                 let obj = teleportPromises.get(this) || {};
                 obj[teleportId] = {

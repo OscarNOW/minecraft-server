@@ -237,7 +237,10 @@ class Client extends EventEmitter {
 
         let keepAlivePromises = {};
         this.server.intervals.push(setInterval(() => {
-            let currentId = Math.floor(Math.random() * 1000);
+            let currentId = Math.floor(Math.random() * 1000000);
+            while (keepAlivePromises[currentId])
+                currentId = Math.floor(Math.random() * 1000000);
+
             new Promise((res, rej) => {
                 keepAlivePromises[currentId] = { res, rej, resolved: false };
 

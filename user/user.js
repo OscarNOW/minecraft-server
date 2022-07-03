@@ -3,6 +3,4 @@ const server = new Server()
 
 server.on('join', client => {
     client.position = {}
-
-    client.on('chat', () => client.slot += 3)
 })
