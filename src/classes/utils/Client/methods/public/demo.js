@@ -1,12 +1,7 @@
 const { CustomError } = require('../../../CustomError.js');
+const demoMessages = require('../../../../../data/demoMessages.json')
 
-const messages = Object.freeze({
-    startScreen: 0,
-    movement: 101,
-    jump: 102,
-    inventory: 103,
-    endScreenshot: 104
-});
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
 module.exports = {
     demo: function (message) {
@@ -16,7 +11,7 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (messages[message] === undefined)
+        if (demoMessages[message] === undefined)
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'message', ''],
@@ -25,12 +20,12 @@ module.exports = {
                 ], {
                     got: message,
                     expectationType: 'value',
-                    expectation: Object.keys(message)
+                    expectation: Object.keys(demoMessages)
                 }, this.demo).toString()
 
         this.p.sendPacket('game_state_change', {
             reason: 5,
-            gameMode: messages[message]
+            gameMode: demoMessages[message]
         })
     }
 }

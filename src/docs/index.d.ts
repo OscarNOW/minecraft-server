@@ -342,7 +342,7 @@ declare class Client {
     }, stage: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): void;
     resetCamera(): void;
     cooldown(item: itemType, tickAmount?: number): void;
-    demo(message: 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot'): void;
+    demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;
     kick(reason: string | Text): void;
@@ -650,6 +650,7 @@ type hsl = {
     l: number;
 };
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
+type demoMessage = 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot';
 type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
 type textArray = Array<{
     text: string;

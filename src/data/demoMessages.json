@@ -1,0 +1,7 @@
+{
+    "startScreen": 0,
+    "movement": 101,
+    "jump": 102,
+    "inventory": 103,
+    "endScreenshot": 104
+}
