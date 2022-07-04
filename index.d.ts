@@ -142,7 +142,8 @@ declare class Client extends EventEmitter {
             pitch?: number;
         };
 
-        clearSky?: boolean;
+        raining?: boolean;
+        toxicRainLevel?: number;
         showRespawnScreen?: boolean;
         gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
 
@@ -205,7 +206,8 @@ declare class Client extends EventEmitter {
         pitch: number;
     };
 
-    clearSky: boolean;
+    raining: boolean;
+    toxicRainLevel: number;
     showRespawnScreen: boolean;
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
 
@@ -215,8 +217,8 @@ declare class Client extends EventEmitter {
 
     difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
-    observe(type: 'slot' | 'health' | 'food' | 'foodSaturation', callback: (changedValue: number) => void): void;
-    observe(type: 'clearSky' | 'showRespawnScreen', callback: (changedValue: boolean) => void): void;
+    observe(type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
+    observe(type: 'raining' | 'showRespawnScreen', callback: (changedValue: boolean) => void): void;
     observe(type: 'position', callback: (changedValue: {
         x: number;
         y: number;

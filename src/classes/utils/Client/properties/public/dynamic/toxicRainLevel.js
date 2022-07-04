@@ -1,12 +1,12 @@
 const { CustomError } = require('../../../../CustomError.js');
 
 module.exports = {
-    clearSky: {
+    toxicRainLevel: {
         info: {
             callAfterLogin: true
         },
         get: function () {
-            return this.p._clearSky
+            return this.p._toxicRainLevel
         },
         set: function (value) {
             if (!this.p.canUsed)
@@ -15,46 +15,50 @@ module.exports = {
                 else
                     throw new Error(`Can't perform this action on an offline player`)
 
-            if (typeof value != 'boolean')
+            if (typeof value != 'number')
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'clearSky', ''],
-                        ['in the function "', 'set clearSky', '"'],
+                        ['', 'toxicRainLevel', ''],
+                        ['in the function "', 'set toxicRainLevel', '"'],
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: value,
                         expectationType: 'type',
-                        expectation: 'boolean'
+                        expectation: 'number'
                     }).toString()
 
-            this.p.sendPacket('game_state_change', {
-                reason: value ? 1 : 2
-            })
+            if (this.raining)
+                this.p.sendPacket('game_state_change', {
+                    reason: 7,
+                    gameMode: value + 1
+                })
 
-            this.p._clearSky = value;
-            this.p.emitObservable('clearSky');
+            this.p._toxicRainLevel = value;
+            this.p.emitObservable('toxicRainLevel');
         },
         setRaw: function (value) {
-            if (typeof value != 'boolean')
+            if (typeof value != 'number')
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'clearSky', ''],
-                        ['in the function "', 'setRaw clearSky', '"'],
+                        ['', 'toxicRainLevel', ''],
+                        ['in the function "', 'setRaw toxicRainLevel', '"'],
                         ['in the class ', this.constructor.name, ''],
                     ], {
                         got: value,
                         expectationType: 'type',
-                        expectation: 'boolean'
+                        expectation: 'number'
                     }).toString()
 
-            this.p.sendPacket('game_state_change', {
-                reason: value ? 1 : 2
-            })
+            if (this.raining)
+                this.p.sendPacket('game_state_change', {
+                    reason: 7,
+                    gameMode: value + 1
+                })
 
-            this.p._clearSky = value;
+            this.p._toxicRainLevel = value;
         },
         init: function () {
-            this.p._clearSky = true;
+            this.p._toxicRainLevel = 0;
         }
     }
 }
