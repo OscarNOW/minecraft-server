@@ -1,5 +1,3 @@
-const maxObjectLength = 100;
-const preferredObjectLength = 14;
 const files = require('./functions/loader/tests');
 const fs = require('fs');
 const path = require('path');
@@ -57,8 +55,8 @@ if (debug) {
 };
 
 (async () => {
-    for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
-        const val = files[fileIndex];
+    for (const val of files) {
+
         let index = 0;
         await val.test((got, expected, id) => {
             testsRun++;

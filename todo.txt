@@ -4,7 +4,6 @@ Expand CustomError
     Action can't be performed right now
     Can't set
 Reimplement canUsed
-Make tests work
 Change file structure so that every class gets its own folder
 Create guide
     Update readme
