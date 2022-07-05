@@ -1,10 +1,11 @@
 const { defaults } = require('../../settings.json');
-const dimensionCodec = require('../../data/dimensionCodec.json')
+const { dimensionCodec } = require('../../functions/loader/data.js')
 
-const { CustomError } = require('./CustomError.js');
 const { EventEmitter } = require('events');
 const fs = require('fs');
 const path = require('path');
+
+const { CustomError } = require('./CustomError.js');
 
 const _p = Symbol('_privates');
 const events = Object.freeze([

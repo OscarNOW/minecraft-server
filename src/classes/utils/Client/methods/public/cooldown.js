@@ -1,4 +1,5 @@
-const items = require('../../../../../data/items.json');
+const { items } = require('../../../../../functions/loader/data.js');
+
 const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {

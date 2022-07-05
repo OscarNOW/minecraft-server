@@ -1,4 +1,5 @@
-const languages = require('../../../../data/languages.json');
+const { languages } = require('../../../../functions/loader/data.js');
+
 const { CustomError } = require('../../CustomError.js');
 
 module.exports = {

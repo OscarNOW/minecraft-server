@@ -1,4 +1,5 @@
-const windowNameIdMapping = require('../../../../../data/windowNameIdMapping.json');
+const { windowNameIdMapping } = require('../../../../../functions/loader/data.js');
+
 const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {

@@ -10,7 +10,8 @@
         "showRespawnScreen": true,
         "reducedDebugInfo": false,
         "maxPlayers": 100,
-        "motd": ""
+        "motd": "",
+        "wrongVersionConnectMessage": "Please use version {version}"
     },
     "links": {
         "docs": "https://oscarnow.github.io/minecraft-server"

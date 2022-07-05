@@ -1,14 +1,13 @@
-const { Client } = require('../utils/Client.js');
-const { CustomError } = require('../utils/CustomError.js');
-
-const protocolVersions = require('../../data/versions.json')
-const { version: serverVersion } = require('../../settings.json');
+const { versions } = require('../../functions/loader/data.js')
 const settings = require('../../settings.json')
 
 const mc = require('minecraft-protocol');
 const endianToggle = require('endian-toggle')
 const { EventEmitter } = require('events');
 const imageSize = require('image-size');
+
+const { Client } = require('../utils/Client.js');
+const { CustomError } = require('../utils/CustomError.js');
 
 const events = Object.freeze([
     'join',
@@ -23,21 +22,21 @@ class Server extends EventEmitter {
         super();
 
         this.serverList = serverList ?? (() => ({}));
-        this.wrongVersionConnect = wrongVersionConnect ?? (() => `Please use version ${serverVersion}`);
+        this.wrongVersionConnect = wrongVersionConnect ?? (() => wrongVersionConnectMessage.replace('{version}', settings.version));
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
         this.server = mc.createServer({
             encryption: true,
             host: 'localhost',
-            version: serverVersion,
+            version: settings.version,
             motd: settings.defaults.motd,
             maxPlayers: settings.defaults.maxPlayers,
             keepAlive: false,
             hideErrors: true,
             beforePing: (response, client) => {
                 let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
-                let infoVersion = info.version?.correct ?? serverVersion;
+                let infoVersion = info.version?.correct ?? settings.version;
 
                 if (!info) info = {};
                 if (!info.players) info.players = {};
@@ -90,7 +89,7 @@ class Server extends EventEmitter {
                 return {
                     version: {
                         name: `${info?.version?.wrongText ?? infoVersion}`,
-                        protocol: protocolVersions.find(a => a.legacy == false && a.version == infoVersion).protocol ?? 0
+                        protocol: versions.find(a => a.legacy == false && a.version == infoVersion).protocol ?? 0
                     },
                     players: {
                         online: info.players.online,
@@ -124,7 +123,7 @@ class Server extends EventEmitter {
 
                 clientEarlyInformation.set(client, {
                     ip: client.socket.remoteAddress,
-                    version: isLegacy ? 'legacy' : (protocolVersions.find(a => a.legacy == false && a.protocol == protocolVersion)?.version || protocolVersions.find(a => a.legacy == true && a.protocol == protocol)?.version),
+                    version: isLegacy ? 'legacy' : (versions.find(a => a.legacy == false && a.protocol == protocolVersion)?.version || versions.find(a => a.legacy == true && a.protocol == protocol)?.version),
                     connection: {
                         host: isLegacy ? null : serverHost,
                         port: isLegacy ? null : serverPort
@@ -132,7 +131,7 @@ class Server extends EventEmitter {
                 });
                 clientLegacyPing.set(client, false)
 
-                if ((clientState == 'login' && clientEarlyInformation.get(client).version != serverVersion) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                if ((clientState == 'login' && clientEarlyInformation.get(client).version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
                     let endReason = this.wrongVersionConnect({ ...clientEarlyInformation.get(client), legacy: isLegacy });
 
                     if (typeof endReason == 'string')
@@ -339,7 +338,7 @@ function handleLegacyPing(request, client, serverList) {
 function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     clientEarlyInformation.set(client, {
         ip: client.socket.remoteAddress,
-        version: protocol !== null ? (protocolVersions.find(a => a.legacy == true && a.protocol == protocol)?.version || protocolVersions.find(a => a.legacy == false && a.protocol == protocol)?.version) : null,
+        version: protocol !== null ? (versions.find(a => a.legacy == true && a.protocol == protocol)?.version || versions.find(a => a.legacy == false && a.protocol == protocol)?.version) : null,
         connection: {
             host: hostname,
             port
@@ -348,10 +347,10 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     clientLegacyPing.set(client, true)
 
     let info = serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
-    let infoVersion = info.version?.correct ?? serverVersion;
+    let infoVersion = info.version?.correct ?? settings.version;
 
     const responseString = '\xa7' + [1,
-        parseInt(protocolVersions.find(a => a.legacy == true && a.version == infoVersion)?.protocol ?? 127),
+        parseInt(versions.find(a => a.legacy == true && a.version == infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
         `${info.description ?? ''}`,
         `${info.players.online}`,

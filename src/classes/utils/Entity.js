@@ -1,11 +1,10 @@
-const { Changable } = require('./Changable.js');
+const { entities, entityAnimations } = require('../../functions/loader/data.js');
 
-const entities = require('../../data/entities.json');
-const entityAnimations = require('../../data/entityAnimations.json');
-
-const { CustomError } = require('./CustomError.js')
 const { v4: uuid } = require('uuid');
 const { EventEmitter } = require('events');
+
+const { CustomError } = require('./CustomError.js')
+const { Changable } = require('./Changable.js');
 
 const ps = Object.fromEntries([ // privateSymbols
     '_position',

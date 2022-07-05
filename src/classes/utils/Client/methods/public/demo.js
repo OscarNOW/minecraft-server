@@ -1,7 +1,6 @@
-const { CustomError } = require('../../../CustomError.js');
-const demoMessages = require('../../../../../data/demoMessages.json')
+const { demoMessages } = require('../../../../../functions/loader/data.js');
 
-const wait = ms => new Promise(res => setTimeout(res, ms));
+const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
     demo: function (message) {

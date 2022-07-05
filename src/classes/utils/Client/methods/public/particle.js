@@ -1,4 +1,5 @@
-const particles = require('../../../../../data/particles.json');
+const { particles } = require('../../../../../functions/loader/data.js');
+
 const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
