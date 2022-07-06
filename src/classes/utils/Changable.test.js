@@ -1,4 +1,4 @@
-const Changable = require('./Changable.js')
+const { Changable } = require('./Changable.js')
 
 module.exports = expect => {
     let count = 0;

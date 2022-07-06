@@ -18,11 +18,13 @@ module.exports = async (expect, warn) => {
 
     let serverPingAmount = 0;
     const server = new Server({
-        serverList: ip => {
+        serverList: ({ ip }) => {
             serverPingAmount++;
 
             return {
-                versionMessage: `#1#${ip}#1#`,
+                version: {
+                    wrongText: `#1#${ip}#1#`
+                },
                 players: {
                     online: 2,
                     max: 3,
@@ -168,7 +170,7 @@ module.exports = async (expect, warn) => {
     expect(pinged?.players?.max, 3)
     expect(pinged?.players?.sample?.[0]?.name, `#4#${ip}#4#`)
     expect(pinged?.players?.sample?.[1]?.name, `#5#${ip}#5#`)
-    expect(pinged?.description, `#6#${ip}#6#\n#7#${ip}#7#`)
+    expect(pinged?.description, { text: `#6#${ip}#6#\n#7#${ip}#7#` })
 
     await wait(500);
     console.log('Closing test server');

@@ -77,7 +77,7 @@ class Color {
     }
 
     set rgb(rgb) {
-        this._rgb._ = rgb;
+        this._rgb.setRaw(rgb);
 
         this._rgbCached = true;
         this._hslCached = false;
@@ -85,7 +85,7 @@ class Color {
     }
 
     set hsl(hsl) {
-        this._hsl._ = hsl;
+        this._hsl.setRaw(hsl);
 
         this._rgbCached = false;
         this._hslCached = true;
@@ -121,7 +121,7 @@ class Color {
             if (this._hexCached)
                 this._rgb.setRaw(Color.hexToRgb(this.hex))
             else
-                this._hsl.setRaw(Color.hslToRgb(this.hsl))
+                this._rgb.setRaw(Color.hslToRgb(this.hsl))
 
         this._rgbCached = true
         return this._rgb;

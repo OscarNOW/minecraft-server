@@ -58,38 +58,60 @@ if (debug) {
     for (const val of files) {
 
         let index = 0;
-        await val.test((got, expected, id) => {
-            testsRun++;
-            if (JSON.stringify(got) != JSON.stringify(expected)) {
-                let o2 = {
-                    got,
-                    expected,
-                    class: val.class,
-                    index
-                };
-                if (id) o2.id = id;
-                jsonOut.failed.push(o2);
-                testsFailed.push({
-                    class: val.class,
-                    got: stringify(got),
-                    expected: stringify(expected),
-                    index,
-                    id
-                })
-            } else {
-                let o2 = {
-                    expected,
-                    got,
-                    class: val.class,
-                    index
-                };
-                if (id) o2.id = id;
-                jsonOut.succeeded.push(o2);
+        try {
+            await val.test((got, expected, id) => {
+                testsRun++;
+                if (JSON.stringify(got) != JSON.stringify(expected)) {
+                    jsonOut.failed.push({
+                        got,
+                        expected,
+                        class: val.class,
+                        index,
+                        id: id || undefined
+                    });
+                    testsFailed.push({
+                        class: val.class,
+                        got: stringify(got),
+                        expected: stringify(expected),
+                        index,
+                        id
+                    })
+                } else {
+                    let o2 = {
+                        expected,
+                        got,
+                        class: val.class,
+                        index
+                    };
+                    if (id) o2.id = id;
+                    jsonOut.succeeded.push(o2);
+                }
+                index++;
+            }, text => {
+                jsonOut.warnings.push(text);
+            })
+        } catch (err) {
+            if (debug) {
+                console.log()
+                console.log('TEST RESULTED IN ERROR:')
+                console.log(err)
             }
-            index++;
-        }, text => {
-            jsonOut.warnings.push(text);
-        })
+
+            jsonOut.failed.push({
+                got: err.stack || `${err}`,
+                expected: '',
+                class: val.class,
+                index: null,
+                id: undefined
+            });
+            testsFailed.push({
+                class: val.class,
+                got: err.stack || `${err}`,
+                expected: '',
+                index: null,
+                id: undefined
+            })
+        }
     }
 
     if (debug) {
