@@ -99,6 +99,7 @@ for (const [name, value] of Object.entries(types))
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
+console.clear()
 console.log('Successfully generated types')
 
 function extractClass(text) {

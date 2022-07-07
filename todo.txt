@@ -18,3 +18,5 @@ Convert Client.entities to array where every Entity has EntityId
 Change Changable rawValues Symbol to values Symbol
 Create ability to create simple settable properties for Client
     Make bossBars one of them
+Implement flags for boss bar
+Server.close() doesn't stop server
