@@ -78,6 +78,14 @@ export class Client extends EventEmitter {
     readonly entities: {
         readonly [entityId: number]: Entity;
     };
+    readonly bossBars: {
+        title: string;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+        id: string;
+        remove(): void;
+    }[];
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
@@ -252,6 +260,12 @@ export class Client extends EventEmitter {
     }): Entity;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
+    bossBar(bossBarInfo: {
+        title: string | Text;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+    }): bossBar;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -367,6 +381,15 @@ export class Client extends EventEmitter {
 
     removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
 }
+
+type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
+type bossBarDivision = 0 | 6 | 10 | 12 | 20;
+type bossBar = {
+    title: string;
+    health: number;
+    color: bossBarColor;
+    divisionAmount: bossBarDivision;
+};
 
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 

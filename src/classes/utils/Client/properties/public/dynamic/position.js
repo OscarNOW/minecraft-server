@@ -30,7 +30,7 @@ module.exports = {
                 teleportPromises.set(this, obj)
 
                 setTimeout(() => {
-                    if (!teleportPromises.get(this)[teleportId].resolved)
+                    if (this.online && !teleportPromises.get(this)[teleportId].resolved)
                         rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
                 }, timing.teleportConfirmationKick)
             })

@@ -196,6 +196,14 @@ declare class Client {
     readonly entities: {
         readonly [entityId: number]: Entity;
     };
+    readonly bossBars: {
+        title: string;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+        id: string;
+        remove(): void;
+    }[];
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
@@ -370,6 +378,12 @@ declare class Client {
     }): Entity;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
+    bossBar(bossBarInfo: {
+        title: string | Text;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+    }): bossBar;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -639,6 +653,7 @@ declare class Entity {
 
 
 type hex = string;
+type bossBarDivision = 0 | 6 | 10 | 12 | 20;
 type version = legacyVersion | newVersion;
 type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;
 type rgb = {
@@ -652,6 +667,7 @@ type hsl = {
     l: number;
 };
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
+type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
 type demoMessage = 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot';
 type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
 type textArray = Array<{
@@ -659,6 +675,12 @@ type textArray = Array<{
     color: textColor;
     modifiers: Array<textModifier>;
 }>;
+type bossBar = {
+    title: string;
+    health: number;
+    color: bossBarColor;
+    divisionAmount: bossBarDivision;
+};
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
 type optionalTextArray = Array<{

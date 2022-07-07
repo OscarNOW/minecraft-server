@@ -7,7 +7,7 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         this.p.sendPacket('chat', {
-            message: JSON.stringify({ translate: `${message}` }),
+            message: JSON.stringify({ text: `${message}` }),
             position: 0,
             sender: '0'
         });
