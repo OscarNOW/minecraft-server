@@ -274,6 +274,17 @@ export class Client extends EventEmitter {
         divisionAmount: bossBarDivision;
         flags: bossBarFlags;
     };
+    sound(soundInfo: {
+        sound: soundName;
+        channel: soundChannel;
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        volume: number;
+        pitch: number;
+    }): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
