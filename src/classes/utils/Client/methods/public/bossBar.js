@@ -22,8 +22,14 @@ const divisionIds = {
 
 module.exports = {
     bossBar: function ({ title, health, color, divisionAmount }) {
+        if (!this.p.canUsed)
+            if (this.online)
+                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+            else
+                throw new Error(`Can't perform this action on an offline player`)
+
         let bossBarUuid = uuid();
-        let active = true;
+        let bossBarVisible = true;
 
         let values = {
             title: `${title}`,
@@ -35,7 +41,7 @@ module.exports = {
         let staticValues = {
             id: bossBarUuid,
             remove: () => {
-                active = false;
+                bossBarVisible = false;
                 this.bossBars = this.bossBars.filter(a => a.id != bossBarUuid);
 
                 this.p.sendPacket('boss_bar', {
@@ -58,7 +64,13 @@ module.exports = {
         })
 
         let bossBar = new Changable(i => {
-            if (!active) return;
+            if (!bossBarVisible) return;
+
+            if (!this.p.canUsed)
+                if (this.online)
+                    throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+                else
+                    throw new Error(`Can't perform this action on an offline player`)
 
             let healthChanged = i.health != values.health;
             let titleChanged = i.title != values.title;
