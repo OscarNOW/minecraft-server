@@ -238,7 +238,7 @@ class Client extends EventEmitter {
         let sendKeepAliveInterval = 4000;
 
         let keepAlivePromises = {};
-        this.p.intervals.push(setInterval(() => {
+        this.p.setInterval(() => {
             let currentId = Math.floor(Math.random() * 1000000);
             while (keepAlivePromises[currentId])
                 currentId = Math.floor(Math.random() * 1000000);
@@ -246,8 +246,8 @@ class Client extends EventEmitter {
             new Promise((res, rej) => {
                 keepAlivePromises[currentId] = { res, rej, resolved: false };
 
-                setTimeout(() => {
-                    if (!keepAlivePromises[currentId].resolved)
+                this.p.setTimeout(() => {
+                    if (this.online && !keepAlivePromises[currentId].resolved)
                         rej(new Error(`Client didn't respond to keep alive packet in time`));
 
                     delete keepAlivePromises[currentId];
@@ -257,7 +257,7 @@ class Client extends EventEmitter {
             this.p.sendPacket('keep_alive', {
                 keepAliveId: BigInt(currentId)
             })
-        }, sendKeepAliveInterval))
+        }, sendKeepAliveInterval)
 
         this.p.client.on('keep_alive', ({ keepAliveId }) => {
             keepAlivePromises[keepAliveId[1]].resolved = true;

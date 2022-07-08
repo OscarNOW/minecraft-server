@@ -20,9 +20,5 @@ server.on('join', async client => {
 
     await wait(2000);
 
-    bossBar.color = 'pink'
-
-    await wait(2000);
-
     bossBar.divisionAmount = 10;
 })
