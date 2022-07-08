@@ -314,8 +314,10 @@ class Server extends EventEmitter {
     }
 
     close() {
-        this.clients.forEach(client => client.shutdown());
-        this.server.close();
+        setTimeout(() => {
+            this.clients.forEach(client => client.p.shutdown());
+            this.server.close();
+        }, 10)
     }
 }
 
