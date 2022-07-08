@@ -1,4 +1,4 @@
-const { entities, entityAnimations } = require('../../functions/loader/data.js');
+const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
 
 const { v4: uuid } = require('uuid');
 const { EventEmitter } = require('events');
@@ -18,11 +18,30 @@ const events = Object.freeze([
     'rightClick'
 ])
 
+let changePosition = function ({ x, y, z, yaw: ya, pitch }) {
+    let yaw = ya;
+    if (yaw > 127)
+        yaw = -127;
+
+    if (yaw < -127)
+        yaw = 127;
+
+    this[ps.sendPacket]('entity_teleport', {
+        entityId: this.id,
+        x,
+        y,
+        z,
+        yaw,
+        pitch,
+        onGround: true
+    });
+
+    this.position.setRaw({ x, y, z, yaw, pitch })
+}
+
 class Entity extends EventEmitter {
     constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
         super();
-
-        const that = this;
 
         let e = getEntity(type);
         if (e === undefined)
@@ -38,7 +57,7 @@ class Entity extends EventEmitter {
                     externalLink: '{docs}/types/entityType.html'
                 }, this.constructor).toString()
 
-        this[ps._position] = new Changable(i => that.position = i, { x, y, z, yaw, pitch })
+        this[ps._position] = new Changable(value => changePosition.call(this, value), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
         this[ps.typeId] = e.id;
@@ -78,6 +97,79 @@ class Entity extends EventEmitter {
                 velocityY: 0,
                 velocityZ: 0
             })
+    }
+
+    get position() {
+        return this[ps._position];
+    }
+
+    set position(value) {
+        changePosition.call(this, value)
+    }
+
+    animation(animationType) {
+        if (entityAnimations[animationType] === undefined)
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'animationType', ''],
+                    ['in the function "', 'animation', '"'],
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: animationType,
+                    expectationType: 'value',
+                    expectation: Object.keys(entityAnimations)
+                }, this.rawListeners).toString()
+
+        this[ps.sendPacket]('animation', {
+            entityId: this.id,
+            animation: entityAnimations[animationType]
+        })
+    }
+
+    camera() {
+        this[ps.sendPacket]('camera', {
+            cameraId: this.id
+        })
+    }
+
+    sound({ sound, channel, volume, pitch }) {
+        if (!this.p.canUsed)
+            if (this.online)
+                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+            else
+                throw new Error(`Can't perform this action on an offline player`)
+
+        if (!sounds.find(a => a.name == sound))
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'sound', ''],
+                    ['in the function "', 'sound', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: sound,
+                    expectationType: 'type',
+                    expectation: 'soundName',
+                    externalLink: '{docs}/types/soundName.html'
+                }, this.sound).toString()
+        if (!soundChannels.includes(channel))
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'channel', ''],
+                    ['in the function "', 'sound', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: channel,
+                    expectationType: 'value',
+                    expectation: soundChannels
+                }, this.sound).toString()
+
+        this.p.sendPacket('entity_sound_effect', {
+            soundId: sounds.find(a => a.name == sound).id,
+            soundCategory: soundChannels.indexOf(channel),
+            entityId: this.id,
+            volume,
+            pitch
+        })
     }
 
     addListener(event, callback) {
@@ -222,56 +314,6 @@ class Entity extends EventEmitter {
                 }, this.rawListeners).toString()
 
         return super.rawListeners(event);
-    }
-
-    get position() {
-        return this[ps._position];
-    }
-
-    set position({ x, y, z, yaw: ya, pitch }) {
-        let yaw = ya;
-        if (yaw > 127)
-            yaw = -127;
-
-        if (yaw < -127)
-            yaw = 127;
-
-        this[ps.sendPacket]('entity_teleport', {
-            entityId: this.id,
-            x,
-            y,
-            z,
-            yaw,
-            pitch,
-            onGround: true
-        });
-
-        this.position.setRaw({ x, y, z, yaw, pitch })
-    }
-
-    animation(animationType) {
-        if (entityAnimations[animationType] === undefined)
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'animationType', ''],
-                    ['in the function "', 'animation', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: animationType,
-                    expectationType: 'value',
-                    expectation: Object.keys(entityAnimations)
-                }, this.rawListeners).toString()
-
-        this[ps.sendPacket]('animation', {
-            entityId: this.id,
-            animation: entityAnimations[animationType]
-        })
-    }
-
-    camera() {
-        this[ps.sendPacket]('camera', {
-            cameraId: this.id
-        })
     }
 }
 

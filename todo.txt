@@ -18,3 +18,4 @@ Convert Client.entities to array where every Entity has EntityId
 Create ability to create simple settable properties for Client
     Make bossBars one of them
 Make some boss bar arguments optional
+Add position observable to Entity

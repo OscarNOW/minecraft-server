@@ -584,7 +584,6 @@ declare class Entity extends EventEmitter {
     }
 
     camera(): void;
-
     animation(animationType: entityAnimationType): void;
 
     on(event: 'leftClick', callback: () => void): void;

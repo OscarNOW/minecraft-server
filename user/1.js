@@ -3,11 +3,11 @@ const server = new Server();
 
 server.on('join', client => {
     client.on('chat', a => eval(a))
-    client.position = {}
 
+    let horse = client.entity('horse', { x: 5, y: 101, z: 10, yaw: 0, pitch: 0 })
     client.observe('slot', () => {
         client.sound({
-            sound: 'music.dragon',
+            sound: 'music.creative',
             channel: 'music',
             position: {
                 x: client.position.x + 5,
@@ -18,4 +18,6 @@ server.on('join', client => {
             pitch: 1
         })
     })
+
+    client.position = {}
 })
