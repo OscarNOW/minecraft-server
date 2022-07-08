@@ -585,6 +585,12 @@ declare class Entity extends EventEmitter {
 
     camera(): void;
     animation(animationType: entityAnimationType): void;
+    sound(soundInfo: {
+        sound: soundName;
+        channel: soundChannel;
+        volume: number;
+        pitch: number;
+    }): void;
 
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (

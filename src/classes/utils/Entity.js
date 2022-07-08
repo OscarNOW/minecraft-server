@@ -36,7 +36,11 @@ let changePosition = function ({ x, y, z, yaw: ya, pitch }) {
         onGround: true
     });
 
-    this.position.setRaw({ x, y, z, yaw, pitch })
+    this.position.setRaw(x, x ?? this.position.x)
+    this.position.setRaw(y, y ?? this.position.y)
+    this.position.setRaw(z, z ?? this.position.z)
+    this.position.setRaw(yaw, yaw ?? this.position.yaw)
+    this.position.setRaw(pitch, pitch ?? this.position.pitch)
 }
 
 class Entity extends EventEmitter {
@@ -108,6 +112,12 @@ class Entity extends EventEmitter {
     }
 
     animation(animationType) {
+        if (!this.client.p.canUsed)
+            if (this.client.online)
+                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+            else
+                throw new Error(`Can't perform this action on an offline player`)
+
         if (entityAnimations[animationType] === undefined)
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
@@ -127,14 +137,20 @@ class Entity extends EventEmitter {
     }
 
     camera() {
+        if (!this.client.p.canUsed)
+            if (this.client.online)
+                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+            else
+                throw new Error(`Can't perform this action on an offline player`)
+
         this[ps.sendPacket]('camera', {
             cameraId: this.id
         })
     }
 
     sound({ sound, channel, volume, pitch }) {
-        if (!this.p.canUsed)
-            if (this.online)
+        if (!this.client.p.canUsed)
+            if (this.client.online)
                 throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
             else
                 throw new Error(`Can't perform this action on an offline player`)
@@ -163,7 +179,7 @@ class Entity extends EventEmitter {
                     expectation: soundChannels
                 }, this.sound).toString()
 
-        this.p.sendPacket('entity_sound_effect', {
+        this[ps.sendPacket]('entity_sound_effect', {
             soundId: sounds.find(a => a.name == sound).id,
             soundCategory: soundChannels.indexOf(channel),
             entityId: this.id,
