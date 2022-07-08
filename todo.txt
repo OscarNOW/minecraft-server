@@ -17,4 +17,3 @@ Add Client to its own entities object
 Convert Client.entities to array where every Entity has EntityId
 Create ability to create simple settable properties for Client
     Make bossBars one of them
--Implement flags for boss bar
