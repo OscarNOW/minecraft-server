@@ -87,7 +87,7 @@ module.exports = {
 
             if (colorChanged || divisionAmountChanged) {
                 values.color = i.color;
-                values.divisionAmount = i.division;
+                values.divisionAmount = `${i.divisionAmount}`;
 
                 this.p.sendPacket('boss_bar', {
                     entityUUID: bossBarUuid,
