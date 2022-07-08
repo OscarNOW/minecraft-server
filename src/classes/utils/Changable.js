@@ -1,15 +1,15 @@
-const rawValuesSymbol = Symbol('rawValues');
+const valuesSymbol = Symbol('values');
 
 class Changable {
     constructor(changeCallback, startValues) {
-        this[rawValuesSymbol] = startValues;
+        this[valuesSymbol] = startValues;
 
         for (const [key, value] of Object.entries(startValues))
             Object.defineProperty(this, key, {
-                get: () => this[rawValuesSymbol][key],
+                get: () => this[valuesSymbol][key],
                 set: newValue => {
-                    this[rawValuesSymbol][key] = newValue;
-                    changeCallback(this[rawValuesSymbol]);
+                    this[valuesSymbol][key] = newValue;
+                    changeCallback(this[valuesSymbol]);
                 }
             })
 
@@ -17,9 +17,9 @@ class Changable {
 
     setRaw(valuesOrKey, value) {
         if (value !== undefined)
-            this[rawValuesSymbol][valuesOrKey] = value
+            this[valuesSymbol][valuesOrKey] = value
         else
-            this[rawValuesSymbol] = valuesOrKey;
+            this[valuesSymbol] = valuesOrKey;
     }
 }
 
