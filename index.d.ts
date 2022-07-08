@@ -201,6 +201,7 @@ declare class Client extends EventEmitter {
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
+        flags: bossBarFlags;
         id: string;
         remove(): void;
     }[];
@@ -383,7 +384,14 @@ declare class Client extends EventEmitter {
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
-    }): bossBar;
+        flags: bossBarFlags;
+    }): {
+        title: string;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+        flags: bossBarFlags;
+    };
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -669,18 +677,17 @@ type hsl = {
 type textModifier = 'bold' | 'italic' | 'underline' | 'strike' | 'random';
 type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
 type demoMessage = 'startScreen' | 'movement' | 'jump' | 'inventory' | 'endScreenshot';
+type bossBarFlags = {
+    darkenSky: boolean;
+    playEndMusic: boolean;
+    createFog: boolean;
+};
 type entityAnimationType = 'swingMainHand' | 'flashRed' | 'leaveBed' | 'swingOffHand' | 'critical' | 'magicCritical';
 type textArray = Array<{
     text: string;
     color: textColor;
     modifiers: Array<textModifier>;
 }>;
-type bossBar = {
-    title: string;
-    health: number;
-    color: bossBarColor;
-    divisionAmount: bossBarDivision;
-};
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
 type optionalTextArray = Array<{

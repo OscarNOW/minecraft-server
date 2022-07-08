@@ -83,6 +83,7 @@ export class Client extends EventEmitter {
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
+        flags: bossBarFlags;
         id: string;
         remove(): void;
     }[];
@@ -265,7 +266,14 @@ export class Client extends EventEmitter {
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
-    }): bossBar;
+        flags: bossBarFlags;
+    }): {
+        title: string;
+        health: number;
+        color: bossBarColor;
+        divisionAmount: bossBarDivision;
+        flags: bossBarFlags;
+    };
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -384,11 +392,10 @@ export class Client extends EventEmitter {
 
 type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
 type bossBarDivision = 0 | 6 | 10 | 12 | 20;
-type bossBar = {
-    title: string;
-    health: number;
-    color: bossBarColor;
-    divisionAmount: bossBarDivision;
+type bossBarFlags = {
+    darkenSky: boolean;
+    playEndMusic: boolean;
+    createFog: boolean;
 };
 
 type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;

@@ -21,7 +21,7 @@ const divisionIds = {
 }
 
 module.exports = {
-    bossBar: function ({ title, health, color, divisionAmount }) {
+    bossBar: function ({ title, health, color, divisionAmount, flags: { darkenSky, playEndMusic, createFog } }) {
         if (!this.p.canUsed)
             if (this.online)
                 throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
@@ -31,11 +31,46 @@ module.exports = {
         let bossBarUuid = uuid();
         let bossBarVisible = true;
 
+        let flags = {
+            darkenSky,
+            playEndMusic,
+            createFog
+        }
+
+        let onFlagsChanged = newFlags => {
+            if (!bossBarVisible) return;
+
+            if (!this.p.canUsed)
+                if (this.online)
+                    throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
+                else
+                    throw new Error(`Can't perform this action on an offline player`)
+
+            let darkenSkyChanged = flags.darkenSky != newFlags.darkenSky;
+            let playEndMusicChanged = flags.playEndMusic != newFlags.playEndMusic;
+            let createFogChanged = flags.createFog != newFlags.createFog;
+
+            if (darkenSkyChanged || playEndMusicChanged || createFogChanged) {
+                flags.darkenSky = newFlags.darkenSky;
+                flags.playEndMusic = newFlags.playEndMusic;
+                flags.createFog = newFlags.createFog;
+
+                this.p.sendPacket('boss_bar', {
+                    entityUUID: bossBarUuid,
+                    action: 5,
+                    flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
+                })
+            }
+        };
+
+        let flagsChangable = new Changable(onFlagsChanged, flags);
+
         let values = {
             title: `${title}`,
             health,
             color,
-            divisionAmount: `${divisionAmount}`
+            divisionAmount: `${divisionAmount}`,
+            flags: flagsChangable
         }
 
         let staticValues = {
@@ -60,10 +95,16 @@ module.exports = {
             health: values.health,
             color: colors[values.color],
             dividers: divisionIds[values.divisionAmount],
-            flags: 0
+            flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 
         let bossBar = new Changable(i => {
+            if (i.flags != flagsChangable) {
+                flagsChangable = new Changable(onFlagsChanged, i.flags);
+                bossBar.setRaw('flags', flagsChangable);
+                onFlagsChanged(i.flags);
+            }
+
             if (!bossBarVisible) return;
 
             if (!this.p.canUsed)
