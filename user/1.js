@@ -17,12 +17,17 @@ server.on('join', client => {
     }
 
     let horse = client.entity('horse', { x: 5, y: 101, z: 10, yaw: 0, pitch: 0 })
-    client.observe('slot', () => {
-        horse.sound({
-            sound: 'entity.cow.ambient',
-            channel: 'friendlyCreature',
-            volume: 1,
-            pitch: 1
-        })
+    client.observe('slot', slot => {
+        if (slot == 0)
+            client.stopSounds({
+                channel: 'friendlyCreature'
+            })
+        else
+            horse.sound({
+                sound: 'entity.cow.ambient',
+                channel: 'friendlyCreature',
+                volume: 1,
+                pitch: 1
+            })
     })
 })

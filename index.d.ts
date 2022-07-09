@@ -414,6 +414,16 @@ declare class Client extends EventEmitter {
         volume: number;
         pitch: number;
     }): void;
+    stopSounds(filter: {
+        soundName: soundName | string;
+    }): void;
+    stopSounds(filter: {
+        channel: soundChannel;
+    }): void;
+    stopSounds(filter: {
+        soundName: soundName | string;
+        channel: soundChannel;
+    }): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;

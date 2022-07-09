@@ -280,8 +280,13 @@ class Client extends EventEmitter {
 
         if (callPath.startsWith(folderPath))
             return this[_p];
-        else
+        else {
+            console.log('Private blocked')
+            console.log({ callPath })
+            console.log({ folderPath })
+            console.log(new Error('Stack trace'))
             return this.p._p
+        }
     }
 
     set p(value) {
