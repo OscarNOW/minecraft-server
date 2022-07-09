@@ -1,5 +1,12 @@
 const { Server, Chunk } = require('../')
-const server = new Server();
+const server = new Server({
+    defaultClientProperties: () => ({
+        experience: {
+            bar: 0.3,
+            level: 2
+        }
+    })
+});
 let chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)
@@ -16,18 +23,7 @@ server.on('join', client => {
         z: 3
     }
 
-    let horse = client.entity('horse', { x: 5, y: 101, z: 10, yaw: 0, pitch: 0 })
-    client.observe('slot', slot => {
-        if (slot == 0)
-            client.stopSounds({
-                channel: 'friendlyCreature'
-            })
-        else
-            horse.sound({
-                sound: 'entity.cow.ambient',
-                channel: 'friendlyCreature',
-                volume: 1,
-                pitch: 1
-            })
+    client.observe('slot', () => {
+        client.experience.level += 1
     })
 })

@@ -19,3 +19,4 @@ Create ability to create simple settable properties for Client
     Make bossBars one of them
 Make some boss bar arguments optional
 Add position observable to Entity
+Create default position in settings.json

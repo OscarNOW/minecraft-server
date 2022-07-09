@@ -60,18 +60,21 @@ export class Server extends EventEmitter {
             legacy: boolean
         }): string | Text | null;
         defaultClientProperties?(client: Client): {
-            slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+            experience?: {
+                bar?: number;
+                level?: number;
+            };
 
-            reducedDebugInfo?: boolean;
-            clearSky?: boolean;
+            raining?: boolean;
+            toxicRainLevel?: number;
             showRespawnScreen?: boolean;
             gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+            difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
 
+            slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
             health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
             food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
             foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
-
-            difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
         };
     });
 
@@ -133,25 +136,21 @@ declare class Client extends EventEmitter {
             port: number;
         }
     }, defaultClientProperties?: (client: Client) => {
-        slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-        position: {
-            x: number;
-            y: number;
-            z: number;
-            yaw?: number;
-            pitch?: number;
+        experience?: {
+            bar?: number;
+            level?: number;
         };
 
         raining?: boolean;
         toxicRainLevel?: number;
         showRespawnScreen?: boolean;
         gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+        difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
 
+        slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
         health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
         food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
         foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
-
-        difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
     });
 
     readonly server: Server;
@@ -206,7 +205,6 @@ declare class Client extends EventEmitter {
         remove(): void;
     }[];
 
-    slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     position: {
         x: number;
         y: number;
@@ -214,17 +212,21 @@ declare class Client extends EventEmitter {
         yaw: number;
         pitch: number;
     };
+    experience: {
+        bar: number;
+        level: number;
+    };
 
     raining: boolean;
     toxicRainLevel: number;
     showRespawnScreen: boolean;
     gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
+    difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
+    slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     food: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
-
-    difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
     observe(type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
     observe(type: 'raining' | 'showRespawnScreen', callback: (changedValue: boolean) => void): void;

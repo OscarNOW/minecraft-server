@@ -8,7 +8,8 @@ const observables = Object.freeze(Object.fromEntries([
     'toxicRainLevel',
     'showRespawnScreen',
     'gamemode',
-    'difficulty'
+    'difficulty',
+    'experience'
 ].map(v => [v, []])));
 
 module.exports = {
