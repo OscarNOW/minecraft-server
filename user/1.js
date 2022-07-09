@@ -17,6 +17,6 @@ server.on('join', client => {
     }
 
     client.observe('slot', () => {
-        client.noRespawnBlock()
+        client.playerArrowHitSound()
     })
 })
