@@ -15,4 +15,8 @@ server.on('join', client => {
         y: 102,
         z: 3
     }
+
+    client.observe('slot', () => {
+        client.noRespawnBlock()
+    })
 })
