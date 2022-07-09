@@ -426,6 +426,7 @@ declare class Client extends EventEmitter {
         soundName: soundName | string;
         channel: soundChannel;
     }): void;
+    pufferFishSound(): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;

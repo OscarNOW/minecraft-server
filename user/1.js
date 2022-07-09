@@ -1,12 +1,5 @@
 const { Server, Chunk } = require('../')
-const server = new Server({
-    defaultClientProperties: () => ({
-        experience: {
-            bar: 0.3,
-            level: 2
-        }
-    })
-});
+const server = new Server();
 let chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)
@@ -22,8 +15,4 @@ server.on('join', client => {
         y: 102,
         z: 3
     }
-
-    client.observe('slot', () => {
-        client.experience.level += 1
-    })
 })
