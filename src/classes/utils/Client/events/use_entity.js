@@ -1,7 +1,7 @@
 const { CustomError } = require('../../CustomError.js');
 
 module.exports = {
-    use_entity: function ({ target, mouse, hand, x, y, z }) {
+    use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {
         if (!this.entities[target])
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
@@ -13,6 +13,8 @@ module.exports = {
                     expectationType: 'value',
                     expectation: Object.keys(this.entities)
                 }).toString()
+
+        this.sneaking = sneaking;
 
         if (mouse == 2) {
             if (hand != 0 && hand != 1)

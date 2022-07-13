@@ -15,11 +15,14 @@ Move client.window('horse') to horse.openWindow()
 Split Color and Text into different packages
 Add Client to its own entities object
 Convert Client.entities to array where every Entity has EntityId
-Create ability to create simple settable properties for Client
-    Make bossBars one of them
+Expand Client property types
+    Create ability to create simple settable properties for Client
+        Make bossBars one of them
+    Create ability to create dynamic private properties
+        Use that for sneaking
 Make some boss bar arguments optional
 Add position observable to Entity
 Create default position in settings.json
-Implement Client.sneaking
+-Implement Client.sneaking
     Use sneaking bool in use_entity
 Implement Client.onGround    

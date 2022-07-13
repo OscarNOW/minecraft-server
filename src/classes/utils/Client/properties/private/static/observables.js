@@ -9,7 +9,8 @@ const observables = Object.freeze(Object.fromEntries([
     'showRespawnScreen',
     'gamemode',
     'difficulty',
-    'experience'
+    'experience',
+    'sneaking'
 ].map(v => [v, []])));
 
 module.exports = {

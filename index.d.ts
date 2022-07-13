@@ -153,17 +153,16 @@ declare class Client extends EventEmitter {
         foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
     });
 
+    /* Constant */
     readonly server: Server;
     readonly username: string;
     readonly uuid: string;
     readonly entityId: number;
-    readonly ping: number;
-    readonly online: boolean;
     readonly version: newVersion;
     readonly ip: string;
     readonly connection: {
-        host: string;
-        port: number
+        readonly host: string;
+        readonly port: number
     };
     readonly textures: {
         skin: string;
@@ -192,6 +191,11 @@ declare class Client extends EventEmitter {
     readonly rightHanded: boolean;
     readonly viewDistance: number;
     readonly reducedDebugInfo: boolean;
+
+    /* Readonly changing */
+    readonly online: boolean;
+    readonly sneaking: boolean;
+    readonly ping: number;
     readonly entities: {
         readonly [entityId: number]: Entity;
     };
@@ -205,6 +209,7 @@ declare class Client extends EventEmitter {
         remove(): void;
     }[];
 
+    /* Writable changing */
     position: {
         x: number;
         y: number;
@@ -229,7 +234,7 @@ declare class Client extends EventEmitter {
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
 
     observe(type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    observe(type: 'raining' | 'showRespawnScreen', callback: (changedValue: boolean) => void): void;
+    observe(type: 'raining' | 'showRespawnScreen' | 'sneaking', callback: (changedValue: boolean) => void): void;
     observe(type: 'position', callback: (changedValue: {
         x: number;
         y: number;

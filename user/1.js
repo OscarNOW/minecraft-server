@@ -10,23 +10,18 @@ for (let x = 0; x < 16; x++)
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
     client.on('chat', a => eval(a))
+    client.observe('sneaking', client.chat);
+
+    let horse = client.entity('horse', {
+        x: 3,
+        y: 100,
+        z: 3
+    })
+
     client.position = {
         x: 3,
         y: 102,
         z: 3
     }
 
-    let horse = client.entity('horse', {
-        x: 3,
-        y: 101,
-        z: 3
-    })
-
-    horse.on('leftClick', () => {
-        client.chat('leftClick')
-    })
-
-    horse.on('rightClick', ({ position: { x, y, z }, isMainHand }) => {
-        client.chat(`rightClick ${x} ${y} ${z} ${isMainHand}`)
-    })
 })
