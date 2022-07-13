@@ -2,7 +2,6 @@ const { version } = require('../../settings.json')
 const { blocks } = require('../../functions/loader/data.js')
 
 const pChunk = require('prismarine-chunk')(version);
-const { Vec3 } = require('vec3');
 
 const { CustomError } = require('../utils/CustomError.js');
 
@@ -13,11 +12,11 @@ class Chunk {
         for (let x = 0; x < 16; x++)
             for (let z = 0; z < 16; z++)
                 for (let y = 0; y < 256; y++)
-                    this._chunk.setSkyLight(new Vec3(x, y, z), 15)
+                    this._chunk.setSkyLight({ x, y, z }, 15)
     }
 
     setBlock({ x, y, z }, blockName, state = {}) {
-        this._chunk.setBlockStateId(new Vec3(x, y, z), getStateId.call(this, blockName, state, { function: 'setBlock' }));
+        this._chunk.setBlockStateId({ x, y, z }, getStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         return this;
     }

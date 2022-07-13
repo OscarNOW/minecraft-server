@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+const { uuid } = require('../../../../../functions/uuid.js');
 
 const { Changable } = require('../../../Changable.js');
 

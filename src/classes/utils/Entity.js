@@ -1,6 +1,6 @@
 const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
 
-const { v4: uuid } = require('uuid');
+const { uuid } = require('../../functions/uuid.js');
 const { EventEmitter } = require('events');
 
 const { CustomError } = require('./CustomError.js')

@@ -1,4 +1,4 @@
-const JSON5 = require('JSON5');
+const CJSON = JSON;
 const fs = require('fs');
 const path = require('path');
 
@@ -8,7 +8,7 @@ fs
     .readdirSync(path.resolve(__dirname, '../../data/'))
     .filter(a => a.endsWith('.json'))
     .forEach(file => {
-        data[file.split('.json')[0]] = JSON5.parse(fs.readFileSync(path.resolve(__dirname, `../../data/${file}`)).toString())
+        data[file.split('.json')[0]] = CJSON.parse(fs.readFileSync(path.resolve(__dirname, `../../data/${file}`)).toString())
     })
 
-module.exports = Object.freeze({ ...data });
+module.exports = Object.freeze(data);
