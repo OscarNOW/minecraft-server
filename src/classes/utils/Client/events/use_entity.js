@@ -38,7 +38,7 @@ module.exports = {
                 isMainHand: hand == 0
             })
         } else if (mouse == 0)
-            throw new Error(`Not implemented`)
+            return //Duplicate of rightClick
         else if (mouse == 1)
             this.entities[target].emit('leftClick');
         else

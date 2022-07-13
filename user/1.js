@@ -10,7 +10,6 @@ for (let x = 0; x < 16; x++)
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
     client.on('chat', a => eval(a))
-    client.observe('sneaking', client.chat);
 
     let horse = client.entity('horse', {
         x: 3,
