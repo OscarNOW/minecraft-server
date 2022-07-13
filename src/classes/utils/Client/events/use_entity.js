@@ -1,52 +1,54 @@
 const { CustomError } = require('../../CustomError.js');
 
 module.exports = {
-    use_entity: function (obj) {
-        if (!this.entities[obj.target])
+    use_entity: function ({ target, mouse, hand, x, y, z }) {
+        if (!this.entities[target])
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'target', ''],
                     ['in the event ', 'use_entity', '']
                     ['in the class ', this.constructor.name, '']
                 ], {
-                    got: obj.target,
+                    got: target,
                     expectationType: 'value',
                     expectation: Object.keys(this.entities)
                 }).toString()
 
-        if (obj.mouse == 2) {
-            if (obj.hand != 0 && obj.hand != 1)
+        if (mouse == 2) {
+            if (hand != 0 && hand != 1)
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'client', [
                         ['', 'target', ''],
                         ['in the event ', 'use_entity', '']
                         ['in the class ', this.constructor.name, '']
                     ], {
-                        got: obj.target,
+                        got: target,
                         expectationType: 'value',
                         expectation: Object.keys(this.entities)
                     }).toString()
 
-            this.entities[obj.target].emit('rightClick', {
-                x: obj.x,
-                y: obj.y,
-                z: obj.z
-            }, obj.hand == 0)
-        } else if (obj.mouse == 0)
-            return
-        else if (obj.mouse == 1)
-            this.entities[obj.target].emit('leftClick');
+            this.entities[target].emit('rightClick', {
+                position: {
+                    x: x,
+                    y: y,
+                    z: z
+                },
+                isMainHand: hand == 0
+            })
+        } else if (mouse == 0)
+            throw new Error(`Not implemented`)
+        else if (mouse == 1)
+            this.entities[target].emit('leftClick');
         else
-            if (obj.hand != 0 && obj.hand != 1)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'client', [
-                        ['', 'mouse', ''],
-                        ['in the event ', 'use_entity', '']
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: obj.mouse,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2]
-                    }).toString()
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'client', [
+                    ['', 'mouse', ''],
+                    ['in the event ', 'use_entity', '']
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: mouse,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2]
+                }).toString()
     }
 }

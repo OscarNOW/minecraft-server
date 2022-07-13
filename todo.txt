@@ -20,3 +20,6 @@ Create ability to create simple settable properties for Client
 Make some boss bar arguments optional
 Add position observable to Entity
 Create default position in settings.json
+Implement Client.sneaking
+    Use sneaking bool in use_entity
+Implement Client.onGround    

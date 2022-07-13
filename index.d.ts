@@ -619,14 +619,14 @@ declare class Entity extends EventEmitter {
     }): void;
 
     on(event: 'leftClick', callback: () => void): void;
-    on(event: 'rightClick', callback: (
+    on(event: 'rightClick', callback: (clickInfo: {
         position: {
             x: number;
             y: number;
             z: number;
-        },
+        };
         isMainHand: boolean
-    ) => void): void;
+    }) => void): void;
 
     addListener(event: 'leftClick', callback: () => void): void;
     addListener(event: 'rightClick', callback: (

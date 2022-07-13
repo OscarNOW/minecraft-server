@@ -16,7 +16,17 @@ server.on('join', client => {
         z: 3
     }
 
-    client.observe('slot', () => {
-        client.playerArrowHitSound()
+    let horse = client.entity('horse', {
+        x: 3,
+        y: 101,
+        z: 3
+    })
+
+    horse.on('leftClick', () => {
+        client.chat('leftClick')
+    })
+
+    horse.on('rightClick', ({ position: { x, y, z }, isMainHand }) => {
+        client.chat(`rightClick ${x} ${y} ${z} ${isMainHand}`)
     })
 })
