@@ -1,4 +1,4 @@
-const { textModifiers, textColorNameMapping } = require('../../functions/loader/data');
+const { textModifiers, textColors } = require('../../functions/loader/data');
 const { CustomError } = require('../utils/CustomError.js');
 
 class Text {
@@ -90,7 +90,7 @@ class Text {
                     currentModifiers = val.modifiers;
                     text += '§r'
                     if (val.color != 'default')
-                        text += `§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}`
+                        text += `§${textColors.find(({ name }) => name == val.color)}`
 
                     val.modifiers.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
@@ -113,13 +113,13 @@ class Text {
                 currentModifiers = val.modifiers;
 
                 if (modCanExtend) {
-                    text += `§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}`
+                    text += `§${textColors.find(({ name }) => name == val.color)}`
                     newMod.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
                     })
                     text += val.text;
                 } else {
-                    text += `§r§${Object.keys(textColorNameMapping).find(key => textColorNameMapping[key] == val.color)}`
+                    text += `§r§${textColors.find(({ name }) => name == val.color)}`
                     val.modifiers.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
                     })
@@ -169,7 +169,7 @@ class Text {
 
         text.split('').forEach(val => {
             if (isModifier) {
-                if (!textColorNameMapping[val] && !textModifiers.find(({ char }) => char == val))
+                if (!textColors.find(({ char }) => char == val) && !textModifiers.find(({ char }) => char == val))
                         /* -- Look at stack trace for location -- */ throw new
                         CustomError('expectationNotMet', 'libraryUser', [
                             ['', 'colorLetter', ''],
@@ -178,10 +178,10 @@ class Text {
                         ], {
                             got: val,
                             expectationType: 'value',
-                            expectation: Object.keys(textColorNameMapping).concat(textModifiers.map(a => a.char)),
+                            expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],
                         }, Text.stringToArray).toString()
                 else
-                    if (textColorNameMapping[val]) {
+                    if (textColors.find(({ char }) => char == val)) {
                         let copy = Object.assign([], currentModifiers);
                         arr.push({
                             text: current,
@@ -189,7 +189,7 @@ class Text {
                             modifiers: copy
                         })
                         current = ''
-                        currentColor = textColorNameMapping[val]
+                        currentColor = textColors.find(({ char }) => char == val)
                     } else if (textModifiers.find(({ char }) => char == val).name == 'reset') {
                         let copy = Object.assign([], currentModifiers);
                         arr.push({

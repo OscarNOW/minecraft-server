@@ -1,0 +1,66 @@
+[
+    {
+        "char": "4",
+        "name": "darkRed"
+    },
+    {
+        "char": "c",
+        "name": "red"
+    },
+    {
+        "char": "6",
+        "name": "gold"
+    },
+    {
+        "char": "e",
+        "name": "yellow"
+    },
+    {
+        "char": "2",
+        "name": "darkGreen"
+    },
+    {
+        "char": "a",
+        "name": "green"
+    },
+    {
+        "char": "b",
+        "name": "aqua"
+    },
+    {
+        "char": "3",
+        "name": "darkAqua"
+    },
+    {
+        "char": "1",
+        "name": "darkBlue"
+    },
+    {
+        "char": "9",
+        "name": "blue"
+    },
+    {
+        "char": "d",
+        "name": "pink"
+    },
+    {
+        "char": "5",
+        "name": "purple"
+    },
+    {
+        "char": "f",
+        "name": "white"
+    },
+    {
+        "char": "7",
+        "name": "gray"
+    },
+    {
+        "char": "8",
+        "name": "darkGray"
+    },
+    {
+        "char": "0",
+        "name": "black"
+    }
+]

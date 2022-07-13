@@ -25,5 +25,3 @@ type optionalTextArray = Array<{
     color?: textColor;
     modifiers?: Array<textModifier>;
 };
-
-type textColor = 'darkRed' | 'red' | 'gold' | 'yellow' | 'darkGreen' | 'green' | 'aqua' | 'darkAqua' | 'darkBlue' | 'blue' | 'pink' | 'purple' | 'white' | 'gray' | 'darkGray' | 'black' | 'default';
