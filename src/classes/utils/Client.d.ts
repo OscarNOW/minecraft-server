@@ -314,6 +314,7 @@ export class Client extends EventEmitter {
     pufferFishSound(): void;
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
+    loadWorld(): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'leave' | 'itemHandSwap', callback: () => void): void;

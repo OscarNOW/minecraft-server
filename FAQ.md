@@ -2,38 +2,47 @@
 
 - [Frequently Asked Questions](#frequently-asked-questions)
   - [The client is stuck on the screen "loading terrain..."](#the-client-is-stuck-on-the-screen-loading-terrain)
-  - [What does client.position = {} mean?](#what-does-clientposition---mean)
   - [How do I get the client to spawn at a certain location?](#how-do-i-get-the-client-to-spawn-at-a-certain-location)
+  - [How do I create different default properties for different clients?](#how-do-i-create-different-default-properties-for-different-clients)
 
 ## The client is stuck on the screen "loading terrain..."
-In order for the Client to spawn in the world, you need to set it's position when you sent all the chunks. Here's an example:
+In order for the Client to spawn in the world, you need to call the loadWorld method. Here's an example:
 ```js
-server.on('join', client => {
-    //Send chunks here (optional)
+server.on('join', client => {    
+    //Here you can send chunks, spawn entities, listen for events, etc   
 
-    client.position = {}
+    client.loadWorld()
 })
 ```
 
-If you don't specify where to spawn the client in the `client.position = {}` line, it will spawn at `x: 0, y: 0, z: 0, yaw: 0, pitch: 0`. If you want the client to spawn at a different location, you can do that like this:
+You can specify the spawn position like this:
 ```js
-server.on('join', client => {
-    //Send chunks here (optional)
+const { Server } = require('minecraft-server')
+const server = new Server({
+    defaultClientProperties: () => ({
+        position: {
+            x: 10,
+            y: 20,
+            z: 5
+        }
+    })
+})
 
-    client.position = {
-        x: 10,
-        y: 15,
-        z: 5,
-        yaw: 10,
-        pitch: 2
-    }
+server.on('join', client => {
+    client.loadWorld()
 })
 ```
-
-Every coordinate and rotation in the `client.position = {` is optional, if you don't specify them, everything you don't specify will default to 0.
-
-## What does client.position = {} mean?
-See [The client is stuck on the screen "loading terrain..."](#the-client-is-stuck-on-the-screen-loading-terrain)
 
 ## How do I get the client to spawn at a certain location?
 See [The client is stuck on the screen "loading terrain..."](#the-client-is-stuck-on-the-screen-loading-terrain)
+
+## How do I create different default properties for different clients?
+Like this:
+```js
+const { Server } = require('minecraft-server')
+const server = new Server({
+    defaultClientProperties: client => ({
+        gamemode: client.username == 'notch' ? 'creative' : 'survival'
+    })
+})    
+```

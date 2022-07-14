@@ -2,7 +2,7 @@ const { Server } = require('minecraft-server')
 const server = new Server()
 
 server.on('join', client => {
-    client.position = {}
+    client.loadWorld()
 
     client.particle(
         'dust',
