@@ -1,5 +1,6 @@
+const { timing, defaults } = require('../../../../../../settings.json');
+
 const { Changable } = require('../../../../Changable.js');
-const { timing } = require('../../../../../../settings.json')
 
 const teleportPromises = new WeakMap();
 
@@ -8,7 +9,7 @@ module.exports = {
         get: function () {
             return this.p._position
         },
-        set: function ({ x, y, z, yaw, pitch }) {
+        set: function ({ x, y, z, yaw, pitch } = {}) {
             if (!this.p.canUsed)
                 if (this.online)
                     throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
@@ -50,13 +51,7 @@ module.exports = {
         init: function () {
             this.p.positionSet = false;
 
-            this.p._position = new Changable((function (i) { this.position = i }).bind(this), {
-                x: 0,
-                y: 0,
-                z: 0,
-                yaw: 0,
-                pitch: 0
-            });
+            this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
         },
         confirm: function (teleportId) {
             teleportPromises.get(this)[teleportId].resolved = true

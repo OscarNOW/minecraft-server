@@ -11,7 +11,14 @@
         "reducedDebugInfo": false,
         "maxPlayers": 100,
         "motd": "",
-        "wrongVersionConnectMessage": "Please use version {version}"
+        "wrongVersionConnectMessage": "Please use version {version}",
+        "position": {
+            "x": 0,
+            "y": 200,
+            "z": 0,
+            "yaw": 0,
+            "pitch": 0
+        }
     },
     "links": {
         "docs": "https://oscarnow.github.io/minecraft-server"
