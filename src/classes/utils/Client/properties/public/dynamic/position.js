@@ -19,7 +19,7 @@ module.exports = {
                 else
                     throw new Error(`Can't perform this action on an offline player`)
 
-            let yaw = ya % 360;
+            let yaw = ya !== undefined ? ya % 360 : undefined;
 
             let teleportId = Math.floor(Math.random() * 1000000);
             while (teleportPromises.get(this)?.[teleportId])
