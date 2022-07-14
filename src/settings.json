@@ -18,6 +18,17 @@
             "z": 0,
             "yaw": 0,
             "pitch": 0
+        },
+        "bossBar": {
+            "title": "",
+            "health": 1,
+            "color": "purple",
+            "divisionAmount": 0,
+            "flags": {
+                "darkenSky": false,
+                "playEndMusic": false,
+                "createFog": false
+            }
         }
     },
     "links": {
