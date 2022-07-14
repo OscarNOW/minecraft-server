@@ -2,9 +2,11 @@ const { Server } = require('../');
 const server = new Server({
     defaultClientProperties: () => ({
         position: {
-            x: 3,
-            y: 10000,
-            z: 3
+            x: NaN,
+            y: NaN,
+            z: NaN,
+            yaw: NaN,
+            pitch: NaN
         }
     })
 });

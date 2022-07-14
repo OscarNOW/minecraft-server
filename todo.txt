@@ -24,4 +24,3 @@ Expand Client property types
 Make some boss bar arguments optional
 Add position observable to Entity
 Change loadWorld method to join listener for Client and load listener
-Make ability to set position to NaN
