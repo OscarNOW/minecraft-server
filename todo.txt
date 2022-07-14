@@ -4,6 +4,10 @@ Expand CustomError
     Action can't be performed right now
     Can't set
 Reimplement canUsed
+    Change loadWorld method to join listener for Client and connect listener (see user\2 for example)
+        Update examples
+        Update readme
+        Update FAQ
 Change file structure so that every class gets its own folder
 Create guide
     Update readme
@@ -23,4 +27,4 @@ Expand Client property types
         Use that for onGround
 Make some boss bar arguments optional
 Add position observable to Entity
-Change loadWorld method to join listener for Client and load listener
+Implement client.on('join')
