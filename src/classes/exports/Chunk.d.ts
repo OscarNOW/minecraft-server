@@ -5,5 +5,5 @@ export class Chunk {
         x: number;
         y: number;
         z: number;
-    }, block: blockType, state?: blockState): Chunk;
+    }, block: blockType, state?: blockState): this;
 }

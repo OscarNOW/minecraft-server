@@ -7,7 +7,7 @@ export class Chunk {
         x: number;
         y: number;
         z: number;
-    }, block: blockType, state?: blockState): Chunk;
+    }, block: blockType, state?: blockState): this;
 }
 
 export class Color {
@@ -96,19 +96,25 @@ export class Text {
 declare class Changable {
     constructor(
         changeCallback: (values: {
-            [valueName: string | symbol]: any;
+            [valueName: string | symbol]: unknown;
+        }, oldValues: {
+            [valueName: string | symbol]: unknown;
         }) => void,
         startValues: {
-            [valueName: string | symbol]: any;
+            [valueName: string | symbol]: unknown;
         }
     );
 
     setRaw(values: {
-        [valueName: string | symbol]: any;
+        [valueName: string | symbol]: unknown;
     }): void;
-    setRaw(key: string | symbol, value: any): void;
+    setRaw(key: string | symbol, value: unknown): void;
 
-    [valueName: string | symbol]: any;
+    raw: {
+        [valueName: string | symbol]: unknown;
+    };
+
+    [valueName: string | symbol]: unknown;
 }
 
 declare class Client {
@@ -569,11 +575,12 @@ declare class Entity {
         x: number;
         y: number;
         z: number;
-        yaw: number;
-        pitch: number;
+        yaw?: number;
+        pitch?: number;
     }, sendPacket: (packetName: string, packet: object) => void);
 
     readonly id: number;
+    readonly uuid: string;
     readonly client: Client;
     readonly type: entityType;
     readonly living: boolean;
@@ -594,6 +601,14 @@ declare class Entity {
         volume: number;
         pitch: number;
     }): void;
+
+    observe(observable: 'position', callback: (position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
 
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (clickInfo: {

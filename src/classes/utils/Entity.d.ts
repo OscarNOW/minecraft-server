@@ -7,11 +7,12 @@ export class Entity extends EventEmitter {
         x: number;
         y: number;
         z: number;
-        yaw: number;
-        pitch: number;
+        yaw?: number;
+        pitch?: number;
     }, sendPacket: (packetName: string, packet: object) => void);
 
     readonly id: number;
+    readonly uuid: string;
     readonly client: Client;
     readonly type: entityType;
     readonly living: boolean;
@@ -32,6 +33,14 @@ export class Entity extends EventEmitter {
         volume: number;
         pitch: number;
     }): void;
+
+    observe(observable: 'position', callback: (position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
 
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (clickInfo: {

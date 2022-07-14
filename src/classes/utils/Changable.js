@@ -8,8 +8,9 @@ class Changable {
             Object.defineProperty(this, key, {
                 get: () => this[valuesSymbol][key],
                 set: newValue => {
+                    let old = Object.assign({}, this[valuesSymbol]);
                     this[valuesSymbol][key] = newValue;
-                    changeCallback(this[valuesSymbol]);
+                    changeCallback(this[valuesSymbol], old);
                 }
             })
 
@@ -20,6 +21,10 @@ class Changable {
             this[valuesSymbol][valuesOrKey] = value
         else
             this[valuesSymbol] = valuesOrKey;
+    }
+
+    get raw() {
+        return Object.assign({}, this[valuesSymbol])
     }
 }
 

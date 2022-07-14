@@ -1,5 +1,5 @@
 module.exports = {
-    emitObservable: function (type) {
-        this.p.observables[type].forEach(cb => cb(this[type]))
+    emitObservable: function (observable) {
+        this.p.observables[observable].forEach(cb => cb(this[observable]))
     }
 }

@@ -1,3 +1,4 @@
+const { defaults } = require('../../settings.json')
 const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
 
 const { uuid } = require('../../functions/uuid.js');
@@ -10,7 +11,9 @@ const ps = Object.fromEntries([ // privateSymbols
     '_position',
     'typeId',
     'uuid',
-    'sendPacket'
+    'sendPacket',
+    'observables',
+    'emitObservable'
 ].map(name => [name, Symbol(name)]));
 
 const events = Object.freeze([
@@ -18,7 +21,11 @@ const events = Object.freeze([
     'rightClick'
 ])
 
-let changePosition = function ({ x, y, z, yaw: ya, pitch }) {
+const observables = Object.freeze(Object.fromEntries([
+    'position'
+].map(v => [v, []])));
+
+const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
     let yaw = ya;
     if (yaw > 127)
         yaw = -127;
@@ -36,15 +43,24 @@ let changePosition = function ({ x, y, z, yaw: ya, pitch }) {
         onGround: true
     });
 
-    this.position.setRaw(x, x ?? this.position.x)
-    this.position.setRaw(y, y ?? this.position.y)
-    this.position.setRaw(z, z ?? this.position.z)
-    this.position.setRaw(yaw, yaw ?? this.position.yaw)
-    this.position.setRaw(pitch, pitch ?? this.position.pitch)
+    let changed = false;
+    [
+        'x',
+        'y',
+        'z',
+        'yaw',
+        'pitch'
+    ].forEach(val => {
+        if (arguments[0][val] !== undefined && oldValue[val] !== arguments[0][val])
+            changed = true;
+    })
+
+    if (changed)
+        this[ps.emitObservable]('position')
 }
 
 class Entity extends EventEmitter {
-    constructor(client, type, id, { x, y, z, yaw, pitch }, sendPacket) {
+    constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket) {
         super();
 
         let e = getEntity(type);
@@ -61,20 +77,24 @@ class Entity extends EventEmitter {
                     externalLink: '{docs}/types/entityType.html'
                 }, this.constructor).toString()
 
-        this[ps._position] = new Changable(value => changePosition.call(this, value), { x, y, z, yaw, pitch })
         this.type = type;
         this.living = e.living;
-        this[ps.typeId] = e.id;
         this.id = id;
-        this[ps.uuid] = uuid();
+        this.uuid = uuid();
         this.client = client;
 
+        this[ps.typeId] = e.id;
+        this[ps.observables] = observables;
         this[ps.sendPacket] = sendPacket;
+        this[ps._position] = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch })
+
+        this[ps.emitObservable] = observable =>
+            this[ps.observables][observable].forEach(cb => cb(this[observable]))
 
         if (this.living)
             this[ps.sendPacket]('spawn_entity_living', {
                 entityId: this.id,
-                entityUUID: this[ps.uuid],
+                entityUUID: this.uuid,
                 type: this[ps.typeId],
                 x: this.position.x,
                 y: this.position.y,
@@ -89,7 +109,7 @@ class Entity extends EventEmitter {
         else
             this[ps.sendPacket]('spawn_entity', {
                 entityId: this.id,
-                objectUUID: this[ps.uuid],
+                objectUUID: this.uuid,
                 type: this[ps.typeId],
                 x: this.position.x,
                 y: this.position.y,
@@ -107,8 +127,27 @@ class Entity extends EventEmitter {
         return this[ps._position];
     }
 
-    set position(value) {
-        changePosition.call(this, value)
+    set position(newValue) {
+        let oldValue = Object.assign({}, this.position.raw)
+        this.position.setRaw(newValue)
+
+        changePosition.call(this, newValue, oldValue)
+    }
+
+    observe(observable, cb) {
+        if (!this[ps.observables][observable])
+                /* -- Look at stack trace for location -- */ throw new
+                CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'observable', ''],
+                    ['in the function "', 'observe', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: observable,
+                    expectationType: 'value',
+                    expectation: Object.keys(this[os.observables])
+                }, this.observe).toString()
+
+        this[ps.observables][observable].push(cb)
     }
 
     animation(animationType) {

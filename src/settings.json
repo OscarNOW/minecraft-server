@@ -14,7 +14,7 @@
         "wrongVersionConnectMessage": "Please use version {version}",
         "position": {
             "x": 0,
-            "y": 200,
+            "y": 0,
             "z": 0,
             "yaw": 0,
             "pitch": 0
@@ -28,6 +28,12 @@
                 "darkenSky": false,
                 "playEndMusic": false,
                 "createFog": false
+            }
+        },
+        "entity": {
+            "position": {
+                "yaw": 0,
+                "pitch": 0
             }
         }
     },

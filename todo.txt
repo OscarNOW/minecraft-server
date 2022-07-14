@@ -26,4 +26,7 @@ Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
-Add position observable to Entity
+Remove eventListener from Client and Entity
+Make Client.set position modulo yaw and pitch
+Make Entity.set position modulo yaw and pitch
+Make use of second Changable callback

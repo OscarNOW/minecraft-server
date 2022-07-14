@@ -1,17 +1,23 @@
 export class Changable {
     constructor(
         changeCallback: (values: {
-            [valueName: string | symbol]: any;
+            [valueName: string | symbol]: unknown;
+        }, oldValues: {
+            [valueName: string | symbol]: unknown;
         }) => void,
         startValues: {
-            [valueName: string | symbol]: any;
+            [valueName: string | symbol]: unknown;
         }
     );
 
     setRaw(values: {
-        [valueName: string | symbol]: any;
+        [valueName: string | symbol]: unknown;
     }): void;
-    setRaw(key: string | symbol, value: any): void;
+    setRaw(key: string | symbol, value: unknown): void;
 
-    [valueName: string | symbol]: any;
+    raw: {
+        [valueName: string | symbol]: unknown;
+    };
+
+    [valueName: string | symbol]: unknown;
 }
