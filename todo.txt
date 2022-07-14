@@ -23,6 +23,5 @@ Expand Client property types
         Use that for onGround
 Make some boss bar arguments optional
 Add position observable to Entity
-Make position defaultable in defaultClientProperties
 Change loadWorld method to join listener for Client and load listener
 Make ability to set position to NaN

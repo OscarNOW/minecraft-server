@@ -59,23 +59,7 @@ export class Server {
             },
             legacy: boolean
         }): string | Text | null;
-        defaultClientProperties?(client: Client): {
-            experience?: {
-                bar?: number;
-                level?: number;
-            };
-
-            raining?: boolean;
-            toxicRainLevel?: number;
-            showRespawnScreen?: boolean;
-            gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
-            difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
-
-            slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-            health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
-            food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
-            foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
-        };
+        defaultClientProperties?(client: Client): defaultClientProperties;
     });
 
     private server: any;
@@ -135,23 +119,7 @@ declare class Client {
             host: string;
             port: number;
         }
-    }, defaultClientProperties?: (client: Client) => {
-        experience?: {
-            bar?: number;
-            level?: number;
-        };
-
-        raining?: boolean;
-        toxicRainLevel?: number;
-        showRespawnScreen?: boolean;
-        gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
-        difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
-
-        slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-        health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
-        food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
-        foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
-    });
+    }, defaultClientProperties?: (client: Client) => defaultClientProperties);
 
     /* Constant */
     readonly server: Server;
@@ -749,6 +717,32 @@ type optionalTextArray = Array<{
     color?: textColor;
     modifiers?: Array<textModifier>;
 };
+type defaultClientProperties = {
+    position?: {
+        x?: number;
+        y?: number;
+        z?: number;
+        yaw?: number;
+        pitch?: number;
+    }
+
+    experience?: {
+        bar?: number;
+        level?: number;
+    };
+
+    raining?: boolean;
+    toxicRainLevel?: number;
+    showRespawnScreen?: boolean;
+    gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+    difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+
+    slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+    health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+    food?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+    foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
+};
+
 type noDataParticle = 'ambient_entity_effect' | 'angry_villager' | 'bubble' | 'cloud' | 'crit' | 'damage_indicator' | 'dragon_breath' | 'dripping_lava' | 'falling_lava' | 'landing_lava' | 'dripping_water' | 'falling_water' | 'effect' | 'elder_guardian' | 'enchanted_hit' | 'enchant' | 'end_rod' | 'entity_effect' | 'explosion_emitter' | 'explosion' | 'firework' | 'fishing' | 'flame' | 'soul_fire_flame' | 'soul' | 'flash' | 'happy_villager' | 'composter' | 'heart' | 'instant_effect' | 'item_slime' | 'item_snowball' | 'large_smoke' | 'lava' | 'mycelium' | 'note' | 'poof' | 'portal' | 'rain' | 'smoke' | 'sneeze' | 'spit' | 'sweep_attack' | 'totem_of_undying' | 'underwater' | 'splash' | 'witch' | 'bubble_pop' | 'current_down' | 'bubble_column_up' | 'nautilus' | 'dolphin' | 'campfire_cosy_smoke' | 'campfire_signal_smoke' | 'dripping_honey' | 'falling_honey' | 'landing_honey' | 'falling_nectar' | 'ash' | 'crimson_spore' | 'warped_spore' | 'dripping_obsidian_tear' | 'falling_obsidian_tear' | 'landing_obsidian_tear' | 'reverse_portal' | 'snowflake' | 'barrier';
 
 type entityType = 'area_effect_cloud' | 'armor_stand' | 'arrow' | 'bat' | 'bee' | 'blaze' | 'boat' | 'cat' | 'cave_spider' | 'chicken' | 'cod' | 'cow' | 'creeper' | 'dolphin' | 'donkey' | 'dragon_fireball' | 'drowned' | 'elder_guardian' | 'end_crystal' | 'ender_dragon' | 'enderman' | 'endermite' | 'evoker' | 'evoker_fangs' | 'experience_orb' | 'eye_of_ender' | 'falling_block' | 'firework_rocket' | 'fox' | 'ghast' | 'giant' | 'guardian' | 'hoglin' | 'horse' | 'husk' | 'illusioner' | 'iron_golem' | 'item' | 'item_frame' | 'fireball' | 'leash_knot' | 'lightning_bolt' | 'llama' | 'llama_spit' | 'magma_cube' | 'minecart' | 'chest_minecart' | 'command_block_minecart' | 'furnace_minecart' | 'hopper_minecart' | 'spawner_minecart' | 'tnt_minecart' | 'mule' | 'mooshroom' | 'ocelot' | 'painting' | 'panda' | 'parrot' | 'phantom' | 'pig' | 'piglin' | 'piglin_brute' | 'pillager' | 'polar_bear' | 'tnt' | 'pufferfish' | 'rabbit' | 'ravager' | 'salmon' | 'sheep' | 'shulker' | 'shulker_bullet' | 'silverfish' | 'skeleton' | 'skeleton_horse' | 'slime' | 'small_fireball' | 'snow_golem' | 'snowball' | 'spectral_arrow' | 'spider' | 'squid' | 'stray' | 'strider' | 'egg' | 'ender_pearl' | 'experience_bottle' | 'potion' | 'trident' | 'trader_llama' | 'tropical_fish' | 'turtle' | 'vex' | 'villager' | 'vindicator' | 'wandering_trader' | 'witch' | 'wither' | 'wither_skeleton' | 'wither_skull' | 'wolf' | 'zoglin' | 'zombie' | 'zombie_horse' | 'zombie_villager' | 'zombified_piglin' | 'player' | 'fishing_bobber';

@@ -6,6 +6,9 @@ const teleportPromises = new WeakMap();
 
 module.exports = {
     position: {
+        info: {
+            callAfterLogin: true
+        },
         get: function () {
             return this.p._position
         },
@@ -48,9 +51,12 @@ module.exports = {
                 teleportId
             });
         },
+        setRaw: function (position = {}) {
+            for (const [key, value] of Object.entries(position))
+                this.p._position.setRaw(key, value)
+        },
         init: function () {
             this.p.positionSet = false;
-
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
         },
         confirm: function (teleportId) {
