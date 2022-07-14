@@ -172,6 +172,7 @@ declare class Client extends EventEmitter {
     readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
+        readonly [clientEntityId: number]: Client;
         readonly [entityId: number]: Entity;
     };
     readonly bossBars: {

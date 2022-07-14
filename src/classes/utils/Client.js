@@ -147,7 +147,7 @@ class Client extends EventEmitter {
         this.p.defaultProperties = defaultClientProperties(this);
 
         let loginPacket = {
-            entityId: client.id,
+            entityId: this.p.client.id,
             isHardcore: false,
             previousGameMode: 255,
             worldNames: ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end'],

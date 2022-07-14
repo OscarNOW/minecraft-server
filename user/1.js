@@ -1,11 +1,5 @@
 const { Server, Chunk } = require('../');
-const server = new Server({
-    defaultClientProperties: () => ({
-        position: {
-            y: 101
-        }
-    })
-});
+const server = new Server();
 const chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)
@@ -15,18 +9,7 @@ for (let x = 0; x < 16; x++)
 
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
-
-    let horse = client.entity('horse', {
-        x: 3,
-        y: 100,
-        z: 3
-    })
-
     client.on('chat', a => eval(a))
-    client.observe('slot', () => {
-        console.log(horse.position.yaw + 10)
-        horse.position.yaw += 10
-    })
 
     client.loadWorld()
 });
