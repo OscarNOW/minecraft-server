@@ -17,8 +17,7 @@ Create guide
 Move client.window('horse') to horse.openWindow()
     Make Horse class that inherits Entity
     Update Client windowType to different name
-Split Color and Text into different packages
-Add Client to its own entities object
+Check if Color class is needed
 Expand Client property types
     Create ability to create simple settable properties for Client
         Make bossBars one of them
