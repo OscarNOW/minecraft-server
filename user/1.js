@@ -22,8 +22,11 @@ server.on('join', client => {
         z: 3
     })
 
-    horse.observe('position', console.log)
     client.on('chat', a => eval(a))
+    client.observe('slot', () => {
+        console.log(horse.position.yaw + 10)
+        horse.position.yaw += 10
+    })
 
     client.loadWorld()
 });

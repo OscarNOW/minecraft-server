@@ -26,12 +26,7 @@ const observables = Object.freeze(Object.fromEntries([
 ].map(v => [v, []])));
 
 const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
-    let yaw = ya;
-    if (yaw > 127)
-        yaw = -127;
-
-    if (yaw < -127)
-        yaw = 127;
+    let yaw = ya % 360;
 
     this[ps.sendPacket]('entity_teleport', {
         entityId: this.id,

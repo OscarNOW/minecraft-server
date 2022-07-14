@@ -27,6 +27,4 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Remove eventListener from Client and Entity
-Make Client.set position modulo yaw and pitch
-Make Entity.set position modulo yaw and pitch
 Make use of second Changable callback

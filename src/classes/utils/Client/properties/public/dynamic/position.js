@@ -12,12 +12,14 @@ module.exports = {
         get: function () {
             return this.p._position
         },
-        set: function ({ x, y, z, yaw, pitch } = {}) {
+        set: function ({ x, y, z, yaw: ya, pitch } = {}) {
             if (!this.p.canUsed)
                 if (this.online)
                     throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
                 else
                     throw new Error(`Can't perform this action on an offline player`)
+
+            let yaw = ya % 360;
 
             let teleportId = Math.floor(Math.random() * 1000000);
             while (teleportPromises.get(this)?.[teleportId])
