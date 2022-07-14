@@ -355,18 +355,20 @@ declare class Client extends EventEmitter {
     }): Entity;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
-    bossBar(bossBarInfo: {
-        title: string | Text;
-        health: number;
-        color: bossBarColor;
-        divisionAmount: bossBarDivision;
-        flags: bossBarFlags;
+    bossBar(bossBarInfo?: {
+        title?: string | Text;
+        health?: number;
+        color?: bossBarColor;
+        divisionAmount?: bossBarDivision;
+        flags?: bossBarFlags;
     }): {
         title: string;
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
         flags: bossBarFlags;
+        id: string;
+        remove(): void;
     };
     sound(soundInfo: {
         sound: soundName;

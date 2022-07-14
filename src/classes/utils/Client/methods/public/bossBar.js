@@ -21,7 +21,7 @@ const divisionIds = {
 }
 
 module.exports = {
-    bossBar: function ({ title, health, color, divisionAmount, flags: { darkenSky, playEndMusic, createFog } }) {
+    bossBar: function ({ title = '', health = 1, color = 'purple', divisionAmount = 0, flags: { darkenSky = false, playEndMusic = false, createFog = false } = {} } = {}) {
         if (!this.p.canUsed)
             if (this.online)
                 throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)

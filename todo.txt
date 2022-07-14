@@ -5,6 +5,7 @@ Expand CustomError
     Can't set
 Reimplement canUsed
     Change loadWorld method to join listener for Client and connect listener (see user\2 for example)
+        Implement client.on('join')
         Update examples
         Update readme
         Update FAQ
@@ -25,6 +26,5 @@ Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
-Make some boss bar arguments optional
+Make default bossBar arguments changable in settings.json
 Add position observable to Entity
-Implement client.on('join')
