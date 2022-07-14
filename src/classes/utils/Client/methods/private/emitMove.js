@@ -23,6 +23,7 @@ module.exports = {
                 this.p._position.setRaw(val, info[val]);
             }
         });
+        this.onGround = info.onGround;
 
         let newChunk = {
             x: Math.floor(this.position.x / 16),

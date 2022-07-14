@@ -11,11 +11,7 @@ server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
     client.on('chat', a => eval(a))
 
-    let horse = client.entity('horse', {
-        x: 3,
-        y: 100,
-        z: 3
-    })
+    client.observe('onGround', client.chat)
 
     client.position = {
         x: 3,

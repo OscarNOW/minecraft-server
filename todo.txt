@@ -20,7 +20,7 @@ Expand Client property types
         Make bossBars one of them
     Create ability to create dynamic private properties
         Use that for sneaking
+        Use that for onGround
 Make some boss bar arguments optional
 Add position observable to Entity
 Create default position in settings.json
-Implement Client.onGround    

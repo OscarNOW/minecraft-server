@@ -74,6 +74,7 @@ export class Client extends EventEmitter {
     /* Readonly changing */
     readonly online: boolean;
     readonly sneaking: boolean;
+    readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
         readonly [entityId: number]: Entity;
@@ -113,7 +114,7 @@ export class Client extends EventEmitter {
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
 
     observe(type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    observe(type: 'raining' | 'showRespawnScreen' | 'sneaking', callback: (changedValue: boolean) => void): void;
+    observe(type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
     observe(type: 'position', callback: (changedValue: {
         x: number;
         y: number;

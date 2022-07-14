@@ -10,7 +10,8 @@ const observables = Object.freeze(Object.fromEntries([
     'gamemode',
     'difficulty',
     'experience',
-    'sneaking'
+    'sneaking',
+    'onGround'
 ].map(v => [v, []])));
 
 module.exports = {
