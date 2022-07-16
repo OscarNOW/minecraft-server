@@ -24,4 +24,8 @@ Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
-Add feature list to Readme
+Update Readme
+    Add feature list to Readme
+    Add thanks
+        wiki.vg
+        minecraft-protocol
