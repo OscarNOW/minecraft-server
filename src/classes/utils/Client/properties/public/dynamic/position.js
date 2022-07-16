@@ -3,6 +3,7 @@ const { timing, defaults } = require('../../../../../../settings.json');
 const { Changable } = require('../../../../Changable.js');
 
 const teleportPromises = new WeakMap();
+const oldPositions = new WeakMap();
 
 module.exports = {
     position: {
@@ -12,14 +13,12 @@ module.exports = {
         get: function () {
             return this.p._position
         },
-        set: function ({ x, y, z, yaw: ya, pitch } = {}) {
+        set: function (pos = {}) {
             if (!this.p.canUsed)
                 if (this.online)
                     throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
                 else
                     throw new Error(`Can't perform this action on an offline player`)
-
-            let yaw = ya !== undefined ? ya % 360 : undefined;
 
             let teleportId = Math.floor(Math.random() * 1000000);
             while (teleportPromises.get(this)?.[teleportId])
@@ -39,31 +38,82 @@ module.exports = {
                     if (this.online && !teleportPromises.get(this)[teleportId].resolved)
                         rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
                 }, timing.teleportConfirmationKick)
-            })
+            });
+
+            let oldPosition = oldPositions.get(this);
+            let useRelative = '';
+            let values = {};
+
+            [
+                'pitch',
+                'yaw',
+                'z',
+                'y',
+                'x',
+            ].forEach(key => {
+                let val = pos[key] ?? oldPosition[key];
+
+                if (oldPosition && Math.abs(val - oldPosition[key]) < Math.abs(val)) {
+                    useRelative += '1'
+                    values[key] = val - oldPosition[key]
+                } else {
+                    useRelative += '0'
+                    values[key] = val
+                }
+            });
 
             this.p.positionSet = true;
 
             this.p.sendPacket('position', {
-                x: x ?? this.position.x,
-                y: y ?? this.position.y,
-                z: z ?? this.position.z,
-                yaw: yaw ?? this.position.yaw,
-                pitch: pitch ?? this.position.pitch,
-                flags: 0x00,
+                ...values,
+                flags: parseInt(useRelative, 2),
                 teleportId
             });
+
+            oldPositions.set(this, Object.freeze({
+                x: this.p._position.x,
+                y: this.p._position.y,
+                z: this.p._position.z,
+                yaw: this.p._position.yaw,
+                pitch: this.p._position.pitch
+            }));
         },
         setRaw: function (position = {}) {
             for (const [key, value] of Object.entries(position))
                 this.p._position.setRaw(key, value)
+
+            oldPositions.set(this, Object.freeze({
+                x: this.p._position.x,
+                y: this.p._position.y,
+                z: this.p._position.z,
+                yaw: this.p._position.yaw,
+                pitch: this.p._position.pitch
+            }));
         },
         init: function () {
             this.p.positionSet = false;
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
+
+            oldPositions.set(this, Object.freeze({
+                x: this.p._position.x,
+                y: this.p._position.y,
+                z: this.p._position.z,
+                yaw: this.p._position.yaw,
+                pitch: this.p._position.pitch
+            }));
         },
         confirm: function (teleportId) {
             teleportPromises.get(this)[teleportId].resolved = true
             teleportPromises.get(this)[teleportId].res()
+        },
+        update(position) {
+            oldPositions.set(this, Object.freeze({
+                x: position.x,
+                y: position.y,
+                z: position.z,
+                yaw: position.yaw,
+                pitch: position.pitch
+            }));
         }
     }
 }
