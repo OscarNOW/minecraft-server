@@ -30,7 +30,7 @@ class CustomError {
         else if (this.causer == 'libraryUser')
             causer = 'Library User (probably you)'
         else if (this.causer == 'library')
-            causer == 'Library itself.Please report this issue on Github(https://github.com/OscarNOW/minecraft-server/issues/new/choose)'
+            causer == 'Library itself. Please report this issue on Github (https://github.com/OscarNOW/minecraft-server/issues/new/choose)'
 
         if (this.type == 'expectationNotMet')
             return `Unknown ${valueName}, got ${got}, expected ${expected}. Program that caused this error: ${causer}`;

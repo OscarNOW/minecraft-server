@@ -92,3 +92,9 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 
 <div class="darkImg"><img loading="lazy" src="/minecraft-server/assets/ISC license/docs/dark.png" alt="ISC License explanation"></div> 
 <div class="lightImg"><img loading="lazy" src="/minecraft-server/assets/ISC license/docs/light.png" alt="ISC License explanation"></div>
+
+
+## Special thanks
+* [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
+* [minecraft-protocol](https://github.com/PrismarineJS/node-minecraft-protocol) for parsing all the packets and helping with the login process.
+* [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the library.

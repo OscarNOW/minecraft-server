@@ -25,8 +25,5 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Update Readme
-    Add feature list to Readme
-    Add thanks
-        wiki.vg
-        minecraft-protocol
+    Add feature list to Readme    
 Create PR for minecraft-protocol to exclude optional files from npm build
