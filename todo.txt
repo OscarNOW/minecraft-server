@@ -29,3 +29,4 @@ Update Readme
     Add thanks
         wiki.vg
         minecraft-protocol
+Create PR for minecraft-protocol to exclude optional files from npm build
