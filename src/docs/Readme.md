@@ -17,25 +17,24 @@
 
 Create Minecraft Servers with an easy to use API and with full control.
 
-This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you can customize everything, and that it's very easy to have different clients see completely different things. However, when you have full control over everything that's being sent to the client, it's more difficult to make a vanilla Minecraft server, because you have to create all the server-side logic yourself.
+This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
 ## **Installation and usage**
-1. Install with npm by running `npm i minecraft-server`
-1. Example code:
+First, install with npm by running `npm i minecraft-server`. Now you can use the library. Here's some example code:
 ```js
 const { Server } = require('minecraft-server');
 const server = new Server();
 
 server.on('join', client => {
+    client.loadWorld();
 
     console.log(`${client.username} joined`);
-    client.on('chat', message => console.log(`<${client.username}> ${message}`));
-
-    client.loadWorld();
-    client.chat(`Welcome to the server, ${client.username}!`);
+    client.chat(`Hello world, ${client.username}`);
 
 });
 ```
+
+If you want to now how to fully use the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
 For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
 

@@ -27,3 +27,4 @@ Expand Client property types
 Update Readme
     Add feature list to Readme    
 Create PR for minecraft-protocol to exclude optional files from npm build
+Update custom doc styles
