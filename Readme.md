@@ -20,7 +20,8 @@ Create Minecraft Servers with an easy to use API and with full control.
 This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
 ## **Installation and usage**
-First, install with npm by running `npm i minecraft-server`. Now you can use the library. Here's some example code:
+1. Install with `npm i minecraft-server`. 
+2. Now you can use the library. Here's some example code:
 ```js
 const { Server } = require('minecraft-server');
 const server = new Server();
@@ -34,11 +35,16 @@ server.on('join', client => {
 });
 ```
 
-If you want to now how to fully use the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
+If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
 For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
+
+## Features
+* **Full protocol coverage**, every packet is implemented in the library in an easy to use way.
+* **Everything is per Client**, meaning you can, for example, have different server lists, or different worlds based on the Client.
+* **Easy to use**, you can create servers in an intuitive way.
 
 ## **Terms**
 
@@ -74,7 +80,7 @@ Entities include all dynamic, moving objects throughout the Minecraft world. Som
 * [Players](#player)
 * Falling blocks
 
-## Contribute
+## **Contribute**
 If this is your first time contributing to an open-source project, don't worry. We'll help you through the whole process. If you have any questions, please let us know!
 
 ### Expectations
@@ -85,13 +91,13 @@ If you want to add a new feature to the library, first, make sure to first creat
 ### Security vulnerability
 If you found a security vulnerability, please do not make a public issue. Instead [create a new security advisory](https://github.com/OscarNOW/minecraft-server/security/advisories/new). For more information, please see [`SECURITY.md`](https://github.com/OscarNOW/minecraft-server/blob/main/SECURITY.md).
 
-## License
+## **License**
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
 ![Explanation of ISC license](/assets/ISC%20license/github/dark.png#gh-dark-mode-only)
 ![Explanation of ISC license](/assets/ISC%20license/github/light.png#gh-light-mode-only)
 
-## Special thanks
+## **Special thanks**
 * [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
 * [minecraft-protocol](https://github.com/PrismarineJS/node-minecraft-protocol) for parsing all the packets and helping with the login process.
 * [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the library.

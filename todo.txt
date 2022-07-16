@@ -24,7 +24,5 @@ Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
-Update Readme
-    Add feature list to Readme    
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update custom doc styles
