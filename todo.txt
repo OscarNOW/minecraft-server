@@ -25,4 +25,3 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
-Update custom doc styles
