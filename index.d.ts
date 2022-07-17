@@ -741,6 +741,8 @@ type optionalTextArray = Array<{
     color?: textColor;
     modifiers?: Array<textModifier>;
 };
+type keycode = 'key.jump' | 'key.sneak' | 'key.sprint' | 'key.left' | 'key.right' | 'key.back' | 'key.forward' | 'key.attack' | 'key.pickItem' | 'key.use' | 'key.drop' | 'key.hotbar.1' | 'key.hotbar.2' | 'key.hotbar.3' | 'key.hotbar.4' | 'key.hotbar.5' | 'key.hotbar.6' | 'key.hotbar.7' | 'key.hotbar.8' | 'key.hotbar.9' | 'key.inventory' | 'key.swapOffhand' | 'key.loadToolbarActivator' | 'key.saveToolbarActivator' | 'key.playerlist' | 'key.chat' | 'key.command' | 'key.socialInteractions' | 'key.advancements' | 'key.spectatorOutlines' | 'key.screenshot' | 'key.smoothCamera' | 'key.fullscreen' | 'key.togglePerspective';
+
 type defaultClientProperties = {
     position?: {
         x?: number;
@@ -820,7 +822,7 @@ type chat = {
         value: chatComponent;
     };
 } | {
-    keybind: string;
+    keybind: keycode;
 
     extra?: chatComponents;
 

@@ -80,7 +80,7 @@ type chat = {
         value: chatComponent;
     };
 } | {
-    keybind: string;
+    keybind: keycode;
 
     extra?: chatComponents;
 

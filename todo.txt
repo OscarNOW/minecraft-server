@@ -35,4 +35,4 @@ Update Text
             Insertion
     Update types        
         Test if realms translations work and update chatTranslate type
-        Add keybind type
+        Check if all current keybinds in data/keybinds.json are actually in game        
