@@ -82,15 +82,20 @@ export class Server {
 }
 
 export class Text {
+    // constructor(text: string | optionalTextArray | chat);
     constructor(text: string | optionalTextArray);
 
     array: textArray;
     string: string;
+    // chat: chat;
+
+    toString(): string;
 
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
     static parseString(text: string): string;
+    // static stringToChat(text: string): chat;
 }
 
 declare class Changable {
@@ -695,8 +700,10 @@ declare class Entity {
 
 
 type hex = string;
+type chatComponents = chatComponent[];
 type bossBarDivision = 0 | 6 | 10 | 12 | 20;
 type version = legacyVersion | newVersion;
+type chatComponent = chat | string | chatComponents;
 type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;
 type rgb = {
     r: number;
@@ -763,6 +770,106 @@ type defaultClientProperties = {
 type noDataParticle = 'ambient_entity_effect' | 'angry_villager' | 'bubble' | 'cloud' | 'crit' | 'damage_indicator' | 'dragon_breath' | 'dripping_lava' | 'falling_lava' | 'landing_lava' | 'dripping_water' | 'falling_water' | 'effect' | 'elder_guardian' | 'enchanted_hit' | 'enchant' | 'end_rod' | 'entity_effect' | 'explosion_emitter' | 'explosion' | 'firework' | 'fishing' | 'flame' | 'soul_fire_flame' | 'soul' | 'flash' | 'happy_villager' | 'composter' | 'heart' | 'instant_effect' | 'item_slime' | 'item_snowball' | 'large_smoke' | 'lava' | 'mycelium' | 'note' | 'poof' | 'portal' | 'rain' | 'smoke' | 'sneeze' | 'spit' | 'sweep_attack' | 'totem_of_undying' | 'underwater' | 'splash' | 'witch' | 'bubble_pop' | 'current_down' | 'bubble_column_up' | 'nautilus' | 'dolphin' | 'campfire_cosy_smoke' | 'campfire_signal_smoke' | 'dripping_honey' | 'falling_honey' | 'landing_honey' | 'falling_nectar' | 'ash' | 'crimson_spore' | 'warped_spore' | 'dripping_obsidian_tear' | 'falling_obsidian_tear' | 'landing_obsidian_tear' | 'reverse_portal' | 'snowflake' | 'barrier';
 
 type entityType = 'area_effect_cloud' | 'armor_stand' | 'arrow' | 'bat' | 'bee' | 'blaze' | 'boat' | 'cat' | 'cave_spider' | 'chicken' | 'cod' | 'cow' | 'creeper' | 'dolphin' | 'donkey' | 'dragon_fireball' | 'drowned' | 'elder_guardian' | 'end_crystal' | 'ender_dragon' | 'enderman' | 'endermite' | 'evoker' | 'evoker_fangs' | 'experience_orb' | 'eye_of_ender' | 'falling_block' | 'firework_rocket' | 'fox' | 'ghast' | 'giant' | 'guardian' | 'hoglin' | 'horse' | 'husk' | 'illusioner' | 'iron_golem' | 'item' | 'item_frame' | 'fireball' | 'leash_knot' | 'lightning_bolt' | 'llama' | 'llama_spit' | 'magma_cube' | 'minecart' | 'chest_minecart' | 'command_block_minecart' | 'furnace_minecart' | 'hopper_minecart' | 'spawner_minecart' | 'tnt_minecart' | 'mule' | 'mooshroom' | 'ocelot' | 'painting' | 'panda' | 'parrot' | 'phantom' | 'pig' | 'piglin' | 'piglin_brute' | 'pillager' | 'polar_bear' | 'tnt' | 'pufferfish' | 'rabbit' | 'ravager' | 'salmon' | 'sheep' | 'shulker' | 'shulker_bullet' | 'silverfish' | 'skeleton' | 'skeleton_horse' | 'slime' | 'small_fireball' | 'snow_golem' | 'snowball' | 'spectral_arrow' | 'spider' | 'squid' | 'stray' | 'strider' | 'egg' | 'ender_pearl' | 'experience_bottle' | 'potion' | 'trident' | 'trader_llama' | 'tropical_fish' | 'turtle' | 'vex' | 'villager' | 'vindicator' | 'wandering_trader' | 'witch' | 'wither' | 'wither_skeleton' | 'wither_skull' | 'wolf' | 'zoglin' | 'zombie' | 'zombie_horse' | 'zombie_villager' | 'zombified_piglin' | 'player' | 'fishing_bobber';
+
+type chat = {
+    text: string;
+
+    extra?: chatComponents;
+
+    bold?: boolean;
+    italic?: boolean;
+    underlined?: boolean;
+    strikethrough?: boolean;
+    obfuscated?: boolean;
+
+    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
+    color?: string;
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        value: string | number;
+    };
+    hoverEvent?: {
+        action: 'show_text' | 'show_item' | 'show_entity';
+        value: chatComponent;
+    };
+
+} | {
+    translate: string;
+    with?: chatComponents;
+
+    extra?: chatComponents;
+
+    bold?: boolean;
+    italic?: boolean;
+    underlined?: boolean;
+    strikethrough?: boolean;
+    obfuscated?: boolean;
+
+    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
+    color?: string;
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        value: string | number;
+    };
+    hoverEvent?: {
+        action: 'show_text' | 'show_item' | 'show_entity';
+        value: chatComponent;
+    };
+} | {
+    keybind: string;
+
+    extra?: chatComponents;
+
+    bold?: boolean;
+    italic?: boolean;
+    underlined?: boolean;
+    strikethrough?: boolean;
+    obfuscated?: boolean;
+
+    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
+    color?: string;
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        value: string | number;
+    };
+    hoverEvent?: {
+        action: 'show_text' | 'show_item' | 'show_entity';
+        value: chatComponent;
+    };
+} | {
+    score: {
+        name: string;
+        objective: string;
+        value: number;
+    };
+
+    extra?: chatComponents;
+
+    bold?: boolean;
+    italic?: boolean;
+    underlined?: boolean;
+    strikethrough?: boolean;
+    obfuscated?: boolean;
+
+    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
+    color?: string;
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        value: string | number;
+    };
+    hoverEvent?: {
+        action: 'show_text' | 'show_item' | 'show_entity';
+        value: chatComponent;
+    };
+};
 
 type blockState = {
         snowy?: boolean;
