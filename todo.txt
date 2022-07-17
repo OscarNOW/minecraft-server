@@ -27,10 +27,12 @@ Expand Client property types
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
     Update JS
-        Web color
-        Click event
-        Optimized chat
-        Insertion    
-    Update types
-        Add translate type
+        Expand textArray with chat functions
+        Implement chat functions
+            Web color
+            Click event
+            Optimized chat
+            Insertion
+    Update types        
+        Test if realms translations work and update chatTranslate type
         Add keybind type

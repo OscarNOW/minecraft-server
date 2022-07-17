@@ -8,6 +8,7 @@ module.exports = {
 
         this.p.sendPacket('chat', {
             message: JSON.stringify({ text: `${message}` }),
+            // message: JSON.stringify({ translate: 'mco.selectServer.leave' }),
             position: 0,
             sender: '0'
         });

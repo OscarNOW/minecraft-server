@@ -56,7 +56,7 @@ type chat = {
     };
 
 } | {
-    translate: string;
+    translate: chatTranslate;
     with?: chatComponents;
 
     extra?: chatComponents;
