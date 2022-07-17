@@ -1,3 +1,3 @@
 module.exports = {
-    entityType: `'${Object.keys(require('./entities.json')).join("' | '")}'`
+    entityType: Object.keys(require('./entities.json')).map(a => `'${a}'`).join('|')
 }

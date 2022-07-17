@@ -13,5 +13,5 @@ module.exports = {
                     .readdirSync(path.resolve(__dirname, './messages/realms/'))[0]}`))
             )))
         .map(a => `'${a}'`)
-        .join(' | ')
+        .join('|')
 }

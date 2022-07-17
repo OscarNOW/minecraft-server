@@ -87,15 +87,13 @@ console.log('Generating output...')
 let out = `import { EventEmitter } from 'events';`
 
 for (const exportClass of exportClasses)
-    out += `\n\nexport ${exportClass}`;
+    out += `export ${exportClass}`;
 
 for (const utilClass of utilClasses)
-    out += `\n\ndeclare ${utilClass}`;
-
-out += `\n\n\n`
+    out += `declare ${utilClass}`;
 
 for (const [name, value] of Object.entries(types))
-    out += `type ${name} = ${value};\n${value.length > 200 ? '\n' : ''}`
+    out += `type ${name} = ${value};`
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 

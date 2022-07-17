@@ -36,3 +36,4 @@ Update Text
     Update types        
         Test if realms translations work and update chatTranslate type
         Check if all current keybinds in data/keybinds.json are actually in game        
+Implement convertToType function in all type generators

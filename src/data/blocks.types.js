@@ -9,16 +9,14 @@ blockStates.forEach(([name, values]) => {
 })
 
 module.exports = {
-    blockType: `'${require('./blocks.json').map(a => a.name).join("' | '")}'`,
-    blockState: `{
-        ${newBlockStates.map(([name, values]) => `${name}?: ${convertToTypes(values)};`).join('\n    ')}
-    }`
+    blockType: require('./blocks.json').map(a => a.name).map(a => `'${a}'`).join('|'),
+    blockState: `{${newBlockStates.map(([name, values]) => `${name}?:${convertToType(values)};`).join('')}}`
 }
 
-function convertToTypes(values) {
-    let types = values.map(a => ['number', 'boolean'].includes(typeof a) ? a : `'${a}'`).join(' | ');
-    if (types == 'true | false')
-        types = 'boolean'
+function convertToType(values) {
+    let type = values.map(a => ['number', 'boolean'].includes(typeof a) ? a : `'${a}'`).sort().join('|');
+    if (type == ['true', 'false'].sort().join('|'))
+        type = 'boolean'
 
-    return types
+    return type
 }
