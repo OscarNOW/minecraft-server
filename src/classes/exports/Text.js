@@ -15,15 +15,12 @@ class Text {
     get array() {
         if (this._input)
             if (typeof this._input == 'string') {
-                this._string = Text.parseString(this._input);
+                this._array = Text.stringToArray(this._input);
                 this._input = null;
             } else {
                 this._array = Text.parseArray(this._input);
                 this._input = null;
             }
-
-        if (this._array === null)
-            this._array = Text.stringToArray(this._string);
 
         return this._array;
     }
@@ -31,7 +28,7 @@ class Text {
     get string() {
         if (this._input)
             if (typeof this._input == 'string') {
-                this._string = Text.parseString(this._input);
+                this._array = Text.stringToArray(this._input);
                 this._input = null;
             } else {
                 this._array = Text.parseArray(this._input);
@@ -229,9 +226,11 @@ class Text {
 
         return this.parseArray(arr);
     }
-    static parseString(text) {
-        return this.arrayToString(this.stringToArray(text));
-    }
+    // static arrayToChat(a) {
+    //     let array = this.parseArray(a);
+
+
+    // }
 }
 
 module.exports = Object.freeze({ Text });

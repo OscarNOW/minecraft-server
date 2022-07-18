@@ -1,66 +1,82 @@
 [
     {
         "char": "4",
-        "name": "darkRed"
+        "name": "darkRed",
+        "minecraftName": "dark_red"
     },
     {
         "char": "c",
-        "name": "red"
+        "name": "red",
+        "minecraftName": "red"
     },
     {
         "char": "6",
-        "name": "gold"
+        "name": "gold",
+        "minecraftName": "gold"
     },
     {
         "char": "e",
-        "name": "yellow"
+        "name": "yellow",
+        "minecraftName": "yellow"
     },
     {
         "char": "2",
-        "name": "darkGreen"
+        "name": "darkGreen",
+        "minecraftName": "dark_green"
     },
     {
         "char": "a",
-        "name": "green"
+        "name": "green",
+        "minecraftName": "green"
     },
     {
         "char": "b",
-        "name": "aqua"
+        "name": "aqua",
+        "minecraftName": "aqua"
     },
     {
         "char": "3",
-        "name": "darkAqua"
+        "name": "darkAqua",
+        "minecraftName": "dark_aqua"
     },
     {
         "char": "1",
-        "name": "darkBlue"
+        "name": "darkBlue",
+        "minecraftName": "dark_blue"
     },
     {
         "char": "9",
-        "name": "blue"
+        "name": "blue",
+        "minecraftName": "blue"
     },
     {
         "char": "d",
-        "name": "pink"
+        "name": "pink",
+        "minecraftName": "light_purple"
     },
     {
         "char": "5",
-        "name": "purple"
+        "name": "purple",
+        "minecraftName": "dark_purple"
     },
     {
         "char": "f",
-        "name": "white"
+        "name": "white",
+        "minecraftName": "white"
     },
     {
         "char": "7",
-        "name": "gray"
+        "name": "gray",
+        "minecraftName": "gray"
     },
     {
         "char": "8",
-        "name": "darkGray"
+        "name": "darkGray",
+        "minecraftName": "dark_gray"
     },
     {
         "char": "0",
-        "name": "black"
+        "name": "black",
+        "minecraftName": "black"
     }
 ]

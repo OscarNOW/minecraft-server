@@ -11,8 +11,7 @@ export class Text {
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static parseString(text: string): string;
-    // static stringToChat(text: string): chat;
+    // static arrayToChat(text: optionalTextArray): chat;
 }
 
 type textArray = Array<{
@@ -42,12 +41,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -67,12 +65,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -90,12 +87,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -117,12 +113,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
