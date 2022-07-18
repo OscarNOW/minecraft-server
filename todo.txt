@@ -34,6 +34,6 @@ Update Text
             Optimized chat
             Insertion
     Update types        
-        Test if realms translations work and update chatTranslate type
-        Check if all current keybinds in data/keybinds.json are actually in game        
+        Check if all current keybinds in data/keybinds.json are actually in game   
+    New tests     
 Implement convertToType function in all type generators
