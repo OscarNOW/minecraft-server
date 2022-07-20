@@ -146,7 +146,7 @@ class Text {
                 obj = {
                     text: val.text || '',
                     color: val.color || 'default',
-                    modifiers: val.modifiers || []
+                    modifiers: [...new Set(val.modifiers)].sort() || []
                 };
 
             array.push(obj);
@@ -226,11 +226,79 @@ class Text {
 
         return this.parseArray(arr);
     }
-    // static arrayToChat(a) {
-    //     let array = this.parseArray(a);
+    static arrayToChat(a) {
+        let array = this.parseArray(a);
+        let structure;
 
+        for (const val of array) {
+            if (val.text == '') return;
 
-    // }
+            if (!structure) {
+                structure = {
+                    text: val.text,
+                    styling: {
+                        color: val.color, //todo: convert to mc color
+                        modifiers: val.modifiers
+                    },
+                    inner: []
+                }
+                continue;
+            }
+
+            let levels = [structure];
+            let levelDifferences = [];
+
+            let lastLevel = structure;
+            while (true) {
+                if (lastLevel.inner.length == 0)
+                    break;
+
+                lastLevel = lastLevel.inner[lastLevel.inner.length - 1];
+                levels.push(lastLevel)
+            }
+
+            if (isSameChatStyling(lastLevel.styling, val)) {
+                lastLevel.text += val.text;
+                continue;
+            }
+
+            for (const levelIndex in levels) {
+                const level = levels[levelIndex];
+
+                levelDifferences[levelIndex] = 0;
+                if (level.styling.color != val.color)
+                    levelDifferences[levelIndex]++;
+
+                levelDifferences[levelIndex] += arrayDifferenceAmount(level.styling.modifiers, val.modifiers);
+            }
+
+            let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))]; //todo: what happens if 2 levels have the same difference?
+
+            lowestDiffLevel.inner.push({
+                text: val.text,
+                styling: {
+                    color: val.color, //todo: convert to mc color
+                    modifiers: val.modifiers
+                },
+                inner: []
+            })
+        }
+
+        //todo: convert structure to actual chat object
+        throw new Error('Not implemented')
+    }
+}
+
+function isSameChatStyling(a, b) {
+    return (a.color == b.color) && (a.modifiers.length == b.modifiers.length) && (JSON.stringify(a.modifiers) == JSON.stringify(b.modifiers))
+}
+
+function arrayDifferenceAmount(a, b) {
+    let difference = 0;
+    [...new Set([...a, ...b])].forEach(key => {
+        difference += Math.abs(a.filter(val => val == key).length - b.filter(val => val == key).length);
+    });
+    return difference;
 }
 
 module.exports = Object.freeze({ Text });

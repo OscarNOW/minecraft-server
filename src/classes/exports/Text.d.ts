@@ -11,7 +11,7 @@ export class Text {
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    // static arrayToChat(text: optionalTextArray): chat;
+    static arrayToChat(text: optionalTextArray): chat;
 }
 
 type textArray = Array<{

@@ -28,12 +28,15 @@ Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
     Update JS
         Expand textArray with chat functions
-        Create prototype optionalTextArray to chat
+        -Create prototype optionalTextArray to chat
         Implement chat functions
             Web color
             Click event
             Optimized chat
             Insertion    
-    New tests
-    -Update types with correct 1.16.3 types (see chrome link)
+    New tests    
 Implement convertToType function in all type generators
+Prevent loading from classes that are not used
+Change forEach to for of
+    Careful with return -> continue
+Change Text modifier underline to underlined

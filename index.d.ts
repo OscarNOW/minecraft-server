@@ -86,7 +86,7 @@ import { EventEmitter } from 'events';export class Chunk {
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    // static arrayToChat(text: optionalTextArray): chat;
+    static arrayToChat(text: optionalTextArray): chat;
 }declare class Changable {
     constructor(
         changeCallback: (values: {
