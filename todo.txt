@@ -25,7 +25,7 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
-Update Text
+-Update Text
     Update JS
         Expand textArray with chat functions
         Make parseChat better with shorthands (https://wiki.vg/index.php?title=Chat&oldid=15679)        

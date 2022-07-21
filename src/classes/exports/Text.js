@@ -260,7 +260,7 @@ class Text {
                 levelDifferences[levelIndex] = chatLevelDifferenceAmount(level, val);
             }
 
-            let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))]; //todo: what happens if 2 levels have the same difference?
+            let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
 
             if (isSameChatStyling(lowestDiffLevel, val)) {
                 lowestDiffLevel.text += val.text;
