@@ -230,20 +230,16 @@ class Text {
         return this.parseArray(arr);
     }
     static arrayToChat(a) {
-        //todo: change so inherited properties are actually inherited
-        //todo: implement parseChat
         let array = this.parseArray(a);
         let out;
 
-        for (const val of array) {
+        for (const v of array) {
+            let val = convertArrayObjectToChatObject(v);
+
             if (val.text == '') return;
 
             if (!out) {
-                out = {
-                    text: val.text,
-                    color: textColors.find(({ name }) => name == val.color).minecraftName,
-                    modifiers: modifierArrayToObject(val.modifiers)
-                }
+                out = val
                 continue;
             }
 
@@ -272,27 +268,66 @@ class Text {
             }
 
             if (!lowestDiffLevel.extra) lowestDiffLevel.extra = [];
-            lowestDiffLevel.extra.push({
-                text: val.text,
-                color: textColors.find(({ name }) => name == val.color).minecraftName,
-                modifiers: modifierArrayToObject(val.modifiers)
-            })
+            lowestDiffLevel.extra.push(val)
         }
 
-        return out;
+        return this.parseChat(out);
+    }
+    static parseChat(c) {
+        let chat = Object.assign({}, c);
+
+        recursiveParseChat(chat, {
+            color: 'reset',
+            ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
+        });
+
+        return chat;
     }
 }
 
-function modifierArrayToObject(modifiers) {
-    return Object.fromEntries(textModifiersWithoutReset.map(({ name }) => name).map(a => [a, modifiers.includes(a)]));
+function recursiveParseChat(chat, inherited) {
+    let styles = {};
+    for (let { name } of [...textModifiersWithoutReset, { name: 'color' }])
+        styles[name] = chat[name] ?? inherited[name];
+
+    let overwrittenStyles = {}
+    for (let name in styles)
+        if (styles[name] != inherited[name])
+            overwrittenStyles[name] = styles[name]
+
+    for (let name in styles)
+        if (overwrittenStyles[name] === undefined)
+            delete chat[name]
+        else
+            chat[name] = overwrittenStyles[name]
+
+    if (chat.extra)
+        for (let extra of chat.extra)
+            recursiveParseChat(extra, styles);
+}
+
+function convertArrayObjectToChatObject({ text, color, modifiers }) {
+    return {
+        text,
+        color: textColors.find(({ name }) => name == color).minecraftName,
+        ...convertModifierArrayToObject(modifiers)
+    }
+}
+
+function convertModifierArrayToObject(modifiers) {
+    return Object.fromEntries(
+        textModifiersWithoutReset
+            .map(({ name }) => name)
+            .map(a => [a, modifiers.includes(a)])
+    );
 }
 
 function isSameChatStyling(a, b) {
     if (a.color != b.color)
         return false;
 
-    for (style in Object.keys(textModifiersWithoutReset))
-        if (a[style] != b[style])
+    for (let { name } of textModifiersWithoutReset)
+        if (a[name] != b[name])
             return false;
 
     return true;
@@ -303,8 +338,8 @@ function chatLevelDifferenceAmount(a, b) {
 
     if (a.color != b.color) difference++;
 
-    for (style in Object.keys(textModifiersWithoutReset))
-        if (a[style] != b[style])
+    for (let { name } of textModifiersWithoutReset)
+        if (a[name] != b[name])
             difference++;
 
     return difference;

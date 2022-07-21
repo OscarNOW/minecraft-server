@@ -28,15 +28,18 @@ Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
     Update JS
         Expand textArray with chat functions
-        -Create prototype optionalTextArray to chat
+        Make parseChat better with shorthands (https://wiki.vg/index.php?title=Chat&oldid=15679)        
         Implement chat functions
             Web color
             Click event
             Optimized chat
             Insertion    
-    New tests    
-    Update Text tests with new modifier names
+    Update tests
+        Create new ones for new features
+        Update with new modifier names
+    Work on "todo: " and "Not implemented" in code
+    Update functions to use new Text chat system
 Implement convertToType function in all type generators
-Prevent loading from classes that are not used
+Prevent loading from classes until they are used
 Change forEach to for of
     Careful with return -> continue

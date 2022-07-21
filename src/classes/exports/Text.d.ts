@@ -12,6 +12,7 @@ export class Text {
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
     static arrayToChat(text: optionalTextArray): chat;
+    static parseChat(text: chat): chat;
 }
 
 type textArray = Array<{
@@ -43,6 +44,8 @@ type chat = {
 
     color?: minecraftTextColor;
 
+    //Not implemented
+    /*
     insertion?: string;
     clickEvent?: {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
@@ -52,8 +55,11 @@ type chat = {
         action: 'show_text' | 'show_item' | 'show_entity';
         value: chatComponent;
     };
+    //*/
 
-} | {
+};
+//Not implemented:
+/*| {
     translate: chatTranslate;
     with?: chatComponents;
 
@@ -125,6 +131,7 @@ type chat = {
         value: chatComponent;
     };
 };
+//*/
 
 type chatComponents = chatComponent[];
 type chatComponent = chat | string | chatComponents;
