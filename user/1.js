@@ -7,9 +7,14 @@ console.log(require('util').inspect(
             modifiers: ['bold', 'italic']
         },
         {
-            text: ' world',
+            text: ' people',
+            color: 'darkRed',
+            modifiers: ['italic', 'bold']
+        },
+        {
+            text: ' and world',
             color: 'blue',
-            modifiers: ['italic', 'italic', 'bold', 'underline']
+            modifiers: ['italic', 'italic', 'bold', 'underlined']
         },
         {
             text: ', people',

@@ -1,5 +1,8 @@
 const { textModifiers, textColors } = require('../../functions/loader/data');
+
 const { CustomError } = require('../utils/CustomError.js');
+
+const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 
 class Text {
     constructor(text) {
@@ -226,78 +229,81 @@ class Text {
 
         return this.parseArray(arr);
     }
-    static arrayToChat(a) {
+    static arrayToChat(a) { //todo: change so inherited properties are actually inherited
         let array = this.parseArray(a);
-        let structure;
+        let out;
 
         for (const val of array) {
             if (val.text == '') return;
 
-            if (!structure) {
-                structure = {
+            if (!out) {
+                out = {
                     text: val.text,
-                    styling: {
-                        color: val.color, //todo: convert to mc color
-                        modifiers: val.modifiers
-                    },
-                    inner: []
+                    color: val.color, //todo: convert to mc color
+                    modifiers: modifierArrayToObject(val.modifiers),
+                    extra: []
                 }
                 continue;
             }
 
-            let levels = [structure];
+            let levels = [out];
             let levelDifferences = [];
 
-            let lastLevel = structure;
+            let lastLevel = out;
             while (true) {
-                if (lastLevel.inner.length == 0)
+                if (lastLevel.extra.length == 0)
                     break;
 
-                lastLevel = lastLevel.inner[lastLevel.inner.length - 1];
+                lastLevel = lastLevel.extra[lastLevel.extra.length - 1];
                 levels.push(lastLevel)
-            }
-
-            if (isSameChatStyling(lastLevel.styling, val)) {
-                lastLevel.text += val.text;
-                continue;
             }
 
             for (const levelIndex in levels) {
                 const level = levels[levelIndex];
-
-                levelDifferences[levelIndex] = 0;
-                if (level.styling.color != val.color)
-                    levelDifferences[levelIndex]++;
-
-                levelDifferences[levelIndex] += arrayDifferenceAmount(level.styling.modifiers, val.modifiers);
+                levelDifferences[levelIndex] = chatLevelDifferenceAmount(level, val);
             }
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))]; //todo: what happens if 2 levels have the same difference?
 
-            lowestDiffLevel.inner.push({
-                text: val.text,
-                styling: {
+            if (isSameChatStyling(lowestDiffLevel, val))
+                lowestDiffLevel.text += val.text;
+            else
+                lowestDiffLevel.extra.push({
+                    text: val.text,
                     color: val.color, //todo: convert to mc color
-                    modifiers: val.modifiers
-                },
-                inner: []
-            })
+                    modifiers: modifierArrayToObject(val.modifiers),
+                    extra: []
+                })
         }
 
-        //todo: convert structure to actual chat object
-        throw new Error('Not implemented')
+        return out;
     }
 }
 
-function isSameChatStyling(a, b) {
-    return (a.color == b.color) && (a.modifiers.length == b.modifiers.length) && (JSON.stringify(a.modifiers) == JSON.stringify(b.modifiers))
+function modifierArrayToObject(modifiers) {
+    return Object.fromEntries(textModifiersWithoutReset.map(({ name }) => name).map(a => [a, modifiers.includes(a)]));
 }
 
-function arrayDifferenceAmount(a, b) {
+function isSameChatStyling(a, b) {
+    if (a.color != b.color)
+        return false;
+
+    for (style in Object.keys(textModifiersWithoutReset))
+        if (a[style] != b[style])
+            return false;
+
+    return true;
+}
+
+function chatLevelDifferenceAmount(a, b) {
     let difference = 0;
-    [...new Set([...a, ...b])].forEach(key => {
-        difference += Math.abs(a.filter(val => val == key).length - b.filter(val => val == key).length);
-    });
+
+    if (a.color != b.color) difference++;
+
+    for (style in Object.keys(textModifiersWithoutReset))
+        if (a[style] != b[style])
+            difference++;
+
     return difference;
 }
 

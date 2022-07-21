@@ -679,7 +679,7 @@ import { EventEmitter } from 'events';export class Chunk {
     ) => void)[];
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
-}type hex = string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type version = legacyVersion | newVersion;type chatComponent = chat | string | chatComponents;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type textModifier = 'bold'|'italic'|'underline'|'strike'|'random';type rgb = {
+}type hex = string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type version = legacyVersion | newVersion;type chatComponent = chat | string | chatComponents;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
     r: number;
     g: number;
     b: number;
@@ -687,7 +687,7 @@ import { EventEmitter } from 'events';export class Chunk {
     h: number;
     s: number;
     l: number;
-};type demoMessage = 'startScreen'|'movement'|'jump'|'inventory'|'endScreenshot';type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';type entityAnimationType = 'swingMainHand'|'flashRed'|'leaveBed'|'swingOffHand'|'critical'|'magicCritical';type bossBarFlags = {
+};type textModifier = 'bold'|'italic'|'underlined'|'strikethrough'|'obfuscated';type demoMessage = 'startScreen'|'movement'|'jump'|'inventory'|'endScreenshot';type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';type entityAnimationType = 'swingMainHand'|'flashRed'|'leaveBed'|'swingOffHand'|'critical'|'magicCritical';type bossBarFlags = {
     darkenSky: boolean;
     playEndMusic: boolean;
     createFog: boolean;

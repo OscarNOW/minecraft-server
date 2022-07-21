@@ -35,8 +35,8 @@ Update Text
             Optimized chat
             Insertion    
     New tests    
+    Update Text tests with new modifier names
 Implement convertToType function in all type generators
 Prevent loading from classes that are not used
 Change forEach to for of
     Careful with return -> continue
-Change Text modifier underline to underlined
