@@ -229,7 +229,9 @@ class Text {
 
         return this.parseArray(arr);
     }
-    static arrayToChat(a) { //todo: change so inherited properties are actually inherited
+    static arrayToChat(a) {
+        //todo: change so inherited properties are actually inherited
+        //todo: implement parseChat
         let array = this.parseArray(a);
         let out;
 
@@ -240,8 +242,7 @@ class Text {
                 out = {
                     text: val.text,
                     color: textColors.find(({ name }) => name == val.color).minecraftName,
-                    modifiers: modifierArrayToObject(val.modifiers),
-                    extra: []
+                    modifiers: modifierArrayToObject(val.modifiers)
                 }
                 continue;
             }
@@ -251,7 +252,7 @@ class Text {
 
             let lastLevel = out;
             while (true) {
-                if (lastLevel.extra.length == 0)
+                if (!lastLevel.extra)
                     break;
 
                 lastLevel = lastLevel.extra[lastLevel.extra.length - 1];
@@ -265,15 +266,17 @@ class Text {
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))]; //todo: what happens if 2 levels have the same difference?
 
-            if (isSameChatStyling(lowestDiffLevel, val))
+            if (isSameChatStyling(lowestDiffLevel, val)) {
                 lowestDiffLevel.text += val.text;
-            else
-                lowestDiffLevel.extra.push({
-                    text: val.text,
-                    color: textColors.find(({ name }) => name == val.color).minecraftName,
-                    modifiers: modifierArrayToObject(val.modifiers),
-                    extra: []
-                })
+                continue;
+            }
+
+            if (!lowestDiffLevel.extra) lowestDiffLevel.extra = [];
+            lowestDiffLevel.extra.push({
+                text: val.text,
+                color: textColors.find(({ name }) => name == val.color).minecraftName,
+                modifiers: modifierArrayToObject(val.modifiers)
+            })
         }
 
         return out;
