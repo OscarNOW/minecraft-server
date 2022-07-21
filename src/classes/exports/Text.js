@@ -239,7 +239,7 @@ class Text {
             if (!out) {
                 out = {
                     text: val.text,
-                    color: val.color, //todo: convert to mc color
+                    color: textColors.find(({ name }) => name == val.color).minecraftName,
                     modifiers: modifierArrayToObject(val.modifiers),
                     extra: []
                 }
@@ -270,7 +270,7 @@ class Text {
             else
                 lowestDiffLevel.extra.push({
                     text: val.text,
-                    color: val.color, //todo: convert to mc color
+                    color: textColors.find(({ name }) => name == val.color).minecraftName,
                     modifiers: modifierArrayToObject(val.modifiers),
                     extra: []
                 })
