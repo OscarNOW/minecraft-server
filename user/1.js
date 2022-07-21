@@ -1,15 +1,40 @@
-const { Server, Chunk } = require('../');
-const server = new Server();
-const chunk = new Chunk();
+const { Text, Server } = require('../');
+let text = Text.arrayToChat([
+    {
+        text: 'hello',
+        color: 'darkRed',
+        modifiers: ['bold', 'italic']
+    },
+    {
+        text: ' people',
+        color: 'darkRed',
+        modifiers: ['italic', 'bold']
+    },
+    {
+        text: ' and world',
+        color: 'blue',
+        modifiers: ['italic', 'italic', 'bold', 'underlined']
+    },
+    {
+        text: ', people',
+        color: 'gold',
+        modifiers: ['bold', 'italic']
+    },
+    {
+        text: '. 12345',
+        color: 'gold',
+        modifiers: ['bold']
+    }
+]);
 
-for (let x = 0; x < 16; x++)
-    for (let z = 0; z < 16; z++)
-        for (let y = 0; y < 100; y++)
-            chunk.setBlock({ x, y, z }, 'dirt')
+console.log(require('util').inspect(text, { depth: null, colors: true, breakLength: 0 }));
+
+/*
+const server = new Server()
 
 server.on('join', client => {
-    client.chunk(chunk, { x: 0, z: 0 })
-    client.on('chat', a => eval(a))
+    client.chat(0, text)
 
     client.loadWorld()
-});
+})
+//*/

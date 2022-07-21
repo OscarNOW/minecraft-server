@@ -13,14 +13,14 @@
     },
     {
         "char": "n",
-        "name": "underline"
+        "name": "underlined"
     },
     {
         "char": "m",
-        "name": "strike"
+        "name": "strikethrough"
     },
     {
         "char": "k",
-        "name": "random"
+        "name": "obfuscated"
     }
 ]

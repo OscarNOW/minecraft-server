@@ -11,8 +11,8 @@ export class Text {
     static stringToArray(text: string): textArray;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static parseString(text: string): string;
-    // static stringToChat(text: string): chat;
+    static arrayToChat(text: optionalTextArray): chat;
+    static parseChat(text: chat): chat;
 }
 
 type textArray = Array<{
@@ -42,20 +42,24 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
+    //Not implemented
+    /*
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
         action: 'show_text' | 'show_item' | 'show_entity';
         value: chatComponent;
     };
+    //*/
 
-} | {
+};
+//Not implemented:
+/*| {
     translate: chatTranslate;
     with?: chatComponents;
 
@@ -67,12 +71,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -90,12 +93,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -117,12 +119,11 @@ type chat = {
     strikethrough?: boolean;
     obfuscated?: boolean;
 
-    font?: 'minecraft:uniform' | 'minecraft:alt' | 'minecraft:default';
-    color?: string;
+    color?: minecraftTextColor;
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
     hoverEvent?: {
@@ -130,6 +131,7 @@ type chat = {
         value: chatComponent;
     };
 };
+//*/
 
 type chatComponents = chatComponent[];
 type chatComponent = chat | string | chatComponents;

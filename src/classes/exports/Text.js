@@ -1,5 +1,8 @@
 const { textModifiers, textColors } = require('../../functions/loader/data');
+
 const { CustomError } = require('../utils/CustomError.js');
+
+const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 
 class Text {
     constructor(text) {
@@ -15,15 +18,12 @@ class Text {
     get array() {
         if (this._input)
             if (typeof this._input == 'string') {
-                this._string = Text.parseString(this._input);
+                this._array = Text.stringToArray(this._input);
                 this._input = null;
             } else {
                 this._array = Text.parseArray(this._input);
                 this._input = null;
             }
-
-        if (this._array === null)
-            this._array = Text.stringToArray(this._string);
 
         return this._array;
     }
@@ -31,7 +31,7 @@ class Text {
     get string() {
         if (this._input)
             if (typeof this._input == 'string') {
-                this._string = Text.parseString(this._input);
+                this._array = Text.stringToArray(this._input);
                 this._input = null;
             } else {
                 this._array = Text.parseArray(this._input);
@@ -149,7 +149,7 @@ class Text {
                 obj = {
                     text: val.text || '',
                     color: val.color || 'default',
-                    modifiers: val.modifiers || []
+                    modifiers: [...new Set(val.modifiers)].sort() || []
                 };
 
             array.push(obj);
@@ -229,9 +229,120 @@ class Text {
 
         return this.parseArray(arr);
     }
-    static parseString(text) {
-        return this.arrayToString(this.stringToArray(text));
+    static arrayToChat(a) {
+        let array = this.parseArray(a);
+        let out;
+
+        for (const v of array) {
+            let val = convertArrayObjectToChatObject(v);
+
+            if (val.text == '') return;
+
+            if (!out) {
+                out = val
+                continue;
+            }
+
+            let levels = [out];
+            let levelDifferences = [];
+
+            let lastLevel = out;
+            while (true) {
+                if (!lastLevel.extra)
+                    break;
+
+                lastLevel = lastLevel.extra[lastLevel.extra.length - 1];
+                levels.push(lastLevel)
+            }
+
+            for (const levelIndex in levels) {
+                const level = levels[levelIndex];
+                levelDifferences[levelIndex] = chatLevelDifferenceAmount(level, val);
+            }
+
+            let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
+
+            if (isSameChatStyling(lowestDiffLevel, val)) {
+                lowestDiffLevel.text += val.text;
+                continue;
+            }
+
+            if (!lowestDiffLevel.extra) lowestDiffLevel.extra = [];
+            lowestDiffLevel.extra.push(val)
+        }
+
+        return this.parseChat(out);
     }
+    static parseChat(c) {
+        let chat = Object.assign({}, c);
+
+        recursiveParseChat(chat, {
+            color: 'reset',
+            ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
+        });
+
+        return chat;
+    }
+}
+
+function recursiveParseChat(chat, inherited) {
+    let styles = {};
+    for (let { name } of [...textModifiersWithoutReset, { name: 'color' }])
+        styles[name] = chat[name] ?? inherited[name];
+
+    let overwrittenStyles = {}
+    for (let name in styles)
+        if (styles[name] != inherited[name])
+            overwrittenStyles[name] = styles[name]
+
+    for (let name in styles)
+        if (overwrittenStyles[name] === undefined)
+            delete chat[name]
+        else
+            chat[name] = overwrittenStyles[name]
+
+    if (chat.extra)
+        for (let extra of chat.extra)
+            recursiveParseChat(extra, styles);
+}
+
+function convertArrayObjectToChatObject({ text, color, modifiers }) {
+    return {
+        text,
+        color: textColors.find(({ name }) => name == color).minecraftName,
+        ...convertModifierArrayToObject(modifiers)
+    }
+}
+
+function convertModifierArrayToObject(modifiers) {
+    return Object.fromEntries(
+        textModifiersWithoutReset
+            .map(({ name }) => name)
+            .map(a => [a, modifiers.includes(a)])
+    );
+}
+
+function isSameChatStyling(a, b) {
+    if (a.color != b.color)
+        return false;
+
+    for (let { name } of textModifiersWithoutReset)
+        if (a[name] != b[name])
+            return false;
+
+    return true;
+}
+
+function chatLevelDifferenceAmount(a, b) {
+    let difference = 0;
+
+    if (a.color != b.color) difference++;
+
+    for (let { name } of textModifiersWithoutReset)
+        if (a[name] != b[name])
+            difference++;
+
+    return difference;
 }
 
 module.exports = Object.freeze({ Text });
