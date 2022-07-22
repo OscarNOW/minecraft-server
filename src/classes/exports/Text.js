@@ -319,12 +319,18 @@ function recursiveParseChat(chat, inherited) {
         else
             chat[name] = overwrittenStyles[name]
 
-    if (Object.keys(overwrittenStyles).length == 0)
-        chat = chat.text;
 
-    if (chat.extra)
+    if (chat.extra) {
         for (let extraIndex in chat.extra)
             chat.extra[extraIndex] = recursiveParseChat(chat.extra[extraIndex], styles);
+
+        chat = [chat, ...chat.extra];
+        delete chat[0].extra;
+
+        if (Object.keys(overwrittenStyles).length == 0)
+            chat[0] = chat[0].text;
+    } else if (Object.keys(overwrittenStyles).length == 0)
+        chat = chat.text;
 
     return chat
 }

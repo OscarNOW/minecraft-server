@@ -40,6 +40,7 @@ Create PR for minecraft-protocol to exclude optional files from npm build
     -Work on "todo: " and "Not implemented" in code
     Update functions to use new Text chat system
     Create chat to array function
+    Add ability for Chat component to be array
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
 Change forEach to for of
