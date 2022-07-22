@@ -1,3 +1,5 @@
+const { Text } = require('../../../../exports/Text.js');
+
 module.exports = {
     kick: function (reason) {
         if (!this.p.canUsed)
@@ -6,6 +8,9 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        this.p.client.end(`${reason}`);
+        if (!reason instanceof Text)
+            reason = new Text(reason);
+
+        this.p.client.end(0, JSON.stringify(reason.chat));
     }
 }

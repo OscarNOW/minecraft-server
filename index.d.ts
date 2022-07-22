@@ -331,7 +331,7 @@ import { EventEmitter } from 'events';export class Chunk {
     demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;
-    kick(reason: string | Text): void;
+    kick(reason: textInput | Text): void;
     chat(message?: textInput | Text): void;
     title(properties: {
         fadeIn?: number;
