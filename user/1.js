@@ -1,5 +1,5 @@
 const { Text, Server } = require('../');
-let text = Text.arrayToChat([
+let text = new Text([
     {
         text: 'hello',
         color: 'darkRed',
@@ -27,13 +27,13 @@ let text = Text.arrayToChat([
     }
 ]);
 
-console.log(require('util').inspect(text, { depth: null, colors: true, breakLength: 0 }));
+// console.log(require('util').inspect(text, { depth: null, colors: true, breakLength: 0 }));
 
-/*
+//*
 const server = new Server()
 
 server.on('join', client => {
-    client.chat(0, text)
+    client.chat(text);
 
     client.loadWorld()
 })

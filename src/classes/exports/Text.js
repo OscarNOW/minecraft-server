@@ -8,7 +8,8 @@ class Text {
     constructor(text) {
         this._input = text;
         this._string = null;
-        this._array = null
+        this._array = null;
+        this._chat = null;
     }
 
     toString() {
@@ -39,16 +40,32 @@ class Text {
             }
 
         if (this._string === null)
-            this._string = Text.arrayToString(this._array)
+            this._string = Text.arrayToString(this._array) // todo: parseArray called in this function when array already parsed, optimize
 
         return this._string;
+    }
+
+    get chat() {
+        if (this._input)
+            if (typeof this._input == 'string') {
+                this._array = Text.stringToArray(this._input);
+                this._input = null;
+            } else {
+                this._array = Text.parseArray(this._input);
+                this._input = null;
+            }
+
+        this._chat = Text.arrayToChat(this._array);
+
+        return this._chat;
     }
 
     set array(val) {
         this._input = val;
 
         this._array = null;
-        this._string = null
+        this._string = null;
+        this._chat = null;
     }
 
     set string(val) {
@@ -56,6 +73,7 @@ class Text {
 
         this._string = null;
         this._array = null;
+        this._chat = null;
     }
 
     static arrayToString(a) {

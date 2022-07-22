@@ -74,12 +74,12 @@ import { EventEmitter } from 'events';export class Chunk {
     removeAllListeners(event?: 'join' | 'leave'): void;
     rawListeners(event: 'join' | 'leave'): ((client: Client) => void)[];
 }export class Text {
-    // constructor(text: string | optionalTextArray | chat);
-    constructor(text: string | optionalTextArray);
+    constructor(text: textInput);
 
     array: textArray;
     string: string;
-    // chat: chat;
+    // todo: make chat writable
+    readonly chat: chat;
 
     toString(): string;
 
@@ -332,7 +332,7 @@ import { EventEmitter } from 'events';export class Chunk {
     elderGuardian(): void;
     win(showCredits: boolean): void;
     kick(reason: string | Text): void;
-    chat(message: string | Text): void;
+    chat(message?: textInput | Text): void;
     title(properties: {
         fadeIn?: number;
         stay?: number;
@@ -680,7 +680,7 @@ import { EventEmitter } from 'events';export class Chunk {
     ) => void)[];
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
-}type hex = string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type version = legacyVersion | newVersion;type chatComponent = chat | string | chatComponents;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
+}type hex = string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type chatComponent = chat | string | chatComponents;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
     r: number;
     g: number;
     b: number;

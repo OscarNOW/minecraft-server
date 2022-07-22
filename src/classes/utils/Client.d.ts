@@ -228,7 +228,7 @@ export class Client extends EventEmitter {
     elderGuardian(): void;
     win(showCredits: boolean): void;
     kick(reason: string | Text): void;
-    chat(message: string | Text): void;
+    chat(message?: textInput | Text): void;
     title(properties: {
         fadeIn?: number;
         stay?: number;

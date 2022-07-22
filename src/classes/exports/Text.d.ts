@@ -1,10 +1,10 @@
 export class Text {
-    // constructor(text: string | optionalTextArray | chat);
-    constructor(text: string | optionalTextArray);
+    constructor(text: textInput);
 
     array: textArray;
     string: string;
-    // chat: chat;
+    // todo: make chat writable
+    readonly chat: chat;
 
     toString(): string;
 
@@ -14,6 +14,9 @@ export class Text {
     static arrayToChat(text: optionalTextArray): chat;
     static parseChat(text: chat): chat;
 }
+
+//todo: allow chat as input
+type textInput = string | optionalTextArray;
 
 type textArray = Array<{
     text: string;
