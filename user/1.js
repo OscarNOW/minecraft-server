@@ -24,10 +24,15 @@ let text = new Text([
         text: '. 12345',
         color: 'gold',
         modifiers: ['bold']
+    },
+    {
+        text: ' Cookies',
+        color: 'gold',
+        modifiers: ['bold', 'italic']
     }
 ]);
 
-// console.log(require('util').inspect(text, { depth: null, colors: true, breakLength: 0 }));
+// console.log(require('util').inspect(text.chat, { depth: null, colors: true, breakLength: 0 }));
 
 //*
 const server = new Server()

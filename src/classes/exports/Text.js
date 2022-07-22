@@ -280,8 +280,8 @@ class Text {
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
 
-            if (isSameChatStyling(lowestDiffLevel, val)) {
-                lowestDiffLevel.text += val.text;
+            if (isSameChatStyling(lastLevel, val)) {
+                lastLevel.text += val.text;
                 continue;
             }
 
@@ -294,7 +294,7 @@ class Text {
     static parseChat(c) {
         let chat = Object.assign({}, c);
 
-        recursiveParseChat(chat, {
+        chat = recursiveParseChat(chat, {
             color: 'reset',
             ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
         });
@@ -319,9 +319,14 @@ function recursiveParseChat(chat, inherited) {
         else
             chat[name] = overwrittenStyles[name]
 
+    if (Object.keys(overwrittenStyles).length == 0)
+        chat = chat.text;
+
     if (chat.extra)
-        for (let extra of chat.extra)
-            recursiveParseChat(extra, styles);
+        for (let extraIndex in chat.extra)
+            chat.extra[extraIndex] = recursiveParseChat(chat.extra[extraIndex], styles);
+
+    return chat
 }
 
 function convertArrayObjectToChatObject({ text, color, modifiers }) {
