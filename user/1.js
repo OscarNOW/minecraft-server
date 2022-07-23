@@ -38,6 +38,7 @@ let text = new Text([
 const server = new Server()
 
 server.on('join', client => {
-    client.kick(text)
+    client.actionBar(text);
+    client.loadWorld()
 })
 //*/

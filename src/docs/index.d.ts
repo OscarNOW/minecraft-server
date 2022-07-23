@@ -340,7 +340,7 @@ import { EventEmitter } from 'events';export class Chunk {
         title?: string | Text;
         subTitle?: string | Text;
     } | string | Text): void;
-    actionBar(text: string | Text): void;
+    actionBar(text?: textInput | Text): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;
         z: number;
