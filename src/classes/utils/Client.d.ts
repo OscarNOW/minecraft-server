@@ -64,7 +64,7 @@ export class Client extends EventEmitter {
         readonly [entityId: number]: Entity;
     };
     readonly bossBars: {
-        title: string;
+        title: Text;
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
@@ -251,13 +251,13 @@ export class Client extends EventEmitter {
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
     bossBar(bossBarInfo?: {
-        title?: string | Text;
+        title?: textInput | Text;
         health?: number;
         color?: bossBarColor;
         divisionAmount?: bossBarDivision;
         flags?: bossBarFlags;
     }): {
-        title: string;
+        title: Text;
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;

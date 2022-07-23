@@ -168,7 +168,7 @@ import { EventEmitter } from 'events';export class Chunk {
         readonly [entityId: number]: Entity;
     };
     readonly bossBars: {
-        title: string;
+        title: Text;
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;
@@ -355,13 +355,13 @@ import { EventEmitter } from 'events';export class Chunk {
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
     bossBar(bossBarInfo?: {
-        title?: string | Text;
+        title?: textInput | Text;
         health?: number;
         color?: bossBarColor;
         divisionAmount?: bossBarDivision;
         flags?: bossBarFlags;
     }): {
-        title: string;
+        title: Text;
         health: number;
         color: bossBarColor;
         divisionAmount: bossBarDivision;

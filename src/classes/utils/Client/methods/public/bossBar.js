@@ -2,6 +2,7 @@ const { defaults } = require('../../../../../settings.json')
 
 const { uuid } = require('../../../../../functions/uuid.js');
 const { Changable } = require('../../../Changable.js');
+const { Text } = require('../../../../exports/Text.js');
 
 const colors = {
     pink: 0,
@@ -28,6 +29,9 @@ module.exports = {
                 throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
             else
                 throw new Error(`Can't perform this action on an offline player`)
+
+        if (!title instanceof Text)
+            title = new Text(title);
 
         let bossBarUuid = uuid();
         let bossBarVisible = true;
@@ -67,7 +71,7 @@ module.exports = {
         let flagsChangable = new Changable(onFlagsChanged, flags);
 
         let values = {
-            title: `${title}`,
+            title,
             health,
             color,
             divisionAmount: `${divisionAmount}`,
@@ -90,9 +94,7 @@ module.exports = {
         this.p.sendPacket('boss_bar', {
             entityUUID: bossBarUuid,
             action: 0,
-            title: JSON.stringify({
-                text: values.title
-            }),
+            title: JSON.stringify(values.title.chat),
             health: values.health,
             color: colors[values.color],
             dividers: divisionIds[values.divisionAmount],
@@ -115,7 +117,7 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             let healthChanged = i.health != values.health;
-            let titleChanged = i.title != values.title;
+            let titleChanged = JSON.stringify(i.title.chat) != JSON.stringify(values.title.chat);
             let colorChanged = i.color != values.color;
             let divisionAmountChanged = i.divisionAmount != values.divisionAmount;
 
@@ -129,13 +131,15 @@ module.exports = {
             }
 
             if (titleChanged) {
-                values.title = `${i.title}`;
+                let newTitle = i.title;
+                if (!newTitle instanceof Text)
+                    newTitle = new Text(newTitle);
+
+                values.title = newTitle;
                 this.p.sendPacket('boss_bar', {
                     entityUUID: bossBarUuid,
                     action: 3,
-                    title: JSON.stringify({
-                        text: values.title
-                    })
+                    title: JSON.stringify(values.title.chat)
                 })
             }
 

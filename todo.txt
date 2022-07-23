@@ -41,6 +41,7 @@ Create PR for minecraft-protocol to exclude optional files from npm build
     Update functions to use new Text chat system
     Create chat to array function
     Add ability for Chat component to be array
+    Add hash property and use in bossBar hasChanged check
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
 Change forEach to for of
