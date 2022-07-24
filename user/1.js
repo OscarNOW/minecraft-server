@@ -38,7 +38,7 @@ let text = new Text([
 const server = new Server()
 
 server.on('join', client => {
-    client.title(text.string)
+    client.title(text)
     client.loadWorld()
 })
 //*/

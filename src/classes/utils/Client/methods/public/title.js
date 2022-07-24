@@ -1,3 +1,5 @@
+const { defaults: { title: defaults } } = require('../../../../../settings.json')
+
 const { Text } = require('../../../../exports/Text');
 
 module.exports = {
@@ -12,7 +14,7 @@ module.exports = {
         if (properties === undefined) properties = {};
         else if (typeof p == 'string' || p instanceof Text || Array.isArray(p)) properties = { title: p };
 
-        let { fadeIn = 10, stay = 40, fadeOut = 10, title = '', subTitle = '' } = properties;
+        let { fadeIn = defaults.fadeIn, stay = defaults.stay, fadeOut = defaults.fadeOut, title = defaults.title, subTitle = defaults.subTitle } = properties;
 
         if (!(title instanceof Text)) title = new Text(title);
         if (!(subTitle instanceof Text)) subTitle = new Text(subTitle);

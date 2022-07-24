@@ -35,6 +35,13 @@
                 "yaw": 0,
                 "pitch": 0
             }
+        },
+        "title": {
+            "fadeIn": 10,
+            "stay": 40,
+            "fadeOut": 10,
+            "title": "",
+            "subTitle": ""
         }
     },
     "links": {

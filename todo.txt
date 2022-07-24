@@ -40,12 +40,10 @@ Create PR for minecraft-protocol to exclude optional files from npm build
     Update tests
         Create new ones for new features
         Update with new modifier names
-    Update types with JS updates
-    
-    -Update functions to use new Text chat system    
+    Update types with JS updates        
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
 Change forEach to for of
     Careful with return -> continue
-Move client.title( defaults to settings.json defaults
 Resolve "todo: " and "not implemented" in code
+Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object
