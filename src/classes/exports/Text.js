@@ -5,6 +5,7 @@ const crypto = require('crypto')
 const { CustomError } = require('../utils/CustomError.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
+const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
 
 class Text {
     constructor(text) {
@@ -354,7 +355,7 @@ function recursiveParseChat(chat, inherited) {
 function convertArrayObjectToChatObject({ text, color, modifiers }) {
     return {
         text,
-        color: textColors.find(({ name }) => name == color).minecraftName,
+        color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
     }
 }

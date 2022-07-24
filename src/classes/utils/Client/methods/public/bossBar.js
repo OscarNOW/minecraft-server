@@ -30,9 +30,6 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (!title instanceof Text)
-            title = new Text(title);
-
         let bossBarUuid = uuid();
         let bossBarVisible = true;
 
@@ -69,6 +66,9 @@ module.exports = {
         };
 
         let flagsChangable = new Changable(onFlagsChanged, flags);
+
+        if (!(title instanceof Text))
+            title = new Text(title);
 
         let values = {
             title,
@@ -108,6 +108,9 @@ module.exports = {
                 onFlagsChanged(i.flags);
             }
 
+            if (!(i.title instanceof Text))
+                i.title = new Text(i.title);
+
             if (!bossBarVisible) return;
 
             if (!this.p.canUsed)
@@ -117,7 +120,7 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             let healthChanged = i.health != values.health;
-            let titleChanged = JSON.stringify(i.title.chat) != JSON.stringify(values.title.chat);
+            let titleChanged = i.title.hash != values.title.hash;
             let colorChanged = i.color != values.color;
             let divisionAmountChanged = i.divisionAmount != values.divisionAmount;
 
@@ -132,7 +135,7 @@ module.exports = {
 
             if (titleChanged) {
                 let newTitle = i.title;
-                if (!newTitle instanceof Text)
+                if (!(newTitle instanceof Text))
                     newTitle = new Text(newTitle);
 
                 values.title = newTitle;

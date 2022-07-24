@@ -34,12 +34,16 @@ let text = new Text([
 
 // console.log(require('util').inspect(text.chat, { depth: null, colors: true, breakLength: 0 }));
 
-console.log(text.hash)
-
-/*
+//*
 const server = new Server()
 
-server.on('join', client => {    
+server.on('join', client => {
     client.loadWorld()
+
+    let bossBar = client.bossBar({
+        title: 'Hello'
+    })
+
+    client.on('chat', a => eval(a))
 })
 //*/

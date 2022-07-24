@@ -8,7 +8,7 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (!reason instanceof Text)
+        if (!(reason instanceof Text))
             reason = new Text(reason);
 
         this.p.client.end(0, JSON.stringify(reason.chat));

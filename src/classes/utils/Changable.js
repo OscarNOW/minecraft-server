@@ -10,7 +10,7 @@ class Changable {
                 set: newValue => {
                     let old = Object.assign({}, this[valuesSymbol]);
                     this[valuesSymbol][key] = newValue;
-                    changeCallback(this[valuesSymbol], old);
+                    changeCallback(Object.assign({}, this[valuesSymbol]), old);
                 }
             })
 

@@ -8,7 +8,7 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        if (!message instanceof Text)
+        if (!(message instanceof Text))
             message = new Text(message);
 
         this.p.sendPacket('title', {

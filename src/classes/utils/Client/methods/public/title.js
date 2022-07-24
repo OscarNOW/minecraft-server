@@ -35,7 +35,7 @@ module.exports = {
             text: JSON.stringify(title.chat)
         })
 
-        //todo: add subTitle isEmpty check
+        //todo: use hashes for subTitle isEmpty check
         this.p.sendPacket('title', {
             action: 1,
             text: JSON.stringify(subTitle.chat)
