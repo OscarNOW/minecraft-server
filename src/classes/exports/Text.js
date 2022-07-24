@@ -8,7 +8,7 @@ const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 're
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
 
 class Text {
-    constructor(text) {
+    constructor(text = '') {
         this.__reset();
         this._input = text;
     }

@@ -35,10 +35,11 @@ module.exports = {
             text: JSON.stringify(title.chat)
         })
 
-        //todo: use hashes for subTitle isEmpty check
-        this.p.sendPacket('title', {
-            action: 1,
-            text: JSON.stringify(subTitle.chat)
-        })
+        if (subTitle.hash != new Text('').hash) {
+            this.p.sendPacket('title', {
+                action: 1,
+                text: JSON.stringify(subTitle.chat)
+            })
+        }
     }
 }

@@ -40,10 +40,8 @@ const server = new Server()
 server.on('join', client => {
     client.loadWorld()
 
-    let bossBar = client.bossBar({
-        title: 'Hello'
+    client.title({
+        title: 'hi'
     })
-
-    client.on('chat', a => eval(a))
 })
 //*/
