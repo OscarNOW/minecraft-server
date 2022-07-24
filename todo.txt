@@ -28,7 +28,7 @@ Create PR for minecraft-protocol to exclude optional files from npm build
 -Update Text
     Update JS
         Expand textArray with chat features        
-        Add hash property and use in bossBar hasChanged check
+        -Add hash property and use in bossBar hasChanged check
         Add uncolored property
         Add isEmpty function
         Create chat to array function    

@@ -81,6 +81,8 @@ import { EventEmitter } from 'events';export class Chunk {
     // todo: make chat writable
     readonly chat: chat;
 
+    readonly hash: string;
+
     toString(): string;
 
     static stringToArray(text: string): textArray;

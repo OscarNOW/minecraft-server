@@ -6,6 +6,8 @@ export class Text {
     // todo: make chat writable
     readonly chat: chat;
 
+    readonly hash: string;
+
     toString(): string;
 
     static stringToArray(text: string): textArray;

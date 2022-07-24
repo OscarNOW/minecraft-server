@@ -34,11 +34,12 @@ let text = new Text([
 
 // console.log(require('util').inspect(text.chat, { depth: null, colors: true, breakLength: 0 }));
 
-//*
+console.log(text.hash)
+
+/*
 const server = new Server()
 
-server.on('join', client => {
-    client.title(text)
+server.on('join', client => {    
     client.loadWorld()
 })
 //*/

@@ -1,42 +1,60 @@
 const { textModifiers, textColors } = require('../../functions/loader/data');
 
+const crypto = require('crypto')
+
 const { CustomError } = require('../utils/CustomError.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 
 class Text {
     constructor(text) {
+        this.__reset();
         this._input = text;
-        this._string = null;
-        this._array = null;
-        this._chat = null;
     }
 
     toString() {
         return this.string;
     }
 
+    __reset() {
+        this._input = null;
+        this._string = null;
+        this._array = null;
+        this._chat = null;
+        this._hash = null;
+    }
+
+    get hash() {
+        if (this._hash)
+            return this._hash;
+
+        this._hash = crypto.createHash('sha256').update(JSON.stringify(this.array)).digest('base64');
+        return this._hash;
+    }
+
     get array() {
-        if (this._input !== null)
-            if (typeof this._input == 'string') {
-                this._array = Text.stringToArray(this._input);
-                this._input = null;
+        let inp = this._input;
+        if (inp !== null)
+            if (typeof inp == 'string') {
+                this.__reset();
+                this._array = Text.stringToArray(inp);
             } else {
-                this._array = Text.parseArray(this._input);
-                this._input = null;
+                this.__reset();
+                this._array = Text.parseArray(inp);
             }
 
         return this._array;
     }
 
     get string() {
-        if (this._input !== null)
-            if (typeof this._input == 'string') {
-                this._array = Text.stringToArray(this._input);
-                this._input = null;
+        let inp = this._input;
+        if (inp !== null)
+            if (inp == 'string') {
+                this.__reset();
+                this._array = Text.stringToArray(inp);
             } else {
-                this._array = Text.parseArray(this._input);
-                this._input = null;
+                this.__reset();
+                this._array = Text.parseArray(inp);
             }
 
         if (this._string === null)
@@ -46,13 +64,14 @@ class Text {
     }
 
     get chat() {
-        if (this._input !== null)
-            if (typeof this._input == 'string') {
-                this._array = Text.stringToArray(this._input);
-                this._input = null;
+        let inp = this._input;
+        if (inp !== null)
+            if (typeof inp == 'string') {
+                this.__reset();
+                this._array = Text.stringToArray(inp);
             } else {
-                this._array = Text.parseArray(this._input);
-                this._input = null;
+                this.__reset();
+                this._array = Text.parseArray(inp);
             }
 
         this._chat = Text.arrayToChat(this._array);
@@ -61,19 +80,13 @@ class Text {
     }
 
     set array(val) {
+        this.__reset();
         this._input = val;
-
-        this._array = null;
-        this._string = null;
-        this._chat = null;
     }
 
     set string(val) {
+        this.__reset();
         this._input = val;
-
-        this._string = null;
-        this._array = null;
-        this._chat = null;
     }
 
     static arrayToString(a) {
