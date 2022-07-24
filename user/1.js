@@ -34,7 +34,7 @@ let text = new Text([
 
 // console.log(require('util').inspect(text.chat, { depth: null, colors: true, breakLength: 0 }));
 
-//*
+/*
 const server = new Server()
 
 server.on('join', client => {

@@ -55,11 +55,11 @@ class Text {
                 this._array = Text.stringToArray(inp);
             } else {
                 this.__reset();
-                this._array = Text.parseArray(inp);
+                this._array = inp;
             }
 
         if (this._string === null)
-            this._string = Text.arrayToString(this._array) // todo: parseArray called in this function when array already parsed, optimize
+            this._string = Text.arrayToString(this._array)
 
         return this._string;
     }
