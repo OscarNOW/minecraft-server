@@ -1,5 +1,4 @@
 const { Text } = require('../../../../exports/Text');
-const { CustomError } = require('../../../CustomError.js');
 
 module.exports = {
     title: function (p) {
@@ -9,30 +8,14 @@ module.exports = {
             else
                 throw new Error(`Can't perform this action on an offline player`)
 
-        let properties;
-        if (p === undefined)
-            properties = {};
-        else if (typeof p == 'string' || p instanceof Text)
-            properties = { title: p };
-        else
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'properties', ''],
-                    ['in the function "', 'title', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: p,
-                    expectationType: 'type',
-                    expectation: `string | Text | {
-                        fadeIn?: number;
-                        stay?: number;
-                        fadeOut?: number;
-                        title?: string | Text;
-                        subTitle?: string | Text;
-                    }`
-                }, this.title).toString()
+        let properties = p;
+        if (properties === undefined) properties = {};
+        else if (typeof p == 'string' || p instanceof Text || Array.isArray(p)) properties = { title: p };
 
-        let { fadeIn, stay, fadeOut, title, subTitle } = properties;
+        let { fadeIn = 10, stay = 40, fadeOut = 10, title = '', subTitle = '' } = properties;
+
+        if (!(title instanceof Text)) title = new Text(title);
+        if (!(subTitle instanceof Text)) subTitle = new Text(subTitle);
 
         this.p.sendPacket('title', {
             action: 5
@@ -40,19 +23,20 @@ module.exports = {
 
         this.p.sendPacket('title', {
             action: 3,
-            fadeIn: fadeIn ?? 10,
-            stay: stay ?? 40,
-            fadeOut: fadeOut ?? 10
+            fadeIn,
+            stay,
+            fadeOut
         })
 
         this.p.sendPacket('title', {
             action: 0,
-            text: JSON.stringify({ translate: `${(title && title !== '') ? title : ''}` })
+            text: JSON.stringify(title.chat)
         })
-        if (subTitle && subTitle !== '')
-            this.p.sendPacket('title', {
-                action: 1,
-                text: JSON.stringify({ translate: `${subTitle}` })
-            })
+
+        //todo: add subTitle isEmpty check
+        this.p.sendPacket('title', {
+            action: 1,
+            text: JSON.stringify(subTitle.chat)
+        })
     }
 }

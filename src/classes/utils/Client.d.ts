@@ -233,9 +233,9 @@ export class Client extends EventEmitter {
         fadeIn?: number;
         stay?: number;
         fadeOut?: number;
-        title?: string | Text;
-        subTitle?: string | Text;
-    } | string | Text): void;
+        title?: textInput | Text;
+        subTitle?: textInput | Text;
+    } | textInput | Text): void;
     actionBar(text?: textInput | Text): void;
     chunk(chunk: Chunk, chunkPosition: {
         x: number;

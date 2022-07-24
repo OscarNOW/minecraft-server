@@ -38,10 +38,7 @@ let text = new Text([
 const server = new Server()
 
 server.on('join', client => {
-    let bb = client.bossBar({
-        title: text
-    })
-    console.log(bb.title)
+    client.title(text.string)
     client.loadWorld()
 })
 //*/

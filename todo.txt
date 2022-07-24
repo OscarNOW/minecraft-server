@@ -27,8 +27,11 @@ Expand Client property types
 Create PR for minecraft-protocol to exclude optional files from npm build
 -Update Text
     Update JS
-        Expand textArray with chat functions
-        Make parseChat better with shorthands (https://wiki.vg/index.php?title=Chat&oldid=15679)        
+        Expand textArray with chat features        
+        Add hash property and use in bossBar hasChanged check
+        Add uncolored property
+        Add isEmpty function
+        Create chat to array function    
         Implement chat functions
             Web color
             Click event
@@ -37,12 +40,12 @@ Create PR for minecraft-protocol to exclude optional files from npm build
     Update tests
         Create new ones for new features
         Update with new modifier names
-    -Work on "todo: " and "Not implemented" in code
-    Update functions to use new Text chat system
-    Create chat to array function
-    Add ability for Chat component to be array
-    Add hash property and use in bossBar hasChanged check
+    Update types with JS updates
+    
+    -Update functions to use new Text chat system    
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
 Change forEach to for of
     Careful with return -> continue
+Move client.title( defaults to settings.json defaults
+Resolve "todo: " and "not implemented" in code

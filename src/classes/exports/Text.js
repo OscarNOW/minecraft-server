@@ -17,7 +17,7 @@ class Text {
     }
 
     get array() {
-        if (this._input)
+        if (this._input !== null)
             if (typeof this._input == 'string') {
                 this._array = Text.stringToArray(this._input);
                 this._input = null;
@@ -30,7 +30,7 @@ class Text {
     }
 
     get string() {
-        if (this._input)
+        if (this._input !== null)
             if (typeof this._input == 'string') {
                 this._array = Text.stringToArray(this._input);
                 this._input = null;
@@ -46,7 +46,7 @@ class Text {
     }
 
     get chat() {
-        if (this._input)
+        if (this._input !== null)
             if (typeof this._input == 'string') {
                 this._array = Text.stringToArray(this._input);
                 this._input = null;
@@ -108,7 +108,7 @@ class Text {
                     currentModifiers = val.modifiers;
                     text += '§r'
                     if (val.color != 'default')
-                        text += `§${textColors.find(({ name }) => name == val.color)}`
+                        text += `§${textColors.find(({ name }) => name == val.color).char}`
 
                     val.modifiers.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
@@ -131,13 +131,13 @@ class Text {
                 currentModifiers = val.modifiers;
 
                 if (modCanExtend) {
-                    text += `§${textColors.find(({ name }) => name == val.color)}`
+                    text += `§${textColors.find(({ name }) => name == val.color).char}`
                     newMod.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
                     })
                     text += val.text;
                 } else {
-                    text += `§r§${textColors.find(({ name }) => name == val.color)}`
+                    text += `§r§${textColors.find(({ name }) => name == val.color).char}`
                     val.modifiers.forEach(v => {
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
                     })
@@ -207,7 +207,7 @@ class Text {
                             modifiers: copy
                         })
                         current = ''
-                        currentColor = textColors.find(({ char }) => char == val)
+                        currentColor = textColors.find(({ char }) => char == val).name
                     } else if (textModifiers.find(({ char }) => char == val).name == 'reset') {
                         let copy = Object.assign([], currentModifiers);
                         arr.push({
@@ -288,6 +288,9 @@ class Text {
             if (!lowestDiffLevel.extra) lowestDiffLevel.extra = [];
             lowestDiffLevel.extra.push(val)
         }
+
+        if (!out)
+            out = { text: '' }
 
         return this.parseChat(out);
     }
