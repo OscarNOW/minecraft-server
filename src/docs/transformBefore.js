@@ -22,6 +22,7 @@ console.log('Transforming types...')
 let types = fs.readFileSync(path.resolve(__dirname, './index.d.ts')).toString()
 types = types.replace(/extends EventEmitter /g, '');
 types = types.replace("import { EventEmitter } from 'events';", '')
-types = types.replace('readonly 0: Client;', '') // this will probably break something in the future
+types = types.replace(/\r\n/g, '\n')
+types = types.replace('        readonly 0: Client;\n', '') // this will probably break something in the future
 types = types.replace('readonly [entityId: number]: Entity;', 'readonly[entityId: number]:Entity|Client;')
 fs.writeFileSync(path.resolve(__dirname, './index.d.ts'), types);

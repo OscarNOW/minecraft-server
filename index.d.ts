@@ -167,8 +167,8 @@ import { EventEmitter } from 'events';export class Chunk {
     readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
-        readonly 0: Client;
         readonly [entityId: number]: Entity;
+        readonly 0: Client;
     };
     readonly bossBars: {
         title: Text;

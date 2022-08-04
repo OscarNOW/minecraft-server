@@ -167,7 +167,6 @@ export class Chunk {
     readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
-        
         readonly[entityId: number]:Entity|Client;
     };
     readonly bossBars: {
