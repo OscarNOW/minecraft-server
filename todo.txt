@@ -38,6 +38,8 @@ Update Text
     Update tests
         Create new ones for new features
         Update with new modifier names
+    Update types
+        Add ability for chat type to be array
     Update types with JS updates
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
@@ -45,3 +47,5 @@ Change forEach to for of
     Careful with return -> continue
 Resolve "todo: " and "not implemented" in code
 Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object
+Make client.bossBars frozen with Object.freeze(
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
