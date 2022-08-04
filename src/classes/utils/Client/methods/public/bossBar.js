@@ -82,7 +82,7 @@ module.exports = {
             id: bossBarUuid,
             remove: () => {
                 bossBarVisible = false;
-                this.bossBars = this.bossBars.filter(a => a.id != bossBarUuid);
+                this.bossBars = Object.freeze(this.bossBars.filter(a => a.id != bossBarUuid));
 
                 this.p.sendPacket('boss_bar', {
                     entityUUID: bossBarUuid,
@@ -162,7 +162,7 @@ module.exports = {
             ...staticValues
         })
 
-        this.bossBars.push(bossBar);
+        this.bossBars = Object.freeze([...this.bossBars, bossBar]);
 
         return bossBar;
 
