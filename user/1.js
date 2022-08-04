@@ -1,61 +1,32 @@
-const { Text, Server } = require('../');
-// let text = new Text([
-//     {
-//         text: 'hello',
-//         color: 'darkRed',
-//         modifiers: ['bold', 'italic']
-//     },
-//     {
-//         text: ' people',
-//         color: 'darkRed',
-//         modifiers: ['italic', 'bold']
-//     },
-//     {
-//         text: ' and world',
-//         color: 'blue',
-//         modifiers: ['italic', 'italic', 'bold', 'underlined']
-//     },
-//     {
-//         text: ', people',
-//         color: 'gold',
-//         modifiers: ['bold', 'italic']
-//     },
-//     {
-//         text: '. 12345',
-//         color: 'gold',
-//         modifiers: ['bold']
-//     },
-//     {
-//         text: ' Cookies',
-//         color: 'gold',
-//         modifiers: ['bold', 'italic']
-//     }
-// ]);
+const { Server, Chunk } = require('../');
 
-// console.log(require('util').inspect(text.chat, { depth: null, colors: true, breakLength: 0 }));
+let chunk = new Chunk();
+for (let x = 0; x < 16; x++)
+    for (let z = 0; z < 16; z++)
+        for (let y = 0; y < 100; y++)
+            chunk.setBlock({ x, y, z }, 'dirt')
 
-//*
-const server = new Server()
+const server = new Server({
+    defaultClientProperties: client => ({
+        gamemode: 'creative',
+        position: {
+            x: 5,
+            y: 101,
+            z: 5
+        }
+    })
+})
 
 server.on('join', client => {
-    client.loadWorld()
+    client.chunk(chunk, { x: 0, z: 0 })
 
-    console.log(client.bossBars)
-
-    client.bossBar({
-        title: 'Hello',
-        health: 0.5
+    let armorStand = client.entity('armor_stand', { x: 3, y: 101, z: 3 });
+    client.observe('position', pos => {
+        armorStand.position = pos;
+    });
+    client.observe('slot', () => {
+        armorStand.camera()
     })
 
-    console.log(client.bossBars)
-
-    client.bossBars[0].remove()
-
-    console.log(client.bossBars)
-
-    client.bossBars = 10
-
-    console.log(client.bossBars)
-
+    client.loadWorld()
 })
-//*/

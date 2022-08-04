@@ -53,7 +53,7 @@ module.exports = {
             ].forEach(key => {
                 let val = pos[key] ?? oldPosition[key];
 
-                if (oldPosition && Math.abs(val - oldPosition[key]) < Math.abs(val)) {
+                if (oldPosition && (!oldPosition.isFirst) && (Math.abs(val - oldPosition[key]) < Math.abs(val))) {
                     useRelative += '1'
                     values[key] = val - oldPosition[key]
                 } else {
@@ -75,7 +75,8 @@ module.exports = {
                 y: this.p._position.y,
                 z: this.p._position.z,
                 yaw: this.p._position.yaw,
-                pitch: this.p._position.pitch
+                pitch: this.p._position.pitch,
+                isFirst: false
             }));
         },
         setRaw: function (position = {}) {
@@ -87,7 +88,8 @@ module.exports = {
                 y: this.p._position.y,
                 z: this.p._position.z,
                 yaw: this.p._position.yaw,
-                pitch: this.p._position.pitch
+                pitch: this.p._position.pitch,
+                isFirst: true
             }));
         },
         init: function () {
@@ -99,7 +101,8 @@ module.exports = {
                 y: this.p._position.y,
                 z: this.p._position.z,
                 yaw: this.p._position.yaw,
-                pitch: this.p._position.pitch
+                pitch: this.p._position.pitch,
+                isFirst: true
             }));
         },
         confirm: function (teleportId) {
@@ -112,7 +115,8 @@ module.exports = {
                 y: position.y,
                 z: position.z,
                 yaw: position.yaw,
-                pitch: position.pitch
+                pitch: position.pitch,
+                isFirst: false
             }));
         }
     }
