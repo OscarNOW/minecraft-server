@@ -49,13 +49,14 @@ class Text {
 
     get string() {
         let inp = this._input;
+
         if (inp !== null)
-            if (inp == 'string') {
+            if (typeof inp == 'string') {
                 this.__reset();
                 this._array = Text.stringToArray(inp);
             } else {
                 this.__reset();
-                this._array = inp;
+                this._array = Text.parseArray(inp);
             }
 
         if (this._string === null)

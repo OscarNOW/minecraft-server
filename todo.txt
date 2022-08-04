@@ -36,8 +36,7 @@ Update Text
             Optimized chat
             Insertion
     Update tests
-        Create new ones for new features
-        Update with new modifier names    
+        Create new ones for new features        
     Update types with JS updates
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used

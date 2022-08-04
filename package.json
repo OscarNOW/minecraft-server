@@ -5,7 +5,7 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "test": "node ./scripts/test",
+        "tests": "node ./scripts/tests",
         "types": "node ./scripts/types",
         "docs": "cd .\\scripts && docs.bat",
         "compile": "npm run types && npm run docs && cls && echo Successfully compiled"
