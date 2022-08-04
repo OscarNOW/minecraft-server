@@ -3,6 +3,7 @@ const { defaults } = require('../../../../../settings.json')
 const { uuid } = require('../../../../../functions/uuid.js');
 const { Changable } = require('../../../Changable.js');
 const { Text } = require('../../../../exports/Text.js');
+const { bossBars } = require('../../properties/public/dynamic/bossBars.js');
 
 const colors = {
     pink: 0,
@@ -82,7 +83,7 @@ module.exports = {
             id: bossBarUuid,
             remove: () => {
                 bossBarVisible = false;
-                this.bossBars = Object.freeze(this.bossBars.filter(a => a.id != bossBarUuid));
+                bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id != bossBarUuid)));
 
                 this.p.sendPacket('boss_bar', {
                     entityUUID: bossBarUuid,
@@ -162,7 +163,7 @@ module.exports = {
             ...staticValues
         })
 
-        this.bossBars = Object.freeze([...this.bossBars, bossBar]);
+        bossBars.setPrivate.call(this, Object.freeze([...this.bossBars, bossBar]));
 
         return bossBar;
 

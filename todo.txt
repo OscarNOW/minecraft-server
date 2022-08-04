@@ -18,9 +18,7 @@ Move client.window('horse') to horse.openWindow()
     Make Horse class that inherits Entity
     Update Client windowType to different name
 Check if Color class is needed
-Expand Client property types
-    Create ability to create simple settable properties for Client
-        Make bossBars one of them
+Expand Client property types    
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
@@ -45,3 +43,4 @@ Change forEach to for of
 Resolve "todo: " and "not implemented" in code
 Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object    
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
+Remove eventEmitter

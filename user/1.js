@@ -39,5 +39,23 @@ const server = new Server()
 
 server.on('join', client => {
     client.loadWorld()
+
+    console.log(client.bossBars)
+
+    client.bossBar({
+        title: 'Hello',
+        health: 0.5
+    })
+
+    console.log(client.bossBars)
+
+    client.bossBars[0].remove()
+
+    console.log(client.bossBars)
+
+    client.bossBars = 10
+
+    console.log(client.bossBars)
+
 })
 //*/
