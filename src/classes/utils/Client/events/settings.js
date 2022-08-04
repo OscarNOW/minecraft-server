@@ -9,7 +9,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'language code', ''],
-                    ['in the event ', 'settings', '']
+                    ['in the event ', 'settings', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: langCode,
@@ -42,7 +42,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'chatFlags', ''],
-                    ['in the event ', 'settings', '']
+                    ['in the event ', 'settings', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: chatFlags,
@@ -69,7 +69,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'mainHand', ''],
-                    ['in the event ', 'settings', '']
+                    ['in the event ', 'settings', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: langCode,

@@ -22,6 +22,8 @@ server.on('join', client => {
 
     let armorStand = client.entity('armor_stand', { x: 3, y: 101, z: 3 });
     client.observe('position', pos => {
+        console.log(pos)
+
         armorStand.position = pos;
     });
     client.observe('slot', () => {

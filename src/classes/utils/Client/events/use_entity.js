@@ -6,7 +6,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'target', ''],
-                    ['in the event ', 'use_entity', '']
+                    ['in the event ', 'use_entity', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: target,
@@ -21,7 +21,7 @@ module.exports = {
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'client', [
                         ['', 'target', ''],
-                        ['in the event ', 'use_entity', '']
+                        ['in the event ', 'use_entity', ''],
                         ['in the class ', this.constructor.name, '']
                     ], {
                         got: target,
@@ -45,7 +45,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'mouse', ''],
-                    ['in the event ', 'use_entity', '']
+                    ['in the event ', 'use_entity', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: mouse,

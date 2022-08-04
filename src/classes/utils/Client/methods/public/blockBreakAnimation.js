@@ -12,7 +12,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'libraryUser', [
                     ['', 'stage', ''],
-                    ['in the function ', 'blockBreakAnimation', '']
+                    ['in the function ', 'blockBreakAnimation', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: stage,

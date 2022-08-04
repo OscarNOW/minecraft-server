@@ -6,7 +6,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'slotId', ''],
-                    ['in the event ', 'held_item_slot', '']
+                    ['in the event ', 'held_item_slot', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: slotId,

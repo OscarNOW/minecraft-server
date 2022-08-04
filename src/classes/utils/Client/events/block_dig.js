@@ -18,7 +18,7 @@ module.exports = {
                     /* -- Look at stack trace for location -- */ throw new
                     CustomError('expectationNotMet', 'client', [
                         ['', 'face', ''],
-                        ['in the event ', 'block_dig', '']
+                        ['in the event ', 'block_dig', ''],
                         ['in the class ', this.constructor.name, '']
                     ], {
                         got: face,
@@ -42,7 +42,7 @@ module.exports = {
                 /* -- Look at stack trace for location -- */ throw new
                 CustomError('expectationNotMet', 'client', [
                     ['', 'status', ''],
-                    ['in the event ', 'block_dig', '']
+                    ['in the event ', 'block_dig', ''],
                     ['in the class ', this.constructor.name, '']
                 ], {
                     got: status,
