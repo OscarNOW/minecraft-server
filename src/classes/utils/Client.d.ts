@@ -61,6 +61,7 @@ export class Client extends EventEmitter {
     readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
+        readonly 0: Client;
         readonly [entityId: number]: Entity;
     };
     readonly bossBars: {
@@ -315,6 +316,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    on(event: 'leftClick', callback: () => void): void;
+    on(event: 'rightClick', callback: (clickInfo: {
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        isMainHand: boolean
+    }) => void): void;
 
     once(event: 'chat', callback: (message: string) => void): void;
     once(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -329,6 +339,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void): void;
 
     addListener(event: 'chat', callback: (message: string) => void): void;
     addListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -357,6 +376,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     prependListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    prependListener(event: 'leftClick', callback: () => void): void;
+    prependListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void): void;
 
     prependOnceListener(event: 'chat', callback: (message: string) => void): void;
     prependOnceListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -371,6 +399,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     prependOnceListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    prependOnceListener(event: 'leftClick', callback: () => void): void;
+    prependOnceListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void): void;
 
     off(event: 'chat', callback: (message: string) => void): void;
     off(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -385,6 +422,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     off(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    off(event: 'leftClick', callback: () => void): void;
+    off(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void): void;
 
     removeListener(event: 'chat', callback: (message: string) => void): void;
     removeListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
@@ -399,6 +445,15 @@ export class Client extends EventEmitter {
         z: number;
     }) => void): void;
     removeListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    removeListener(event: 'leftClick', callback: () => void): void;
+    removeListener(event: 'rightClick', callback: (
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void): void;
 
     rawListeners(event: 'chat'): ((message: string) => void)[];
     rawListeners(event: 'leave' | 'itemHandSwap'): (() => void)[];
@@ -413,8 +468,17 @@ export class Client extends EventEmitter {
         z: number;
     }) => void)[];
     rawListeners(event: 'itemDrop'): ((stack: boolean) => void)[];
+    rawListeners(event: 'leftClick'): (() => void)[];
+    rawListeners(event: 'rightClick'): ((
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        isMainHand: boolean
+    ) => void)[];
 
-    removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop'): void;
+    removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 }
 
 type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';

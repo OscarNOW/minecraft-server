@@ -52,8 +52,8 @@ export class Entity extends EventEmitter {
         isMainHand: boolean
     }) => void): void;
 
-    addListener(event: 'leftClick', callback: () => void): void;
-    addListener(event: 'rightClick', callback: (
+    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'rightClick', callback: (
         position: {
             x: number;
             y: number;
@@ -62,8 +62,8 @@ export class Entity extends EventEmitter {
         isMainHand: boolean
     ) => void): void;
 
-    once(event: 'leftClick', callback: () => void): void;
-    once(event: 'rightClick', callback: (
+    addListener(event: 'leftClick', callback: () => void): void;
+    addListener(event: 'rightClick', callback: (
         position: {
             x: number;
             y: number;

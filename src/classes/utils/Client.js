@@ -15,7 +15,9 @@ const events = Object.freeze([
     'digCancel',
     'blockBreak',
     'itemDrop',
-    'itemHandSwap'
+    'itemHandSwap',
+    'leftClick',
+    'rightClick'
 ]);
 
 class Client extends EventEmitter {

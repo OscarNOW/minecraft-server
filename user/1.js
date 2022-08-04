@@ -20,15 +20,7 @@ const server = new Server({
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
 
-    let armorStand = client.entity('armor_stand', { x: 3, y: 101, z: 3 });
-    client.observe('position', pos => {
-        console.log(pos)
-
-        armorStand.position = pos;
-    });
-    client.observe('slot', () => {
-        armorStand.camera()
-    })
+    client
 
     client.loadWorld()
 })

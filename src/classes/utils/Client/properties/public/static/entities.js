@@ -1,3 +1,7 @@
 module.exports = {
-    entities: () => ({})
+    entities: function () {
+        return {
+            0: this
+        }
+    }
 }
