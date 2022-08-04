@@ -682,7 +682,7 @@ import { EventEmitter } from 'events';export class Chunk {
     ) => void)[];
 
     removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
-}type hex = string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type chatComponent = chat | string | chatComponents;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
+}type hex = string;type chatComponent = chat | string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
     r: number;
     g: number;
     b: number;
@@ -706,7 +706,7 @@ import { EventEmitter } from 'events';export class Chunk {
     text: string;
     color?: textColor;
     modifiers?: Array<textModifier>;
-};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chat = {
+};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chat = chatComponents | {
     text: string;
 
     extra?: chatComponents;

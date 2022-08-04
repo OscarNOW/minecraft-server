@@ -36,7 +36,7 @@ type optionalTextArray = Array<{
     modifiers?: Array<textModifier>;
 };
 
-type chat = {
+type chat = chatComponents | {
     text: string;
 
     extra?: chatComponents;
@@ -139,4 +139,4 @@ type chat = {
 //*/
 
 type chatComponents = chatComponent[];
-type chatComponent = chat | string | chatComponents;
+type chatComponent = chat | string;
