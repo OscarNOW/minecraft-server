@@ -18,7 +18,7 @@ Move client.window('horse') to horse.openWindow()
     Make Horse class that inherits Entity
     Update Client windowType to different name
 Check if Color class is needed
-Expand Client property types    
+Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
         Use that for onGround
@@ -34,13 +34,12 @@ Update Text
             Optimized chat
             Insertion
     Update tests
-        Create new ones for new features        
-    Update types with JS updates
+        Create new ones for new features
 Implement convertToType function in all type generators
 Prevent loading from classes until they are used
 Change forEach to for of
     Careful with return -> continue
 Resolve "todo: " and "not implemented" in code
-Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object    
+Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Remove eventEmitter
