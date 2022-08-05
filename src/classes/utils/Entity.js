@@ -21,9 +21,9 @@ const events = Object.freeze([
     'rightClick'
 ])
 
-const observables = Object.freeze(Object.fromEntries([
+const observables = [
     'position'
-].map(v => [v, []])));
+];
 
 const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
     let yaw = ya % 360;
@@ -79,7 +79,7 @@ class Entity extends EventEmitter {
         this.client = client;
 
         this[ps.typeId] = e.id;
-        this[ps.observables] = observables;
+        this[ps.observables] = Object.fromEntries(observables.map(a => [a, []]));
         this[ps.sendPacket] = sendPacket;
         this[ps._position] = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch })
 
