@@ -1,4 +1,4 @@
-const observables = Object.freeze(Object.fromEntries([
+const observables = [
     'position',
     'slot',
     'health',
@@ -12,8 +12,8 @@ const observables = Object.freeze(Object.fromEntries([
     'experience',
     'sneaking',
     'onGround'
-].map(v => [v, []])));
+];
 
 module.exports = {
-    observables: () => observables
+    observables: () => Object.fromEntries(observables.map(a => [a, []]))
 }
