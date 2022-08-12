@@ -45,3 +45,4 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 Remove eventEmitter
 Make client.entities{ truly readonly
 Change server.playerCount to server.clientCount
+-Yaw and pitch are switched?

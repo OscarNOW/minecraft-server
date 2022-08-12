@@ -26,13 +26,16 @@ server.on('join', client => {
 
     if (isFirst)
         client.observe('position', pos => {
-            if (armorStand)
+            console.log(pos.yaw)
+            if (armorStand) {
                 armorStand.position = pos;
+            }
         })
     else {
         armorStand = client.entity('armor_stand', { x: 3, y: 101, z: 3 });
         client.observe('slot', () => {
             armorStand.camera();
+            client.on('leave', process.exit)
         })
     }
 
