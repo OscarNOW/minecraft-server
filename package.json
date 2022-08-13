@@ -31,7 +31,7 @@
     "dependencies": {
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
-        "minecraft-protocol": "^1.35.0",
+        "minecraft-protocol": "^1.35.1",
         "prismarine-chunk": "^1.31.0"
     },
     "devDependencies": {
