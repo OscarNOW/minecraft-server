@@ -7,7 +7,7 @@ for (let x = 0; x < 16; x++)
             chunk.setBlock({ x, y, z }, 'dirt')
 
 const server = new Server({
-    defaultClientProperties: client => ({
+    defaultClientProperties: () => ({
         gamemode: 'creative',
         position: {
             x: 5,
@@ -15,7 +15,9 @@ const server = new Server({
             z: 5
         }
     })
-})
+});
+
+notDefined.notDefined();
 
 let armorStand;
 

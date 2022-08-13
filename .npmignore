@@ -24,3 +24,4 @@ src/classes/utils/*.d.ts
 packets.xlsx
 FAQ.md
 assets/ISC License/docs/
+.eslintsrc.*
