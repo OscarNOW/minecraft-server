@@ -10,6 +10,9 @@
             "error",
             4
         ],
-        "no-undef": "error"
+        "no-undef": "error",
+        "no-undefined": "error",
+        "no-unused-vars": "warn",
+        "no-const-assign": "error"
     }
 }

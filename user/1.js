@@ -17,8 +17,6 @@ const server = new Server({
     })
 });
 
-notDefined.notDefined();
-
 let armorStand;
 
 server.on('join', client => {
