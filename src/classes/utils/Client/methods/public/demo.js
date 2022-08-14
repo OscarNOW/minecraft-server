@@ -11,16 +11,15 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (demoMessages[message] === undefined)
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'message', ''],
-                    ['in the function "', 'cooldown', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: message,
-                    expectationType: 'value',
-                    expectation: Object.keys(demoMessages)
-                }, this.demo).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'message', ''],
+                ['in the function "', 'cooldown', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: message,
+                expectationType: 'value',
+                expectation: Object.keys(demoMessages)
+            }, this.demo).toString()
 
         this.p.sendPacket('game_state_change', {
             reason: 5,

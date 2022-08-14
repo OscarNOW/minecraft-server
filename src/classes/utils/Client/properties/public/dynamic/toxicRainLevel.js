@@ -16,16 +16,15 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (typeof value != 'number')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'toxicRainLevel', ''],
-                        ['in the function "', 'set toxicRainLevel', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'number'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'toxicRainLevel', ''],
+                    ['in the function "', 'set toxicRainLevel', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'number'
+                }).toString()
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {
@@ -38,16 +37,15 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'number')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'toxicRainLevel', ''],
-                        ['in the function "', 'setRaw toxicRainLevel', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'number'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'toxicRainLevel', ''],
+                    ['in the function "', 'setRaw toxicRainLevel', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'number'
+                }).toString()
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {

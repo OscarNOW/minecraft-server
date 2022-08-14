@@ -203,16 +203,15 @@ class Text {
         text.split('').forEach(val => {
             if (isModifier) {
                 if (!textColors.find(({ char }) => char == val) && !textModifiers.find(({ char }) => char == val))
-                        /* -- Look at stack trace for location -- */ throw new
-                        CustomError('expectationNotMet', 'libraryUser', [
-                            ['', 'colorLetter', ''],
-                            ['in the function "', 'stringToArray', '"'],
-                            ['in the class ', this.constructor.name, ''],
-                        ], {
-                            got: val,
-                            expectationType: 'value',
-                            expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],
-                        }, Text.stringToArray).toString()
+                    throw new CustomError('expectationNotMet', 'libraryUser', [
+                        ['', 'colorLetter', ''],
+                        ['in the function "', 'stringToArray', '"'],
+                        ['in the class ', this.constructor.name, ''],
+                    ], {
+                        got: val,
+                        expectationType: 'value',
+                        expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],
+                    }, Text.stringToArray).toString()
                 else
                     if (textColors.find(({ char }) => char == val)) {
                         let copy = Object.assign([], currentModifiers);

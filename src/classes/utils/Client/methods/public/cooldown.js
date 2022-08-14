@@ -11,17 +11,16 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (!items[item])
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'item', ''],
-                    ['in the function "', 'cooldown', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: item,
-                    expectationType: 'type',
-                    expectation: 'itemType',
-                    externalLink: '{docs}/types/itemType.html'
-                }, this.cooldown).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'item', ''],
+                ['in the function "', 'cooldown', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: item,
+                expectationType: 'type',
+                expectation: 'itemType',
+                externalLink: '{docs}/types/itemType.html'
+            }, this.cooldown).toString()
 
         this.p.sendPacket('set_cooldown', {
             itemID: items[item].id,

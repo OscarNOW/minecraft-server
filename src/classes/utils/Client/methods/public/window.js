@@ -11,28 +11,26 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (!windowNameIdMapping[windowType])
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'windowType', ''],
-                    ['in the function "', 'title', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: windowType,
-                    expectationType: 'value',
-                    expectation: Object.keys(windowNameIdMapping)
-                }, this.window).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'windowType', ''],
+                ['in the function "', 'title', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: windowType,
+                expectationType: 'value',
+                expectation: Object.keys(windowNameIdMapping)
+            }, this.window).toString()
         if (windowType == 'horse' && !horse)
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'horse', ''],
-                    ['in the function "', 'title', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: horse,
-                    expectationType: 'type',
-                    expectation: 'Entity',
-                    externalLink: `{docs}/classes/Entity.html`
-                }, this.window).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'horse', ''],
+                ['in the function "', 'title', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: horse,
+                expectationType: 'type',
+                expectation: 'Entity',
+                externalLink: `{docs}/classes/Entity.html`
+            }, this.window).toString()
 
         let windowId = windowNameIdMapping[windowType];
 

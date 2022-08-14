@@ -29,21 +29,20 @@ function getStateId(blockName, state = {}, { function: func }) {
     let stateIds = [];
     block.states.forEach(({ name, values }) => {
         if (values.indexOf(state[name]) === -1)
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'state', ''],
-                    ['for the block "', blockName, '"'],
-                    ['in the function "', func, '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], [true, false].sort().join(',') == values.sort().join(',') ? {
-                    got: state[name],
-                    expectationType: 'type',
-                    expectation: 'boolean'
-                } : {
-                    got: state[name],
-                    expectationType: 'value',
-                    expectation: values
-                }, this[func]).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'state', ''],
+                ['for the block "', blockName, '"'],
+                ['in the function "', func, '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], [true, false].sort().join(',') == values.sort().join(',') ? {
+                got: state[name],
+                expectationType: 'type',
+                expectation: 'boolean'
+            } : {
+                got: state[name],
+                expectationType: 'value',
+                expectation: values
+            }, this[func]).toString()
 
         stateIds.push(values.indexOf(state[name]))
     })
@@ -68,17 +67,16 @@ function getBlock(blockName, { function: func }) {
     let block = blocks.find(({ name }) => name == blockName)
     if (block) return block
 
-    /* -- Look at stack trace for location -- */ throw new
-        CustomError('expectationNotMet', 'libraryUser', [
-            ['', 'blockName', ''],
-            ['in the function "', func, '"'],
-            ['in the class ', this.constructor.name, ''],
-        ], {
-            got: blockName,
-            expectationType: 'type',
-            expectation: 'blockType',
-            externalLink: '{docs}/types/blockType.html'
-        }, this[func]).toString()
+    throw new CustomError('expectationNotMet', 'libraryUser', [
+        ['', 'blockName', ''],
+        ['in the function "', func, '"'],
+        ['in the class ', this.constructor.name, ''],
+    ], {
+        got: blockName,
+        expectationType: 'type',
+        expectation: 'blockType',
+        externalLink: '{docs}/types/blockType.html'
+    }, this[func]).toString()
 }
 
 module.exports = Object.freeze({ Chunk });

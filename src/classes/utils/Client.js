@@ -183,28 +183,26 @@ class Client extends EventEmitter {
 
         for (const [key, value] of Object.entries(this.p.defaultProperties)) {
             if (!pubDynProperties[key])
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'default key', ''],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: key,
-                        expectationType: 'value',
-                        expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
-                    }, this.constructor).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'default key', ''],
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: key,
+                    expectationType: 'value',
+                    expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
+                }, this.constructor).toString()
 
             let file = pubDynProperties[key];
 
             if (!file.setRaw)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'default key', ''],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: key,
-                        expectationType: 'value',
-                        expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
-                    }, this.constructor).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'default key', ''],
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: key,
+                    expectationType: 'value',
+                    expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
+                }, this.constructor).toString()
 
             let ret;
             if (file.info?.callAfterLogin)
@@ -292,144 +290,135 @@ class Client extends EventEmitter {
 
     addListener(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'addListener', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.addListener).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'addListener', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.addListener).toString()
 
         return super.addListener(event, callback);
     }
 
     on(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'on', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.on).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'on', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.on).toString()
 
         return super.on(event, callback);
     }
 
     once(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'once', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.once).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'once', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.once).toString()
 
         return super.once(event, callback);
     }
 
     prependListener(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'prependListener', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.prependListener).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'prependListener', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.prependListener).toString()
 
         return super.prependListener(event, callback);
     }
 
     prependOnceListener(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'prependOnceListener', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.prependOnceListener).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'prependOnceListener', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.prependOnceListener).toString()
 
         return super.prependOnceListener(event, callback);
     }
 
     off(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'off', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.off).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'off', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.off).toString()
 
         return super.off(event, callback);
     }
 
     removeListener(event, callback) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'removeListener', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.removeListener).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'removeListener', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.removeListener).toString()
 
         return super.removeListener(event, callback);
     }
 
     removeAllListeners(event) {
         if (event !== undefined && !events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'removeAllListeners', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.removeAllListeners).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'removeAllListeners', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.removeAllListeners).toString()
 
         return super.removeAllListeners(event);
     }
 
     rawListeners(event) {
         if (!events.includes(event))
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'event', ''],
-                    ['in the function "', 'rawListeners', '"'],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: event,
-                    expectationType: 'value',
-                    expectation: events
-                }, this.rawListeners).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'event', ''],
+                ['in the function "', 'rawListeners', '"'],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.rawListeners).toString()
 
         return super.rawListeners(event);
     }

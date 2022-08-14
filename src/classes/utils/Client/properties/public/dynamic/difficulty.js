@@ -16,16 +16,15 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'difficulty', ''],
-                        ['in the function "', 'set difficulty', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'value',
-                        expectation: ['peaceful', 'easy', 'normal', 'hard']
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'difficulty', ''],
+                    ['in the function "', 'set difficulty', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'value',
+                    expectation: ['peaceful', 'easy', 'normal', 'hard']
+                }).toString()
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),
@@ -37,16 +36,15 @@ module.exports = {
         },
         setRaw: function (value) {
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'difficulty', ''],
-                        ['in the function "', 'set difficulty', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'value',
-                        expectation: ['peaceful', 'easy', 'normal', 'hard']
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'difficulty', ''],
+                    ['in the function "', 'set difficulty', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'value',
+                    expectation: ['peaceful', 'easy', 'normal', 'hard']
+                }).toString()
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),

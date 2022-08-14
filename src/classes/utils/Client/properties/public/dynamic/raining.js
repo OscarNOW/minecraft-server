@@ -16,16 +16,15 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (typeof value != 'boolean')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'raining', ''],
-                        ['in the function "', 'set raining', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'boolean'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'raining', ''],
+                    ['in the function "', 'set raining', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,
@@ -37,16 +36,15 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'raining', ''],
-                        ['in the function "', 'setRaw raining', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'boolean'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'raining', ''],
+                    ['in the function "', 'setRaw raining', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,

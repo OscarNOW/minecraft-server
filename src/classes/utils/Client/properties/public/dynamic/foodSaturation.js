@@ -18,16 +18,15 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'foodSaturation', ''],
-                        ['in the function "', 'set foodSaturation', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5]
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'foodSaturation', ''],
+                    ['in the function "', 'set foodSaturation', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5]
+                }).toString()
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,
@@ -42,16 +41,15 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'foodSaturation', ''],
-                        ['in the function "', 'setRaw foodSaturation', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5]
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'foodSaturation', ''],
+                    ['in the function "', 'setRaw foodSaturation', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5]
+                }).toString()
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,

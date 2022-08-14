@@ -31,17 +31,16 @@ class Color {
                 this._hexCached = true;
                 hex = input
             } else
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'input', ''],
-                        ['in the ', 'constructor', ' of'],
-                        ['the class ', this.constructor.name, ''],
-                    ], {
-                        got: input,
-                        expectationType: 'type',
-                        expectation: 'string | rgb | hsl',
-                        externalLink: '{docs}/classes/Color.html#constructor'
-                    }, this.constructor).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'input', ''],
+                    ['in the ', 'constructor', ' of'],
+                    ['the class ', this.constructor.name, ''],
+                ], {
+                    got: input,
+                    expectationType: 'type',
+                    expectation: 'string | rgb | hsl',
+                    externalLink: '{docs}/classes/Color.html#constructor'
+                }, this.constructor).toString()
         else if (input.r && input.g && input.b) {
             this._rgbCached = true;
             rgb = {
@@ -53,17 +52,16 @@ class Color {
             this._hslCached = true;
             hsl = input;
         } else
-            /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'input', ''],
-                    ['in the ', 'constructor', ' of'],
-                    ['the class ', this.constructor.name, ''],
-                ], {
-                    got: input,
-                    expectationType: 'type',
-                    expectation: 'string | rgb | hsl',
-                    externalLink: '{docs}/classes/Color.html#constructor'
-                }, this.constructor).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'input', ''],
+                ['in the ', 'constructor', ' of'],
+                ['the class ', this.constructor.name, ''],
+            ], {
+                got: input,
+                expectationType: 'type',
+                expectation: 'string | rgb | hsl',
+                externalLink: '{docs}/classes/Color.html#constructor'
+            }, this.constructor).toString()
 
         this._rgb = new Changable(rgb => {
             this.rgb = rgb;

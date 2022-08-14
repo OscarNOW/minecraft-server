@@ -18,16 +18,15 @@ module.exports = {
             let value = parseInt(v);
 
             if (isNaN(value))
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'slot', ''],
-                        ['in the function "', 'set slot', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'type',
-                        expectation: 'number'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'slot', ''],
+                    ['in the function "', 'set slot', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'type',
+                    expectation: 'number'
+                }).toString()
 
             value = value % 9;
 
@@ -40,16 +39,15 @@ module.exports = {
             let value = parseInt(v);
 
             if (isNaN(value))
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'slot', ''],
-                        ['in the function "', 'setRaw slot', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'type',
-                        expectation: 'number'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'slot', ''],
+                    ['in the function "', 'setRaw slot', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'type',
+                    expectation: 'number'
+                }).toString()
 
             value = value % 9;
 

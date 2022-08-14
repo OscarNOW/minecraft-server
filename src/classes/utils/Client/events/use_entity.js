@@ -3,8 +3,21 @@ const { CustomError } = require('../../CustomError.js');
 module.exports = {
     use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {
         if (!this.entities[target])
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'client', [
+            throw new CustomError('expectationNotMet', 'client', [
+                ['', 'target', ''],
+                ['in the event ', 'use_entity', ''],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: target,
+                expectationType: 'value',
+                expectation: Object.keys(this.entities)
+            }).toString()
+
+        this.sneaking = sneaking;
+
+        if (mouse == 2) {
+            if (hand != 0 && hand != 1)
+                throw new CustomError('expectationNotMet', 'client', [
                     ['', 'target', ''],
                     ['in the event ', 'use_entity', ''],
                     ['in the class ', this.constructor.name, '']
@@ -13,21 +26,6 @@ module.exports = {
                     expectationType: 'value',
                     expectation: Object.keys(this.entities)
                 }).toString()
-
-        this.sneaking = sneaking;
-
-        if (mouse == 2) {
-            if (hand != 0 && hand != 1)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'client', [
-                        ['', 'target', ''],
-                        ['in the event ', 'use_entity', ''],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: target,
-                        expectationType: 'value',
-                        expectation: Object.keys(this.entities)
-                    }).toString()
 
             this.entities[target].emit('rightClick', {
                 position: {
@@ -42,15 +40,14 @@ module.exports = {
         else if (mouse == 1)
             this.entities[target].emit('leftClick');
         else
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'client', [
-                    ['', 'mouse', ''],
-                    ['in the event ', 'use_entity', ''],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: mouse,
-                    expectationType: 'value',
-                    expectation: [0, 1, 2]
-                }).toString()
+            throw new CustomError('expectationNotMet', 'client', [
+                ['', 'mouse', ''],
+                ['in the event ', 'use_entity', ''],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: mouse,
+                expectationType: 'value',
+                expectation: [0, 1, 2]
+            }).toString()
     }
 }

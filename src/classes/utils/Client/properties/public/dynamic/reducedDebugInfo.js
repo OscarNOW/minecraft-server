@@ -13,16 +13,15 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'reducedDebugInfo', ''],
-                        ['in the function "', 'setRaw reducedDebugInfo', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'boolean'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'reducedDebugInfo', ''],
+                    ['in the function "', 'setRaw reducedDebugInfo', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                }).toString()
 
             this.p._reducedDebugInfo = value;
 

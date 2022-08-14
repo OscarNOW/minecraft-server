@@ -19,16 +19,15 @@ module.exports = {
                     throw new Error(`Can't perform this action on an offline player`)
 
             if (typeof value != 'boolean')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'showRespawnScreen', ''],
-                        ['in the function "', 'set showRespawnScreen', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'boolean'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'showRespawnScreen', ''],
+                    ['in the function "', 'set showRespawnScreen', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                }).toString()
 
             this.p.sendPacket('game_state_change', {
                 reason: 11,
@@ -40,16 +39,15 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'showRespawnScreen', ''],
-                        ['in the function "', 'setRaw showRespawnScreen', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: value,
-                        expectationType: 'type',
-                        expectation: 'boolean'
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'showRespawnScreen', ''],
+                    ['in the function "', 'setRaw showRespawnScreen', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'boolean'
+                }).toString()
 
             this.p._showRespawnScreen = value;
 

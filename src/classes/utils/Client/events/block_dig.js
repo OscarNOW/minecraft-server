@@ -15,16 +15,15 @@ module.exports = {
             if (faces[face])
                 this.emit('digStart', { x, y, z }, faces[face])
             else
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'client', [
-                        ['', 'face', ''],
-                        ['in the event ', 'block_dig', ''],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: face,
-                        expectationType: 'value',
-                        expectation: Object.keys(faces)
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'client', [
+                    ['', 'face', ''],
+                    ['in the event ', 'block_dig', ''],
+                    ['in the class ', this.constructor.name, '']
+                ], {
+                    got: face,
+                    expectationType: 'value',
+                    expectation: Object.keys(faces)
+                }).toString()
 
         else if (status == 1)
             this.emit('digCancel', { x, y, z })
@@ -39,15 +38,14 @@ module.exports = {
         else if (status == 6)
             this.emit('itemHandSwap')
         else
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'client', [
-                    ['', 'status', ''],
-                    ['in the event ', 'block_dig', ''],
-                    ['in the class ', this.constructor.name, '']
-                ], {
-                    got: status,
-                    expectationType: 'value',
-                    expectation: [0, 1, 2, 3, 4, 5, 6]
-                }).toString()
+            throw new CustomError('expectationNotMet', 'client', [
+                ['', 'status', ''],
+                ['in the event ', 'block_dig', ''],
+                ['in the class ', this.constructor.name, '']
+            ], {
+                got: status,
+                expectationType: 'value',
+                expectation: [0, 1, 2, 3, 4, 5, 6]
+            }).toString()
     }
 }

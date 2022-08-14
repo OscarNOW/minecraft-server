@@ -18,16 +18,15 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 20)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'food', ''],
-                        ['in the function "', 'set food', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'food', ''],
+                    ['in the function "', 'set food', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                }).toString()
 
             this.p.sendPacket('update_health', {
                 health: this.health,
@@ -42,16 +41,15 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 20)
-                    /* -- Look at stack trace for location -- */ throw new
-                    CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'food', ''],
-                        ['in the function "', 'set food', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
-                        got: v,
-                        expectationType: 'value',
-                        expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                    }).toString()
+                throw new CustomError('expectationNotMet', 'libraryUser', [
+                    ['', 'food', ''],
+                    ['in the function "', 'set food', '"'],
+                    ['in the class ', this.constructor.name, ''],
+                ], {
+                    got: v,
+                    expectationType: 'value',
+                    expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                }).toString()
 
             this.p.sendPacket('update_health', {
                 health: this.health,

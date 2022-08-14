@@ -11,27 +11,25 @@ module.exports = {
                 throw new Error(`Can't perform this action on an offline player`)
 
         if (!soundChannels.includes(channel))
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'channel', ''],
-                    ['in the function "', 'sound', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: channel,
-                    expectationType: 'value',
-                    expectation: soundChannels
-                }, this.sound).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'channel', ''],
+                ['in the function "', 'sound', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: channel,
+                expectationType: 'value',
+                expectation: soundChannels
+            }, this.sound).toString()
         if (typeof volume != 'number' || volume < 0 || volume > 1)
-                /* -- Look at stack trace for location -- */ throw new
-                CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'volume', ''],
-                    ['in the function "', 'sound', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
-                    got: volume,
-                    expectationType: 'type',
-                    expectation: 'number between 0 and 1'
-                }, this.sound).toString()
+            throw new CustomError('expectationNotMet', 'libraryUser', [
+                ['', 'volume', ''],
+                ['in the function "', 'sound', '"'],
+                ['in the class ', this.constructor.name, ''],
+            ], {
+                got: volume,
+                expectationType: 'type',
+                expectation: 'number between 0 and 1'
+            }, this.sound).toString()
 
         //Multiplying by 8 is needed, see https://wiki.vg/index.php?title=Protocol&oldid=16091#Sound_Effect
         this.p.sendPacket('named_sound_effect', {

@@ -44,5 +44,5 @@ Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" t
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Remove eventEmitter
 Make client.entities{ truly readonly
-Change server.playerCount to server.clientCount
--Reduce file sizes
+-Change server.playerCount to server.clientCount
+Create JS minifier
