@@ -5,6 +5,7 @@ console.clear();
 console.log('Minifieing JSON files')
 
 for (const file of [
+    './settings.json',
     ...fs
         .readdirSync(path.resolve(__dirname, './data/'))
         .filter(file => file.endsWith('.json'))
