@@ -12,6 +12,7 @@ src/logs/
 src/tests.js
 src/compile.js
 src/types.js
+src/minify.js
 src/functions/loader/tests.js
 src/docs/
 docs/

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
+console.clear()
 console.log('Getting export classes...')
 
 let exportClasses =
