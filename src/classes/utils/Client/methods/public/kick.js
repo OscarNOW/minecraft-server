@@ -1,4 +1,4 @@
-const { Text } = require('../../../../exports/Text.js');
+const Text = require('../../../../exports/Text.js');
 
 module.exports = {
     kick: function (reason) {

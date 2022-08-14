@@ -1,6 +1,6 @@
 const { sounds, soundChannels } = require('../../../../../functions/loader/data.js');
 
-const { CustomError } = require('../../../CustomError.js');
+const CustomError = require('../../../CustomError.js');
 
 module.exports = {
     sound: function ({ sound, channel, position: { x, y, z }, volume, pitch }) {

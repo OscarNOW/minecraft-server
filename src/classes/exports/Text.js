@@ -2,7 +2,7 @@ const { textModifiers, textColors } = require('../../functions/loader/data');
 
 const crypto = require('crypto')
 
-const { CustomError } = require('../utils/CustomError.js');
+const CustomError  = require('../utils/CustomError.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];

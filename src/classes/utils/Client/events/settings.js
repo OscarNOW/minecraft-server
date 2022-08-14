@@ -1,6 +1,6 @@
 const { languages } = require('../../../../functions/loader/data.js');
 
-const { CustomError } = require('../../CustomError.js');
+const CustomError = require('../../CustomError.js');
 
 module.exports = {
     settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {

@@ -3,7 +3,7 @@ const { blocks } = require('../../functions/loader/data.js')
 
 const pChunk = require('prismarine-chunk')(version);
 
-const { CustomError } = require('../utils/CustomError.js');
+const CustomError = require('../utils/CustomError.js');
 
 class Chunk {
     constructor() {

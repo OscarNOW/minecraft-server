@@ -1,4 +1,4 @@
-const { CustomError } = require('../../CustomError.js');
+const CustomError = require('../../CustomError.js');
 
 module.exports = {
     use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {

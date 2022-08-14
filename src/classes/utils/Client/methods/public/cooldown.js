@@ -1,6 +1,6 @@
 const { items } = require('../../../../../functions/loader/data.js');
 
-const { CustomError } = require('../../../CustomError.js');
+const CustomError = require('../../../CustomError.js');
 
 module.exports = {
     cooldown: function (item, length = 60) {

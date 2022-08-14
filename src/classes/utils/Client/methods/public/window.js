@@ -1,6 +1,6 @@
 const { windowNameIdMapping } = require('../../../../../functions/loader/data.js');
 
-const { CustomError } = require('../../../CustomError.js');
+const CustomError = require('../../../CustomError.js');
 
 module.exports = {
     window: function (windowType, horse) {

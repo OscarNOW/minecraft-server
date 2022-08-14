@@ -4,8 +4,8 @@ const { entities, entityAnimations, sounds, soundChannels } = require('../../fun
 const { uuid } = require('../../functions/uuid.js');
 const { EventEmitter } = require('events');
 
-const { CustomError } = require('./CustomError.js')
-const { Changable } = require('./Changable.js');
+const  CustomError = require('./CustomError.js')
+const  Changable  = require('./Changable.js');
 
 const ps = Object.fromEntries([ // privateSymbols
     '_position',

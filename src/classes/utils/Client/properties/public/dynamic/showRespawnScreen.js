@@ -1,5 +1,5 @@
 const { defaults } = require('../../../../../../settings.json');
-const { CustomError } = require('../../../../CustomError.js');
+const CustomError = require('../../../../CustomError.js');
 
 module.exports = {
     showRespawnScreen: {

@@ -1,5 +1,5 @@
-const { Changable } = require('../utils/Changable.js');
-const { CustomError } = require('../utils/CustomError.js');
+const Changable = require('../utils/Changable.js');
+const  CustomError = require('../utils/CustomError.js');
 
 class Color {
     constructor(input, i2, i3) {

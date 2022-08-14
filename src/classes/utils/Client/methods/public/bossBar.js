@@ -1,8 +1,8 @@
 const { defaults } = require('../../../../../settings.json')
 
 const { uuid } = require('../../../../../functions/uuid.js');
-const { Changable } = require('../../../Changable.js');
-const { Text } = require('../../../../exports/Text.js');
+const  Changable  = require('../../../Changable.js');
+const  Text  = require('../../../../exports/Text.js');
 const { bossBars } = require('../../properties/public/dynamic/bossBars.js');
 
 const colors = {

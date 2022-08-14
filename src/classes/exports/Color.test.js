@@ -1,4 +1,4 @@
-const { Color } = require('./Color.js');
+const Color = require('./Color.js');
 
 module.exports = (expect, warn) => {
     let a = new Color('#8ed67c');

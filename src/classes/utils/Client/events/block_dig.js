@@ -1,4 +1,4 @@
-const { CustomError } = require('../../CustomError.js')
+const CustomError = require('../../CustomError.js')
 
 const faces = Object.freeze({
     0: '-Y',

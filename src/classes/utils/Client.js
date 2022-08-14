@@ -5,7 +5,7 @@ const { EventEmitter } = require('events');
 const fs = require('fs');
 const path = require('path');
 
-const { CustomError } = require('./CustomError.js');
+const  CustomError  = require('./CustomError.js');
 
 const _p = Symbol('_privates');
 const events = Object.freeze([

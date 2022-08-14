@@ -1,6 +1,6 @@
 const { particles } = require('../../../../../functions/loader/data.js');
 
-const { CustomError } = require('../../../CustomError.js');
+const CustomError = require('../../../CustomError.js');
 
 module.exports = {
     particle: function (particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {

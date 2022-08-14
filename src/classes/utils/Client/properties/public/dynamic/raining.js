@@ -1,4 +1,4 @@
-const { CustomError } = require('../../../../CustomError.js');
+const CustomError = require('../../../../CustomError.js');
 
 module.exports = {
     raining: {

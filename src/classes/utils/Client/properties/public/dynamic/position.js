@@ -1,6 +1,6 @@
 const { timing, defaults } = require('../../../../../../settings.json');
 
-const { Changable } = require('../../../../Changable.js');
+const Changable = require('../../../../Changable.js');
 
 const teleportPromises = new WeakMap();
 const oldPositions = new WeakMap();

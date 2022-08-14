@@ -6,8 +6,8 @@ const endianToggle = require('endian-toggle')
 const { EventEmitter } = require('events');
 const imageSize = require('image-size');
 
-const { Client } = require('../utils/Client.js');
-const { CustomError } = require('../utils/CustomError.js');
+const Client = require('../utils/Client.js');
+const CustomError = require('../utils/CustomError.js');
 
 const events = Object.freeze([
     'join',

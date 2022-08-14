@@ -1,4 +1,4 @@
-const { Entity } = require('../../../Entity.js');
+const Entity = require('../../../Entity.js');
 
 module.exports = {
     entity: function (type, { x, y, z, yaw, pitch }) {
