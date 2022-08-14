@@ -9,7 +9,7 @@
         "types": "node ./scripts/types",
         "docs": "cd .\\scripts && docs.bat",
         "minify": "node ./scripts/minify",
-        "compile": "npm run types && npm run docs && npm run minify && cls && echo Successfully compiled"
+        "compile": "npm run minify && npm run types && npm run docs && cls && echo Successfully compiled"
     },
     "keywords": [
         "minecraft",

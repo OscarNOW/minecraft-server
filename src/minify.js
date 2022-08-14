@@ -9,7 +9,7 @@ for (const file of fs
     .filter(file => file.endsWith('.json'))
 ) {
     console.log(`   ${file}`);
-    fs.writeFileSync(path.resolve(__dirname, './data/') + file, JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(__dirname, './data/') + file))))
+    fs.writeFileSync(path.resolve(__dirname, './data/') + '/' + file, JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(__dirname, './data/') + '/' + file))))
 }
 
 console.clear();
