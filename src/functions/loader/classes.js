@@ -1,16 +1,57 @@
 const fs = require('fs');
 const path = require('path');
-let e = {};
-let utils = {};
 
-fs.readdirSync(path.resolve(__dirname, '../../classes/exports/')).forEach(file => {
-    if (file.split('.').length == 2)
-        e = { ...e, ...require(`../../classes/exports/${file}`) }
-})
+let xports = [];
+let utils = [];
 
-fs.readdirSync(path.resolve(__dirname, '../../classes/utils/')).forEach(file => {
-    if (file.split('.').length == 2)
-        utils = { ...utils, ...require(`../../classes/utils/${file}`) }
-})
+for (const file of fs
+    .readdirSync(path.resolve(__dirname, '../../classes/exports/'))
+    .filter(file => file.split('.').length == 2)
+)
+    xports.push(`../../classes/exports/${file}`)
 
-module.exports = Object.freeze({ exports: e, utils });
+for (const file of fs
+    .readdirSync(path.resolve(__dirname, '../../classes/utils/'))
+    .filter(file => file.split('.').length == 2)
+)
+    utils.push(`../../classes/utils/${file}`)
+
+let cachedExports = {};
+let lazyExports = {};
+
+for (const xport of xports) {
+    const name = xport.split('/')[xport.split('/').length - 1].split('.')[0];
+
+    Object.defineProperty(lazyExports, name, {
+        configurable: false,
+        enumerable: true,
+        get: () => {
+            if (cachedExports[name])
+                return cachedExports[name];
+
+            cachedExports[name] = require(xport);
+            return cachedExports[name];
+        }
+    })
+}
+
+let cachedUtils = {};
+let lazyUtils = {};
+
+for (const xport of xports) {
+    const name = xport.split('/')[xport.split('/').length - 1].split('.')[0];
+
+    Object.defineProperty(lazyUtils, name, {
+        configurable: false,
+        enumerable: true,
+        get: () => {
+            if (cachedUtils[name])
+                return cachedUtils[name];
+
+            cachedUtils[name] = require(xport);
+            return cachedUtils[name];
+        }
+    })
+}
+
+module.exports = Object.freeze({ exports: lazyExports, utils: lazyUtils })

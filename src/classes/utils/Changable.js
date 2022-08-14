@@ -2,10 +2,17 @@ const valuesSymbol = Symbol('values');
 
 class Changable {
     constructor(changeCallback, startValues) {
-        this[valuesSymbol] = Object.assign({}, startValues);
+        Object.defineProperty(this, valuesSymbol, {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: Object.assign({}, startValues)
+        })
 
         for (const [key, value] of Object.entries(this[valuesSymbol]))
             Object.defineProperty(this, key, {
+                configurable: false,
+                enumerable: true,
                 get: () => this[valuesSymbol][key],
                 set: newValue => {
                     let old = Object.assign({}, this[valuesSymbol]);
@@ -28,4 +35,4 @@ class Changable {
     }
 }
 
-module.exports = Object.freeze({ Changable })
+module.exports = Changable

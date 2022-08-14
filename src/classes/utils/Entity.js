@@ -137,7 +137,7 @@ class Entity extends EventEmitter {
             ], {
                 got: observable,
                 expectationType: 'value',
-                expectation: Object.keys(this[os.observables])
+                expectation: Object.keys(this[ps.observables])
             }, this.observe).toString()
 
         this[ps.observables][observable].push(cb)
@@ -360,4 +360,4 @@ function getEntity(type) {
     return undefined;
 }
 
-module.exports = Object.freeze({ Entity });
+module.exports = Entity

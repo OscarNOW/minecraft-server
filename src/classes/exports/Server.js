@@ -380,4 +380,4 @@ function parseLegacyPing(requestLeft) {
 
 
 
-module.exports = Object.freeze({ Server });
+module.exports = Server;

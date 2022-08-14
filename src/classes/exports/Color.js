@@ -204,4 +204,4 @@ class Color {
     }
 }
 
-module.exports = Object.freeze({ Color });
+module.exports = Color;

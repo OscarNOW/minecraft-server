@@ -212,7 +212,7 @@ class Text {
                         expectationType: 'value',
                         expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],
                     }, Text.stringToArray).toString()
-                else
+                else {
                     if (textColors.find(({ char }) => char == val)) {
                         let copy = Object.assign([], currentModifiers);
                         arr.push({
@@ -244,6 +244,8 @@ class Text {
                             currentModifiers.push(textModifiers.find(({ char }) => char == val).name)
                         }
                     }
+                }
+
                 return isModifier = false;
             }
 
@@ -391,4 +393,4 @@ function chatLevelDifferenceAmount(a, b) {
     return difference;
 }
 
-module.exports = Object.freeze({ Text });
+module.exports = Text;

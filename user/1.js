@@ -22,7 +22,7 @@ let armorStand;
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
 
-    let isFirst = server.playerCount == 1;
+    let isFirst = server.clients.length == 1;
 
     if (isFirst)
         client.observe('position', pos => {

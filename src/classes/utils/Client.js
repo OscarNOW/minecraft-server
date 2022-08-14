@@ -424,4 +424,4 @@ class Client extends EventEmitter {
     }
 }
 
-module.exports = Object.freeze({ Client })
+module.exports = Client

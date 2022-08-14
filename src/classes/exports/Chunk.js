@@ -79,4 +79,4 @@ function getBlock(blockName, { function: func }) {
     }, this[func]).toString()
 }
 
-module.exports = Object.freeze({ Chunk });
+module.exports = Chunk;

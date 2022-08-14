@@ -18,6 +18,7 @@
         "WeakMap": true,
         "Promise": true,
         "BigInt": true,
-        "Symbol": true
+        "Symbol": true,
+        "Set": true
     }
 }

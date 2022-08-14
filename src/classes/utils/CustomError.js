@@ -89,4 +89,4 @@ function consecutive(a) {
     return true;
 }
 
-module.exports = Object.freeze({ CustomError });
+module.exports = CustomError

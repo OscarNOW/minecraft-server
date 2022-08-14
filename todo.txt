@@ -36,7 +36,7 @@ Update Text
     Update tests
         Create new ones for new features
 Implement convertToType function in all type generators
-Prevent loading from classes until they are used
+Make data loader lazy load data
 Change forEach to for of
     Careful with return -> continue
 Resolve "todo: " and "not implemented" in code
