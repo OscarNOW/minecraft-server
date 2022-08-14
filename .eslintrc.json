@@ -15,6 +15,9 @@
         "no-const-assign": "error"
     },
     "globals": {
-        "WeakMap": true
+        "WeakMap": true,
+        "Promise": true,
+        "BigInt": true,
+        "Symbol": true
     }
 }

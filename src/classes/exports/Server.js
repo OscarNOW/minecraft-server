@@ -22,7 +22,7 @@ class Server extends EventEmitter {
         super();
 
         this.serverList = serverList ?? (() => ({}));
-        this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.wrongVersionConnectMessage.replace('{version}', settings.version));
+        this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}', settings.version));
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
@@ -30,19 +30,19 @@ class Server extends EventEmitter {
             encryption: true,
             host: 'localhost',
             version: settings.version,
-            motd: settings.defaults.motd,
-            maxPlayers: settings.defaults.maxPlayers,
+            motd: settings.defaults.serverList.motd,
+            maxPlayers: settings.defaults.serverList.maxPlayers,
             keepAlive: false,
             hideErrors: true,
             beforePing: (response, client) => {
-                let info = this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
+                let info = Object.assign({}, this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) }));
                 let infoVersion = info.version?.correct ?? settings.version;
 
                 if (!info) info = {};
                 if (!info.players) info.players = {};
-                if (info.players.max === undefined) info.players.max = settings.defaults.maxPlayers;
+                if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
                 if (info.players.online === undefined) info.players.online = this.clients.length;
-                if (info.description === undefined) info.description = settings.defaults.motd;
+                if (info.description === undefined) info.description = settings.defaults.serverList.motd;
 
                 let playerHover = [];
                 if (info?.players?.hover === undefined)

@@ -40,7 +40,6 @@ Prevent loading from classes until they are used
 Change forEach to for of
     Careful with return -> continue
 Resolve "todo: " and "not implemented" in code
-Move settings.json defaults "maxPlayers", "motd", "wrongVersionConnectMessage" to separate serverList object
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Remove eventEmitter
 Object.freeze client.entities{
