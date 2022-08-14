@@ -1,4 +1,4 @@
-# ![Minecraft Server](/minecraft-server/assets/Minecraft%20Server.png)
+# ![Minecraft Server](/minecraft-server/assets/Minecraft%20Server/docs.png)
 
 <p align="center">
     <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">

@@ -14,6 +14,8 @@ readme[licensePosition] = `
 `
 readme = readme.join('\n')
 
+readme = readme.replace(/\/github\.webp/g, '/docs.png');
+
 readme = readme.replace(/\/assets\//g, '/minecraft-server/assets/');
 
 fs.writeFileSync(path.resolve(__dirname, './Readme.md'), readme);
