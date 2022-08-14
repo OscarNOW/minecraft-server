@@ -41,7 +41,7 @@ class Server extends EventEmitter {
                 if (!info) info = {};
                 if (!info.players) info.players = {};
                 if (info.players.max === undefined) info.players.max = settings.defaults.maxPlayers;
-                if (info.players.online === undefined) info.players.online = this.playerCount;
+                if (info.players.online === undefined) info.players.online = this.clients.length;
                 if (info.description === undefined) info.description = settings.defaults.motd;
 
                 let playerHover = [];
@@ -298,10 +298,6 @@ class Server extends EventEmitter {
             }, this.rawListeners).toString()
 
         return super.rawListeners(event);
-    }
-
-    get playerCount() {
-        return this.clients.length;
     }
 
     close() {

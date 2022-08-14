@@ -56,11 +56,10 @@ import { EventEmitter } from 'events';export class Chunk {
         defaultClientProperties?(client: Client): defaultClientProperties;
     });
 
+    readonly clients: Array<Client>;
+
     private server: any;
     private intervals: NodeJS.Timer[];
-
-    readonly clients: Array<Client>;
-    readonly playerCount: number;
 
     close(): void;
 
