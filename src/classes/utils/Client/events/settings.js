@@ -74,7 +74,6 @@ module.exports = {
                 expectation: [0, 1]
             }).toString()
 
-        this.p.readyStates.clientSettings = true;
-        this.p.updateCanUsed();
+        this.p.stateHandler.updateState.packetReceived.call(this, 'settings')
     }
 }

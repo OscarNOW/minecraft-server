@@ -5,7 +5,7 @@ const { EventEmitter } = require('events');
 const fs = require('fs');
 const path = require('path');
 
-const  CustomError  = require('./CustomError.js');
+const CustomError = require('./CustomError.js');
 
 const _p = Symbol('_privates');
 const events = Object.freeze([
@@ -39,10 +39,6 @@ class Client extends EventEmitter {
             host,
             port
         }
-
-        this.p.client.socket.addListener('close', () => {
-            this.p.updateCanUsed();
-        });
 
         //Inject private static properties
         Object.entries(
@@ -133,15 +129,8 @@ class Client extends EventEmitter {
             )
         )
 
-        //Inject events
-        for (const [eventName, eventCallback] of Object.entries(
-            Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/events/'))
-                .filter(a => a.endsWith('.js'))
-                .map(a => require(`./Client/events/${a}`))
-            )
-        ))
-            this.p.client.on(eventName, eventCallback.bind(this))
+        //Initialize stateHandler
+        this.p.stateHandler.init.call(this);
 
         //Set default public dynamic properties
         let callAfterLogin = [];
@@ -232,6 +221,16 @@ class Client extends EventEmitter {
         this.p.sendPacket('login', loginPacket);
 
         callAfterLogin.forEach(a => a());
+
+        //Inject events
+        for (const [eventName, eventCallback] of Object.entries(
+            Object.assign({}, ...fs
+                .readdirSync(path.resolve(__dirname, './Client/events/'))
+                .filter(a => a.endsWith('.js'))
+                .map(a => require(`./Client/events/${a}`))
+            )
+        ))
+            this.p.client.on(eventName, eventCallback.bind(this))
 
         //Keep alive packets
         let clientKeepAliveKick = 30000;

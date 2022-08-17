@@ -10,6 +10,7 @@ const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
 
 const events = Object.freeze([
+    'connect',
     'join',
     'leave'
 ])

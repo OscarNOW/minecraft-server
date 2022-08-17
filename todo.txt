@@ -3,12 +3,14 @@ Expand CustomError
     Not implemented
     Action can't be performed right now
     Can't set
-Reimplement canUsed
-    Change loadWorld method to join listener for Client and connect listener (see user\2 for example)
+-Reimplement canUsed
+    -Change loadWorld method to join listener for Client and connect listener (see user\2 for example)
         Implement client.on('join')
         Update examples
         Update readme
         Update FAQ
+        Update types
+        Implement server events, but on Client
 Change file structure so that every class gets its own folder
 Create guide
     Update readme
@@ -45,3 +47,5 @@ Remove eventEmitter
 Object.freeze client.entities{
 Create JS minifier
 Circular reference in client.entities, meaning a client class never gets garbage collected
+Move keepAlive packets into separate file
+Update CustomError from 'in the function...' to 'className.functionName'

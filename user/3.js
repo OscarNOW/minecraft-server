@@ -19,8 +19,5 @@ const server = new Server({
 
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })
-
-    client.observe('position', console.log)
-
     client.loadWorld()
 })
