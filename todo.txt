@@ -8,8 +8,7 @@ Expand CustomError
         Implement client.on('join')
         Update examples
         Update readme
-        Update FAQ
-        -Update types
+        Update FAQ        
         Implement server events, but on Client
         Remove duplicate code checking if action can be performed on Client
 Change file structure so that every class gets its own folder

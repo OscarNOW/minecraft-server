@@ -3,6 +3,7 @@ const CustomError = require('../../../../CustomError.js');
 const states = Object.freeze([
     'connecting',
     'connected',
+    'loginSent',
     'settingsReceived',
     'clientSpawned',
     'offline'
@@ -16,13 +17,22 @@ module.exports = {
             this.p.stateHandler.updateState.set.call(this, 'connected');
         },
 
-        handleNewState: function (stateName) {
-            if (stateName == 'settingsReceived') {
+        handleNewState: function (currentState) {
+            let nextState = states[states.indexOf(currentState) + 1];
+
+            if (nextState == 'loginSent') {
+
+                this.p.sendLogin();
+                this.p.stateHandler.updateState.set.call(this, 'loginSent');
+
+            } else if (nextState == 'clientSpawned') {
+
                 this.server.emit('connect', this);
-                this.p.stateHandler.updateState.set.call(this, 'clientSpawned');
-            } else if (stateName == 'clientSpawned') {
                 this.position = {};
                 this.server.emit('join', this);
+
+                this.p.stateHandler.updateState.set.call(this, 'clientSpawned');
+
             }
         },
 
