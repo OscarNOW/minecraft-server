@@ -15,7 +15,7 @@
 | ⚠ WARNING: The only current supported Minecraft version for this library is `1.16.3` |
 | -------------------------------------------------------------------------------------------- |
 
-Create Minecraft Servers with an easy to use API and with full control.
+Create Minecraft Servers with an easy to use API and with full control
 
 This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
