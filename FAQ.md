@@ -8,8 +8,8 @@
 ## The client is stuck on the screen "loading terrain..."
 In order for the Client to spawn in the world, you need to call the loadWorld method. Here's an example:
 ```js
-server.on('join', client => {    
-    //Here you can send chunks, spawn entities, listen for events, etc   
+server.on('join', client => {
+    //Here you can send chunks, spawn entities, listen for events, etc
 
     client.loadWorld()
 })
@@ -44,5 +44,5 @@ const server = new Server({
     defaultClientProperties: client => ({
         gamemode: client.username == 'notch' ? 'creative' : 'survival'
     })
-})    
+})
 ```

@@ -20,7 +20,7 @@ Create Minecraft Servers with an easy to use API and with full control
 This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
 ## **Installation and usage**
-1. Install with `npm i minecraft-server`. 
+1. Install with `npm i minecraft-server`.
 2. Now you can use the library. Here's some example code:
 ```js
 const { Server } = require('minecraft-server');
@@ -51,7 +51,7 @@ If you have any questions please first read the [FAQ](https://github.com/OscarNO
 A client is a person that is (going to be) connected to the server.
 
 ### Player
-A player is just a type of [entity](#entity). It is the thing that a [client](#client) sees, when they see other people. Each [client](#client) has it's own players. Here's an example: 
+A player is just a type of [entity](#entity). It is the thing that a [client](#client) sees, when they see other people. Each [client](#client) has it's own players. Here's an example:
 
 * Notch ([Client](#client))
     * jeb_ (Player)
