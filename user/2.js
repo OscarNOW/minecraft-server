@@ -1,7 +1,7 @@
 const { Server } = require('../');
 const server = new Server({
     defaultClientProperties: client => {
-        console.log(client.rightHanded)
+        client.actionBar('Hello')
 
         return {}
     }

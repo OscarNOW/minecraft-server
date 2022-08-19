@@ -13,6 +13,17 @@ module.exports = {
     state: () => states[0],
     stateHandler: () => ({
 
+        checkReady: function () {
+            const loginSentIndex = states.indexOf('loginSent');
+            const currentIndex = states.indexOf(this.p.state);
+            const offlineIndex = states.indexOf('offline');
+
+            if (currentIndex < loginSentIndex)
+                throw new Error("Can't perform this action on this Client yet")
+            else if (currentIndex >= offlineIndex)
+                throw new Error("Can't perform this action on this Client, because the Client is offline")
+        },
+
         init: function () {
             this.p.stateHandler.updateState.set.call(this, 'connected');
         },

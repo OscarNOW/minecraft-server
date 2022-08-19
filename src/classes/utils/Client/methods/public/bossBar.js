@@ -1,8 +1,8 @@
 const { defaults } = require('../../../../../settings.json')
 
 const { uuid } = require('../../../../../functions/uuid.js');
-const  Changable  = require('../../../Changable.js');
-const  Text  = require('../../../../exports/Text.js');
+const Changable = require('../../../Changable.js');
+const Text = require('../../../../exports/Text.js');
 const { bossBars } = require('../../properties/public/dynamic/bossBars.js');
 
 const colors = {
@@ -25,11 +25,7 @@ const divisionIds = {
 
 module.exports = {
     bossBar: function ({ title = defaults.bossBar.title, health = defaults.bossBar.health, color = defaults.bossBar.color, divisionAmount = defaults.bossBar.divisionAmount, flags: { darkenSky = defaults.bossBar.flags.darkenSky, playEndMusic = defaults.bossBar.flags.playEndMusic, createFog = defaults.bossBar.flags.createFog } = defaults.bossBar.flags } = defaults.bossBar) {
-        if (!this.p.canUsed)
-            if (this.online)
-                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-            else
-                throw new Error(`Can't perform this action on an offline player`)
+        this.p.stateHandler.checkReady.call(this);
 
         let bossBarUuid = uuid();
         let bossBarVisible = true;
@@ -43,11 +39,7 @@ module.exports = {
         let onFlagsChanged = newFlags => {
             if (!bossBarVisible) return;
 
-            if (!this.p.canUsed)
-                if (this.online)
-                    throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-                else
-                    throw new Error(`Can't perform this action on an offline player`)
+            this.p.stateHandler.checkReady.call(this);
 
             let darkenSkyChanged = flags.darkenSky != newFlags.darkenSky;
             let playEndMusicChanged = flags.playEndMusic != newFlags.playEndMusic;
@@ -114,11 +106,7 @@ module.exports = {
 
             if (!bossBarVisible) return;
 
-            if (!this.p.canUsed)
-                if (this.online)
-                    throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-                else
-                    throw new Error(`Can't perform this action on an offline player`)
+            this.p.stateHandler.checkReady.call(this);
 
             let healthChanged = i.health != values.health;
             let titleChanged = i.title.hash != values.title.hash;

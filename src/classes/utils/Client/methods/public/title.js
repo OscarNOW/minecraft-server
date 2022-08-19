@@ -4,11 +4,7 @@ const Text = require('../../../../exports/Text');
 
 module.exports = {
     title: function (p) {
-        if (!this.p.canUsed)
-            if (this.online)
-                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-            else
-                throw new Error(`Can't perform this action on an offline player`)
+        this.p.stateHandler.checkReady.call(this);
 
         let properties = p;
         if (properties === undefined) properties = {};
