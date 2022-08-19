@@ -26,8 +26,7 @@ This is a library that gives you access to an easy to use API that you can use t
 const { Server } = require('minecraft-server');
 const server = new Server();
 
-server.on('join', client => {
-    client.loadWorld();
+server.on('connect', client => {
 
     console.log(`${client.username} joined`);
     client.chat(`Hello world, ${client.username}`);

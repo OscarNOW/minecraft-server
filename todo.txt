@@ -4,8 +4,7 @@ Expand CustomError
     Action can't be performed right now
     Can't set
 -Reimplement canUsed
-    -Change loadWorld method to join listener for Client and connect listener (see user\2 for example)        
-        Update readme
+    -Change loadWorld method to join listener for Client and connect listener (see user\2 for example)                
         Update FAQ
         Implement server events, but on Client
 Change file structure so that every class gets its own folder
