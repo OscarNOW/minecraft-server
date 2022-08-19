@@ -20,7 +20,6 @@ const message = new Text([
 
 const server = new Server()
 
-server.on('join', client => {
-    client.loadWorld()
+server.on('connect', client => {
     client.chat(message)
 })

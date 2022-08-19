@@ -1,5 +1,6 @@
-const fs = require('fs');
 const { Server, Text } = require('minecraft-server');
+const fs = require('fs');
+
 const server = new Server({
 
     serverList: ({ ip, connection: { host, port }, version }) => ({

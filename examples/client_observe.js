@@ -1,7 +1,6 @@
 const { Server } = require('minecraft-server')
 const server = new Server()
 
-server.on('join', client => {
-    client.observe('slot', slot => console.log(`Client switched slot to ${slot}`))
-    client.loadWorld()
+server.on('connect', client => {
+    client.observe('slot', slot => console.log(`${client.username} switched slot to ${slot}`))
 })

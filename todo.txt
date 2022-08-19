@@ -4,13 +4,10 @@ Expand CustomError
     Action can't be performed right now
     Can't set
 -Reimplement canUsed
-    -Change loadWorld method to join listener for Client and connect listener (see user\2 for example)
-        Implement client.on('join')
-        Update examples
+    -Change loadWorld method to join listener for Client and connect listener (see user\2 for example)        
         Update readme
-        Update FAQ        
+        Update FAQ
         Implement server events, but on Client
-        Remove duplicate code checking if action can be performed on Client
 Change file structure so that every class gets its own folder
 Create guide
     Update readme
