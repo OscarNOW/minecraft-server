@@ -407,7 +407,7 @@ export class Chunk {
     playerArrowHitSound(): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
-    on(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    on(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -430,7 +430,7 @@ export class Chunk {
     }) => void): void;
 
     once(event: 'chat', callback: (message: string) => void): void;
-    once(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    once(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     once(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -453,7 +453,7 @@ export class Chunk {
     ) => void): void;
 
     addListener(event: 'chat', callback: (message: string) => void): void;
-    addListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    addListener(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     addListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -467,7 +467,7 @@ export class Chunk {
     addListener(event: 'itemDrop', callback: (stack: boolean) => void): void;
 
     prependListener(event: 'chat', callback: (message: string) => void): void;
-    prependListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    prependListener(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     prependListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -490,7 +490,7 @@ export class Chunk {
     ) => void): void;
 
     prependOnceListener(event: 'chat', callback: (message: string) => void): void;
-    prependOnceListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    prependOnceListener(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     prependOnceListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -513,7 +513,7 @@ export class Chunk {
     ) => void): void;
 
     off(event: 'chat', callback: (message: string) => void): void;
-    off(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    off(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     off(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -536,7 +536,7 @@ export class Chunk {
     ) => void): void;
 
     removeListener(event: 'chat', callback: (message: string) => void): void;
-    removeListener(event: 'leave' | 'itemHandSwap', callback: () => void): void;
+    removeListener(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     removeListener(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -559,7 +559,7 @@ export class Chunk {
     ) => void): void;
 
     rawListeners(event: 'chat'): ((message: string) => void)[];
-    rawListeners(event: 'leave' | 'itemHandSwap'): (() => void)[];
+    rawListeners(event: 'itemHandSwap' | 'connect' | 'join' | 'leave'): (() => void)[];
     rawListeners(event: 'digStart'): ((location: {
         x: number;
         y: number;
@@ -581,7 +581,7 @@ export class Chunk {
         isMainHand: boolean
     ) => void)[];
 
-    removeAllListeners(event?: 'chat' | 'leave' | 'itemHandSwap' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
+    removeAllListeners(event?: 'chat' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 }declare class CustomError {
     constructor(
         type: 'expectationNotMet',
