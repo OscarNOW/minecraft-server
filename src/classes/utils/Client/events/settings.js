@@ -1,5 +1,7 @@
 const { languages } = require('../../../../functions/loader/data.js');
 
+const settingsSent = new WeakSet();
+
 const CustomError = require('../../CustomError.js');
 
 module.exports = {
@@ -74,6 +76,9 @@ module.exports = {
                 expectation: [0, 1]
             }).toString()
 
-        this.p.stateHandler.updateState.packetReceived.call(this, 'settings')
+        if (!settingsSent.has(this)) {
+            settingsSent.add(this)
+            this.p.stateHandler.updateState.packetReceived.call(this, 'settings')
+        }
     }
 }

@@ -19,6 +19,7 @@
         "Promise": true,
         "BigInt": true,
         "Symbol": true,
-        "Set": true
+        "Set": true,
+        "WeakSet": true
     }
 }
