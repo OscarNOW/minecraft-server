@@ -38,12 +38,19 @@ module.exports = {
 
             } else if (nextState == 'clientSpawned') {
 
+                this.emit('connect');
                 this.server.emit('connect', this);
                 this.position = {};
+                this.emit('join');
                 this.server.emit('join', this);
 
                 this.p.stateHandler.updateState.set.call(this, 'clientSpawned');
 
+            }
+
+            if (currentState == 'offline') {
+                this.emit('leave');
+                this.server.emit('leave', this);
             }
         },
 

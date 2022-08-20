@@ -7,14 +7,16 @@ const CustomError = require('./CustomError.js');
 const _p = Symbol('_privates');
 const events = Object.freeze([
     'chat',
-    'leave',
     'digStart',
     'digCancel',
     'blockBreak',
     'itemDrop',
     'itemHandSwap',
     'leftClick',
-    'rightClick'
+    'rightClick',
+    'connect',
+    'join',
+    'leave'
 ]);
 
 class Client extends EventEmitter {
