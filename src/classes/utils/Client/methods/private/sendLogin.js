@@ -87,14 +87,13 @@ module.exports = {
             .flat()
             .filter(a => a.info?.loginPacket)
             .forEach(file => {
-                file.info.loginPacket.forEach(key => {
+                for (const key of file.info.loginPacket)
                     if (loginPacket[key] === undefined)
                         loginPacket[key] = defaults[key];
-                })
             })
 
         this.p.sendPacket('login', loginPacket);
 
-        callAfterLogin.forEach(a => a());
+        for (const a of callAfterLogin) a();
     }
 }

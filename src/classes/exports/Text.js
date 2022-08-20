@@ -2,7 +2,7 @@ const { textModifiers, textColors } = require('../../functions/loader/data');
 
 const crypto = require('crypto')
 
-const CustomError  = require('../utils/CustomError.js');
+const CustomError = require('../utils/CustomError.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
@@ -98,26 +98,26 @@ class Text {
         let currentModifiers = [];
         let currentColor = 'default';
 
-        array.forEach(val => {
-            if (val.text == '') return;
+        for (const val of array) {
+            if (val.text == '') continue;
 
             let modCanExtend = true;
-            currentModifiers.forEach(v => {
-                if (!val.modifiers.includes(v)) modCanExtend = false;
-            })
+            for (const currentModifier of currentModifiers)
+                if (!val.modifiers.includes(currentModifier))
+                    modCanExtend = false;
 
             let newMod = [];
             if (modCanExtend)
-                val.modifiers.forEach(v => {
-                    if (!currentModifiers.includes(v)) newMod.push(v);
-                })
+                for (const modifier of val.modifiers)
+                    if (!currentModifiers.includes(modifier))
+                        newMod.push(modifier);
 
             if (val.color == currentColor)
                 if (modCanExtend) {
                     currentModifiers = val.modifiers;
-                    newMod.forEach(v => {
+                    for (const v of newMod)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
-                    })
+
                     text += val.text
                 } else {
                     currentModifiers = val.modifiers;
@@ -125,9 +125,8 @@ class Text {
                     if (val.color != 'default')
                         text += `§${textColors.find(({ name }) => name == val.color).char}`
 
-                    val.modifiers.forEach(v => {
-                        text += `§${textModifiers.find(({ name }) => name == v).char}`
-                    })
+                    for (const modifier of val.modifiers)
+                        text += `§${textModifiers.find(({ name }) => name == modifier).char}`
 
                     text += val.text
                 }
@@ -136,9 +135,9 @@ class Text {
                 currentModifiers = val.modifiers
                 text += '§r'
 
-                val.modifiers.forEach(v => {
-                    text += `§${textModifiers.find(({ name }) => name == v).char}`
-                })
+                for (const modifier of val.modifiers)
+                    text += `§${textModifiers.find(({ name }) => name == modifier).char}`
+
                 text += val.text;
 
             } else {
@@ -147,20 +146,22 @@ class Text {
 
                 if (modCanExtend) {
                     text += `§${textColors.find(({ name }) => name == val.color).char}`
-                    newMod.forEach(v => {
+
+                    for (const v of newMod)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
-                    })
+
                     text += val.text;
                 } else {
                     text += `§r§${textColors.find(({ name }) => name == val.color).char}`
-                    val.modifiers.forEach(v => {
+
+                    for (const v of val.modifiers)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
-                    })
+
                     text += val.text;
                 }
 
             }
-        })
+        }
 
         return text;
     }
@@ -169,7 +170,7 @@ class Text {
             text = [text]
         let array = [];
 
-        text.forEach(val => {
+        for (const val of text) {
             let obj;
 
             if (typeof val == 'string')
@@ -186,7 +187,7 @@ class Text {
                 };
 
             array.push(obj);
-        });
+        };
 
         array = array.filter(val => val.text !== '')
 
@@ -200,7 +201,7 @@ class Text {
         let currentColor = 'default';
         let currentModifiers = [];
 
-        text.split('').forEach(val => {
+        for (const val of text.split('')) {
             if (isModifier) {
                 if (!textColors.find(({ char }) => char == val) && !textModifiers.find(({ char }) => char == val))
                     throw new CustomError('expectationNotMet', 'libraryUser', [
@@ -246,14 +247,15 @@ class Text {
                     }
                 }
 
-                return isModifier = false;
+                isModifier = false;
+                continue;
             }
 
             if (val == '§')
                 isModifier = true;
             else
                 current += val;
-        })
+        }
 
         arr.push({
             text: current,

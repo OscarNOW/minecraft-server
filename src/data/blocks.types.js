@@ -1,12 +1,11 @@
 let blockStates = require('./blocks.json').map(a => a.states).flat().map(a => [a.name, a.values])
 let newBlockStates = [];
 
-blockStates.forEach(([name, values]) => {
-    if (newBlockStates.find(([foundName, foundValues]) => name === foundName))
-        newBlockStates.find(([foundName, foundValues]) => name === foundName)[1] = [... new Set(values.concat(newBlockStates.find(([foundName, foundValues]) => name === foundName)[1]))]
+for (const [name, values] of blockStates)
+    if (newBlockStates.find(([foundName]) => name === foundName))
+        newBlockStates.find(([foundName]) => name === foundName)[1] = [... new Set(values.concat(newBlockStates.find(([foundName]) => name === foundName)[1]))]
     else
         newBlockStates.push([name, values])
-})
 
 module.exports = {
     blockType: require('./blocks.json').map(a => a.name).map(a => `'${a}'`).join('|'),

@@ -11,18 +11,18 @@ module.exports = {
         let oldY = parseInt(this.position.y);
 
         let changed = false;
-        [
+        for (const val of [
             'x',
             'y',
             'z',
             'pitch',
             'yaw'
-        ].forEach(val => {
+        ])
             if (info[val] !== undefined && this.p._position[val] != info[val]) {
                 changed = true;
                 this.p._position.setRaw(val, info[val]);
             }
-        });
+
         this.onGround = info.onGround;
 
         let newChunk = {

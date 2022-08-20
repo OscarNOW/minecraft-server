@@ -184,7 +184,7 @@ if (debug) {
 
     if (!silenceWarnings & jsonOut.warnings.length > 0) {
         console.log(`${colors.bg.yellow}${colors.fg.black} WARNINGS ${colors.reset}`)
-        jsonOut.warnings.forEach(v => console.log(v));
+        for (const v of jsonOut.warnings) console.log(v)
         console.log();
     }
 })();

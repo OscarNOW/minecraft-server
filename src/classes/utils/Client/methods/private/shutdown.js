@@ -1,7 +1,7 @@
 module.exports = {
     shutdown: function () {
         this.p.stateHandler.updateState.close.call(this);
-        this.p.intervals.forEach(interval => clearInterval(interval));
-        this.p.timeouts.forEach(timeout => clearInterval(timeout));
+        for (const interval of this.p.intervals) clearInterval(interval);
+        for (const timeout of this.p.timeouts) clearInterval(timeout);
     }
 }

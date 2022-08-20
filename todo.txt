@@ -31,8 +31,6 @@ Update Text
         Create new ones for new features
 Implement convertToType function in all type generators
 Make data loader lazy load data
-Change forEach to for of
-    Careful with return -> continue
 Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Remove eventEmitter

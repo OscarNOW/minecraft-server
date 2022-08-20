@@ -27,7 +27,7 @@ function getStateId(blockName, state = {}, { function: func }) {
     if (!block.states) return block.minStateId;
 
     let stateIds = [];
-    block.states.forEach(({ name, values }) => {
+    for (const { name, values } of block.states) {
         if (values.indexOf(state[name]) === -1)
             throw new CustomError('expectationNotMet', 'libraryUser', [
                 ['', 'state', ''],
@@ -45,7 +45,7 @@ function getStateId(blockName, state = {}, { function: func }) {
             }, this[func]).toString()
 
         stateIds.push(values.indexOf(state[name]))
-    })
+    }
 
     let maxi = block.states.map(a => a.values.length)
 
@@ -55,7 +55,7 @@ function getStateId(blockName, state = {}, { function: func }) {
         let maxiBefore = maxi.slice(0, currentStateIdIndex)
         let currentStateIdAndBefore = currentStateId;
 
-        maxiBefore.forEach(a => currentStateIdAndBefore *= a)
+        for (const a of maxiBefore) currentStateIdAndBefore *= a
 
         stateId += currentStateIdAndBefore
     })

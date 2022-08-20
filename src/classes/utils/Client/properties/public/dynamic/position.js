@@ -40,13 +40,13 @@ module.exports = {
             let useRelative = '';
             let values = {};
 
-            [
+            for (const key of [
                 'pitch',
                 'yaw',
                 'z',
                 'y',
                 'x',
-            ].forEach(key => {
+            ]) {
                 let val = pos[key] ?? oldPosition[key];
 
                 if (oldPosition && (!oldPosition.isFirst) && (Math.abs(val - oldPosition[key]) < Math.abs(val))) {
@@ -56,7 +56,7 @@ module.exports = {
                     useRelative += '0'
                     values[key] = val
                 }
-            });
+            };
 
             this.p.positionSet = true;
 

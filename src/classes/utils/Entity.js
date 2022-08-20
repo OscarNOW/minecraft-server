@@ -4,8 +4,8 @@ const { entities, entityAnimations, sounds, soundChannels } = require('../../fun
 const { uuid } = require('../../functions/uuid.js');
 const { EventEmitter } = require('events');
 
-const  CustomError = require('./CustomError.js')
-const  Changable  = require('./Changable.js');
+const CustomError = require('./CustomError.js')
+const Changable = require('./Changable.js');
 
 const ps = Object.fromEntries([ // privateSymbols
     '_position',
@@ -39,16 +39,15 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
     });
 
     let changed = false;
-    [
+    for (const val of [
         'x',
         'y',
         'z',
         'yaw',
         'pitch'
-    ].forEach(val => {
+    ])
         if (arguments[0][val] !== undefined && oldValue[val] !== arguments[0][val])
             changed = true;
-    })
 
     if (changed)
         this[ps.emitObservable]('position')

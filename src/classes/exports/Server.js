@@ -303,7 +303,7 @@ class Server extends EventEmitter {
 
     close() {
         setTimeout(() => {
-            this.clients.forEach(client => client.p.shutdown());
+            for (const client of this.clients) client.p.shutdown();
             this.server.close();
         }, 10)
     }

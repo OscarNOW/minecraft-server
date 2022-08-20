@@ -41,26 +41,24 @@ class Client extends EventEmitter {
         }
 
         //Inject private static properties
-        Object.entries(
+        for (const [key, value] of Object.entries(
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/properties/private/static/'))
                 .filter(v => v.endsWith('.js'))
                 .map(v => require(`./Client/properties/private/static/${v}`))
             )
-        ).forEach(([key, value]) =>
+        ))
             this.p[key] = value.call(this)
-        )
 
         //Inject private methods
-        Object.entries(
+        for (const [key, value] of Object.entries(
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/methods/private/'))
                 .filter(v => v.endsWith('.js'))
                 .map(v => require(`./Client/methods/private/${v}`))
             )
-        ).forEach(([key, value]) =>
+        ))
             this.p[key] = value.bind(this)
-        )
 
         //Inject public methods
         Object.defineProperties(this,

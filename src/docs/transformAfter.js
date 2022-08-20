@@ -13,7 +13,7 @@ menu = menu.substring(0, menu.indexOf('</div>') + 6);
 
 let newTopMenu = menu;
 
-getAllIndexes(menu, `<li><a class="category__link js-category-link category__link--ts" href="`).forEach(index => {
+for (const index of getAllIndexes(menu, `<li><a class="category__link js-category-link category__link--ts" href="`)) {
     let value = menu.substring(index + `<li><a class="category__link js-category-link category__link--ts" href="`.length);
     value = value.substring(0, value.indexOf(`</a>`) + 4);
 
@@ -23,7 +23,7 @@ getAllIndexes(menu, `<li><a class="category__link js-category-link category__lin
 
     let url = `${isClass ? 'classes' : 'types'}/${name}.html`
     newTopMenu = newTopMenu.replace(value, `${url}" data-id="/${url}">${name}</a>`);
-});
+};
 
 let newInnerMenu = newTopMenu;
 
@@ -31,27 +31,26 @@ newInnerMenu = newInnerMenu.replace(/classes\//g, '../classes/');
 newInnerMenu = newInnerMenu.replace(/types\//g, '../types/');
 
 console.log('Writing menu...');
-[
+for (const file of [
     'index.html',
     'modules.html',
     ...fs.readdirSync(path.resolve(__dirname, '../../docs/classes')).map(file => `classes/${file}`),
     ...fs.readdirSync(path.resolve(__dirname, '../../docs/types')).map(file => `types/${file}`)
-]
-    .forEach(file => {
-        console.log(`   ${file}`)
+]) {
+    console.log(`   ${file}`)
 
-        let content = fs.readFileSync(path.resolve(__dirname, `../../docs/${file}`)).toString();
+    let content = fs.readFileSync(path.resolve(__dirname, `../../docs/${file}`)).toString();
 
-        let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
-        thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
+    let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
+    thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
 
-        if (file.includes('/'))
-            content = content.replace(thisMenu, newInnerMenu);
-        else
-            content = content.replace(thisMenu, newTopMenu);
+    if (file.includes('/'))
+        content = content.replace(thisMenu, newInnerMenu);
+    else
+        content = content.replace(thisMenu, newTopMenu);
 
-        fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
-    });
+    fs.writeFileSync(path.resolve(__dirname, `../../docs/${file}`), content);
+};
 
 console.log('Writing overwrites...')
 console.log('   style.css')
