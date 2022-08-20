@@ -31,6 +31,14 @@ module.exports = {
         handleNewState: function (currentState) {
             let nextState = states[states.indexOf(currentState) + 1];
 
+            if (currentState == 'clientSpawned') {
+                this.emit('join');
+                this.server.emit('join', this);
+            } else if (currentState == 'offline') {
+                this.emit('leave');
+                this.server.emit('leave', this);
+            }
+
             if (nextState == 'loginSent') {
 
                 this.p.sendLogin();
@@ -41,17 +49,11 @@ module.exports = {
                 this.emit('connect');
                 this.server.emit('connect', this);
                 this.position = {};
-                this.emit('join');
-                this.server.emit('join', this);
 
                 this.p.stateHandler.updateState.set.call(this, 'clientSpawned');
 
             }
 
-            if (currentState == 'offline') {
-                this.emit('leave');
-                this.server.emit('leave', this);
-            }
         },
 
         updateState: {
