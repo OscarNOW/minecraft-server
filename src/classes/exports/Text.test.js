@@ -1,4 +1,4 @@
-const Text = require('./Text').Text;
+const Text = require('./Text');
 
 module.exports = expect => {
     expect(Text.stringToArray(''), [])
