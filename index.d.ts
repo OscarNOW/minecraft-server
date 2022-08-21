@@ -111,7 +111,7 @@ import { EventEmitter } from 'events';export class Chunk {
     };
 
     [valueName: string | symbol]: unknown;
-}declare class Client extends EventEmitter {
+}declare class Client {
     private constructor(client: any, server: Server, earlyInformation: {
         version: newVersion;
         ip: string;
