@@ -1,5 +1,5 @@
 module.exports = {
     chat: function ({ message }) {
-        this.emit('chat', message);
+        this.p.emit('chat', message);
     }
 }

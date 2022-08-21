@@ -1,3 +1,4 @@
+const Client = require('../../Client.js');
 const CustomError = require('../../CustomError.js');
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
             }).toString()
 
         this.sneaking = sneaking;
+        let emitter = this.entities[target] instanceof Client ? this.entities[target].p : this.entities[target];
 
         if (mouse == 2) {
             if (hand != 0 && hand != 1)
@@ -17,9 +19,9 @@ module.exports = {
                     got: hand,
                     expectationType: 'value',
                     expectation: [0, 1]
-                }).toString()
+                }).toString();
 
-            this.entities[target].emit('rightClick', {
+            emitter.emit('rightClick', {
                 position: {
                     x: x,
                     y: y,
@@ -30,7 +32,7 @@ module.exports = {
         } else if (mouse == 0)
             return //Duplicate of rightClick
         else if (mouse == 1)
-            this.entities[target].emit('leftClick');
+            emitter.emit('leftClick');
         else
             throw new CustomError('expectationNotMet', 'client', `mouse in  <remote ${this.constructor.name}>.use_entity({ mouse: ${require('util').inspect(mouse)} })  `, {
                 got: mouse,

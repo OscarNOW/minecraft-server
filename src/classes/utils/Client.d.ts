@@ -1,12 +1,10 @@
-import { EventEmitter } from 'events';
-
 type Entity = import('./Entity').Entity;
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
 type Color = import('../exports/Color').Color;
 
-export class Client extends EventEmitter {
+export class Client {
     private constructor(client: any, server: Server, earlyInformation: {
         version: newVersion;
         ip: string;

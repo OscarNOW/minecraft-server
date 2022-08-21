@@ -32,10 +32,10 @@ module.exports = {
             let nextState = states[states.indexOf(currentState) + 1];
 
             if (currentState == 'clientSpawned') {
-                this.emit('join');
+                this.p.emit('join');
                 this.server.emit('join', this);
             } else if (currentState == 'offline') {
-                this.emit('leave');
+                this.p.emit('leave');
                 this.server.emit('leave', this);
             }
 
@@ -46,7 +46,7 @@ module.exports = {
 
             } else if (nextState == 'clientSpawned') {
 
-                this.emit('connect');
+                this.p.emit('connect');
                 this.server.emit('connect', this);
                 this.position = {};
 
