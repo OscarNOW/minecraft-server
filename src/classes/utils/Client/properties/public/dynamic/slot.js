@@ -14,11 +14,7 @@ module.exports = {
             let value = parseInt(v);
 
             if (isNaN(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'slot', ''],
-                    ['in the function "', 'set slot', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'type',
                     expectation: 'number'
@@ -35,11 +31,7 @@ module.exports = {
             let value = parseInt(v);
 
             if (isNaN(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'slot', ''],
-                    ['in the function "', 'setRaw slot', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'type',
                     expectation: 'number'

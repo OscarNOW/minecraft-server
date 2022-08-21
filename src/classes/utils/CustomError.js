@@ -14,7 +14,7 @@ class CustomError {
     }
 
     generateMessage() {
-        let valueName = this.names.map(([prefix, value, suffix]) => prefix + value + suffix).join(' ');
+        let valueName = this.names;
 
         let got = valueToText(this.expectationInfo.got);
 

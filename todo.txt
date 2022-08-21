@@ -26,16 +26,15 @@ Update Text
             Web color
             Click event
             Optimized chat
-            Insertion
-    Update tests
-        Create new ones for new features
+            Insertion    
+    Create new tests for new features
 Implement convertToType function in all type generators
-Make data loader lazy load data
 Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
-Remove eventEmitter
++Remove eventEmitter
+Lazy load Client methods
 Object.freeze client.entities{
 Create JS minifier
 Circular reference in client.entities, meaning a client class never gets garbage collected
 Move keepAlive packets into separate file
-Update CustomError from 'in the function...' to 'className.functionName'
+ExpectationType: 'value' vs 'values'

@@ -47,25 +47,19 @@ module.exports = {
 
         for (const [key, value] of Object.entries(this.p.defaultProperties)) {
             if (!this.p.pubDynProperties[key])
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'default key', ''],
-                    ['in the class ', this.constructor.name, '']
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
                     got: key,
                     expectationType: 'value',
-                    expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
+                    expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
                 }, this.constructor).toString()
 
             let file = this.p.pubDynProperties[key];
 
             if (!file.setRaw)
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'default key', ''],
-                    ['in the class ', this.constructor.name, '']
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
                     got: key,
                     expectationType: 'value',
-                    expectation: ['slot', 'position', 'clearSky', 'showRespawnScreen', 'gamemode', 'health', 'food', 'foodSaturation', 'difficulty']
+                    expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
                 }, this.constructor).toString()
 
             let ret;

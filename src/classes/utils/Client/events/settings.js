@@ -8,11 +8,7 @@ module.exports = {
     settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {
         let langCode = locale.toLowerCase();
         if (!languages[langCode])
-            throw new CustomError('expectationNotMet', 'client', [
-                ['', 'language code', ''],
-                ['in the event ', 'settings', ''],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'client', `locale in  <remote ${this.constructor.name}>.settings({ locale: ${require('util').inspect(langCode)} })  `, {
                 got: langCode,
                 expectationType: 'value',
                 expectation: Object.keys(languages)
@@ -40,11 +36,7 @@ module.exports = {
                 colors: chatColors
             });
         else
-            throw new CustomError('expectationNotMet', 'client', [
-                ['', 'chatFlags', ''],
-                ['in the event ', 'settings', ''],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'client', `chatFlags in  <remote ${this.constructor.name}>.settings({ chatFlags: ${require('util').inspect(chatFlags)} })  `, {
                 got: chatFlags,
                 expectationType: 'value',
                 expectation: [0, 1, 2]
@@ -66,12 +58,8 @@ module.exports = {
         else if (mainHand === 1)
             this.rightHanded = true
         else
-            throw new CustomError('expectationNotMet', 'client', [
-                ['', 'mainHand', ''],
-                ['in the event ', 'settings', ''],
-                ['in the class ', this.constructor.name, '']
-            ], {
-                got: langCode,
+            throw new CustomError('expectationNotMet', 'client', `mainHand in  <remote ${this.constructor.name}>.settings({ mainHand: ${require('util').inspect(mainHand)} })  `, {
+                got: mainHand,
                 expectationType: 'value',
                 expectation: [0, 1]
             }).toString()

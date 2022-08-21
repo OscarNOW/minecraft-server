@@ -12,11 +12,7 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'raining', ''],
-                    ['in the function "', 'set raining', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
@@ -32,11 +28,7 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'raining', ''],
-                    ['in the function "', 'setRaw raining', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'

@@ -15,11 +15,7 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'showRespawnScreen', ''],
-                    ['in the function "', 'set showRespawnScreen', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
@@ -35,11 +31,7 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'showRespawnScreen', ''],
-                    ['in the function "', 'setRaw showRespawnScreen', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'

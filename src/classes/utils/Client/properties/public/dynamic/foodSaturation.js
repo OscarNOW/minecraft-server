@@ -14,11 +14,7 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'foodSaturation', ''],
-                    ['in the function "', 'set foodSaturation', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]
@@ -37,11 +33,7 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'foodSaturation', ''],
-                    ['in the function "', 'setRaw foodSaturation', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]

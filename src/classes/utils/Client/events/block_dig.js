@@ -15,11 +15,7 @@ module.exports = {
             if (faces[face])
                 this.emit('digStart', { x, y, z }, faces[face])
             else
-                throw new CustomError('expectationNotMet', 'client', [
-                    ['', 'face', ''],
-                    ['in the event ', 'block_dig', ''],
-                    ['in the class ', this.constructor.name, '']
-                ], {
+                throw new CustomError('expectationNotMet', 'client', `face in  <remote ${this.constructor.name}>.block_dig({ face: ${require('util').inspect(face)} })  `, {
                     got: face,
                     expectationType: 'value',
                     expectation: Object.keys(faces)
@@ -38,11 +34,7 @@ module.exports = {
         else if (status == 6)
             this.emit('itemHandSwap')
         else
-            throw new CustomError('expectationNotMet', 'client', [
-                ['', 'status', ''],
-                ['in the event ', 'block_dig', ''],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'client', `status in  <remote ${this.constructor.name}>.block_dig({ status: ${require('util').inspect(status)} })  `, {
                 got: status,
                 expectationType: 'value',
                 expectation: [0, 1, 2, 3, 4, 5, 6]

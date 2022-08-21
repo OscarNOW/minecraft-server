@@ -60,24 +60,14 @@ class Server extends EventEmitter {
                     let imageInfo = imageSize(info.favicon);
 
                     if (imageInfo.type != 'png')
-                        throw new CustomError('expectationNotMet', 'libraryUser', [
-                            ['', 'image type', ''],
-                            ['in the function "', 'serverList', '"'],
-                            ['in the ', 'constructor', ' of'],
-                            ['the class ', this.constructor.name, ''],
-                        ], {
+                        throw new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
                             got: imageInfo.type,
                             expectationType: 'value',
                             expectation: ['png']
                         }, this.constructor).toString()
 
                     if (imageInfo.width != 64 || imageInfo.height != 64)
-                        throw new CustomError('expectationNotMet', 'libraryUser', [
-                            ['', 'image dimensions', ''],
-                            ['in the function "', 'serverList', '"'],
-                            ['in the ', 'constructor', ' of'],
-                            ['the class ', this.constructor.name, ''],
-                        ], {
+                        throw new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
                             got: `${imageInfo.width}x${imageInfo.height}`,
                             expectationType: 'value',
                             expectation: ['64x64']
@@ -147,10 +137,7 @@ class Server extends EventEmitter {
                         } else
                             client.end(endReason)
                     else if (endReason !== null)
-                        throw new CustomError('expectationNotMet', 'libraryUser', [
-                            ['', 'return from wrongVersionConnect', ''],
-                            ['in the class ', this.constructor.name, ''],
-                        ], {
+                        throw new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
                             got: endReason,
                             expectationType: 'type',
                             expectation: 'string | null'
@@ -168,11 +155,7 @@ class Server extends EventEmitter {
 
     addListener(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'addListener', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.addListener(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -183,11 +166,7 @@ class Server extends EventEmitter {
 
     on(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'on', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -198,11 +177,7 @@ class Server extends EventEmitter {
 
     once(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'once', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -213,11 +188,7 @@ class Server extends EventEmitter {
 
     prependListener(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'prependListener', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.prependListener(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -228,11 +199,7 @@ class Server extends EventEmitter {
 
     prependOnceListener(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'prependOnceListener', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.prependOnceListener(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -243,11 +210,7 @@ class Server extends EventEmitter {
 
     off(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'off', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.off(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -258,11 +221,7 @@ class Server extends EventEmitter {
 
     removeListener(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'removeListener', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.removeListener(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -273,11 +232,7 @@ class Server extends EventEmitter {
 
     removeAllListeners(event) {
         if (event !== undefined && !events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'removeAllListeners', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.removeListeners(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
@@ -288,11 +243,7 @@ class Server extends EventEmitter {
 
     rawListeners(event) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'event', ''],
-                ['in the function "', 'rawListeners', '"'],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.rawListeners(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events

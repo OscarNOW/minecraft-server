@@ -12,11 +12,7 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'difficulty', ''],
-                    ['in the function "', 'set difficulty', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
@@ -32,11 +28,7 @@ module.exports = {
         },
         setRaw: function (value) {
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'difficulty', ''],
-                    ['in the function "', 'set difficulty', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']

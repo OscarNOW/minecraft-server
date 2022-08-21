@@ -14,11 +14,7 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 20)
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'health', ''],
-                    ['in the function "', 'set health', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `health in  <${this.constructor.name}>.health = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
@@ -37,11 +33,7 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 20)
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'health', ''],
-                    ['in the function "', 'setRaw health', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `health in  <${this.constructor.name}>.health = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]

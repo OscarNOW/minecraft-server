@@ -7,11 +7,7 @@ module.exports = {
         this.p.stateHandler.checkReady.call(this);
 
         if (!particles[particleName])
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'particleName', ''],
-                ['in the function "', 'particle', '"'],
-                ['in the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {
                 got: particleName,
                 expectationType: 'value',
                 expectation: Object.keys(particles)

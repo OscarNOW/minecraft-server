@@ -204,11 +204,7 @@ class Text {
         for (const val of text.split('')) {
             if (isModifier) {
                 if (!textColors.find(({ char }) => char == val) && !textModifiers.find(({ char }) => char == val))
-                    throw new CustomError('expectationNotMet', 'libraryUser', [
-                        ['', 'colorLetter', ''],
-                        ['in the function "', 'stringToArray', '"'],
-                        ['in the class ', this.constructor.name, ''],
-                    ], {
+                    throw new CustomError('expectationNotMet', 'libraryUser', `colorLetter in  ${this.constructor.name}.stringToArray(<includes colorLetter ${val}>)  `, {
                         got: val,
                         expectationType: 'value',
                         expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],

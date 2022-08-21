@@ -1,5 +1,5 @@
 const Changable = require('../utils/Changable.js');
-const  CustomError = require('../utils/CustomError.js');
+const CustomError = require('../utils/CustomError.js');
 
 class Color {
     constructor(input, i2, i3) {
@@ -31,11 +31,7 @@ class Color {
                 this._hexCached = true;
                 hex = input
             } else
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'input', ''],
-                    ['in the ', 'constructor', ' of'],
-                    ['the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `input in  new ${this.constructor.name}(${require('util').inspect(input)}, ..., ...)  `, {
                     got: input,
                     expectationType: 'type',
                     expectation: 'string | rgb | hsl',
@@ -52,11 +48,7 @@ class Color {
             this._hslCached = true;
             hsl = input;
         } else
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'input', ''],
-                ['in the ', 'constructor', ' of'],
-                ['the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `input in  new ${this.constructor.name}(${require('util').inspect(input)}, ..., ...)  `, {
                 got: input,
                 expectationType: 'type',
                 expectation: 'string | rgb | hsl',

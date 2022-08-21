@@ -7,11 +7,7 @@ module.exports = {
         this.p.stateHandler.checkReady.call(this);
 
         if (!items[item])
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'item', ''],
-                ['in the function "', 'cooldown', '"'],
-                ['in the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `item in  <${this.constructor.name}>.cooldown(${require('util').inspect(item)}, ...)  `, {
                 got: item,
                 expectationType: 'type',
                 expectation: 'itemType',

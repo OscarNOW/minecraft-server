@@ -59,33 +59,22 @@ module.exports = {
         updateState: {
 
             set: function (stateName) {
+                const oldIndex = states.indexOf(this.p.state);
+
                 if (!states.includes(stateName))
-                    throw new CustomError('expectationNotMet', 'library', [
-                        ['', 'stateName', ''],
-                        ['in the function "', 'set', '"'],
-                        ['in the object "', 'updateState', '"'],
-                        ['in the handler "', 'stateHandler', '"'],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
+                    throw new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
                         got: stateName,
                         expectationType: 'value',
-                        expectation: states
+                        expectation: states.slice(oldIndex)
                     }, this.p.stateHandler.updateState.set).toString()
 
                 const newIndex = states.indexOf(stateName);
-                const oldIndex = states.indexOf(this.p.state);
 
                 if (newIndex <= oldIndex)
-                    throw new CustomError('expectationNotMet', 'library', [
-                        ['', 'stateName', ''],
-                        ['in the function "', 'set', '"'],
-                        ['in the object "', 'updateState', '"'],
-                        ['in the handler "', 'stateHandler', '"'],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
-                        got: newIndex,
-                        expectationType: 'type',
-                        expectation: `number > ${oldIndex}`
+                    throw new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
+                        got: stateName,
+                        expectationType: 'value',
+                        expectation: states.slice(oldIndex)
                     }, this.p.stateHandler.updateState.set).toString()
 
                 this.p.state = stateName;
@@ -101,13 +90,7 @@ module.exports = {
                 if (packet == 'settings')
                     this.p.stateHandler.updateState.set.call(this, 'settingsReceived');
                 else
-                    throw new CustomError('expectationNotMet', 'library', [
-                        ['', 'packet', ''],
-                        ['in the function "', 'packetReceived', '"'],
-                        ['in the object "', 'updateState', '"'],
-                        ['in the handler "', 'stateHandler', '"'],
-                        ['in the class ', this.constructor.name, '']
-                    ], {
+                    throw new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {
                         got: packet,
                         expectationType: 'value',
                         expectation: ['settings']

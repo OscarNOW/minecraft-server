@@ -5,11 +5,7 @@ module.exports = {
         this.p.stateHandler.checkReady.call(this);
 
         if (stage < 0 || stage > 10)
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'stage', ''],
-                ['in the function ', 'blockBreakAnimation', ''],
-                ['in the class ', this.constructor.name, '']
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `stage in  <${this.constructor.name}>.blockBreakAnimation(..., ${require('util').inspect(stage)})  `, {
                 got: stage,
                 expectationType: 'value',
                 expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

@@ -15,11 +15,7 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'gamemode', ''],
-                    ['in the function "', 'set gamemode', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['survival', 'creative', 'adventure', 'spectator']
@@ -35,11 +31,7 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', [
-                    ['', 'gamemode', ''],
-                    ['in the function "', 'setRaw gamemode', '"'],
-                    ['in the class ', this.constructor.name, ''],
-                ], {
+                throw new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['survival', 'creative', 'adventure', 'spectator']

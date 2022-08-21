@@ -7,11 +7,7 @@ module.exports = {
         this.p.stateHandler.checkReady.call(this);
 
         if (demoMessages[message] === undefined)
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'message', ''],
-                ['in the function "', 'cooldown', '"'],
-                ['in the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `message in  <${this.constructor.name}>.demo(${require('util').inspect(message)})  `, {
                 got: message,
                 expectationType: 'value',
                 expectation: Object.keys(demoMessages)

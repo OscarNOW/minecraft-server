@@ -7,22 +7,14 @@ module.exports = {
         this.p.stateHandler.checkReady.call(this);
 
         if (channel && !soundChannels.includes(channel))
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'channel', ''],
-                ['in the function "', 'sound', '"'],
-                ['in the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.stopSound({ channel: ${require('util').inspect(channel)} })  `, {
                 got: channel,
                 expectationType: 'value',
                 expectation: [undefined, ...soundChannels]
             }, this.sound).toString()
 
         if (soundName && typeof soundName != 'string')
-            throw new CustomError('expectationNotMet', 'libraryUser', [
-                ['', 'customSoundName', ''],
-                ['in the function "', 'sound', '"'],
-                ['in the class ', this.constructor.name, ''],
-            ], {
+            throw new CustomError('expectationNotMet', 'libraryUser', `soundName in  <${this.constructor.name}>.stopSound({ soundName: ${require('util').inspect(soundName)} })  `, {
                 got: soundName,
                 expectationType: 'type',
                 expectation: "undefined | string"
