@@ -18,7 +18,7 @@ Expand Client property types
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
-    Update JS
+    +Update JS
         Expand textArray with chat features
         Add uncolored property
         Create chat to array function

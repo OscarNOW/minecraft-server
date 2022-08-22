@@ -57,8 +57,6 @@ class Client {
             this.p[key] = value.bind(this)
 
         //Inject public methods
-        // -todo: lazy load
-
         let cachedMethods = {};
 
         Object.defineProperties(this,
