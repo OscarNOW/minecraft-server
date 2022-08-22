@@ -31,7 +31,6 @@ Update Text
 Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
-+Lazy load Client methods
 Object.freeze client.entities{
 Create JS minifier
 Circular reference in client.entities, meaning a client class never gets garbage collected

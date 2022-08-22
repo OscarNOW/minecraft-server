@@ -23,137 +23,135 @@ const divisionIds = {
     '20': 4
 }
 
-module.exports = {
-    bossBar: function ({ title = defaults.bossBar.title, health = defaults.bossBar.health, color = defaults.bossBar.color, divisionAmount = defaults.bossBar.divisionAmount, flags: { darkenSky = defaults.bossBar.flags.darkenSky, playEndMusic = defaults.bossBar.flags.playEndMusic, createFog = defaults.bossBar.flags.createFog } = defaults.bossBar.flags } = defaults.bossBar) {
+module.exports = function ({ title = defaults.bossBar.title, health = defaults.bossBar.health, color = defaults.bossBar.color, divisionAmount = defaults.bossBar.divisionAmount, flags: { darkenSky = defaults.bossBar.flags.darkenSky, playEndMusic = defaults.bossBar.flags.playEndMusic, createFog = defaults.bossBar.flags.createFog } = defaults.bossBar.flags } = defaults.bossBar) {
+    this.p.stateHandler.checkReady.call(this);
+
+    let bossBarUuid = uuid();
+    let bossBarVisible = true;
+
+    let flags = {
+        darkenSky,
+        playEndMusic,
+        createFog
+    }
+
+    let onFlagsChanged = newFlags => {
+        if (!bossBarVisible) return;
+
         this.p.stateHandler.checkReady.call(this);
 
-        let bossBarUuid = uuid();
-        let bossBarVisible = true;
+        let darkenSkyChanged = flags.darkenSky != newFlags.darkenSky;
+        let playEndMusicChanged = flags.playEndMusic != newFlags.playEndMusic;
+        let createFogChanged = flags.createFog != newFlags.createFog;
 
-        let flags = {
-            darkenSky,
-            playEndMusic,
-            createFog
+        if (darkenSkyChanged || playEndMusicChanged || createFogChanged) {
+            flags.darkenSky = newFlags.darkenSky;
+            flags.playEndMusic = newFlags.playEndMusic;
+            flags.createFog = newFlags.createFog;
+
+            this.p.sendPacket('boss_bar', {
+                entityUUID: bossBarUuid,
+                action: 5,
+                flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
+            })
         }
+    };
 
-        let onFlagsChanged = newFlags => {
-            if (!bossBarVisible) return;
+    let flagsChangable = new Changable(onFlagsChanged, flags);
 
-            this.p.stateHandler.checkReady.call(this);
+    if (!(title instanceof Text))
+        title = new Text(title);
 
-            let darkenSkyChanged = flags.darkenSky != newFlags.darkenSky;
-            let playEndMusicChanged = flags.playEndMusic != newFlags.playEndMusic;
-            let createFogChanged = flags.createFog != newFlags.createFog;
-
-            if (darkenSkyChanged || playEndMusicChanged || createFogChanged) {
-                flags.darkenSky = newFlags.darkenSky;
-                flags.playEndMusic = newFlags.playEndMusic;
-                flags.createFog = newFlags.createFog;
-
-                this.p.sendPacket('boss_bar', {
-                    entityUUID: bossBarUuid,
-                    action: 5,
-                    flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
-                })
-            }
-        };
-
-        let flagsChangable = new Changable(onFlagsChanged, flags);
-
-        if (!(title instanceof Text))
-            title = new Text(title);
-
-        let values = {
-            title,
-            health,
-            color,
-            divisionAmount: `${divisionAmount}`,
-            flags: flagsChangable
-        }
-
-        let staticValues = {
-            id: bossBarUuid,
-            remove: () => {
-                bossBarVisible = false;
-                bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id != bossBarUuid)));
-
-                this.p.sendPacket('boss_bar', {
-                    entityUUID: bossBarUuid,
-                    action: 1
-                })
-            }
-        }
-
-        this.p.sendPacket('boss_bar', {
-            entityUUID: bossBarUuid,
-            action: 0,
-            title: JSON.stringify(values.title.chat),
-            health: values.health,
-            color: colors[values.color],
-            dividers: divisionIds[values.divisionAmount],
-            flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
-        })
-
-        let bossBar = new Changable(i => {
-            if (i.flags != flagsChangable) {
-                flagsChangable = new Changable(onFlagsChanged, i.flags);
-                bossBar.setRaw('flags', flagsChangable);
-                onFlagsChanged(i.flags);
-            }
-
-            if (!(i.title instanceof Text))
-                i.title = new Text(i.title);
-
-            if (!bossBarVisible) return;
-
-            this.p.stateHandler.checkReady.call(this);
-
-            let healthChanged = i.health != values.health;
-            let titleChanged = i.title.hash != values.title.hash;
-            let colorChanged = i.color != values.color;
-            let divisionAmountChanged = i.divisionAmount != values.divisionAmount;
-
-            if (healthChanged) {
-                values.health = i.health;
-                this.p.sendPacket('boss_bar', {
-                    entityUUID: bossBarUuid,
-                    action: 2,
-                    health: values.health
-                })
-            }
-
-            if (titleChanged) {
-                let newTitle = i.title;
-                if (!(newTitle instanceof Text))
-                    newTitle = new Text(newTitle);
-
-                values.title = newTitle;
-                this.p.sendPacket('boss_bar', {
-                    entityUUID: bossBarUuid,
-                    action: 3,
-                    title: JSON.stringify(values.title.chat)
-                })
-            }
-
-            if (colorChanged || divisionAmountChanged) {
-                values.color = i.color;
-                values.divisionAmount = `${i.divisionAmount}`;
-
-                this.p.sendPacket('boss_bar', {
-                    entityUUID: bossBarUuid,
-                    action: 4,
-                    color: colors[values.color],
-                    dividers: divisionIds[values.divisionAmount],
-                })
-            }
-        }, {
-            ...values,
-            ...staticValues
-        })
-
-        bossBars.setPrivate.call(this, Object.freeze([...this.bossBars, bossBar]));
-
-        return bossBar;
-
+    let values = {
+        title,
+        health,
+        color,
+        divisionAmount: `${divisionAmount}`,
+        flags: flagsChangable
     }
+
+    let staticValues = {
+        id: bossBarUuid,
+        remove: () => {
+            bossBarVisible = false;
+            bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id != bossBarUuid)));
+
+            this.p.sendPacket('boss_bar', {
+                entityUUID: bossBarUuid,
+                action: 1
+            })
+        }
+    }
+
+    this.p.sendPacket('boss_bar', {
+        entityUUID: bossBarUuid,
+        action: 0,
+        title: JSON.stringify(values.title.chat),
+        health: values.health,
+        color: colors[values.color],
+        dividers: divisionIds[values.divisionAmount],
+        flags: parseInt([flags.createFog, flags.playEndMusic, flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
+    })
+
+    let bossBar = new Changable(i => {
+        if (i.flags != flagsChangable) {
+            flagsChangable = new Changable(onFlagsChanged, i.flags);
+            bossBar.setRaw('flags', flagsChangable);
+            onFlagsChanged(i.flags);
+        }
+
+        if (!(i.title instanceof Text))
+            i.title = new Text(i.title);
+
+        if (!bossBarVisible) return;
+
+        this.p.stateHandler.checkReady.call(this);
+
+        let healthChanged = i.health != values.health;
+        let titleChanged = i.title.hash != values.title.hash;
+        let colorChanged = i.color != values.color;
+        let divisionAmountChanged = i.divisionAmount != values.divisionAmount;
+
+        if (healthChanged) {
+            values.health = i.health;
+            this.p.sendPacket('boss_bar', {
+                entityUUID: bossBarUuid,
+                action: 2,
+                health: values.health
+            })
+        }
+
+        if (titleChanged) {
+            let newTitle = i.title;
+            if (!(newTitle instanceof Text))
+                newTitle = new Text(newTitle);
+
+            values.title = newTitle;
+            this.p.sendPacket('boss_bar', {
+                entityUUID: bossBarUuid,
+                action: 3,
+                title: JSON.stringify(values.title.chat)
+            })
+        }
+
+        if (colorChanged || divisionAmountChanged) {
+            values.color = i.color;
+            values.divisionAmount = `${i.divisionAmount}`;
+
+            this.p.sendPacket('boss_bar', {
+                entityUUID: bossBarUuid,
+                action: 4,
+                color: colors[values.color],
+                dividers: divisionIds[values.divisionAmount],
+            })
+        }
+    }, {
+        ...values,
+        ...staticValues
+    })
+
+    bossBars.setPrivate.call(this, Object.freeze([...this.bossBars, bossBar]));
+
+    return bossBar;
+
 }

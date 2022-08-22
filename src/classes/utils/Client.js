@@ -57,20 +57,26 @@ class Client {
             this.p[key] = value.bind(this)
 
         //Inject public methods
+        // -todo: lazy load
+
+        let cachedMethods = {};
+
         Object.defineProperties(this,
             Object.fromEntries(
-                Object.entries(
-                    Object.assign({}, ...fs
-                        .readdirSync(path.resolve(__dirname, './Client/methods/public/'))
-                        .filter(v => v.endsWith('.js'))
-                        .map(v => require(`./Client/methods/public/${v}`))
-                    )
-                )
-                    .map(([name, value]) => [name, {
+                fs
+                    .readdirSync(path.resolve(__dirname, './Client/methods/public/'))
+                    .filter(v => v.endsWith('.js'))
+                    .map(v => [v.split('.')[0], path.resolve(__dirname, './Client/methods/public/', v)])
+                    .map(([name, path]) => [name, {
                         configurable: false,
                         enumerable: true,
-                        writable: false,
-                        value: value.bind(this)
+                        get: () => {
+                            if (cachedMethods[name])
+                                return cachedMethods[name]
+
+                            cachedMethods[name] = require(path).bind(this);
+                            return cachedMethods[name];
+                        }
                     }])
             )
         )
