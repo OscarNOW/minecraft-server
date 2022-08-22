@@ -48,12 +48,4 @@ export class Server extends EventEmitter {
     close(): void;
 
     on(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    addListener(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    once(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    prependListener(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    prependOnceListener(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    off(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    removeListener(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
-    removeAllListeners(event?: 'join' | 'leave' | 'connect'): void;
-    rawListeners(event: 'join' | 'leave' | 'connect'): ((client: Client) => void)[];
 }

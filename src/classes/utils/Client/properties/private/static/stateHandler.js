@@ -33,10 +33,10 @@ module.exports = {
 
             if (currentState == 'clientSpawned') {
                 this.p.emit('join');
-                this.server.emit('join', this);
+                for (const listener of this.server.globals.serverEvents.get(this.server).join) listener(this);
             } else if (currentState == 'offline') {
                 this.p.emit('leave');
-                this.server.emit('leave', this);
+                for (const listener of this.server.globals.serverEvents.get(this.server).leave) listener(this);
             }
 
             if (nextState == 'loginSent') {
@@ -47,7 +47,7 @@ module.exports = {
             } else if (nextState == 'clientSpawned') {
 
                 this.p.emit('connect');
-                this.server.emit('connect', this);
+                for (const listener of this.server.globals.serverEvents.get(this.server).connect) listener(this);
                 this.position = {};
 
                 this.p.stateHandler.updateState.set.call(this, 'clientSpawned');
