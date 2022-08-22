@@ -1,8 +1,6 @@
-import { EventEmitter } from 'events';
-
 type Client = import('./Client').Client;
 
-export class Entity extends EventEmitter {
+export class Entity {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
         y: number;
@@ -51,76 +49,4 @@ export class Entity extends EventEmitter {
         };
         isMainHand: boolean
     }) => void): void;
-
-    once(event: 'leftClick', callback: () => void): void;
-    once(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    addListener(event: 'leftClick', callback: () => void): void;
-    addListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    prependListener(event: 'leftClick', callback: () => void): void;
-    prependListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    prependOnceListener(event: 'leftClick', callback: () => void): void;
-    prependOnceListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    off(event: 'leftClick', callback: () => void): void;
-    off(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    removeListener(event: 'leftClick', callback: () => void): void;
-    removeListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    rawListeners(event: 'leftClick'): (() => void)[];
-    rawListeners(event: 'rightClick'): ((
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void)[];
-
-    removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
 }

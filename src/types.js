@@ -49,7 +49,7 @@ types = {
             .map(a => ([a.substring(5).split(' ')[0], a]))
             .map(([key, value]) => [key, value.substring(key.length + 8)])
             .map(([key, value]) => [key, value.substring(0, value.length - 1)])
-            .filter(([key, value]) => key != '')
+            .filter(([key]) => key != '')
     )
 }
 
@@ -64,7 +64,7 @@ types = {
             .map(a => ([a.substring(5).split(' ')[0], a]))
             .map(([key, value]) => [key, value.substring(key.length + 8)])
             .map(([key, value]) => [key, value.substring(0, value.length - 1)])
-            .filter(([key, value]) => key != '')
+            .filter(([key]) => key != '')
     )
 }
 
@@ -85,7 +85,7 @@ types = Object.fromEntries(Object.entries(types)
 
 console.log('Generating output...')
 
-let out = `import { EventEmitter } from 'events';`
+let out = ``
 
 for (const exportClass of exportClasses)
     out += `export ${exportClass}`;

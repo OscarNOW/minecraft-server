@@ -2,7 +2,6 @@ const { defaults } = require('../../settings.json')
 const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
 
 const { uuid } = require('../../functions/uuid.js');
-const { EventEmitter } = require('events');
 
 const CustomError = require('./CustomError.js')
 const Changable = require('./Changable.js');
@@ -13,7 +12,8 @@ const ps = Object.fromEntries([ // privateSymbols
     'uuid',
     'sendPacket',
     'observables',
-    'emitObservable'
+    'emitObservable',
+    'events'
 ].map(name => [name, Symbol(name)]));
 
 const events = Object.freeze([
@@ -53,10 +53,8 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
         this[ps.emitObservable]('position')
 }
 
-class Entity extends EventEmitter {
+class Entity {
     constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket) {
-        super();
-
         let e = getEntity(type);
         if (e === undefined)
             throw new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
@@ -76,6 +74,12 @@ class Entity extends EventEmitter {
         this[ps.observables] = Object.fromEntries(observables.map(a => [a, []]));
         this[ps.sendPacket] = sendPacket;
         this[ps._position] = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch })
+        this[ps.events] = Object.fromEntries(events.map(a => [a, []]));
+        this.privateEmitter = {
+            emit: (event, ...args) => {
+                for (const listener of this[ps.events][event]) listener(...args)
+            }
+        }
 
         this[ps.emitObservable] = observable =>
             this[ps.observables][observable].forEach(cb => cb(this[observable]))
@@ -215,84 +219,7 @@ class Entity extends EventEmitter {
                 expectation: events
             }, this.on).toString()
 
-        return super.on(event, callback);
-    }
-
-    once(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.once).toString()
-
-        return super.once(event, callback);
-    }
-
-    prependListener(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.prependListener(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.prependListener).toString()
-
-        return super.prependListener(event, callback);
-    }
-
-    prependOnceListener(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.prependOnceListener(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.prependOnceListener).toString()
-
-        return super.prependOnceListener(event, callback);
-    }
-
-    off(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.off(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.off).toString()
-
-        return super.off(event, callback);
-    }
-
-    removeListener(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.removeListener(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.removeListener).toString()
-
-        return super.removeListener(event, callback);
-    }
-
-    removeAllListeners(event) {
-        if (event !== undefined && !events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.removeAllListeners(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.removeAllListeners).toString()
-
-        return super.removeAllListeners(event);
-    }
-
-    rawListeners(event) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.rawListeners(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.rawListeners).toString()
-
-        return super.rawListeners(event);
+        this[ps.events][event].push(callback)
     }
 }
 

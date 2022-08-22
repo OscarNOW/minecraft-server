@@ -1,4 +1,5 @@
 const Client = require('../../Client.js');
+const Entity = require('../../Entity.js');
 const CustomError = require('../../CustomError.js');
 
 module.exports = {
@@ -11,7 +12,9 @@ module.exports = {
             }).toString()
 
         this.sneaking = sneaking;
-        let emitter = this.entities[target] instanceof Client ? this.entities[target].p : this.entities[target];
+        let emitter = this.entities[target] instanceof Client ? this.entities[target].p :
+            this.entities[target] instanceof Entity ? this.entities[target].privateEmitter :
+                this.entities[target];
 
         if (mouse == 2) {
             if (hand != 0 && hand != 1)

@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';export class Chunk {
+export class Chunk {
     private chunk: any;
     constructor();
     setBlock(location: {
@@ -461,7 +461,7 @@ import { EventEmitter } from 'events';export class Chunk {
     toString(): Error;
 
     private generateMessage(): string;
-}declare class Entity extends EventEmitter {
+}declare class Entity {
     private constructor(client: Client, type: entityType, id: number, position: {
         x: number;
         y: number;
@@ -510,78 +510,6 @@ import { EventEmitter } from 'events';export class Chunk {
         };
         isMainHand: boolean
     }) => void): void;
-
-    once(event: 'leftClick', callback: () => void): void;
-    once(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    addListener(event: 'leftClick', callback: () => void): void;
-    addListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    prependListener(event: 'leftClick', callback: () => void): void;
-    prependListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    prependOnceListener(event: 'leftClick', callback: () => void): void;
-    prependOnceListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    off(event: 'leftClick', callback: () => void): void;
-    off(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    removeListener(event: 'leftClick', callback: () => void): void;
-    removeListener(event: 'rightClick', callback: (
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void): void;
-
-    rawListeners(event: 'leftClick'): (() => void)[];
-    rawListeners(event: 'rightClick'): ((
-        position: {
-            x: number;
-            y: number;
-            z: number;
-        },
-        isMainHand: boolean
-    ) => void)[];
-
-    removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
 }type hex = string;type chatComponent = chat | string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
     r: number;
     g: number;
