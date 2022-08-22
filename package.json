@@ -33,7 +33,7 @@
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
         "minecraft-protocol": "^1.35.0",
-        "prismarine-chunk": "^1.31.0"
+        "prismarine-chunk": "^1.32.0"
     },
     "devDependencies": {
         "eslint": "^8.21.0",
