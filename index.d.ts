@@ -18,7 +18,7 @@ import { EventEmitter } from 'events';export class Chunk {
     static hslToRgb(hsl: hsl): rgb;
     static rgbToHex(rgb: rgb): hex;
     static hexToRgb(hex: hex): rgb;
-}export class Server extends EventEmitter {
+}export class Server {
     constructor(serverOptions: {
         serverList?(info: {
             ip: string,

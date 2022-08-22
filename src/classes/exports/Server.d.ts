@@ -1,8 +1,6 @@
-import { EventEmitter } from 'events';
-
 type Client = import('../utils/Client').Client;
 
-export class Server extends EventEmitter {
+export class Server {
     constructor(serverOptions: {
         serverList?(info: {
             ip: string,
