@@ -1,7 +1,16 @@
-const { Server } = require('../');
-const server = new Server();
+const { Text } = require('../');
 
-server.on('connect', client => { // The set position is sent, when this function is finished
-    client.on('join', () => console.log('join'))
-    client.on('leave', () => console.log('leave'))
-})
+let text = new Text([
+    {
+        text: 'hi',
+        color: 'green'
+    },
+    {
+        text: ' world',
+        color: 'blue'
+    }
+])
+
+console.log(text.string)
+text.uncolored = text.uncolored
+console.log(text.string)

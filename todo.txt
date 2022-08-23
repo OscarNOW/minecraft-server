@@ -17,16 +17,15 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
-Update Text
-    +Update JS
+-Update Text
+    -Update JS
         Expand textArray with chat features
-        Add uncolored property
         Create chat to array function
         Implement chat functions
             Web color
             Click event
             Optimized chat
-            Insertion    
+            Insertion
     Create new tests for new features
 Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code

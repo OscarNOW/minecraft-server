@@ -20,6 +20,7 @@ class Text {
     __reset() {
         this._input = null;
         this._string = null;
+        this._uncolored = null;
         this._array = null;
         this._chat = null;
         this._hash = null;
@@ -65,6 +66,27 @@ class Text {
         return this._string;
     }
 
+    get uncolored() {
+        let inp = this._input;
+
+        if (inp !== null)
+            if (typeof inp == 'string') {
+                this.__reset();
+                this._array = Text.stringToArray(inp);
+            } else {
+                this.__reset();
+                this._array = Text.parseArray(inp);
+            }
+
+        if (this._string === null)
+            this._string = Text.arrayToString(this._array)
+
+        if (this._uncolored === null)
+            this._uncolored = Text.stringToUncolored(this._string)
+
+        return this._uncolored;
+    }
+
     get chat() {
         let inp = this._input;
         if (inp !== null)
@@ -89,6 +111,32 @@ class Text {
     set string(val) {
         this.__reset();
         this._input = val;
+    }
+
+    set uncolored(val) {
+        this.__reset();
+        this._input = val;
+    }
+
+    static stringToUncolored(string) {
+        let out = '';
+        let isSpecial = false;
+
+        for (const char of string) {
+            if (isSpecial) {
+                isSpecial = false;
+                continue;
+            }
+
+            if (char == '§') {
+                isSpecial = true;
+                continue;
+            }
+
+            out += char;
+        }
+
+        return out
     }
 
     static arrayToString(a) {

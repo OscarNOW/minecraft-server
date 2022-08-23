@@ -3,7 +3,7 @@ export class Text {
 
     array: textArray;
     string: string;
-    // todo: make chat writable
+    uncolored: string;
     readonly chat: chat;
 
     readonly hash: string;
@@ -11,6 +11,7 @@ export class Text {
     toString(): string;
 
     static stringToArray(text: string): textArray;
+    static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
     static arrayToChat(text: optionalTextArray): chat;
