@@ -17,8 +17,6 @@ export class Text {
     static arrayToChat(text: optionalTextArray): chat;
     static parseChat(text: chat): chat;
 }
-
-//todo: allow chat as input
 type textInput = string | optionalTextArray;
 
 type textArray = Array<{
@@ -64,7 +62,7 @@ type chat = chatComponents | {
     //*/
 
 };
-//Not implemented:
+//Not implemented
 /*| {
     translate: chatTranslate;
     with?: chatComponents;

@@ -213,6 +213,7 @@ class Text {
 
         return text;
     }
+
     static parseArray(text) {
         if (!Array.isArray(text))
             text = [text]
@@ -241,6 +242,7 @@ class Text {
 
         return array;
     }
+
     static stringToArray(text) {
         let arr = [];
 
@@ -309,6 +311,7 @@ class Text {
 
         return this.parseArray(arr);
     }
+
     static arrayToChat(a) {
         let array = this.parseArray(a);
         let out;
@@ -356,6 +359,7 @@ class Text {
 
         return this.parseChat(out);
     }
+
     static parseChat(c) {
         let chat = Object.assign({}, c);
 

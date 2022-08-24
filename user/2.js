@@ -1,16 +1,14 @@
-const { Text } = require('../');
+const { Server, Text } = require('../');
 
-let text = new Text([
-    {
-        text: 'hi',
-        color: 'green'
-    },
-    {
-        text: ' world',
-        color: 'blue'
-    }
-])
+let text = new Text('Hello world')
+console.log(require('util').inspect(text.chat, { depth: null }))
 
-console.log(text.string)
-text.uncolored = text.uncolored
-console.log(text.string)
+const server = new Server();
+
+server.on('connect', client => {
+    client.raw('chat', {
+        message: JSON.stringify(text.chat),
+        position: 0,
+        sender: '0'
+    })
+})
