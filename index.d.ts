@@ -70,7 +70,7 @@ export class Chunk {
     array: textArray;
     string: string;
     uncolored: string;
-    readonly chat: chat;
+    readonly chat: chatComponent;
 
     readonly hash: string;
 
@@ -80,8 +80,9 @@ export class Chunk {
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static arrayToChat(text: optionalTextArray): chat;
-    static parseChat(text: chat): chat;
+    static arrayToChat(text: optionalTextArray): chatComponent;
+    static parseChat(text: chatComponent): chatComponent;
+    static minifyChat(text: chatComponent): chatComponent;
 }declare class Changable {
     constructor(
         changeCallback: (values: {
@@ -511,7 +512,7 @@ export class Chunk {
         };
         isMainHand: boolean
     }) => void): void;
-}type hex = string;type chatComponent = chat | string;type chatComponents = chatComponent[];type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
+}type hex = string;type bossBarDivision = 0 | 6 | 10 | 12 | 20;type textInput = string | optionalTextArray;type version = legacyVersion | newVersion;type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;type rgb = {
     r: number;
     g: number;
     b: number;
@@ -535,10 +536,10 @@ export class Chunk {
     text: string;
     color?: textColor;
     modifiers?: Array<textModifier>;
-};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chat = chatComponents | {
+};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
 
-    extra?: chatComponents;
+    extra?: chatComponent[];
 
     bold?: boolean;
     italic?: boolean;
