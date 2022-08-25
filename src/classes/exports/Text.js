@@ -357,22 +357,49 @@ class Text {
         if (!out)
             out = { text: '' }
 
-        return this.parseChat(out);
+        return this.minifyChat(out);
     }
 
-    static parseChat(c) {
-        let chat = Object.assign({}, c);
+    static minifyChat(c) {
+        let chat = Object.assign({}, this.parseChat(c));
 
-        chat = recursiveParseChat(chat, {
+        chat = recursiveMinifyChat(chat, {
             color: 'reset',
             ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
         });
 
         return chat;
     }
+
+    static parseChat(chat) {
+        return stripShorthandFromChat(chat);
+    }
 }
 
-function recursiveParseChat(chat, inherited) {
+function stripShorthandFromChat(chat) {
+    let obj;
+
+    if (['string', 'number', 'boolean'].includes(typeof chat) || chat == null)
+        obj = { text: `${chat}` };
+
+    if (Array.isArray(chat))
+        obj = { ...chat[0], extra: [...chat[0].extra, ...chat.slice(1)] };
+
+    if (
+        typeof chat == 'object' &&
+        !Array.isArray(chat) &&
+        chat != null
+    ) {
+        obj = chat;
+    }
+
+    for (const extra in obj.extra || [])
+        obj.extra[extra] = stripShorthandFromChat(obj.extra[extra]);
+
+    return obj;
+};
+
+function recursiveMinifyChat(chat, inherited) {
     let styles = {};
     for (let { name } of [...textModifiersWithoutReset, { name: 'color' }])
         styles[name] = chat[name] ?? inherited[name];
@@ -391,15 +418,21 @@ function recursiveParseChat(chat, inherited) {
 
     if (chat.extra) {
         for (let extraIndex in chat.extra)
-            chat.extra[extraIndex] = recursiveParseChat(chat.extra[extraIndex], styles);
+            chat.extra[extraIndex] = recursiveMinifyChat(chat.extra[extraIndex], styles);
 
         chat = [chat, ...chat.extra];
         delete chat[0].extra;
 
         if (Object.keys(overwrittenStyles).length == 0)
             chat[0] = chat[0].text;
-    } else if (Object.keys(overwrittenStyles).length == 0)
-        chat = chat.text;
+    } else if (Object.keys(overwrittenStyles).length == 0) {
+        if (!isNaN(parseInt(chat.text)))
+            chat = parseInt(chat.text)
+        else if (chat.text == 'true' || chat.text == 'false')
+            chat = Boolean(chat.text)
+        else
+            chat = chat.text;
+    }
 
     return chat
 }

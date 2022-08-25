@@ -4,7 +4,7 @@ export class Text {
     array: textArray;
     string: string;
     uncolored: string;
-    readonly chat: chat;
+    readonly chat: chatComponent;
 
     readonly hash: string;
 
@@ -14,8 +14,9 @@ export class Text {
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static arrayToChat(text: optionalTextArray): chat;
-    static parseChat(text: chat): chat;
+    static arrayToChat(text: optionalTextArray): chatComponent;
+    static parseChat(text: chatComponent): chatComponent;
+    static minifyChat(text: chatComponent): chatComponent;
 }
 type textInput = string | optionalTextArray;
 
@@ -35,10 +36,10 @@ type optionalTextArray = Array<{
     modifiers?: Array<textModifier>;
 };
 
-type chat = chatComponents | {
+type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
 
-    extra?: chatComponents;
+    extra?: chatComponent[];
 
     bold?: boolean;
     italic?: boolean;
@@ -136,6 +137,3 @@ type chat = chatComponents | {
     };
 };
 //*/
-
-type chatComponents = chatComponent[];
-type chatComponent = chat | string;

@@ -1,8 +1,11 @@
-const { Server, Text } = require('../');
+const { Text } = require('../');
 
-let text = new Text('Hello world')
-console.log(require('util').inspect(text.chat, { depth: null }))
+let text = new Text('null')
+console.log(require('util').inspect(text.chat, { depth: null, colors: true }));
+console.log(JSON.stringify(text.chat))
 
+//*
+const { Server } = require('../');
 const server = new Server();
 
 server.on('connect', client => {
@@ -12,3 +15,4 @@ server.on('connect', client => {
         sender: '0'
     })
 })
+//*/
