@@ -36,7 +36,7 @@
         "prismarine-chunk": "^1.31.0"
     },
     "devDependencies": {
-        "eslint": "^8.21.0",
+        "eslint": "^8.23.0",
         "mineflayer": "^4.3.0",
         "typedoc": "^0.23.8",
         "typedoc-theme-hierarchy": "^3.0.0"
