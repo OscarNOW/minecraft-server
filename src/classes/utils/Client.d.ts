@@ -210,11 +210,11 @@ export class Client {
             y: number;
             z: number;
         }, strength: number,
-        destroyedBlocks: Array<{
+        destroyedBlocks: {
             xOffset: number;
             yOffset: number;
             zOffset: number;
-        }>
+        }[]
     ): void;
     blockBreakAnimation(location: {
         x: number;

@@ -20,20 +20,20 @@ export class Text {
 }
 type textInput = string | optionalTextArray;
 
-type textArray = Array<{
+type textArray = {
     text: string;
     color: textColor;
-    modifiers: Array<textModifier>;
-}>;
+    modifiers: textModifier[];
+}[];
 
-type optionalTextArray = Array<{
+type optionalTextArray = ({
     text: string;
     color?: textColor;
-    modifiers?: Array<textModifier>;
-} | string> | {
+    modifiers?: textModifier[];
+} | string)[] | {
     text: string;
     color?: textColor;
-    modifiers?: Array<textModifier>;
+    modifiers?: textModifier[];
 };
 
 type chatComponent = string | number | boolean | chatComponent[] | {

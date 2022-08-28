@@ -18,10 +18,10 @@ export class Server {
             players?: {
                 online?: number;
                 max?: number;
-                hover?: string | Array<{
+                hover?: string | {
                     name: string;
                     uuid: string;
-                }>;
+                }[];
             };
             description?: string | Text;
             favicon?: Buffer;
@@ -38,7 +38,7 @@ export class Server {
         defaultClientProperties?(client: Client): defaultClientProperties;
     });
 
-    readonly clients: Array<Client>;
+    readonly clients: Client[];
 
     private server: any;
     private intervals: NodeJS.Timer[];
