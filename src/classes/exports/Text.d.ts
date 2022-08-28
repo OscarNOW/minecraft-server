@@ -25,7 +25,7 @@ type textArrayComponent = {
     color: textColor;
     modifiers: textModifier[];
     insertion?: string;
-}
+};
 
 type optionalTextArrayComponent = string | {
     text?: string;

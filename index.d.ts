@@ -524,24 +524,17 @@ export class Chunk {
     darkenSky: boolean;
     playEndMusic: boolean;
     createFog: boolean;
+};type textArrayComponent = {
+    text: string;
+    color: textColor;
+    modifiers: textModifier[];
+    insertion?: string;
 };type soundChannel = 'master'|'music'|'soundBlock'|'weather'|'block'|'hostileCreature'|'friendlyCreature'|'player'|'ambient'|'voice';type optionalTextArrayComponent = string | {
     text?: string;
     color?: textColor;
     modifiers?: textModifier[];
     insertion?: string;
-};type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type textArrayComponent = {
-    text: string;
-    color: textColor;
-    modifiers: textModifier[];
-    insertion?: string;
-}
-
-type optionalTextArrayComponent = string | {
-    text?: string;
-    color?: textColor;
-    modifiers?: textModifier[];
-    insertion?: string;
-};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chatComponent = string | number | boolean | chatComponent[] | {
+};type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
 
     extra?: chatComponent[];
