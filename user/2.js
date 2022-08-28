@@ -1,14 +1,23 @@
 const { Text } = require('../');
 
-let text = new Text('null')
-console.log(require('util').inspect(text.chat, { depth: null, colors: true }));
-console.log(JSON.stringify(text.chat))
+let a = Text.parseArray({
+    text: 'Hello World'
+})
 
-//*
+console.log(a)
+
+/*
 const { Server } = require('../');
 const server = new Server();
 
 server.on('connect', client => {
-    client.chat(text)
+    client.raw('chat', {
+        message: JSON.stringify({
+            text: 'Hello, world!',
+            insertion: ''
+        }),
+        position: 0,
+        sender: '0'
+    })
 })
 //*/

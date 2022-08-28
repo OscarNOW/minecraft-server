@@ -13,28 +13,31 @@ export class Text {
     static stringToArray(text: string): textArray;
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
-    static arrayToString(text: optionalTextArray): string;
-    static arrayToChat(text: optionalTextArray): chatComponent;
+    static arrayToString(text: optionalTextArray): string; //
+    static arrayToChat(text: optionalTextArray): chatComponent; //
     static parseChat(text: chatComponent): chatComponent;
     static minifyChat(text: chatComponent): chatComponent;
 }
 type textInput = string | optionalTextArray;
 
-type textArray = {
+type textArrayComponent = {
     text: string;
     color: textColor;
     modifiers: textModifier[];
-}[];
+    insertion?: string;
+}
 
-type optionalTextArray = ({
-    text: string;
+type optionalTextArrayComponent = string | {
+    text?: string;
     color?: textColor;
     modifiers?: textModifier[];
-} | string)[] | {
-    text: string;
-    color?: textColor;
-    modifiers?: textModifier[];
+    insertion?: string;
 };
+
+type textArray = textArrayComponent[];
+
+type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
+
 
 type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;

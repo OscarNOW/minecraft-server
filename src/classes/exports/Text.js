@@ -232,7 +232,8 @@ class Text {
                 obj = {
                     text: val.text || '',
                     color: val.color || 'default',
-                    modifiers: [...new Set(val.modifiers)].sort() || []
+                    modifiers: [...new Set(val.modifiers || [])].sort(),
+                    insertion: val.insertion ?? undefined
                 };
 
             array.push(obj);
