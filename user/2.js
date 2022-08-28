@@ -4,11 +4,13 @@ const { Text } = require('../');
 let a = Text.arrayToChat([
     {
         text: 'Hello',
-        insertion: 'World'
+        color: 'darkRed',
+        insertion: 'foo'
     },
     {
         text: ' world',
-        insertion: 'World'
+        color: 'darkGreen',
+        insertion: 'foo'
     }
 ])
 

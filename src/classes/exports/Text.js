@@ -361,8 +361,9 @@ class Text {
         return this.minifyChat(out);
     }
 
-    static minifyChat(c) {
-        let chat = Object.assign({}, this.parseChat(c));
+    static minifyChat(chat) {
+        chat = this.parseChat(chat);
+        chat = Object.assign({}, chat);
 
         chat = recursiveMinifyChat(chat, {
             color: 'reset',
@@ -384,7 +385,7 @@ function stripShorthandFromChat(chat) {
         obj = { text: `${chat}` };
 
     if (Array.isArray(chat))
-        obj = { ...chat[0], extra: [...chat[0].extra, ...chat.slice(1)] };
+        obj = { ...chat[0], extra: [...(chat[0].extra || []), ...(chat.slice(1) || [])] };
 
     if (
         typeof chat == 'object' &&
@@ -402,23 +403,22 @@ function stripShorthandFromChat(chat) {
 
 function recursiveMinifyChat(chat, inherited) {
     let styles = {};
-    for (let { name } of [...textModifiersWithoutReset, { name: 'color' }])
+    for (const { name } of [...textModifiersWithoutReset, { name: 'color' }, { name: 'insertion' }])
         styles[name] = chat[name] ?? inherited[name];
 
     let overwrittenStyles = {}
-    for (let name in styles)
+    for (const name in styles)
         if (styles[name] != inherited[name])
             overwrittenStyles[name] = styles[name]
 
-    for (let name in styles)
+    for (const name in styles)
         if (overwrittenStyles[name] === undefined)
             delete chat[name]
         else
             chat[name] = overwrittenStyles[name]
 
-
     if (chat.extra) {
-        for (let extraIndex in chat.extra)
+        for (const extraIndex in chat.extra)
             chat.extra[extraIndex] = recursiveMinifyChat(chat.extra[extraIndex], styles);
 
         chat = [chat, ...chat.extra];
