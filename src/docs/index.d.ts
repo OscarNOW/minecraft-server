@@ -36,10 +36,10 @@ export class Chunk {
             players?: {
                 online?: number;
                 max?: number;
-                hover?: string | Array<{
+                hover?: string | {
                     name: string;
                     uuid: string;
-                }>;
+                }[];
             };
             description?: string | Text;
             favicon?: Buffer;
@@ -56,7 +56,7 @@ export class Chunk {
         defaultClientProperties?(client: Client): defaultClientProperties;
     });
 
-    readonly clients: Array<Client>;
+    readonly clients: Client[];
 
     private server: any;
     private intervals: NodeJS.Timer[];
@@ -310,11 +310,11 @@ export class Chunk {
             y: number;
             z: number;
         }, strength: number,
-        destroyedBlocks: Array<{
+        destroyedBlocks: {
             xOffset: number;
             yOffset: number;
             zOffset: number;
-        }>
+        }[]
     ): void;
     blockBreakAnimation(location: {
         x: number;
@@ -519,23 +519,23 @@ export class Chunk {
     h: number;
     s: number;
     l: number;
-};type textModifier = 'bold'|'italic'|'underlined'|'strikethrough'|'obfuscated';type demoMessage = 'startScreen'|'movement'|'jump'|'inventory'|'endScreenshot';type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';type entityAnimationType = 'swingMainHand'|'flashRed'|'leaveBed'|'swingOffHand'|'critical'|'magicCritical';type bossBarFlags = {
+};type textModifier = 'bold'|'italic'|'underlined'|'strikethrough'|'obfuscated';type demoMessage = 'startScreen'|'movement'|'jump'|'inventory'|'endScreenshot';type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';type entityAnimationType = 'swingMainHand'|'flashRed'|'leaveBed'|'swingOffHand'|'critical'|'magicCritical';type textArray = {
+    text: string;
+    color: textColor;
+    modifiers: textModifier[];
+}[];type bossBarFlags = {
     darkenSky: boolean;
     playEndMusic: boolean;
     createFog: boolean;
-};type textArray = Array<{
-    text: string;
-    color: textColor;
-    modifiers: Array<textModifier>;
-}>;type soundChannel = 'master'|'music'|'soundBlock'|'weather'|'block'|'hostileCreature'|'friendlyCreature'|'player'|'ambient'|'voice';type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type optionalTextArray = Array<{
+};type soundChannel = 'master'|'music'|'soundBlock'|'weather'|'block'|'hostileCreature'|'friendlyCreature'|'player'|'ambient'|'voice';type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type optionalTextArray = ({
     text: string;
     color?: textColor;
-    modifiers?: Array<textModifier>;
-} | string> | {
+    modifiers?: textModifier[];
+} | string)[] | {
     text: string;
     color?: textColor;
-    modifiers?: Array<textModifier>;
-};type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chatComponent = string | number | boolean | chatComponent[] | {
+    modifiers?: textModifier[];
+};type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type keycode = 'key.jump'|'key.sneak'|'key.sprint'|'key.left'|'key.right'|'key.back'|'key.forward'|'key.attack'|'key.pickItem'|'key.use'|'key.drop'|'key.hotbar.1'|'key.hotbar.2'|'key.hotbar.3'|'key.hotbar.4'|'key.hotbar.5'|'key.hotbar.6'|'key.hotbar.7'|'key.hotbar.8'|'key.hotbar.9'|'key.inventory'|'key.swapOffhand'|'key.loadToolbarActivator'|'key.saveToolbarActivator'|'key.playerlist'|'key.chat'|'key.command'|'key.advancements'|'key.spectatorOutlines'|'key.screenshot'|'key.smoothCamera'|'key.fullscreen'|'key.togglePerspective';type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
 
     extra?: chatComponent[];
