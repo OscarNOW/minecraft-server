@@ -19,7 +19,8 @@ Expand Client property types
 Create PR for minecraft-protocol to exclude optional files from npm build
 -Update Text
     -Update JS
-        -Expand textArray with chat features
+        -Implement new chat features        
+        Change chatLevelDifferenceAmount to count difference in characters and not difference in properties
         Create chat to array function
         Implement chat functions
             Web color
@@ -34,3 +35,4 @@ Object.freeze client.entities{
 Create JS minifier
 Circular reference in client.entities, meaning a client class never gets garbage collected
 Move keepAlive packets into separate file
+Reduce file sizes (mainly of images in readme)

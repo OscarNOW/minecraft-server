@@ -320,7 +320,7 @@ class Text {
         for (const v of array) {
             let val = convertArrayObjectToChatObject(v);
 
-            if (val.text == '') return;
+            if (val.text == '') continue;
 
             if (!out) {
                 out = val
@@ -438,12 +438,17 @@ function recursiveMinifyChat(chat, inherited) {
     return chat
 }
 
-function convertArrayObjectToChatObject({ text, color, modifiers }) {
-    return {
+function convertArrayObjectToChatObject({ text, color, modifiers, insertion }) {
+    let out = {
         text,
         color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
-    }
+    };
+
+    if (insertion)
+        out.insertion = insertion;
+
+    return out;
 }
 
 function convertModifierArrayToObject(modifiers) {
@@ -458,6 +463,9 @@ function isSameChatStyling(a, b) {
     if (a.color != b.color)
         return false;
 
+    if (a.insertion !== b.insertion)
+        return false;
+
     for (let { name } of textModifiersWithoutReset)
         if (a[name] != b[name])
             return false;
@@ -469,8 +477,9 @@ function chatLevelDifferenceAmount(a, b) {
     let difference = 0;
 
     if (a.color != b.color) difference++;
+    if (a.insertion != b.insertion) difference++;
 
-    for (let { name } of textModifiersWithoutReset)
+    for (const { name } of textModifiersWithoutReset)
         if (a[name] != b[name])
             difference++;
 

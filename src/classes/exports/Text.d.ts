@@ -13,8 +13,8 @@ export class Text {
     static stringToArray(text: string): textArray;
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
-    static arrayToString(text: optionalTextArray): string; //
-    static arrayToChat(text: optionalTextArray): chatComponent; //
+    static arrayToString(text: optionalTextArray): string;
+    static arrayToChat(text: optionalTextArray): chatComponent;
     static parseChat(text: chatComponent): chatComponent;
     static minifyChat(text: chatComponent): chatComponent;
 }
