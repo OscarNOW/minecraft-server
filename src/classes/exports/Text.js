@@ -333,7 +333,7 @@ class Text {
         let out;
 
         for (const v of array) {
-            let val = convertArrayObjectToChatObject(v);
+            let val = convertArrayComponentToChatComponent(v);
 
             if (val.text == '') continue;
 
@@ -373,6 +373,7 @@ class Text {
         if (!out)
             out = { text: '' }
 
+        console.log(out)
         return this.minifyChat(out);
     }
 
@@ -453,7 +454,7 @@ function recursiveMinifyChat(chat, inherited) {
     return chat
 }
 
-function convertArrayObjectToChatObject({ text, color, modifiers, insertion }) {
+function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent }) {
     let out = {
         text,
         color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
@@ -462,6 +463,9 @@ function convertArrayObjectToChatObject({ text, color, modifiers, insertion }) {
 
     if (insertion)
         out.insertion = insertion;
+
+    if (clickEvent)
+        out.clickEvent = clickEvent;
 
     return out;
 }
@@ -481,6 +485,12 @@ function isSameChatStyling(a, b) {
     if (a.insertion !== b.insertion)
         return false;
 
+    if (a.clickEvent?.action !== b.clickEvent?.action)
+        return false;
+
+    if (a.clickEvent?.value !== b.clickEvent?.value)
+        return false;
+
     for (let { name } of textModifiersWithoutReset)
         if (a[name] != b[name])
             return false;
@@ -493,6 +503,11 @@ function chatLevelDifferenceAmount(a, b) {
 
     if (a.color != b.color) difference++;
     if (a.insertion != b.insertion) difference++;
+    if (
+        (a.clickEvent?.action != b.clickEvent?.action) ||
+        (a.clickEvent?.value != b.clickEvent?.value)
+    )
+        difference++;
 
     for (const { name } of textModifiersWithoutReset)
         if (a[name] != b[name])

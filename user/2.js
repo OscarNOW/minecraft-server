@@ -5,12 +5,18 @@ let a = Text.arrayToChat([
     {
         text: 'Hello',
         color: 'darkRed',
-        insertion: 'foo'
+        clickEvent: {
+            action: 'open_url',
+            value: 'https://www.youtube.com'
+        }
     },
     {
         text: ' world',
-        color: 'darkGreen',
-        insertion: 'bar'
+        color: 'darkRed',
+        clickEvent: {
+            action: 'open_url',
+            value: 'https://www.google.com'
+        }
     }
 ])
 
@@ -25,12 +31,11 @@ server.on('connect', client => {
     client.raw('chat', {
         message: JSON.stringify({
             text: 'Hello, world!',
-            insertion: '12345678',
-            extra: [
-                {
-                    text: ' kkkkkk'
-                }
-            ]
+            clickEvent: {
+                action: 'open_url',
+                value: 'https://google.com'
+            },
+            extra: [true]
         }),
         position: 0,
         sender: '0'

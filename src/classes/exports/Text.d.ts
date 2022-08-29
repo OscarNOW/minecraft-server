@@ -14,7 +14,7 @@ export class Text {
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static arrayToChat(text: optionalTextArray): chatComponent; //
+    static arrayToChat(text: optionalTextArray): chatComponent;
     static parseChat(text: chatComponent): chatComponent; //
     static minifyChat(text: chatComponent): chatComponent; //
 }
@@ -63,12 +63,12 @@ type chatComponent = string | number | boolean | chatComponent[] | {
     color?: minecraftTextColor;
 
     insertion?: string;
-    //Not implemented
-    /*
     clickEvent?: {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
+    //Not implemented
+    /*
     hoverEvent?: {
         action: 'show_text' | 'show_item' | 'show_entity';
         value: chatComponent;
