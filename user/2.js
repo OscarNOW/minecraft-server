@@ -14,12 +14,6 @@ let a = Text.arrayToChat([
     }
 ])
 
-Text.minifyChat([
-    {
-
-    }
-])
-
 console.log(a)
 //*/
 
