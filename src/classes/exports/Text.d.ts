@@ -15,8 +15,8 @@ export class Text {
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
     static arrayToChat(text: optionalTextArray): chatComponent;
-    static parseChat(text: chatComponent): chatComponent; //
-    static minifyChat(text: chatComponent): chatComponent; //
+    static parseChat(text: chatComponent): chatComponent;
+    static minifyChat(text: chatComponent): chatComponent;
 }
 type textInput = string | optionalTextArray;
 

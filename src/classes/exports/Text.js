@@ -373,7 +373,6 @@ class Text {
         if (!out)
             out = { text: '' }
 
-        console.log(out)
         return this.minifyChat(out);
     }
 
@@ -381,8 +380,10 @@ class Text {
         chat = this.parseChat(chat);
         chat = Object.assign({}, chat);
 
-        chat = recursiveMinifyChat(chat, {
+        chat = minifyChatComponent(chat, {
             color: 'reset',
+            insertion: undefined,
+            clickEvent: undefined,
             ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
         });
 
@@ -390,11 +391,11 @@ class Text {
     }
 
     static parseChat(chat) {
-        return stripShorthandFromChat(chat);
+        return deMinifyChatComponent(chat);
     }
 }
 
-function stripShorthandFromChat(chat) {
+function deMinifyChatComponent(chat) {
     let obj;
 
     if (['string', 'number', 'boolean'].includes(typeof chat) || chat == null)
@@ -412,46 +413,67 @@ function stripShorthandFromChat(chat) {
     }
 
     for (const extra in obj.extra || [])
-        obj.extra[extra] = stripShorthandFromChat(obj.extra[extra]);
+        obj.extra[extra] = deMinifyChatComponent(obj.extra[extra]);
 
     return obj;
 };
 
-function recursiveMinifyChat(chat, inherited) {
-    let styles = {};
-    for (const { name } of [...textModifiersWithoutReset, { name: 'color' }, { name: 'insertion' }])
-        styles[name] = chat[name] ?? inherited[name];
+function minifyChatComponent(chat, inherited) {
+    let properties = {};
+    for (const { name } of [...textModifiersWithoutReset, { name: 'color' }, { name: 'insertion' }, { name: 'clickEvent' }])
+        properties[name] = chat[name] ?? inherited[name];
 
-    let overwrittenStyles = {}
-    for (const name in styles)
-        if (styles[name] != inherited[name])
-            overwrittenStyles[name] = styles[name]
+    let overwrittenProperties = {}
+    for (const name in properties)
+        if (!compareChatProperties(properties[name], inherited[name], name))
+            overwrittenProperties[name] = properties[name]
 
-    for (const name in styles)
-        if (overwrittenStyles[name] === undefined)
+    for (const name in properties)
+        if (overwrittenProperties[name] === undefined)
             delete chat[name]
         else
-            chat[name] = overwrittenStyles[name]
+            chat[name] = overwrittenProperties[name]
 
     if (chat.extra) {
         for (const extraIndex in chat.extra)
-            chat.extra[extraIndex] = recursiveMinifyChat(chat.extra[extraIndex], styles);
+            chat.extra[extraIndex] = minifyChatComponent(chat.extra[extraIndex], properties);
 
         chat = [chat, ...chat.extra];
         delete chat[0].extra;
 
-        if (Object.keys(overwrittenStyles).length == 0)
-            chat[0] = chat[0].text;
-    } else if (Object.keys(overwrittenStyles).length == 0) {
+        if (Object.keys(overwrittenProperties).length == 0)
+            if (!isNaN(parseInt(chat[0].text)))
+                chat[0] = parseInt(chat[0].text)
+            else if (chat[0].text == 'true' || chat[0].text == 'false')
+                chat[0] = Boolean(chat[0].text)
+            else
+                chat[0] = chat[0].text;
+
+    } else if (Object.keys(overwrittenProperties).length == 0)
         if (!isNaN(parseInt(chat.text)))
             chat = parseInt(chat.text)
         else if (chat.text == 'true' || chat.text == 'false')
             chat = Boolean(chat.text)
         else
             chat = chat.text;
-    }
 
     return chat
+}
+
+function compareChatProperties(a, b, name) {
+    if (typeof a != typeof b) return false;
+
+    if (
+        typeof a != 'object' &&
+        typeof b != 'object'
+    )
+        return a === b;
+
+    if (name == 'clickEvent')
+        return a.action == b.action && a.value == b.value;
+
+    // todo: Use CustomError
+    throw new Error(`Don't know how to compare ${name}`);
 }
 
 function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent }) {
