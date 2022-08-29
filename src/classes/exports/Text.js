@@ -228,13 +228,28 @@ class Text {
                     color: 'default',
                     modifiers: []
                 }
-            else
+            else {
                 obj = {
                     text: val.text || '',
                     color: val.color || 'default',
-                    modifiers: [...new Set(val.modifiers || [])].sort(),
-                    insertion: val.insertion ?? undefined
+                    modifiers: [...new Set(val.modifiers || [])].sort()
                 };
+
+                if (val.insertion)
+                    obj.insertion = val.insertion
+
+                if (
+                    val.clickEvent &&
+                    val.clickEvent.action &&
+                    ['open_url', 'run_command', 'suggest_command', 'change_page'].includes(val.clickEvent.action) &&
+                    val.clickEvent.value &&
+                    ['number', 'string'].includes(typeof val.clickEvent.value)
+                )
+                    obj.clickEvent = {
+                        action: val.clickEvent.action,
+                        value: val.clickEvent.value
+                    }
+            }
 
             array.push(obj);
         };

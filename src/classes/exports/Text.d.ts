@@ -14,9 +14,9 @@ export class Text {
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArray;
     static arrayToString(text: optionalTextArray): string;
-    static arrayToChat(text: optionalTextArray): chatComponent;
-    static parseChat(text: chatComponent): chatComponent;
-    static minifyChat(text: chatComponent): chatComponent;
+    static arrayToChat(text: optionalTextArray): chatComponent; //
+    static parseChat(text: chatComponent): chatComponent; //
+    static minifyChat(text: chatComponent): chatComponent; //
 }
 type textInput = string | optionalTextArray;
 
@@ -24,14 +24,24 @@ type textArrayComponent = {
     text: string;
     color: textColor;
     modifiers: textModifier[];
+
     insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
+        value: string | number;
+    };
 };
 
 type optionalTextArrayComponent = string | {
     text?: string;
     color?: textColor;
     modifiers?: textModifier[];
+
     insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
+        value: string | number;
+    };
 };
 
 type textArray = textArrayComponent[];
