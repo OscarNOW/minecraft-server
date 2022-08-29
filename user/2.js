@@ -10,7 +10,13 @@ let a = Text.arrayToChat([
     {
         text: ' world',
         color: 'darkGreen',
-        insertion: 'foo'
+        insertion: 'bar'
+    }
+])
+
+Text.minifyChat([
+    {
+
     }
 ])
 

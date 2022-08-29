@@ -52,9 +52,9 @@ type chatComponent = string | number | boolean | chatComponent[] | {
 
     color?: minecraftTextColor;
 
+    insertion?: string;
     //Not implemented
     /*
-    insertion?: string;
     clickEvent?: {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
