@@ -27,9 +27,21 @@ type textArrayComponent = {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
         value: string | number;
     };
+    // hoverEvent?: {
+    //     action: 'show_text'; // todo: convert to better name
+    //     value: textArrayComponent;
+    // } | {
+    //     action: 'show_item';
+    //     value: object; // todo: implement item NBT
+    // } | {
+    //     action: 'show_entity';
+    //     value: {
+    //         // todo
+    //     };
+    // };
 };
 
 type optionalTextArrayComponent = string | {
