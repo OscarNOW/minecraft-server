@@ -1,8 +1,4 @@
 implement error event for Server and Client
-Expand CustomError
-    Not implemented
-    Action can't be performed right now
-    Can't set
 Change file structure so that every class gets its own folder
 Create guide
     Update readme
@@ -17,16 +13,8 @@ Expand Client property types
         Use that for sneaking
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
--Update Text
-    -Update JS
-        -Implement new chat features        
-        Change chatLevelDifferenceAmount to count difference in characters and not difference in properties
-        Create chat to array function
-        Implement chat functions
-            Web color
-            Click event
-            Optimized chat
-            Insertion
+Update Text    
+    Change chatLevelDifferenceAmount to count difference in characters and not difference in properties                
     Create new tests for new features
 Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
@@ -37,3 +25,4 @@ Circular reference in client.entities, meaning a client class never gets garbage
 Move keepAlive packets into separate file
 Reduce file sizes (mainly of images in readme)
 Make console.log(<Text>) better by hiding hidden properties
+Fix all in spreadsheet
