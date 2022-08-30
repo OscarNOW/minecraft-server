@@ -16,13 +16,11 @@ src/minify.js
 src/functions/loader/tests.js
 src/docs/
 docs/
-src/temp/
-todo.txt
+temp/
+progress/
 user/
 src/classes/exports/*.d.ts
 src/classes/utils/*.d.ts
-~$packets.xlsx
-packets.xlsx
 FAQ.md
 assets/ISC License/docs/
 assets/Minecraft Server/docs.png

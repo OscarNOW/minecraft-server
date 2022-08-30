@@ -41,7 +41,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     else if (particleName == 'dust')
         throw new Error('Not implemented')
     /*
-    see /src/temp/prismarineType/particleData.jsonc
+    see /temp/prismarineType/particleData.jsonc
     data: {
         red: data1.r,
         green: data1.g,
