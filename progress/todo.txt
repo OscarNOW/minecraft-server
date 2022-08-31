@@ -28,3 +28,4 @@ Move keepAlive packets into separate file
 Make console.log(<Text>) better by hiding hidden properties
 Fix all in spreadsheet
 Fix blockType documentation
+Change 'itemType' type to 'item' or 'itemName'

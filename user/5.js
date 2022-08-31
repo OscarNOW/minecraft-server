@@ -1,13 +1,9 @@
 const fs = require('fs')
 
-let blocks = require('../src/data/blocks.json')
-blocks = blocks.map(a => {
-    let o = [a.name, a.minStateId]
+let oldItems = require('../src/data/items.json')
+let newItems = []
 
-    if (a.states.length != 0)
-        o.push(a.states)
+for (const [key, value] of Object.entries(oldItems))
+    newItems.push([key, value.id])
 
-    return o
-})
-
-fs.writeFileSync('./src/data/blocks.json', JSON.stringify(blocks))
+fs.writeFileSync('./src/data/items.json', JSON.stringify(newItems))
