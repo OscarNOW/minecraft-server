@@ -27,3 +27,4 @@ Move keepAlive packets into separate file
 -Reduce file sizes (mainly of images in readme)
 Make console.log(<Text>) better by hiding hidden properties
 Fix all in spreadsheet
+Fix blockType documentation

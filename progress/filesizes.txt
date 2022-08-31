@@ -1,8 +1,8 @@
 251.9kB     index.d.ts
 
-96.8kB      src/data/blocks.json
 79.8kB      src/data/items.json
 76.4kB      src/data/dimensionCodec.json
+73.8kB      src/data/blocks.json
 42.5kB      src/data/sounds.json
 39.4kB      src/data/versions.json
 16.3kB      src/classes/exports/Text.js
