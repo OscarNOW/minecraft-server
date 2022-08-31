@@ -24,10 +24,10 @@ class Chunk {
 
 function getStateId(blockName, state = {}, { function: func }) {
     let block = getBlock.call(this, blockName, { function: func })
-    if (!block.states) return block.minStateId;
+    if (!block[2]) return block[1];
 
     let stateIds = [];
-    for (const { name, values } of block.states) {
+    for (const { name, values } of block[2]) {
         if (values.indexOf(state[name]) === -1)
             throw new CustomError('expectationNotMet', 'libraryUser', `state in   <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, state)  `, [true, false].sort().join(',') == values.sort().join(',') ? {
                 got: state[name],
@@ -42,9 +42,9 @@ function getStateId(blockName, state = {}, { function: func }) {
         stateIds.push(values.indexOf(state[name]))
     }
 
-    let maxi = block.states.map(a => a.values.length)
+    let maxi = block[2].map(a => a.values.length)
 
-    let stateId = block.minStateId;
+    let stateId = block[1];
 
     stateIds.forEach((currentStateId, currentStateIdIndex) => {
         let maxiBefore = maxi.slice(0, currentStateIdIndex)
@@ -59,7 +59,7 @@ function getStateId(blockName, state = {}, { function: func }) {
 }
 
 function getBlock(blockName, { function: func }) {
-    let block = blocks.find(({ name }) => name == blockName)
+    let block = blocks.find(a => a[0] == blockName)
     if (block) return block
 
     throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, ...)  `, {

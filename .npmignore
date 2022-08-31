@@ -24,3 +24,4 @@ src/classes/utils/*.d.ts
 FAQ.md
 assets/
 .eslintrc.*
+src/data/messages/game/en_us.json

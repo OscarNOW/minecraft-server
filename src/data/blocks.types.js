@@ -1,4 +1,4 @@
-let blockStates = require('./blocks.json').map(a => a.states).flat().map(a => [a.name, a.values])
+let blockStates = require('./blocks.json').map(a => a[2] || []).flat().map(a => [a.name, a.values])
 let newBlockStates = [];
 
 for (const [name, values] of blockStates)
