@@ -1,4 +1,4 @@
-# ![Minecraft Server](https://github.com/OscarNOW/minecraft-server/blob/main/minecraft-server/assets/Minecraft%20Server.png?raw=true)
+# ![Minecraft Server](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
     <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
