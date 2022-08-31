@@ -523,17 +523,7 @@ export class Chunk {
     darkenSky: boolean;
     playEndMusic: boolean;
     createFog: boolean;
-};type soundChannel = 'master'|'music'|'soundBlock'|'weather'|'block'|'hostileCreature'|'friendlyCreature'|'player'|'ambient'|'voice';type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type textArrayComponent = {
-    text: string;
-    color: textColor;
-    modifiers: textModifier[];
-
-    insertion?: string;
-    clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
-        value: string | number;
-    };
-};type optionalTextArrayComponent = string | {
+};type soundChannel = 'master'|'music'|'soundBlock'|'weather'|'block'|'hostileCreature'|'friendlyCreature'|'player'|'ambient'|'voice';type textColor = 'darkRed'|'red'|'gold'|'yellow'|'darkGreen'|'green'|'aqua'|'darkAqua'|'darkBlue'|'blue'|'pink'|'purple'|'white'|'gray'|'darkGray'|'black'|'default';type minecraftTextColor = 'dark_red'|'red'|'gold'|'yellow'|'dark_green'|'green'|'aqua'|'dark_aqua'|'dark_blue'|'blue'|'light_purple'|'dark_purple'|'white'|'gray'|'dark_gray'|'black'|'reset';type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;type optionalTextArrayComponent = string | {
     text?: string;
     color?: textColor;
     modifiers?: textModifier[];
@@ -569,6 +559,28 @@ export class Chunk {
     };
     //*/
 
+};type textArrayComponent = {
+    text: string;
+    color: textColor;
+    modifiers: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        value: string | number;
+    };
+    // hoverEvent?: {
+    //     action: 'show_text'; // todo: convert to better name
+    //     value: textArrayComponent;
+    // } | {
+    //     action: 'show_item';
+    //     value: object; // todo: implement item NBT
+    // } | {
+    //     action: 'show_entity';
+    //     value: {
+    //         // todo
+    //     };
+    // };
 };type defaultClientProperties = {
     position?: {
         x?: number;

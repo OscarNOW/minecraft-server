@@ -22,6 +22,5 @@ user/
 src/classes/exports/*.d.ts
 src/classes/utils/*.d.ts
 FAQ.md
-assets/ISC License/docs/
-assets/Minecraft Server/docs.png
+assets/
 .eslintrc.*

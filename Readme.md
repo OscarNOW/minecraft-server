@@ -1,4 +1,4 @@
-# ![Minecraft Server](/assets/Minecraft%20Server/github.webp)
+# ![Minecraft Server](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
     <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
@@ -93,8 +93,8 @@ If you found a security vulnerability, please do not make a public issue. Instea
 ## **License**
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
-![Explanation of ISC license](/assets/ISC%20license/github/dark.png#gh-dark-mode-only)
-![Explanation of ISC license](/assets/ISC%20license/github/light.png#gh-light-mode-only)
+![Explanation of ISC license](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%20license/github/dark.png#gh-dark-mode-only?raw=true)
+![Explanation of ISC license](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%20license/github/light.png#gh-light-mode-only?raw=true)
 
 ## **Special thanks**
 * [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
