@@ -94,7 +94,38 @@ for (const utilClass of utilClasses)
     out += `declare ${utilClass}`;
 
 for (const [name, value] of Object.entries(types))
-    out += `type ${name} = ${value};`
+    out += `type ${name}=${value};`
+
+console.log('Minifieing output...')
+
+out = out.replace(/\r\n/g, '\n')
+
+out = out.replace(/\/\//g, '\n//')
+out = out.replace(/\/\*/g, '\n/*')
+out = out.replace(/\*\//g, '*/\n')
+
+out = out.replace(/\*(.|[\r\n])*?\*/g, ''); //remove comments 
+out = out.split('\n').filter(a => !a.startsWith('//')).join('\n')
+
+out = out.split('\n')
+out = out.filter(a => a.trim().length > 0)
+out = out.map(a => a.trim())
+out = out.join('\n')
+
+out = out.replace(/ => /g, '=>')
+out = out.replace(/: /g, ':')
+
+out = out.replace(/;\n/g, ';')
+out = out.replace(/\n;/g, ';')
+out = out.replace(/,\n/g, ',')
+out = out.replace(/{\n/g, '{')
+out = out.replace(/\n}/g, '}')
+out = out.replace(/\(\n/g, '(')
+out = out.replace(/\n\)/g, ')')
+out = out.replace(/, /g, ',')
+out = out.replace(/ \| /g, '|')
+
+out = out.replace(/\}\n/g, '};')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
