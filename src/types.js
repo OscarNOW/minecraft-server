@@ -124,8 +124,9 @@ out = out.replace(/\(\n/g, '(')
 out = out.replace(/\n\)/g, ')')
 out = out.replace(/, /g, ',')
 out = out.replace(/ \| /g, '|')
-
-out = out.replace(/\}\n/g, '};')
+out = out.replace(/readonly \[/g, 'readonly[')
+out = out.replace(/}\n/g, '};')
+out = out.replace(/;}/, '}')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
