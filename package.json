@@ -38,7 +38,7 @@
     "devDependencies": {
         "eslint": "^8.23.0",
         "mineflayer": "^4.4.0",
-        "typedoc": "^0.23.11",
+        "typedoc": "^0.23.12",
         "typedoc-theme-hierarchy": "^3.0.0"
     }
 }
