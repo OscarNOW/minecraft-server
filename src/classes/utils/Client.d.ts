@@ -170,7 +170,7 @@ export class Client {
             y: number;
             z: number;
         },
-        item: itemType,
+        item: itemName,
         itemAmount: number
     ): void;
     particle(
@@ -222,7 +222,7 @@ export class Client {
         z: number;
     }, stage: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): void;
     resetCamera(): void;
-    cooldown(item: itemType, tickAmount?: number): void;
+    cooldown(item: itemName, tickAmount?: number): void;
     demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;

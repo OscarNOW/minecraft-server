@@ -9,8 +9,8 @@ module.exports = function (item, length = 60) {
         throw new CustomError('expectationNotMet', 'libraryUser', `item in  <${this.constructor.name}>.cooldown(${require('util').inspect(item)}, ...)  `, {
             got: item,
             expectationType: 'type',
-            expectation: 'itemType',
-            externalLink: '{docs}/types/itemType.html'
+            expectation: 'itemName',
+            externalLink: '{docs}/types/itemName.html'
         }, this.cooldown).toString()
 
     this.p.sendPacket('set_cooldown', {
