@@ -27,4 +27,3 @@ Circular reference in client.entities, meaning a client class never gets garbage
 Move keepAlive packets into separate file
 Fix all in spreadsheet
 Add recommended extensions to workspace
-Add once addListener to Client
