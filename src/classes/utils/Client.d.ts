@@ -332,6 +332,34 @@ export class Client {
         };
         isMainHand: boolean
     }) => void): void;
+
+    once(event: 'chat', callback: (message: string) => void): void;
+    once(event: 'signEditorClose', callback: (signText: string[], location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    once(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
+    once(event: 'digStart', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, blockFace: blockFace) => void): void;
+    once(event: 'digCancel' | 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
+    once(event: 'itemDrop', callback: (stack: boolean) => void): void;
+    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'rightClick', callback: (clickInfo: {
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        isMainHand: boolean
+    }) => void): void;
 }
 
 type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
