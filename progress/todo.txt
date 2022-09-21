@@ -24,5 +24,6 @@ Create JS minifier
 Further minify index.d.ts
 Circular reference in client.entities, meaning a client class never gets garbage collected
 Move keepAlive packets into separate file
-Make console.log(<Text>) better by hiding hidden properties
+Split Text functions into separate files
+Remove duplicate code in Text
 Fix all in spreadsheet

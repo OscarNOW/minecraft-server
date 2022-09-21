@@ -1,6 +1,6 @@
 const { Text } = require('../');
 
-let a = Text.arrayToChat([
+let a = new Text([
     {
         text: 'Hello',
         color: 'darkRed',
