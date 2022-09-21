@@ -1,6 +1,7 @@
 const { textModifiers, textColors } = require('../../functions/loader/data');
 
-const crypto = require('crypto')
+const fs = require('fs');
+const path = require('path');
 
 const CustomError = require('../utils/CustomError.js');
 
@@ -16,102 +17,10 @@ const hiddenProperties = [
     '_hash'
 ];
 
-const properties = {
-    hash: {
-        get() {
-            if (this._hash)
-                return this._hash;
+let properties = {};
 
-            this._hash = crypto.createHash('sha256').update(JSON.stringify(this.array)).digest('base64');
-            return this._hash;
-        }
-    },
-    array: {
-        get() {
-            let inp = this._input;
-            if (inp !== null)
-                if (typeof inp == 'string') {
-                    this.__reset();
-                    this._array = Text.stringToArray(inp);
-                } else {
-                    this.__reset();
-                    this._array = Text.parseArray(inp);
-                }
-
-            return this._array;
-        },
-        set(val) {
-            this.__reset();
-            this._input = val;
-        }
-    },
-    string: {
-        get() {
-            let inp = this._input;
-
-            if (inp !== null)
-                if (typeof inp == 'string') {
-                    this.__reset();
-                    this._array = Text.stringToArray(inp);
-                } else {
-                    this.__reset();
-                    this._array = Text.parseArray(inp);
-                }
-
-            if (this._string === null)
-                this._string = Text.arrayToString(this._array)
-
-            return this._string;
-        },
-        set(val) {
-            this.__reset();
-            this._input = val;
-        }
-    },
-    uncolored: {
-        get() {
-            let inp = this._input;
-
-            if (inp !== null)
-                if (typeof inp == 'string') {
-                    this.__reset();
-                    this._array = Text.stringToArray(inp);
-                } else {
-                    this.__reset();
-                    this._array = Text.parseArray(inp);
-                }
-
-            if (this._string === null)
-                this._string = Text.arrayToString(this._array)
-
-            if (this._uncolored === null)
-                this._uncolored = Text.stringToUncolored(this._string)
-
-            return this._uncolored;
-        },
-        set(val) {
-            this.__reset();
-            this._input = val;
-        }
-    },
-    chat: {
-        get() {
-            let inp = this._input;
-            if (inp !== null)
-                if (typeof inp == 'string') {
-                    this.__reset();
-                    this._array = Text.stringToArray(inp);
-                } else {
-                    this.__reset();
-                    this._array = Text.parseArray(inp);
-                }
-
-            this._chat = Text.arrayToChat(this._array);
-
-            return this._chat;
-        }
-    }
-};
+for (const file of fs.readdirSync(path.join(__dirname, './Text/properties/public/dynamic/')).filter(a => a.endsWith('.js')))
+    properties[file.split('.js')[0]] = require(`./Text/properties/public/dynamic/${file}`);
 
 class Text {
     constructor(text = '') {

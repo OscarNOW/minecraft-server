@@ -15,7 +15,8 @@ Expand Client property types
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text    
     Change chatLevelDifferenceAmount to count difference in characters and not difference in properties                
-    Create new tests for new features
+    Create new tests for new features    
+    Remove duplicate code in Text
 Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
@@ -24,6 +25,4 @@ Create JS minifier
 Further minify index.d.ts
 Circular reference in client.entities, meaning a client class never gets garbage collected
 Move keepAlive packets into separate file
-Split Text functions into separate files
-Remove duplicate code in Text
 Fix all in spreadsheet
