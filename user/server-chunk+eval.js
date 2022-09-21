@@ -27,4 +27,10 @@ server.on('connect', client => {
     client.on('chat', a => eval(a));
 })
 
-console.log(1)
+server.on('join', client => {
+    client.signEditor({
+        x: 3,
+        y: 100,
+        z: 3
+    })
+})

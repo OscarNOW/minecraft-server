@@ -249,6 +249,11 @@ export class Client {
     }): Entity;
     window(windowType: windowType): void;
     window(windowType: 'horse', horse: Entity): void;
+    signEditor(signLocation: {
+        x: number;
+        y: number;
+        z: number;
+    }): void;
     bossBar(bossBarInfo?: {
         title?: textInput | Text;
         health?: number;
