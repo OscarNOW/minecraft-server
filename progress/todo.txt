@@ -22,5 +22,3 @@ Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Object.freeze client.entities{
 Create JS minifier
-Further minify index.d.ts
-Circular reference in client.entities, meaning a client class never gets garbage collected

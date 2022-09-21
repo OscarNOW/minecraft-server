@@ -127,6 +127,7 @@ out = out.replace(/ \| /g, '|')
 out = out.replace(/readonly \[/g, 'readonly[')
 out = out.replace(/}\n/g, '};')
 out = out.replace(/;}/, '}')
+out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
