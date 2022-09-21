@@ -1,4 +1,4 @@
-const { timing, defaults } = require('../../../../../../settings.json');
+const { timing: { teleportConfirmationTimeout }, defaults } = require('../../../../../../settings.json');
 
 const Changable = require('../../../../Changable.js');
 
@@ -33,7 +33,7 @@ module.exports = {
                 this.p.setTimeout(() => {
                     if (this.online && !teleportPromises.get(this)[teleportId].resolved)
                         rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
-                }, timing.teleportConfirmationKick)
+                }, teleportConfirmationTimeout)
             });
 
             let oldPosition = oldPositions.get(this);

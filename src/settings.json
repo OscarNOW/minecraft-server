@@ -3,7 +3,7 @@
     "timing": {
         "keepAliveTimeout": 30000,
         "sendKeepAliveInterval": 3000,
-        "teleportConfirmationKick": 5000
+        "teleportConfirmationTimeout": 5000
     },
     "defaults": {
         "gamemode": 0,
