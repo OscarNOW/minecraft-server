@@ -12,7 +12,7 @@
         "serverList": {
             "maxPlayers": 100,
             "motd": "",
-            "wrongVersionConnectMessage": "Please use version {version}"
+            "wrongVersionConnectMessage": "{version}"
         },
         "position": {
             "x": 0,
