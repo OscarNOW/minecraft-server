@@ -3,7 +3,7 @@ const { Server } = require('../');
 const server = new Server();
 
 server.on('connect', async client => {
-    let ent = client.entity('zombie', client.position);
+    let ent = client.entity('drowned', client.position);
 
     await wait(1000);
     console.log(ent.uuid)
@@ -18,7 +18,7 @@ server.on('connect', async client => {
                         "text": "johnny sins"
                     },
                     "type": "minecraft:drowned",
-                    id: "11cdf7cf-6dc0-4b6f-9e87-e06fd2377ce8"
+                    id: ent.uuid
                 }
             }
         }),

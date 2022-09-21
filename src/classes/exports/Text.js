@@ -183,6 +183,19 @@ class Text {
                         action: val.clickEvent.action,
                         value: val.clickEvent.value
                     }
+
+                if (
+                    val.hoverEvent &&
+                    val.hoverEvent.action &&
+                    ['show_text'].includes(val.hoverEvent.action) &&
+                    val.hoverEvent.value &&
+                    typeof val.hoverEvent.value == 'object' &&
+                    val.hoverEvent.value !== null
+                )
+                    obj.hoverEvent = {
+                        action: val.hoverEvent.action,
+                        value: this.parseArray(val.hoverEvent.value)
+                    }
             }
 
             array.push(obj);

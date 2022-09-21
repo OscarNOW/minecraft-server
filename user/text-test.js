@@ -19,4 +19,4 @@ let a = new Text([
     }
 ])
 
-console.log(a)
+console.log(a.chat)
