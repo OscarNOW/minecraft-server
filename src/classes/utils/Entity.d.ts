@@ -21,7 +21,7 @@ export class Entity {
         z: number;
         yaw: number;
         pitch: number;
-    }
+    };
 
     camera(): void;
     animation(animationType: entityAnimationType): void;
@@ -31,6 +31,7 @@ export class Entity {
         volume: number;
         pitch: number;
     }): void;
+    remove(): void;
 
     observe(observable: 'position', callback: (position: {
         x: number;

@@ -139,11 +139,7 @@ class Entity {
     }
 
     animation(animationType) {
-        if (!this.client.p.canUsed)
-            if (this.client.online)
-                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-            else
-                throw new Error(`Can't perform this action on an offline player`)
+        this.client.p.stateHandler.checkReady.call(this.client);
 
         if (entityAnimations[animationType] === undefined)
             throw new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
@@ -159,11 +155,7 @@ class Entity {
     }
 
     camera() {
-        if (!this.client.p.canUsed)
-            if (this.client.online)
-                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-            else
-                throw new Error(`Can't perform this action on an offline player`)
+        this.client.p.stateHandler.checkReady.call(this.client);
 
         this[ps.sendPacket]('camera', {
             cameraId: this.id
@@ -171,11 +163,7 @@ class Entity {
     }
 
     sound({ sound, channel, volume, pitch }) {
-        if (!this.client.p.canUsed)
-            if (this.client.online)
-                throw new Error(`This action can't be performed on this Client right now. This may be because the Client is no longer online or that the client is not ready to receive this packet.`)
-            else
-                throw new Error(`Can't perform this action on an offline player`)
+        this.client.p.stateHandler.checkReady.call(this.client);
 
         if (!sounds.find(a => a.name == sound))
             throw new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
@@ -198,6 +186,18 @@ class Entity {
             volume,
             pitch
         })
+    }
+
+    remove() {
+        throw new Error('not implemented')
+
+        // this.client.p.stateHandler.checkReady.call(this.client);
+
+        // this[ps.sendPacket]('destroy_entities', {
+        //     entityIds: [this.id]
+        // })
+
+        // delete this.client.entities[this.id]        
     }
 
     addListener(event, callback) {
