@@ -143,36 +143,13 @@ class Client {
         ))
             this.p.client.on(eventName, eventCallback.bind(this))
 
-        //Keep alive packets
-        let clientKeepAliveKick = 30000;
-        let sendKeepAliveInterval = 4000;
-
-        let keepAlivePromises = {};
-        this.p.setInterval(() => {
-            let currentId = Math.floor(Math.random() * 1000000);
-            while (keepAlivePromises[currentId])
-                currentId = Math.floor(Math.random() * 1000000);
-
-            new Promise((res, rej) => {
-                keepAlivePromises[currentId] = { res, rej, resolved: false };
-
-                this.p.setTimeout(() => {
-                    if (this.online && !keepAlivePromises[currentId].resolved)
-                        rej(new Error(`Client didn't respond to keep alive packet in time`));
-
-                    delete keepAlivePromises[currentId];
-                }, clientKeepAliveKick)
-            })
-
-            this.p.sendPacket('keep_alive', {
-                keepAliveId: BigInt(currentId)
-            })
-        }, sendKeepAliveInterval)
-
-        this.p.client.on('keep_alive', ({ keepAliveId }) => {
-            keepAlivePromises[keepAliveId[1]].resolved = true;
-            keepAlivePromises[keepAliveId[1]].res();
-        })
+        for (const { func } of fs
+            .readdirSync(path.resolve(__dirname, './Client/constructors/'))
+            .filter(a => a.endsWith('.js'))
+            .map(a => ({ name: a.split('.js')[0], ...require(`./Client/constructors/${a}`) }))
+            .sort(({ index: a }, { index: b }) => a - b)
+        )
+            func?.call?.(this)
 
     }
 

@@ -24,15 +24,5 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('signEditorClose', (text, location) => (console.log(text), console.log(location)))
-
     client.on('chat', a => eval(a));
-})
-
-server.on('join', client => {
-    client.signEditor({
-        x: 3,
-        y: 100,
-        z: 3
-    })
 })
