@@ -29,7 +29,7 @@ function getStateId(blockName, state = {}, { function: func }) {
     let stateIds = [];
     for (const { name, values } of block[2]) {
         if (values.indexOf(state[name]) === -1)
-            throw new CustomError('expectationNotMet', 'libraryUser', `state in   <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, state)  `, [true, false].sort().join(',') == values.sort().join(',') ? {
+            throw new CustomError('expectationNotMet', 'libraryUser', `stateValue in   <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, { ${name}: stateValue })  `, [true, false].sort().join(',') == values.sort().join(',') ? {
                 got: state[name],
                 expectationType: 'type',
                 expectation: 'boolean'

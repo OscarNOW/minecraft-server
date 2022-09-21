@@ -41,7 +41,11 @@ class CustomError {
     }
 }
 
-function arrayToText(arr) {
+function arrayToText(ar) {
+    let arr = ar;
+
+    arr = sortArray(arr)
+
     if (arr.length == 0)
         return valueToText()
 
@@ -54,7 +58,7 @@ function arrayToText(arr) {
     if (arr.filter(a => typeof a == 'number').length == arr.length && consecutive(arr))
         return `a number between ${arr.sort()[0]} and ${arr.sort()[arr.length - 1]}`
 
-    return `one of ${inspect(arr)}`
+    return `one of ${inspect(arr, { sorted: false })}`
 }
 
 function typeToText(type, externalLink) {
@@ -77,7 +81,7 @@ function parseUri(uri) {
 }
 
 function consecutive(a) {
-    let arr = a.sort()
+    let arr = sortArray(a);
 
     for (let i = 0; i < arr.length - 1; i++) {
         let d = arr[i + 1] - arr[i];
@@ -87,6 +91,20 @@ function consecutive(a) {
     }
 
     return true;
+}
+
+function sortArray(a) {
+    let arr = Object.assign([], a);
+
+    if (arr.filter(a => !isNaN(parseInt(a))).length == arr.length)
+        arr = arr.map(a => parseInt(a))
+
+    if (arr.filter(a => typeof a == 'number').length == arr.length)
+        arr = arr.sort((a, b) => a - b)
+    else
+        arr = arr.sort();
+
+    return arr;
 }
 
 module.exports = CustomError

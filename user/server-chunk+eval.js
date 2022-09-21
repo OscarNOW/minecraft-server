@@ -6,6 +6,8 @@ for (let x = 0; x < 16; x++)
         for (let y = 0; y < 100; y++)
             chunk.setBlock({ x, y, z }, 'dirt')
 
+chunk.setBlock({ x: 3, y: 100, z: 3 }, 'oak_wall_sign', { waterlogged: false, facing: 'north' })
+
 const server = new Server({
     defaultClientProperties: () => ({
         gamemode: 'creative',
@@ -22,11 +24,7 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    let horse = client.entity('horse', {
-        x: 3,
-        y: 101,
-        z: 3
-    })
-
     client.on('chat', a => eval(a));
 })
+
+console.log(1)
