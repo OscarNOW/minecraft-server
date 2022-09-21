@@ -1,9 +1,8 @@
+const { timing: { keepAliveTimeout, sendKeepAliveInterval } } = require('../../../../settings.json');
+
 module.exports = {
     index: 0,
     func() {
-        let clientKeepAliveKick = 30000; //todo: move to settings
-        let sendKeepAliveInterval = 4000;
-
         let keepAlivePromises = {};
         this.p.setInterval(() => {
             let currentId = Math.floor(Math.random() * 1000000);
@@ -18,7 +17,7 @@ module.exports = {
                         rej(new Error(`Client didn't respond to keep alive packet in time`));
 
                     delete keepAlivePromises[currentId];
-                }, clientKeepAliveKick)
+                }, keepAliveTimeout)
             })
 
             this.p.sendPacket('keep_alive', {
