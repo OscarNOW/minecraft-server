@@ -200,17 +200,6 @@ class Entity {
         // delete this.client.entities[this.id]        
     }
 
-    addListener(event, callback) {
-        if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.addListener(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.addListener).toString()
-
-        return super.addListener(event, callback);
-    }
-
     on(event, callback) {
         if (!events.includes(event))
             throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {

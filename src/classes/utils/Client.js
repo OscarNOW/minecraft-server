@@ -13,7 +13,8 @@ const events = Object.freeze([
     'rightClick',
     'connect',
     'join',
-    'leave'
+    'leave',
+    'signEditorClose'
 ]);
 
 class Client {

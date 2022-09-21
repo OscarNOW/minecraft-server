@@ -306,6 +306,11 @@ export class Client {
     playerArrowHitSound(): void;
 
     on(event: 'chat', callback: (message: string) => void): void;
+    on(event: 'signEditorClose', callback: (signText: string[], location: {
+        x: number;
+        y: number;
+        z: number;
+    }) => void): void;
     on(event: 'itemHandSwap' | 'connect' | 'join' | 'leave', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;

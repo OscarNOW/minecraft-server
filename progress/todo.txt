@@ -28,4 +28,3 @@ Move keepAlive packets into separate file
 Fix all in spreadsheet
 Add recommended extensions to workspace
 Add once addListener to Client
-Remove addListener from Client
