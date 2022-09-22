@@ -158,9 +158,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'show_text';
         value: chatComponent;
     };
-};
-//Not implemented
-/*| {
+} | {
     translate: chatTranslate;
     with?: chatComponents;
 
@@ -183,7 +181,9 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'show_text' | 'show_item' | 'show_entity';
         value: chatComponent;
     };
-} | {
+};
+//Not implemented
+/* | {
     score: {
         name: string;
         objective: string;
