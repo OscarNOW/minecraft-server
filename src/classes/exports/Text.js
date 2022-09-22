@@ -3,7 +3,10 @@ const { textModifiers, textColors, keybinds } = require('../../functions/loader/
 const fs = require('fs');
 const path = require('path');
 
+const englishMessages = Object.assign({}, fs.readFileSync(path.join(__dirname, '../../data/messages/game/en_us.json')), fs.readFileSync(path.join(__dirname, '../../data/messages/realms/en_us.json')));
+
 const CustomError = require('../utils/CustomError.js');
+const { formatJavaString } = require('../../functions/formatJavaString.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
@@ -89,10 +92,7 @@ class Text {
         let currentColor = 'default';
 
         for (const component of array) {
-            const componentText = component.text ??
-                ((component.keybind !== undefined) ?
-                    keybinds.find(({ code }) => code == component.keybind).default :
-                    '');
+            const componentText = getTextComponentDefaultText(component);
 
             if (componentText == '') continue;
 
@@ -540,10 +540,27 @@ function compareChatProperty(a, b, name) {
 function getTextComponentTypeValue(component) {
     if (component.text !== undefined)
         return ['text', component.text];
+    else if (component.translate !== undefined)
+        return ['translate', component.translate];
     else if (component.keybind !== undefined)
         return ['keybind', component.keybind];
     else
         return ['text', ''];
+}
+
+function getTextComponentDefaultText(component) {
+    let [type, value] = getTextComponentTypeValue(component);
+
+    if (type == 'text')
+        return value;
+
+    if (type == 'translate')
+        return formatJavaString(englishMessages[value] ?? value, ...((component.with || []).map(getTextComponentDefaultText)));
+
+    if (type == 'keybind')
+        return keybinds.find(({ code }) => code == component.keybind).default;
+
+    throw new Error(`Unknown type ${type}`);
 }
 
 module.exports = Text;

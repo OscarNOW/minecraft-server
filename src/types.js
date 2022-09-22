@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+const { getAllIndexes } = require('./functions/getAllIndexes.js');
+
 console.clear()
 console.log('Getting export classes...')
 
@@ -189,18 +191,4 @@ function removeEndFromType(text) {
         throw new Error(`Type definition doesn't end with semicolon.\n    at type ${out.split(' ')[1]} = \n`)
 
     return out;
-}
-
-function getAllIndexes(str, val) {
-    let indexes = [];
-    let i = 0;
-
-    while (i != -1) {
-        i = str.indexOf(val, i + 1)
-
-        if (i != -1)
-            indexes.push(i);
-    }
-
-    return indexes;
 }

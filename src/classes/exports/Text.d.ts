@@ -48,6 +48,22 @@ type textArrayComponent = {
         action: 'show_text';
         value: textArrayComponent[];
     };
+} | {
+    translate: chatTranslate;
+    with: textArrayComponent[];
+
+    color: textColor;
+    modifiers: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: textArrayComponent[];
+    };
 };
 
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
@@ -67,6 +83,22 @@ type optionalTextArrayComponent = string | {
     };
 } | {
     keybind?: keycode;
+    color?: textColor;
+    modifiers?: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: optionalTextArray;
+    };
+} | {
+    translate?: chatTranslate;
+    with?: optionalTextArray;
+
     color?: textColor;
     modifiers?: textModifier[];
 
