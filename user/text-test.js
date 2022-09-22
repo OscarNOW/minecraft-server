@@ -8,9 +8,7 @@ let a = new Text([
             value: 'Hover'
         }
     },
-    {
-        text: ' world'
-    }
+    ' world'
 ])
 
 console.log(require('util').inspect(a.chat, { depth: 100, colors: true }))

@@ -489,15 +489,18 @@ function hasSameChatProperties(a, b) {
     if (a.clickEvent?.action !== b.clickEvent?.action)
         return false;
 
-    if (typeof a.clickEvent?.value !== typeof b.clickEvent?.value)
+    if (a.clickEvent?.value !== b.clickEvent?.value)
         return false;
-
-    if (typeof a.clickEvent?.value == 'string' && typeof b.clickEvent?.value == 'string')
-        if (a.clickEvent?.value !== b.clickEvent?.value)
-            return false;
 
     if (a.hoverEvent?.action !== b.hoverEvent?.action)
         return false;
+
+    if (typeof a.hoverEvent?.value !== typeof b.hoverEvent?.value)
+        return false;
+
+    if (typeof a.hoverEvent?.value == 'string' && typeof b.hoverEvent?.value == 'string')
+        if (a.hoverEvent?.value !== b.hoverEvent?.value)
+            return false;
 
     for (let { name } of textModifiersWithoutReset)
         if (a[name] !== b[name])
