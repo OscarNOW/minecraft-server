@@ -247,7 +247,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }): Entity;
-    window(windowType: windowType): void;
+    window(windowType: nonEntityWindowName): void;
     window(windowType: 'horse', horse: Entity): void;
     signEditor(signLocation: {
         x: number;
@@ -396,6 +396,6 @@ type defaultClientProperties = {
     foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
 };
 
-type windowType = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
+type nonEntityWindowName = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
 
 type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;

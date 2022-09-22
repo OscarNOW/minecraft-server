@@ -2,16 +2,16 @@ const { windowNameIdMapping } = require('../../../../../functions/loader/data.js
 
 const CustomError = require('../../../CustomError.js');
 
-module.exports = function (windowType, horse) {
+module.exports = function (windowName, horse) {
     this.p.stateHandler.checkReady.call(this);
 
-    if (!windowNameIdMapping[windowType])
-        throw new CustomError('expectationNotMet', 'libraryUser', `windowType in  <${this.constructor.name}>.window(${require('util').inspect(windowType)}, ...)  `, {
-            got: windowType,
+    if (!windowNameIdMapping[windowName])
+        throw new CustomError('expectationNotMet', 'libraryUser', `windowName in  <${this.constructor.name}>.window(${require('util').inspect(windowName)}, ...)  `, {
+            got: windowName,
             expectationType: 'value',
             expectation: Object.keys(windowNameIdMapping)
         }, this.window).toString()
-    if (windowType == 'horse' && !horse)
+    if (windowName == 'horse' && !horse)
         throw new CustomError('expectationNotMet', 'libraryUser', `horse in  <${this.constructor.name}>.window(..., ${require('util').inspect(horse)})  `, {
             got: horse,
             expectationType: 'type',
@@ -19,7 +19,7 @@ module.exports = function (windowType, horse) {
             externalLink: `{docs}/classes/Entity.html`
         }, this.window).toString()
 
-    let windowId = windowNameIdMapping[windowType];
+    let windowId = windowNameIdMapping[windowName];
 
     if (windowId == 'EntityHorse')
         this.p.sendPacket('open_horse_window', {
