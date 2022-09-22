@@ -3,20 +3,14 @@ const { Text } = require('../');
 let a = new Text([
     {
         text: 'Hello',
-        color: 'darkRed',
-        clickEvent: {
-            action: 'open_url',
-            value: 'https://www.google.com'
+        hoverEvent: {
+            action: 'show_text',
+            value: 'Hover'
         }
     },
     {
-        text: ' world',
-        color: 'darkGreen',
-        clickEvent: {
-            action: 'open_url',
-            value: 'https://www.google.com'
-        }
+        text: ' world'
     }
 ])
 
-console.log(a.chat)
+console.log(require('util').inspect(a.chat, { depth: 100, colors: true }))

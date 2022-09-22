@@ -55,6 +55,10 @@ type optionalTextArrayComponent = string | {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
+    hoverEvent?: {
+        action: 'show_text'; // todo: convert to better name
+        value: textArrayComponent;
+    };
 };
 
 type textArray = textArrayComponent[];
@@ -80,10 +84,14 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
         value: string | number;
     };
+    hoverEvent?: {
+        action: 'show_text';
+        value: chatComponent;
+    };
     //Not implemented
     /*
     hoverEvent?: {
-        action: 'show_text' | 'show_item' | 'show_entity';
+        action: 'show_item' | 'show_entity';
         value: chatComponent;
     };
     //*/

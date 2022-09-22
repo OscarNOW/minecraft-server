@@ -22,6 +22,14 @@ let properties = {};
 for (const file of fs.readdirSync(path.join(__dirname, './Text/properties/public/dynamic/')).filter(a => a.endsWith('.js')))
     properties[file.split('.js')[0]] = require(`./Text/properties/public/dynamic/${file}`);
 
+const defaultInheritedChatProperties = Object.freeze({
+    color: 'reset',
+    insertion: undefined,
+    clickEvent: undefined,
+    hoverEvent: { action: 'show_text', value: '' },
+    ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
+});
+
 class Text {
     constructor(text = '') {
         for (const hiddenProperty of hiddenProperties)
@@ -148,62 +156,15 @@ class Text {
         return text;
     }
 
-    static parseArray(text) {
-        if (!Array.isArray(text))
-            text = [text]
-        let array = [];
+    static parseArray(arr) {
+        if (!Array.isArray(arr))
+            arr = [arr];
 
-        for (const val of text) {
-            let obj;
+        arr = arr.map(parseArrayComponent);
 
-            if (typeof val == 'string')
-                obj = {
-                    text: val,
-                    color: 'default',
-                    modifiers: []
-                }
-            else {
-                obj = {
-                    text: val.text || '',
-                    color: val.color || 'default',
-                    modifiers: [...new Set(val.modifiers || [])].sort()
-                };
+        arr = arr.filter(val => val.text !== '')
 
-                if (val.insertion)
-                    obj.insertion = val.insertion
-
-                if (
-                    val.clickEvent &&
-                    val.clickEvent.action &&
-                    ['open_url', 'run_command', 'suggest_command', 'change_page'].includes(val.clickEvent.action) &&
-                    val.clickEvent.value &&
-                    ['number', 'string'].includes(typeof val.clickEvent.value)
-                )
-                    obj.clickEvent = {
-                        action: val.clickEvent.action,
-                        value: val.clickEvent.value
-                    }
-
-                if (
-                    val.hoverEvent &&
-                    val.hoverEvent.action &&
-                    ['show_text'].includes(val.hoverEvent.action) &&
-                    val.hoverEvent.value &&
-                    typeof val.hoverEvent.value == 'object' &&
-                    val.hoverEvent.value !== null
-                )
-                    obj.hoverEvent = {
-                        action: val.hoverEvent.action,
-                        value: this.parseArray(val.hoverEvent.value)
-                    }
-            }
-
-            array.push(obj);
-        };
-
-        array = array.filter(val => val.text !== '')
-
-        return array;
+        return arr;
     }
 
     static stringToArray(text) {
@@ -308,13 +269,13 @@ class Text {
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
 
-            if (isSameChatStyling(lastLevel, val)) {
+            if (hasSameChatProperties(lastLevel, val)) {
                 lastLevel.text += val.text;
                 continue;
             }
 
             if (!lowestDiffLevel.extra) lowestDiffLevel.extra = [];
-            lowestDiffLevel.extra.push(val)
+            lowestDiffLevel.extra.push(val);
         }
 
         if (!out)
@@ -327,12 +288,7 @@ class Text {
         chat = this.parseChat(chat);
         chat = Object.assign({}, chat);
 
-        chat = minifyChatComponent(chat, {
-            color: 'reset',
-            insertion: undefined,
-            clickEvent: undefined,
-            ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
-        });
+        chat = minifyChatComponent(chat, defaultInheritedChatProperties);
 
         return chat;
     }
@@ -340,6 +296,53 @@ class Text {
     static parseChat(chat) {
         return deMinifyChatComponent(chat);
     }
+}
+
+function parseArrayComponent(component) {
+    let out;
+
+    if (typeof component == 'string')
+        out = {
+            text: component,
+            color: 'default',
+            modifiers: []
+        }
+    else {
+        out = {
+            text: component.text || '',
+            color: component.color || 'default',
+            modifiers: [...new Set(component.modifiers || [])].sort()
+        };
+
+        if (component.insertion)
+            out.insertion = component.insertion
+
+        if (
+            component.clickEvent &&
+            component.clickEvent.action &&
+            ['open_url', 'run_command', 'suggest_command', 'change_page'].includes(component.clickEvent.action) &&
+            component.clickEvent.value &&
+            ['number', 'string'].includes(typeof component.clickEvent.value)
+        )
+            out.clickEvent = {
+                action: component.clickEvent.action,
+                value: component.clickEvent.value
+            }
+
+        if (
+            component.hoverEvent &&
+            component.hoverEvent.action &&
+            ['show_text'].includes(component.hoverEvent.action) &&
+            component.hoverEvent.value &&
+            component.hoverEvent.value !== undefined
+        )
+            out.hoverEvent = {
+                action: component.hoverEvent.action,
+                value: parseArrayComponent(component.hoverEvent.value)
+            }
+    }
+
+    return out
 }
 
 function deMinifyChatComponent(chat) {
@@ -366,13 +369,16 @@ function deMinifyChatComponent(chat) {
 };
 
 function minifyChatComponent(chat, inherited) {
+    if (typeof chat == 'string')
+        return chat;
+
     let properties = {};
-    for (const { name } of [...textModifiersWithoutReset, { name: 'color' }, { name: 'insertion' }, { name: 'clickEvent' }])
+    for (const { name } of [...textModifiersWithoutReset, ...['color', 'insertion', 'clickEvent', 'hoverEvent'].map(a => ({ name: a }))])
         properties[name] = chat[name] ?? inherited[name];
 
     let overwrittenProperties = {}
     for (const name in properties)
-        if (!compareChatProperties(properties[name], inherited[name], name))
+        if (!compareChatProperty(properties[name], inherited[name], name))
             overwrittenProperties[name] = properties[name]
 
     for (const name in properties)
@@ -380,6 +386,9 @@ function minifyChatComponent(chat, inherited) {
             delete chat[name]
         else
             chat[name] = overwrittenProperties[name]
+
+    if (chat.hoverEvent)
+        chat.hoverEvent.value = minifyChatComponent(chat.hoverEvent.value, defaultInheritedChatProperties)
 
     if (chat.extra) {
         for (const extraIndex in chat.extra)
@@ -407,7 +416,7 @@ function minifyChatComponent(chat, inherited) {
     return chat
 }
 
-function compareChatProperties(a, b, name) {
+function compareChatProperty(a, b, name) {
     if (typeof a != typeof b) return false;
 
     if (
@@ -419,11 +428,14 @@ function compareChatProperties(a, b, name) {
     if (name == 'clickEvent')
         return a.action == b.action && a.value == b.value;
 
+    if (name == 'hoverEvent')
+        return a.action == b.action && hasSameChatProperties(a.value, b.value);
+
     // todo: Use CustomError
     throw new Error(`Don't know how to compare ${name}`);
 }
 
-function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent }) {
+function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent, hoverEvent }) {
     let out = {
         text,
         color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
@@ -436,6 +448,17 @@ function convertArrayComponentToChatComponent({ text, color, modifiers, insertio
     if (clickEvent)
         out.clickEvent = clickEvent;
 
+    if (hoverEvent)
+        out.hoverEvent = {
+            action: hoverEvent.action,
+            value: convertArrayComponentToChatComponent(Text.parseArray([hoverEvent.value])[0])
+        }
+    else
+        out.hoverEvent = {
+            action: 'show_text',
+            value: ''
+        }
+
     return out;
 }
 
@@ -447,8 +470,17 @@ function convertModifierArrayToObject(modifiers) {
     );
 }
 
-function isSameChatStyling(a, b) {
-    if (a.color != b.color)
+function hasSameChatProperties(a, b) {
+    if (typeof a !== typeof b)
+        return false;
+
+    if (typeof a == 'string' && typeof b == 'string')
+        if (a !== b)
+            return false;
+        else
+            return true;
+
+    if (a.color !== b.color)
         return false;
 
     if (a.insertion !== b.insertion)
@@ -457,11 +489,22 @@ function isSameChatStyling(a, b) {
     if (a.clickEvent?.action !== b.clickEvent?.action)
         return false;
 
-    if (a.clickEvent?.value !== b.clickEvent?.value)
+    if (typeof a.clickEvent?.value !== typeof b.clickEvent?.value)
+        return false;
+
+    if (typeof a.clickEvent?.value == 'string' && typeof b.clickEvent?.value == 'string')
+        if (a.clickEvent?.value !== b.clickEvent?.value)
+            return false;
+
+    if (a.hoverEvent?.action !== b.hoverEvent?.action)
         return false;
 
     for (let { name } of textModifiersWithoutReset)
-        if (a[name] != b[name])
+        if (a[name] !== b[name])
+            return false;
+
+    if (a.hoverEvent?.value && b.hoverEvent?.value)
+        if (!hasSameChatProperties(a.hoverEvent.value, b.hoverEvent.value))
             return false;
 
     return true;
@@ -475,6 +518,13 @@ function chatLevelDifferenceAmount(a, b) {
     if (
         (a.clickEvent?.action != b.clickEvent?.action) ||
         (a.clickEvent?.value != b.clickEvent?.value)
+    )
+        difference++;
+
+    if (
+        (a.hoverEvent?.action != b.hoverEvent?.action) ||
+        (Boolean(a.hoverEvent) != Boolean(b.hoverEvent)) ||
+        ((a.hoverEvent && b.hoverEvent) ? !hasSameChatProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         difference++;
 
