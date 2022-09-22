@@ -158,11 +158,12 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'show_text';
         value: chatComponent;
     };
+
 } | {
     translate: chatTranslate;
-    with?: chatComponents;
+    with?: chatComponent[];
 
-    extra?: chatComponents; //chatComponents doesn't exist
+    extra?: chatComponent[];
 
     bold?: boolean;
     italic?: boolean;
@@ -178,9 +179,10 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         value: string | number;
     };
     hoverEvent?: {
-        action: 'show_text' | 'show_item' | 'show_entity';
+        action: 'show_text';
         value: chatComponent;
     };
+
 };
 //Not implemented
 /* | {
@@ -189,25 +191,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         objective: string;
         value: number;
     };
-
-    extra?: chatComponents; //chatComponents doesn't exist
-
-    bold?: boolean;
-    italic?: boolean;
-    underlined?: boolean;
-    strikethrough?: boolean;
-    obfuscated?: boolean;
-
-    color?: minecraftTextColor;
-
-    insertion?: string;
-    clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
-        value: string | number;
-    };
-    hoverEvent?: {
-        action: 'show_text' | 'show_item' | 'show_entity';
-        value: chatComponent;
-    };
+    
+    //copy from other
 };
 //*/
