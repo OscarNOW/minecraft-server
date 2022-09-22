@@ -21,4 +21,3 @@ Object.freeze client.entities{
 Make language customizable in settings.json
 Make tests for functions
 Change windowNameIdMapping to windows
-Banner image doesn't work in docs
