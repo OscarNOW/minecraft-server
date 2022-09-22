@@ -50,7 +50,7 @@ type textArrayComponent = {
     };
 } | {
     translate: chatTranslate;
-    with: textArrayComponent[];
+    with: textArrayComponent[]; //todo: maybe give better name
 
     color: textColor;
     modifiers: textModifier[];
@@ -97,7 +97,7 @@ type optionalTextArrayComponent = string | {
     };
 } | {
     translate?: chatTranslate;
-    with?: optionalTextArray;
+    with?: optionalTextArrayComponent[]; //todo: maybe give better name
 
     color?: textColor;
     modifiers?: textModifier[];

@@ -241,7 +241,7 @@ class Text {
         return this.parseArray(arr);
     }
 
-    static arrayToChat(a) {
+    static arrayToChat(a) { //todo: implement translate
         let array = this.parseArray(a);
         let out;
 
@@ -274,7 +274,7 @@ class Text {
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
 
-            if (compareChatComponent(lastLevel, val)) {
+            if (compareChatComponentInheritableProperties(lastLevel, val)) {
                 lastLevel.text += val.text;
                 continue;
             }
@@ -289,7 +289,7 @@ class Text {
         return this.minifyChat(out);
     }
 
-    static minifyChat(chat) {
+    static minifyChat(chat) { //todo: implement translate
         chat = this.parseChat(chat);
         chat = Object.assign({}, chat);
 
@@ -298,7 +298,7 @@ class Text {
         return chat;
     }
 
-    static parseChat(chat) {
+    static parseChat(chat) { //todo: implement translate
         return deMinifyChatComponent(chat);
     }
 }
@@ -388,7 +388,7 @@ function minifyChatComponent(chat, inherited) {
 
     let overwrittenProperties = {}
     for (const name in properties)
-        if (!compareChatProperty(properties[name], inherited[name], name))
+        if (!compareChatComponentInheritableProperty(properties[name], inherited[name], name))
             overwrittenProperties[name] = properties[name]
 
     for (const name in properties)
@@ -426,18 +426,17 @@ function minifyChatComponent(chat, inherited) {
     return chat
 }
 
-function convertArrayComponentToChatComponent({ text, keybind, color, modifiers, insertion, clickEvent, hoverEvent } = {}) {
+function convertArrayComponentToChatComponent({ with: wit, color, modifiers, insertion, clickEvent, hoverEvent } = {}) {
     let out = {
         color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
     };
 
-    if (text !== undefined)
-        out.text = text;
-    else if (keybind !== undefined)
-        out.keybind = keybind;
-    else
-        out.text = '';
+    const [type, value] = getTextComponentTypeValue(arguments[0]);
+    out[type] = value;
+
+    if (out.type == 'translate' && wit)
+        out.with = wit.map(convertArrayComponentToChatComponent);
 
     if (insertion)
         out.insertion = insertion;
@@ -489,7 +488,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     if (
         (a.hoverEvent?.action != b.hoverEvent?.action) ||
         (Boolean(a.hoverEvent) != Boolean(b.hoverEvent)) ||
-        ((a.hoverEvent && b.hoverEvent) ? !compareChatComponent(a.hoverEvent?.value, b.hoverEvent?.value) : false)
+        ((a.hoverEvent && b.hoverEvent) ? !compareChatComponentInheritableProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         difference++;
 
@@ -500,7 +499,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     return difference;
 }
 
-function compareChatComponent(a, b) {
+function compareChatComponentInheritableProperties(a, b) {
     if (typeof a !== typeof b)
         return false;
 
@@ -511,13 +510,13 @@ function compareChatComponent(a, b) {
         return false;
 
     for (const propertyName of ['color', 'insertion', 'clickEvent', ...textModifiersWithoutReset.map(({ name }) => name), 'hoverEvent'])
-        if (!compareChatProperty(a[propertyName], b[propertyName], propertyName))
+        if (!compareChatComponentInheritableProperty(a[propertyName], b[propertyName], propertyName))
             return false;
 
     return true;
 }
 
-function compareChatProperty(a, b, name) {
+function compareChatComponentInheritableProperty(a, b, name) {
     if (typeof a != typeof b) return false;
 
     if (
@@ -530,7 +529,7 @@ function compareChatProperty(a, b, name) {
         return a.action == b.action && a.value == b.value;
 
     if (name == 'hoverEvent')
-        return a.action == b.action && compareChatComponent(a.value, b.value);
+        return a.action == b.action && compareChatComponentInheritableProperties(a.value, b.value);
 
     // todo: Use CustomError
     throw new Error(`Don't know how to compare ${name}`);
