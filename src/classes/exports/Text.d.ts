@@ -31,7 +31,7 @@ type textArrayComponent = {
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
-        action: 'show_text'; // todo: convert to better name
+        action: 'show_text';
         value: textArrayComponent[];
     };
 } | {
@@ -44,9 +44,9 @@ type textArrayComponent = {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: {
-        action: 'show_text'; // todo: convert to better name
-        value: textArrayComponent;
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: textArrayComponent[];
     };
 };
 
@@ -62,7 +62,7 @@ type optionalTextArrayComponent = string | {
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
-        action: 'show_text'; // todo: convert to better name
+        action: 'show_text';
         value: optionalTextArray;
     };
 } | {
@@ -76,7 +76,7 @@ type optionalTextArrayComponent = string | {
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
-        action: 'show_text'; // todo: convert to better name
+        action: 'show_text';
         value: optionalTextArray;
     };
 };
