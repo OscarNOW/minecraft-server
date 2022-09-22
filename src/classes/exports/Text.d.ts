@@ -34,27 +34,39 @@ type textArrayComponent = {
         action: 'show_text'; // todo: convert to better name
         value: textArrayComponent[];
     };
-};
-// } | {
-//     keybind: keycode;
-//     color: textColor;
-//     modifiers: textModifier[];
+} | {
+    keybind: keycode;
+    color: textColor;
+    modifiers: textModifier[];
 
-//     insertion?: string;
-//     clickEvent?: {
-//         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
-//         value: string | number;
-//     };
-//     hoverEvent?: {
-//         action: 'show_text'; // todo: convert to better name
-//         value: textArrayComponent;
-//     };
-// };
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        value: string | number;
+    };
+    hoverEvent?: {
+        action: 'show_text'; // todo: convert to better name
+        value: textArrayComponent;
+    };
+};
 
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
 type optionalTextArrayComponent = string | {
     text?: string;
-    // keybind?: keycode;
+    color?: textColor;
+    modifiers?: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text'; // todo: convert to better name
+        value: optionalTextArray;
+    };
+} | {
+    keybind?: keycode;
     color?: textColor;
     modifiers?: textModifier[];
 
@@ -92,11 +104,8 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         value: chatComponent;
     };
 
-};
-//Not implemented
-/*| {
-    translate: chatTranslate;
-    with?: chatComponents;
+} | {
+    keybind: keycode;
 
     extra?: chatComponents;
 
@@ -117,8 +126,11 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'show_text' | 'show_item' | 'show_entity';
         value: chatComponent;
     };
-} | {
-    keybind: keycode;
+};
+//Not implemented
+/*| {
+    translate: chatTranslate;
+    with?: chatComponents;
 
     extra?: chatComponents;
 

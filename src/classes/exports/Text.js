@@ -1,4 +1,4 @@
-const { textModifiers, textColors } = require('../../functions/loader/data');
+const { textModifiers, textColors, keybinds } = require('../../functions/loader/data');
 
 const fs = require('fs');
 const path = require('path');
@@ -88,66 +88,71 @@ class Text {
         let currentModifiers = [];
         let currentColor = 'default';
 
-        for (const val of array) {
-            if (val.text == '') continue;
+        for (const component of array) {
+            const componentText = component.text ??
+                ((component.keybind !== undefined) ?
+                    keybinds.find(({ code }) => code == component.keybind).default :
+                    '');
+
+            if (componentText == '') continue;
 
             let modCanExtend = true;
             for (const currentModifier of currentModifiers)
-                if (!val.modifiers.includes(currentModifier))
+                if (!component.modifiers.includes(currentModifier))
                     modCanExtend = false;
 
             let newMod = [];
             if (modCanExtend)
-                for (const modifier of val.modifiers)
+                for (const modifier of component.modifiers)
                     if (!currentModifiers.includes(modifier))
                         newMod.push(modifier);
 
-            if (val.color == currentColor)
+            if (component.color == currentColor)
                 if (modCanExtend) {
-                    currentModifiers = val.modifiers;
+                    currentModifiers = component.modifiers;
                     for (const v of newMod)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
 
-                    text += val.text
+                    text += componentText
                 } else {
-                    currentModifiers = val.modifiers;
+                    currentModifiers = component.modifiers;
                     text += '§r'
-                    if (val.color != 'default')
-                        text += `§${textColors.find(({ name }) => name == val.color).char}`
+                    if (component.color != 'default')
+                        text += `§${textColors.find(({ name }) => name == component.color).char}`
 
-                    for (const modifier of val.modifiers)
+                    for (const modifier of component.modifiers)
                         text += `§${textModifiers.find(({ name }) => name == modifier).char}`
 
-                    text += val.text
+                    text += componentText
                 }
-            else if (val.color == 'default') {
+            else if (component.color == 'default') {
                 currentColor = 'default'
-                currentModifiers = val.modifiers
+                currentModifiers = component.modifiers
                 text += '§r'
 
-                for (const modifier of val.modifiers)
+                for (const modifier of component.modifiers)
                     text += `§${textModifiers.find(({ name }) => name == modifier).char}`
 
-                text += val.text;
+                text += componentText;
 
             } else {
-                currentColor = val.color;
-                currentModifiers = val.modifiers;
+                currentColor = component.color;
+                currentModifiers = component.modifiers;
 
                 if (modCanExtend) {
-                    text += `§${textColors.find(({ name }) => name == val.color).char}`
+                    text += `§${textColors.find(({ name }) => name == component.color).char}`
 
                     for (const v of newMod)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
 
-                    text += val.text;
+                    text += componentText;
                 } else {
-                    text += `§r§${textColors.find(({ name }) => name == val.color).char}`
+                    text += `§r§${textColors.find(({ name }) => name == component.color).char}`
 
-                    for (const v of val.modifiers)
+                    for (const v of component.modifiers)
                         text += `§${textModifiers.find(({ name }) => name == v).char}`
 
-                    text += val.text;
+                    text += componentText;
                 }
 
             }
@@ -264,7 +269,7 @@ class Text {
 
             for (const levelIndex in levels) {
                 const level = levels[levelIndex];
-                levelDifferences[levelIndex] = chatComponentDifferenceAmount(level, val);
+                levelDifferences[levelIndex] = chatComponentInheritablePropertiesDifferenceAmount(level, val);
             }
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
@@ -309,10 +314,16 @@ function parseArrayComponent(component) {
         }
     else {
         out = {
-            text: component.text || '',
             color: component.color || 'default',
             modifiers: [...new Set(component.modifiers || [])].sort()
         };
+
+        if (component.text !== undefined)
+            out.text = component.text;
+        else if (component.keybind !== undefined)
+            out.keybind = component.keybind;
+        else
+            out.text = '';
 
         if (component.insertion)
             out.insertion = component.insertion
@@ -397,7 +408,7 @@ function minifyChatComponent(chat, inherited) {
         chat = [chat, ...chat.extra];
         delete chat[0].extra;
 
-        if (Object.keys(overwrittenProperties).length == 0)
+        if (Object.keys(overwrittenProperties).length == 0 && chat.text !== undefined)
             if (!isNaN(parseInt(chat[0].text)))
                 chat[0] = parseInt(chat[0].text)
             else if (chat[0].text == 'true' || chat[0].text == 'false')
@@ -405,7 +416,7 @@ function minifyChatComponent(chat, inherited) {
             else
                 chat[0] = chat[0].text;
 
-    } else if (Object.keys(overwrittenProperties).length == 0)
+    } else if (Object.keys(overwrittenProperties).length == 0 && chat.text !== undefined)
         if (!isNaN(parseInt(chat.text)))
             chat = parseInt(chat.text)
         else if (chat.text == 'true' || chat.text == 'false')
@@ -416,12 +427,18 @@ function minifyChatComponent(chat, inherited) {
     return chat
 }
 
-function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent, hoverEvent }) {
+function convertArrayComponentToChatComponent({ text, keybind, color, modifiers, insertion, clickEvent, hoverEvent } = {}) {
     let out = {
-        text,
         color: textColorsWithDefault.find(({ name }) => name == color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
     };
+
+    if (text !== undefined)
+        out.text = text;
+    else if (keybind !== undefined)
+        out.keybind = keybind;
+    else
+        out.text = '';
 
     if (insertion)
         out.insertion = insertion;
@@ -459,7 +476,7 @@ function convertModifierArrayToObject(modifiers) {
     );
 }
 
-function chatComponentDifferenceAmount(a, b) {
+function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     let difference = 0;
 
     if (a.color != b.color) difference++;
@@ -491,6 +508,9 @@ function compareChatComponent(a, b) {
     if (typeof a != 'object' && typeof b != 'object')
         return a === b;
 
+    if (getTextComponentTypeValue(a)[0] != getTextComponentTypeValue(b)[0])
+        return false;
+
     for (const propertyName of ['color', 'insertion', 'clickEvent', ...textModifiersWithoutReset.map(({ name }) => name), 'hoverEvent'])
         if (!compareChatProperty(a[propertyName], b[propertyName], propertyName))
             return false;
@@ -515,6 +535,15 @@ function compareChatProperty(a, b, name) {
 
     // todo: Use CustomError
     throw new Error(`Don't know how to compare ${name}`);
+}
+
+function getTextComponentTypeValue(component) {
+    if (component.text !== undefined)
+        return ['text', component.text];
+    else if (component.keybind !== undefined)
+        return ['keybind', component.keybind];
+    else
+        return ['text', ''];
 }
 
 module.exports = Text;
