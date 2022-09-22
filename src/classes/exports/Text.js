@@ -264,12 +264,12 @@ class Text {
 
             for (const levelIndex in levels) {
                 const level = levels[levelIndex];
-                levelDifferences[levelIndex] = chatLevelDifferenceAmount(level, val);
+                levelDifferences[levelIndex] = chatComponentDifferenceAmount(level, val);
             }
 
             let lowestDiffLevel = levels[levelDifferences.indexOf(Math.min(...levelDifferences))];
 
-            if (hasSameChatProperties(lastLevel, val)) {
+            if (compareChatComponent(lastLevel, val)) {
                 lastLevel.text += val.text;
                 continue;
             }
@@ -338,7 +338,7 @@ function parseArrayComponent(component) {
         )
             out.hoverEvent = {
                 action: component.hoverEvent.action,
-                value: parseArrayComponent(component.hoverEvent.value)
+                value: Text.parseArray(component.hoverEvent.value)
             }
     }
 
@@ -369,7 +369,7 @@ function deMinifyChatComponent(chat) {
 };
 
 function minifyChatComponent(chat, inherited) {
-    if (typeof chat == 'string')
+    if (typeof chat != 'object')
         return chat;
 
     let properties = {};
@@ -401,7 +401,7 @@ function minifyChatComponent(chat, inherited) {
             if (!isNaN(parseInt(chat[0].text)))
                 chat[0] = parseInt(chat[0].text)
             else if (chat[0].text == 'true' || chat[0].text == 'false')
-                chat[0] = Boolean(chat[0].text)
+                chat[0] = chat[0].text == true
             else
                 chat[0] = chat[0].text;
 
@@ -414,25 +414,6 @@ function minifyChatComponent(chat, inherited) {
             chat = chat.text;
 
     return chat
-}
-
-function compareChatProperty(a, b, name) {
-    if (typeof a != typeof b) return false;
-
-    if (
-        typeof a != 'object' &&
-        typeof b != 'object'
-    )
-        return a === b;
-
-    if (name == 'clickEvent')
-        return a.action == b.action && a.value == b.value;
-
-    if (name == 'hoverEvent')
-        return a.action == b.action && hasSameChatProperties(a.value, b.value);
-
-    // todo: Use CustomError
-    throw new Error(`Don't know how to compare ${name}`);
 }
 
 function convertArrayComponentToChatComponent({ text, color, modifiers, insertion, clickEvent, hoverEvent }) {
@@ -459,7 +440,7 @@ function convertArrayComponentToChatComponent({ text, color, modifiers, insertio
     if (hoverEvent)
         out.hoverEvent = {
             action: hoverEvent.action,
-            value: convertArrayComponentToChatComponent(parseArrayComponent(hoverEvent.value))
+            value: Text.arrayToChat(hoverEvent.value)
         }
     else
         out.hoverEvent = {
@@ -478,50 +459,7 @@ function convertModifierArrayToObject(modifiers) {
     );
 }
 
-function hasSameChatProperties(a, b) {
-    if (typeof a !== typeof b)
-        return false;
-
-    if (typeof a == 'string' && typeof b == 'string')
-        if (a !== b)
-            return false;
-        else
-            return true;
-
-    if (a.color !== b.color)
-        return false;
-
-    if (a.insertion !== b.insertion)
-        return false;
-
-    if (a.clickEvent?.action !== b.clickEvent?.action)
-        return false;
-
-    if (a.clickEvent?.value !== b.clickEvent?.value)
-        return false;
-
-    if (a.hoverEvent?.action !== b.hoverEvent?.action)
-        return false;
-
-    if (typeof a.hoverEvent?.value !== typeof b.hoverEvent?.value)
-        return false;
-
-    if (typeof a.hoverEvent?.value == 'string' && typeof b.hoverEvent?.value == 'string')
-        if (a.hoverEvent?.value !== b.hoverEvent?.value)
-            return false;
-
-    for (let { name } of textModifiersWithoutReset)
-        if (a[name] !== b[name])
-            return false;
-
-    if (a.hoverEvent?.value && b.hoverEvent?.value)
-        if (!hasSameChatProperties(a.hoverEvent.value, b.hoverEvent.value))
-            return false;
-
-    return true;
-}
-
-function chatLevelDifferenceAmount(a, b) {
+function chatComponentDifferenceAmount(a, b) {
     let difference = 0;
 
     if (a.color != b.color) difference++;
@@ -535,7 +473,7 @@ function chatLevelDifferenceAmount(a, b) {
     if (
         (a.hoverEvent?.action != b.hoverEvent?.action) ||
         (Boolean(a.hoverEvent) != Boolean(b.hoverEvent)) ||
-        ((a.hoverEvent && b.hoverEvent) ? !hasSameChatProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
+        ((a.hoverEvent && b.hoverEvent) ? !compareChatComponent(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         difference++;
 
@@ -544,6 +482,39 @@ function chatLevelDifferenceAmount(a, b) {
             difference++;
 
     return difference;
+}
+
+function compareChatComponent(a, b) {
+    if (typeof a !== typeof b)
+        return false;
+
+    if (typeof a != 'object' && typeof b != 'object')
+        return a === b;
+
+    for (const propertyName of ['color', 'insertion', 'clickEvent', ...textModifiersWithoutReset.map(({ name }) => name), 'hoverEvent'])
+        if (!compareChatProperty(a[propertyName], b[propertyName], propertyName))
+            return false;
+
+    return true;
+}
+
+function compareChatProperty(a, b, name) {
+    if (typeof a != typeof b) return false;
+
+    if (
+        typeof a != 'object' &&
+        typeof b != 'object'
+    )
+        return a === b;
+
+    if (name == 'clickEvent')
+        return a.action == b.action && a.value == b.value;
+
+    if (name == 'hoverEvent')
+        return a.action == b.action && compareChatComponent(a.value, b.value);
+
+    // todo: Use CustomError
+    throw new Error(`Don't know how to compare ${name}`);
 }
 
 module.exports = Text;

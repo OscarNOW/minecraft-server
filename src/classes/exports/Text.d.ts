@@ -1,7 +1,7 @@
 export class Text {
     constructor(text: textInput);
 
-    array: textArray;
+    array: textArrayComponent[];
     string: string;
     uncolored: string;
     readonly chat: chatComponent;
@@ -10,9 +10,9 @@ export class Text {
 
     toString(): string;
 
-    static stringToArray(text: string): textArray;
+    static stringToArray(text: string): textArrayComponent[];
     static stringToUncolored(text: string): string;
-    static parseArray(text: optionalTextArray): textArray;
+    static parseArray(text: optionalTextArray): textArrayComponent[];
     static arrayToString(text: optionalTextArray): string;
     static arrayToChat(text: optionalTextArray): chatComponent;
     static parseChat(text: chatComponent): chatComponent;
@@ -30,41 +30,44 @@ type textArrayComponent = {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: {
+    hoverEvent?: { //todo: change to hoverText
         action: 'show_text'; // todo: convert to better name
-        value: textArrayComponent;
+        value: textArrayComponent[];
     };
-    // | {
-    //     action: 'show_item';
-    //     value: object; // todo: implement item NBT
-    // } | {
-    //     action: 'show_entity';
-    //     value: {
-    //         // todo
-    //     };
-    // };
 };
+// } | {
+//     keybind: keycode;
+//     color: textColor;
+//     modifiers: textModifier[];
 
+//     insertion?: string;
+//     clickEvent?: {
+//         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+//         value: string | number;
+//     };
+//     hoverEvent?: {
+//         action: 'show_text'; // todo: convert to better name
+//         value: textArrayComponent;
+//     };
+// };
+
+type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
 type optionalTextArrayComponent = string | {
     text?: string;
+    // keybind?: keycode;
     color?: textColor;
     modifiers?: textModifier[];
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page';
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
         value: string | number;
     };
-    hoverEvent?: {
+    hoverEvent?: { //todo: change to hoverText
         action: 'show_text'; // todo: convert to better name
-        value: textArrayComponent;
+        value: optionalTextArray;
     };
 };
-
-type textArray = textArrayComponent[];
-
-type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
-
 
 type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
@@ -88,13 +91,6 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         action: 'show_text';
         value: chatComponent;
     };
-    //Not implemented
-    /*
-    hoverEvent?: {
-        action: 'show_item' | 'show_entity';
-        value: chatComponent;
-    };
-    //*/
 
 };
 //Not implemented
