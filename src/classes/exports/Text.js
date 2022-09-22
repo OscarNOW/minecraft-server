@@ -289,7 +289,7 @@ class Text {
         return this.minifyChat(out);
     }
 
-    static minifyChat(chat) { //todo: implement translate
+    static minifyChat(chat) {
         chat = this.parseChat(chat);
         chat = Object.assign({}, chat);
 
@@ -298,7 +298,7 @@ class Text {
         return chat;
     }
 
-    static parseChat(chat) { //todo: implement translate
+    static parseChat(chat) {
         return deMinifyChatComponent(chat);
     }
 }
@@ -380,7 +380,7 @@ function deMinifyChatComponent(chat) {
 
 function minifyChatComponent(chat, inherited) {
     if (typeof chat != 'object')
-        return chat;
+        chat = { text: chat };
 
     let properties = {};
     for (const { name } of [...textModifiersWithoutReset, ...['color', 'insertion', 'clickEvent', 'hoverEvent'].map(a => ({ name: a }))])
@@ -400,9 +400,11 @@ function minifyChatComponent(chat, inherited) {
     if (chat.hoverEvent)
         chat.hoverEvent.value = minifyChatComponent(chat.hoverEvent.value, defaultInheritedChatProperties)
 
+    if (chat.with)
+        chat.with = chat.with.map(a => minifyChatComponent(a, properties));
+
     if (chat.extra) {
-        for (const extraIndex in chat.extra)
-            chat.extra[extraIndex] = minifyChatComponent(chat.extra[extraIndex], properties);
+        chat.extra = chat.extra.map(a => minifyChatComponent(a, properties));
 
         chat = [chat, ...chat.extra];
         delete chat[0].extra;
@@ -435,7 +437,7 @@ function convertArrayComponentToChatComponent({ with: wit, color, modifiers, ins
     const [type, value] = getTextComponentTypeValue(arguments[0]);
     out[type] = value;
 
-    if (out.type == 'translate' && wit)
+    if (type == 'translate' && wit)
         out.with = wit.map(convertArrayComponentToChatComponent);
 
     if (insertion)

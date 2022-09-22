@@ -3,6 +3,7 @@ const { Text } = require('../');
 let a = new Text([
     {
         translate: 'tutorial.move.title',
+        modifiers: ['bold'],
         with: [
             {
                 keybind: 'key.forward'
