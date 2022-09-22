@@ -3,7 +3,7 @@ const { textModifiers, textColors, keybinds } = require('../../functions/loader/
 const fs = require('fs');
 const path = require('path');
 
-const englishMessages = Object.assign({}, fs.readFileSync(path.join(__dirname, '../../data/messages/game/en_us.json')), fs.readFileSync(path.join(__dirname, '../../data/messages/realms/en_us.json')));
+const englishMessages = Object.assign({}, JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/messages/game/en_us.json')).toString()), JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/messages/realms/en_us.json')).toString()));
 
 const CustomError = require('../utils/CustomError.js');
 const { formatJavaString } = require('../../functions/formatJavaString.js');
@@ -318,12 +318,11 @@ function parseArrayComponent(component) {
             modifiers: [...new Set(component.modifiers || [])].sort()
         };
 
-        if (component.text !== undefined)
-            out.text = component.text;
-        else if (component.keybind !== undefined)
-            out.keybind = component.keybind;
-        else
-            out.text = '';
+        const [type, value] = getTextComponentTypeValue(component);
+        out[type] = value;
+
+        if (type == 'translate' && component.with)
+            out.with = component.with;
 
         if (component.insertion)
             out.insertion = component.insertion
