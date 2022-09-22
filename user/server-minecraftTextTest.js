@@ -3,20 +3,19 @@ const server = new Server();
 
 server.on('connect', async client => {
     client.raw('chat', {
-        message: JSON.stringify({
-            text: 'Hello',
-            italic: true,
-            extra: [{
+        message: JSON.stringify([
+            {
                 text: 'Hello',
-                bold: true,
-                hoverEvent: {
-                    action: 'show_text',
-                    value: {
-                        text: 'Hover'
-                    }
+                clickEvent: { action: 'open_url', value: 'https://google.com' }
+            },
+            {
+                text: ' world',
+                clickEvent: {
+                    action: 'change_page',
+                    value: 0
                 }
-            }]
-        }),
+            }
+        ]),
         position: 0,
         sender: '0'
     })

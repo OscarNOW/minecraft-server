@@ -25,7 +25,7 @@ for (const file of fs.readdirSync(path.join(__dirname, './Text/properties/public
 const defaultInheritedChatProperties = Object.freeze({
     color: 'reset',
     insertion: undefined,
-    clickEvent: undefined,
+    clickEvent: { action: 'change_page', value: 0 },
     hoverEvent: { action: 'show_text', value: '' },
     ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
 });
@@ -446,12 +446,20 @@ function convertArrayComponentToChatComponent({ text, color, modifiers, insertio
         out.insertion = insertion;
 
     if (clickEvent)
-        out.clickEvent = clickEvent;
+        out.clickEvent = {
+            action: clickEvent.action,
+            value: clickEvent.value
+        }
+    else
+        out.clickEvent = {
+            action: 'change_page',
+            value: 0
+        }
 
     if (hoverEvent)
         out.hoverEvent = {
             action: hoverEvent.action,
-            value: convertArrayComponentToChatComponent(Text.parseArray([hoverEvent.value])[0])
+            value: convertArrayComponentToChatComponent(Text.parseArray([hoverEvent.value])[0]) //todo change to parse chat component
         }
     else
         out.hoverEvent = {

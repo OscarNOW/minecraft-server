@@ -3,9 +3,9 @@ const { Text } = require('../');
 let a = new Text([
     {
         text: 'Hello',
-        hoverEvent: {
-            action: 'show_text',
-            value: 'Hover'
+        clickEvent: {
+            action: 'open_url',
+            value: 'https://google.com'
         }
     },
     ' world'
