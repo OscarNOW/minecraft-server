@@ -322,7 +322,7 @@ function parseArrayComponent(component) {
         out[type] = value;
 
         if (type == 'translate' && component.with)
-            out.with = component.with;
+            out.with = component.with.map(parseArrayComponent);
 
         if (component.insertion)
             out.insertion = component.insertion
