@@ -107,7 +107,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
 } | {
     keybind: keycode;
 
-    extra?: chatComponents;
+    extra?: chatComponent[];
 
     bold?: boolean;
     italic?: boolean;
@@ -123,7 +123,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         value: string | number;
     };
     hoverEvent?: {
-        action: 'show_text' | 'show_item' | 'show_entity';
+        action: 'show_text';
         value: chatComponent;
     };
 };
@@ -132,7 +132,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
     translate: chatTranslate;
     with?: chatComponents;
 
-    extra?: chatComponents;
+    extra?: chatComponents; //chatComponents doesn't exist
 
     bold?: boolean;
     italic?: boolean;
@@ -158,7 +158,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         value: number;
     };
 
-    extra?: chatComponents;
+    extra?: chatComponents; //chatComponents doesn't exist
 
     bold?: boolean;
     italic?: boolean;
