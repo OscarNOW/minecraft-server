@@ -5,8 +5,7 @@ Create guide
     Put examples in guide
     Add screenshots
 Move client.window('horse') to horse.openWindow()
-    Make Horse class that inherits Entity
-    -Update Client windowType to different name
+    Make Horse class that inherits Entity    
 Check if Color class is needed
 Expand Client property types
     Create ability to create dynamic private properties
