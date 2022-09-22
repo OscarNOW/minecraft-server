@@ -459,7 +459,7 @@ function convertArrayComponentToChatComponent({ text, color, modifiers, insertio
     if (hoverEvent)
         out.hoverEvent = {
             action: hoverEvent.action,
-            value: convertArrayComponentToChatComponent(Text.parseArray([hoverEvent.value])[0]) //todo change to parse chat component
+            value: convertArrayComponentToChatComponent(parseArrayComponent(hoverEvent.value))
         }
     else
         out.hoverEvent = {
