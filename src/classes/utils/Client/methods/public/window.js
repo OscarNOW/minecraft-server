@@ -1,32 +1,19 @@
 const { windowNameIdMapping } = require('../../../../../functions/loader/data.js');
+const nonEntityWindowIdMapping = Object.fromEntries(Object.entries(windowNameIdMapping).filter(([windowName, windowId]) => windowName != 'horse'))
 
 const CustomError = require('../../../CustomError.js');
 
-module.exports = function (windowName, horse) {
+module.exports = function (nonEntityWindowName, horse) {
     this.p.stateHandler.checkReady.call(this);
 
-    if (!windowNameIdMapping[windowName])
-        throw new CustomError('expectationNotMet', 'libraryUser', `windowName in  <${this.constructor.name}>.window(${require('util').inspect(windowName)}, ...)  `, {
-            got: windowName,
+    if (!nonEntityWindowIdMapping[nonEntityWindowName])
+        throw new CustomError('expectationNotMet', 'libraryUser', `nonEntityWindowName in  <${this.constructor.name}>.window(${require('util').inspect(nonEntityWindowName)}, ...)  `, {
+            got: nonEntityWindowName,
             expectationType: 'value',
-            expectation: Object.keys(windowNameIdMapping)
-        }, this.window).toString()
-    if (windowName == 'horse' && !horse)
-        throw new CustomError('expectationNotMet', 'libraryUser', `horse in  <${this.constructor.name}>.window(..., ${require('util').inspect(horse)})  `, {
-            got: horse,
-            expectationType: 'type',
-            expectation: 'Entity',
-            externalLink: `{docs}/classes/Entity.html`
+            expectation: Object.keys(nonEntityWindowIdMapping)
         }, this.window).toString()
 
-    let windowId = windowNameIdMapping[windowName];
+    let windowId = nonEntityWindowIdMapping[nonEntityWindowName];
 
-    if (windowId == 'EntityHorse')
-        this.p.sendPacket('open_horse_window', {
-            windowId: 1,
-            nbSlots: 2,
-            entityId: horse.id
-        })
-    else
-        throw new Error(`Not implemented`)
+    throw new Error(`Not implemented`)
 }

@@ -4,8 +4,6 @@ Create guide
     Update readme
     Put examples in guide
     Add screenshots
-Move client.window('horse') to horse.openWindow()
-    Make Horse class that inherits Entity    
 Check if Color class is needed
 Expand Client property types
     Create ability to create dynamic private properties
@@ -22,3 +20,4 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 Object.freeze client.entities{
 Make language customizable in settings.json
 Make tests for functions
+Change windowNameIdMapping to windows

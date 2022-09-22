@@ -1,4 +1,6 @@
 type Client = import('./Client').Client;
+type Horse = import('./Horse').Horse;
+type EntityLike = Entity | Horse;
 
 export class Entity {
     private constructor(client: Client, type: entityType, id: number, position: {

@@ -1,4 +1,5 @@
 type Entity = import('./Entity').Entity;
+type Horse = import('./Horse').Horse;
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
@@ -59,7 +60,7 @@ export class Client {
     readonly onGround: boolean;
     readonly ping: number;
     readonly entities: {
-        readonly [entityId: number]: Entity;
+        readonly [entityId: number]: EntityLike;
         readonly 0: Client;
     };
     readonly bossBars: {
@@ -193,7 +194,7 @@ export class Client {
             y: number;
             z: number;
         },
-        destination: Entity | {
+        destination: EntityLike | {
             x: number;
             y: number;
             z: number;
@@ -246,9 +247,8 @@ export class Client {
         z: number;
         yaw: number;
         pitch: number;
-    }): Entity;
+    }): EntityLike;
     window(windowType: nonEntityWindowName): void;
-    window(windowType: 'horse', horse: Entity): void;
     signEditor(signLocation: {
         x: number;
         y: number;
