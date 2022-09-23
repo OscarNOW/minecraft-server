@@ -45,5 +45,6 @@ export class Server {
 
     close(): void;
 
-    on(event: 'join' | 'leave' | 'connect', callback: (Client: Client) => void): void;
+    on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
+    on(event: 'error', callback: (customError: CustomError) => void): void;
 }
