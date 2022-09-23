@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 let blockStates = require('./blocks.json').map(a => a[2] || []).flat().map(a => [a.name, a.values])
 let newBlockStates = [];
 
@@ -10,12 +12,4 @@ for (const [name, values] of blockStates)
 module.exports = {
     blockType: require('./blocks.json').map(a => a[0]).map(a => `'${a}'`).join('|'),
     blockState: `{${newBlockStates.map(([name, values]) => `${name}?:${convertToType(values)};`).join('')}}`
-}
-
-function convertToType(values) {
-    let type = values.map(a => ['number', 'boolean'].includes(typeof a) ? a : `'${a}'`).sort().join('|');
-    if (type == ['true', 'false'].sort().join('|'))
-        type = 'boolean'
-
-    return type
 }

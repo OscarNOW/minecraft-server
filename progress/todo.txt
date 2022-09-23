@@ -14,8 +14,7 @@ Update Text
     Change chatLevelDifferenceAmount to count difference in characters and not difference in properties                
     Create new tests for new features    
     Remove duplicate code in Text
-Implement convertToType function in all type generators
+-Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Object.freeze client.entities{
 Make tests for functions
