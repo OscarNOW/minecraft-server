@@ -158,6 +158,14 @@ class Server {
 
     }
 
+    emitError(customError) {
+        if (this.globals.serverEvents.get(this.server).error.length > 0)
+            for (const callback of this.globals.serverEvents.get(this.server).error)
+                callback(customError);
+        else
+            throw customError;
+    }
+
     on(event, callback) {
         if (!events.includes(event))
             throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {

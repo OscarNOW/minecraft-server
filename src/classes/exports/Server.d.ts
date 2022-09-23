@@ -43,6 +43,8 @@ export class Server {
     private server: any;
     private intervals: NodeJS.Timer[];
 
+    private emitError(customError: CustomError): void;
+
     close(): void;
 
     on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;

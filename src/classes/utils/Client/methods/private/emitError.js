@@ -5,12 +5,7 @@ module.exports = {
                 this.p.emit('misbehavior', customError);
             else
                 throw customError;
-        else {
-            if (this.server.globals.serverEvents.get(this.server).error.length > 0)
-                for (const callback of this.server.globals.serverEvents.get(this.server).error)
-                    callback(customError);
-            else
-                throw customError;
-        }
+        else
+            this.server.emitError(customError);
     }
 }
