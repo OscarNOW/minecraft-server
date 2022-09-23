@@ -489,24 +489,35 @@ function convertModifierArrayToObject(modifiers) {
 function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     let difference = 0;
 
-    if (a.color != b.color) difference++;
-    if (a.insertion != b.insertion) difference++;
+    if (a.color != b.color) difference += `,color:"${b.color}"`.length;
+    if (a.insertion != b.insertion)
+        if (b.insertion !== undefined)
+            difference += `,insertion:"${b.insertion}"`.length;
+        else
+            difference += `,insertion:""`.length;
+
     if (
         (a.clickEvent?.action != b.clickEvent?.action) ||
         (a.clickEvent?.value != b.clickEvent?.value)
     )
-        difference++;
+        if (b.clickEvent !== undefined)
+            difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length;
+        else
+            difference += `,clickEvent:{action:"change_page",value:0}`.length;
 
     if (
         (a.hoverEvent?.action != b.hoverEvent?.action) ||
         (Boolean(a.hoverEvent) != Boolean(b.hoverEvent)) ||
         ((a.hoverEvent && b.hoverEvent) ? !compareChatComponentInheritableProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
-        difference++;
+        if (b.hoverEvent !== undefined)
+            difference += `,hoverEvent:{action:"${b.hoverEvent?.action}",value:${JSON.stringify(b.hoverEvent?.value)}}`.length;
+        else
+            difference += `,hoverEvent:{action:"show_text",value:""}`.length;
 
     for (const { name } of textModifiersWithoutReset)
-        if (a[name] != b[name])
-            difference++;
+        if (a[name] !== b[name])
+            difference += `,${name}:${b[name]}`.length;
 
     return difference;
 }

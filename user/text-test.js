@@ -3,12 +3,15 @@ const { Text } = require('../');
 let a = new Text([
     {
         text: 'Hello',
-        modifiers: ['bold', 'italic'],
-        insertion: 'Hello'
+        modifiers: ['bold', 'italic', 'underlined']
     },
     {
-        text: ' World',
+        text: ' world',
         modifiers: ['bold', 'italic']
+    },
+    {
+        text: ' people',
+        modifiers: ['italic', 'underlined']
     }
 ])
 
