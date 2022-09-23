@@ -12,7 +12,7 @@ let cachedData = {};
 let lazyData = {};
 
 for (const datum of data) {
-    const name = datum.split('.')[0].split('\\').pop();
+    const name = datum.split('.js')[0].split('\\').pop().split('/').pop();
 
     Object.defineProperty(lazyData, name, {
         configurable: false,

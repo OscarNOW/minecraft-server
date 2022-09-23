@@ -20,7 +20,7 @@ let cachedExports = {};
 let lazyExports = {};
 
 for (const xport of xports) {
-    const name = xport.split('/')[xport.split('/').length - 1].split('.')[0];
+    const name = xport.split('.js')[0].split('\\').pop().split('/').pop();
 
     Object.defineProperty(lazyExports, name, {
         configurable: false,
