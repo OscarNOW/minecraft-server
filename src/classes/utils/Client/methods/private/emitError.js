@@ -6,6 +6,6 @@ module.exports = {
             else
                 throw customError.toString();
         else
-            this.server.emitError(customError);
+            this.server.p.emitError(customError);
     }
 }
