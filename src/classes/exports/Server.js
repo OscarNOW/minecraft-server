@@ -27,7 +27,7 @@ class Server {
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
-        this.p.serverEvents = Object.fromEntries(events.map(event => [event, []]));
+        this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.globals = {
             clientEarlyInformation,
             clientLegacyPing
@@ -185,8 +185,8 @@ class Server {
     }
 
     emitError(customError) {
-        if (this.p.serverEvents.error.length > 0)
-            for (const callback of this.p.serverEvents.error)
+        if (this.p.events.error.length > 0)
+            for (const callback of this.p.events.error)
                 callback(customError);
         else
             throw customError.toString();
@@ -200,7 +200,7 @@ class Server {
                 expectation: events
             }, this.on))
 
-        this.p.serverEvents[event].push(callback)
+        this.p.events[event].push(callback)
     }
 
     close() {
