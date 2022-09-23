@@ -1,10 +1,5 @@
-Create guide
-    Update readme
-    Put examples in guide
-    Add screenshots
 Expand Client property types
-    Create ability to create dynamic private properties
-        Use that for sneaking
+    Create ability to create dynamic private properties        
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text

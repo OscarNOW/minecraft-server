@@ -3,7 +3,6 @@ type Horse = import('./Horse').Horse;
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
-type Color = import('../exports/Color').Color;
 
 export class Client {
     private constructor(client: any, server: Server, earlyInformation: {
@@ -154,7 +153,11 @@ export class Client {
             y: number;
             z: number;
         },
-        color: Color | rgb,
+        color: {
+            r: number;
+            g: number;
+            b: number;
+        },
         scale: number
     ): void;
     particle(

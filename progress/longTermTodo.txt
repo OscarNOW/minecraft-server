@@ -1,0 +1,4 @@
+Create guide
+    Update readme
+    Put examples in guide
+    Add screenshots
