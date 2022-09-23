@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    entityType: Object.keys(require('./entities.json')).map(a => `'${a}'`).join('|')
+    entityType: convertToType(Object.keys(require('./entities.json')))
 }

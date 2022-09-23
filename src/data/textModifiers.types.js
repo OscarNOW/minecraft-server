@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    textModifier: require('./textModifiers.json').map(({ name }) => name).filter(a => a != 'reset').map(a => `'${a}'`).join('|'),
+    textModifier: convertToType(require('./textModifiers.json').map(({ name }) => name).filter(a => a != 'reset')),
 }

@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    soundChannel: require('./soundChannels.json').map(a => `'${a}'`).join('|')
+    soundChannel: convertToType(require('./soundChannels.json'))
 }

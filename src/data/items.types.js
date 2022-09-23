@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    itemName: require('./items.json').map(a => `'${a[0]}'`).join('|')
+    itemName: convertToType(require('./items.json').map(a => a[0]))
 }

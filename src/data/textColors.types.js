@@ -1,4 +1,6 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    textColor: [...require('./textColors.json').map(a => a.name), 'default'].map(a => `'${a}'`).join('|'),
-    minecraftTextColor: [...require('./textColors.json').map(a => a.minecraftName), 'reset'].map(a => `'${a}'`).join('|')
+    textColor: convertToType([...require('./textColors.json').map(a => a.name), 'default']),
+    minecraftTextColor: convertToType([...require('./textColors.json').map(a => a.minecraftName), 'reset'])
 }

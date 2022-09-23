@@ -1,3 +1,5 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    keycode: require('./keybinds.json').map(({ code }) => code).map(a => `'${a}'`).join('|')
+    keycode: convertToType(require('./keybinds.json').map(({ code }) => code))
 }

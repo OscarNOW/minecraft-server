@@ -1,7 +1,8 @@
+const { convertToType } = require('../functions/convertToType.js');
 const versions = require('./versions.json');
 
 module.exports = {
-    legacyVersion: versions.filter(a => a.legacy).map(a => a.version).map(a => `'${a}'`).join('|'),
-    newVersion: versions.filter(a => !a.legacy).map(a => a.version).map(a => `'${a}'`).join('|'),
-    version: "legacyVersion | newVersion"
+    legacyVersion: convertToType(versions.filter(a => a.legacy).map(a => a.version)),
+    newVersion: convertToType(versions.filter(a => !a.legacy).map(a => a.version)),
+    version: convertToType(['legacyVersion', 'newVersion'])
 }

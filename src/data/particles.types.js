@@ -1,8 +1,10 @@
+const { convertToType } = require('../functions/convertToType.js');
+
 module.exports = {
-    noDataParticle: Object.entries(
+    noDataParticle: convertToType(Object.entries(
         require('./particles.json')
-    ).filter(([key, value]) => !value.requiresData)
-        .map(([key, value]) => key)
-        .map(a => `'${a}'`)
-        .join('|')
+    )
+        // eslint-disable-next-line no-unused-vars
+        .filter(([_, value]) => !value.requiresData)
+        .map(([key]) => key))
 }
