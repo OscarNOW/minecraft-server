@@ -35,7 +35,9 @@ export class CustomError {
     context: Function;
 
     error: Error;
-    toString(): Error;
+    [Symbol.toPrimitive](hint: 'string'): Error;
+    [Symbol.toPrimitive](hint: 'default'): Error;
+    [Symbol.toPrimitive](hint: 'number'): number;
 
     private generateMessage(): string;
 }
