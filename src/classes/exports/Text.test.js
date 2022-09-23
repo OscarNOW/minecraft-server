@@ -31,7 +31,7 @@ module.exports = expect => {
     o.string = '§r§r§r§r§nH§li§r§a§r';
     expect(o.string, '§r§nH§li') //9
     expect(o.array, [
-        { text: 'H', color: 'default', modifiers: ['underlined'] },
-        { text: 'i', color: 'default', modifiers: ['bold', 'underlined'] }
+        { color: 'default', modifiers: ['underlined'], text: 'H' },
+        { color: 'default', modifiers: ['bold', 'underlined'], text: 'i' }
     ]) //10
 }

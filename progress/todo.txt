@@ -1,4 +1,3 @@
-Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
     Create new tests for new features
 Resolve "todo: " and "not implemented" in code

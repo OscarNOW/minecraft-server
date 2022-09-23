@@ -2,3 +2,4 @@ Create guide
     Update readme
     Put examples in guide
     Add screenshots
+Create PR for minecraft-protocol to exclude optional files from npm build
