@@ -18,5 +18,4 @@ Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive
 Object.freeze client.entities{
-Make language customizable in settings.json
 Make tests for functions

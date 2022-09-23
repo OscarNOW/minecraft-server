@@ -1,9 +1,10 @@
 const { textModifiers, textColors, keybinds } = require('../../functions/loader/data');
+const { language } = require('../../settings.json')
 
 const fs = require('fs');
 const path = require('path');
 
-const englishMessages = Object.assign({}, JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/messages/game/en_us.json')).toString()), JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/messages/realms/en_us.json')).toString()));
+const englishMessages = Object.assign({}, JSON.parse(fs.readFileSync(path.join(__dirname, `../../data/messages/game/${language}.json`)).toString()), JSON.parse(fs.readFileSync(path.join(__dirname, `../../data/messages/realms/${language}.json`)).toString()));
 
 const CustomError = require('../utils/CustomError.js');
 const { formatJavaString } = require('../../functions/formatJavaString.js');
