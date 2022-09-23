@@ -15,11 +15,11 @@ module.exports = {
             if (faces[face])
                 this.p.emit('digStart', { x, y, z }, faces[face])
             else
-                throw new CustomError('expectationNotMet', 'client', `face in  <remote ${this.constructor.name}>.block_dig({ face: ${require('util').inspect(face)} })  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'client', `face in  <remote ${this.constructor.name}>.block_dig({ face: ${require('util').inspect(face)} })  `, {
                     got: face,
                     expectationType: 'value',
                     expectation: Object.keys(faces)
-                }).toString()
+                }))
 
         else if (status == 1)
             this.p.emit('digCancel', { x, y, z })
@@ -34,10 +34,10 @@ module.exports = {
         else if (status == 6)
             this.p.emit('itemHandSwap')
         else
-            throw new CustomError('expectationNotMet', 'client', `status in  <remote ${this.constructor.name}>.block_dig({ status: ${require('util').inspect(status)} })  `, {
+            this.p.emitError(new CustomError('expectationNotMet', 'client', `status in  <remote ${this.constructor.name}>.block_dig({ status: ${require('util').inspect(status)} })  `, {
                 got: status,
                 expectationType: 'value',
                 expectation: [0, 1, 2, 3, 4, 5, 6]
-            }).toString()
+            }))
     }
 }

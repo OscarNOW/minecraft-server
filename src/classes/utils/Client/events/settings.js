@@ -8,11 +8,11 @@ module.exports = {
     settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {
         let langCode = locale.toLowerCase();
         if (!languages[langCode])
-            throw new CustomError('expectationNotMet', 'client', `locale in  <remote ${this.constructor.name}>.settings({ locale: ${require('util').inspect(langCode)} })  `, {
+            this.p.emitError(new CustomError('expectationNotMet', 'client', `locale in  <remote ${this.constructor.name}>.settings({ locale: ${require('util').inspect(langCode)} })  `, {
                 got: langCode,
                 expectationType: 'value',
                 expectation: Object.keys(languages)
-            }).toString()
+            }))
 
         let obj = languages[langCode];
         obj.langCode = langCode;
@@ -36,11 +36,11 @@ module.exports = {
                 colors: chatColors
             });
         else
-            throw new CustomError('expectationNotMet', 'client', `chatFlags in  <remote ${this.constructor.name}>.settings({ chatFlags: ${require('util').inspect(chatFlags)} })  `, {
+            this.p.emitError(new CustomError('expectationNotMet', 'client', `chatFlags in  <remote ${this.constructor.name}>.settings({ chatFlags: ${require('util').inspect(chatFlags)} })  `, {
                 got: chatFlags,
                 expectationType: 'value',
                 expectation: [0, 1, 2]
-            }).toString()
+            }))
 
         let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
         this.visibleSkinParts = Object.freeze({
@@ -58,11 +58,11 @@ module.exports = {
         else if (mainHand === 1)
             this.rightHanded = true
         else
-            throw new CustomError('expectationNotMet', 'client', `mainHand in  <remote ${this.constructor.name}>.settings({ mainHand: ${require('util').inspect(mainHand)} })  `, {
+            this.p.emitError(new CustomError('expectationNotMet', 'client', `mainHand in  <remote ${this.constructor.name}>.settings({ mainHand: ${require('util').inspect(mainHand)} })  `, {
                 got: mainHand,
                 expectationType: 'value',
                 expectation: [0, 1]
-            }).toString()
+            }))
 
         if (!settingsSent.has(this)) {
             settingsSent.add(this)

@@ -13,11 +13,11 @@ module.exports = {
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }).toString()
+                }))
 
             this.p._reducedDebugInfo = value;
 

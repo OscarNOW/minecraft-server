@@ -65,18 +65,18 @@ class Server {
                     let imageInfo = imageSize(info.favicon);
 
                     if (imageInfo.type != 'png')
-                        throw new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
+                        this.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
                             got: imageInfo.type,
                             expectationType: 'value',
                             expectation: ['png']
-                        }, this.constructor).toString()
+                        }, this.constructor))
 
                     if (imageInfo.width != 64 || imageInfo.height != 64)
-                        throw new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
+                        this.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
                             got: `${imageInfo.width}x${imageInfo.height}`,
                             expectationType: 'value',
                             expectation: ['64x64']
-                        }, this.constructor).toString()
+                        }, this.constructor))
 
                 }
 
@@ -142,11 +142,11 @@ class Server {
                         } else
                             client.end(endReason)
                     else if (endReason !== null)
-                        throw new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
+                        this.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
                             got: endReason,
                             expectationType: 'type',
                             expectation: 'string | null'
-                        }, this.constructor).toString()
+                        }, this.constructor))
                 }
 
             })
@@ -163,16 +163,16 @@ class Server {
             for (const callback of this.globals.serverEvents.get(this.server).error)
                 callback(customError);
         else
-            throw customError;
+            throw customError.toString();
     }
 
     on(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {
+            this.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
-            }, this.on).toString()
+            }, this.on))
 
         serverEvents.get(this)[event].push(callback)
     }

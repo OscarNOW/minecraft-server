@@ -6,11 +6,11 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     this.p.stateHandler.checkReady.call(this);
 
     if (!particles[particleName])
-        throw new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {
+        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {
             got: particleName,
             expectationType: 'value',
             expectation: Object.keys(particles)
-        }, this.demo).toString()
+        }, this.demo))
 
     if (!particles[particleName].requireData)
         this.p.sendPacket('world_particles', {

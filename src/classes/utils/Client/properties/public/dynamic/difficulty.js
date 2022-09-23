@@ -12,11 +12,11 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
-                }).toString()
+                }))
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),
@@ -28,11 +28,11 @@ module.exports = {
         },
         setRaw: function (value) {
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
-                throw new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
-                }).toString()
+                }))
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),

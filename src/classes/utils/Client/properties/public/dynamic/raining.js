@@ -12,11 +12,11 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }).toString()
+                }))
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,
@@ -28,11 +28,11 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')
-                throw new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }).toString()
+                }))
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,

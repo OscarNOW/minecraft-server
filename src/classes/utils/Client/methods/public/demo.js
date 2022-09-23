@@ -6,11 +6,11 @@ module.exports = function (message) {
     this.p.stateHandler.checkReady.call(this);
 
     if (demoMessages[message] === undefined)
-        throw new CustomError('expectationNotMet', 'libraryUser', `message in  <${this.constructor.name}>.demo(${require('util').inspect(message)})  `, {
+        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `message in  <${this.constructor.name}>.demo(${require('util').inspect(message)})  `, {
             got: message,
             expectationType: 'value',
             expectation: Object.keys(demoMessages)
-        }, this.demo).toString()
+        }, this.demo))
 
     this.p.sendPacket('game_state_change', {
         reason: 5,

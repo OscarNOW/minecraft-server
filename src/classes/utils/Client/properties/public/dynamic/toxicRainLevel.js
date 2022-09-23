@@ -12,11 +12,11 @@ module.exports = {
             this.p.stateHandler.checkReady.call(this);
 
             if (typeof value != 'number')
-                throw new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'number'
-                }).toString()
+                }))
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {
@@ -29,11 +29,11 @@ module.exports = {
         },
         setRaw: function (value) {
             if (typeof value != 'number')
-                throw new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'number'
-                }).toString()
+                }))
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {

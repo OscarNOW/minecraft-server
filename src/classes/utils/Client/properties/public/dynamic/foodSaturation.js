@@ -14,11 +14,11 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                throw new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]
-                }).toString()
+                }))
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,
@@ -33,11 +33,11 @@ module.exports = {
             const value = parseInt(v);
 
             if (isNaN(value) || value < 0 || value > 5)
-                throw new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `foodSaturation in  <${this.constructor.name}>.foodSaturation = ${require('util').inspect(value)}  `, {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]
-                }).toString()
+                }))
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,

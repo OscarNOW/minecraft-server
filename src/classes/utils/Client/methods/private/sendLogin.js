@@ -47,20 +47,20 @@ module.exports = {
 
         for (const [key, value] of Object.entries(this.p.defaultProperties)) {
             if (!this.p.pubDynProperties[key])
-                throw new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
+                this.emitError(new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
                     got: key,
                     expectationType: 'value',
                     expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor).toString()
+                }, this.constructor))
 
             let file = this.p.pubDynProperties[key];
 
             if (!file.setRaw)
-                throw new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
                     got: key,
                     expectationType: 'value',
                     expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor).toString()
+                }, this.constructor))
 
             let ret;
             if (file.info?.callAfterLogin)

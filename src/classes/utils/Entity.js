@@ -57,12 +57,12 @@ class Entity {
     constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket) {
         let e = getEntity(type);
         if (e === undefined)
-            throw new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
+            client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
                 got: type,
                 expectationType: 'type',
                 expectation: 'entityType',
                 externalLink: '{docs}/types/entityType.html'
-            }, this.constructor).toString()
+            }, this.constructor))
 
         this.type = type;
         this.living = e.living;
@@ -129,11 +129,11 @@ class Entity {
 
     observe(observable, cb) {
         if (!this[ps.observables][observable])
-            throw new CustomError('expectationNotMet', 'libraryUser', `observable in  <${this.constructor.name}>.observe(${require('util').inspect(observable)}, ...)  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `observable in  <${this.constructor.name}>.observe(${require('util').inspect(observable)}, ...)  `, {
                 got: observable,
                 expectationType: 'value',
                 expectation: Object.keys(this[ps.observables])
-            }, this.observe).toString()
+            }, this.observe))
 
         this[ps.observables][observable].push(cb)
     }
@@ -142,11 +142,11 @@ class Entity {
         this.client.p.stateHandler.checkReady.call(this.client);
 
         if (entityAnimations[animationType] === undefined)
-            throw new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
                 got: animationType,
                 expectationType: 'value',
                 expectation: Object.keys(entityAnimations)
-            }, this.rawListeners).toString()
+            }, this.rawListeners))
 
         this[ps.sendPacket]('animation', {
             entityId: this.id,
@@ -166,18 +166,18 @@ class Entity {
         this.client.p.stateHandler.checkReady.call(this.client);
 
         if (!sounds.find(a => a.name == sound))
-            throw new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
                 got: sound,
                 expectationType: 'type',
                 expectation: 'soundName',
                 externalLink: '{docs}/types/soundName.html'
-            }, this.sound).toString()
+            }, this.sound))
         if (!soundChannels.includes(channel))
-            throw new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
                 got: channel,
                 expectationType: 'value',
                 expectation: soundChannels
-            }, this.sound).toString()
+            }, this.sound))
 
         this[ps.sendPacket]('entity_sound_effect', {
             soundId: sounds.find(a => a.name == sound).id,
@@ -202,11 +202,11 @@ class Entity {
 
     on(event, callback) {
         if (!events.includes(event))
-            throw new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
                 got: event,
                 expectationType: 'value',
                 expectation: events
-            }, this.on).toString()
+            }, this.on))
 
         this[ps.events][event].push(callback)
     }

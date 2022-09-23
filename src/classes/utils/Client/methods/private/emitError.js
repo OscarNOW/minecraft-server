@@ -4,7 +4,7 @@ module.exports = {
             if (this.p.events.misbehavior.length > 0)
                 this.p.emit('misbehavior', customError);
             else
-                throw customError;
+                throw customError.toString();
         else
             this.server.emitError(customError);
     }

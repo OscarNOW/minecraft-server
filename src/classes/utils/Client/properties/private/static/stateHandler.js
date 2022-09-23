@@ -62,20 +62,20 @@ module.exports = {
                 const oldIndex = states.indexOf(this.p.state);
 
                 if (!states.includes(stateName))
-                    throw new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
+                    this.p.emitError(new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
                         got: stateName,
                         expectationType: 'value',
                         expectation: states.slice(oldIndex)
-                    }, this.p.stateHandler.updateState.set).toString()
+                    }, this.p.stateHandler.updateState.set))
 
                 const newIndex = states.indexOf(stateName);
 
                 if (newIndex <= oldIndex)
-                    throw new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
+                    this.p.emitError(new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
                         got: stateName,
                         expectationType: 'value',
                         expectation: states.slice(oldIndex)
-                    }, this.p.stateHandler.updateState.set).toString()
+                    }, this.p.stateHandler.updateState.set))
 
                 this.p.state = stateName;
                 this.p.stateHandler.handleNewState.call(this, stateName);
@@ -90,11 +90,11 @@ module.exports = {
                 if (packet == 'settings')
                     this.p.stateHandler.updateState.set.call(this, 'settingsReceived');
                 else
-                    throw new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {
+                    this.p.emitError(new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {
                         got: packet,
                         expectationType: 'value',
                         expectation: ['settings']
-                    }, this.p.stateHandler.updateState.packetReceived).toString()
+                    }, this.p.stateHandler.updateState.packetReceived))
             }
 
         }
