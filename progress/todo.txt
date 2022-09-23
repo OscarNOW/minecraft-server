@@ -1,9 +1,6 @@
-Expand Client property types
-    Create ability to create dynamic private properties        
-        Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
-    Create new tests for new features    
+    Create new tests for new features
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions

@@ -6,7 +6,7 @@ module.exports = {
             if (!values.has(this)) values.set(this, false);
             return values.get(this);
         },
-        set: function (newValue) {
+        setPrivate: function (newValue) {
             let oldValue = this.onGround;
 
             values.set(this, newValue);
