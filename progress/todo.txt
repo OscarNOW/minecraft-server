@@ -1,9 +1,7 @@
--implement error event for Server and Client
 Create guide
     Update readme
     Put examples in guide
     Add screenshots
-Check if Color class is needed
 Expand Client property types
     Create ability to create dynamic private properties
         Use that for sneaking
