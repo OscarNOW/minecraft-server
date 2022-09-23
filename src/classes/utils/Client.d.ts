@@ -396,6 +396,4 @@ type defaultClientProperties = {
     foodSaturation?: 0 | 1 | 2 | 3 | 4 | 5;
 };
 
-type nonEntityWindowName = 'anvil' | 'beacon' | 'brewingStand' | 'chest' | 'container' | 'craftingTable' | 'dispenser' | 'dropper' | 'enchanting_table' | 'furnace' | 'hopper' | 'villager' /* | 'horse' */;
-
 type blockFace = `${'+' | '-'}${'X' | 'Y' | 'Z'}`;

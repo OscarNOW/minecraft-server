@@ -1,3 +1,5 @@
+--- OUTDATED ---
+
 20.4 MB  assets/Minecraft Server.png
 
 418.3 kb src/data/dimensionCodec.json
@@ -101,7 +103,7 @@
 137 B    src/data/entityAnimations.json
 175 B    src/data/soundChannels.json
 393 B    src/data/textModifiers.json
-516 B    src/data/windowNameIdMapping.json
+516 B    src/data/windows.json
 540 B    src/functions/loader/classes.js
 398 B    src/functions/loader/data.js
 776 B    src/functions/uuid.js

@@ -20,4 +20,3 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 Object.freeze client.entities{
 Make language customizable in settings.json
 Make tests for functions
-Change windowNameIdMapping to windows
