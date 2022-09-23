@@ -11,8 +11,7 @@ Expand Client property types
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text
-    Create new tests for new features
-    Remove duplicate code in Text
+    Create new tests for new features    
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
