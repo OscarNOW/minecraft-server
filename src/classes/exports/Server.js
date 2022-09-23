@@ -12,12 +12,12 @@ const CustomError = require('../utils/CustomError.js');
 const events = Object.freeze([
     'connect',
     'join',
-    'leave'
+    'leave',
+    'error'
 ])
 
 let clientEarlyInformation = new WeakMap();
 let clientLegacyPing = new WeakMap();
-let serverEvents = new WeakMap();
 const privates = new WeakMap();
 
 class Server {
@@ -27,11 +27,10 @@ class Server {
         this.defaultClientProperties = defaultClientProperties;
         this.clients = [];
 
-        serverEvents.set(this, Object.fromEntries(events.map(event => [event, []])));
+        this.p.serverEvents = Object.fromEntries(events.map(event => [event, []]));
         this.globals = {
             clientEarlyInformation,
-            clientLegacyPing,
-            serverEvents
+            clientLegacyPing
         }
 
         this.server = mc.createServer({
@@ -186,8 +185,8 @@ class Server {
     }
 
     emitError(customError) {
-        if (this.globals.serverEvents.get(this.server).error.length > 0)
-            for (const callback of this.globals.serverEvents.get(this.server).error)
+        if (this.p.serverEvents.error.length > 0)
+            for (const callback of this.p.serverEvents.error)
                 callback(customError);
         else
             throw customError.toString();
@@ -201,7 +200,7 @@ class Server {
                 expectation: events
             }, this.on))
 
-        serverEvents.get(this)[event].push(callback)
+        this.p.serverEvents[event].push(callback)
     }
 
     close() {
