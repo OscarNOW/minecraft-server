@@ -16,8 +16,6 @@ const events = Object.freeze([
     'error'
 ])
 
-let clientEarlyInformation = new WeakMap();
-let clientLegacyPing = new WeakMap();
 const privates = new WeakMap();
 
 class Server {
@@ -28,10 +26,7 @@ class Server {
         this.clients = [];
 
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
-        this.globals = {
-            clientEarlyInformation,
-            clientLegacyPing
-        }
+        this.p.clientInfo = new WeakMap();
 
         this.server = mc.createServer({
             encryption: true,
@@ -42,7 +37,7 @@ class Server {
             keepAlive: false,
             hideErrors: true,
             beforePing: (response, client) => {
-                let info = Object.assign({}, this.serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) }));
+                let info = Object.assign({}, this.serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing }));
                 let infoVersion = info.version?.correct ?? settings.version;
 
                 if (!info) info = {};
@@ -100,6 +95,8 @@ class Server {
         })
 
         this.server.on('connection', client => {
+            this.p.clientInformation.set(client, {});
+
             let clientState = null;
 
             client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
@@ -116,7 +113,7 @@ class Server {
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
                 const isLegacy = serverHost == '';
 
-                clientEarlyInformation.set(client, {
+                this.p.clientInformation.get(client).clientEarlyInformation = {
                     ip: client.socket.remoteAddress,
                     version: isLegacy ?
                         'legacy' :
@@ -126,11 +123,11 @@ class Server {
                         host: isLegacy ? null : serverHost,
                         port: isLegacy ? null : serverPort
                     }
-                });
-                clientLegacyPing.set(client, false)
+                };
+                this.p.clientInformation.get(client).clientLegacyPing = false;
 
-                if ((clientState == 'login' && clientEarlyInformation.get(client).version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
-                    let endReason = this.wrongVersionConnect({ ...clientEarlyInformation.get(client), legacy: isLegacy });
+                if ((clientState == 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                    let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
 
                     if (typeof endReason == 'string')
                         if (isLegacy) {
@@ -154,7 +151,7 @@ class Server {
         })
 
         this.server.on('login', async client => {
-            new Client(client, this, clientEarlyInformation.get(client), this.defaultClientProperties);
+            new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
         });
 
     }
@@ -228,17 +225,17 @@ function handleLegacyPing(request, client, serverList) {
 }
 
 function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
-    clientEarlyInformation.set(client, {
+    this.p.clientInformation.get(client).clientEarlyInformation = {
         ip: client.socket.remoteAddress,
         version: protocol !== null ? (versions.find(a => a.legacy == true && a.protocol == protocol)?.version || versions.find(a => a.legacy == false && a.protocol == protocol)?.version) : null,
         connection: {
             host: hostname,
             port
         }
-    })
-    clientLegacyPing.set(client, true)
+    }
+    this.p.clientInformation.get(client).clientLegacyPing = true
 
-    let info = serverList({ ...clientEarlyInformation.get(client), legacy: clientLegacyPing.get(client) });
+    let info = serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing });
     let infoVersion = info.version?.correct ?? settings.version;
 
     const responseString = '\xa7' + [1,
