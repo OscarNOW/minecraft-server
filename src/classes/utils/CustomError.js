@@ -2,11 +2,11 @@ const { inspect } = require('util');
 const settings = require('../../settings.json');
 
 class CustomError {
-    constructor(type, causer, names, { got, expectation, expectationType, externalLink }, context) {
+    constructor(type, causer, valueName, { got, expectation, expectationType, externalLink }, context) {
         this.type = type;
         this.causer = causer;
         this.expectationInfo = { got, expectation, expectationType, externalLink };
-        this.names = names;
+        this.valueName = valueName;
         this.context = context || this.constructor;
 
         this.error = new Error(this.generateMessage())
@@ -14,7 +14,7 @@ class CustomError {
     }
 
     generateMessage() {
-        let valueName = this.names;
+        let valueName = this.valueName;
 
         let got = valueToText(this.expectationInfo.got);
 

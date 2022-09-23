@@ -1,5 +1,4 @@
-implement error event for Server and Client
-Change file structure so that every class gets its own folder
+-implement error event for Server and Client
 Create guide
     Update readme
     Put examples in guide

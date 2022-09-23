@@ -2,11 +2,11 @@ export class CustomError {
     constructor(
         type: 'expectationNotMet',
         causer: 'client' | 'libraryUser' | 'library',
-        names: string[][],
+        valueName: string,
         expectationInfo: {
             got: any;
             expectationType: 'value';
-            expectation: any[];
+            expectation: unknown[];
         } | {
             got: any;
             expectationType: 'type';
@@ -16,16 +16,12 @@ export class CustomError {
         context?: Function);
 
     type: 'expectationNotMet';
-    cause: 'client' | 'libraryUser';
-    names: {
-        value: string;
-        function: string;
-        class: string;
-    };
+    causer: 'client' | 'libraryUser' | 'library';
+    valueName: string;
     expectationInfo: {
         got: any;
         expectationType: 'value';
-        expectation: any[];
+        expectation: unknown[];
     } | {
         got: any;
         expectationType: 'type';
@@ -39,5 +35,5 @@ export class CustomError {
     [Symbol.toPrimitive](hint: 'default'): Error;
     [Symbol.toPrimitive](hint: 'number'): number;
 
-    private generateMessage(): string;
+    generateMessage(): string;
 }
