@@ -10,9 +10,11 @@ const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
 
 const defaultPrivateProperties = {
-    emit(event, ...args) {
-        for (const callback of this.p.events[event])
+    emit(name, ...args) {
+        for (const { callback } of this.p.events[name])
             callback(...args);
+
+        this.p.events[name] = this.p.events[name].filter(({ once }) => once == false);
     },
     emitError(customError) {
         if (this.p.events.error.length > 0)
@@ -202,7 +204,18 @@ class Server {
                 expectation: events
             }, this.on))
 
-        this.p.events[event].push(callback)
+        this.p.events[event].push({ callback, once: false })
+    }
+
+    once(event, callback) {
+        if (!events.includes(event))
+            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)`, {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.on))
+
+        this.p.events[event].push({ callback, once: true })
     }
 
     close() {

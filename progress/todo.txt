@@ -3,5 +3,4 @@ Update Text
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
--Add once to Server and proper event handlers
 Add same private properties to Entity as Client
