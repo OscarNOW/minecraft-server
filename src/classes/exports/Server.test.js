@@ -2,7 +2,7 @@ const mineflayer = require('mineflayer');
 const fs = require('fs');
 const path = require('path');
 const mc = require('minecraft-protocol');
-const Server = require('./Server').Server;
+const Server = require('./Server');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let credentials = null;
@@ -11,7 +11,7 @@ if (fs.existsSync(path.resolve(__dirname, `../../credentials/`)))
         credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../../credentials/microsoft.json`)))
 
 module.exports = async (expect, warn) => {
-    if (credentials === null) return warn("Can't test server class without Microsoft account credentials. Create ./credentials/microsoft.json with username and password properties")
+    if (credentials === null) return warn(`Can't test server class without Microsoft account credentials. Create ${path.resolve(__dirname, './credentials/microsoft.json')} with username and password properties`)
 
     console.clear()
     console.log('Starting testing server')
@@ -65,24 +65,22 @@ module.exports = async (expect, warn) => {
 
     expect(joined, false);
     expect(left, false);
-    expect(server.playerCount, 0);
-    expect(server.server.playerCount, 0);
+    expect(server.clients.length, 0);
 
     let bot1Kicked = false;
     let bot1KickedReason;
     console.log('Bot 1 joining')
     await bot({
         kicked: reason => {
+            bot1KickedReason = reason;
             bot1Kicked = true;
-            bot1KickedReason = JSON.parse(reason).text;
         }
     });
 
     expect(joined, true);
     expect(left, false);
     expect(bot1Kicked, false);
-    expect(server.playerCount, 1);
-    expect(server.server.playerCount, 1);
+    expect(server.clients.length, 1);
 
     await wait(1000);
 
@@ -97,9 +95,8 @@ module.exports = async (expect, warn) => {
     expect(left, true);
     expect(leftClient.uuid, joinedClient.uuid);
     expect(bot1Kicked, true);
-    expect(bot1KickedReason, random);
-    expect(server.playerCount, 0);
-    expect(server.server.playerCount, 0);
+    expect(bot1KickedReason, random); //
+    expect(server.clients.length, 0);
 
     let client1 = joinedClient;
     joined = false;
@@ -112,8 +109,8 @@ module.exports = async (expect, warn) => {
     console.log('Bot 1 joining')
     await bot({
         kicked: reason => {
+            bot1KickedReason = reason;
             bot1Kicked = true;
-            bot1KickedReason = JSON.parse(reason).text;
         }
     });
     client1 = joinedClient;
@@ -122,8 +119,7 @@ module.exports = async (expect, warn) => {
     expect(left, false);
     expect(client1?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, false);
-    expect(server?.playerCount, 1);
-    expect(server?.server?.playerCount, 1);
+    expect(server?.clients.length, 1);
 
     joined = false;
     joinedClient = null;
@@ -134,7 +130,7 @@ module.exports = async (expect, warn) => {
     await bot({
         kicked: reason => {
             bot2Kicked = true;
-            bot2KickedReason = JSON.parse(reason).text;
+            bot2KickedReason = reason;
         }
     })
 
@@ -143,8 +139,7 @@ module.exports = async (expect, warn) => {
     expect(client1?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, false);
     expect(bot2Kicked, false);
-    expect(server?.playerCount, 2);
-    expect(server?.server?.playerCount, 2);
+    expect(server?.clients.length, 2);
 
     random = `${Math.floor(Math.random() * 100)}`;
     joinedClient.kick(random);
@@ -153,10 +148,9 @@ module.exports = async (expect, warn) => {
 
     expect(left, true);
     expect(bot2Kicked, true);
-    expect(bot2KickedReason, random);
+    expect(bot2KickedReason, random); //
     expect(leftClient?.uuid, client1?.uuid);
-    expect(server?.playerCount, 1);
-    expect(server?.server?.playerCount, 1);
+    expect(server?.clients.length, 1);
 
     client1?.kick?.();
 

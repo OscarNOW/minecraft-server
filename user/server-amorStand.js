@@ -19,7 +19,7 @@ const server = new Server({
 
 let armorStand;
 
-server.on('join', client => {
+server.on('connect', client => {
     client.chunk(chunk, { x: 0, z: 0 })
 
     let isFirst = server.clients.length == 1;
@@ -38,6 +38,4 @@ server.on('join', client => {
             client.on('leave', process.exit)
         })
     }
-
-    client.loadWorld()
 })

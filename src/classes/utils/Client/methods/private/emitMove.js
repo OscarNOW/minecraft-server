@@ -23,7 +23,7 @@ module.exports = {
                 this.p._position.setRaw(val, info[val]);
             }
 
-        require('../../properties/public/dynamic/onGround.js').setPrivate.call(this, info.onGround);
+        require('../../properties/public/dynamic/onGround.js').onGround.setPrivate.call(this, info.onGround);
 
         let newChunk = {
             x: Math.floor(this.position.x / 16),

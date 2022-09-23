@@ -35,6 +35,7 @@ module.exports = {
                 this.p.emit('join');
                 for (const listener of this.server.globals.serverEvents.get(this.server).join) listener(this);
             } else if (currentState == 'offline') {
+                this.server.clients.splice(this.server.clients.indexOf(this), 1);
                 this.p.emit('leave');
                 for (const listener of this.server.globals.serverEvents.get(this.server).leave) listener(this);
             }
@@ -46,6 +47,7 @@ module.exports = {
 
             } else if (nextState == 'clientSpawned') {
 
+                this.server.clients.push(this);
                 this.p.emit('connect');
                 for (const listener of this.server.globals.serverEvents.get(this.server).connect) listener(this);
                 this.position = {};
