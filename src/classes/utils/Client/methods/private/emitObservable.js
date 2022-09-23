@@ -1,5 +1,5 @@
 module.exports = {
-    emitObservable: function (observable) {
+    emitObservable(observable) {
         for (const cb of this.p.observables[observable]) cb(this[observable])
     }
 }

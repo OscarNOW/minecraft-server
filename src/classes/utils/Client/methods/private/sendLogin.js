@@ -7,7 +7,7 @@ const { defaults } = require('../../../../../settings.json');
 const { dimensionCodec } = require('../../../../../functions/loader/data.js');
 
 module.exports = {
-    sendLogin: function () {
+    sendLogin() {
         let callAfterLogin = [];
 
         this.p.defaultProperties = this.p.defaultClientProperties(this);

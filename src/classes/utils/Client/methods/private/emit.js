@@ -1,5 +1,5 @@
 module.exports = {
-    emit: function (name, ...args) {
+    emit(name, ...args) {
         for (const { callback, once } of this.p.events[name]) {
             callback(...args)
 

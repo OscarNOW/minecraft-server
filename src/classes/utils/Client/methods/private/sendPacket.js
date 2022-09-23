@@ -1,5 +1,5 @@
 module.exports = {
-    sendPacket: function (name, packet) {
+    sendPacket(name, packet) {
         this.p.client.write(name, packet)
     }
 }

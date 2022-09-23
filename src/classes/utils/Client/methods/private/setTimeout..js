@@ -1,5 +1,5 @@
 module.exports = {
-    setTimeout: function (callback, delay) {
+    setTimeout(callback, delay) {
         let timeout = setTimeout(() => {
             this.p.timeouts = this.p.timeouts.filter(a => a !== timeout);
             callback();

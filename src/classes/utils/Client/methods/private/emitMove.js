@@ -1,5 +1,5 @@
 module.exports = {
-    emitMove: function (info) {
+    emitMove(info) {
         if (!this.p.positionSet)
             return;
 
