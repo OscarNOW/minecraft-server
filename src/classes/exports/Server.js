@@ -4,6 +4,7 @@ const settings = require('../../settings.json')
 const mc = require('minecraft-protocol');
 const endianToggle = require('endian-toggle');
 const imageSize = require('image-size');
+const path = require('path');
 
 const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
@@ -17,6 +18,7 @@ const events = Object.freeze([
 let clientEarlyInformation = new WeakMap();
 let clientLegacyPing = new WeakMap();
 let serverEvents = new WeakMap();
+const privates = new WeakMap();
 
 class Server {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties } = {}) {
@@ -156,6 +158,31 @@ class Server {
             new Client(client, this, clientEarlyInformation.get(client), this.defaultClientProperties);
         });
 
+    }
+
+    get p() {
+        let callPath = new Error().stack.split('\n')[2];
+
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (callPath.startsWith(folderPath)) {
+            if (!privates.get(this))
+                privates.set(this, {});
+
+            return privates.get(this);
+        } else
+            return this.p._p
+    }
+
+    set p(value) {
+        this.p._p = value;
     }
 
     emitError(customError) {
