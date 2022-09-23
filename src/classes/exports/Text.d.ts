@@ -8,7 +8,9 @@ export class Text {
 
     readonly hash: string;
 
-    toString(): string;
+    [Symbol.toPrimitive](hint: 'string'): string;
+    [Symbol.toPrimitive](hint: 'number'): number;
+    [Symbol.toPrimitive](hint: 'default'): textArrayComponent[];
 
     static stringToArray(text: string): textArrayComponent[];
     static stringToUncolored(text: string): string;

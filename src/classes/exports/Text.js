@@ -55,8 +55,15 @@ class Text {
             });
     }
 
-    toString() {
-        return this.string;
+    [Symbol.toPrimitive](hint) {
+        if (hint == 'string')
+            return this.uncolored;
+        else if (hint == 'default')
+            return this.array;
+        else if (hint == 'number')
+            return this.uncolored.length;
+        else
+            return null;
     }
 
     __reset() {
