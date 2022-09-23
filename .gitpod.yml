@@ -9,6 +9,7 @@ ports:
   - port: 25565
     onOpen: notify
     name: Minecraft Server
+    visibility: public
 
 vscode:
   extensions:
