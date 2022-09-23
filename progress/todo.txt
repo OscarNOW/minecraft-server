@@ -11,10 +11,9 @@ Expand Client property types
         Use that for onGround
 Create PR for minecraft-protocol to exclude optional files from npm build
 Update Text    
-    Change chatLevelDifferenceAmount to count difference in characters and not difference in properties                
+    -Change chatLevelDifferenceAmount to count difference in characters and not difference in properties                
     Create new tests for new features    
     Remove duplicate code in Text
--Implement convertToType function in all type generators
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions

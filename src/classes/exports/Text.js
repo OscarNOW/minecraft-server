@@ -28,7 +28,7 @@ for (const file of fs.readdirSync(path.join(__dirname, './Text/properties/public
 
 const defaultInheritedChatProperties = Object.freeze({
     color: 'reset',
-    insertion: undefined,
+    insertion: '',
     clickEvent: { action: 'change_page', value: 0 },
     hoverEvent: { action: 'show_text', value: '' },
     ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
@@ -450,6 +450,8 @@ function convertArrayComponentToChatComponent({ with: wit, color, modifiers, ins
 
     if (insertion)
         out.insertion = insertion;
+    else
+        out.insertion = '';
 
     if (clickEvent)
         out.clickEvent = {
