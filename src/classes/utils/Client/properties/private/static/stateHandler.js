@@ -33,11 +33,11 @@ module.exports = {
 
             if (currentState == 'clientSpawned') {
                 this.p.emit('join');
-                for (const callback of this.server.p.events.join) callback(this);
+                this.server.p.emit('join', this);
             } else if (currentState == 'offline') {
                 this.server.clients.splice(this.server.clients.indexOf(this), 1);
                 this.p.emit('leave');
-                for (const callback of this.server.events.leave) callback(this);
+                this.server.p.emit('leave', this);
             }
 
             if (nextState == 'loginSent') {
@@ -49,7 +49,8 @@ module.exports = {
 
                 this.server.clients.push(this);
                 this.p.emit('connect');
-                for (const callback of this.server.p.events.connect) callback(this);
+                this.server.p.emit('connect', this);
+
                 this.position = {};
 
                 this.p.stateHandler.updateState.set.call(this, 'clientSpawned');

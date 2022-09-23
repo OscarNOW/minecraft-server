@@ -9,6 +9,13 @@ const path = require('path');
 const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
 
+const defaultPrivateProperties = {
+    emit(event, ...args) {
+        for (const callback of this.p.events[event])
+            callback(...args);
+    }
+};
+
 const events = Object.freeze([
     'connect',
     'join',
@@ -170,7 +177,7 @@ class Server {
 
         if (callPath.startsWith(folderPath)) {
             if (!privates.get(this))
-                privates.set(this, {});
+                privates.set(this, Object.assign({}, defaultPrivateProperties));
 
             return privates.get(this);
         } else
@@ -183,8 +190,7 @@ class Server {
 
     emitError(customError) {
         if (this.p.events.error.length > 0)
-            for (const callback of this.p.events.error)
-                callback(customError);
+            this.p.emit('error', customError);
         else
             throw customError.toString();
     }
