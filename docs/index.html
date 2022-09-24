@@ -28,7 +28,7 @@
 <table>
 <thead>
 <tr>
-<th>⚠ WARNING: The only current supported Minecraft version for this library is <code>1.16.3</code></th>
+<th>⚠ WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the <a href="https://oscarnow.github.io/minecraft-server/">docs</a>. New library updates will change the API and add more coverage.</th>
 </tr>
 </thead>
 </table>
@@ -44,6 +44,9 @@
 </ol>
 <pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> { </span><span class="hl-2">Server</span><span class="hl-1"> } = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;minecraft-server&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">server</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-3">Server</span><span class="hl-1">();</span><br/><br/><span class="hl-5">server</span><span class="hl-1">.</span><span class="hl-3">on</span><span class="hl-1">(</span><span class="hl-4">&#39;connect&#39;</span><span class="hl-1">, </span><span class="hl-5">client</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> {</span><br/><br/><span class="hl-1">    </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-4">`</span><span class="hl-0">${</span><span class="hl-5">client</span><span class="hl-6">.</span><span class="hl-5">username</span><span class="hl-0">}</span><span class="hl-4"> joined`</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-5">client</span><span class="hl-1">.</span><span class="hl-3">chat</span><span class="hl-1">(</span><span class="hl-4">`Hello world, </span><span class="hl-0">${</span><span class="hl-5">client</span><span class="hl-6">.</span><span class="hl-5">username</span><span class="hl-0">}</span><span class="hl-4">`</span><span class="hl-1">);</span><br/><br/><span class="hl-1">});</span>
 </code></pre>
+<ol start="3">
+<li>Join the server with Minecraft Java Edition version <code>1.16.3</code> on port <code>25565</code>. Different versions and ports are currently not supported.</li>
+</ol>
 <p>If you want to now how to use the rest of the library, please see <a href="https://oscarnow.github.io/minecraft-server/">the documentation</a>.</p>
 <p>For more examples, please see <a href="https://github.com/OscarNOW/minecraft-server/tree/main/examples">the examples folder</a>.</p>
 <p>If you have any questions please first read the <a href="https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md">FAQ</a>. If your question isn&#39;t in there, you can <a href="https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions">ask a question in discussions</a>.</p>

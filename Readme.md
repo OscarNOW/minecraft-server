@@ -12,8 +12,8 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
-| :warning: WARNING: The only current supported Minecraft version for this library is `1.16.3` |
-| -------------------------------------------------------------------------------------------- |
+| :warning: WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New library updates will change the API and add more coverage. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 Create Minecraft Servers with an easy to use API and with full control
 
@@ -33,6 +33,7 @@ server.on('connect', client => {
 
 });
 ```
+3. Join the server with Minecraft Java Edition version `1.16.3` on port `25565`. Different versions and ports are currently not supported.
 
 If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
