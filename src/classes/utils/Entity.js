@@ -18,6 +18,12 @@ const observables = [
     'position'
 ];
 
+const defaultPrivate = {
+    emitObservable(observable) {
+        this.p.observables[observable].forEach(cb => cb(this[observable]))
+    }
+};
+
 const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
     let yaw = ya % 360;
 
@@ -68,14 +74,6 @@ class Entity {
         this.p.sendPacket = sendPacket;
         this.p._position = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch })
         this.p.events = Object.fromEntries(events.map(a => [a, []]));
-        this.privateEmitter = {
-            emit: (event, ...args) => {
-                for (const listener of this.p.events[event]) listener(...args)
-            }
-        }
-
-        this.p.emitObservable = observable =>
-            this.p.observables[observable].forEach(cb => cb(this[observable]))
 
         if (this.living)
             this.p.sendPacket('spawn_entity_living', {
@@ -123,7 +121,7 @@ class Entity {
 
         if (callPath.startsWith(folderPath)) {
             if (!this[_p])
-                this[_p] = {};
+                this[_p] = Object.assign({}, defaultPrivate);
 
             return this[_p];
         } else
