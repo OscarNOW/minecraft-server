@@ -1,5 +1,5 @@
-Update Text
-    Create new tests for new features
+Create new tests for new Text features
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
+Make package ready for publishing
