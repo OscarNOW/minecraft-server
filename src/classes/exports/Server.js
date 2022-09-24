@@ -9,7 +9,7 @@ const path = require('path');
 const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
 
-const defaultPrivateProperties = {
+const defaultPrivate = {
     emit(name, ...args) {
         for (const { callback } of this.p.events[name])
             callback(...args);
@@ -185,7 +185,7 @@ class Server {
 
         if (callPath.startsWith(folderPath)) {
             if (!privates.get(this))
-                privates.set(this, Object.assign({}, defaultPrivateProperties));
+                privates.set(this, Object.assign({}, defaultPrivate));
 
             return privates.get(this);
         } else

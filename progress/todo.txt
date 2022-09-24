@@ -3,4 +3,4 @@ Update Text
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
-Add same private properties to Entity as Client
+Move constant Entity privates into defaultPrivates
