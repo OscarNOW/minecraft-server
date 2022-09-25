@@ -40,16 +40,14 @@ module.exports = expect => {
     let temp = new Text();
     temp.string = 'Hello world!';
     expect(temp.string, '§rHello world!')
-    expect(temp.array, [
-        { text: 'Hello world!', color: 'default', modifiers: [] }
-    ])
+    expect(temp.array, [{ color: 'default', modifiers: [], text: 'Hello world!' }])
     expect(temp.uncolored, 'Hello world!')
     expect(temp.chat, 'Hello world!')
 
     temp = new Text()
     temp.array = 'Foo bar 123';
     expect(temp.string, '§rFoo bar 123')
-    expect(temp.array, [{ text: 'Foo bar 123', color: 'default', modifiers: [] }])
+    expect(temp.array, [{ color: 'default', modifiers: [], text: 'Foo bar 123' }])
     expect(temp.uncolored, 'Foo bar 123')
     expect(temp.chat, 'Foo bar 123')
 }
