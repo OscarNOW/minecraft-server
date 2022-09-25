@@ -29,7 +29,7 @@ type textArrayComponent = {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
@@ -43,7 +43,7 @@ type textArrayComponent = {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
@@ -59,7 +59,7 @@ type textArrayComponent = {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better names
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
@@ -76,7 +76,7 @@ type optionalTextArrayComponent = string | {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
@@ -90,7 +90,7 @@ type optionalTextArrayComponent = string | {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText
@@ -106,7 +106,7 @@ type optionalTextArrayComponent = string | {
 
     insertion?: string;
     clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; // todo: convert to better name
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
         value: string | number;
     };
     hoverEvent?: { //todo: change to hoverText

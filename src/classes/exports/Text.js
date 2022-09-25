@@ -554,7 +554,7 @@ function compareChatComponentInheritableProperty(a, b, name) {
     if (name == 'hoverEvent')
         return a.action == b.action && compareChatComponentInheritableProperties(a.value, b.value);
 
-    // todo: Use CustomError
+    //todo: Use CustomError
     throw new Error(`Don't know how to compare ${name}`);
 }
 
