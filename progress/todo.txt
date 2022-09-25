@@ -3,4 +3,3 @@ Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
 Make package ready for publishing
--Change Chunk.setBlock( so that blockName comes first and location second
