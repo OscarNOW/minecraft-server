@@ -1,4 +1,4 @@
-Create new tests for new Text features
+-Create new tests for new Text features
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
