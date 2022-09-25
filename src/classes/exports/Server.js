@@ -41,7 +41,7 @@ class Server {
         this.clients = [];
 
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
-        this.p.clientInfo = new WeakMap();
+        this.p.clientInformation = new WeakMap();
 
         this.server = mc.createServer({
             encryption: true,
@@ -184,8 +184,19 @@ class Server {
         let folderPath = path.resolve(__dirname, '../../');
 
         if (callPath.startsWith(folderPath)) {
-            if (!privates.get(this))
-                privates.set(this, Object.assign({}, defaultPrivate));
+            if (!privates.get(this)) {
+                let newPrivate = {};
+
+                for (const [key, value] of Object.entries(defaultPrivate)) {
+                    let newValue = value;
+                    if (typeof newValue == 'function')
+                        newValue = newValue.bind(this);
+
+                    newPrivate[key] = newValue;
+                }
+
+                privates.set(this, newPrivate);
+            }
 
             return privates.get(this);
         } else
