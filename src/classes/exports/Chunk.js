@@ -15,7 +15,7 @@ class Chunk {
                     this._chunk.setSkyLight({ x, y, z }, 15)
     }
 
-    setBlock({ x, y, z }, blockName, state = {}) {
+    setBlock(blockName, { x, y, z }, state = {}) {
         this._chunk.setBlockStateId({ x, y, z }, getStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         return this;
