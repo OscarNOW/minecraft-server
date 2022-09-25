@@ -97,20 +97,7 @@ if (debug) {
                 console.log(err)
             }
 
-            jsonOut.failed.push({
-                got: err.stack || `${err}`,
-                expected: '',
-                class: val.class,
-                index: null,
-                id: undefined
-            });
-            testsFailed.push({
-                class: val.class,
-                got: err.stack || `${err}`,
-                expected: '',
-                index: null,
-                id: undefined
-            })
+            throw err
         }
     }
 
