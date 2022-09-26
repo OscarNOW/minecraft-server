@@ -21,4 +21,4 @@ jobs:
       - name: Install modules
         run: npm install
       - name: Run ESLint
-        run: npx eslint ./src
+        run: npx eslint ./src --max-warnings 0
