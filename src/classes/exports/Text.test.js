@@ -40,6 +40,15 @@ module.exports = expect => {
         { text: '2', color: 'default', modifiers: ['underlined', 'bold'] },
         { text: '3', color: 'default', modifiers: [] },
     ]), '§r§n1§l2§r3');
+    expect(Text.arrayToString([{
+        translate: 'demo.help.movementShort',
+        with: [
+            'Foo',
+            'Bar',
+            'Baz',
+            'Fooz'
+        ]
+    }]), '§rMove by pressing the Foo, Bar, Baz, Fooz keys')
 
     // stringToArray
     expect(Text.stringToArray(''), [])
