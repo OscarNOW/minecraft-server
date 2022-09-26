@@ -7,10 +7,10 @@ name: ESLint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   lint:
@@ -31,13 +31,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: npm login
-        run:
-          npm config set //registry.npmjs.org/:_authToken=$NPM_READONLY_AUTH_TOKEN
+        run: npm config set //registry.npmjs.org/:_authToken=$NPM_READONLY_AUTH_TOKEN
         env:
           NPM_READONLY_AUTH_TOKEN: ${{ secrets.NPM_READONLY_AUTH_TOKEN }}
 
       - name: npm install
-        working-directory: ./application
+        working-directory: ./
         run: npm i --ignore-scripts
 
       - name: Run ESLint
