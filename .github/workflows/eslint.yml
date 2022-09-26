@@ -14,7 +14,5 @@ jobs:
     steps:
       - name: "Checkout Repository"
         uses: actions/checkout@v3
-      # - name: Install modules
-      #   run: npm install
       - name: ESLint
         run: npx eslint ./src ./examples/ ./scripts/ --max-warnings 0
