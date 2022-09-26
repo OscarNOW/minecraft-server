@@ -1,3 +1,4 @@
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
+Rewrite src/tests.js

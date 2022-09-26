@@ -38,9 +38,17 @@ const colors = Object.freeze({
     }
 });
 
-const verbose = process.argv.includes('--verbose')
-const debug = process.argv.includes('--debug')
-const silenceWarnings = process.argv.includes('--silence-warnings')
+let verbose = process.argv.includes('--verbose')
+let debug = process.argv.includes('--debug')
+let silenceWarnings = process.argv.includes('--silence-warnings')
+let githubAction = process.argv.includes('--github-action')
+
+if (githubAction) {
+    debug = true;
+    verbose = false;
+    silenceWarnings = true;
+}
+
 let testsRun = 0;
 let testsFailed = [];
 let jsonOut = {
@@ -50,7 +58,8 @@ let jsonOut = {
 };
 
 if (debug) {
-    console.clear()
+    if (!githubAction)
+        console.clear()
     console.log('LOGS START\n')
 };
 
@@ -94,7 +103,6 @@ if (debug) {
             if (debug) {
                 console.log()
                 console.log('TEST RESULTED IN ERROR:')
-                console.log(err)
             }
 
             throw err
@@ -102,76 +110,115 @@ if (debug) {
     }
 
     if (debug) {
-        console.log()
-        console.log('LOGS END\nSUMMARY START')
+        if (githubAction) {
+            console.log()
+            console.log()
+            console.log()
+            console.log('TEST SUMMARY')
+            console.log()
+        } else {
+            console.log()
+            console.log('LOGS END\nSUMMARY START')
+        }
     } else
         console.clear();
 
     let sumText;
-    if (testsRun == 0)
-        sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
-    else if (testsFailed.length > 0)
-        sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length == 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
-    else
-        sumText = `${colors.bg.green}${colors.fg.black}${colors.bold} ALL TESTS SUCCEEDED ${colors.reset}`
+    if (githubAction)
+        if (testsRun == 0)
+            sumText = 'No tests were found'
+        else if (testsFailed.length > 0)
+            sumText = `${testsFailed.length} test${testsFailed.length > 1 ? 's' : ''} failed`
+        else
+            sumText = 'All tests passed'
+    else {
+        if (testsRun == 0)
+            sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
+        else if (testsFailed.length > 0)
+            sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length == 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
+        else
+            sumText = `${colors.bg.green}${colors.fg.black}${colors.bold} ALL TESTS SUCCEEDED ${colors.reset}`
+    }
+
     if (!verbose) {
         console.log(sumText)
         console.log()
     }
 
     if (!verbose) {
-        if (testsFailed.length > 0)
-            console.log('/----------------------------\\')
+        if (githubAction) {
+            for (const testFailed of testsFailed) {
+                console.log(`FAILED TEST `)
+                console.log(`  GOT:       ${testFailed.got.text} `)
+                console.log(`  EXPECTED:  ${testFailed.expected.text} `)
+                console.log(`  CLASS:     ${testFailed.class}`)
 
-        testsFailed.forEach((val, ind) => {
-            let colArr = [];
-            let arr = [];
-
-            colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
-            arr.push(`|  FAILED `)
-            colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
-            arr.push(`| GOT:       ${val.got.text} `)
-            colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
-            arr.push(`| EXPECTED:  ${val.expected.text} `)
-            colArr.push(`| CLASS:    ${colors.fg.yellow}${val.class}`)
-            arr.push(`| CLASS:    ${val.class}`)
-            if (val.id) {
-                colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
-                arr.push(`| ID:       ${val.id} `)
-            } else {
-                colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
-                arr.push(`| INDEX:    ${val.index} `)
+                if (testFailed.id)
+                    console.log(`  ID:       ${testFailed.id} `)
+                else
+                    console.log(`  INDEX:    ${testFailed.index} `)
             }
+        } else {
+            if (testsFailed.length > 0)
+                console.log('/----------------------------\\')
 
-            colArr.forEach((val, ind) => {
-                let spaces = '';
-                for (let ii = 0; ii < 29 - arr[ind].length; ii++)
-                    spaces += ' ';
+            testsFailed.forEach((val, ind) => {
+                let colArr = [];
+                let arr = [];
 
-                console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
+                colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
+                arr.push(`|  FAILED `)
+                colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
+                arr.push(`| GOT:       ${val.got.text} `)
+                colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
+                arr.push(`| EXPECTED:  ${val.expected.text} `)
+                colArr.push(`| CLASS:    ${colors.fg.yellow}${val.class}`)
+                arr.push(`| CLASS:    ${val.class}`)
+                if (val.id) {
+                    colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
+                    arr.push(`| ID:       ${val.id} `)
+                } else {
+                    colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
+                    arr.push(`| INDEX:    ${val.index} `)
+                }
+
+                colArr.forEach((val, ind) => {
+                    let spaces = '';
+                    for (let ii = 0; ii < 29 - arr[ind].length; ii++)
+                        spaces += ' ';
+
+                    console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
+                })
+
+                if (ind == testsFailed.length - 1)
+                    console.log('\\----------------------------/')
+                else
+                    console.log('+----------------------------+')
             })
-
-            if (ind == testsFailed.length - 1)
-                console.log('\\----------------------------/')
-            else
-                console.log('+----------------------------+')
-        })
+        }
     }
 
-    if (testsFailed.length > 0) {
-        console.log()
-        console.log(sumText)
+    if (!githubAction)
+        if (testsFailed.length > 0) {
+            console.log()
+            console.log(sumText)
 
-        let p = path.resolve(__dirname, `./logs/tests/latest.json`);
-        fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
-        console.log(p)
+            let p = path.resolve(__dirname, `./logs/tests/latest.json`);
+            fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
+            console.log(p)
 
-        console.log()
-    }
+            console.log()
+        }
 
     if (!silenceWarnings & jsonOut.warnings.length > 0) {
-        console.log(`${colors.bg.yellow}${colors.fg.black} WARNINGS ${colors.reset}`)
+        if (githubAction)
+            console.log(`WARNINGS`)
+        else
+            console.log(`${colors.bg.yellow}${colors.fg.black} WARNINGS ${colors.reset}`)
         for (const v of jsonOut.warnings) console.log(v)
         console.log();
     }
+
+    if (githubAction && (testsFailed.length > 0 || testsRun.length == 0))
+        process.exit(1);
 })();
