@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install dependencies
+        run: npm install
       - name: Lint
         uses: Krizzu/eslint-check-action@v1.1.0
         with:
