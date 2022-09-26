@@ -294,8 +294,7 @@ class Text {
         if (!out)
             out = { text: '' }
 
-        // return this.minifyChat(out);
-        return out;
+        return this.minifyChat(out);
     }
 
     static minifyChat(chat) {
