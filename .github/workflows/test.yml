@@ -4,11 +4,14 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [16.x]
+        node-version: [14.x, 16.x, 18.x]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    name: Tests - Node ${{ matrix.node-version }} on ${{ matrix.os }}
 
     steps:
       - name: Checkout Repository
