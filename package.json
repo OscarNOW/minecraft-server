@@ -5,7 +5,7 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "tests": "node ./scripts/tests",
+        "test": "node ./scripts/test",
         "types": "node ./scripts/types",
         "docs": "cd .\\scripts && docs.bat",
         "minify": "node ./scripts/minify",
