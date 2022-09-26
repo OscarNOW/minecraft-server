@@ -4,9 +4,9 @@ let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++)
         for (let y = 0; y < 100; y++)
-            chunk.setBlock({ x, y, z }, 'dirt')
+            chunk.setBlock('dirt', { x, y, z })
 
-chunk.setBlock({ x: 3, y: 100, z: 3 }, 'oak_wall_sign', { waterlogged: false, facing: 'north' })
+chunk.setBlock('oak_wall_sign', { x: 3, y: 100, z: 3 }, { waterlogged: false, facing: 'north' })
 
 const server = new Server({
     defaultClientProperties: () => ({

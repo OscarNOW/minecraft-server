@@ -9,6 +9,23 @@ module.exports = expect => {
         { text: '', color: 'blue', modifiers: [] }
     ]), [])
     expect(Text.parseArray([{ text: '', modifiers: ['bold', 'underlined'], color: 'green' }]), [])
+    expect(Text.parseArray([{ text: 'Hello world', insertion: '' }]), [{ color: 'default', modifiers: [], text: 'Hello world' }])
+
+    //arrayToChat
+    expect(Text.arrayToChat([{
+        text: 'Hello world',
+        clickEvent: { action: 'open_url', value: 'https://google.com' }
+    }]), { text: 'Hello world', clickEvent: { action: 'open_url', value: 'https://google.com' } })
+    expect(Text.arrayToChat([{
+        text: 'Hello world',
+        hoverEvent: {
+            action: 'show_text',
+            value: 'Hello world'
+        }
+    }]), { text: 'Hello world', hoverEvent: { action: 'show_text', value: 'Hello world' } })
+    expect(Text.arrayToChat([{
+        text: 'true'
+    }]), true)
 
     // arrayToString
     expect(Text.arrayToString([{ text: 'hi', modifiers: ['bold'], color: 'green' }]), '§r§a§lhi')
