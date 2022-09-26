@@ -157,7 +157,7 @@ module.exports = async (expect, warn) => {
     console.log('Pinging test server')
     serverPingAmount = 0;
     let pinged = await ping();
-    let ip = '127.0.0.1';
+    let ip = '::1';
     expect(serverPingAmount, 1)
     expect(pinged?.version?.name, `#1#${ip}#1#`)
     expect(pinged?.players?.online, 2)

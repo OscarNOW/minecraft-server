@@ -23,6 +23,23 @@ module.exports = expect => {
             value: 'Hello world'
         }
     }]), { text: 'Hello world', hoverEvent: { action: 'show_text', value: 'Hello world' } })
+    expect(Text.arrayToChat({
+        translate: 'demo.help.movementShort',
+        with: [
+            'w',
+            'a',
+            's',
+            'd'
+        ]
+    }), {
+        translate: 'demo.help.movementShort',
+        with: [
+            'w',
+            'a',
+            's',
+            'd'
+        ]
+    })
     expect(Text.arrayToChat([{
         text: 'true'
     }]), true)
