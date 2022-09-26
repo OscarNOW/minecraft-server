@@ -44,7 +44,7 @@ let silenceWarnings = process.argv.includes('--silence-warnings')
 let githubAction = process.argv.includes('--github-action')
 
 if (githubAction) {
-    debug = true;
+    debug = false;
     verbose = false;
     silenceWarnings = true;
 }
