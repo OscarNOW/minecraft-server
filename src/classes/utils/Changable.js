@@ -9,7 +9,7 @@ class Changable {
             value: Object.assign({}, startValues)
         })
 
-        for (const [key, value] of Object.entries(this[valuesSymbol]))
+        for (const [key] of Object.entries(this[valuesSymbol]))
             Object.defineProperty(this, key, {
                 configurable: false,
                 enumerable: true,

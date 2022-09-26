@@ -18,7 +18,7 @@ const server = new Server({
     }),
 
     wrongVersionConnect: ({ ip, connection: { host, port }, version, legacy }) =>
-        `You've connected with the wrong version!\nYour version: ${version}\nCorrect version: 1.16.3`,
+        `You've connected with the wrong version!\nExtra info:\nip: ${ip}, host: ${host}, port: ${port}, version: ${version}, legacy: ${legacy ? 'yes' : 'no'}`,
 
     defaultClientProperties: client => ({
         clearSky: true,

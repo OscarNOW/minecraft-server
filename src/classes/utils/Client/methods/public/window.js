@@ -13,7 +13,7 @@ module.exports = function (nonEntityWindowName) {
             expectation: Object.keys(nonEntityWindowIdMapping)
         }, this.window))
 
-    let windowId = nonEntityWindowIdMapping.find(({ name }) => name == nonEntityWindowName).id;
+    // let windowId = nonEntityWindowIdMapping.find(({ name }) => name == nonEntityWindowName).id;
 
     throw new Error(`Not implemented`)
 }
