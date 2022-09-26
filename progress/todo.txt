@@ -1,4 +1,3 @@
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
-Make package ready for publishing
