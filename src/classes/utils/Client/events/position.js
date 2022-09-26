@@ -12,3 +12,7 @@ module.exports = {
         return this.p.emitMove.call(this, i);
     }
 }
+
+throw new Error();
+
+console.log(10)
