@@ -148,7 +148,8 @@ if (debug) {
     if (!verbose) {
         if (githubAction) {
             for (const testFailed of testsFailed) {
-                console.log(`FAILED TEST `)
+                console.log()
+                console.log('FAILED TEST SUMMARY')
                 console.log(`  GOT:       ${testFailed.got.text} `)
                 console.log(`  EXPECTED:  ${testFailed.expected.text} `)
                 console.log(`  CLASS:     ${testFailed.class}`)
