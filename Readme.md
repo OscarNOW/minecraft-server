@@ -1,7 +1,7 @@
 # ![Banner Image](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
-    <img src="https://img.shields.io/npm/dt/minecraft-server" alt="NPM downloads">
+    <img src="https://img.shields.io/npm/dt/@boem312/minecraft-server" alt="NPM downloads">
     <img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
     <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
         <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
@@ -20,10 +20,10 @@ Create Minecraft Servers with an easy to use API and with full control
 This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
 ## **Installation and usage**
-1. Install with `npm i minecraft-server`.
-2. Now you can use the library. Here's some example code:
+1. Install with `npm i @boem312/minecraft-server`.
+2. Now you can use the library. Here's an example code:
 ```js
-const { Server } = require('minecraft-server');
+const { Server } = require('@boem312/minecraft-server');
 const server = new Server();
 
 server.on('connect', client => {

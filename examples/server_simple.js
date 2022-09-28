@@ -1,4 +1,4 @@
-const { Server } = require('minecraft-server');
+const { Server } = require('@boem312/minecraft-server');
 const server = new Server();
 
 server.on('connect', client => {

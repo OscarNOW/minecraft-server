@@ -1,4 +1,4 @@
-const { Server } = require('../')
+const { Server } = require('@boem312/minecraft-server')
 const server = new Server()
 
 server.on('join', client => {

@@ -1,4 +1,4 @@
-const { Text, Server } = require('minecraft-server');
+const { Text, Server } = require('@boem312/minecraft-server');
 const message = new Text([
     {
         text: 'Hello ',
