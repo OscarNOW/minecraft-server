@@ -69,7 +69,7 @@ type textArrayComponent = {
 };
 
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
-type optionalTextArrayComponent = string | {
+type optionalTextArrayComponent = string | number | boolean | {
     text?: string;
     color?: textColor;
     modifiers?: textModifier[];

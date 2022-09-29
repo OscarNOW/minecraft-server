@@ -291,7 +291,7 @@ class Text {
             lowestDiffLevel.extra.push(val);
         }
 
-        if (!out)
+        if (out === undefined)
             out = { text: '' }
 
         return this.minifyChat(out);
@@ -314,7 +314,7 @@ class Text {
 function parseArrayComponent(component) {
     let out;
 
-    if (typeof component == 'string')
+    if (['string', 'number', 'boolean'].includes(typeof component))
         out = {
             text: component,
             color: 'default',
