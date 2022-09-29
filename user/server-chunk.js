@@ -22,5 +22,10 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('itemUse', client.chat)
+    client.on('inventoryClose', () => client.chat(1))
+
+    let horse = client.entity('horse', { x: 0, y: 100, z: 0 })
+    client.on('join', () => {
+        horse.window()
+    })
 })

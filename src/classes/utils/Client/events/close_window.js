@@ -10,8 +10,10 @@ module.exports = {
                 expectation: [this.p.windowId]
             }))
 
+        this.p.windowId = null;
+
         if (windowId === 0)
-            return; //not implemented            
+            return this.p.emit('inventoryClose');
 
         this.p.emit('windowClose');
     }

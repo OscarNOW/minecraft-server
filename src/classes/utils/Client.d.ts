@@ -317,7 +317,7 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    on(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose', callback: () => void): void;
+    on(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -347,7 +347,7 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    once(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose', callback: () => void): void;
+    once(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose', callback: () => void): void;
     once(event: 'digStart', callback: (location: {
         x: number;
         y: number;
