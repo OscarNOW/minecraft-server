@@ -23,11 +23,11 @@ server.on('connect', client => {
             client.chunk(chunk, { x, z });
 
     let horse = client.entity('horse', { x: 3, y: 100, z: 3 })
-    client.on('join', () => {
+    client.once('join', () => {
         horse.window()
 
-        setTimeout(() => {
-            client.closeWindow()
-        }, 2000)
+        client.once('windowClose', () => {
+            client.chat(1)
+        })
     })
 })

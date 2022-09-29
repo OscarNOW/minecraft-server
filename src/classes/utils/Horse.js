@@ -10,7 +10,7 @@ class Horse extends Entity {
             entityId: this.id
         })
 
-        this.p.windowId = windowId;
+        this.client.p.windowId = windowId;
     }
 }
 

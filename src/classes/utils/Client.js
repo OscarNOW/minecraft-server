@@ -14,7 +14,8 @@ const events = Object.freeze([
     'connect',
     'join',
     'leave',
-    'signEditorClose'
+    'signEditorClose',
+    'windowClose'
 ]);
 
 class Client {
