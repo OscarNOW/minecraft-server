@@ -256,9 +256,9 @@ class Text {
         for (const v of array) {
             let val = convertArrayComponentToChatComponent(v);
 
-            if (val.text == '') continue;
+            if (val.text === '') continue;
 
-            if (!out) {
+            if (out === undefined) {
                 out = val
                 continue;
             }
