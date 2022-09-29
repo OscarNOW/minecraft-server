@@ -252,6 +252,7 @@ export class Client {
         pitch: number;
     }): EntityLike;
     window(windowType: nonEntityWindowName): void;
+    closeWindow(): void;
     signEditor(signLocation: {
         x: number;
         y: number;
