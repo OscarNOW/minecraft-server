@@ -11,7 +11,7 @@ module.exports = {
             }))
 
         if (windowId === 0)
-            throw new Error('Not implemented')
+            return; //not implemented            
 
         this.p.emit('windowClose');
     }
