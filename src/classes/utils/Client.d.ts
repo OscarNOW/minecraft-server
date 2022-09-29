@@ -309,6 +309,7 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
 
+    on(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'signEditorClose', callback: (signText: string[], location: {
@@ -338,6 +339,7 @@ export class Client {
         isMainHand: boolean
     }) => void): void;
 
+    once(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     once(event: 'chat', callback: (message: string) => void): void;
     once(event: 'signEditorClose', callback: (signText: string[], location: {
