@@ -2,3 +2,4 @@ Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
 Rewrite src/tests.js
+Rename event files to resemble our library names
