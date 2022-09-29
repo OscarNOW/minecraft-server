@@ -43,6 +43,11 @@ module.exports = expect => {
     expect(Text.arrayToChat([{
         text: 'true'
     }]), true)
+    expect(Text.arrayToChat(0), 0)
+    expect(Text.arrayToChat(1), 1)
+    expect(Text.arrayToChat(10), 10)
+    expect(Text.arrayToChat(true), true)
+    expect(Text.arrayToChat(false), false)
 
     // arrayToString
     expect(Text.arrayToString([{ text: 'hi', modifiers: ['bold'], color: 'green' }]), '§r§a§lhi')
