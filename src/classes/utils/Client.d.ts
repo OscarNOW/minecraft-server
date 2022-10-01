@@ -1,5 +1,6 @@
 type Entity = import('./Entity').Entity;
 type Horse = import('./Horse').Horse;
+type BossBar = import('./BossBar').BossBar;
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
@@ -14,7 +15,7 @@ export class Client {
         }
     }, defaultClientProperties?: (client: Client) => defaultClientProperties);
 
-    /* Constant */
+    /* Readonly constant */
     readonly server: Server;
     readonly username: string;
     readonly uuid: string;
@@ -62,15 +63,7 @@ export class Client {
         readonly [entityId: number]: EntityLike;
         readonly 0: Client;
     };
-    readonly bossBars: {
-        title: Text;
-        health: number;
-        color: bossBarColor;
-        divisionAmount: bossBarDivision;
-        flags: bossBarFlags;
-        id: string;
-        remove(): void;
-    }[];
+    readonly bossBars: BossBar[];
 
     /* Writable changing */
     position: {
@@ -258,21 +251,7 @@ export class Client {
         y: number;
         z: number;
     }): void;
-    bossBar(bossBarInfo?: {
-        title?: textInput | Text;
-        health?: number;
-        color?: bossBarColor;
-        divisionAmount?: bossBarDivision;
-        flags?: bossBarFlags;
-    }): {
-        title: Text;
-        health: number;
-        color: bossBarColor;
-        divisionAmount: bossBarDivision;
-        flags: bossBarFlags;
-        id: string;
-        remove(): void;
-    };
+    bossBar(bossBarInfo?: optionalBossBarInfo): BossBar;
     sound(soundInfo: {
         sound: soundName;
         channel: soundChannel;
