@@ -7,3 +7,4 @@ Add server property on Entity and BossBar
 Move BossBar colors to separate data file
 Move BossBar divisionIds to separate data file
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
+Make compiled files not in github repo
