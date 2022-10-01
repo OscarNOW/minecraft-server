@@ -15,7 +15,7 @@ export class Changable {
     }): void;
     setRaw(key: string | symbol, value: unknown): void;
 
-    raw: {
+    readonly raw: {
         [valueName: string | symbol]: unknown;
     };
 
