@@ -9,6 +9,7 @@ export class BossBar {
 
     readonly id: string;
     readonly client: Client;
+    readonly server: Server;
 
     remove(): void;
 }

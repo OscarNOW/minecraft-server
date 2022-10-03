@@ -2,7 +2,7 @@ Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
 Rewrite src/tests.jss
-Add server property on Entity and BossBar
+-Add server property on Entity and BossBar
 Move BossBar colors to separate data file
 Move BossBar divisionIds to separate data file
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class

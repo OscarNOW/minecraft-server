@@ -110,6 +110,7 @@ const propertyNames = Object.freeze([
 class BossBar {
     constructor(client, sendPacket, p) {
         this.client = client;
+        this.server = client.server;
         this.p.sendPacket = sendPacket;
 
         this.client.p.stateHandler.checkReady.call(this.client);
