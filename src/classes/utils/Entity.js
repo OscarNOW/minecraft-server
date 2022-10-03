@@ -63,11 +63,12 @@ class Entity {
                 externalLink: '{docs}/types/entityType.html'
             }, this.constructor))
 
+        this.client = client;
+        this.sever = client.server;
         this.type = type;
         this.living = e.living;
         this.id = id;
         this.uuid = uuid();
-        this.client = client;
 
         this.p.typeId = e.id;
         this.p.observables = Object.fromEntries(observables.map(a => [a, []]));

@@ -11,9 +11,10 @@ export class Entity {
         pitch?: number;
     }, sendPacket: (packetName: string, packet: object) => void);
 
+    readonly client: Client;
+    readonly server: Server;
     readonly id: number;
     readonly uuid: string;
-    readonly client: Client;
     readonly type: entityType;
     readonly living: boolean;
 
