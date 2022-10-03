@@ -4,7 +4,7 @@ export class BossBar {
     title: Text;
     health: number;
     color: bossBarColor;
-    divisionAmount: bossBarDivision;
+    divisionAmount: bossBarDivisionAmount;
     flags: bossBarFlags;
 
     readonly id: string;
@@ -17,6 +17,14 @@ type optionalBossBarInfo = {
     title?: textInput | Text;
     health?: number;
     color?: bossBarColor;
-    divisionAmount?: bossBarDivision;
+    divisionAmount?: bossBarDivisionAmount;
     flags?: bossBarFlags;
+};
+
+type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
+type bossBarDivisionAmount = 0 | 6 | 10 | 12 | 20;
+type bossBarFlags = {
+    darkenSky: boolean;
+    playEndMusic: boolean;
+    createFog: boolean;
 };

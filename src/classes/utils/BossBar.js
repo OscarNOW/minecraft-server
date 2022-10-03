@@ -5,7 +5,7 @@ const path = require('path');
 const { uuid } = require('../../functions/uuid.js');
 const Changable = require('./Changable.js');
 const Text = require('../exports/Text.js');
-const bossBars = require('./Client/properties/public/dynamic/bossBars.js');
+const { bossBars } = require('./Client/properties/public/dynamic/bossBars.js');
 
 const _p = Symbol('private');
 const defaultPrivate = {
@@ -24,30 +24,28 @@ const defaultPrivate = {
                 flags: parseInt([newFlags.createFog, newFlags.playEndMusic, newFlags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
             })
     },
-    updateProperty: function (key, value) {
+    updateProperty: function (name) {
         this.client.p.stateHandler.checkReady.call(this.client);
-        if (!this.p.visible) return; //todo: throw error
+        if (!this.p.visible) return; //todo: throw error        
 
-        value = this.p.parseProperty.call(this, key, value);
-
-        if (key == 'health')
+        if (name == 'health')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 2,
-                health: value
+                health: this.health
             });
-        else if (key == 'title')
+        else if (name == 'title')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 3,
-                title: JSON.stringify(value.chat)
+                title: JSON.stringify(this.title.chat)
             });
-        else if (key == 'color' || key == 'divisionAmount')
+        else if (name == 'color' || name == 'divisionAmount')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 4,
-                color: colors[this.p._.color],
-                divisionAmount: divisionIds[this.p._.divisionAmount]
+                color: colors[this.color],
+                dividers: divisionIds[this.divisionAmount]
             });
     },
     parseProperty: function (key, value) {
@@ -73,6 +71,16 @@ const defaultPrivate = {
         return properties;
     }
 };
+
+function applyDefaults(properties, defaults) {
+    if (properties === undefined) return defaults;
+    if (typeof properties != 'object') return properties;
+
+    for (const key of Object.keys(defaults))
+        properties[key] = applyDefaults(properties[key], defaults[key])
+
+    return properties;
+}
 
 const colors = Object.freeze({
     pink: 0,
@@ -100,7 +108,7 @@ const propertyNames = Object.freeze([
 ])
 
 class BossBar {
-    constructor(client, sendPacket, { title = defaults.bossBar.title, health = defaults.bossBar.health, color = defaults.bossBar.color, divisionAmount = defaults.bossBar.divisionAmount, flags: { darkenSky = defaults.bossBar.flags.darkenSky, playEndMusic = defaults.bossBar.flags.playEndMusic, createFog = defaults.bossBar.flags.createFog } = defaults.bossBar.flags } = defaults.bossBar) {
+    constructor(client, sendPacket, p) {
         this.client = client;
         this.p.sendPacket = sendPacket;
 
@@ -111,7 +119,8 @@ class BossBar {
         this.p.visible = true;
 
         // parseProperties
-        let properties = arguments[0];
+        let properties = typeof p == 'object' ? Object.assign({}, p) : p;
+        properties = applyDefaults(properties, defaults.bossBar);
         properties = this.p.parseProperties.call(this, properties);
 
         //set private properties
@@ -120,7 +129,6 @@ class BossBar {
             this.p._[propertyName] = properties[propertyName];
 
         this.p._.flags = properties.flags;
-        this.p._.id = bossBarUuid;
 
         //define getters and setters
         for (const propertyName of propertyNames)
@@ -129,21 +137,27 @@ class BossBar {
                 enumerable: true,
                 get: () => this.p._[propertyName],
                 set: newValue => {
-                    let oldValue = this.p._[propertyName];
+                    // let oldValue = this.p._[propertyName];
                     this.p._[propertyName] = newValue;
 
-                    this.p.updateProperty.call(this, propertyName, newValue, oldValue);
+                    this.p.updateProperty.call(this, propertyName);
                 }
             })
+        Object.defineProperty(this, 'id', {
+            configurable: false,
+            enumerable: true,
+            writable: false,
+            value: bossBarUuid
+        })
 
         this.p.sendPacket('boss_bar', {
-            entityUUID: bossBarUuid,
+            entityUUID: this.id,
             action: 0,
-            title: JSON.stringify(title.chat),
-            health: health,
-            color: colors[color],
-            dividers: divisionIds[divisionAmount],
-            flags: parseInt([createFog, playEndMusic, darkenSky].map(a => a ? '1' : '0').join(''), 2)
+            title: JSON.stringify(this.title.chat),
+            health: this.health,
+            color: colors[this.color],
+            dividers: divisionIds[this.divisionAmount],
+            flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 
         bossBars.setPrivate.call(this.client, Object.freeze([...this.client.bossBars, this]));

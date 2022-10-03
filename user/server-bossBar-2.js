@@ -5,7 +5,7 @@ let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++)
         for (let y = 0; y < 100; y++)
-            chunk.setBlock({ x, y, z }, 'dirt')
+            chunk.setBlock('dirt', { x, y, z })
 
 server.on('join', client => {
     client.chunk(chunk, { x: 0, z: 0 })

@@ -11,14 +11,14 @@ server.on('join', async client => {
         divisionAmount: 10
     })
 
-    // await wait(2000);
+    await wait(2000);
 
-    // client.chat(1)
-    // bossBar.color = 'purple'
-    // bossBar.color = 'pink'
+    client.chat(1)
+    bossBar.color = 'purple'
+    bossBar.color = 'pink'
 
-    // await wait(2000);
+    await wait(2000);
 
-    // client.chat(2)
-    // bossBar.divisionAmount = 10;
+    client.chat(2)
+    bossBar.divisionAmount = 10;
 })

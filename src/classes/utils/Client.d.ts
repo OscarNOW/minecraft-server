@@ -349,14 +349,6 @@ export class Client {
     }) => void): void;
 }
 
-type bossBarColor = 'pink' | 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'white';
-type bossBarDivision = 0 | 6 | 10 | 12 | 20;
-type bossBarFlags = {
-    darkenSky: boolean;
-    playEndMusic: boolean;
-    createFog: boolean;
-};
-
 type defaultClientProperties = {
     position?: {
         x?: number;
