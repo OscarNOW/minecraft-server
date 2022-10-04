@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 console.clear();
-console.log('Minifieing JSON files')
+console.log('Minifying JSON files...')
 
 for (const file of [
     './settings.json',
@@ -24,4 +24,4 @@ for (const file of [
 }
 
 console.clear();
-console.log('Done minifieing')
+console.log('Done minifying')

@@ -98,7 +98,7 @@ for (const utilClass of utilClasses)
 for (const [name, value] of Object.entries(types))
     out += `type ${name}=${value};`
 
-console.log('Minifieing output...')
+console.log('Minifying output...')
 
 out = out.replace(/\r\n/g, '\n')
 

@@ -14,11 +14,14 @@
 
     let copiedFilePromises = [];
 
-    for (const copyingFile of copyingFiles)
+    for (const copyingFile of copyingFiles) {
+        console.log(`    ${copyingFile}`)
+
         copiedFilePromises.push(fs.copyFile(
             path.join(__dirname, `../../${copyingFile}`),
             path.join(__dirname, `./${copyingFile}`)
         ));
+    }
 
     await Promise.all(copiedFilePromises);
 
@@ -54,23 +57,26 @@
     require('./transformAfter.js');
 
     console.clear();
-    console.log('Copying assets')
+    console.log('Copying assets...')
 
     copyingFiles = [
         'assets'
     ];
     copiedFilePromises = [];
 
-    for (const copyingFile of copyingFiles)
+    for (const copyingFile of copyingFiles) {
+        console.log(`   ${copyingFile}`)
+
         copiedFilePromises.push(fs.cp(
             path.join(__dirname, `../../${copyingFile}`),
             path.join(__dirname, `../../docs/${copyingFile}`),
             { recursive: true }
         ));
+    }
 
     await Promise.all(copiedFilePromises);
 
     console.clear();
-    console.log('Done!')
+    console.log('Done generating docs')
 
 })();
