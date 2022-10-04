@@ -19,8 +19,6 @@ jobs:
           cache: npm
       - name: Install Dependencies
         run: npm ci
-      - name: Build-minify
-        run: npm run minify
       - name: Build-types
         run: npm run types
       - name: Build-docs
@@ -29,5 +27,6 @@ jobs:
         uses: EndBug/add-and-commit@v9.1.0
         with:
           add: docs --force
-          author_name: Docs bot
-          message: Docs <${{ github.event.head_commit.message }}>
+          author_name: ${{ github.event.head_commit.author.name }}
+          author_email: ${{ github.event.head_commit.author.email }}
+          message: Automatic docs
