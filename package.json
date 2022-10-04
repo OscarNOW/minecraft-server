@@ -5,10 +5,10 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "test": "node ./scripts/test",
+        "minify": "node ./scripts/minify",
         "types": "node ./scripts/types",
         "docs": "node ./scripts/docs",
-        "minify": "node ./scripts/minify",
+        "test": "node ./scripts/test",
         "compile": "npm run minify && npm run types && npm run docs"
     },
     "keywords": [
