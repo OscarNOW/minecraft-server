@@ -4,6 +4,4 @@ Make tests for functions
 Rewrite src/test.jss
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Add client and server property to CustomError
-Object.freeze( function exports
 Publish to github packages?
-Put checkDocs.generateHash in separate functions file

@@ -8,4 +8,4 @@ function applyDefaults(properties, defaults) {
     return properties;
 }
 
-module.exports = { applyDefaults };
+module.exports = Object.freeze({ applyDefaults });
