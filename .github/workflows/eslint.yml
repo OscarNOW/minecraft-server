@@ -3,17 +3,11 @@ name: ESLint
 on: [push, pull_request]
 
 jobs:
-  prepare:
-    name: Prepare
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
-  eslint:
-    needs: prepare
-    name: ESLint
-    runs-on: ubuntu-latest
-    steps:
       - name: ESLint
         run: npx eslint ./src ./examples/ ./scripts/ --max-warnings 0

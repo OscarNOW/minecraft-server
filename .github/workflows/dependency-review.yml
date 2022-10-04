@@ -6,17 +6,11 @@ permissions:
   contents: read
 
 jobs:
-  prepare:
-    name: Prepare
+  dependency-review:
+    name: Dependency review
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
-  dependency-review:
-    needs: prepare
-    name: Dependency review
-    runs-on: ubuntu-latest
-    steps:
       - name: Dependency Review
         uses: actions/dependency-review-action@v2
