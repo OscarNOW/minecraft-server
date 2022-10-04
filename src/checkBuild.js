@@ -56,5 +56,7 @@ function generateHash(hashPath) {
 
     contents += '=';
 
+    console.log('contents', contents);
+
     return crypto.createHash('sha256').update(contents).digest('hex');
 }
