@@ -29,6 +29,4 @@ jobs:
         uses: EndBug/add-and-commit@v9.1.0
         with:
           add: docs --force
-          author_name: ${{ github.event.head_commit.author.name }}
-          author_email: ${{ github.event.head_commit.author.email }}
           message: Automatic docs
