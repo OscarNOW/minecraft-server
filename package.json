@@ -5,10 +5,10 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "minify": "node ./scripts/minify",
-        "types": "node ./scripts/types",
-        "docs": "node ./scripts/docs",
-        "test": "node ./scripts/test"
+        "minify": "node ./src/minify",
+        "types": "node ./src/types",
+        "docs": "node ./src/docs/generate",
+        "test": "node ./src/test"
     },
     "keywords": [
         "minecraft",
