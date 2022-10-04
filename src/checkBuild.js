@@ -10,7 +10,7 @@ const exec = require('util').promisify(require('child_process').exec);
 
     if (fs.existsSync(path.join(__dirname, '../docs/')))
         docsHashBefore = generateHash(path.join(__dirname, '../docs/'));
-    if (fs.existsSync(path.join(__dirname, '../data/')))
+    if (fs.existsSync(path.join(__dirname, './data/')))
         dataHashBefore = generateHash(path.join(__dirname, './data/'));
 
     await exec('npm run minify');
@@ -22,7 +22,7 @@ const exec = require('util').promisify(require('child_process').exec);
 
     if (fs.existsSync(path.join(__dirname, '../docs/')))
         docsHashAfter = generateHash(path.join(__dirname, '../docs/'));
-    if (fs.existsSync(path.join(__dirname, '../data/')))
+    if (fs.existsSync(path.join(__dirname, './data/')))
         dataHashAfter = generateHash(path.join(__dirname, './data/'));
 
     console.log('docsHashBefore', docsHashBefore);
@@ -56,5 +56,5 @@ function generateHash(hashPath) {
 
     contents += '=';
 
-    return crypto.createHash('sha256').update(contents).digest('base64');
+    return crypto.createHash('sha256').update(contents).digest('hex');
 }
