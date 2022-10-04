@@ -1,9 +1,10 @@
 name: Light Test
 
-on: [push]
+on: push
 
 jobs:
-  test:
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +17,12 @@ jobs:
           cache: "npm"
       - name: Install Dependencies
         run: npm ci
+
+  test:
+    needs: prepare
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Test
         run: node scripts/test --github-action
