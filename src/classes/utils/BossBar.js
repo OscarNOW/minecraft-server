@@ -3,6 +3,7 @@ const { defaults } = require('../../settings.json');
 const path = require('path');
 
 const { uuid } = require('../../functions/uuid.js');
+const { applyDefaults } = require('../../functions/applyDefaults.js');
 const Changable = require('./Changable.js');
 const Text = require('../exports/Text.js');
 const { bossBars } = require('./Client/properties/public/dynamic/bossBars.js');
@@ -71,16 +72,6 @@ const defaultPrivate = {
         return properties;
     }
 };
-
-function applyDefaults(properties, defaults) {
-    if (properties === undefined) return defaults;
-    if (typeof properties != 'object') return properties;
-
-    for (const key of Object.keys(defaults))
-        properties[key] = applyDefaults(properties[key], defaults[key])
-
-    return properties;
-}
 
 const colors = Object.freeze({
     pink: 0,
