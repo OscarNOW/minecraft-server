@@ -8,7 +8,7 @@ examples/
 src/logs/
 *.test.js
 *.types.js
-src/tests.js
+src/test.js
 src/compile.js
 src/types.js
 src/minify.js
