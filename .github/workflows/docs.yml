@@ -1,11 +1,13 @@
-name: Build
+name: Docs
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
-    name: Build
+    name: Docs
 
     steps:
       - name: Checkout Repository
@@ -23,3 +25,9 @@ jobs:
         run: npm run types
       - name: Build-docs
         run: npm run docs
+      - name: Push docs
+        uses: EndBug/add-and-commit@v9.1.0
+        with:
+          add: docs --force
+          author_name: Docs bot
+          message: Docs <${{ github.event.head_commit.message }}>
