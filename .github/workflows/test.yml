@@ -7,10 +7,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # node-version: [14.x, 18.x]
-        # os: [ubuntu-latest, macOS-latest, windows-latest]
-        node-version: [18.x]
-        os: [windows-latest]
+        node-version: [14.x, 18.x]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
     name: Node ${{ matrix.node-version }}, ${{ matrix.os }}
@@ -25,9 +23,5 @@ jobs:
           cache: npm
       - name: Install Dependencies
         run: npm ci
-      - name: debug-dir
-        run: dir
-      - name: debug-dir-src
-        run: cd src && dir
       - name: Test
         run: node src/test --github-action
