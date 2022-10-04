@@ -7,7 +7,7 @@
             "theme": "hierarchy",
             "name": "\"minecraft-server\"",
             "gitRemote": "origin",
-            "logLevel": "info"
+            "logLevel": "Info"
         },
         "settings": [
             "disableSources",
