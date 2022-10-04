@@ -3,13 +3,13 @@ name: ESLint
 on:
   push:
     paths:
-      - "**.js"
       - ".github/workflows/eslint.yml"
+      - "**.js"
       - ".eslintrc.json"
   pull_request:
     paths:
-      - "**.js"
       - ".github/workflows/eslint.yml"
+      - "**.js"
       - ".eslintrc.json"
 
 jobs:
