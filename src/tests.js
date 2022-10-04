@@ -59,7 +59,7 @@ let jsonOut = {
 
 if (debug) {
     if (!githubAction)
-        console.clear()
+        console.clear();
     console.log('LOGS START\n')
 };
 

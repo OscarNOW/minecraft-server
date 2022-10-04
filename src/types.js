@@ -3,7 +3,7 @@ const path = require('path')
 
 const { getAllIndexes } = require('./functions/getAllIndexes.js');
 
-console.clear()
+console.clear();
 console.log('Getting export classes...')
 
 let exportClasses =
@@ -133,8 +133,8 @@ out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
-console.clear()
-console.log('Successfully generated types')
+console.clear();
+console.log('Done generating types')
 
 function extractClass(text) {
     text = text.substring(text.indexOf('export class ') + 7).split('')
