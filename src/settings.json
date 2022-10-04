@@ -6,7 +6,8 @@
         "valueSettings": {
             "theme": "hierarchy",
             "name": "\"minecraft-server\"",
-            "gitRemote": "origin"
+            "gitRemote": "origin",
+            "logLevel": "info"
         },
         "settings": [
             "disableSources",
