@@ -1,7 +1,7 @@
 Resolve "todo: " and "not implemented" in code
 Object.freeze client.entities{
 Make tests for functions
-Rewrite src/test.jss
+Rewrite src/test.js
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Add client and server property to CustomError
 Publish to github packages?
