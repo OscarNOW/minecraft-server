@@ -1,11 +1,11 @@
-name: Test build
+name: Test buildable
 
 on: [push, pull_request]
 
 jobs:
-  test-build:
+  test-buildable:
     runs-on: ubuntu-latest
-    name: Test build
+    name: Test buildable
 
     steps:
       - name: Checkout Repository
