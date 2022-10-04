@@ -1,11 +1,13 @@
 (async () => {
 
-    console.clear();
-    console.log('Copying files...')
-
     const fs = require('fs').promises;
     const path = require('path');
     const exec = require('util').promisify(require('child_process').exec);
+
+    const settings = require('../settings.json');
+
+    console.clear();
+    console.log('Copying files...')
 
     let copyingFiles = [
         'index.d.ts',
@@ -39,19 +41,15 @@
 
     await exec([
         'typedoc',
-        './src/docs/index.d.ts',
-        '--readme ./src/docs/Readme.md',
-        '--tsconfig ./src/docs/tsconfig.json',
-        '--out ./docs',
-        '--plugin ./node_modules/typedoc-theme-hierarchy/dist/index.js',
-        '--theme hierarchy',
-        '--name "minecraft-server"',
-        '--disableSources',
-        '--sort visibility',
-        '--sort static-first',
-        '--sort alphabetical',
-        '--gitRemote origin',
-        '--hideGenerator'
+        settings.typedoc.paths.types,
+        `--readme ${settings.typedoc.paths.readme}`,
+        `--tsconfig ${settings.typedoc.paths.tsconfig}`,
+        `--out ${settings.typedoc.paths.out}`,
+        `--plugin ${settings.typedoc.paths.plugin}`,
+        ...settings.typedoc.sort.map(a => `--sort ${a}`),
+        ...Object.entries(settings.typedoc.valueSettings).map(([key, value]) => `--${key} ${value}`),
+        ...settings.typedoc.settings.map(a => `--${a}`),
+        ...settings.typedoc.arguments
     ].join(' '));
 
     require('./transformAfter.js');

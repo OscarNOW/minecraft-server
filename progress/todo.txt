@@ -9,4 +9,3 @@ Make code compile on push
 Move BossBar.applyDefaults to separate function file
 Add checks to only send packets when something changed
 Add client and server property to CustomError
--Move typedoc command line arguments to settings file
