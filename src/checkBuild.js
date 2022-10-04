@@ -25,6 +25,12 @@ const exec = require('util').promisify(require('child_process').exec);
     if (fs.existsSync(path.join(__dirname, '../data/')))
         dataHashAfter = generateHash(path.join(__dirname, './data/'));
 
+    console.log('docsHashBefore', docsHashBefore);
+    console.log('docsHashAfter', docsHashAfter)
+    console.log()
+    console.log('dataHashBefore', dataHashBefore);
+    console.log('dataHashAfter', dataHashAfter)
+
     if (docsHashBefore === undefined || docsHashBefore !== docsHashAfter)
         failed();
     if (dataHashBefore === undefined || dataHashBefore !== dataHashAfter)
