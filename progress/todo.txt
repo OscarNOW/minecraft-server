@@ -6,3 +6,4 @@ Add checks to check if input from constructor is valid with errors when wrong in
 Add client and server property to CustomError
 Object.freeze( function exports
 Publish to github packages?
+Put checkDocs.generateHash in separate functions file
