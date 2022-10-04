@@ -8,8 +8,7 @@
         "minify": "node ./scripts/minify",
         "types": "node ./scripts/types",
         "docs": "node ./scripts/docs",
-        "test": "node ./scripts/test",
-        "compile": "npm run minify && npm run types && npm run docs"
+        "test": "node ./scripts/test"
     },
     "keywords": [
         "minecraft",
