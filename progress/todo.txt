@@ -6,7 +6,7 @@ Move BossBar colors to separate data file
 Move BossBar divisionIds to separate data file
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Make code compile on push
-Make compiled files not in github repo
+-Make compiled files not in github repo
 Move BossBar.applyDefaults to separate function file
 Add checks to only send packets when something changed
 Add client and server property to CustomError
