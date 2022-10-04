@@ -24,4 +24,4 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Test
-        run: node scripts/test --github-action
+        run: node src/test --github-action
