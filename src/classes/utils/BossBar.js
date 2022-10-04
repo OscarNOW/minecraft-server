@@ -1,5 +1,5 @@
 const { defaults } = require('../../settings.json');
-const { colors } = require('../../functions/loader/data.js');
+const { bossBarColors, bossBarDivisions } = require('../../functions/loader/data.js');
 
 const path = require('path');
 
@@ -46,8 +46,8 @@ const defaultPrivate = {
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 4,
-                color: colors.find(a => a.name == this.color).id,
-                dividers: divisionIds[this.divisionAmount]
+                color: bossBarColors.find(({ name }) => name == this.color).id,
+                dividers: bossBarDivisions.find(({ divisions }) => divisions == this.divisionAmount).id
             });
     },
     parseProperty: function (key, value) {
@@ -73,14 +73,6 @@ const defaultPrivate = {
         return properties;
     }
 };
-
-const divisionIds = Object.freeze({
-    '0': 0,
-    '6': 1,
-    '10': 2,
-    '12': 3,
-    '20': 4
-});
 
 const propertyNames = Object.freeze([
     'title',
@@ -138,8 +130,8 @@ class BossBar {
             action: 0,
             title: JSON.stringify(this.title.chat),
             health: this.health,
-            color: colors.find(a => a.name == this.color).id,
-            dividers: divisionIds[this.divisionAmount],
+            color: bossBarColors.find(({ name }) => name == this.color).id,
+            dividers: bossBarDivisions.find(({ divisions }) => divisions == this.divisionAmount).id,
             flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 

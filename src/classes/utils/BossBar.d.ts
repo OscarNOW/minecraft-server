@@ -22,7 +22,6 @@ type optionalBossBarInfo = {
     flags?: bossBarFlags;
 };
 
-type bossBarDivisionAmount = 0 | 6 | 10 | 12 | 20;
 type bossBarFlags = {
     darkenSky: boolean;
     playEndMusic: boolean;
