@@ -1,6 +1,18 @@
 name: Test buildable
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - "**.txt"
+      - "**.md"
+      - "**.xlsx"
+      - "**.d.ts"
+  pull_request:
+    paths-ignore:
+      - "**.txt"
+      - "**.md"
+      - "**.xlsx"
+      - "**.d.ts"
 
 jobs:
   test-buildable:
