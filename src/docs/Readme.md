@@ -41,8 +41,8 @@ For more examples, please see [the examples folder](https://github.com/OscarNOW/
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
-## Features
-* **Full protocol coverage**, every packet is implemented in the library in an easy to use way.
+## (Coming) Features
+* **Full protocol coverage**, every packet is implemented in the library in an easy to use way. (Not everything is implemented yet)
 * **Everything is per Client**, meaning you can, for example, have different server lists, or different worlds based on the Client.
 * **Easy to use**, you can create servers in an intuitive way.
 
