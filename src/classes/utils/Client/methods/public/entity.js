@@ -1,4 +1,4 @@
-const Entity = require('../../../Entity.js'); //todo: use Class loader
+const { Entity } = require('../../../../../functions/loader/classes.js');
 const CustomEntityClasses = Object.fromEntries(
     [
         'Horse'
