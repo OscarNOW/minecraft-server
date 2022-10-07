@@ -30,6 +30,9 @@ export class CustomError {
     };
     context: Function;
 
+    client?: Client;
+    server?: Server;
+
     error: Error;
     [Symbol.toPrimitive](hint: 'string'): Error;
     [Symbol.toPrimitive](hint: 'default'): Error;
