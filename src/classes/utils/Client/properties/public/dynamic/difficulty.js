@@ -16,7 +16,7 @@ module.exports = {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),
@@ -32,7 +32,7 @@ module.exports = {
                     got: value,
                     expectationType: 'value',
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),

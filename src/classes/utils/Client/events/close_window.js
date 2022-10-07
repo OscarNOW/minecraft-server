@@ -8,7 +8,7 @@ module.exports = {
                 got: windowId,
                 expectationType: 'value',
                 expectation: [this.p.windowId]
-            }))
+            }, null, { server: this.server, client: this }));
 
         this.p.windowId = null;
 

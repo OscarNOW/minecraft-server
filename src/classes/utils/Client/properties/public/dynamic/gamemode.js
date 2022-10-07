@@ -19,7 +19,7 @@ module.exports = {
                     got: value,
                     expectationType: 'value',
                     expectation: ['survival', 'creative', 'adventure', 'spectator']
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('game_state_change', {
                 reason: 3,
@@ -35,7 +35,7 @@ module.exports = {
                     got: value,
                     expectationType: 'value',
                     expectation: ['survival', 'creative', 'adventure', 'spectator']
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p._gamemode = value;
 

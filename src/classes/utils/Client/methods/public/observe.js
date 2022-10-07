@@ -6,7 +6,7 @@ module.exports = function (observable, cb) {
             got: observable,
             expectationType: 'value',
             expectation: Object.keys(this.p.observables)
-        }, this.observe))
+        }, this.observe, { server: this.server, client: this }));
 
     this.p.observables[observable].push(cb);
 }

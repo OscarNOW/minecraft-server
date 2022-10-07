@@ -7,7 +7,7 @@ module.exports = function () {
             got: 'no open window',
             expectationType: 'value',
             expectation: 'open window'
-        }, this.constructor))
+        }, this.constructor, { server: this.server, client: this }));
 
     this.p.sendPacket('close_window', {
         windowId: this.p.windowId

@@ -10,7 +10,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
             got: particleName,
             expectationType: 'value',
             expectation: Object.keys(particles)
-        }, this.demo))
+        }, this.demo, { server: this.server, client: this }));
 
     if (!particles[particleName].requireData)
         this.p.sendPacket('world_particles', {

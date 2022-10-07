@@ -16,7 +16,7 @@ module.exports = {
                     got: value,
                     expectationType: 'type',
                     expectation: 'number'
-                }))
+                }, null, { server: this.server, client: this }));
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {
@@ -33,7 +33,7 @@ module.exports = {
                     got: value,
                     expectationType: 'type',
                     expectation: 'number'
-                }))
+                }, null, { server: this.server, client: this }));
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {

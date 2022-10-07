@@ -11,7 +11,7 @@ module.exports = function (item, length = 60) {
             expectationType: 'type',
             expectation: 'itemName',
             externalLink: '{docs}/types/itemName.html'
-        }, this.cooldown))
+        }, this.cooldown, { server: this.server, client: this }));
 
     this.p.sendPacket('set_cooldown', {
         itemID: items.find(a => a[0] == item)[1],

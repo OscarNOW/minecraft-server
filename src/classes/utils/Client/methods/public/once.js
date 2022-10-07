@@ -6,7 +6,7 @@ module.exports = function (event, callback) {
             got: event,
             expectationType: 'value',
             expectation: Object.keys(this.p.events)
-        }, this.on))
+        }, this.on, { server: this.server, client: this }));
 
     this.p.events[event].push({ callback, once: true });
 }

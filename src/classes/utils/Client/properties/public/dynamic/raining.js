@@ -16,7 +16,7 @@ module.exports = {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,
@@ -32,7 +32,7 @@ module.exports = {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,

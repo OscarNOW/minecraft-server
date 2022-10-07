@@ -17,7 +17,7 @@ module.exports = {
                     got: value,
                     expectationType: 'type',
                     expectation: 'boolean'
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p._reducedDebugInfo = value;
 

@@ -7,7 +7,7 @@ module.exports = {
                 got: hand,
                 expectationType: 'value',
                 expectation: [0, 1]
-            }))
+            }, null, { server: this.server, client: this }));
 
         this.p.emit('itemUse', hand === 0);
     }

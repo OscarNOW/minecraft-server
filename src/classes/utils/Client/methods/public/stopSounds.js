@@ -10,14 +10,14 @@ module.exports = function ({ soundName, channel } = {}) {
             got: channel,
             expectationType: 'value',
             expectation: [undefined, ...soundChannels]
-        }, this.sound))
+        }, this.sound, { server: this.server, client: this }));
 
     if (soundName && typeof soundName != 'string')
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `soundName in  <${this.constructor.name}>.stopSound({ soundName: ${require('util').inspect(soundName)} })  `, {
             got: soundName,
             expectationType: 'type',
             expectation: "undefined | string"
-        }, this.sound))
+        }, this.sound, { server: this.server, client: this }));
 
     this.p.sendPacket('stop_sound', {
         flags: channel ? (soundName ? 3 : 1) : (soundName ? 2 : 1),

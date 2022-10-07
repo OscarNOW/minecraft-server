@@ -7,7 +7,7 @@ module.exports = {
                 got: slotId,
                 expectationType: 'value',
                 expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-            }))
+            }, null, { server: this.server, client: this }));
 
         this.p._slot = slotId;
         this.p.emitObservable('slot');

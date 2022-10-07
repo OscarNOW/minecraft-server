@@ -80,14 +80,14 @@ class Server {
                             got: imageInfo.type,
                             expectationType: 'value',
                             expectation: ['png']
-                        }, this.constructor))
+                        }, this.constructor, { server: this }))
 
                     if (imageInfo.width != 64 || imageInfo.height != 64)
                         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
                             got: `${imageInfo.width}x${imageInfo.height}`,
                             expectationType: 'value',
                             expectation: ['64x64']
-                        }, this.constructor))
+                        }, this.constructor, { server: this }))
 
                 }
 
@@ -159,7 +159,7 @@ class Server {
                             got: endReason,
                             expectationType: 'type',
                             expectation: 'string | null'
-                        }, this.constructor))
+                        }, this.constructor, { server: this }))
                 }
 
             })
@@ -213,7 +213,7 @@ class Server {
                 got: event,
                 expectationType: 'value',
                 expectation: events
-            }, this.on))
+            }, this.on, { server: this }))
 
         this.p.events[event].push({ callback, once: false })
     }
@@ -224,7 +224,7 @@ class Server {
                 got: event,
                 expectationType: 'value',
                 expectation: events
-            }, this.on))
+            }, this.on, { server: this }))
 
         this.p.events[event].push({ callback, once: true })
     }

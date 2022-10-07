@@ -12,7 +12,7 @@ module.exports = {
                 got: langCode,
                 expectationType: 'value',
                 expectation: Object.keys(languages)
-            }))
+            }, null, { server: this.server, client: this }));
 
         let obj = languages[langCode];
         obj.langCode = langCode;
@@ -40,7 +40,7 @@ module.exports = {
                 got: chatFlags,
                 expectationType: 'value',
                 expectation: [0, 1, 2]
-            }))
+            }, null, { server: this.server, client: this }));
 
         let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
         this.visibleSkinParts = Object.freeze({
@@ -62,7 +62,7 @@ module.exports = {
                 got: mainHand,
                 expectationType: 'value',
                 expectation: [0, 1]
-            }))
+            }, null, { server: this.server, client: this }));
 
         if (!settingsSent.has(this)) {
             settingsSent.add(this)

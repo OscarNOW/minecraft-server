@@ -18,7 +18,7 @@ module.exports = {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,
@@ -37,7 +37,7 @@ module.exports = {
                     got: v,
                     expectationType: 'value',
                     expectation: [0, 1, 2, 3, 4, 5]
-                }))
+                }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,

@@ -51,7 +51,7 @@ module.exports = {
                     got: key,
                     expectationType: 'value',
                     expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor))
+                }, this.constructor, { server: this.server, client: this }));
 
             let file = this.p.pubDynProperties[key];
 
@@ -60,7 +60,7 @@ module.exports = {
                     got: key,
                     expectationType: 'value',
                     expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor))
+                }, this.constructor, { server: this.server, client: this }));
 
             let ret;
             if (file.info?.callAfterLogin)

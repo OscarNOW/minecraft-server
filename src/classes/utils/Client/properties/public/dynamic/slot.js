@@ -18,7 +18,7 @@ module.exports = {
                     got: v,
                     expectationType: 'type',
                     expectation: 'number'
-                }))
+                }, null, { server: this.server, client: this }));
 
             value = value % 9;
 
@@ -35,7 +35,7 @@ module.exports = {
                     got: v,
                     expectationType: 'type',
                     expectation: 'number'
-                }))
+                }, null, { server: this.server, client: this }));
 
             value = value % 9;
 

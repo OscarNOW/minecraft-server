@@ -10,7 +10,7 @@ module.exports = function (message) {
             got: message,
             expectationType: 'value',
             expectation: Object.keys(demoMessages)
-        }, this.demo))
+        }, this.demo, { server: this.server, client: this }));
 
     this.p.sendPacket('game_state_change', {
         reason: 5,

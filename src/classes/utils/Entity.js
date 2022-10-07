@@ -61,7 +61,7 @@ class Entity {
                 expectationType: 'type',
                 expectation: 'entityType',
                 externalLink: '{docs}/types/entityType.html'
-            }, this.constructor))
+            }, this.constructor, { server: this.client.server, client: this.client }))
 
         this.client = client;
         this.sever = client.server;
@@ -150,7 +150,7 @@ class Entity {
                 got: observable,
                 expectationType: 'value',
                 expectation: Object.keys(this.p.observables)
-            }, this.observe))
+            }, this.observe, { server: this.client.server, client: this.client }))
 
         this.p.observables[observable].push(cb)
     }
@@ -163,7 +163,7 @@ class Entity {
                 got: animationType,
                 expectationType: 'value',
                 expectation: Object.keys(entityAnimations)
-            }, this.rawListeners))
+            }, this.rawListeners, { server: this.client.server, client: this.client }))
 
         this.p.sendPacket('animation', {
             entityId: this.id,
@@ -188,13 +188,13 @@ class Entity {
                 expectationType: 'type',
                 expectation: 'soundName',
                 externalLink: '{docs}/types/soundName.html'
-            }, this.sound))
+            }, this.sound, { server: this.client.server, client: this.client }))
         if (!soundChannels.includes(channel))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
                 got: channel,
                 expectationType: 'value',
                 expectation: soundChannels
-            }, this.sound))
+            }, this.sound, { server: this.client.server, client: this.client }))
 
         this.p.sendPacket('entity_sound_effect', {
             soundId: sounds.find(a => a.name == sound).id,
@@ -223,7 +223,7 @@ class Entity {
                 got: event,
                 expectationType: 'value',
                 expectation: events
-            }, this.on))
+            }, this.on, { server: this.client.server, client: this.client }))
 
         this.p.events[event].push(callback)
     }

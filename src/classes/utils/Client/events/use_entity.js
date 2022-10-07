@@ -9,7 +9,7 @@ module.exports = {
                 got: target,
                 expectationType: 'value',
                 expectation: Object.keys(this.entities)
-            }))
+            }, null, { server: this.server, client: this }));
 
         require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, sneaking);
         let emitter = this.entities[target] instanceof Client ? this.entities[target].p :
@@ -23,7 +23,7 @@ module.exports = {
                     got: hand,
                     expectationType: 'value',
                     expectation: [0, 1]
-                }))
+                }, null, { server: this.server, client: this }));
 
             emitter.emit('rightClick', {
                 position: {
@@ -42,6 +42,6 @@ module.exports = {
                 got: mouse,
                 expectationType: 'value',
                 expectation: [0, 1, 2]
-            }))
+            }, null, { server: this.server, client: this }));
     }
 }

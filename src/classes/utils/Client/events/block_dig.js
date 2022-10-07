@@ -19,7 +19,7 @@ module.exports = {
                     got: face,
                     expectationType: 'value',
                     expectation: Object.keys(faces)
-                }))
+                }, null, { server: this.server, client: this }))
 
         else if (status == 1)
             this.p.emit('digCancel', { x, y, z })
@@ -38,6 +38,6 @@ module.exports = {
                 got: status,
                 expectationType: 'value',
                 expectation: [0, 1, 2, 3, 4, 5, 6]
-            }))
+            }, null, { server: this.server, client: this }))
     }
 }

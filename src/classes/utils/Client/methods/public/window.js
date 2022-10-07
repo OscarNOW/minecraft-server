@@ -11,7 +11,7 @@ module.exports = function (nonEntityWindowName) {
             got: nonEntityWindowName,
             expectationType: 'value',
             expectation: Object.keys(nonEntityWindowIdMapping)
-        }, this.window))
+        }, this.window, { server: this.server, client: this }));
 
     // let windowTypeId = nonEntityWindowIdMapping.find(({ name }) => name == nonEntityWindowName).id;
     // const windowId = 1; //could be anything except 0

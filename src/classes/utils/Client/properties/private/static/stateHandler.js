@@ -69,7 +69,7 @@ module.exports = {
                         got: stateName,
                         expectationType: 'value',
                         expectation: states.slice(oldIndex)
-                    }, this.p.stateHandler.updateState.set))
+                    }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
 
                 const newIndex = states.indexOf(stateName);
 
@@ -78,7 +78,7 @@ module.exports = {
                         got: stateName,
                         expectationType: 'value',
                         expectation: states.slice(oldIndex)
-                    }, this.p.stateHandler.updateState.set))
+                    }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
 
                 this.p.state = stateName;
                 this.p.stateHandler.handleNewState.call(this, stateName);
@@ -97,7 +97,7 @@ module.exports = {
                         got: packet,
                         expectationType: 'value',
                         expectation: ['settings']
-                    }, this.p.stateHandler.updateState.packetReceived))
+                    }, this.p.stateHandler.updateState.packetReceived, { server: this.server, client: this }));
             }
 
         }

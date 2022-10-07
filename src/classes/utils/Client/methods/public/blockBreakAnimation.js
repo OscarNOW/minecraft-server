@@ -8,7 +8,7 @@ module.exports = function (location, stage) {
             got: stage,
             expectationType: 'value',
             expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        }))
+        }, null, { server: this.server, client: this }));
 
     this.p.sendPacket('block_break_animation', {
         entityId: Math.floor(Math.random() * 1000),
