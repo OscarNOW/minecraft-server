@@ -21,7 +21,7 @@ module.exports = {
             if (currentIndex < loginSentIndex)
                 throw new Error("Can't perform this action on this Client yet")
             else if (currentIndex >= offlineIndex)
-                throw new Error("Can't perform this action on this Client, because the Client is offline")
+                throw new Error("Can't perform this action on this Client, because the Client is offline") //todo: use CustomError
         },
 
         init: function () {

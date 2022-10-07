@@ -13,7 +13,8 @@ const _p = Symbol('private');
 const defaultPrivate = {
     updateFlags: function (newFlags, oldFlags) {
         this.client.p.stateHandler.checkReady.call(this.client);
-        if (!this.p.visible) return; //todo: throw error
+        if (!this.p.visible)
+            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
 
         let darkenSkyChanged = oldFlags.darkenSky != newFlags.darkenSky;
         let playEndMusicChanged = oldFlags.playEndMusic != newFlags.playEndMusic;
@@ -28,7 +29,8 @@ const defaultPrivate = {
     },
     updateProperty: function (name) {
         this.client.p.stateHandler.checkReady.call(this.client);
-        if (!this.p.visible) return; //todo: throw error        
+        if (!this.p.visible)
+            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
 
         if (name == 'health')
             this.p.sendPacket('boss_bar', {
