@@ -13,7 +13,7 @@ module.exports = {
 
         require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, sneaking);
         let emitter = this.entities[target] instanceof Client ? this.entities[target].p :
-            this.entities[target] instanceof Entity ? this.entities[target].privateEmitter :
+            this.entities[target] instanceof Entity ? this.entities[target].privateEmitter : //todo: implement check if class inherits Entity
                 this.entities[target];
 
         if (mouse == 2) {
