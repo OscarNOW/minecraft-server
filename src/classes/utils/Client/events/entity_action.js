@@ -5,6 +5,7 @@ module.exports = {
             require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, true);
         else if (actionId == 1)
             require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, false);
-        else { } //Not implemented            
+        else
+            throw new Error('Not implemented')
     }
 }

@@ -206,7 +206,7 @@ class Entity {
     }
 
     remove() {
-        throw new Error('not implemented')
+        throw new Error('Not implemented')
 
         // this.client.p.stateHandler.checkReady.call(this.client);
 
