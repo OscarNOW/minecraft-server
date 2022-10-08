@@ -1,1 +1,17 @@
-{"versions":[{"version":"0.1.0","name":"0.1.0 (latest stable)","path":"0.1.0","latestStable":true},{"version":"-1.0.0","latestUnstable":true,"unstable":true}]}
+{
+    "versions": [
+        {
+            "version": "0.1.0",
+            "name": "0.1.0 (latest stable)",
+            "path": "0.1.0",
+            "latestStable": true
+        },
+        {
+            "version": "-1.0.0",
+            "name": "unstable",
+            "path": "unstable",
+            "latestUnstable": true,
+            "unstable": true
+        }
+    ]
+}
