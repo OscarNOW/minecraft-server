@@ -9,11 +9,12 @@ let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
 if (newVersion !== undefined)
     manifest.versions.push({
         version: newVersion,
-        name: newVersion
+        name: newVersion,
+        path: newVersion
     })
 
-delete manifest.versions.filter(({ unstable }) => !unstable)?.find?.(({ latestStable }) => latestStable)?.name;
-delete manifest.versions.filter(({ unstable }) => !unstable)?.find?.(({ latestStable }) => latestStable)?.latestStable;
+delete manifest.versions.find(({ latestStable }) => latestStable)?.name;
+delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable;
 
 manifest.versions = [...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || []), ...(manifest.versions.filter(({ unstable }) => unstable) || [])];
 
