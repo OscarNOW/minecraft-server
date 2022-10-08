@@ -20,9 +20,9 @@ jobs:
       - name: Copy docs
         run: |
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
-          cp -r ./docs/unstable/ ./docs/${{ github.event.inputs.version }}/
-          mkdir -p "./docs/latest/"
-          cp -r ./docs/unstable/ ./docs/latest/
+          cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
+      - name: Update doc manifest
+        run: node ./src/updateDocManifest
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

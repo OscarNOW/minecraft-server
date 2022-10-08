@@ -2,6 +2,7 @@
     "versions": [
         {
             "name": "unstable",
+            "version": "-10.0.0",
             "latestUnstable": true,
             "latestStable": true
         }
