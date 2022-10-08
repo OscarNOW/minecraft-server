@@ -9,8 +9,8 @@ readme = readme.replace(/\r\n/g, '\n').replace(/:warning:/g, '⚠').split('\n').
 let licensePosition = readme.split('\n').findIndex(a => a.includes('ISC%20license/github/dark.png'));
 readme = readme.split('\n')
 readme[licensePosition] = `
-<div class="darkImg"><img loading="lazy" src="/minecraft-server/assets/ISC license/docs/dark.png" alt="ISC License explanation"></div> 
-<div class="lightImg"><img loading="lazy" src="/minecraft-server/assets/ISC license/docs/light.png" alt="ISC License explanation"></div>
+<div class="darkImg"><img loading="lazy" src="/assets/ISC license/docs/dark.png" alt="ISC License explanation"></div> 
+<div class="lightImg"><img loading="lazy" src="/assets/ISC license/docs/light.png" alt="ISC License explanation"></div>
 `
 readme = readme.join('\n')
 
