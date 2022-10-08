@@ -2,11 +2,7 @@
     "versions": [
         {
             "name": "unstable",
-            "latestUnstable": true
-        },
-        {
-            "name": "Stable",
-            "path": "stable",
+            "latestUnstable": true,
             "latestStable": true
         }
     ]
