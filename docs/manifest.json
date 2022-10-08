@@ -5,7 +5,8 @@
             "latestUnstable": true
         },
         {
-            "name": "stable",
+            "name": "Stable",
+            "path": "stable",
             "latestStable": true
         }
     ]
