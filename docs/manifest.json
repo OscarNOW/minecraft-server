@@ -1,0 +1,9 @@
+{
+    "versions": [
+        {
+            "name": "unstable",
+            "latestStable": true,
+            "latestUnstable": true
+        }
+    ]
+}

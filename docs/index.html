@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Minecraft-Server</title>
+
+    <script type="module">
+        let latestStableVersion;
+        async function getLatestStableVersion() {
+            if (latestStableVersion)
+                return latestStableVersion;
+
+            latestStableVersion = (await getVersions()).find(({ latestStable }) => latestStable);
+            return latestStableVersion;
+        }
+
+        let versions;
+        async function getVersions() {
+            if (versions)
+                return versions;
+
+            versions = (await getManifest()).versions;
+            return versions;
+        }
+
+        let manifest;
+        async function getManifest() {
+            if (manifest)
+                return manifest;
+
+            manifest = await fetch('./manifest.json');
+            manifest = await manifest.json();
+
+            return manifest;
+        }
+
+        location = `./${(await getLatestStableVersion()).path ?? (await getLatestStableVersion()).name}/`
+    </script>
+</head>
+
+<body>
+    Redirecting to latest stable version...
+</body>
+
+</html>
