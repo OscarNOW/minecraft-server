@@ -25,7 +25,7 @@ const index = `
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docs minecraft-server ${latestStableVersionName}</title>    
+    <title>${latestStableVersionName} docs minecraft-server</title>    
 </head>
 <body>
     Redirecting to latest stable version...
@@ -125,12 +125,28 @@ for (const file of [
     else
         content = content.replace(thisMenu, newTopMenu);
 
-    let versionDropdownIndex = content.indexOf('<a href="index.html" class="title">minecraft-server</a>') + '<a href="index.html" class="title">minecraft-server</a>'.length - 1;
-    content = content.split('');
-    content[versionDropdownIndex] += versionDropdown;
-    content = content.join('');
+    let headLinks = [
+        '<a href="index.html" class="title">minecraft-server</a>',
+        '<a href="../modules.html">minecraft-server</a>'
+    ];
+    let replaced = false;
 
-    content += versionDropdownScript;
+    for (const headLink of headLinks) {
+        if (!content.includes(headLink)) continue;
+
+        let versionDropdownIndex = content.indexOf(headLink) + headLink.length - 1;
+        content = content.split('');
+        content[versionDropdownIndex] += versionDropdown;
+        content = content.join('');
+
+        content += versionDropdownScript;
+
+        replaced = true;
+        break;
+    }
+
+    if (!replaced)
+        throw new Error(`Couldn't find home link in ${file}`)
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
 };
