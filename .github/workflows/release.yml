@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version"
+        required: true
+        default: "patch"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Copy docs
+        run: |
+          mkdir -p "./docs/${{ github.event.inputs.version }}/"
+          cp -r ./docs/unstable/ ./docs/${{ github.event.inputs.version }}/
+          mkdir -p "./docs/latest/"
+          cp -r ./docs/unstable/ ./docs/latest/
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Copy docs for ${{ github.event.inputs.version }}"
+          branch: main
+          file_pattern: ./docs/
+
+          commit_user_name: Doc-bot
+          commit_user_email: actions@github.com
+          commit_author: Doc-bot <actions@github.com>
+
+      # - name: Github Release # https://github.com/marketplace/actions/create-release
+      #   uses: actions/release-action@v2
+      #   with:
+      #     bodyFile: CHANGELOG.md
+      #     version: ${{ github.event.inputs.version }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
