@@ -30,18 +30,18 @@ console.log('Writing index...')
 fs.writeFileSync(path.join(__dirname, '../../docs/index.html'), index);
 
 console.log('Generating version dropdown...')
-let versionDropdown = `<select id="versionDropdown" onchange="versionChange(this.value)"></select>`;
+let versionDropdown = `<select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
 
 console.log('Generating version dropdown script...')
 let versionDropdownScript = `
-<script type="module">
+<script defer>
 
 let cachedVersions;
 async function getVersions() {
     if (cachedVersions)
         return cachedVersions;
 
-        cachedVersions = (await getManifest()).cachedVersions;
+    cachedVersions = (await getManifest()).versions;
     return cachedVersions;
 }
 
@@ -50,7 +50,7 @@ async function getManifest() {
     if (manifest)
         return manifest;
 
-    manifest = await fetch('./manifest.json');
+    manifest = await fetch('../manifest.json');    
     manifest = await manifest.json();
 
     return manifest;
@@ -59,6 +59,8 @@ async function getManifest() {
 async function versionChange(version) {
     location = \`/minecraft-server/\${version}/\`
 }
+
+(async () => {
 
 let versions = await getVersions();
 let currentVersion = location.pathname.split('/')[2];
@@ -70,6 +72,7 @@ versions = [currentVersion, ...versions];
 const versionDropdown = document.getElementById('versionDropdown');
 versionDropdown.innerHTML = versions.map(({ name, path }) => \`<option value="\${path ?? name}">\${name}</option>\`).join('')
 
+})()
 </script>
 `;
 
