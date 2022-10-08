@@ -517,6 +517,8 @@
 <ul></ul></li></ul></div></div></div></div>
 <div class="overlay"></div><script src="../assets/main.js"></script><script src="../assets/custom.js"></script></body></html>
 <script defer>
+/*eslint-env browser */
+/*eslint-disable no-unused-vars*/
 
 let cachedVersions;
 async function getVersions() {
@@ -532,7 +534,7 @@ async function getManifest() {
     if (manifest)
         return manifest;
 
-    manifest = await fetch('/minecraft-server/${location.pathname.split('/')[2]}/manifest.json');    
+    manifest = await fetch(`/minecraft-server/${location.pathname.split('/')[2]}/manifest.json`);
     manifest = await manifest.json();
 
     return manifest;
@@ -544,15 +546,15 @@ async function versionChange(version) {
 
 (async () => {
 
-let versions = await getVersions();
-let currentVersion = location.pathname.split('/')[2];
+    let versions = await getVersions();
+    let currentVersion = location.pathname.split('/')[2];
 
-currentVersion = versions.find(({ name }) => name === currentVersion);
-versions = versions.filter(({ name }) => name !== currentVersion.name);
-versions = [currentVersion, ...versions];
+    currentVersion = versions.find(({ name }) => name === currentVersion);
+    versions = versions.filter(({ name }) => name !== currentVersion.name);
+    versions = [currentVersion, ...versions];
 
-const versionDropdown = document.getElementById('versionDropdown');
-versionDropdown.innerHTML = versions.map(({ name, path }) => `<option value="${path ?? name}">${name}</option>`).join('')
+    const versionDropdown = document.getElementById('versionDropdown');
+    versionDropdown.innerHTML = versions.map(({ name, path }) => `<option value="${path ?? name}">${name}</option>\`).join('')`)
 
-})()
+})();
 </script>
