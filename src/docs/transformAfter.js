@@ -6,6 +6,73 @@ let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/unstable/ass
 customCss = customCss.replace('.category__link--ts', '.none');
 fs.writeFileSync(path.resolve(__dirname, '../../docs/unstable/assets/custom.css'), customCss);
 
+console.log('Generating index...')
+const versionManifest = require('../../docs/manifest.json')
+const latestStableVersion = versionManifest.versions.find(({ latestStable }) => latestStable);
+const latestStableVersionPath = latestStableVersion.path ?? latestStableVersion.name;
+const latestStableVersionName = latestStableVersion.name;
+const index = `
+<!DOCTYPE html>
+<script>location = "./${latestStableVersionPath}/"</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs minecraft-server ${latestStableVersionName}</title>    
+</head>
+<body>
+    Redirecting to latest stable version...
+</body>
+</html>
+`;
+console.log('Writing index...')
+fs.writeFileSync(path.join(__dirname, '../../docs/index.html'), index);
+
+console.log('Generating version dropdown...')
+let versionDropdown = `<select id="versionDropdown" onchange="versionChange(this.value)"></select>`;
+
+console.log('Generating version dropdown script...')
+let versionDropdownScript = `
+<script type="module">
+
+let cachedVersions;
+async function getVersions() {
+    if (cachedVersions)
+        return cachedVersions;
+
+        cachedVersions = (await getManifest()).cachedVersions;
+    return cachedVersions;
+}
+
+let manifest;
+async function getManifest() {
+    if (manifest)
+        return manifest;
+
+    manifest = await fetch('./manifest.json');
+    manifest = await manifest.json();
+
+    return manifest;
+}
+
+async function versionChange(version) {
+    location = \`/minecraft-server/\${version}/\`
+}
+
+let versions = await getVersions();
+let currentVersion = location.pathname.split('/')[2];
+
+currentVersion = versions.find(({ name }) => name === currentVersion);
+versions = versions.filter(({ name }) => name !== currentVersion.name);
+versions = [currentVersion, ...versions];
+
+const versionDropdown = document.getElementById('versionDropdown');
+versionDropdown.innerHTML = versions.map(({ name, path }) => \`<option value="\${path ?? name}">\${name}</option>\`).join('')
+
+</script>
+`;
+
 console.log('Generating menu...')
 let menu = fs.readFileSync(path.resolve(__dirname, '../../docs/unstable/index.html')).toString()
 menu = menu.substring(menu.indexOf('<div class="tree-content">'));
@@ -30,7 +97,7 @@ let newInnerMenu = newTopMenu;
 newInnerMenu = newInnerMenu.replace(/classes\//g, '../classes/');
 newInnerMenu = newInnerMenu.replace(/types\//g, '../types/');
 
-console.log('Writing menu...');
+console.log('Writing files...');
 for (const file of [
     'index.html',
     'modules.html',
@@ -48,6 +115,13 @@ for (const file of [
         content = content.replace(thisMenu, newInnerMenu);
     else
         content = content.replace(thisMenu, newTopMenu);
+
+    let versionDropdownIndex = content.indexOf('<a href="index.html" class="title">minecraft-server</a>') + '<a href="index.html" class="title">minecraft-server</a>'.length - 1;
+    content = content.split('');
+    content[versionDropdownIndex] += versionDropdown;
+    content = content.join('');
+
+    content += versionDropdownScript;
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
 };
