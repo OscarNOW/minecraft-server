@@ -1700,8 +1700,8 @@ async function versionChange(version) {
     let versions = await getVersions();
     let currentVersion = location.pathname.split('/')[2];
 
-    currentVersion = versions.find(({ name }) => name === currentVersion);
-    versions = versions.filter(({ name }) => name !== currentVersion.name);
+    currentVersion = versions.find(({ name, path }) => (path ?? name) === currentVersion);
+    versions = versions.filter(({ path }) => path !== currentVersion.path);
     versions = [currentVersion, ...versions];
 
     const versionDropdown = document.getElementById('versionDropdown');
