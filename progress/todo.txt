@@ -6,3 +6,4 @@ Remove error when trying to perform an action on a Client that is not visible
 Rewrite CustomError and change constructor arguments in better order
 Do lighter (or no) test on commit, so that Github Pages deployment doesn't wait
     Have main test skip lighter test (https://stackoverflow.com/questions/68994484/how-to-skip-a-configuration-of-a-matrix-with-github-actions)
+Move src scripts (like src/test) to separate folder

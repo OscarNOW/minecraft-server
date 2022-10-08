@@ -1,7 +1,1 @@
-## Bug fixes
-
-## Features
-
-## Types
-
-## Refactoring
+## First release

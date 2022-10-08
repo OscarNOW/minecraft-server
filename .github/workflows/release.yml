@@ -17,16 +17,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
+
       - name: Copy docs
         run: |
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
           cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
       - name: Update doc manifest
         run: node ./src/updateDocManifest ${{ github.event.inputs.version }}
+
+      - name: Update package version
+        run: node ./src/setPackageVersion ${{ github.event.inputs.version }}
+
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Copy docs for release ${{ github.event.inputs.version }}"
+          commit_message: "Release ${{ github.event.inputs.version }}"
           branch: main
           file_pattern: ./docs/
 
@@ -34,9 +39,20 @@ jobs:
           commit_user_email: actions@github.com
           commit_author: Doc-bot <actions@github.com>
 
-      # - name: Github Release # https://github.com/marketplace/actions/create-release
-      #   uses: actions/release-action@v2
-      #   with:
-      #     bodyFile: CHANGELOG.md
-      #     version: ${{ github.event.inputs.version }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Github Release
+        uses: actions/release-action@v2
+        with:
+          bodyFile: CHANGELOG.md
+          version: ${{ github.event.inputs.version }}
+          commit: main
+          name: ${{ github.event.inputs.version }}
+
+          tag: latest
+      - name: NPM Release
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          greater-version-only: true
+
+          tag: latest
