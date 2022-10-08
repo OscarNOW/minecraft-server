@@ -125,9 +125,9 @@ for (const file of [
     else
         content = content.replace(thisMenu, newTopMenu);
 
-    let headLinks = [
+    const headLinks = [
         '<a href="index.html" class="title">minecraft-server</a>',
-        '<a href="../modules.html">minecraft-server</a>'
+        '<a href="../index.html" class="title">minecraft-server</a>'
     ];
     let replaced = false;
 
