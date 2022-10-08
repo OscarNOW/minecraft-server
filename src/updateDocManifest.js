@@ -4,9 +4,9 @@ const path = require('path');
 const manifestPath = path.join(__dirname, '../docs/manifest.json');
 
 let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
-delete manifest.versions.filter(({ unstable }) => !unstable).find(({ latestStable }) => latestStable).name;
-delete manifest.versions.filter(({ unstable }) => !unstable).find(({ latestStable }) => latestStable).latestStable;
-manifest.versions = [...manifest.versions.filter(({ unstable }) => !unstable).sort((a, b) => compareVersions(a.version, b.version)).reverse(), ...manifest.versions.filter(({ unstable }) => unstable)];
+delete manifest.versions.filter(({ unstable }) => !unstable)?.find?.(({ latestStable }) => latestStable)?.name;
+delete manifest.versions.filter(({ unstable }) => !unstable)?.find?.(({ latestStable }) => latestStable)?.latestStable;
+manifest.versions = [...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || []), ...(manifest.versions.filter(({ unstable }) => unstable) || [])];
 manifest.versions[0].latestStable = true;
 manifest.versions[0].name = `${manifest.versions[0].version} (latest stable)`;
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
