@@ -4,6 +4,12 @@ const path = require('path');
 console.log('Transforming customCss...')
 let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/unstable/assets/custom.css')).toString()
 customCss = customCss.replace('.category__link--ts', '.none');
+customCss += `
+#versionDropdownLabel {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+`
 fs.writeFileSync(path.resolve(__dirname, '../../docs/unstable/assets/custom.css'), customCss);
 
 console.log('Generating index...')
@@ -30,7 +36,7 @@ console.log('Writing index...')
 fs.writeFileSync(path.join(__dirname, '../../docs/index.html'), index);
 
 console.log('Generating version dropdown...')
-let versionDropdown = `<select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
+let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
 
 console.log('Generating version dropdown script...')
 let versionDropdownScript = `
