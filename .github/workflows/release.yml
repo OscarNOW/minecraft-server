@@ -40,7 +40,7 @@ jobs:
           commit_author: Doc-bot <actions@github.com>
 
       - name: Github Release
-        uses: actions/release-action@v2
+        uses: ncipollo/release-action@v1.11.1
         with:
           bodyFile: CHANGELOG.md
           version: ${{ github.event.inputs.version }}
