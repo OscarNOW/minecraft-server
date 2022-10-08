@@ -22,7 +22,7 @@ jobs:
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
           cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
       - name: Update doc manifest
-        run: node ./src/updateDocManifest
+        run: node ./src/updateDocManifest ${{ github.event.inputs.version }}
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
