@@ -1,7 +1,11 @@
+## Breaking changes
+
 ## Bug fixes
 
 ## Features
 
-## Types
+## New packets covered
 
-## Refactoring
+## Packets changed
+
+## Types
