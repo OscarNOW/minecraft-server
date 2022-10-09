@@ -1,4 +1,3 @@
-(
   (
     (AANTAL.ALS(Packets!E5:E143; "fully implemented") * Settings!D5)
     + (AANTAL.ALS(Packets!E5:E143; "working implemented") * Settings!D6)
@@ -12,4 +11,3 @@
     + (AANTAL.ALS(Miscellaneous!E4:E104; "tried") * Settings!D8)
     + (AANTAL.ALS(Miscellaneous!E4:E104; "not started") * Settings!D9)
   ) / (RIJEN(Packets!E5:E143 + AANTALARG(Miscellaneous!E4:E104))
-) * 100
