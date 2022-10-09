@@ -1,7 +1,7 @@
 type Chunk = import('../exports/Chunk').Chunk;
 
 export class LoadedChunk extends Chunk {
-    private constructor(client: Client, pChunk: any, chunkPosition: { x: number; z: number }): void;
+    private constructor(client: Client, pChunk: any, chunkPosition: { x: number; z: number });
     private updateBlock(block: blockType, chunkRelativeLocation: {
         x: number;
         y: number;
