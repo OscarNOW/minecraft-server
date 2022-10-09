@@ -7,3 +7,7 @@ Rewrite CustomError and change constructor arguments in better order
 Do lighter (or no) test on commit, so that Github Pages deployment doesn't wait
     Have main test skip lighter test (https://stackoverflow.com/questions/68994484/how-to-skip-a-configuration-of-a-matrix-with-github-actions)
 Move src scripts (like src/test) to separate folder
+Add better private properties to all classes that need it (Chunk)
+Change blockType to blockName
+Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io/minecraft-server/0.1.0/classes/
+Remove .html from links in docs

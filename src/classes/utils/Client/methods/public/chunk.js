@@ -5,7 +5,7 @@ module.exports = function (chunk, { x, z }) {
         x,
         z,
         groundUp: true,
-        biomes: chunk._chunk.dumpBiomes !== undefined ? chunk._chunk.dumpBiomes() : undefined,
+        biomes: chunk._chunk.dumpBiomes?.(),
         heightmaps: {
             type: 'compound',
             name: '',
