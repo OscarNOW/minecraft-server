@@ -10,8 +10,7 @@
     console.log('Copying files...')
 
     let copyingFiles = [
-        'index.d.ts',
-        'Readme.md'
+        'index.d.ts'
     ];
 
     let copiedFilePromises = [];
@@ -24,6 +23,12 @@
             path.join(__dirname, `./${copyingFile}`)
         ));
     }
+
+    console.log(`    .github/Readme.md`)
+    copiedFilePromises.push(fs.copyFile(
+        path.join(__dirname, `../../.github/Readme.md`),
+        path.join(__dirname, `./Readme.md`)
+    ));
 
     await Promise.all(copiedFilePromises);
 
