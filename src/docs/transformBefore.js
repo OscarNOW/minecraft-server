@@ -20,5 +20,5 @@ console.log('Transforming types...')
 let types = fs.readFileSync(path.resolve(__dirname, './index.d.ts')).toString()
 types = types.replace(/\r\n/g, '\n')
 types = types.replace('readonly 0:Client;\n', '') // this will probably break something in the future
-types = types.replace('readonly[entityId:number]:EntityLike;', 'readonly[entityId:number]:Entity|Client;')
+types = types.replace('readonly[entityId:number]:EntityLike;', 'readonly[entityId:number]:EntityLike|Client;')
 fs.writeFileSync(path.resolve(__dirname, './index.d.ts'), types);

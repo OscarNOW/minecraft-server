@@ -13,3 +13,4 @@ Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io
 Remove .html from links in docs
 Change Github actions from status to check (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks#checks)
 When changing version in dropdown, keep current loaded class
+NPM duplicate License images
