@@ -1,7 +1,7 @@
-name: Test
+name: Light Test
 
 on:
-  pull_request:
+  push:
     paths-ignore:
       - "**.txt"
       - "**.md"
@@ -13,11 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 18.x]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-        exclude:
-          - node-version: 18.x
-            os: windows-latest
+        node-version: [18.x]
+        os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
     name: Node ${{ matrix.node-version }}, ${{ matrix.os }}
