@@ -111,6 +111,25 @@ for (const file of [
     if (!replaced)
         throw new Error(`Couldn't find home link in ${file}`)
 
+    let index = content.indexOf('href="');
+    while (index !== -1) {
+        const oldLink = content.substring(index + 'href="'.length).split('"')[0];
+        let newLink = oldLink;
+
+        if (newLink.endsWith('.html'))
+            newLink = newLink.substring(0, newLink.length - '.html'.length);
+
+        if (newLink.endsWith('/index'))
+            newLink = newLink.substring(0, newLink.length - '/index'.length);
+
+        if (newLink.endsWith('index'))
+            newLink = newLink.substring(0, newLink.length - 'index'.length) + '#';
+
+        content = content.substring(0, index + 'href="'.length) + newLink + content.substring(index + 'href="'.length + oldLink.length);
+
+        index = content.indexOf('href="', index + 1);
+    }
+
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
 };
 
