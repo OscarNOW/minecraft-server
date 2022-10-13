@@ -123,7 +123,7 @@ for (const file of [
             newLink = newLink.substring(0, newLink.length - '/index'.length);
 
         if (newLink.endsWith('index'))
-            newLink = newLink.substring(0, newLink.length - 'index'.length) + '#';
+            newLink = newLink.substring(0, newLink.length - 'index'.length) + '/';
 
         content = content.substring(0, index + 'href="'.length) + newLink + content.substring(index + 'href="'.length + oldLink.length);
 
