@@ -6,13 +6,11 @@ on:
       - "**.txt"
       - "**.md"
       - "**.xlsx"
-      - "**.d.ts"
   pull_request:
     paths-ignore:
       - "**.txt"
       - "**.md"
       - "**.xlsx"
-      - "**.d.ts"
 
 jobs:
   test-buildable:
@@ -29,6 +27,8 @@ jobs:
           cache: npm
       - name: Install Dependencies
         run: npm ci
+      - name: Build-readme
+        run: npm run readme
       - name: Build-minify
         run: npm run minify
       - name: Build-types
