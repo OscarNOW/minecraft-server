@@ -10,5 +10,3 @@ Change blockType to blockName
 Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io/minecraft-server/0.1.0/classes/
 Change title of documentation pages
 Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
-When changing version in dropdown, keep current loaded class
-+Change deployment name to 'production' or 'documentation'

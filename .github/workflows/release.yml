@@ -28,7 +28,7 @@ jobs:
       - name: Update package version
         run: node ./src/setPackageVersion ${{ github.event.inputs.version }}
 
-      - name: Compile #todo change name to build
+      - name: Compile #todo //todo change name to build
         run: npm run compile
 
       - name: Commit and push
