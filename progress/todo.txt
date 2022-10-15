@@ -9,8 +9,7 @@ Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io
 Change title of documentation pages
 Remove privates from type files
 -Fix classes    
-    Add better private properties to all classes that need it (Chunk, Block)        
-    Add sendPacket property in constructor in LoadedChunk class (like in Entity)
+    Add better private properties to all classes that need it (Chunk, Block)            
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
 Make Client public static properties readonly
 Remove .html from doc links when not at end (like /classes/Client.html#slot)

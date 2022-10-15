@@ -4,7 +4,7 @@ const { chunks } = require('../../properties/public/dynamic/chunks.js');
 module.exports = function (chunk, { x, z }) {
     this.p.stateHandler.checkReady.call(this);
 
-    const loadedChunk = new LoadedChunk(this, chunk, { x, z });
+    const loadedChunk = new LoadedChunk(this, chunk, { x, z }, this.p.sendPacket);
 
     this.p.sendPacket('map_chunk', {
         x,
