@@ -1,6 +1,6 @@
 class Block {
-    constructor(block, state, { x, y, z }, updateCallback) {
-        this._block = block;
+    constructor(name, state, { x, y, z }, updateCallback) {
+        this._block = { name, state };
         this._state = state;
         this.updateCallback = updateCallback;
 
@@ -13,17 +13,8 @@ class Block {
         return this._block;
     }
 
-    get state() {
-        return this._state;
-    }
-
-    set block(value) {
-        this._block = value;
-        this.updateCallback(this);
-    }
-
-    set state(value) {
-        this._state = value;
+    set block({ name, state }) {
+        this._block = { name, state };
         this.updateCallback(this);
     }
 }

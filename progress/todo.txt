@@ -11,6 +11,8 @@ Remove privates from type files
 -Implement the LoadedChunk class
     Change blockType to blockName
     Add better private properties to all classes that need it (Chunk, Block)
+    Create BlocksSegment class with get method to get xyz
+    Add stateId property to Block
+    Add sendPacket property in constructor in LoadedChunk class (like in Entity)
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
 Make Client public static properties readonly
-Add sendPacket property in constructor in LoadedChunk class (like in Entity)

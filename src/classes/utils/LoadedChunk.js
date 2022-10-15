@@ -1,8 +1,8 @@
 const Chunk = require('../exports/Chunk.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
-function updateBlock({ block, x, y, z, state }) {
-    let stateId = getBlockStateId.call(this, block, state);
+function updateBlock({ block: { name, state }, x, y, z }) {
+    let stateId = getBlockStateId.call(this, name, state);
 
     this.client.p.sendPacket('block_change', {
         location: {
