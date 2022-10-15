@@ -12,7 +12,8 @@ module.exports = {
             return this.p._gamemode
         },
         set: function (value) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {

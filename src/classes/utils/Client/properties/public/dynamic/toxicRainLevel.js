@@ -9,7 +9,8 @@ module.exports = {
             return this.p._toxicRainLevel
         },
         set: function (value) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (typeof value != 'number')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {

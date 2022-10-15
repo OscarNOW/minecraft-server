@@ -1,7 +1,8 @@
 const Text = require('../../../../exports/Text.js');
 
 module.exports = function (message = '') {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (!(message instanceof Text))
         message = new Text(message);

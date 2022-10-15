@@ -9,7 +9,8 @@ module.exports = {
             return this.p._raining
         },
         set: function (value) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (typeof value != 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {

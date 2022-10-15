@@ -9,7 +9,8 @@ module.exports = {
             return this.p._experience;
         },
         set: function ({ bar, level } = {}) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (bar === undefined) bar = this.experience.bar;
             if (level === undefined) level = this.experience.level;

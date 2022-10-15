@@ -1,7 +1,8 @@
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (location, stage) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this.client))
+        return;
 
     if (stage < 0 || stage > 10)
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `stage in  <${this.constructor.name}>.blockBreakAnimation(..., ${require('util').inspect(stage)})  `, {

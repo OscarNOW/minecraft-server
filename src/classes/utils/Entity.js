@@ -156,7 +156,8 @@ class Entity {
     }
 
     animation(animationType) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         if (entityAnimations[animationType] === undefined)
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
@@ -172,7 +173,8 @@ class Entity {
     }
 
     camera() {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         this.p.sendPacket('camera', {
             cameraId: this.id
@@ -180,7 +182,8 @@ class Entity {
     }
 
     sound({ sound, channel, volume, pitch }) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         if (!sounds.find(a => a.name == sound))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
@@ -207,8 +210,6 @@ class Entity {
 
     remove() {
         throw new Error('Not implemented')
-
-        // this.client.p.stateHandler.checkReady.call(this.client);
 
         // this.p.sendPacket('destroy_entities', {
         //     entityIds: [this.id]

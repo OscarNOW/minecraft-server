@@ -9,7 +9,8 @@ module.exports = {
             return this.p._slot
         },
         set: function (v) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             let value = parseInt(v);
 

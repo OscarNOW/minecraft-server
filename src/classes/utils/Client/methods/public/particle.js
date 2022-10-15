@@ -3,7 +3,8 @@ const { particles } = require('../../../../../functions/loader/data.js');
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (!particles[particleName])
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {

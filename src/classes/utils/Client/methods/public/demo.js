@@ -3,7 +3,8 @@ const { demoMessages } = require('../../../../../functions/loader/data.js');
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (message) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this.client))
+        return;
 
     if (demoMessages[message] === undefined)
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `message in  <${this.constructor.name}>.demo(${require('util').inspect(message)})  `, {

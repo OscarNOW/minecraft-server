@@ -3,7 +3,8 @@ const { sounds, soundChannels } = require('../../../../../functions/loader/data.
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitch }) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (!sounds.find(a => a.name == sound))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {

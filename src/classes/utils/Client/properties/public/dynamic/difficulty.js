@@ -9,7 +9,8 @@ module.exports = {
             return this.p._difficulty
         },
         set: function (value) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
