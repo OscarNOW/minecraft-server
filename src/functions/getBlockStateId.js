@@ -44,8 +44,8 @@ function getBlock(blockName, { function: func } = {}) {
     throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, ...)  `, {
         got: blockName,
         expectationType: 'type',
-        expectation: 'blockType',
-        externalLink: '{docs}/types/blockType.html'
+        expectation: 'blockName',
+        externalLink: '{docs}/types/blockName.html'
     }, func ? this[func] : getBlock).toString()
 }
 

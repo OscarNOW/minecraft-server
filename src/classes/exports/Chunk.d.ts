@@ -5,7 +5,7 @@ export class Chunk {
 
     blocks: blocksSegment;
 
-    setBlock(block: blockType, location: {
+    setBlock(block: blockName, location: {
         x: number;
         y: number;
         z: number;

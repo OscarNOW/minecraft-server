@@ -132,7 +132,7 @@ export class Client {
             y: number;
             z: number;
         },
-        block: blockType
+        block: blockName
     ): void;
     particle(
         particleName: 'dust',

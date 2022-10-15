@@ -3,7 +3,7 @@ export class Block {
     readonly y: number;
     readonly z: number;
 
-    block: blockType;
+    block: blockName;
     state: blockState;
 }
 
