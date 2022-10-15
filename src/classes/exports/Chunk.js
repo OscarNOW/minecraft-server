@@ -5,8 +5,8 @@ const PChunk = require('prismarine-chunk')(version);
 const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
-function updateBlock({ block, state, x, y, z }) {
-    this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, block, state));
+function updateBlock({ block: { name, state }, x, y, z }) {
+    this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, name, state));
 
     if (this.blockUpdateCallback)
         this.updateBlock(arguments[0]);

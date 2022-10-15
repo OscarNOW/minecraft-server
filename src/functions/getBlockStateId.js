@@ -1,7 +1,7 @@
 const { blocks } = require('./loader/data.js');
 const CustomError = require('../classes/utils/CustomError.js');
 
-function getBlockStateId(blockName, state = {}, { function: func }) {
+function getBlockStateId(blockName, state = {}, { function: func } = {}) {
     let block = getBlock.call(this, blockName, { function: func })
     if (!block[2]) return block[1];
 
@@ -37,7 +37,7 @@ function getBlockStateId(blockName, state = {}, { function: func }) {
     return stateId
 }
 
-function getBlock(blockName, { function: func }) {
+function getBlock(blockName, { function: func } = {}) {
     let block = blocks.find(a => a[0] == blockName)
     if (block) return block
 
@@ -46,7 +46,7 @@ function getBlock(blockName, { function: func }) {
         expectationType: 'type',
         expectation: 'blockType',
         externalLink: '{docs}/types/blockType.html'
-    }, this[func]).toString()
+    }, func ? this[func] : getBlock).toString()
 }
 
 module.exports = Object.freeze({ getBlockStateId });
