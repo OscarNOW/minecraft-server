@@ -19,9 +19,11 @@ module.exports = {
             const offlineIndex = states.indexOf('offline');
 
             if (currentIndex < loginSentIndex)
-                throw new Error("Can't perform this action on this Client yet")
+                return false;
             else if (currentIndex >= offlineIndex)
-                throw new Error("Can't perform this action on this Client, because the Client is offline") //todo: use CustomError
+                return false;
+
+            return true;
         },
 
         init: function () {
