@@ -59,11 +59,13 @@ export class Client {
     readonly sneaking: boolean;
     readonly onGround: boolean;
     readonly ping: number;
+
     readonly entities: {
         readonly [entityId: number]: EntityLike;
         readonly 0: Client;
     };
     readonly bossBars: BossBar[];
+    readonly chunks: LoadedChunk[];
 
     /* Writable changing */
     position: {

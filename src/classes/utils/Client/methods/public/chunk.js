@@ -1,18 +1,25 @@
+const LoadedChunk = require('../../../LoadedChunk.js');
+const { chunks } = require('../../properties/public/dynamic/chunks.js');
+
 module.exports = function (chunk, { x, z }) {
     this.p.stateHandler.checkReady.call(this);
+
+    const loadedChunk = new LoadedChunk(this, chunk, { x, z });
 
     this.p.sendPacket('map_chunk', {
         x,
         z,
         groundUp: true,
-        biomes: chunk.chunk.dumpBiomes?.(),
+        biomes: loadedChunk.chunk.dumpBiomes?.(),
         heightmaps: {
             type: 'compound',
             name: '',
             value: {}
         },
-        bitMap: chunk.chunk.getMask(),
-        chunkData: chunk.chunk.dump(),
+        bitMap: loadedChunk.chunk.getMask(),
+        chunkData: loadedChunk.chunk.dump(),
         blockEntities: []
     })
+
+    chunks.setPrivate.call(this, [loadedChunk, ...this.chunks]);
 }

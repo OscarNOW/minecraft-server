@@ -4,7 +4,7 @@ let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++)
         for (let y = 0; y < 100; y++)
-            chunk.blocks.find(b => b.x == x && b.y == y && b.z == z).block = { name: 'dirt' }
+            chunk.setBlock('dirt', { x, y, z })
 
 const server = new Server({
     defaultClientProperties: () => ({
@@ -23,10 +23,5 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('inventoryClose', () => client.chat(1))
-
-    let horse = client.entity('horse', { x: 0, y: 100, z: 0 })
-    client.on('join', () => {
-        horse.window()
-    })
+    console.log(require('util').inspect(client.chunks, { depth: 1, colors: true }))
 })

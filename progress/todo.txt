@@ -8,7 +8,7 @@ Move src scripts (like src/test) to separate folder
 Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io/minecraft-server/0.1.0/classes/
 Change title of documentation pages
 Remove privates from type files
--Implement the LoadedChunk class
+-Fix classes
     Change blockType to blockName
     Add better private properties to all classes that need it (Chunk, Block)
     Create BlocksSegment class with get method to get xyz
@@ -17,3 +17,4 @@ Remove privates from type files
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
 Make Client public static properties readonly
 Remove .html from doc links when not at end (like /classes/Client.html#slot)
+Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error

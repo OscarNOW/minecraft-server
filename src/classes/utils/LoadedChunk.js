@@ -15,14 +15,14 @@ function updateBlock({ block: { name, state }, x, y, z }) {
 }
 
 class LoadedChunk extends Chunk {
-    constructor(client, pChunk, { x, z }) {
+    constructor(client, chunk, { x, z }) {
+        super(chunk, () => updateBlock.call(this));
+
         this.client = client;
         this.server = client.server;
 
         this.x = x;
         this.z = z;
-
-        super(pChunk, updateBlock.bind(this));
     }
 }
 

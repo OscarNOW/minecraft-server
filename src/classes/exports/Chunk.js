@@ -6,11 +6,11 @@ const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
 class Chunk {
-    constructor(pChunk, blockUpdateCallback) {
-        this.chunk = pChunk || new PChunk();
-        this.blockUpdateCallback = blockUpdateCallback;
+    constructor(chunk, blockUpdateCallback) {
+        this.chunk = chunk?.chunk || new PChunk();
+        this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
 
-        this.blocks = {};
+        this.blocks = chunk?.blocks || {};
 
         for (let x = 0; x < 16; x++)
             for (let z = 0; z < 16; z++)
@@ -34,7 +34,7 @@ class Chunk {
                 this.blocks[x] = {};
 
             if (!this.blocks[x][y])
-                this.blocks[y] = {};
+                this.blocks[x][y] = {};
 
             this.blocks[x][y][z] = new Block(blockName, state, { x, y, z }, ({ block: { name, state }, x, y, z }) => this.setBlock(name, { x, y, z }, state));
         }
