@@ -1,11 +1,10 @@
 ## Breaking changes
-* New way of creating Chunks. See [examples/chunk](https://github.com/OscarNOW/minecraft-server/blob/main/examples/chunk.js) to see the new wau.
 
 ## Bug fixes
 
 ## Features
+* You can now [access the blocks of a chunk](https://oscarnow.github.io/minecraft-server/unstable/classes/Chunk#blocks)
 * New [LoadedChunk](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk) class
-* New [Block](https://oscarnow.github.io/minecraft-server/unstable/classes/Block) class
 
 ## New packets covered
 * [Client block change](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk#setBlock)

@@ -3,5 +3,11 @@ export class Chunk {
 
     constructor();
 
-    blocks: Block[];
+    blocks: blocksSegment;
+
+    setBlock(block: blockType, location: {
+        x: number;
+        y: number;
+        z: number;
+    }, state?: blockState): this;
 }

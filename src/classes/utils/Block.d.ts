@@ -6,3 +6,11 @@ export class Block {
     block: blockType;
     state: blockState;
 }
+
+type blocksSegment = {
+    [x: number]: {
+        [y: number]: {
+            [z: number]: Block;
+        };
+    };
+};
