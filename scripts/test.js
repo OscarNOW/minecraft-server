@@ -1,3 +1,17 @@
+let verbose = process.argv.includes('--verbose')
+let debug = process.argv.includes('--debug')
+let silenceWarnings = process.argv.includes('--silence-warnings')
+let githubAction = process.argv.includes('--github-action')
+
+if (githubAction) {
+    debug = true;
+    verbose = true;
+    silenceWarnings = false;
+}
+
+if (verbose)
+    console.log('Getting files...')
+
 const files = require('../src/functions/loader/tests');
 const fs = require('fs');
 const path = require('path');
@@ -38,17 +52,6 @@ const colors = Object.freeze({
     }
 });
 
-let verbose = process.argv.includes('--verbose')
-let debug = process.argv.includes('--debug')
-let silenceWarnings = process.argv.includes('--silence-warnings')
-let githubAction = process.argv.includes('--github-action')
-
-if (githubAction) {
-    debug = true;
-    verbose = true;
-    silenceWarnings = false;
-}
-
 let testsRun = 0;
 let testsFailed = [];
 let jsonOut = {
@@ -64,13 +67,28 @@ if (debug) {
 };
 
 (async () => {
+    if (verbose)
+        console.log('Looping through files...')
+
     for (const val of files) {
+        if (verbose)
+            console.log(`  ${val.class}`)
 
         let index = 0;
         try {
+            if (verbose)
+                console.log('    Running tests...')
+
             await val.test((got, expected, id) => {
                 testsRun++;
+
+                if (verbose)
+                    console.log(`      Test ran`, { testsRun, id })
+
                 if (JSON.stringify(got) != JSON.stringify(expected)) {
+                    if (verbose)
+                        console.log('        Test failed')
+
                     jsonOut.failed.push({
                         got,
                         expected,
@@ -86,6 +104,10 @@ if (debug) {
                         id
                     })
                 } else {
+
+                    if (verbose)
+                        console.log('        Test succeeded')
+
                     let o2 = {
                         expected,
                         got,
@@ -97,9 +119,15 @@ if (debug) {
                 }
                 index++;
             }, text => {
+                if (verbose)
+                    console.log('      Warning gotten', text)
+
                 jsonOut.warnings.push(text);
             })
         } catch (err) {
+            if (verbose)
+                console.log('Test resulted in error', err)
+
             if (debug) {
                 console.log()
                 console.log('TEST RESULTED IN ERROR:')
@@ -123,6 +151,9 @@ if (debug) {
     } else
         console.clear();
 
+    if (verbose)
+        console.log('SUMMARY')
+
     let sumText;
     if (githubAction)
         if (testsRun == 0)
@@ -145,58 +176,56 @@ if (debug) {
         console.log()
     }
 
-    if (!verbose) {
-        if (githubAction) {
-            for (const testFailed of testsFailed) {
-                console.log()
-                console.log('FAILED TEST SUMMARY')
-                console.log(`  GOT:       ${testFailed.got.text} `)
-                console.log(`  EXPECTED:  ${testFailed.expected.text} `)
-                console.log(`  CLASS:     ${testFailed.class}`)
+    if (githubAction) {
+        for (const testFailed of testsFailed) {
+            console.log()
+            console.log('FAILED TEST SUMMARY')
+            console.log(`  GOT:       ${testFailed.got.text} `)
+            console.log(`  EXPECTED:  ${testFailed.expected.text} `)
+            console.log(`  CLASS:     ${testFailed.class}`)
 
-                if (testFailed.id)
-                    console.log(`  ID:       ${testFailed.id} `)
-                else
-                    console.log(`  INDEX:    ${testFailed.index} `)
-            }
-        } else {
-            if (testsFailed.length > 0)
-                console.log('/----------------------------\\')
-
-            testsFailed.forEach((val, ind) => {
-                let colArr = [];
-                let arr = [];
-
-                colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
-                arr.push(`|  FAILED `)
-                colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
-                arr.push(`| GOT:       ${val.got.text} `)
-                colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
-                arr.push(`| EXPECTED:  ${val.expected.text} `)
-                colArr.push(`| CLASS:    ${colors.fg.yellow}${val.class}`)
-                arr.push(`| CLASS:    ${val.class}`)
-                if (val.id) {
-                    colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
-                    arr.push(`| ID:       ${val.id} `)
-                } else {
-                    colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
-                    arr.push(`| INDEX:    ${val.index} `)
-                }
-
-                colArr.forEach((val, ind) => {
-                    let spaces = '';
-                    for (let ii = 0; ii < 29 - arr[ind].length; ii++)
-                        spaces += ' ';
-
-                    console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
-                })
-
-                if (ind == testsFailed.length - 1)
-                    console.log('\\----------------------------/')
-                else
-                    console.log('+----------------------------+')
-            })
+            if (testFailed.id)
+                console.log(`  ID:       ${testFailed.id} `)
+            else
+                console.log(`  INDEX:    ${testFailed.index} `)
         }
+    } else {
+        if (testsFailed.length > 0)
+            console.log('/----------------------------\\')
+
+        testsFailed.forEach((val, ind) => {
+            let colArr = [];
+            let arr = [];
+
+            colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
+            arr.push(`|  FAILED `)
+            colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
+            arr.push(`| GOT:       ${val.got.text} `)
+            colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
+            arr.push(`| EXPECTED:  ${val.expected.text} `)
+            colArr.push(`| CLASS:    ${colors.fg.yellow}${val.class}`)
+            arr.push(`| CLASS:    ${val.class}`)
+            if (val.id) {
+                colArr.push(`| ID:      ${colors.fg.yellow}${colors.bold} ${val.id} `)
+                arr.push(`| ID:       ${val.id} `)
+            } else {
+                colArr.push(`| INDEX:   ${colors.fg.yellow}${colors.bold} ${val.index} `)
+                arr.push(`| INDEX:    ${val.index} `)
+            }
+
+            colArr.forEach((val, ind) => {
+                let spaces = '';
+                for (let ii = 0; ii < 29 - arr[ind].length; ii++)
+                    spaces += ' ';
+
+                console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
+            })
+
+            if (ind == testsFailed.length - 1)
+                console.log('\\----------------------------/')
+            else
+                console.log('+----------------------------+')
+        })
     }
 
     if (!githubAction)
