@@ -23,10 +23,10 @@ jobs:
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
           cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
       - name: Update doc manifest
-        run: node ./src/updateDocManifest ${{ github.event.inputs.version }}
+        run: node ./scripts/updateDocManifest ${{ github.event.inputs.version }}
 
       - name: Update package version
-        run: node ./src/setPackageVersion ${{ github.event.inputs.version }}
+        run: node ./scripts/setPackageVersion ${{ github.event.inputs.version }}
 
       - name: Compile #todo //todo change name to build
         run: npm run compile
