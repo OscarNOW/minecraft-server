@@ -119,7 +119,7 @@ for (const file of [
         if (newLink.endsWith('.html'))
             newLink = newLink.substring(0, newLink.length - '.html'.length);
 
-        if (newLink.split('#')[newLink.split('#').length - 2].endsWith('.html'))
+        if (newLink.includes('#') && newLink.split('#')[newLink.split('#').length - 2].endsWith('.html'))
             newLink = newLink.split('#')[newLink.split('#').length - 2].substring(0, newLink.split('#')[newLink.split('#').length - 2].length - '.html'.length) + '#' + newLink.split('#').pop();
 
         if (newLink.endsWith('/index'))
