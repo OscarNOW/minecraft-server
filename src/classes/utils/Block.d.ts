@@ -1,4 +1,6 @@
 export class Block {
+    private readonly stateId: number;
+
     readonly x: number;
     readonly y: number;
     readonly z: number;
