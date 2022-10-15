@@ -1,4 +1,4 @@
-const files = require('./functions/loader/tests');
+const files = require('../src/functions/loader/tests');
 const fs = require('fs');
 const path = require('path');
 const { inspect } = require('util');
@@ -204,7 +204,7 @@ if (debug) {
             console.log()
             console.log(sumText)
 
-            let p = path.resolve(__dirname, `./logs/tests/latest.json`);
+            let p = path.resolve(__dirname, `../src/logs/tests/latest.json`);
             fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
             console.log(p)
 

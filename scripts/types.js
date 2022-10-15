@@ -1,20 +1,20 @@
 const fs = require('fs')
 const path = require('path')
 
-const { getAllIndexes } = require('./functions/getAllIndexes.js');
+const { getAllIndexes } = require('../src/functions/getAllIndexes.js');
 
 console.clear();
 console.log('Getting export classes...')
 
 let exportClasses =
     fs
-        .readdirSync(path.resolve(__dirname, './classes/exports/'))
+        .readdirSync(path.resolve(__dirname, '../src/classes/exports/'))
         .filter(a => a.endsWith('.d.ts'))
-        .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/exports/${a}`)).toString())
+        .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/exports/${a}`)).toString())
         .map(a => extractClass(a))
 
 console.log(fs
-    .readdirSync(path.resolve(__dirname, './classes/exports/'))
+    .readdirSync(path.resolve(__dirname, '../src/classes/exports/'))
     .filter(a => a.endsWith('.d.ts'))
     .map(a => `    ${a}`)
     .join('\n')
@@ -24,13 +24,13 @@ console.log('Getting util classes...')
 
 let utilClasses =
     fs
-        .readdirSync(path.resolve(__dirname, './classes/utils/'))
+        .readdirSync(path.resolve(__dirname, '../src/classes/utils/'))
         .filter(a => a.endsWith('.d.ts'))
-        .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/utils/${a}`)).toString())
+        .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/utils/${a}`)).toString())
         .map(a => extractClass(a))
 
 console.log(fs
-    .readdirSync(path.resolve(__dirname, './classes/utils/'))
+    .readdirSync(path.resolve(__dirname, '../src/classes/utils/'))
     .filter(a => a.endsWith('.d.ts'))
     .map(a => `    ${a}`)
     .join('\n')
@@ -43,9 +43,9 @@ let types = {};
 types = {
     ...types, ...Object.fromEntries(
         fs
-            .readdirSync(path.resolve(__dirname, './classes/exports/'))
+            .readdirSync(path.resolve(__dirname, '../src/classes/exports/'))
             .filter(a => a.endsWith('.d.ts'))
-            .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/exports/${a}`)).toString())
+            .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/exports/${a}`)).toString())
             .map(extractTypes)
             .flat()
             .map(a => ([a.substring(5).split(' ')[0], a]))
@@ -58,9 +58,9 @@ types = {
 types = {
     ...types, ...Object.fromEntries(
         fs
-            .readdirSync(path.resolve(__dirname, './classes/utils/'))
+            .readdirSync(path.resolve(__dirname, '../src/classes/utils/'))
             .filter(a => a.endsWith('.d.ts'))
-            .map(a => fs.readFileSync(path.resolve(__dirname, `./classes/utils/${a}`)).toString())
+            .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/utils/${a}`)).toString())
             .map(extractTypes)
             .flat()
             .map(a => ([a.substring(5).split(' ')[0], a]))
@@ -72,9 +72,9 @@ types = {
 
 types = {
     ...types, ...Object.assign({}, ...fs
-        .readdirSync(path.resolve(__dirname, './data/'))
+        .readdirSync(path.resolve(__dirname, '../src/data/'))
         .filter(a => a.endsWith('.types.js'))
-        .map(a => require(`./data/${a}`))
+        .map(a => require(`../src/data/${a}`))
     )
 }
 
