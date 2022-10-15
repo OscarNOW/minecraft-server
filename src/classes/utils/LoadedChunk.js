@@ -1,6 +1,19 @@
 const Chunk = require('../exports/Chunk.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
+function updateBlock({ block, x, y, z, state }) {
+    let stateId = getBlockStateId.call(this, block, state);
+
+    this.client.p.sendPacket('block_change', {
+        location: {
+            x: this.x * 16 + x,
+            y,
+            z: this.z * 16 + z
+        },
+        type: stateId
+    })
+}
+
 class LoadedChunk extends Chunk {
     constructor(client, pChunk, { x, z }) {
         this.client = client;
@@ -9,20 +22,7 @@ class LoadedChunk extends Chunk {
         this.x = x;
         this.z = z;
 
-        super(true, pChunk);
-    }
-
-    updateBlock(blockName, { x, y, z }, state = {}) {
-        let stateId = getBlockStateId.call(this, blockName, state, { function: 'setBlock' });
-
-        this.client.p.sendPacket('block_change', {
-            location: {
-                x: this.x * 16 + x,
-                y,
-                z: this.z * 16 + z
-            },
-            type: stateId
-        })
+        super(pChunk, updateBlock.bind(this));
     }
 }
 
