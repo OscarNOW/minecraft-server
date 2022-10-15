@@ -8,7 +8,7 @@
         "readme": "node ./scripts/readme",
         "minify": "node ./scripts/minify",
         "types": "node ./scripts/types",
-        "docs": "node ./scripts/docs/generate",
+        "docs": "node ./src/docs/generate",
         "test": "node ./scripts/test",
         "compile": "npm run readme && npm run minify && npm run types && npm run docs"
     },
