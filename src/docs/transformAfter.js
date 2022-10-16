@@ -17,23 +17,21 @@ const versionManifest = require('../../docs/manifest.json')
 const latestStableVersion = versionManifest.versions.find(({ latestStable }) => latestStable);
 const latestStableVersionPath = latestStableVersion.path ?? latestStableVersion.name;
 const latestStableVersionName = latestStableVersion.name;
-const index = `
+const redirectionPage = `
 <!DOCTYPE html>
-<script>location = "./${latestStableVersionPath}/"</script>
+<script>location = "./${latestStableVersionPath}/{path}"</script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${latestStableVersionName} docs minecraft-server</title>    
+    <title>{title}${latestStableVersionName} docs minecraft-server</title>    
 </head>
 <body>
     Redirecting to latest stable version...
 </body>
 </html>
 `;
-console.log('Writing index...')
-fs.writeFileSync(path.join(__dirname, '../../docs/index.html'), index);
 
 console.log('Generating version dropdown...')
 let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
@@ -134,9 +132,7 @@ for (const file of [
     }
 
     let name;
-    if (file == 'index.html')
-        name = ''
-    else if (file == 'modules.html')
+    if (!file.includes('/'))
         name = ''
     else
         name = file.split('/')[1].split('.html')[0] + ' ';
@@ -147,6 +143,20 @@ for (const file of [
     content = content.join('');
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
+
+    let filePath;
+    if (!file.includes('/'))
+        filePath = ''
+    else
+        filePath = file.split('.html')[0];
+
+    let folder = file.split('/').slice(0, -1).join('/');
+
+    if (folder !== '')
+        fs.mkdirSync(path.join(__dirname, '../../docs/', folder), { recursive: true });
+
+    fs.writeFileSync(path.join(__dirname, `../../docs/${file}`), redirectionPage.replaceAll('{path}', filePath).replaceAll('{title}', name));
+
 };
 
 console.log('Writing overwrites...')
