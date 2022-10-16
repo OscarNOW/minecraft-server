@@ -10,7 +10,7 @@
         "types": "node ./scripts/types",
         "docs": "node ./src/docs/generate",
         "test": "node ./scripts/test",
-        "build": "npm run readme && npm run minify && npm run types && npm run docs"
+        "build": "npm run readme && npm run minify && npm run types && npm run docs && npm test"
     },
     "keywords": [
         "minecraft",

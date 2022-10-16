@@ -5,7 +5,7 @@ src/credentials/
 .github/
 SECURITY.md
 examples/
-src/logs/
+logs/
 *.test.js
 *.types.js
 scripts/

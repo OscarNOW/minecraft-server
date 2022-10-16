@@ -233,7 +233,9 @@ if (debug) {
             console.log()
             console.log(sumText)
 
-            let p = path.resolve(__dirname, `../src/logs/tests/latest.json`);
+            fs.mkdirSync(path.resolve(__dirname, '../logs/tests/'), { recursive: true })
+
+            let p = path.resolve(__dirname, `../logs/tests/latest.json`);
             fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
             console.log(p)
 
