@@ -3,7 +3,6 @@ Make tests for functions
 Rewrite src/test.js
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Remove error when trying to perform an action on a BossBar that is not visible
--Move ./src/logs to ./logs/
 Rewrite CustomError and change constructor arguments in better order
 Add options to doc redirect. For example /classes/Chunk?unstable=true will redirect to /unstable/classes/Chunk
 Add better private properties to all classes that need it (Chunk, Block)
