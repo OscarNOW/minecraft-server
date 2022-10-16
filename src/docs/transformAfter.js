@@ -19,7 +19,7 @@ const latestStableVersionPath = latestStableVersion.path ?? latestStableVersion.
 const latestStableVersionName = latestStableVersion.name;
 const redirectionPage = `
 <!DOCTYPE html>
-<script>location = "./${latestStableVersionPath}/{path}"</script>
+<script>location = "{pathBefore}${latestStableVersionPath}/{path}"</script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -155,7 +155,13 @@ for (const file of [
     if (folder !== '')
         fs.mkdirSync(path.join(__dirname, '../../docs/', folder), { recursive: true });
 
-    fs.writeFileSync(path.join(__dirname, `../../docs/${file}`), redirectionPage.replaceAll('{path}', filePath).replaceAll('{title}', name));
+    let pathBefore;
+    if (file.split('/').length == 1)
+        pathBefore = './';
+    else
+        pathBefore = '../'.repeat(file.split('/').length - 1);
+
+    fs.writeFileSync(path.join(__dirname, `../../docs/${file}`), redirectionPage.replaceAll('{path}', filePath).replaceAll('{title}', name).replaceAll('{pathBefore}', pathBefore));
 
 };
 
