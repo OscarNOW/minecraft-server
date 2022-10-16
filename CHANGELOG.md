@@ -1,15 +1,14 @@
-## Breaking changes
+## Existing API changes
+None
+
+## New API
+### Chunks
+* [\<Chunk>.blocks{](https://oscarnow.github.io/minecraft-server/unstable/classes/Chunk#blocks)
+* [\<LoadedChunk>](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk)
+* [\<LoadedChunk>.setBlock(](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk#setBlock)
 
 ## Bug fixes
-
-## Features
-* You can now [access the blocks of a chunk](https://oscarnow.github.io/minecraft-server/unstable/classes/Chunk#blocks)
-* New [LoadedChunk](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk) class
-
-## New packets covered
-* [Client block change](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk#setBlock)
-
-## Packets changed
+None
 
 ## Documentation / Types
 * Updated [documentation](https://oscarnow.github.io/minecraft-server/unstable/) with loads of new features, for example
