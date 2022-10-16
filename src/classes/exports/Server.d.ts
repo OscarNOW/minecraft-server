@@ -40,9 +40,6 @@ export class Server {
 
     readonly clients: Client[];
 
-    private server: any;
-    private intervals: NodeJS.Timer[];
-
     close(): void;
 
     on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
