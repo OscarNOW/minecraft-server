@@ -10,3 +10,4 @@ Add better private properties to all classes that need it (Chunk, Block)
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
+Look at Github actions permissions and assign them to the Github actions
