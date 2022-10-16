@@ -12,4 +12,5 @@
 ## Packets changed
 
 ## Documentation / Types
-* Updated [documentation](https://oscarnow.github.io/minecraft-server/unstable/) with loads of new features
+* Updated [documentation](https://oscarnow.github.io/minecraft-server/unstable/) with loads of new features, for example
+  * Changed the title to include the version

@@ -143,7 +143,7 @@ for (const file of [
 
     content = content.split('<title>');
     content[1] = content[1].split('</title>')[1];
-    content.splice(1, 0, `<title>${name}x.x.x docs minecraft-server</title>`);
+    content.splice(1, 0, `<title>${name}x.x.x minecraft-server</title>`);
     content = content.join('');
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
