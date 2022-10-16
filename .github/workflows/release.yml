@@ -28,8 +28,8 @@ jobs:
       - name: Update package version
         run: node ./scripts/setPackageVersion ${{ github.event.inputs.version }}
 
-      - name: Compile #todo //todo change name to build
-        run: npm run compile
+      - name: Build
+        run: npm run build
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
