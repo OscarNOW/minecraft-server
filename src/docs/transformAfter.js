@@ -39,9 +39,9 @@ console.log('Generating version dropdown...')
 let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
 
 console.log('Generating version dropdown script...')
-let versionDropdownScript = `
+let docScript = `
 <script defer>
-${fs.readFileSync(path.resolve(__dirname, './versionDropdownScript.js')).toString()}
+${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
 </script>
 `;
 
@@ -102,14 +102,14 @@ for (const file of [
         content[versionDropdownIndex] += versionDropdown;
         content = content.join('');
 
-        content += versionDropdownScript;
-
         replaced = true;
         break;
     }
 
     if (!replaced)
         throw new Error(`Couldn't find home link in ${file}`)
+
+    content += docScript;
 
     let index = content.indexOf('href="');
     while (index !== -1) {
@@ -132,6 +132,19 @@ for (const file of [
 
         index = content.indexOf('href="', index + 1);
     }
+
+    let name;
+    if (file == 'index.html')
+        name = ''
+    else if (file == 'modules.html')
+        name = ''
+    else
+        name = file.split('/')[1].split('.html')[0] + ' ';
+
+    content = content.split('<title>');
+    content[1] = content[1].split('</title>')[1];
+    content.splice(1, 0, `<title>${name}x.x.x docs minecraft-server</title>`);
+    content = content.join('');
 
     fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
 };

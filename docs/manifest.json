@@ -10,8 +10,7 @@
             "version": "-1.0.0",
             "name": "unstable",
             "path": "unstable",
-            "latestUnstable": true,
-            "unstable": true
+            "latestUnstable": true
         }
     ]
 }

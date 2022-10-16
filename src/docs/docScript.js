@@ -1,7 +1,7 @@
 /*eslint-env browser */
 /*eslint-disable no-unused-vars*/
 
-const path = '/minecraft-server/'
+const path = `/${location.href.split('/')[3]}/`
 
 let cachedVersions;
 async function getVersions() {
@@ -12,15 +12,15 @@ async function getVersions() {
     return cachedVersions;
 }
 
-let manifest;
+let cachedManifest;
 async function getManifest() {
-    if (manifest)
-        return manifest;
+    if (cachedManifest)
+        return cachedManifest;
 
-    manifest = await fetch(`${path}manifest.json`);
-    manifest = await manifest.json();
+    cachedManifest = await fetch(`${path}manifest.json`);
+    cachedManifest = await cachedManifest.json();
 
-    return manifest;
+    return cachedManifest;
 }
 
 async function versionChange(version) {
@@ -41,5 +41,8 @@ async function versionChange(version) {
 
     const versionDropdown = document.getElementById('versionDropdown');
     versionDropdown.innerHTML = versions.map(({ name, path }) => `<option value="${path ?? name}">${name}</option>\`).join('')`)
+
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = titleElement.innerHTML.replace('x.x.x', currentVersion.path);
 
 })();
