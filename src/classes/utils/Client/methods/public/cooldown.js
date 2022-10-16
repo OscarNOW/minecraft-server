@@ -11,7 +11,7 @@ module.exports = function (item, length = 60) {
             got: item,
             expectationType: 'type',
             expectation: 'itemName',
-            externalLink: '{docs}/types/itemName.html'
+            externalLink: '{docs}/types/itemName'
         }, this.cooldown, { server: this.server, client: this }));
 
     this.p.sendPacket('set_cooldown', {

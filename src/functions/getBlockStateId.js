@@ -45,7 +45,7 @@ function getBlock(blockName, { function: func } = {}) {
         got: blockName,
         expectationType: 'type',
         expectation: 'blockName',
-        externalLink: '{docs}/types/blockName.html'
+        externalLink: '{docs}/types/blockName'
     }, func ? this[func] : getBlock).toString()
 }
 

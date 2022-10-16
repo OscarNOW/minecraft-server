@@ -11,7 +11,7 @@ module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitc
             got: sound,
             expectationType: 'type',
             expectation: 'soundName',
-            externalLink: '{docs}/types/soundName.html'
+            externalLink: '{docs}/types/soundName'
         }, this.sound, { server: this.server, client: this }));
     if (!soundChannels.includes(channel))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {

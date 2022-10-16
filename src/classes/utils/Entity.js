@@ -60,7 +60,7 @@ class Entity {
                 got: type,
                 expectationType: 'type',
                 expectation: 'entityType',
-                externalLink: '{docs}/types/entityType.html'
+                externalLink: '{docs}/types/entityType'
             }, this.constructor, { server: this.client.server, client: this.client }))
 
         this.client = client;
@@ -190,7 +190,7 @@ class Entity {
                 got: sound,
                 expectationType: 'type',
                 expectation: 'soundName',
-                externalLink: '{docs}/types/soundName.html'
+                externalLink: '{docs}/types/soundName'
             }, this.sound, { server: this.client.server, client: this.client }))
         if (!soundChannels.includes(channel))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
