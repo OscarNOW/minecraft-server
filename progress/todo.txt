@@ -15,5 +15,4 @@ Check "npm pack --dry-run" to see if any unnecessary files are included
 Implement client.blocks
 Add hints to CustomError
     Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
-Add Chunk size to data
-Change blocksSegment to blockSegment
+Add Chunk size (x: 16, y: 255, z: 16) to a data file

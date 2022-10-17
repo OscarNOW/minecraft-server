@@ -8,9 +8,12 @@ const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
 class Chunk {
     constructor(chunk, blockUpdateCallback, blocksOffset) {
-        this.chunk = chunk?.chunk || new PChunk();
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
+
+        //copy prismarine chunk to allow new chunk to be changed without affecting the original
+        this._chunk = new PChunk();
+        this.chunkSet = !chunk?.chunk;
 
         this.blocks = {};
         if (chunk?.blocks)
@@ -27,6 +30,20 @@ class Chunk {
                         this.blocks[x][y][z] = new Block(chunk.blocks[x][y][z].block, chunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
                     }
 
+    }
+
+    get chunk() {
+        if (this.chunkSet)
+            return this._chunk;
+
+        for (const x in this.blocks)
+            for (const y in this.blocks[x])
+                for (const z in this.blocks[x][y])
+                    this._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
+
+        this.chunkSet = true;
+
+        return this._chunk;
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {
@@ -51,7 +68,8 @@ class Chunk {
                 expectation: new Array(15).fill(0).map((_, i) => i),
             }, this.setBlock).toString()
 
-        this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
+        if (this.chunkSet)
+            this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         if (blockName == 'air') {
             delete this.blocks[x][y][z];
