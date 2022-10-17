@@ -23,5 +23,7 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    console.log(require('util').inspect(client.chunks, { depth: 1, colors: true }))
+    setTimeout(() => {
+        client.chunks.find(({ x, z }) => x == 0 && z == 0).setBlock('stone', { x: 0, y: 99, z: 0 });
+    }, 3000)
 })

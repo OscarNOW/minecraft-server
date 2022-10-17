@@ -13,7 +13,7 @@ function updateBlock({ x, y, z, stateId }) {
 
 class LoadedChunk extends Chunk {
     constructor(client, chunk, { x, z }, sendPacket) {
-        super(chunk, () => updateBlock.call(this));
+        super(chunk, block => updateBlock.call(this, block));
 
         this.sendPacket = sendPacket;
 

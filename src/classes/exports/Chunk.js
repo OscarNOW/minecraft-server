@@ -40,7 +40,7 @@ class Chunk {
         }
 
         if (this.blockUpdateCallback)
-            this.blockUpdateCallback(arguments[0]);
+            this.blockUpdateCallback(this.blocks[x][y][z]);
 
         return this;
     }
