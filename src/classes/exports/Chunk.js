@@ -24,7 +24,7 @@ class Chunk {
                         if (!this.blocks[x][y])
                             this.blocks[x][y] = {};
 
-                        this.blocks[x][y][z] = new Block(chunk.blocks[x][y][z].block, chunk.blocks[x][y][z].state, { x: x + this.blocksOffset.x, y: y + this.blocksOffset.y, z: z + this.blocksOffset.z });
+                        this.blocks[x][y][z] = new Block(chunk.blocks[x][y][z].block, chunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
                     }
 
     }
