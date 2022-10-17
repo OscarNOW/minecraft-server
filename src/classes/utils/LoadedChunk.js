@@ -3,9 +3,9 @@ const Chunk = require('../exports/Chunk.js');
 function updateBlock({ x, y, z, stateId }) {
     this.sendPacket('block_change', {
         location: {
-            x: this.x * 16 + x,
+            x,
             y,
-            z: this.z * 16 + z
+            z
         },
         type: stateId
     })
@@ -13,7 +13,7 @@ function updateBlock({ x, y, z, stateId }) {
 
 class LoadedChunk extends Chunk {
     constructor(client, chunk, { x, z }, sendPacket) {
-        super(chunk, block => updateBlock.call(this, block));
+        super(chunk, block => updateBlock.call(this, block), { x: x * 16, y: 0, z: z * 16 });
 
         this.sendPacket = sendPacket;
 

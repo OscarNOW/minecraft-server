@@ -2,23 +2,55 @@ const { version } = require('../../settings.json')
 
 const PChunk = require('prismarine-chunk')(version);
 
+const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
 class Chunk {
-    constructor(chunk, blockUpdateCallback) {
+    constructor(chunk, blockUpdateCallback, blocksOffset) {
         this.chunk = chunk?.chunk || new PChunk();
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
+        this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
-        this.blocks = chunk?.blocks || {};
+        this.blocks = {};
+        if (chunk?.blocks)
 
-        for (let x = 0; x < 16; x++)
-            for (let z = 0; z < 16; z++)
-                for (let y = 0; y < 256; y++)
-                    this.chunk.setSkyLight({ x, y, z }, 15)
+            for (const x in chunk.blocks)
+                for (const y in chunk.blocks[x])
+                    for (const z in chunk.blocks[x][y]) {
+                        if (!this.blocks[x])
+                            this.blocks[x] = {};
+
+                        if (!this.blocks[x][y])
+                            this.blocks[x][y] = {};
+
+                        this.blocks[x][y][z] = new Block(chunk.blocks[x][y][z].block, chunk.blocks[x][y][z].state, { x: x + this.blocksOffset.x, y: y + this.blocksOffset.y, z: z + this.blocksOffset.z });
+                    }
+
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {
+        if (x < 0 || x > 15)
+            throw new CustomError('expectationNotMet', 'libraryUser', `x in  ${this.constructor.name}.setBlock(..., {x: x, ... }, ...)  `, {
+                got: x,
+                expectationType: 'value',
+                expectation: new Array(15).fill(0).map((_, i) => i),
+            }, this.setBlock).toString()
+
+        if (y < 0 || y > 255)
+            throw new CustomError('expectationNotMet', 'libraryUser', `y in  ${this.constructor.name}.setBlock(..., {y: y, ... }, ...)  `, {
+                got: y,
+                expectationType: 'value',
+                expectation: new Array(255).fill(0).map((_, i) => i),
+            }, this.setBlock).toString()
+
+        if (z < 0 || z > 15)
+            throw new CustomError('expectationNotMet', 'libraryUser', `z in  ${this.constructor.name}.setBlock(..., {z: z, ... }, ...)  `, {
+                got: z,
+                expectationType: 'value',
+                expectation: new Array(15).fill(0).map((_, i) => i),
+            }, this.setBlock).toString()
+
         this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         if (blockName == 'air') {
@@ -36,7 +68,7 @@ class Chunk {
             if (!this.blocks[x][y])
                 this.blocks[x][y] = {};
 
-            this.blocks[x][y][z] = new Block(blockName, state, { x, y, z });
+            this.blocks[x][y][z] = new Block(blockName, state, { x: x + this.blocksOffset.x, y: y + this.blocksOffset.y, z: z + this.blocksOffset.z });
         }
 
         if (this.blockUpdateCallback)
