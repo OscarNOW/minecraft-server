@@ -1,11 +1,10 @@
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
 class Block {
-    constructor(name, state, { x, y, z }, updateCallback) {
-        this._block = { name, state };
+    constructor(name, state, { x, y, z }) {
+        this._block = name;
         this._state = state;
         this._stateId = null;
-        this.updateCallback = updateCallback;
 
         this.x = x;
         this.y = y;
@@ -14,7 +13,7 @@ class Block {
 
     get stateId() {
         if (this._stateId === null)
-            this._stateId = getBlockStateId(this.block.name, this.block.state);
+            this._stateId = getBlockStateId(this.block, this.state);
 
         return this._stateId;
     }
@@ -23,9 +22,8 @@ class Block {
         return this._block;
     }
 
-    set block({ name, state }) {
-        this._block = { name, state };
-        this.updateCallback(this);
+    get state() {
+        return this._state;
     }
 }
 

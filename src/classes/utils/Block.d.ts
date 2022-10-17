@@ -5,8 +5,8 @@ export class Block {
     readonly y: number;
     readonly z: number;
 
-    block: blockName;
-    state: blockState;
+    readonly block: blockName;
+    readonly state: blockState;
 }
 
 type blocksSegment = {

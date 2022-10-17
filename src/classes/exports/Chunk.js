@@ -36,7 +36,7 @@ class Chunk {
             if (!this.blocks[x][y])
                 this.blocks[x][y] = {};
 
-            this.blocks[x][y][z] = new Block(blockName, state, { x, y, z }, ({ block: { name, state }, x, y, z }) => this.setBlock(name, { x, y, z }, state));
+            this.blocks[x][y][z] = new Block(blockName, state, { x, y, z });
         }
 
         if (this.blockUpdateCallback)
