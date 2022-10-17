@@ -2,7 +2,7 @@ const LoadedChunk = require('../../../LoadedChunk.js');
 const { chunks } = require('../../properties/public/dynamic/chunks.js');
 
 module.exports = function (chunk, { x, z }) {
-    if (!this.p.stateHandler.checkReady.call(this.client))
+    if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     const loadedChunk = new LoadedChunk(this, chunk, { x, z }, this.p.sendPacket);

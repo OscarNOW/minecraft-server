@@ -8,7 +8,7 @@ const CustomEntityClasses = Object.fromEntries(
 const { entities } = require('../../properties/public/dynamic/entities.js');
 
 module.exports = function (type, { x, y, z, yaw, pitch }) {
-    if (!this.p.stateHandler.checkReady.call(this.client))
+    if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     let entityId = null;

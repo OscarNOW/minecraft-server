@@ -1,7 +1,7 @@
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (location, stage) {
-    if (!this.p.stateHandler.checkReady.call(this.client))
+    if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     if (stage < 0 || stage > 10)

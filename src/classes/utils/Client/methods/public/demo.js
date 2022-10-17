@@ -3,7 +3,7 @@ const { demoMessages } = require('../../../../../functions/loader/data.js');
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (message) {
-    if (!this.p.stateHandler.checkReady.call(this.client))
+    if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     if (demoMessages[message] === undefined)

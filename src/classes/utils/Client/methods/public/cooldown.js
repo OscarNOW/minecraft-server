@@ -3,7 +3,7 @@ const { items } = require('../../../../../functions/loader/data.js');
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (item, length = 60) {
-    if (!this.p.stateHandler.checkReady.call(this.client))
+    if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     if (!items.find(a => a[0] == item))
