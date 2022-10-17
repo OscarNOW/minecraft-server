@@ -5,7 +5,7 @@ export class Chunk {
 
     blocks: blocksSegment;
 
-    setBlock(block: blockName, location: {
+    setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
         y: number;
         z: number;

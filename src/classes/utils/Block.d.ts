@@ -10,9 +10,9 @@ export class Block {
 }
 
 type blocksSegment = {
-    [x: number]: {
-        [y: number]: {
-            [z: number]: Block;
+    [relativeX: number]: {
+        [relativeY: number]: {
+            [relativeZ: number]: Block;
         };
     };
 };
