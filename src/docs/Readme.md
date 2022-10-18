@@ -17,7 +17,7 @@
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
 | ⚠ WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New library updates will change the API and add more coverage. |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 Create Minecraft Servers with an easy to use API and with full control
 
