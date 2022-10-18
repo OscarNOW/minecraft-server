@@ -215,7 +215,7 @@ class Entity {
         //     entityIds: [this.id]
         // })
 
-        // delete this.client.entities[this.id]        
+        // delete this.client.entities[this.id]
     }
 
     on(event, callback) {

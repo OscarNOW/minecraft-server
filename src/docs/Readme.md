@@ -17,7 +17,7 @@
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
 | ⚠ WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New library updates will change the API and add more coverage. |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 Create Minecraft Servers with an easy to use API and with full control
 
@@ -99,7 +99,7 @@ If you found a security vulnerability, please do not make a public issue. Instea
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
 
 
-<div class="darkImg"><img loading="lazy" src="./assets/ISC license/docs/dark.png" alt="ISC License explanation"></div> 
+<div class="darkImg"><img loading="lazy" src="./assets/ISC license/docs/dark.png" alt="ISC License explanation"></div>
 <div class="lightImg"><img loading="lazy" src="./assets/ISC license/docs/light.png" alt="ISC License explanation"></div>
 
 

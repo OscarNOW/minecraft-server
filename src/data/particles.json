@@ -1,1 +1,294 @@
-{"ambient_entity_effect":{"id":0,"requiresData":false},"angry_villager":{"id":1,"requiresData":false},"block":{"id":2,"requiresData":true},"block_marker":{"id":3,"requiresData":true},"bubble":{"id":4,"requiresData":false},"cloud":{"id":5,"requiresData":false},"crit":{"id":6,"requiresData":false},"damage_indicator":{"id":7,"requiresData":false},"dragon_breath":{"id":8,"requiresData":false},"dripping_lava":{"id":9,"requiresData":false},"falling_lava":{"id":10,"requiresData":false},"landing_lava":{"id":11,"requiresData":false},"dripping_water":{"id":12,"requiresData":false},"falling_water":{"id":13,"requiresData":false},"dust":{"id":14,"requiresData":true},"effect":{"id":15,"requiresData":false},"elder_guardian":{"id":16,"requiresData":false},"enchanted_hit":{"id":17,"requiresData":false},"enchant":{"id":18,"requiresData":false},"end_rod":{"id":19,"requiresData":false},"entity_effect":{"id":20,"requiresData":false},"explosion_emitter":{"id":21,"requiresData":false},"explosion":{"id":22,"requiresData":false},"falling_dust":{"id":23,"requiresData":true},"firework":{"id":24,"requiresData":false},"fishing":{"id":25,"requiresData":false},"flame":{"id":26,"requiresData":false},"soul_fire_flame":{"id":27,"requiresData":false},"soul":{"id":28,"requiresData":false},"flash":{"id":29,"requiresData":false},"happy_villager":{"id":30,"requiresData":false},"composter":{"id":31,"requiresData":false},"heart":{"id":32,"requiresData":false},"instant_effect":{"id":33,"requiresData":false},"item":{"id":34,"requiresData":true},"vibration":{"id":35,"requiresData":true},"item_slime":{"id":36,"requiresData":false},"item_snowball":{"id":37,"requiresData":false},"large_smoke":{"id":38,"requiresData":false},"lava":{"id":39,"requiresData":false},"mycelium":{"id":40,"requiresData":false},"note":{"id":41,"requiresData":false},"poof":{"id":42,"requiresData":false},"portal":{"id":43,"requiresData":false},"rain":{"id":44,"requiresData":false},"smoke":{"id":45,"requiresData":false},"sneeze":{"id":46,"requiresData":false},"spit":{"id":47,"requiresData":false},"sweep_attack":{"id":48,"requiresData":false},"totem_of_undying":{"id":49,"requiresData":false},"underwater":{"id":50,"requiresData":false},"splash":{"id":51,"requiresData":false},"witch":{"id":52,"requiresData":false},"bubble_pop":{"id":53,"requiresData":false},"current_down":{"id":54,"requiresData":false},"bubble_column_up":{"id":55,"requiresData":false},"nautilus":{"id":56,"requiresData":false},"dolphin":{"id":57,"requiresData":false},"campfire_cosy_smoke":{"id":58,"requiresData":false},"campfire_signal_smoke":{"id":59,"requiresData":false},"dripping_honey":{"id":60,"requiresData":false},"falling_honey":{"id":61,"requiresData":false},"landing_honey":{"id":62,"requiresData":false},"falling_nectar":{"id":63,"requiresData":false},"ash":{"id":64,"requiresData":false},"crimson_spore":{"id":65,"requiresData":false},"warped_spore":{"id":66,"requiresData":false},"dripping_obsidian_tear":{"id":67,"requiresData":false},"falling_obsidian_tear":{"id":68,"requiresData":false},"landing_obsidian_tear":{"id":69,"requiresData":false},"reverse_portal":{"id":70,"requiresData":false},"snowflake":{"id":71,"requiresData":false},"barrier":{"id":72,"requiresData":false}}
+{
+    "ambient_entity_effect": {
+        "id": 0,
+        "requiresData": false
+    },
+    "angry_villager": {
+        "id": 1,
+        "requiresData": false
+    },
+    "block": {
+        "id": 2,
+        "requiresData": true
+    },
+    "block_marker": {
+        "id": 3,
+        "requiresData": true
+    },
+    "bubble": {
+        "id": 4,
+        "requiresData": false
+    },
+    "cloud": {
+        "id": 5,
+        "requiresData": false
+    },
+    "crit": {
+        "id": 6,
+        "requiresData": false
+    },
+    "damage_indicator": {
+        "id": 7,
+        "requiresData": false
+    },
+    "dragon_breath": {
+        "id": 8,
+        "requiresData": false
+    },
+    "dripping_lava": {
+        "id": 9,
+        "requiresData": false
+    },
+    "falling_lava": {
+        "id": 10,
+        "requiresData": false
+    },
+    "landing_lava": {
+        "id": 11,
+        "requiresData": false
+    },
+    "dripping_water": {
+        "id": 12,
+        "requiresData": false
+    },
+    "falling_water": {
+        "id": 13,
+        "requiresData": false
+    },
+    "dust": {
+        "id": 14,
+        "requiresData": true
+    },
+    "effect": {
+        "id": 15,
+        "requiresData": false
+    },
+    "elder_guardian": {
+        "id": 16,
+        "requiresData": false
+    },
+    "enchanted_hit": {
+        "id": 17,
+        "requiresData": false
+    },
+    "enchant": {
+        "id": 18,
+        "requiresData": false
+    },
+    "end_rod": {
+        "id": 19,
+        "requiresData": false
+    },
+    "entity_effect": {
+        "id": 20,
+        "requiresData": false
+    },
+    "explosion_emitter": {
+        "id": 21,
+        "requiresData": false
+    },
+    "explosion": {
+        "id": 22,
+        "requiresData": false
+    },
+    "falling_dust": {
+        "id": 23,
+        "requiresData": true
+    },
+    "firework": {
+        "id": 24,
+        "requiresData": false
+    },
+    "fishing": {
+        "id": 25,
+        "requiresData": false
+    },
+    "flame": {
+        "id": 26,
+        "requiresData": false
+    },
+    "soul_fire_flame": {
+        "id": 27,
+        "requiresData": false
+    },
+    "soul": {
+        "id": 28,
+        "requiresData": false
+    },
+    "flash": {
+        "id": 29,
+        "requiresData": false
+    },
+    "happy_villager": {
+        "id": 30,
+        "requiresData": false
+    },
+    "composter": {
+        "id": 31,
+        "requiresData": false
+    },
+    "heart": {
+        "id": 32,
+        "requiresData": false
+    },
+    "instant_effect": {
+        "id": 33,
+        "requiresData": false
+    },
+    "item": {
+        "id": 34,
+        "requiresData": true
+    },
+    "vibration": {
+        "id": 35,
+        "requiresData": true
+    },
+    "item_slime": {
+        "id": 36,
+        "requiresData": false
+    },
+    "item_snowball": {
+        "id": 37,
+        "requiresData": false
+    },
+    "large_smoke": {
+        "id": 38,
+        "requiresData": false
+    },
+    "lava": {
+        "id": 39,
+        "requiresData": false
+    },
+    "mycelium": {
+        "id": 40,
+        "requiresData": false
+    },
+    "note": {
+        "id": 41,
+        "requiresData": false
+    },
+    "poof": {
+        "id": 42,
+        "requiresData": false
+    },
+    "portal": {
+        "id": 43,
+        "requiresData": false
+    },
+    "rain": {
+        "id": 44,
+        "requiresData": false
+    },
+    "smoke": {
+        "id": 45,
+        "requiresData": false
+    },
+    "sneeze": {
+        "id": 46,
+        "requiresData": false
+    },
+    "spit": {
+        "id": 47,
+        "requiresData": false
+    },
+    "sweep_attack": {
+        "id": 48,
+        "requiresData": false
+    },
+    "totem_of_undying": {
+        "id": 49,
+        "requiresData": false
+    },
+    "underwater": {
+        "id": 50,
+        "requiresData": false
+    },
+    "splash": {
+        "id": 51,
+        "requiresData": false
+    },
+    "witch": {
+        "id": 52,
+        "requiresData": false
+    },
+    "bubble_pop": {
+        "id": 53,
+        "requiresData": false
+    },
+    "current_down": {
+        "id": 54,
+        "requiresData": false
+    },
+    "bubble_column_up": {
+        "id": 55,
+        "requiresData": false
+    },
+    "nautilus": {
+        "id": 56,
+        "requiresData": false
+    },
+    "dolphin": {
+        "id": 57,
+        "requiresData": false
+    },
+    "campfire_cosy_smoke": {
+        "id": 58,
+        "requiresData": false
+    },
+    "campfire_signal_smoke": {
+        "id": 59,
+        "requiresData": false
+    },
+    "dripping_honey": {
+        "id": 60,
+        "requiresData": false
+    },
+    "falling_honey": {
+        "id": 61,
+        "requiresData": false
+    },
+    "landing_honey": {
+        "id": 62,
+        "requiresData": false
+    },
+    "falling_nectar": {
+        "id": 63,
+        "requiresData": false
+    },
+    "ash": {
+        "id": 64,
+        "requiresData": false
+    },
+    "crimson_spore": {
+        "id": 65,
+        "requiresData": false
+    },
+    "warped_spore": {
+        "id": 66,
+        "requiresData": false
+    },
+    "dripping_obsidian_tear": {
+        "id": 67,
+        "requiresData": false
+    },
+    "falling_obsidian_tear": {
+        "id": 68,
+        "requiresData": false
+    },
+    "landing_obsidian_tear": {
+        "id": 69,
+        "requiresData": false
+    },
+    "reverse_portal": {
+        "id": 70,
+        "requiresData": false
+    },
+    "snowflake": {
+        "id": 71,
+        "requiresData": false
+    },
+    "barrier": {
+        "id": 72,
+        "requiresData": false
+    }
+}

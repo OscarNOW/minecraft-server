@@ -19,4 +19,4 @@ Add hints to CustomError
 Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
-Add .editorconfig
+Update .github/ISSUE_TEMPLATE/config.yml

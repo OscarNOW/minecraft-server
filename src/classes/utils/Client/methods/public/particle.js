@@ -62,7 +62,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
         itemId: items[data1].id,
         itemCount: data2
     }
-    
+
     kicks client: 'expected text to be a string. was an object'
     */
 

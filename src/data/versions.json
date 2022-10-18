@@ -1,1 +1,3597 @@
-[{"version":"22w19a","protocol":1073741908,"legacy":false},{"version":"22w18a","protocol":1073741907,"legacy":false},{"version":"22w17a","protocol":1073741906,"legacy":false},{"version":"22w16b","protocol":1073741905,"legacy":false},{"version":"22w16a","protocol":1073741904,"legacy":false},{"version":"22w15a","protocol":1073741903,"legacy":false},{"version":"22w14a","protocol":1073741902,"legacy":false},{"version":"22w13a","protocol":1073741900,"legacy":false},{"version":"22w12a","protocol":1073741899,"legacy":false},{"version":"22w11a","protocol":1073741898,"legacy":false},{"version":"Deep Dark Experimental Snapshot 1","protocol":1073741893,"legacy":false},{"version":"1.18.2","protocol":758,"legacy":false},{"version":"1.18.2 Release Candidate 1","protocol":1073741897,"legacy":false},{"version":"1.18.2 Pre-release 3","protocol":1073741896,"legacy":false},{"version":"1.18.2 Pre-release 2","protocol":1073741895,"legacy":false},{"version":"1.18.2 Pre-release 1","protocol":1073741894,"legacy":false},{"version":"22w07a","protocol":1073741892,"legacy":false},{"version":"22w06a","protocol":1073741891,"legacy":false},{"version":"22w05a","protocol":1073741890,"legacy":false},{"version":"22w03a","protocol":1073741889,"legacy":false},{"version":"1.18.1","protocol":757,"legacy":false},{"version":"1.18.1 Release Candidate 3","protocol":1073741888,"legacy":false},{"version":"1.18.1 Release Candidate 2","protocol":1073741887,"legacy":false},{"version":"1.18.1 Release Candidate 1","protocol":1073741886,"legacy":false},{"version":"1.18.1 Pre-release 1","protocol":1073741885,"legacy":false},{"version":"1.18","protocol":757,"legacy":false},{"version":"1.18 Release Candidate 4","protocol":1073741884,"legacy":false},{"version":"1.18 Release Candidate 3","protocol":1073741883,"legacy":false},{"version":"1.18 Release Candidate 2","protocol":1073741882,"legacy":false},{"version":"1.18 Release Candidate 1","protocol":1073741881,"legacy":false},{"version":"1.18 Pre-release 8","protocol":1073741880,"legacy":false},{"version":"1.18 Pre-release 7","protocol":1073741879,"legacy":false},{"version":"1.18 Pre-release 6","protocol":1073741878,"legacy":false},{"version":"1.18 Pre-release 5","protocol":1073741877,"legacy":false},{"version":"1.18 Pre-release 4","protocol":1073741876,"legacy":false},{"version":"1.18 Pre-release 3","protocol":1073741875,"legacy":false},{"version":"1.18 Pre-release 2","protocol":1073741874,"legacy":false},{"version":"1.18 Pre-release 1","protocol":1073741873,"legacy":false},{"version":"21w44a","protocol":1073741872,"legacy":false},{"version":"21w43a","protocol":1073741871,"legacy":false},{"version":"21w42a","protocol":1073741870,"legacy":false},{"version":"21w41a","protocol":1073741869,"legacy":false},{"version":"21w40a","protocol":1073741868,"legacy":false},{"version":"21w39a","protocol":1073741867,"legacy":false},{"version":"21w38a","protocol":1073741866,"legacy":false},{"version":"21w37a","protocol":1073741865,"legacy":false},{"version":"1.18 experimental snapshot 7","protocol":1073741871,"legacy":false},{"version":"1.18 experimental snapshot 6","protocol":1073741870,"legacy":false},{"version":"1.18 experimental snapshot 5","protocol":1073741869,"legacy":false},{"version":"1.18 experimental snapshot 4","protocol":1073741868,"legacy":false},{"version":"1.18 experimental snapshot 3","protocol":1073741867,"legacy":false},{"version":"1.18 experimental snapshot 2","protocol":1073741866,"legacy":false},{"version":"1.18 Experimental Snapshot 1","protocol":1073741865,"legacy":false},{"version":"1.17.1","protocol":756,"legacy":false},{"version":"1.17.1 Release Candidate 2","protocol":1073741864,"legacy":false},{"version":"1.17.1 Release Candidate 1","protocol":1073741863,"legacy":false},{"version":"1.17.1 Pre-release 3","protocol":1073741862,"legacy":false},{"version":"1.17.1 Pre-release 2","protocol":1073741861,"legacy":false},{"version":"1.17.1 Pre-release 1","protocol":1073741860,"legacy":false},{"version":"1.17","protocol":755,"legacy":false},{"version":"1.17 Release Candidate 2","protocol":1073741859,"legacy":false},{"version":"1.17 Release Candidate 1","protocol":1073741858,"legacy":false},{"version":"1.17 Pre-release 5","protocol":1073741857,"legacy":false},{"version":"1.17 Pre-release 4","protocol":1073741856,"legacy":false},{"version":"1.17 Pre-release 3","protocol":1073741855,"legacy":false},{"version":"1.17 Pre-release 2","protocol":1073741854,"legacy":false},{"version":"1.17 Pre-release 1","protocol":1073741853,"legacy":false},{"version":"21w20a","protocol":1073741852,"legacy":false},{"version":"21w19a","protocol":1073741851,"legacy":false},{"version":"21w18a","protocol":1073741850,"legacy":false},{"version":"21w17a","protocol":1073741849,"legacy":false},{"version":"21w16a","protocol":1073741847,"legacy":false},{"version":"21w15a","protocol":1073741846,"legacy":false},{"version":"21w14a","protocol":1073741845,"legacy":false},{"version":"21w13a","protocol":1073741844,"legacy":false},{"version":"21w11a","protocol":1073741843,"legacy":false},{"version":"21w10a","protocol":1073741842,"legacy":false},{"version":"21w08b","protocol":1073741841,"legacy":false},{"version":"21w08a","protocol":1073741840,"legacy":false},{"version":"21w07a","protocol":1073741839,"legacy":false},{"version":"21w06a","protocol":1073741838,"legacy":false},{"version":"21w05b","protocol":1073741837,"legacy":false},{"version":"21w05a","protocol":1073741836,"legacy":false},{"version":"21w03a","protocol":1073741835,"legacy":false},{"version":"20w51a","protocol":1073741833,"legacy":false},{"version":"20w49a","protocol":1073741832,"legacy":false},{"version":"20w48a","protocol":1073741831,"legacy":false},{"version":"20w46a","protocol":1073741830,"legacy":false},{"version":"20w45a","protocol":1073741829,"legacy":false},{"version":"Combat Test 8c","protocol":803,"legacy":false},{"version":"Combat Test 7c","protocol":802,"legacy":false},{"version":"Combat Test 6","protocol":801,"legacy":false},{"version":"1.16.5","protocol":754,"legacy":false},{"version":"1.16.5 Release Candidate 1","protocol":1073741834,"legacy":false},{"version":"1.16.4","protocol":754,"legacy":false},{"version":"1.16.4 Release Candidate 1","protocol":1073741827,"legacy":false},{"version":"1.16.4 Pre-release 2","protocol":1073741826,"legacy":false},{"version":"1.16.4 Pre-release 1","protocol":1073741825,"legacy":false},{"version":"1.16.3","protocol":753,"legacy":false},{"version":"1.16.3 Release Candidate 1","protocol":752,"legacy":false},{"version":"1.16.2","protocol":751,"legacy":false},{"version":"1.16.2 Release Candidate 2","protocol":750,"legacy":false},{"version":"1.16.2 Release Candidate 1","protocol":749,"legacy":false},{"version":"1.16.2 Pre-release 3","protocol":748,"legacy":false},{"version":"1.16.2 Pre-release 2","protocol":746,"legacy":false},{"version":"1.16.2 Pre-release 1","protocol":744,"legacy":false},{"version":"20w30a","protocol":742,"legacy":false},{"version":"20w29a","protocol":741,"legacy":false},{"version":"20w28a","protocol":740,"legacy":false},{"version":"20w27a","protocol":738,"legacy":false},{"version":"1.16.1","protocol":736,"legacy":false},{"version":"1.16","protocol":735,"legacy":false},{"version":"1.16 Release Candidate 1","protocol":734,"legacy":false},{"version":"1.16 Pre-release 8","protocol":733,"legacy":false},{"version":"1.16 Pre-release 7","protocol":732,"legacy":false},{"version":"1.16 Pre-release 6","protocol":730,"legacy":false},{"version":"1.16 Pre-release 5","protocol":729,"legacy":false},{"version":"1.16 Pre-release 4","protocol":727,"legacy":false},{"version":"1.16 Pre-release 3","protocol":725,"legacy":false},{"version":"1.16 Pre-release 2","protocol":722,"legacy":false},{"version":"1.16 Pre-release 1","protocol":721,"legacy":false},{"version":"20w22a","protocol":719,"legacy":false},{"version":"20w21a","protocol":718,"legacy":false},{"version":"20w20b","protocol":717,"legacy":false},{"version":"20w20a","protocol":716,"legacy":false},{"version":"20w19a","protocol":715,"legacy":false},{"version":"20w18a","protocol":714,"legacy":false},{"version":"20w17a","protocol":713,"legacy":false},{"version":"20w16a","protocol":712,"legacy":false},{"version":"20w15a","protocol":711,"legacy":false},{"version":"20w14a","protocol":710,"legacy":false},{"version":"20w13b","protocol":709,"legacy":false},{"version":"20w13a","protocol":708,"legacy":false},{"version":"20w12a","protocol":707,"legacy":false},{"version":"20w11a","protocol":706,"legacy":false},{"version":"20w10a","protocol":705,"legacy":false},{"version":"20w09a","protocol":704,"legacy":false},{"version":"20w08a","protocol":703,"legacy":false},{"version":"20w07a","protocol":702,"legacy":false},{"version":"Snapshot 20w06a","protocol":701,"legacy":false},{"version":"Combat Test 5","protocol":601,"legacy":false},{"version":"Combat Test 4","protocol":600,"legacy":false},{"version":"1.15.2","protocol":578,"legacy":false},{"version":"1.15.2 Pre-release 2","protocol":577,"legacy":false},{"version":"1.15.2 Pre-Release 1","protocol":576,"legacy":false},{"version":"1.15.1","protocol":575,"legacy":false},{"version":"1.15.1 Pre-release 1","protocol":574,"legacy":false},{"version":"1.15","protocol":573,"legacy":false},{"version":"1.15 Pre-release 7","protocol":572,"legacy":false},{"version":"1.15 Pre-release 6","protocol":571,"legacy":false},{"version":"1.15 Pre-release 5","protocol":570,"legacy":false},{"version":"1.15 Pre-release 4","protocol":569,"legacy":false},{"version":"1.15 Pre-release 3","protocol":567,"legacy":false},{"version":"1.15 Pre-Release 2","protocol":566,"legacy":false},{"version":"1.15 Pre-release 1","protocol":565,"legacy":false},{"version":"19w46b","protocol":564,"legacy":false},{"version":"19w46a","protocol":563,"legacy":false},{"version":"19w45b","protocol":562,"legacy":false},{"version":"19w45a","protocol":561,"legacy":false},{"version":"19w44a","protocol":560,"legacy":false},{"version":"19w42a","protocol":559,"legacy":false},{"version":"19w41a","protocol":558,"legacy":false},{"version":"19w40a","protocol":557,"legacy":false},{"version":"19w39a","protocol":556,"legacy":false},{"version":"19w38b","protocol":555,"legacy":false},{"version":"19w38a","protocol":554,"legacy":false},{"version":"19w37a","protocol":553,"legacy":false},{"version":"19w36a","protocol":552,"legacy":false},{"version":"19w35a","protocol":551,"legacy":false},{"version":"19w34a","protocol":550,"legacy":false},{"version":"Combat Test 3","protocol":502,"legacy":false},{"version":"Combat Test 2","protocol":501,"legacy":false},{"version":"1.14.3 - Combat Test","protocol":500,"legacy":false},{"version":"1.14.4","protocol":498,"legacy":false},{"version":"1.14.4 Pre-Release 7","protocol":497,"legacy":false},{"version":"1.14.4 Pre-Release 6","protocol":496,"legacy":false},{"version":"1.14.4 Pre-Release 5","protocol":495,"legacy":false},{"version":"1.14.4 Pre-Release 4","protocol":494,"legacy":false},{"version":"1.14.4 Pre-Release 3","protocol":493,"legacy":false},{"version":"1.14.4 Pre-Release 2","protocol":492,"legacy":false},{"version":"1.14.4 Pre-Release 1","protocol":491,"legacy":false},{"version":"1.14.3","protocol":490,"legacy":false},{"version":"1.14.3 Pre-Release 4","protocol":489,"legacy":false},{"version":"1.14.3 Pre-Release 3","protocol":488,"legacy":false},{"version":"1.14.3 Pre-Release 2","protocol":487,"legacy":false},{"version":"1.14.3 Pre-Release 1","protocol":486,"legacy":false},{"version":"1.14.2","protocol":485,"legacy":false},{"version":"1.14.2 Pre-Release 4","protocol":484,"legacy":false},{"version":"1.14.2 Pre-Release 3","protocol":483,"legacy":false},{"version":"1.14.2 Pre-Release 2","protocol":482,"legacy":false},{"version":"1.14.2 Pre-Release 1","protocol":481,"legacy":false},{"version":"1.14.1","protocol":480,"legacy":false},{"version":"1.14.1 Pre-Release 2","protocol":479,"legacy":false},{"version":"1.14.1 Pre-Release 1","protocol":478,"legacy":false},{"version":"1.14","protocol":477,"legacy":false},{"version":"1.14 Pre-Release 5","protocol":476,"legacy":false},{"version":"1.14 Pre-Release 4","protocol":475,"legacy":false},{"version":"1.14 Pre-Release 3","protocol":474,"legacy":false},{"version":"1.14 Pre-Release 2","protocol":473,"legacy":false},{"version":"1.14 Pre-Release 1","protocol":472,"legacy":false},{"version":"19w14b","protocol":471,"legacy":false},{"version":"19w14a","protocol":470,"legacy":false},{"version":"19w13b","protocol":469,"legacy":false},{"version":"19w13a","protocol":468,"legacy":false},{"version":"19w12b","protocol":467,"legacy":false},{"version":"19w12a","protocol":466,"legacy":false},{"version":"19w11b","protocol":465,"legacy":false},{"version":"19w11a","protocol":464,"legacy":false},{"version":"19w09a","protocol":463,"legacy":false},{"version":"19w08b","protocol":462,"legacy":false},{"version":"19w08a","protocol":461,"legacy":false},{"version":"19w07a","protocol":460,"legacy":false},{"version":"19w06a","protocol":459,"legacy":false},{"version":"19w05a","protocol":458,"legacy":false},{"version":"19w04b","protocol":457,"legacy":false},{"version":"19w04a","protocol":456,"legacy":false},{"version":"19w03c","protocol":455,"legacy":false},{"version":"19w03b","protocol":454,"legacy":false},{"version":"19w03a","protocol":453,"legacy":false},{"version":"19w02a","protocol":452,"legacy":false},{"version":"18w50a","protocol":451,"legacy":false},{"version":"18w49a","protocol":450,"legacy":false},{"version":"18w48b","protocol":449,"legacy":false},{"version":"18w48a","protocol":448,"legacy":false},{"version":"18w47b","protocol":447,"legacy":false},{"version":"18w47a","protocol":446,"legacy":false},{"version":"18w46a","protocol":445,"legacy":false},{"version":"18w45a","protocol":444,"legacy":false},{"version":"18w44a","protocol":443,"legacy":false},{"version":"18w43c","protocol":442,"legacy":false},{"version":"18w43b","protocol":441,"legacy":false},{"version":"18w43a","protocol":440,"legacy":false},{"version":"1.13.2","protocol":404,"legacy":false},{"version":"1.13.2-pre2","protocol":403,"legacy":false},{"version":"1.13.2-pre1","protocol":402,"legacy":false},{"version":"1.13.1","protocol":401,"legacy":false},{"version":"1.13.1-pre2","protocol":400,"legacy":false},{"version":"1.13.1-pre1","protocol":399,"legacy":false},{"version":"18w33a","protocol":398,"legacy":false},{"version":"18w32a","protocol":397,"legacy":false},{"version":"18w31a","protocol":396,"legacy":false},{"version":"18w30b","protocol":395,"legacy":false},{"version":"18w30a","protocol":394,"legacy":false},{"version":"1.13","protocol":393,"legacy":false},{"version":"1.13-pre10","protocol":392,"legacy":false},{"version":"1.13-pre9","protocol":391,"legacy":false},{"version":"1.13-pre8","protocol":390,"legacy":false},{"version":"1.13-pre7","protocol":389,"legacy":false},{"version":"1.13-pre6","protocol":388,"legacy":false},{"version":"1.13-pre5","protocol":387,"legacy":false},{"version":"1.13-pre4","protocol":386,"legacy":false},{"version":"1.13-pre3","protocol":385,"legacy":false},{"version":"1.13-pre2","protocol":384,"legacy":false},{"version":"1.13-pre1","protocol":383,"legacy":false},{"version":"18w22c","protocol":382,"legacy":false},{"version":"18w22b","protocol":381,"legacy":false},{"version":"18w22a","protocol":380,"legacy":false},{"version":"18w21b","protocol":379,"legacy":false},{"version":"18w21a","protocol":378,"legacy":false},{"version":"18w20c","protocol":377,"legacy":false},{"version":"18w20b","protocol":376,"legacy":false},{"version":"18w20a","protocol":375,"legacy":false},{"version":"18w19b","protocol":374,"legacy":false},{"version":"18w19a","protocol":373,"legacy":false},{"version":"18w16a","protocol":372,"legacy":false},{"version":"18w15a","protocol":371,"legacy":false},{"version":"18w14b","protocol":370,"legacy":false},{"version":"18w14a","protocol":369,"legacy":false},{"version":"18w11a","protocol":368,"legacy":false},{"version":"18w10d","protocol":367,"legacy":false},{"version":"18w10c","protocol":366,"legacy":false},{"version":"18w10b","protocol":365,"legacy":false},{"version":"18w10a","protocol":364,"legacy":false},{"version":"18w09a","protocol":363,"legacy":false},{"version":"18w08b","protocol":362,"legacy":false},{"version":"18w08a","protocol":361,"legacy":false},{"version":"18w07c","protocol":360,"legacy":false},{"version":"18w07b","protocol":359,"legacy":false},{"version":"18w07a","protocol":358,"legacy":false},{"version":"18w06a","protocol":357,"legacy":false},{"version":"18w05a","protocol":356,"legacy":false},{"version":"18w03b","protocol":355,"legacy":false},{"version":"18w03a","protocol":354,"legacy":false},{"version":"18w02a","protocol":353,"legacy":false},{"version":"18w01a","protocol":352,"legacy":false},{"version":"17w50a","protocol":351,"legacy":false},{"version":"17w49b","protocol":350,"legacy":false},{"version":"17w49a","protocol":349,"legacy":false},{"version":"17w48a","protocol":348,"legacy":false},{"version":"17w47b","protocol":347,"legacy":false},{"version":"17w47a","protocol":346,"legacy":false},{"version":"17w46a","protocol":345,"legacy":false},{"version":"17w45b","protocol":344,"legacy":false},{"version":"17w45a","protocol":343,"legacy":false},{"version":"17w43b","protocol":342,"legacy":false},{"version":"17w43a","protocol":341,"legacy":false},{"version":"1.12.2","protocol":340,"legacy":false},{"version":"1.12.2-pre2","protocol":339,"legacy":false},{"version":"1.12.1","protocol":338,"legacy":false},{"version":"1.12.1-pre1","protocol":337,"legacy":false},{"version":"17w31a","protocol":336,"legacy":false},{"version":"1.12","protocol":335,"legacy":false},{"version":"1.12-pre7","protocol":334,"legacy":false},{"version":"1.12-pre6","protocol":333,"legacy":false},{"version":"1.12-pre5","protocol":332,"legacy":false},{"version":"1.12-pre4","protocol":331,"legacy":false},{"version":"1.12-pre3","protocol":330,"legacy":false},{"version":"1.12-pre2","protocol":329,"legacy":false},{"version":"1.12-pre1","protocol":328,"legacy":false},{"version":"17w18b","protocol":327,"legacy":false},{"version":"17w18a","protocol":326,"legacy":false},{"version":"17w17b","protocol":325,"legacy":false},{"version":"17w17a","protocol":324,"legacy":false},{"version":"17w16b","protocol":323,"legacy":false},{"version":"17w16a","protocol":322,"legacy":false},{"version":"17w15a","protocol":321,"legacy":false},{"version":"17w14a","protocol":320,"legacy":false},{"version":"17w13b","protocol":319,"legacy":false},{"version":"17w13a","protocol":318,"legacy":false},{"version":"17w06a","protocol":317,"legacy":false},{"version":"1.11.2","protocol":316,"legacy":false},{"version":"1.11","protocol":315,"legacy":false},{"version":"1.11-pre1","protocol":314,"legacy":false},{"version":"16w44a","protocol":313,"legacy":false},{"version":"16w42a","protocol":312,"legacy":false},{"version":"16w41a","protocol":311,"legacy":false},{"version":"16w40a","protocol":310,"legacy":false},{"version":"16w39c","protocol":309,"legacy":false},{"version":"16w39b","protocol":308,"legacy":false},{"version":"16w39a","protocol":307,"legacy":false},{"version":"16w38a","protocol":306,"legacy":false},{"version":"16w36a","protocol":305,"legacy":false},{"version":"16w35a","protocol":304,"legacy":false},{"version":"16w33a","protocol":303,"legacy":false},{"version":"16w32b","protocol":302,"legacy":false},{"version":"16w32a","protocol":301,"legacy":false},{"version":"1.10.2","protocol":210,"legacy":false},{"version":"1.10-pre2","protocol":205,"legacy":false},{"version":"1.10-pre1","protocol":204,"legacy":false},{"version":"16w21b","protocol":203,"legacy":false},{"version":"16w21a","protocol":202,"legacy":false},{"version":"16w20a","protocol":201,"legacy":false},{"version":"1.9.4","protocol":110,"legacy":false},{"version":"1.9.3-pre1","protocol":109,"legacy":false},{"version":"1.9.1","protocol":108,"legacy":false},{"version":"1.9.1-pre1","protocol":107,"legacy":false},{"version":"1.9-pre4","protocol":106,"legacy":false},{"version":"1.9-pre3","protocol":105,"legacy":false},{"version":"1.9-pre2","protocol":104,"legacy":false},{"version":"1.9-pre1","protocol":103,"legacy":false},{"version":"16w07b","protocol":102,"legacy":false},{"version":"16w07a","protocol":101,"legacy":false},{"version":"16w06a","protocol":100,"legacy":false},{"version":"16w05b","protocol":99,"legacy":false},{"version":"16w05a","protocol":98,"legacy":false},{"version":"16w04a","protocol":97,"legacy":false},{"version":"16w03a","protocol":96,"legacy":false},{"version":"16w02a","protocol":95,"legacy":false},{"version":"15w51b","protocol":94,"legacy":false},{"version":"15w51a","protocol":93,"legacy":false},{"version":"15w50a","protocol":92,"legacy":false},{"version":"15w49b","protocol":91,"legacy":false},{"version":"15w49a","protocol":90,"legacy":false},{"version":"15w47c","protocol":89,"legacy":false},{"version":"15w47b","protocol":88,"legacy":false},{"version":"15w47a","protocol":87,"legacy":false},{"version":"15w46a","protocol":86,"legacy":false},{"version":"15w45a","protocol":85,"legacy":false},{"version":"15w44b","protocol":84,"legacy":false},{"version":"15w44a","protocol":83,"legacy":false},{"version":"15w43c","protocol":82,"legacy":false},{"version":"15w43b","protocol":81,"legacy":false},{"version":"15w43a","protocol":80,"legacy":false},{"version":"15w42a","protocol":79,"legacy":false},{"version":"15w41b","protocol":78,"legacy":false},{"version":"15w41a","protocol":77,"legacy":false},{"version":"15w40b","protocol":76,"legacy":false},{"version":"15w40a","protocol":75,"legacy":false},{"version":"15w39c","protocol":74,"legacy":false},{"version":"15w38b","protocol":73,"legacy":false},{"version":"15w38a","protocol":72,"legacy":false},{"version":"15w37a","protocol":71,"legacy":false},{"version":"15w36d","protocol":70,"legacy":false},{"version":"15w36c","protocol":69,"legacy":false},{"version":"15w36b","protocol":68,"legacy":false},{"version":"15w36a","protocol":67,"legacy":false},{"version":"15w35e","protocol":66,"legacy":false},{"version":"15w35d","protocol":65,"legacy":false},{"version":"15w35c","protocol":64,"legacy":false},{"version":"15w35b","protocol":63,"legacy":false},{"version":"15w35a","protocol":62,"legacy":false},{"version":"15w34d","protocol":61,"legacy":false},{"version":"15w34c","protocol":60,"legacy":false},{"version":"15w34b","protocol":59,"legacy":false},{"version":"15w34a","protocol":58,"legacy":false},{"version":"15w33c","protocol":57,"legacy":false},{"version":"15w33b","protocol":56,"legacy":false},{"version":"15w33a","protocol":55,"legacy":false},{"version":"15w32c","protocol":54,"legacy":false},{"version":"15w32b","protocol":53,"legacy":false},{"version":"15w32a","protocol":52,"legacy":false},{"version":"15w31c","protocol":51,"legacy":false},{"version":"15w31b","protocol":50,"legacy":false},{"version":"15w31a","protocol":49,"legacy":false},{"version":"1.8.9","protocol":47,"legacy":false},{"version":"1.8-pre3","protocol":46,"legacy":false},{"version":"1.8-pre2","protocol":45,"legacy":false},{"version":"1.8-pre1","protocol":44,"legacy":false},{"version":"14w34d","protocol":43,"legacy":false},{"version":"14w34c","protocol":42,"legacy":false},{"version":"14w34b","protocol":41,"legacy":false},{"version":"14w34a","protocol":40,"legacy":false},{"version":"14w33c","protocol":39,"legacy":false},{"version":"14w33b","protocol":38,"legacy":false},{"version":"14w33a","protocol":37,"legacy":false},{"version":"14w32d","protocol":36,"legacy":false},{"version":"14w32c","protocol":35,"legacy":false},{"version":"14w32b","protocol":34,"legacy":false},{"version":"14w32a","protocol":33,"legacy":false},{"version":"14w31a","protocol":32,"legacy":false},{"version":"14w30c","protocol":31,"legacy":false},{"version":"14w30b","protocol":30,"legacy":false},{"version":"14w29b","protocol":29,"legacy":false},{"version":"14w28b","protocol":28,"legacy":false},{"version":"14w28a","protocol":27,"legacy":false},{"version":"14w27b","protocol":26,"legacy":false},{"version":"14w26c","protocol":25,"legacy":false},{"version":"14w26b","protocol":24,"legacy":false},{"version":"14w26a","protocol":23,"legacy":false},{"version":"14w25b","protocol":22,"legacy":false},{"version":"14w25a","protocol":21,"legacy":false},{"version":"14w21b","protocol":20,"legacy":false},{"version":"14w21a","protocol":19,"legacy":false},{"version":"14w20b","protocol":18,"legacy":false},{"version":"14w19a","protocol":17,"legacy":false},{"version":"14w18b","protocol":16,"legacy":false},{"version":"14w17a","protocol":15,"legacy":false},{"version":"14w11b","protocol":14,"legacy":false},{"version":"14w10c","protocol":13,"legacy":false},{"version":"14w08a","protocol":12,"legacy":false},{"version":"14w07a","protocol":11,"legacy":false},{"version":"14w06b","protocol":10,"legacy":false},{"version":"14w05b","protocol":9,"legacy":false},{"version":"14w04b","protocol":8,"legacy":false},{"version":"14w04a","protocol":7,"legacy":false},{"version":"14w03b","protocol":6,"legacy":false},{"version":"14w02c","protocol":5,"legacy":false},{"version":"1.7.5","protocol":4,"legacy":false},{"version":"1.7.1","protocol":3,"legacy":false},{"version":"13w43a","protocol":2,"legacy":false},{"version":"13w42b","protocol":1,"legacy":false},{"version":"13w41b","protocol":0,"legacy":false},{"version":"13w41a","protocol":0,"legacy":false},{"version":"13w39b","protocol":80,"legacy":true},{"version":"13w39a","protocol":80,"legacy":true},{"version":"13w38c","protocol":79,"legacy":true},{"version":"13w38b","protocol":79,"legacy":true},{"version":"13w38a","protocol":79,"legacy":true},{"version":"1.6.4","protocol":78,"legacy":true},{"version":"1.6.3","protocol":77,"legacy":true},{"version":"13w37b","protocol":76,"legacy":true},{"version":"13w37a","protocol":76,"legacy":true},{"version":"13w36b","protocol":75,"legacy":true},{"version":"13w36a","protocol":75,"legacy":true},{"version":"1.6.2","protocol":74,"legacy":true},{"version":"1.6.1","protocol":73,"legacy":true},{"version":"1.6","protocol":72,"legacy":true},{"version":"13w26a","protocol":72,"legacy":true},{"version":"13w25c","protocol":71,"legacy":true},{"version":"13w25b","protocol":71,"legacy":true},{"version":"13w25a","protocol":71,"legacy":true},{"version":"13w24b","protocol":70,"legacy":true},{"version":"13w24a","protocol":69,"legacy":true},{"version":"13w23b","protocol":68,"legacy":true},{"version":"13w23a","protocol":67,"legacy":true},{"version":"13w22a","protocol":67,"legacy":true},{"version":"13w21b","protocol":67,"legacy":true},{"version":"13w21a","protocol":67,"legacy":true},{"version":"13w19a","protocol":66,"legacy":true},{"version":"13w18c","protocol":65,"legacy":true},{"version":"13w18b","protocol":65,"legacy":true},{"version":"13w18a","protocol":65,"legacy":true},{"version":"13w17a","protocol":64,"legacy":true},{"version":"13w16b","protocol":63,"legacy":true},{"version":"13w16a","protocol":62,"legacy":true},{"version":"1.5.2","protocol":61,"legacy":true},{"version":"1.5.1","protocol":60,"legacy":true},{"version":"13w12~","protocol":60,"legacy":true},{"version":"13w11a","protocol":60,"legacy":true},{"version":"1.5","protocol":60,"legacy":true},{"version":"13w10b","protocol":60,"legacy":true},{"version":"13w10a","protocol":60,"legacy":true},{"version":"13w09c","protocol":60,"legacy":true},{"version":"13w09b","protocol":59,"legacy":true},{"version":"13w09a","protocol":59,"legacy":true},{"version":"13w07a","protocol":58,"legacy":true},{"version":"13w06a","protocol":58,"legacy":true},{"version":"13w05b","protocol":56,"legacy":true},{"version":"13w05a","protocol":56,"legacy":true},{"version":"13w04a","protocol":55,"legacy":true},{"version":"13w03a","protocol":54,"legacy":true},{"version":"13w02b","protocol":53,"legacy":true},{"version":"13w02a","protocol":53,"legacy":true},{"version":"13w01b","protocol":52,"legacy":true},{"version":"13w01a","protocol":52,"legacy":true},{"version":"1.4.7","protocol":51,"legacy":true},{"version":"1.4.6","protocol":51,"legacy":true},{"version":"12w50b","protocol":51,"legacy":true},{"version":"12w50a","protocol":51,"legacy":true},{"version":"12w49a","protocol":50,"legacy":true},{"version":"1.4.5","protocol":49,"legacy":true},{"version":"1.4.4","protocol":49,"legacy":true},{"version":"1.4.3","protocol":48,"legacy":true},{"version":"1.4.2","protocol":47,"legacy":true},{"version":"1.4.1","protocol":47,"legacy":true},{"version":"1.4","protocol":47,"legacy":true},{"version":"12w42b","protocol":47,"legacy":true},{"version":"12w42a","protocol":46,"legacy":true},{"version":"12w41b","protocol":46,"legacy":true},{"version":"12w41a","protocol":46,"legacy":true},{"version":"12w40b","protocol":45,"legacy":true},{"version":"12w40a","protocol":44,"legacy":true},{"version":"12w39b","protocol":43,"legacy":true},{"version":"12w39a","protocol":43,"legacy":true},{"version":"12w38b","protocol":43,"legacy":true},{"version":"12w38a","protocol":43,"legacy":true},{"version":"12w37a","protocol":42,"legacy":true},{"version":"12w36a","protocol":42,"legacy":true},{"version":"12w34b","protocol":42,"legacy":true},{"version":"12w34a","protocol":41,"legacy":true},{"version":"12w32a","protocol":40,"legacy":true},{"version":"1.3.2","protocol":39,"legacy":true},{"version":"1.3.1","protocol":39,"legacy":true},{"version":"1.3","protocol":39,"legacy":true},{"version":"12w30e","protocol":39,"legacy":true},{"version":"12w30d","protocol":39,"legacy":true},{"version":"12w30c","protocol":39,"legacy":true},{"version":"12w30b","protocol":38,"legacy":true},{"version":"12w30a","protocol":38,"legacy":true},{"version":"12w27a","protocol":38,"legacy":true},{"version":"12w26a","protocol":37,"legacy":true},{"version":"12w25a","protocol":37,"legacy":true},{"version":"12w24a","protocol":36,"legacy":true},{"version":"12w23b","protocol":35,"legacy":true},{"version":"12w23a","protocol":35,"legacy":true},{"version":"12w22a","protocol":34,"legacy":true},{"version":"12w21b","protocol":33,"legacy":true},{"version":"12w21a","protocol":33,"legacy":true},{"version":"12w19a","protocol":32,"legacy":true},{"version":"12w18a","protocol":32,"legacy":true},{"version":"12w17a","protocol":31,"legacy":true},{"version":"12w16a","protocol":30,"legacy":true},{"version":"12w15a","protocol":29,"legacy":true},{"version":"1.2.5","protocol":29,"legacy":true},{"version":"1.2.4","protocol":29,"legacy":true},{"version":"1.2.3","protocol":28,"legacy":true},{"version":"1.2.2","protocol":28,"legacy":true},{"version":"1.2.1","protocol":28,"legacy":true},{"version":"1.2","protocol":28,"legacy":true},{"version":"12w08a","protocol":28,"legacy":true},{"version":"12w07b","protocol":27,"legacy":true},{"version":"12w07a","protocol":27,"legacy":true},{"version":"12w06a","protocol":25,"legacy":true},{"version":"12w05b","protocol":24,"legacy":true},{"version":"12w05a","protocol":24,"legacy":true},{"version":"12w04a","protocol":24,"legacy":true},{"version":"12w03a","protocol":24,"legacy":true},{"version":"1.1","protocol":23,"legacy":true},{"version":"12w01a","protocol":23,"legacy":true},{"version":"11w50a","protocol":22,"legacy":true},{"version":"11w49a","protocol":22,"legacy":true},{"version":"11w48a","protocol":22,"legacy":true},{"version":"11w47a","protocol":22,"legacy":true},{"version":"1.0.1","protocol":22,"legacy":true},{"version":"1.0.0","protocol":22,"legacy":true},{"version":"RC2","protocol":22,"legacy":true},{"version":"RC1","protocol":22,"legacy":true},{"version":"Beta 1.9 Prerelease 6","protocol":22,"legacy":true},{"version":"Beta 1.9 Prerelease 5","protocol":21,"legacy":true},{"version":"Beta 1.9 Prerelease 4","protocol":20,"legacy":true},{"version":"Beta 1.9 Prerelease 3","protocol":19,"legacy":true},{"version":"Beta 1.9 Prerelease 2","protocol":19,"legacy":true},{"version":"Beta 1.9 Prerelease","protocol":18,"legacy":true},{"version":"Beta 1.8.1","protocol":17,"legacy":true},{"version":"Beta 1.8","protocol":17,"legacy":true},{"version":"Beta 1.8 Pre-release 2 ","protocol":null,"legacy":true},{"version":"Beta 1.8 Pre-release","protocol":15,"legacy":true},{"version":"Beta 1.7.3","protocol":14,"legacy":true},{"version":"Beta 1.7.2","protocol":14,"legacy":true},{"version":"Beta 1.7_01","protocol":14,"legacy":true},{"version":"Beta 1.7","protocol":14,"legacy":true},{"version":"Beta 1.6.6","protocol":13,"legacy":true},{"version":"Beta 1.6.5","protocol":13,"legacy":true},{"version":"Beta 1.6.4","protocol":13,"legacy":true},{"version":"Beta 1.6.3","protocol":13,"legacy":true},{"version":"Beta 1.6.2","protocol":13,"legacy":true},{"version":"Beta 1.6.1","protocol":13,"legacy":true},{"version":"Beta 1.6","protocol":13,"legacy":true},{"version":"Beta 1.6 Test Build 3","protocol":12,"legacy":true},{"version":"Beta 1.5_02","protocol":11,"legacy":true},{"version":"Beta 1.5_01","protocol":11,"legacy":true},{"version":"Beta 1.5","protocol":11,"legacy":true},{"version":"Beta 1.4_01","protocol":10,"legacy":true},{"version":"Beta 1.4","protocol":10,"legacy":true},{"version":"Beta 1.3_01","protocol":9,"legacy":true},{"version":"Beta 1.3","protocol":9,"legacy":true},{"version":"Beta 1.2_02","protocol":8,"legacy":true},{"version":"Beta 1.2_01","protocol":8,"legacy":true},{"version":"Beta 1.2","protocol":8,"legacy":true},{"version":"Beta 1.1_02","protocol":8,"legacy":true},{"version":"Beta 1.1_01","protocol":7,"legacy":true},{"version":"Beta 1.1","protocol":7,"legacy":true},{"version":"Beta 1.0.2","protocol":7,"legacy":true},{"version":"Beta 1.0_01","protocol":7,"legacy":true},{"version":"Beta 1.0","protocol":7,"legacy":true},{"version":"Alpha server 0.2.8","protocol":6,"legacy":true},{"version":"Alpha v1.2.6","protocol":6,"legacy":true},{"version":"Alpha server 0.2.7","protocol":6,"legacy":true},{"version":"Alpha v1.2.5","protocol":6,"legacy":true},{"version":"Alpha server 0.2.6_02","protocol":6,"legacy":true},{"version":"Alpha v1.2.4_01","protocol":6,"legacy":true},{"version":"Alpha server 0.2.6_01","protocol":6,"legacy":true},{"version":"Alpha server 0.2.6","protocol":6,"legacy":true},{"version":"Alpha v1.2.3_05","protocol":6,"legacy":true},{"version":"Alpha v1.2.3_04","protocol":5,"legacy":true},{"version":"Alpha server 0.2.5_02","protocol":5,"legacy":true},{"version":"Alpha server 0.2.5_01","protocol":5,"legacy":true},{"version":"Alpha v1.2.3_02","protocol":5,"legacy":true},{"version":"Alpha v1.2.3_01","protocol":5,"legacy":true},{"version":"Alpha server 0.2.5","protocol":5,"legacy":true},{"version":"Alpha v1.2.3","protocol":5,"legacy":true},{"version":"Alpha server 0.2.4","protocol":4,"legacy":true},{"version":"Alpha v1.2.2","protocol":4,"legacy":true},{"version":"Alpha v1.2.1_01","protocol":3,"legacy":true},{"version":"Alpha server 0.2.3","protocol":3,"legacy":true},{"version":"Alpha v1.2.1","protocol":3,"legacy":true},{"version":"Alpha v1.2.0_02","protocol":3,"legacy":true},{"version":"Alpha v1.2.0_01","protocol":3,"legacy":true},{"version":"Alpha server 0.2.2_01","protocol":3,"legacy":true},{"version":"Alpha server 0.2.2","protocol":3,"legacy":true},{"version":"Alpha v1.2.0","protocol":3,"legacy":true},{"version":"Alpha v1.1.2_01","protocol":2,"legacy":true},{"version":"Alpha v1.1.2","protocol":2,"legacy":true},{"version":"Alpha server 0.2.1","protocol":2,"legacy":true},{"version":"Alpha v1.1.1","protocol":2,"legacy":true},{"version":"Alpha server 0.2.0_01","protocol":2,"legacy":true},{"version":"Alpha server 0.2.0","protocol":2,"legacy":true},{"version":"Alpha v1.1.0","protocol":2,"legacy":true},{"version":"Alpha v1.0.17_04","protocol":1,"legacy":true},{"version":"Alpha v1.0.17_03","protocol":1,"legacy":true},{"version":"Alpha v1.0.17_02","protocol":1,"legacy":true},{"version":"Alpha server 0.1.4","protocol":1,"legacy":true},{"version":"Alpha server 0.1.3","protocol":14,"legacy":true},{"version":"Alpha v1.0.16_02","protocol":14,"legacy":true},{"version":"Alpha server 0.1.2_01","protocol":14,"legacy":true},{"version":"Alpha server 0.1.2","protocol":14,"legacy":true},{"version":"Alpha v1.0.16_01","protocol":14,"legacy":true},{"version":"Alpha server 0.1.1","protocol":14,"legacy":true},{"version":"Alpha v1.0.16","protocol":14,"legacy":true},{"version":"Alpha server 0.1.0","protocol":13,"legacy":true},{"version":"Alpha v1.0.15","protocol":13,"legacy":true},{"version":"Alpha v1.0.14","protocol":12,"legacy":true},{"version":"Alpha v1.0.13_01","protocol":12,"legacy":true},{"version":"Alpha v1.0.13","protocol":12,"legacy":true},{"version":"Alpha v1.0.12","protocol":11,"legacy":true},{"version":"Alpha v1.0.11","protocol":10,"legacy":true},{"version":"Alpha v1.0.10","protocol":10,"legacy":true},{"version":"Alpha v1.0.9","protocol":10,"legacy":true},{"version":"Alpha v1.0.8_01","protocol":10,"legacy":true},{"version":"Alpha v1.0.8","protocol":10,"legacy":true},{"version":"Alpha v1.0.7","protocol":10,"legacy":true},{"version":"Alpha v1.0.6_03","protocol":10,"legacy":true},{"version":"Alpha v1.0.6_02","protocol":10,"legacy":true},{"version":"Alpha v1.0.6_01","protocol":10,"legacy":true},{"version":"Alpha v1.0.6","protocol":10,"legacy":true},{"version":"Alpha v1.0.5_01","protocol":10,"legacy":true},{"version":"Alpha v1.0.5","protocol":10,"legacy":true},{"version":"Classic server 1.10.1","protocol":7,"legacy":true},{"version":"Classic server 1.10","protocol":7,"legacy":true},{"version":"Classic 0.30","protocol":7,"legacy":true},{"version":"Classic 0.29_02","protocol":7,"legacy":true},{"version":"Classic 0.29_01","protocol":7,"legacy":true},{"version":"Classic 0.29","protocol":7,"legacy":true},{"version":"Classic 0.28_01","protocol":7,"legacy":true},{"version":"Classic server 1.9","protocol":7,"legacy":true},{"version":"Classic server 1.8.3","protocol":7,"legacy":true},{"version":"Classic 0.27 SURVIVAL TEST","protocol":6,"legacy":true},{"version":"Classic 0.26 SURVIVAL TEST","protocol":6,"legacy":true},{"version":"Classic 0.25_05 SURVIVAL TEST","protocol":6,"legacy":true},{"version":"Classic 0.25 SURVIVAL TEST","protocol":6,"legacy":true},{"version":"Classic 0.24_SURVIVAL_TEST_03","protocol":6,"legacy":true},{"version":"Classic 0.24_SURVIVAL_TEST_02","protocol":6,"legacy":true},{"version":"Classic 0.24_SURVIVAL_TEST_01","protocol":6,"legacy":true},{"version":"Classic 0.24_SURVIVAL_TEST","protocol":6,"legacy":true},{"version":"Classic 0.0.23a_01","protocol":6,"legacy":true},{"version":"Classic 0.0.23a","protocol":6,"legacy":true},{"version":"Classic 0.0.22a_05","protocol":6,"legacy":true},{"version":"Classic 0.0.22a_04","protocol":6,"legacy":true},{"version":"Classic 0.0.22a_03","protocol":6,"legacy":true},{"version":"Classic 0.0.22a_02","protocol":6,"legacy":true},{"version":"Classic 0.0.22a_01","protocol":6,"legacy":true},{"version":"Classic 0.0.22a","protocol":6,"legacy":true},{"version":"Classic 0.0.21a_01","protocol":6,"legacy":true},{"version":"Classic 0.0.21a","protocol":6,"legacy":true},{"version":"Classic 0.0.20a_02","protocol":6,"legacy":true},{"version":"Classic server 1.8.2","protocol":6,"legacy":true},{"version":"Classic 0.0.20a_01","protocol":6,"legacy":true},{"version":"Classic server 1.8.1","protocol":6,"legacy":true},{"version":"Classic server 1.8","protocol":6,"legacy":true},{"version":"Classic server 1.7","protocol":5,"legacy":true},{"version":"Classic server 1.6","protocol":5,"legacy":true},{"version":"Classic server 1.5","protocol":5,"legacy":true},{"version":"Classic 0.0.18a_02","protocol":4,"legacy":true},{"version":"Classic server 1.4.1","protocol":4,"legacy":true},{"version":"Classic server 1.4","protocol":4,"legacy":true},{"version":"Classic server 1.3","protocol":4,"legacy":true},{"version":"Classic 0.0.17a","protocol":4,"legacy":true},{"version":"Classic server 1.2","protocol":3,"legacy":true},{"version":"Classic 0.0.16a_02","protocol":3,"legacy":true}]
+[
+    {
+        "version": "22w19a",
+        "protocol": 1073741908,
+        "legacy": false
+    },
+    {
+        "version": "22w18a",
+        "protocol": 1073741907,
+        "legacy": false
+    },
+    {
+        "version": "22w17a",
+        "protocol": 1073741906,
+        "legacy": false
+    },
+    {
+        "version": "22w16b",
+        "protocol": 1073741905,
+        "legacy": false
+    },
+    {
+        "version": "22w16a",
+        "protocol": 1073741904,
+        "legacy": false
+    },
+    {
+        "version": "22w15a",
+        "protocol": 1073741903,
+        "legacy": false
+    },
+    {
+        "version": "22w14a",
+        "protocol": 1073741902,
+        "legacy": false
+    },
+    {
+        "version": "22w13a",
+        "protocol": 1073741900,
+        "legacy": false
+    },
+    {
+        "version": "22w12a",
+        "protocol": 1073741899,
+        "legacy": false
+    },
+    {
+        "version": "22w11a",
+        "protocol": 1073741898,
+        "legacy": false
+    },
+    {
+        "version": "Deep Dark Experimental Snapshot 1",
+        "protocol": 1073741893,
+        "legacy": false
+    },
+    {
+        "version": "1.18.2",
+        "protocol": 758,
+        "legacy": false
+    },
+    {
+        "version": "1.18.2 Release Candidate 1",
+        "protocol": 1073741897,
+        "legacy": false
+    },
+    {
+        "version": "1.18.2 Pre-release 3",
+        "protocol": 1073741896,
+        "legacy": false
+    },
+    {
+        "version": "1.18.2 Pre-release 2",
+        "protocol": 1073741895,
+        "legacy": false
+    },
+    {
+        "version": "1.18.2 Pre-release 1",
+        "protocol": 1073741894,
+        "legacy": false
+    },
+    {
+        "version": "22w07a",
+        "protocol": 1073741892,
+        "legacy": false
+    },
+    {
+        "version": "22w06a",
+        "protocol": 1073741891,
+        "legacy": false
+    },
+    {
+        "version": "22w05a",
+        "protocol": 1073741890,
+        "legacy": false
+    },
+    {
+        "version": "22w03a",
+        "protocol": 1073741889,
+        "legacy": false
+    },
+    {
+        "version": "1.18.1",
+        "protocol": 757,
+        "legacy": false
+    },
+    {
+        "version": "1.18.1 Release Candidate 3",
+        "protocol": 1073741888,
+        "legacy": false
+    },
+    {
+        "version": "1.18.1 Release Candidate 2",
+        "protocol": 1073741887,
+        "legacy": false
+    },
+    {
+        "version": "1.18.1 Release Candidate 1",
+        "protocol": 1073741886,
+        "legacy": false
+    },
+    {
+        "version": "1.18.1 Pre-release 1",
+        "protocol": 1073741885,
+        "legacy": false
+    },
+    {
+        "version": "1.18",
+        "protocol": 757,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Release Candidate 4",
+        "protocol": 1073741884,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Release Candidate 3",
+        "protocol": 1073741883,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Release Candidate 2",
+        "protocol": 1073741882,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Release Candidate 1",
+        "protocol": 1073741881,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 8",
+        "protocol": 1073741880,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 7",
+        "protocol": 1073741879,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 6",
+        "protocol": 1073741878,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 5",
+        "protocol": 1073741877,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 4",
+        "protocol": 1073741876,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 3",
+        "protocol": 1073741875,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 2",
+        "protocol": 1073741874,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Pre-release 1",
+        "protocol": 1073741873,
+        "legacy": false
+    },
+    {
+        "version": "21w44a",
+        "protocol": 1073741872,
+        "legacy": false
+    },
+    {
+        "version": "21w43a",
+        "protocol": 1073741871,
+        "legacy": false
+    },
+    {
+        "version": "21w42a",
+        "protocol": 1073741870,
+        "legacy": false
+    },
+    {
+        "version": "21w41a",
+        "protocol": 1073741869,
+        "legacy": false
+    },
+    {
+        "version": "21w40a",
+        "protocol": 1073741868,
+        "legacy": false
+    },
+    {
+        "version": "21w39a",
+        "protocol": 1073741867,
+        "legacy": false
+    },
+    {
+        "version": "21w38a",
+        "protocol": 1073741866,
+        "legacy": false
+    },
+    {
+        "version": "21w37a",
+        "protocol": 1073741865,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 7",
+        "protocol": 1073741871,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 6",
+        "protocol": 1073741870,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 5",
+        "protocol": 1073741869,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 4",
+        "protocol": 1073741868,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 3",
+        "protocol": 1073741867,
+        "legacy": false
+    },
+    {
+        "version": "1.18 experimental snapshot 2",
+        "protocol": 1073741866,
+        "legacy": false
+    },
+    {
+        "version": "1.18 Experimental Snapshot 1",
+        "protocol": 1073741865,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1",
+        "protocol": 756,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1 Release Candidate 2",
+        "protocol": 1073741864,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1 Release Candidate 1",
+        "protocol": 1073741863,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1 Pre-release 3",
+        "protocol": 1073741862,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1 Pre-release 2",
+        "protocol": 1073741861,
+        "legacy": false
+    },
+    {
+        "version": "1.17.1 Pre-release 1",
+        "protocol": 1073741860,
+        "legacy": false
+    },
+    {
+        "version": "1.17",
+        "protocol": 755,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Release Candidate 2",
+        "protocol": 1073741859,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Release Candidate 1",
+        "protocol": 1073741858,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Pre-release 5",
+        "protocol": 1073741857,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Pre-release 4",
+        "protocol": 1073741856,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Pre-release 3",
+        "protocol": 1073741855,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Pre-release 2",
+        "protocol": 1073741854,
+        "legacy": false
+    },
+    {
+        "version": "1.17 Pre-release 1",
+        "protocol": 1073741853,
+        "legacy": false
+    },
+    {
+        "version": "21w20a",
+        "protocol": 1073741852,
+        "legacy": false
+    },
+    {
+        "version": "21w19a",
+        "protocol": 1073741851,
+        "legacy": false
+    },
+    {
+        "version": "21w18a",
+        "protocol": 1073741850,
+        "legacy": false
+    },
+    {
+        "version": "21w17a",
+        "protocol": 1073741849,
+        "legacy": false
+    },
+    {
+        "version": "21w16a",
+        "protocol": 1073741847,
+        "legacy": false
+    },
+    {
+        "version": "21w15a",
+        "protocol": 1073741846,
+        "legacy": false
+    },
+    {
+        "version": "21w14a",
+        "protocol": 1073741845,
+        "legacy": false
+    },
+    {
+        "version": "21w13a",
+        "protocol": 1073741844,
+        "legacy": false
+    },
+    {
+        "version": "21w11a",
+        "protocol": 1073741843,
+        "legacy": false
+    },
+    {
+        "version": "21w10a",
+        "protocol": 1073741842,
+        "legacy": false
+    },
+    {
+        "version": "21w08b",
+        "protocol": 1073741841,
+        "legacy": false
+    },
+    {
+        "version": "21w08a",
+        "protocol": 1073741840,
+        "legacy": false
+    },
+    {
+        "version": "21w07a",
+        "protocol": 1073741839,
+        "legacy": false
+    },
+    {
+        "version": "21w06a",
+        "protocol": 1073741838,
+        "legacy": false
+    },
+    {
+        "version": "21w05b",
+        "protocol": 1073741837,
+        "legacy": false
+    },
+    {
+        "version": "21w05a",
+        "protocol": 1073741836,
+        "legacy": false
+    },
+    {
+        "version": "21w03a",
+        "protocol": 1073741835,
+        "legacy": false
+    },
+    {
+        "version": "20w51a",
+        "protocol": 1073741833,
+        "legacy": false
+    },
+    {
+        "version": "20w49a",
+        "protocol": 1073741832,
+        "legacy": false
+    },
+    {
+        "version": "20w48a",
+        "protocol": 1073741831,
+        "legacy": false
+    },
+    {
+        "version": "20w46a",
+        "protocol": 1073741830,
+        "legacy": false
+    },
+    {
+        "version": "20w45a",
+        "protocol": 1073741829,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 8c",
+        "protocol": 803,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 7c",
+        "protocol": 802,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 6",
+        "protocol": 801,
+        "legacy": false
+    },
+    {
+        "version": "1.16.5",
+        "protocol": 754,
+        "legacy": false
+    },
+    {
+        "version": "1.16.5 Release Candidate 1",
+        "protocol": 1073741834,
+        "legacy": false
+    },
+    {
+        "version": "1.16.4",
+        "protocol": 754,
+        "legacy": false
+    },
+    {
+        "version": "1.16.4 Release Candidate 1",
+        "protocol": 1073741827,
+        "legacy": false
+    },
+    {
+        "version": "1.16.4 Pre-release 2",
+        "protocol": 1073741826,
+        "legacy": false
+    },
+    {
+        "version": "1.16.4 Pre-release 1",
+        "protocol": 1073741825,
+        "legacy": false
+    },
+    {
+        "version": "1.16.3",
+        "protocol": 753,
+        "legacy": false
+    },
+    {
+        "version": "1.16.3 Release Candidate 1",
+        "protocol": 752,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2",
+        "protocol": 751,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2 Release Candidate 2",
+        "protocol": 750,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2 Release Candidate 1",
+        "protocol": 749,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2 Pre-release 3",
+        "protocol": 748,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2 Pre-release 2",
+        "protocol": 746,
+        "legacy": false
+    },
+    {
+        "version": "1.16.2 Pre-release 1",
+        "protocol": 744,
+        "legacy": false
+    },
+    {
+        "version": "20w30a",
+        "protocol": 742,
+        "legacy": false
+    },
+    {
+        "version": "20w29a",
+        "protocol": 741,
+        "legacy": false
+    },
+    {
+        "version": "20w28a",
+        "protocol": 740,
+        "legacy": false
+    },
+    {
+        "version": "20w27a",
+        "protocol": 738,
+        "legacy": false
+    },
+    {
+        "version": "1.16.1",
+        "protocol": 736,
+        "legacy": false
+    },
+    {
+        "version": "1.16",
+        "protocol": 735,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Release Candidate 1",
+        "protocol": 734,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 8",
+        "protocol": 733,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 7",
+        "protocol": 732,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 6",
+        "protocol": 730,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 5",
+        "protocol": 729,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 4",
+        "protocol": 727,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 3",
+        "protocol": 725,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 2",
+        "protocol": 722,
+        "legacy": false
+    },
+    {
+        "version": "1.16 Pre-release 1",
+        "protocol": 721,
+        "legacy": false
+    },
+    {
+        "version": "20w22a",
+        "protocol": 719,
+        "legacy": false
+    },
+    {
+        "version": "20w21a",
+        "protocol": 718,
+        "legacy": false
+    },
+    {
+        "version": "20w20b",
+        "protocol": 717,
+        "legacy": false
+    },
+    {
+        "version": "20w20a",
+        "protocol": 716,
+        "legacy": false
+    },
+    {
+        "version": "20w19a",
+        "protocol": 715,
+        "legacy": false
+    },
+    {
+        "version": "20w18a",
+        "protocol": 714,
+        "legacy": false
+    },
+    {
+        "version": "20w17a",
+        "protocol": 713,
+        "legacy": false
+    },
+    {
+        "version": "20w16a",
+        "protocol": 712,
+        "legacy": false
+    },
+    {
+        "version": "20w15a",
+        "protocol": 711,
+        "legacy": false
+    },
+    {
+        "version": "20w14a",
+        "protocol": 710,
+        "legacy": false
+    },
+    {
+        "version": "20w13b",
+        "protocol": 709,
+        "legacy": false
+    },
+    {
+        "version": "20w13a",
+        "protocol": 708,
+        "legacy": false
+    },
+    {
+        "version": "20w12a",
+        "protocol": 707,
+        "legacy": false
+    },
+    {
+        "version": "20w11a",
+        "protocol": 706,
+        "legacy": false
+    },
+    {
+        "version": "20w10a",
+        "protocol": 705,
+        "legacy": false
+    },
+    {
+        "version": "20w09a",
+        "protocol": 704,
+        "legacy": false
+    },
+    {
+        "version": "20w08a",
+        "protocol": 703,
+        "legacy": false
+    },
+    {
+        "version": "20w07a",
+        "protocol": 702,
+        "legacy": false
+    },
+    {
+        "version": "Snapshot 20w06a",
+        "protocol": 701,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 5",
+        "protocol": 601,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 4",
+        "protocol": 600,
+        "legacy": false
+    },
+    {
+        "version": "1.15.2",
+        "protocol": 578,
+        "legacy": false
+    },
+    {
+        "version": "1.15.2 Pre-release 2",
+        "protocol": 577,
+        "legacy": false
+    },
+    {
+        "version": "1.15.2 Pre-Release 1",
+        "protocol": 576,
+        "legacy": false
+    },
+    {
+        "version": "1.15.1",
+        "protocol": 575,
+        "legacy": false
+    },
+    {
+        "version": "1.15.1 Pre-release 1",
+        "protocol": 574,
+        "legacy": false
+    },
+    {
+        "version": "1.15",
+        "protocol": 573,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 7",
+        "protocol": 572,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 6",
+        "protocol": 571,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 5",
+        "protocol": 570,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 4",
+        "protocol": 569,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 3",
+        "protocol": 567,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-Release 2",
+        "protocol": 566,
+        "legacy": false
+    },
+    {
+        "version": "1.15 Pre-release 1",
+        "protocol": 565,
+        "legacy": false
+    },
+    {
+        "version": "19w46b",
+        "protocol": 564,
+        "legacy": false
+    },
+    {
+        "version": "19w46a",
+        "protocol": 563,
+        "legacy": false
+    },
+    {
+        "version": "19w45b",
+        "protocol": 562,
+        "legacy": false
+    },
+    {
+        "version": "19w45a",
+        "protocol": 561,
+        "legacy": false
+    },
+    {
+        "version": "19w44a",
+        "protocol": 560,
+        "legacy": false
+    },
+    {
+        "version": "19w42a",
+        "protocol": 559,
+        "legacy": false
+    },
+    {
+        "version": "19w41a",
+        "protocol": 558,
+        "legacy": false
+    },
+    {
+        "version": "19w40a",
+        "protocol": 557,
+        "legacy": false
+    },
+    {
+        "version": "19w39a",
+        "protocol": 556,
+        "legacy": false
+    },
+    {
+        "version": "19w38b",
+        "protocol": 555,
+        "legacy": false
+    },
+    {
+        "version": "19w38a",
+        "protocol": 554,
+        "legacy": false
+    },
+    {
+        "version": "19w37a",
+        "protocol": 553,
+        "legacy": false
+    },
+    {
+        "version": "19w36a",
+        "protocol": 552,
+        "legacy": false
+    },
+    {
+        "version": "19w35a",
+        "protocol": 551,
+        "legacy": false
+    },
+    {
+        "version": "19w34a",
+        "protocol": 550,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 3",
+        "protocol": 502,
+        "legacy": false
+    },
+    {
+        "version": "Combat Test 2",
+        "protocol": 501,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3 - Combat Test",
+        "protocol": 500,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4",
+        "protocol": 498,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 7",
+        "protocol": 497,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 6",
+        "protocol": 496,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 5",
+        "protocol": 495,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 4",
+        "protocol": 494,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 3",
+        "protocol": 493,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 2",
+        "protocol": 492,
+        "legacy": false
+    },
+    {
+        "version": "1.14.4 Pre-Release 1",
+        "protocol": 491,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3",
+        "protocol": 490,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3 Pre-Release 4",
+        "protocol": 489,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3 Pre-Release 3",
+        "protocol": 488,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3 Pre-Release 2",
+        "protocol": 487,
+        "legacy": false
+    },
+    {
+        "version": "1.14.3 Pre-Release 1",
+        "protocol": 486,
+        "legacy": false
+    },
+    {
+        "version": "1.14.2",
+        "protocol": 485,
+        "legacy": false
+    },
+    {
+        "version": "1.14.2 Pre-Release 4",
+        "protocol": 484,
+        "legacy": false
+    },
+    {
+        "version": "1.14.2 Pre-Release 3",
+        "protocol": 483,
+        "legacy": false
+    },
+    {
+        "version": "1.14.2 Pre-Release 2",
+        "protocol": 482,
+        "legacy": false
+    },
+    {
+        "version": "1.14.2 Pre-Release 1",
+        "protocol": 481,
+        "legacy": false
+    },
+    {
+        "version": "1.14.1",
+        "protocol": 480,
+        "legacy": false
+    },
+    {
+        "version": "1.14.1 Pre-Release 2",
+        "protocol": 479,
+        "legacy": false
+    },
+    {
+        "version": "1.14.1 Pre-Release 1",
+        "protocol": 478,
+        "legacy": false
+    },
+    {
+        "version": "1.14",
+        "protocol": 477,
+        "legacy": false
+    },
+    {
+        "version": "1.14 Pre-Release 5",
+        "protocol": 476,
+        "legacy": false
+    },
+    {
+        "version": "1.14 Pre-Release 4",
+        "protocol": 475,
+        "legacy": false
+    },
+    {
+        "version": "1.14 Pre-Release 3",
+        "protocol": 474,
+        "legacy": false
+    },
+    {
+        "version": "1.14 Pre-Release 2",
+        "protocol": 473,
+        "legacy": false
+    },
+    {
+        "version": "1.14 Pre-Release 1",
+        "protocol": 472,
+        "legacy": false
+    },
+    {
+        "version": "19w14b",
+        "protocol": 471,
+        "legacy": false
+    },
+    {
+        "version": "19w14a",
+        "protocol": 470,
+        "legacy": false
+    },
+    {
+        "version": "19w13b",
+        "protocol": 469,
+        "legacy": false
+    },
+    {
+        "version": "19w13a",
+        "protocol": 468,
+        "legacy": false
+    },
+    {
+        "version": "19w12b",
+        "protocol": 467,
+        "legacy": false
+    },
+    {
+        "version": "19w12a",
+        "protocol": 466,
+        "legacy": false
+    },
+    {
+        "version": "19w11b",
+        "protocol": 465,
+        "legacy": false
+    },
+    {
+        "version": "19w11a",
+        "protocol": 464,
+        "legacy": false
+    },
+    {
+        "version": "19w09a",
+        "protocol": 463,
+        "legacy": false
+    },
+    {
+        "version": "19w08b",
+        "protocol": 462,
+        "legacy": false
+    },
+    {
+        "version": "19w08a",
+        "protocol": 461,
+        "legacy": false
+    },
+    {
+        "version": "19w07a",
+        "protocol": 460,
+        "legacy": false
+    },
+    {
+        "version": "19w06a",
+        "protocol": 459,
+        "legacy": false
+    },
+    {
+        "version": "19w05a",
+        "protocol": 458,
+        "legacy": false
+    },
+    {
+        "version": "19w04b",
+        "protocol": 457,
+        "legacy": false
+    },
+    {
+        "version": "19w04a",
+        "protocol": 456,
+        "legacy": false
+    },
+    {
+        "version": "19w03c",
+        "protocol": 455,
+        "legacy": false
+    },
+    {
+        "version": "19w03b",
+        "protocol": 454,
+        "legacy": false
+    },
+    {
+        "version": "19w03a",
+        "protocol": 453,
+        "legacy": false
+    },
+    {
+        "version": "19w02a",
+        "protocol": 452,
+        "legacy": false
+    },
+    {
+        "version": "18w50a",
+        "protocol": 451,
+        "legacy": false
+    },
+    {
+        "version": "18w49a",
+        "protocol": 450,
+        "legacy": false
+    },
+    {
+        "version": "18w48b",
+        "protocol": 449,
+        "legacy": false
+    },
+    {
+        "version": "18w48a",
+        "protocol": 448,
+        "legacy": false
+    },
+    {
+        "version": "18w47b",
+        "protocol": 447,
+        "legacy": false
+    },
+    {
+        "version": "18w47a",
+        "protocol": 446,
+        "legacy": false
+    },
+    {
+        "version": "18w46a",
+        "protocol": 445,
+        "legacy": false
+    },
+    {
+        "version": "18w45a",
+        "protocol": 444,
+        "legacy": false
+    },
+    {
+        "version": "18w44a",
+        "protocol": 443,
+        "legacy": false
+    },
+    {
+        "version": "18w43c",
+        "protocol": 442,
+        "legacy": false
+    },
+    {
+        "version": "18w43b",
+        "protocol": 441,
+        "legacy": false
+    },
+    {
+        "version": "18w43a",
+        "protocol": 440,
+        "legacy": false
+    },
+    {
+        "version": "1.13.2",
+        "protocol": 404,
+        "legacy": false
+    },
+    {
+        "version": "1.13.2-pre2",
+        "protocol": 403,
+        "legacy": false
+    },
+    {
+        "version": "1.13.2-pre1",
+        "protocol": 402,
+        "legacy": false
+    },
+    {
+        "version": "1.13.1",
+        "protocol": 401,
+        "legacy": false
+    },
+    {
+        "version": "1.13.1-pre2",
+        "protocol": 400,
+        "legacy": false
+    },
+    {
+        "version": "1.13.1-pre1",
+        "protocol": 399,
+        "legacy": false
+    },
+    {
+        "version": "18w33a",
+        "protocol": 398,
+        "legacy": false
+    },
+    {
+        "version": "18w32a",
+        "protocol": 397,
+        "legacy": false
+    },
+    {
+        "version": "18w31a",
+        "protocol": 396,
+        "legacy": false
+    },
+    {
+        "version": "18w30b",
+        "protocol": 395,
+        "legacy": false
+    },
+    {
+        "version": "18w30a",
+        "protocol": 394,
+        "legacy": false
+    },
+    {
+        "version": "1.13",
+        "protocol": 393,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre10",
+        "protocol": 392,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre9",
+        "protocol": 391,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre8",
+        "protocol": 390,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre7",
+        "protocol": 389,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre6",
+        "protocol": 388,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre5",
+        "protocol": 387,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre4",
+        "protocol": 386,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre3",
+        "protocol": 385,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre2",
+        "protocol": 384,
+        "legacy": false
+    },
+    {
+        "version": "1.13-pre1",
+        "protocol": 383,
+        "legacy": false
+    },
+    {
+        "version": "18w22c",
+        "protocol": 382,
+        "legacy": false
+    },
+    {
+        "version": "18w22b",
+        "protocol": 381,
+        "legacy": false
+    },
+    {
+        "version": "18w22a",
+        "protocol": 380,
+        "legacy": false
+    },
+    {
+        "version": "18w21b",
+        "protocol": 379,
+        "legacy": false
+    },
+    {
+        "version": "18w21a",
+        "protocol": 378,
+        "legacy": false
+    },
+    {
+        "version": "18w20c",
+        "protocol": 377,
+        "legacy": false
+    },
+    {
+        "version": "18w20b",
+        "protocol": 376,
+        "legacy": false
+    },
+    {
+        "version": "18w20a",
+        "protocol": 375,
+        "legacy": false
+    },
+    {
+        "version": "18w19b",
+        "protocol": 374,
+        "legacy": false
+    },
+    {
+        "version": "18w19a",
+        "protocol": 373,
+        "legacy": false
+    },
+    {
+        "version": "18w16a",
+        "protocol": 372,
+        "legacy": false
+    },
+    {
+        "version": "18w15a",
+        "protocol": 371,
+        "legacy": false
+    },
+    {
+        "version": "18w14b",
+        "protocol": 370,
+        "legacy": false
+    },
+    {
+        "version": "18w14a",
+        "protocol": 369,
+        "legacy": false
+    },
+    {
+        "version": "18w11a",
+        "protocol": 368,
+        "legacy": false
+    },
+    {
+        "version": "18w10d",
+        "protocol": 367,
+        "legacy": false
+    },
+    {
+        "version": "18w10c",
+        "protocol": 366,
+        "legacy": false
+    },
+    {
+        "version": "18w10b",
+        "protocol": 365,
+        "legacy": false
+    },
+    {
+        "version": "18w10a",
+        "protocol": 364,
+        "legacy": false
+    },
+    {
+        "version": "18w09a",
+        "protocol": 363,
+        "legacy": false
+    },
+    {
+        "version": "18w08b",
+        "protocol": 362,
+        "legacy": false
+    },
+    {
+        "version": "18w08a",
+        "protocol": 361,
+        "legacy": false
+    },
+    {
+        "version": "18w07c",
+        "protocol": 360,
+        "legacy": false
+    },
+    {
+        "version": "18w07b",
+        "protocol": 359,
+        "legacy": false
+    },
+    {
+        "version": "18w07a",
+        "protocol": 358,
+        "legacy": false
+    },
+    {
+        "version": "18w06a",
+        "protocol": 357,
+        "legacy": false
+    },
+    {
+        "version": "18w05a",
+        "protocol": 356,
+        "legacy": false
+    },
+    {
+        "version": "18w03b",
+        "protocol": 355,
+        "legacy": false
+    },
+    {
+        "version": "18w03a",
+        "protocol": 354,
+        "legacy": false
+    },
+    {
+        "version": "18w02a",
+        "protocol": 353,
+        "legacy": false
+    },
+    {
+        "version": "18w01a",
+        "protocol": 352,
+        "legacy": false
+    },
+    {
+        "version": "17w50a",
+        "protocol": 351,
+        "legacy": false
+    },
+    {
+        "version": "17w49b",
+        "protocol": 350,
+        "legacy": false
+    },
+    {
+        "version": "17w49a",
+        "protocol": 349,
+        "legacy": false
+    },
+    {
+        "version": "17w48a",
+        "protocol": 348,
+        "legacy": false
+    },
+    {
+        "version": "17w47b",
+        "protocol": 347,
+        "legacy": false
+    },
+    {
+        "version": "17w47a",
+        "protocol": 346,
+        "legacy": false
+    },
+    {
+        "version": "17w46a",
+        "protocol": 345,
+        "legacy": false
+    },
+    {
+        "version": "17w45b",
+        "protocol": 344,
+        "legacy": false
+    },
+    {
+        "version": "17w45a",
+        "protocol": 343,
+        "legacy": false
+    },
+    {
+        "version": "17w43b",
+        "protocol": 342,
+        "legacy": false
+    },
+    {
+        "version": "17w43a",
+        "protocol": 341,
+        "legacy": false
+    },
+    {
+        "version": "1.12.2",
+        "protocol": 340,
+        "legacy": false
+    },
+    {
+        "version": "1.12.2-pre2",
+        "protocol": 339,
+        "legacy": false
+    },
+    {
+        "version": "1.12.1",
+        "protocol": 338,
+        "legacy": false
+    },
+    {
+        "version": "1.12.1-pre1",
+        "protocol": 337,
+        "legacy": false
+    },
+    {
+        "version": "17w31a",
+        "protocol": 336,
+        "legacy": false
+    },
+    {
+        "version": "1.12",
+        "protocol": 335,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre7",
+        "protocol": 334,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre6",
+        "protocol": 333,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre5",
+        "protocol": 332,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre4",
+        "protocol": 331,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre3",
+        "protocol": 330,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre2",
+        "protocol": 329,
+        "legacy": false
+    },
+    {
+        "version": "1.12-pre1",
+        "protocol": 328,
+        "legacy": false
+    },
+    {
+        "version": "17w18b",
+        "protocol": 327,
+        "legacy": false
+    },
+    {
+        "version": "17w18a",
+        "protocol": 326,
+        "legacy": false
+    },
+    {
+        "version": "17w17b",
+        "protocol": 325,
+        "legacy": false
+    },
+    {
+        "version": "17w17a",
+        "protocol": 324,
+        "legacy": false
+    },
+    {
+        "version": "17w16b",
+        "protocol": 323,
+        "legacy": false
+    },
+    {
+        "version": "17w16a",
+        "protocol": 322,
+        "legacy": false
+    },
+    {
+        "version": "17w15a",
+        "protocol": 321,
+        "legacy": false
+    },
+    {
+        "version": "17w14a",
+        "protocol": 320,
+        "legacy": false
+    },
+    {
+        "version": "17w13b",
+        "protocol": 319,
+        "legacy": false
+    },
+    {
+        "version": "17w13a",
+        "protocol": 318,
+        "legacy": false
+    },
+    {
+        "version": "17w06a",
+        "protocol": 317,
+        "legacy": false
+    },
+    {
+        "version": "1.11.2",
+        "protocol": 316,
+        "legacy": false
+    },
+    {
+        "version": "1.11",
+        "protocol": 315,
+        "legacy": false
+    },
+    {
+        "version": "1.11-pre1",
+        "protocol": 314,
+        "legacy": false
+    },
+    {
+        "version": "16w44a",
+        "protocol": 313,
+        "legacy": false
+    },
+    {
+        "version": "16w42a",
+        "protocol": 312,
+        "legacy": false
+    },
+    {
+        "version": "16w41a",
+        "protocol": 311,
+        "legacy": false
+    },
+    {
+        "version": "16w40a",
+        "protocol": 310,
+        "legacy": false
+    },
+    {
+        "version": "16w39c",
+        "protocol": 309,
+        "legacy": false
+    },
+    {
+        "version": "16w39b",
+        "protocol": 308,
+        "legacy": false
+    },
+    {
+        "version": "16w39a",
+        "protocol": 307,
+        "legacy": false
+    },
+    {
+        "version": "16w38a",
+        "protocol": 306,
+        "legacy": false
+    },
+    {
+        "version": "16w36a",
+        "protocol": 305,
+        "legacy": false
+    },
+    {
+        "version": "16w35a",
+        "protocol": 304,
+        "legacy": false
+    },
+    {
+        "version": "16w33a",
+        "protocol": 303,
+        "legacy": false
+    },
+    {
+        "version": "16w32b",
+        "protocol": 302,
+        "legacy": false
+    },
+    {
+        "version": "16w32a",
+        "protocol": 301,
+        "legacy": false
+    },
+    {
+        "version": "1.10.2",
+        "protocol": 210,
+        "legacy": false
+    },
+    {
+        "version": "1.10-pre2",
+        "protocol": 205,
+        "legacy": false
+    },
+    {
+        "version": "1.10-pre1",
+        "protocol": 204,
+        "legacy": false
+    },
+    {
+        "version": "16w21b",
+        "protocol": 203,
+        "legacy": false
+    },
+    {
+        "version": "16w21a",
+        "protocol": 202,
+        "legacy": false
+    },
+    {
+        "version": "16w20a",
+        "protocol": 201,
+        "legacy": false
+    },
+    {
+        "version": "1.9.4",
+        "protocol": 110,
+        "legacy": false
+    },
+    {
+        "version": "1.9.3-pre1",
+        "protocol": 109,
+        "legacy": false
+    },
+    {
+        "version": "1.9.1",
+        "protocol": 108,
+        "legacy": false
+    },
+    {
+        "version": "1.9.1-pre1",
+        "protocol": 107,
+        "legacy": false
+    },
+    {
+        "version": "1.9-pre4",
+        "protocol": 106,
+        "legacy": false
+    },
+    {
+        "version": "1.9-pre3",
+        "protocol": 105,
+        "legacy": false
+    },
+    {
+        "version": "1.9-pre2",
+        "protocol": 104,
+        "legacy": false
+    },
+    {
+        "version": "1.9-pre1",
+        "protocol": 103,
+        "legacy": false
+    },
+    {
+        "version": "16w07b",
+        "protocol": 102,
+        "legacy": false
+    },
+    {
+        "version": "16w07a",
+        "protocol": 101,
+        "legacy": false
+    },
+    {
+        "version": "16w06a",
+        "protocol": 100,
+        "legacy": false
+    },
+    {
+        "version": "16w05b",
+        "protocol": 99,
+        "legacy": false
+    },
+    {
+        "version": "16w05a",
+        "protocol": 98,
+        "legacy": false
+    },
+    {
+        "version": "16w04a",
+        "protocol": 97,
+        "legacy": false
+    },
+    {
+        "version": "16w03a",
+        "protocol": 96,
+        "legacy": false
+    },
+    {
+        "version": "16w02a",
+        "protocol": 95,
+        "legacy": false
+    },
+    {
+        "version": "15w51b",
+        "protocol": 94,
+        "legacy": false
+    },
+    {
+        "version": "15w51a",
+        "protocol": 93,
+        "legacy": false
+    },
+    {
+        "version": "15w50a",
+        "protocol": 92,
+        "legacy": false
+    },
+    {
+        "version": "15w49b",
+        "protocol": 91,
+        "legacy": false
+    },
+    {
+        "version": "15w49a",
+        "protocol": 90,
+        "legacy": false
+    },
+    {
+        "version": "15w47c",
+        "protocol": 89,
+        "legacy": false
+    },
+    {
+        "version": "15w47b",
+        "protocol": 88,
+        "legacy": false
+    },
+    {
+        "version": "15w47a",
+        "protocol": 87,
+        "legacy": false
+    },
+    {
+        "version": "15w46a",
+        "protocol": 86,
+        "legacy": false
+    },
+    {
+        "version": "15w45a",
+        "protocol": 85,
+        "legacy": false
+    },
+    {
+        "version": "15w44b",
+        "protocol": 84,
+        "legacy": false
+    },
+    {
+        "version": "15w44a",
+        "protocol": 83,
+        "legacy": false
+    },
+    {
+        "version": "15w43c",
+        "protocol": 82,
+        "legacy": false
+    },
+    {
+        "version": "15w43b",
+        "protocol": 81,
+        "legacy": false
+    },
+    {
+        "version": "15w43a",
+        "protocol": 80,
+        "legacy": false
+    },
+    {
+        "version": "15w42a",
+        "protocol": 79,
+        "legacy": false
+    },
+    {
+        "version": "15w41b",
+        "protocol": 78,
+        "legacy": false
+    },
+    {
+        "version": "15w41a",
+        "protocol": 77,
+        "legacy": false
+    },
+    {
+        "version": "15w40b",
+        "protocol": 76,
+        "legacy": false
+    },
+    {
+        "version": "15w40a",
+        "protocol": 75,
+        "legacy": false
+    },
+    {
+        "version": "15w39c",
+        "protocol": 74,
+        "legacy": false
+    },
+    {
+        "version": "15w38b",
+        "protocol": 73,
+        "legacy": false
+    },
+    {
+        "version": "15w38a",
+        "protocol": 72,
+        "legacy": false
+    },
+    {
+        "version": "15w37a",
+        "protocol": 71,
+        "legacy": false
+    },
+    {
+        "version": "15w36d",
+        "protocol": 70,
+        "legacy": false
+    },
+    {
+        "version": "15w36c",
+        "protocol": 69,
+        "legacy": false
+    },
+    {
+        "version": "15w36b",
+        "protocol": 68,
+        "legacy": false
+    },
+    {
+        "version": "15w36a",
+        "protocol": 67,
+        "legacy": false
+    },
+    {
+        "version": "15w35e",
+        "protocol": 66,
+        "legacy": false
+    },
+    {
+        "version": "15w35d",
+        "protocol": 65,
+        "legacy": false
+    },
+    {
+        "version": "15w35c",
+        "protocol": 64,
+        "legacy": false
+    },
+    {
+        "version": "15w35b",
+        "protocol": 63,
+        "legacy": false
+    },
+    {
+        "version": "15w35a",
+        "protocol": 62,
+        "legacy": false
+    },
+    {
+        "version": "15w34d",
+        "protocol": 61,
+        "legacy": false
+    },
+    {
+        "version": "15w34c",
+        "protocol": 60,
+        "legacy": false
+    },
+    {
+        "version": "15w34b",
+        "protocol": 59,
+        "legacy": false
+    },
+    {
+        "version": "15w34a",
+        "protocol": 58,
+        "legacy": false
+    },
+    {
+        "version": "15w33c",
+        "protocol": 57,
+        "legacy": false
+    },
+    {
+        "version": "15w33b",
+        "protocol": 56,
+        "legacy": false
+    },
+    {
+        "version": "15w33a",
+        "protocol": 55,
+        "legacy": false
+    },
+    {
+        "version": "15w32c",
+        "protocol": 54,
+        "legacy": false
+    },
+    {
+        "version": "15w32b",
+        "protocol": 53,
+        "legacy": false
+    },
+    {
+        "version": "15w32a",
+        "protocol": 52,
+        "legacy": false
+    },
+    {
+        "version": "15w31c",
+        "protocol": 51,
+        "legacy": false
+    },
+    {
+        "version": "15w31b",
+        "protocol": 50,
+        "legacy": false
+    },
+    {
+        "version": "15w31a",
+        "protocol": 49,
+        "legacy": false
+    },
+    {
+        "version": "1.8.9",
+        "protocol": 47,
+        "legacy": false
+    },
+    {
+        "version": "1.8-pre3",
+        "protocol": 46,
+        "legacy": false
+    },
+    {
+        "version": "1.8-pre2",
+        "protocol": 45,
+        "legacy": false
+    },
+    {
+        "version": "1.8-pre1",
+        "protocol": 44,
+        "legacy": false
+    },
+    {
+        "version": "14w34d",
+        "protocol": 43,
+        "legacy": false
+    },
+    {
+        "version": "14w34c",
+        "protocol": 42,
+        "legacy": false
+    },
+    {
+        "version": "14w34b",
+        "protocol": 41,
+        "legacy": false
+    },
+    {
+        "version": "14w34a",
+        "protocol": 40,
+        "legacy": false
+    },
+    {
+        "version": "14w33c",
+        "protocol": 39,
+        "legacy": false
+    },
+    {
+        "version": "14w33b",
+        "protocol": 38,
+        "legacy": false
+    },
+    {
+        "version": "14w33a",
+        "protocol": 37,
+        "legacy": false
+    },
+    {
+        "version": "14w32d",
+        "protocol": 36,
+        "legacy": false
+    },
+    {
+        "version": "14w32c",
+        "protocol": 35,
+        "legacy": false
+    },
+    {
+        "version": "14w32b",
+        "protocol": 34,
+        "legacy": false
+    },
+    {
+        "version": "14w32a",
+        "protocol": 33,
+        "legacy": false
+    },
+    {
+        "version": "14w31a",
+        "protocol": 32,
+        "legacy": false
+    },
+    {
+        "version": "14w30c",
+        "protocol": 31,
+        "legacy": false
+    },
+    {
+        "version": "14w30b",
+        "protocol": 30,
+        "legacy": false
+    },
+    {
+        "version": "14w29b",
+        "protocol": 29,
+        "legacy": false
+    },
+    {
+        "version": "14w28b",
+        "protocol": 28,
+        "legacy": false
+    },
+    {
+        "version": "14w28a",
+        "protocol": 27,
+        "legacy": false
+    },
+    {
+        "version": "14w27b",
+        "protocol": 26,
+        "legacy": false
+    },
+    {
+        "version": "14w26c",
+        "protocol": 25,
+        "legacy": false
+    },
+    {
+        "version": "14w26b",
+        "protocol": 24,
+        "legacy": false
+    },
+    {
+        "version": "14w26a",
+        "protocol": 23,
+        "legacy": false
+    },
+    {
+        "version": "14w25b",
+        "protocol": 22,
+        "legacy": false
+    },
+    {
+        "version": "14w25a",
+        "protocol": 21,
+        "legacy": false
+    },
+    {
+        "version": "14w21b",
+        "protocol": 20,
+        "legacy": false
+    },
+    {
+        "version": "14w21a",
+        "protocol": 19,
+        "legacy": false
+    },
+    {
+        "version": "14w20b",
+        "protocol": 18,
+        "legacy": false
+    },
+    {
+        "version": "14w19a",
+        "protocol": 17,
+        "legacy": false
+    },
+    {
+        "version": "14w18b",
+        "protocol": 16,
+        "legacy": false
+    },
+    {
+        "version": "14w17a",
+        "protocol": 15,
+        "legacy": false
+    },
+    {
+        "version": "14w11b",
+        "protocol": 14,
+        "legacy": false
+    },
+    {
+        "version": "14w10c",
+        "protocol": 13,
+        "legacy": false
+    },
+    {
+        "version": "14w08a",
+        "protocol": 12,
+        "legacy": false
+    },
+    {
+        "version": "14w07a",
+        "protocol": 11,
+        "legacy": false
+    },
+    {
+        "version": "14w06b",
+        "protocol": 10,
+        "legacy": false
+    },
+    {
+        "version": "14w05b",
+        "protocol": 9,
+        "legacy": false
+    },
+    {
+        "version": "14w04b",
+        "protocol": 8,
+        "legacy": false
+    },
+    {
+        "version": "14w04a",
+        "protocol": 7,
+        "legacy": false
+    },
+    {
+        "version": "14w03b",
+        "protocol": 6,
+        "legacy": false
+    },
+    {
+        "version": "14w02c",
+        "protocol": 5,
+        "legacy": false
+    },
+    {
+        "version": "1.7.5",
+        "protocol": 4,
+        "legacy": false
+    },
+    {
+        "version": "1.7.1",
+        "protocol": 3,
+        "legacy": false
+    },
+    {
+        "version": "13w43a",
+        "protocol": 2,
+        "legacy": false
+    },
+    {
+        "version": "13w42b",
+        "protocol": 1,
+        "legacy": false
+    },
+    {
+        "version": "13w41b",
+        "protocol": 0,
+        "legacy": false
+    },
+    {
+        "version": "13w41a",
+        "protocol": 0,
+        "legacy": false
+    },
+    {
+        "version": "13w39b",
+        "protocol": 80,
+        "legacy": true
+    },
+    {
+        "version": "13w39a",
+        "protocol": 80,
+        "legacy": true
+    },
+    {
+        "version": "13w38c",
+        "protocol": 79,
+        "legacy": true
+    },
+    {
+        "version": "13w38b",
+        "protocol": 79,
+        "legacy": true
+    },
+    {
+        "version": "13w38a",
+        "protocol": 79,
+        "legacy": true
+    },
+    {
+        "version": "1.6.4",
+        "protocol": 78,
+        "legacy": true
+    },
+    {
+        "version": "1.6.3",
+        "protocol": 77,
+        "legacy": true
+    },
+    {
+        "version": "13w37b",
+        "protocol": 76,
+        "legacy": true
+    },
+    {
+        "version": "13w37a",
+        "protocol": 76,
+        "legacy": true
+    },
+    {
+        "version": "13w36b",
+        "protocol": 75,
+        "legacy": true
+    },
+    {
+        "version": "13w36a",
+        "protocol": 75,
+        "legacy": true
+    },
+    {
+        "version": "1.6.2",
+        "protocol": 74,
+        "legacy": true
+    },
+    {
+        "version": "1.6.1",
+        "protocol": 73,
+        "legacy": true
+    },
+    {
+        "version": "1.6",
+        "protocol": 72,
+        "legacy": true
+    },
+    {
+        "version": "13w26a",
+        "protocol": 72,
+        "legacy": true
+    },
+    {
+        "version": "13w25c",
+        "protocol": 71,
+        "legacy": true
+    },
+    {
+        "version": "13w25b",
+        "protocol": 71,
+        "legacy": true
+    },
+    {
+        "version": "13w25a",
+        "protocol": 71,
+        "legacy": true
+    },
+    {
+        "version": "13w24b",
+        "protocol": 70,
+        "legacy": true
+    },
+    {
+        "version": "13w24a",
+        "protocol": 69,
+        "legacy": true
+    },
+    {
+        "version": "13w23b",
+        "protocol": 68,
+        "legacy": true
+    },
+    {
+        "version": "13w23a",
+        "protocol": 67,
+        "legacy": true
+    },
+    {
+        "version": "13w22a",
+        "protocol": 67,
+        "legacy": true
+    },
+    {
+        "version": "13w21b",
+        "protocol": 67,
+        "legacy": true
+    },
+    {
+        "version": "13w21a",
+        "protocol": 67,
+        "legacy": true
+    },
+    {
+        "version": "13w19a",
+        "protocol": 66,
+        "legacy": true
+    },
+    {
+        "version": "13w18c",
+        "protocol": 65,
+        "legacy": true
+    },
+    {
+        "version": "13w18b",
+        "protocol": 65,
+        "legacy": true
+    },
+    {
+        "version": "13w18a",
+        "protocol": 65,
+        "legacy": true
+    },
+    {
+        "version": "13w17a",
+        "protocol": 64,
+        "legacy": true
+    },
+    {
+        "version": "13w16b",
+        "protocol": 63,
+        "legacy": true
+    },
+    {
+        "version": "13w16a",
+        "protocol": 62,
+        "legacy": true
+    },
+    {
+        "version": "1.5.2",
+        "protocol": 61,
+        "legacy": true
+    },
+    {
+        "version": "1.5.1",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w12~",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w11a",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "1.5",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w10b",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w10a",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w09c",
+        "protocol": 60,
+        "legacy": true
+    },
+    {
+        "version": "13w09b",
+        "protocol": 59,
+        "legacy": true
+    },
+    {
+        "version": "13w09a",
+        "protocol": 59,
+        "legacy": true
+    },
+    {
+        "version": "13w07a",
+        "protocol": 58,
+        "legacy": true
+    },
+    {
+        "version": "13w06a",
+        "protocol": 58,
+        "legacy": true
+    },
+    {
+        "version": "13w05b",
+        "protocol": 56,
+        "legacy": true
+    },
+    {
+        "version": "13w05a",
+        "protocol": 56,
+        "legacy": true
+    },
+    {
+        "version": "13w04a",
+        "protocol": 55,
+        "legacy": true
+    },
+    {
+        "version": "13w03a",
+        "protocol": 54,
+        "legacy": true
+    },
+    {
+        "version": "13w02b",
+        "protocol": 53,
+        "legacy": true
+    },
+    {
+        "version": "13w02a",
+        "protocol": 53,
+        "legacy": true
+    },
+    {
+        "version": "13w01b",
+        "protocol": 52,
+        "legacy": true
+    },
+    {
+        "version": "13w01a",
+        "protocol": 52,
+        "legacy": true
+    },
+    {
+        "version": "1.4.7",
+        "protocol": 51,
+        "legacy": true
+    },
+    {
+        "version": "1.4.6",
+        "protocol": 51,
+        "legacy": true
+    },
+    {
+        "version": "12w50b",
+        "protocol": 51,
+        "legacy": true
+    },
+    {
+        "version": "12w50a",
+        "protocol": 51,
+        "legacy": true
+    },
+    {
+        "version": "12w49a",
+        "protocol": 50,
+        "legacy": true
+    },
+    {
+        "version": "1.4.5",
+        "protocol": 49,
+        "legacy": true
+    },
+    {
+        "version": "1.4.4",
+        "protocol": 49,
+        "legacy": true
+    },
+    {
+        "version": "1.4.3",
+        "protocol": 48,
+        "legacy": true
+    },
+    {
+        "version": "1.4.2",
+        "protocol": 47,
+        "legacy": true
+    },
+    {
+        "version": "1.4.1",
+        "protocol": 47,
+        "legacy": true
+    },
+    {
+        "version": "1.4",
+        "protocol": 47,
+        "legacy": true
+    },
+    {
+        "version": "12w42b",
+        "protocol": 47,
+        "legacy": true
+    },
+    {
+        "version": "12w42a",
+        "protocol": 46,
+        "legacy": true
+    },
+    {
+        "version": "12w41b",
+        "protocol": 46,
+        "legacy": true
+    },
+    {
+        "version": "12w41a",
+        "protocol": 46,
+        "legacy": true
+    },
+    {
+        "version": "12w40b",
+        "protocol": 45,
+        "legacy": true
+    },
+    {
+        "version": "12w40a",
+        "protocol": 44,
+        "legacy": true
+    },
+    {
+        "version": "12w39b",
+        "protocol": 43,
+        "legacy": true
+    },
+    {
+        "version": "12w39a",
+        "protocol": 43,
+        "legacy": true
+    },
+    {
+        "version": "12w38b",
+        "protocol": 43,
+        "legacy": true
+    },
+    {
+        "version": "12w38a",
+        "protocol": 43,
+        "legacy": true
+    },
+    {
+        "version": "12w37a",
+        "protocol": 42,
+        "legacy": true
+    },
+    {
+        "version": "12w36a",
+        "protocol": 42,
+        "legacy": true
+    },
+    {
+        "version": "12w34b",
+        "protocol": 42,
+        "legacy": true
+    },
+    {
+        "version": "12w34a",
+        "protocol": 41,
+        "legacy": true
+    },
+    {
+        "version": "12w32a",
+        "protocol": 40,
+        "legacy": true
+    },
+    {
+        "version": "1.3.2",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "1.3.1",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "1.3",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "12w30e",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "12w30d",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "12w30c",
+        "protocol": 39,
+        "legacy": true
+    },
+    {
+        "version": "12w30b",
+        "protocol": 38,
+        "legacy": true
+    },
+    {
+        "version": "12w30a",
+        "protocol": 38,
+        "legacy": true
+    },
+    {
+        "version": "12w27a",
+        "protocol": 38,
+        "legacy": true
+    },
+    {
+        "version": "12w26a",
+        "protocol": 37,
+        "legacy": true
+    },
+    {
+        "version": "12w25a",
+        "protocol": 37,
+        "legacy": true
+    },
+    {
+        "version": "12w24a",
+        "protocol": 36,
+        "legacy": true
+    },
+    {
+        "version": "12w23b",
+        "protocol": 35,
+        "legacy": true
+    },
+    {
+        "version": "12w23a",
+        "protocol": 35,
+        "legacy": true
+    },
+    {
+        "version": "12w22a",
+        "protocol": 34,
+        "legacy": true
+    },
+    {
+        "version": "12w21b",
+        "protocol": 33,
+        "legacy": true
+    },
+    {
+        "version": "12w21a",
+        "protocol": 33,
+        "legacy": true
+    },
+    {
+        "version": "12w19a",
+        "protocol": 32,
+        "legacy": true
+    },
+    {
+        "version": "12w18a",
+        "protocol": 32,
+        "legacy": true
+    },
+    {
+        "version": "12w17a",
+        "protocol": 31,
+        "legacy": true
+    },
+    {
+        "version": "12w16a",
+        "protocol": 30,
+        "legacy": true
+    },
+    {
+        "version": "12w15a",
+        "protocol": 29,
+        "legacy": true
+    },
+    {
+        "version": "1.2.5",
+        "protocol": 29,
+        "legacy": true
+    },
+    {
+        "version": "1.2.4",
+        "protocol": 29,
+        "legacy": true
+    },
+    {
+        "version": "1.2.3",
+        "protocol": 28,
+        "legacy": true
+    },
+    {
+        "version": "1.2.2",
+        "protocol": 28,
+        "legacy": true
+    },
+    {
+        "version": "1.2.1",
+        "protocol": 28,
+        "legacy": true
+    },
+    {
+        "version": "1.2",
+        "protocol": 28,
+        "legacy": true
+    },
+    {
+        "version": "12w08a",
+        "protocol": 28,
+        "legacy": true
+    },
+    {
+        "version": "12w07b",
+        "protocol": 27,
+        "legacy": true
+    },
+    {
+        "version": "12w07a",
+        "protocol": 27,
+        "legacy": true
+    },
+    {
+        "version": "12w06a",
+        "protocol": 25,
+        "legacy": true
+    },
+    {
+        "version": "12w05b",
+        "protocol": 24,
+        "legacy": true
+    },
+    {
+        "version": "12w05a",
+        "protocol": 24,
+        "legacy": true
+    },
+    {
+        "version": "12w04a",
+        "protocol": 24,
+        "legacy": true
+    },
+    {
+        "version": "12w03a",
+        "protocol": 24,
+        "legacy": true
+    },
+    {
+        "version": "1.1",
+        "protocol": 23,
+        "legacy": true
+    },
+    {
+        "version": "12w01a",
+        "protocol": 23,
+        "legacy": true
+    },
+    {
+        "version": "11w50a",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "11w49a",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "11w48a",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "11w47a",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "1.0.1",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "1.0.0",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "RC2",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "RC1",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease 6",
+        "protocol": 22,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease 5",
+        "protocol": 21,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease 4",
+        "protocol": 20,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease 3",
+        "protocol": 19,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease 2",
+        "protocol": 19,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.9 Prerelease",
+        "protocol": 18,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.8.1",
+        "protocol": 17,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.8",
+        "protocol": 17,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.8 Pre-release 2 ",
+        "protocol": null,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.8 Pre-release",
+        "protocol": 15,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.7.3",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.7.2",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.7_01",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.7",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.6",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.5",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.4",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.3",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.2",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6.1",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.6 Test Build 3",
+        "protocol": 12,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.5_02",
+        "protocol": 11,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.5_01",
+        "protocol": 11,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.5",
+        "protocol": 11,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.4_01",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.4",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.3_01",
+        "protocol": 9,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.3",
+        "protocol": 9,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.2_02",
+        "protocol": 8,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.2_01",
+        "protocol": 8,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.2",
+        "protocol": 8,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.1_02",
+        "protocol": 8,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.1_01",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.1",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.0.2",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.0_01",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Beta 1.0",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.8",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.6",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.7",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.5",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.6_02",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.4_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.6_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.6",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.3_05",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.3_04",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.5_02",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.5_01",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.3_02",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.3_01",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.5",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.3",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.4",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.2",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.1_01",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.3",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.1",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.0_02",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.0_01",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.2_01",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.2",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.2.0",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.1.2_01",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.1.2",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.1",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.1.1",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.0_01",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.2.0",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.1.0",
+        "protocol": 2,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.17_04",
+        "protocol": 1,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.17_03",
+        "protocol": 1,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.17_02",
+        "protocol": 1,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.4",
+        "protocol": 1,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.3",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.16_02",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.2_01",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.2",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.16_01",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.1",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.16",
+        "protocol": 14,
+        "legacy": true
+    },
+    {
+        "version": "Alpha server 0.1.0",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.15",
+        "protocol": 13,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.14",
+        "protocol": 12,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.13_01",
+        "protocol": 12,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.13",
+        "protocol": 12,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.12",
+        "protocol": 11,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.11",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.10",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.9",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.8_01",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.8",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.7",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.6_03",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.6_02",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.6_01",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.6",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.5_01",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Alpha v1.0.5",
+        "protocol": 10,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.10.1",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.10",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.30",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.29_02",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.29_01",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.29",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.28_01",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.9",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.8.3",
+        "protocol": 7,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.27 SURVIVAL TEST",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.26 SURVIVAL TEST",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.25_05 SURVIVAL TEST",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.25 SURVIVAL TEST",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.24_SURVIVAL_TEST_03",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.24_SURVIVAL_TEST_02",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.24_SURVIVAL_TEST_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.24_SURVIVAL_TEST",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.23a_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.23a",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a_05",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a_04",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a_03",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a_02",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.22a",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.21a_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.21a",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.20a_02",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.8.2",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.20a_01",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.8.1",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.8",
+        "protocol": 6,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.7",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.6",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.5",
+        "protocol": 5,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.18a_02",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.4.1",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.4",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.3",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.17a",
+        "protocol": 4,
+        "legacy": true
+    },
+    {
+        "version": "Classic server 1.2",
+        "protocol": 3,
+        "legacy": true
+    },
+    {
+        "version": "Classic 0.0.16a_02",
+        "protocol": 3,
+        "legacy": true
+    }
+]

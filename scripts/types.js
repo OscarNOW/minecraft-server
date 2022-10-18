@@ -106,7 +106,7 @@ out = out.replace(/\/\//g, '\n//')
 out = out.replace(/\/\*/g, '\n/*')
 out = out.replace(/\*\//g, '*/\n')
 
-out = out.replace(/\*(.|[\r\n])*?\*/g, ''); //remove comments 
+out = out.replace(/\*(.|[\r\n])*?\*/g, ''); //remove comments
 out = out.split('\n').filter(a => !a.startsWith('//')).join('\n')
 
 out = out.split('\n')

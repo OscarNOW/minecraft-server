@@ -1,1 +1,134 @@
-[{"code":"key.jump","default":"Space"},{"code":"key.sneak","default":"Left Shift"},{"code":"key.sprint","default":"Left Control"},{"code":"key.left","default":"a"},{"code":"key.right","default":"d"},{"code":"key.back","default":"s"},{"code":"key.forward","default":"w"},{"code":"key.attack","default":"Left Button"},{"code":"key.pickItem","default":"Middle Button"},{"code":"key.use","default":"Right Button"},{"code":"key.drop","default":"q"},{"code":"key.hotbar.1","default":"1"},{"code":"key.hotbar.2","default":"2"},{"code":"key.hotbar.3","default":"3"},{"code":"key.hotbar.4","default":"4"},{"code":"key.hotbar.5","default":"5"},{"code":"key.hotbar.6","default":"6"},{"code":"key.hotbar.7","default":"7"},{"code":"key.hotbar.8","default":"8"},{"code":"key.hotbar.9","default":"9"},{"code":"key.inventory","default":"e"},{"code":"key.swapOffhand","default":"f"},{"code":"key.loadToolbarActivator","default":"x"},{"code":"key.saveToolbarActivator","default":"c"},{"code":"key.playerlist","default":"Tab"},{"code":"key.chat","default":"t"},{"code":"key.command","default":"/"},{"code":"key.advancements","default":"l"},{"code":"key.spectatorOutlines","default":""},{"code":"key.screenshot","default":"F2"},{"code":"key.smoothCamera","default":""},{"code":"key.fullscreen","default":"F11"},{"code":"key.togglePerspective","default":"F5"}]
+[
+    {
+        "code": "key.jump",
+        "default": "Space"
+    },
+    {
+        "code": "key.sneak",
+        "default": "Left Shift"
+    },
+    {
+        "code": "key.sprint",
+        "default": "Left Control"
+    },
+    {
+        "code": "key.left",
+        "default": "a"
+    },
+    {
+        "code": "key.right",
+        "default": "d"
+    },
+    {
+        "code": "key.back",
+        "default": "s"
+    },
+    {
+        "code": "key.forward",
+        "default": "w"
+    },
+    {
+        "code": "key.attack",
+        "default": "Left Button"
+    },
+    {
+        "code": "key.pickItem",
+        "default": "Middle Button"
+    },
+    {
+        "code": "key.use",
+        "default": "Right Button"
+    },
+    {
+        "code": "key.drop",
+        "default": "q"
+    },
+    {
+        "code": "key.hotbar.1",
+        "default": "1"
+    },
+    {
+        "code": "key.hotbar.2",
+        "default": "2"
+    },
+    {
+        "code": "key.hotbar.3",
+        "default": "3"
+    },
+    {
+        "code": "key.hotbar.4",
+        "default": "4"
+    },
+    {
+        "code": "key.hotbar.5",
+        "default": "5"
+    },
+    {
+        "code": "key.hotbar.6",
+        "default": "6"
+    },
+    {
+        "code": "key.hotbar.7",
+        "default": "7"
+    },
+    {
+        "code": "key.hotbar.8",
+        "default": "8"
+    },
+    {
+        "code": "key.hotbar.9",
+        "default": "9"
+    },
+    {
+        "code": "key.inventory",
+        "default": "e"
+    },
+    {
+        "code": "key.swapOffhand",
+        "default": "f"
+    },
+    {
+        "code": "key.loadToolbarActivator",
+        "default": "x"
+    },
+    {
+        "code": "key.saveToolbarActivator",
+        "default": "c"
+    },
+    {
+        "code": "key.playerlist",
+        "default": "Tab"
+    },
+    {
+        "code": "key.chat",
+        "default": "t"
+    },
+    {
+        "code": "key.command",
+        "default": "/"
+    },
+    {
+        "code": "key.advancements",
+        "default": "l"
+    },
+    {
+        "code": "key.spectatorOutlines",
+        "default": ""
+    },
+    {
+        "code": "key.screenshot",
+        "default": "F2"
+    },
+    {
+        "code": "key.smoothCamera",
+        "default": ""
+    },
+    {
+        "code": "key.fullscreen",
+        "default": "F11"
+    },
+    {
+        "code": "key.togglePerspective",
+        "default": "F5"
+    }
+]

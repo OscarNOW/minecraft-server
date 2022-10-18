@@ -1,1 +1,8 @@
-{"swingMainHand":0,"flashRed":1,"leaveBed":2,"swingOffHand":3,"critical":4,"magicCritical":5}
+{
+    "swingMainHand": 0,
+    "flashRed": 1,
+    "leaveBed": 2,
+    "swingOffHand": 3,
+    "critical": 4,
+    "magicCritical": 5
+}
