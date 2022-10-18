@@ -22,8 +22,11 @@ Create default block states
 -Create issue forms
     Automatically update bug_report when new version released
     Convert feature request to issue form
+    Add placeholders to issue forms
 Change unstable version name to Github
     Update docs
     Update bug_report issue form
 Add Microsoft credentials to Github actions and local
 https://github.com/OscarNOW/minecraft-server/community
+Change all references from library to package
+Create a pull request template
