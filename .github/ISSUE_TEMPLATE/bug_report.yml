@@ -27,7 +27,7 @@ body:
     attributes:
       label: Reproduction
       description: How can we reproduce this bug? Please provide an as short as possible list of steps.
-      placeholder: |
+      value: |
         1.
     validations:
       required: true
