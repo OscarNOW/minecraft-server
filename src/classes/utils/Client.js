@@ -144,7 +144,7 @@ class Client {
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this.p.client.on(eventName, eventCallback.bind(this))
+            this.p.client.on(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0));
 
         for (const { func } of fs
             .readdirSync(path.resolve(__dirname, './Client/constructors/'))
