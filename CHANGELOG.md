@@ -3,6 +3,7 @@ None
 
 ## New API
 ### Chunks
+* [\<Client>.setBlock(](https://oscarnow.github.io/minecraft-server/unstable/classes/Client#setBlock)
 * [\<Chunk>.blocks{](https://oscarnow.github.io/minecraft-server/unstable/classes/Chunk#blocks)
 * [\<LoadedChunk>](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk)
 * [\<LoadedChunk>.setBlock(](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk#setBlock)

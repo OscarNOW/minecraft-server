@@ -227,6 +227,11 @@ export class Client {
     win(showCredits: boolean): void;
     kick(reason: textInput | Text): void;
     chat(message?: textInput | Text): void;
+    setBlock(block: blockName, location: {
+        x: number;
+        y: number;
+        z: number;
+    }, state?: blockState): this;
     title(properties: {
         fadeIn?: number;
         stay?: number;

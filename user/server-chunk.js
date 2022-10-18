@@ -24,6 +24,9 @@ server.on('connect', client => {
             client.chunk(chunk, { x, z });
 
     client.on('chat', () => {
-        client.chunks.find(({ x, z }) => x == 0 && z == 0).setBlock('stone', { x: 0, y: 99, z: 0 });
+        // client.setBlock('stone', { x: 0, y: 99, z: 0 });
+        client
+            .setBlock('stone', { x: 0, y: 99, z: 0 })
+            .setBlock('grass_block', { x: 0, y: 99, z: 1 }, { snowy: true })
     })
 })
