@@ -13,6 +13,7 @@ body:
     attributes:
       label: Problem
       description: What problem is your feature request related to? Please provide a clear and concise description of the problem.
+      placeholder: I found that it's not possible to...
     validations:
       required: true
   - type: textarea
@@ -20,6 +21,7 @@ body:
     attributes:
       label: Solution to problem
       description: Describe the solution you'd like. Please provide a clear and concise description of what you want to happen.
+      placeholder: I'd like that there is a new method that...
     validations:
       required: true
   - type: textarea
@@ -27,6 +29,7 @@ body:
     attributes:
       label: Alternative solutions
       description: Describe alternatives you've considered.
+      placeholder: I've also considered a method where...
     validations:
       required: false
 
