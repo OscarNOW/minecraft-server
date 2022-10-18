@@ -110,77 +110,64 @@ class Server {
         })
 
         this.server.on('connection', client => {
-            setTimeout(() => { //to avoid try blocks outside our code
+            this.p.clientInformation.set(client, {});
 
-                this.p.clientInformation.set(client, {});
+            let clientState = null;
 
-                let clientState = null;
+            client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
+                if (
+                    name == 'legacy_server_list_ping' &&
+                    state == 'handshaking' &&
+                    payload == 1
+                )
+                    handleLegacyPing(buffer, client, this.serverList)
+            })
 
-                client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
-                    setTimeout(() => { //to avoid try blocks outside our code
+            client.on('state', state => clientState = state)
 
-                        if (
-                            name == 'legacy_server_list_ping' &&
-                            state == 'handshaking' &&
-                            payload == 1
-                        )
-                            handleLegacyPing(buffer, client, this.serverList)
+            client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
+                const isLegacy = serverHost == '';
 
-                    }, 0)
-                })
+                this.p.clientInformation.get(client).clientEarlyInformation = {
+                    ip: client.socket.remoteAddress,
+                    version: isLegacy ?
+                        'legacy' :
+                        (versions.find(a => a.legacy == false && a.protocol == protocolVersion)?.version ||
+                            versions.find(a => a.legacy == true && a.protocol == protocolVersion)?.version),
+                    connection: {
+                        host: isLegacy ? null : serverHost,
+                        port: isLegacy ? null : serverPort
+                    }
+                };
+                this.p.clientInformation.get(client).clientLegacyPing = false;
 
-                client.on('state', state => clientState = state)
+                if ((clientState == 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                    let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
 
-                client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
-                    setTimeout(() => { //to avoid try blocks outside our code
+                    if (typeof endReason == 'string')
+                        if (isLegacy) {
+                            const buffer = Buffer.alloc(2);
+                            buffer.writeUInt16BE(endReason.length);
 
-                        const isLegacy = serverHost == '';
+                            const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(endReason, 'utf16le'), 16)])
 
-                        this.p.clientInformation.get(client).clientEarlyInformation = {
-                            ip: client.socket.remoteAddress,
-                            version: isLegacy ?
-                                'legacy' :
-                                (versions.find(a => a.legacy == false && a.protocol == protocolVersion)?.version ||
-                                    versions.find(a => a.legacy == true && a.protocol == protocolVersion)?.version),
-                            connection: {
-                                host: isLegacy ? null : serverHost,
-                                port: isLegacy ? null : serverPort
-                            }
-                        };
-                        this.p.clientInformation.get(client).clientLegacyPing = false;
+                            return client.socket.write(responseBuffer)
+                        } else
+                            client.end(endReason)
+                    else if (endReason !== null)
+                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
+                            got: endReason,
+                            expectationType: 'type',
+                            expectation: 'string | null'
+                        }, this.constructor, { server: this }))
+                }
 
-                        if ((clientState == 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
-                            let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
+            });
 
-                            if (typeof endReason == 'string')
-                                if (isLegacy) {
-                                    const buffer = Buffer.alloc(2);
-                                    buffer.writeUInt16BE(endReason.length);
-
-                                    const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(endReason, 'utf16le'), 16)])
-
-                                    return client.socket.write(responseBuffer)
-                                } else
-                                    client.end(endReason)
-                            else if (endReason !== null)
-                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
-                                    got: endReason,
-                                    expectationType: 'type',
-                                    expectation: 'string | null'
-                                }, this.constructor, { server: this }))
-                        }
-
-                    });
-
-                }, 0);
-
-            }, 0);
         })
 
         this.server.on('login', async client => {
-            setTimeout(() => { //to avoid try blocks outside our code                
-                new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
-            }, 0);
+            new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
         });
 
     }
