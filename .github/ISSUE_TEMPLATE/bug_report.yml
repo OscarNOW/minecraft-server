@@ -13,13 +13,15 @@ body:
     attributes:
       label: Description
       description: How did you find this bug? Tell a bit about the bug.
+      placeholder: |
+        I found the bug when I was working on...
     validations:
       required: true
   - type: textarea
     id: screenshots
     attributes:
       label: Screenshots
-      description: If applicable, ass screenshots to help explain your problem.
+      description: If applicable, add screenshots to help explain your problem.
     validations:
       required: false
   - type: textarea
@@ -27,6 +29,8 @@ body:
     attributes:
       label: Reproduction
       description: How can we reproduce this bug? Please provide an as short as possible list of steps.
+      placeholder: |
+        1. Use the following code...
     validations:
       required: true
   - type: textarea
@@ -34,6 +38,8 @@ body:
     attributes:
       label: Expected behaviour
       description: What did you expect to happen? Please provide a clear and concise description.
+      placeholder: |
+        I expected the following code to...
     validations:
       required: true
 
@@ -52,7 +58,8 @@ body:
     id: OS-version
     attributes:
       label: OS Version
-      description: What OS version (and distro) do you use? (e.g. Windows 10)
+      description: What OS version (and distro) do you use?
+      placeholder: Windows 10
     validations:
       required: true
 
