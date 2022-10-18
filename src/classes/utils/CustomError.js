@@ -41,11 +41,15 @@ class CustomError {
             return `Unknown ${valueName}, got ${got}, expected ${expected}. Program that caused this error: ${causer}`;
     }
 
+    toString() {
+        return this[Symbol.toPrimitive]('string');
+    }
+
     [Symbol.toPrimitive](hint) {
         if (hint == 'string')
-            return this.error;
+            return this.error.stack;
         else if (hint == 'default')
-            return this.error;
+            return this.error.stack;
         else if (hint == 'number')
             return NaN;
         else
