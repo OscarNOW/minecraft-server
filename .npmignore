@@ -1,22 +1,36 @@
 node_modules/
-src/credentials/
+
+# Dotfiles
 .vscode/
-.gitignore
 .github/
-SECURITY.md
-examples/
-logs/
-*.test.js
-*.types.js
-scripts/
-src/functions/loader/tests.js
-src/docs/
+.gitignore
+.eslintrc.*
+.editorconfig
+*.Dockerfile
+.gitpod.yml
+
+
+# Folders
 docs/
-temp/
+examples/
+scripts/
+assets/
+
+# User folders
 progress/
 user/
-src/classes/exports/*.d.ts
-src/classes/utils/*.d.ts
+
+# Documentation files
+CHANGELOG.md
 FAQ.md
-assets/
-.eslintrc.*
+SECURITY.md
+
+# Documentation generation
+src/docs/
+
+# Source type files
+src/**/*.d.ts
+**/*.types.js
+
+# Test files
+**/*.test.js
