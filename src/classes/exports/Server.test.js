@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const mc = require('minecraft-protocol');
 const Server = require('./Server');
+const version = require('../../settings.json').version;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let credentials = null;
@@ -179,7 +180,8 @@ function bot({ kicked }) {
             host: 'localhost',
             username: credentials.username,
             password: credentials.password,
-            auth: 'microsoft'
+            auth: 'microsoft',
+            version
         })
 
         bot.on('chat', (username, message) => {
@@ -195,6 +197,6 @@ function ping() {
     return mc.ping({
         host: 'localhost',
         port: '25565',
-        version: '1.16.3'
+        version
     })
 }
