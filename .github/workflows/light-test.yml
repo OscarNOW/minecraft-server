@@ -2,8 +2,6 @@ name: Light Test
 
 on:
   push:
-    branches:
-      - main
     paths-ignore:
       - "**.txt"
       - "**.md"

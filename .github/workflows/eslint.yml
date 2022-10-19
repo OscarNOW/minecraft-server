@@ -2,13 +2,12 @@ name: ESLint
 
 on:
   push:
-    branches:
-      - main
     paths:
       - .github/workflows/eslint.yml
       - "**.js"
       - .eslintrc.json
   pull_request:
+    types: [opened, reopened]
     paths:
       - .github/workflows/eslint.yml
       - "**.js"

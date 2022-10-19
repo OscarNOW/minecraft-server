@@ -9,6 +9,7 @@ on:
       - "**.md"
       - "**.xlsx"
   pull_request:
+    types: [opened, reopened]
     paths-ignore:
       - "**.txt"
       - "**.md"
