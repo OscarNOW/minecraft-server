@@ -19,12 +19,8 @@ Add hints to CustomError
 Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
--Create issue forms
-    -Automatically update bug_report when new version released
 Move manifest versions to settings.json
-Change unstable version name to Github
-    Update docs
-    Update bug_report issue form
+-Change unstable version name to Github
 Add Microsoft credentials to Github actions and local
 https://github.com/OscarNOW/minecraft-server/community
 Change all references from library to package

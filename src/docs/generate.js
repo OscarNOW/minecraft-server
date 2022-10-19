@@ -35,8 +35,8 @@
     console.clear();
     console.log('Deleting old files...')
 
-    await fs.rm(path.join(__dirname, '../../docs/unstable/'), { recursive: true, force: true });
-    await fs.mkdir(path.join(__dirname, '../../docs/unstable/'))
+    await fs.rm(path.join(__dirname, '../../docs/github/'), { recursive: true, force: true });
+    await fs.mkdir(path.join(__dirname, '../../docs/github/'))
 
     console.clear();
     require('./transformBefore.js');
@@ -72,7 +72,7 @@
 
         copiedFilePromises.push(fs.cp(
             path.join(__dirname, `../../${copyingFile}`),
-            path.join(__dirname, `../../docs/unstable/${copyingFile}`),
+            path.join(__dirname, `../../docs/github/${copyingFile}`),
             { recursive: true }
         ));
     }

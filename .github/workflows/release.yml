@@ -21,7 +21,7 @@ jobs:
       - name: Copy docs
         run: |
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
-          cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
+          cp -r ./docs/github/. ./docs/${{ github.event.inputs.version }}/
       - name: Update version files
         run: node ./scripts/updateVersionFiles ${{ github.event.inputs.version }}
 

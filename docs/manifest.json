@@ -8,8 +8,9 @@
         },
         {
             "version": "-1.0.0",
-            "name": "unstable",
-            "path": "unstable",
+            "name": "github",
+            "path": "github",
+            "unstable": true,
             "latestUnstable": true
         }
     ]
