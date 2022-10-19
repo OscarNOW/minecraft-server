@@ -21,6 +21,5 @@ Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
-Add Microsoft credentials to Github actions and local
--https://github.com/OscarNOW/minecraft-server/community
+-Add Microsoft credentials to Github actions and local
 Change all references from library to package
