@@ -21,7 +21,6 @@ Create default block states
     Create table of states and blocks
 -Create issue forms
     Automatically update bug_report when new version released
-    -Add placeholders to issue forms
 Change unstable version name to Github
     Update docs
     Update bug_report issue form
