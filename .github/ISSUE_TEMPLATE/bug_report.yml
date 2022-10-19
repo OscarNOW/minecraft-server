@@ -69,9 +69,12 @@ body:
       label: Package Version
       description: What package version do you use? (get by running `npm list @boem312/minecraft-server`)
       options:
+        # these version options are automatically updated in scripts/updateVersionFiles
+        #startVersionOptions
         - 0.0.0
         - 0.1.0
         - unstable
+        #endVersionOptions
     validations:
       required: true
 
