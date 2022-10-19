@@ -23,9 +23,23 @@ manifest.versions[0].name = `${manifest.versions[0].version} (latest stable)`;
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
 
+let bugReport = fs.readFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml')).toString();
+bugReport = bugReport.split('\n');
+
+let versionLineStartIndex = bugReport.find(a => a.includes('#startVersionOptions')) + 1;
+let versionLineEndIndex = bugReport.find(a => a.includes('#endVersionOptions')) - 1;
+
+let newVersions = manifest.versions.map(({ name }) => name).map(a => `        - ${a}`);
+
+bugReport = [...bugReport.slice(0, versionLineStartIndex), ...newVersions, ...bugReport.slice(versionLineEndIndex)];
+
+bugReport = bugReport.join('\n');
+
+fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport)
+
 function compareVersions(a, b) {
-    a = a.split('.').map(c => parseFloat(c));
-    b = b.split('.').map(c => parseFloat(c));
+    a = a.split('.').map(c => parseInt(c));
+    b = b.split('.').map(c => parseInt(c));
 
     for (let i = 0; i < a.length; i++) {
         if (a[i] > b[i]) return 1;

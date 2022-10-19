@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 console.log('Transforming customCss...')
-let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/unstable/assets/custom.css')).toString()
+let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css')).toString()
 customCss = customCss.replace('.category__link--ts', '.none');
 customCss += `
 #versionDropdownLabel {
@@ -10,7 +10,7 @@ customCss += `
     margin-right: 5px;
 }
 `
-fs.writeFileSync(path.resolve(__dirname, '../../docs/unstable/assets/custom.css'), customCss);
+fs.writeFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css'), customCss);
 
 console.log('Generating index...')
 const versionManifest = require('../../docs/manifest.json')
@@ -44,7 +44,7 @@ ${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
 `;
 
 console.log('Generating menu...')
-let menu = fs.readFileSync(path.resolve(__dirname, '../../docs/unstable/index.html')).toString()
+let menu = fs.readFileSync(path.resolve(__dirname, '../../docs/github/index.html')).toString()
 menu = menu.substring(menu.indexOf('<div class="tree-content">'));
 menu = menu.substring(0, menu.indexOf('</div>') + 6);
 
@@ -71,12 +71,12 @@ console.log('Writing files...');
 for (const file of [
     'index.html',
     'modules.html',
-    ...fs.readdirSync(path.resolve(__dirname, '../../docs/unstable/classes')).map(file => `classes/${file}`),
-    ...fs.readdirSync(path.resolve(__dirname, '../../docs/unstable/types')).map(file => `types/${file}`)
+    ...fs.readdirSync(path.resolve(__dirname, '../../docs/github/classes')).map(file => `classes/${file}`),
+    ...fs.readdirSync(path.resolve(__dirname, '../../docs/github/types')).map(file => `types/${file}`)
 ]) {
     console.log(`   ${file}`)
 
-    let content = fs.readFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`)).toString();
+    let content = fs.readFileSync(path.resolve(__dirname, `../../docs/github/${file}`)).toString();
 
     let thisMenu = content.substring(content.indexOf('<div class="tree-content">'));
     thisMenu = thisMenu.substring(0, thisMenu.indexOf('</div>') + 6);
@@ -142,7 +142,7 @@ for (const file of [
     content.splice(1, 0, `<title>${name}x.x.x minecraft-server</title>`);
     content = content.join('');
 
-    fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/${file}`), content);
+    fs.writeFileSync(path.resolve(__dirname, `../../docs/github/${file}`), content);
 
     let filePath;
     if (!file.includes('/'))
@@ -167,7 +167,7 @@ for (const file of [
 
 console.log('Writing overwrites...')
 console.log('   style.css')
-fs.writeFileSync(path.resolve(__dirname, `../../docs/unstable/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
+fs.writeFileSync(path.resolve(__dirname, `../../docs/github/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
 
 function getAllIndexes(str, val) {
     let indexes = [];
