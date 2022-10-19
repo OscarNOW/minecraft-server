@@ -2,6 +2,8 @@ name: Test buildable
 
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - "**.txt"
       - "**.md"
