@@ -24,4 +24,3 @@ Move manifest versions to settings.json
 Add Microsoft credentials to Github actions and local
 -https://github.com/OscarNOW/minecraft-server/community
 Change all references from library to package
-Create a pull request template
