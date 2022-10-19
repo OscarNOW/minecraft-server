@@ -24,6 +24,7 @@ user/
 CHANGELOG.md
 FAQ.md
 SECURITY.md
+contributing.md
 
 # Documentation generation
 src/docs/

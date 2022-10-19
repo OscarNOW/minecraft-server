@@ -11,7 +11,8 @@ _Change Github actions from status checks to check runs (https://docs.github.com
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Look at Github actions permissions and assign them to the Github actions
-Capitalize license.md
+Capitalize all documentation files (see npmignore)
+Add good first issue label
 Implement client.blocks
 Add hints to CustomError
     Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
@@ -21,6 +22,6 @@ Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
 Add Microsoft credentials to Github actions and local
-https://github.com/OscarNOW/minecraft-server/community
+-https://github.com/OscarNOW/minecraft-server/community
 Change all references from library to package
 Create a pull request template

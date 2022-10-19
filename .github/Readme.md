@@ -84,16 +84,8 @@ Entities include all dynamic, moving objects throughout the Minecraft world. Som
 * [Players](#player)
 * Falling blocks
 
-## **Contribute**
-If this is your first time contributing to an open-source project, don't worry. We'll help you through the whole process. If you have any questions, please let us know!
-
-### Expectations
-If you want to contribute, whether it's a new feature or bug fix, make sure you first search if there already is an issue open for your contribution.
-
-If you want to add a new feature to the library, first, make sure to first create an issue that explains the new feature. Then if it's approved and if you want to, create a pull request that resolves the issue. You don't actually have to implement the feature yourself.
-
-### Security vulnerability
-If you found a security vulnerability, please do not make a public issue. Instead [create a new security advisory](https://github.com/OscarNOW/minecraft-server/security/advisories/new). For more information, please see [`SECURITY.md`](https://github.com/OscarNOW/minecraft-server/blob/main/SECURITY.md).
+## **Contributing**
+See [contributing.md](https://github.com/OscarNOW/minecraft-server/blob/main/contributing.md)
 
 ## **License**
 For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
