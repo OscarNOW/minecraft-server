@@ -16,7 +16,6 @@
         "minecraft",
         "server",
         "minecraft-server",
-        "library",
         "protocol",
         "wrapper"
     ],

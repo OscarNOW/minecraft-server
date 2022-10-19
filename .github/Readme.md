@@ -16,12 +16,12 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
-| :warning: WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New library updates will change the API and add more coverage. |
+| :warning: WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New package updates will change the API and add more coverage. |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 Create Minecraft Servers with an easy to use API and with full control
 
-This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This library includes types. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
+This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This package includes types so that your IDE has autocomplete. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
 
 ## **Installation and usage**
 1. Install with `npm i @boem312/minecraft-server`.
@@ -45,8 +45,10 @@ For more examples, please see [the examples folder](https://github.com/OscarNOW/
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
-## (Coming) Features
-* **Full protocol coverage**, every packet is implemented in the library in an easy to use way. (Not everything is implemented yet)
+## Goals
+Not all goals are fully finished.
+
+* **Full protocol coverage**, every packet is implemented in the library with an easy to use API.
 * **Everything is per Client**, meaning you can, for example, have different server lists, or different worlds based on the Client.
 * **Easy to use**, you can create servers in an intuitive way.
 
@@ -88,7 +90,7 @@ Entities include all dynamic, moving objects throughout the Minecraft world. Som
 See [contributing.md](https://github.com/OscarNOW/minecraft-server/blob/main/contributing.md)
 
 ## **License**
-For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md).This library uses [the ISC license](https://opensource.org/licenses/ISC).
+For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-server/blob/main/license.md). This package uses [the ISC license](https://opensource.org/licenses/ISC).
 
 ![Explanation of ISC license](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%20license/github/dark.png?raw=true#gh-dark-mode-only)
 ![Explanation of ISC license](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%20license/github/light.png?raw=true#gh-light-mode-only)
@@ -96,4 +98,4 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 ## **Special thanks**
 * [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
 * [minecraft-protocol](https://github.com/PrismarineJS/node-minecraft-protocol) for parsing all the packets and helping with the login process.
-* [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the library.
+* [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the package.

@@ -8,6 +8,7 @@ Add options to doc redirect. For example /classes/Chunk?unstable=true will redir
 Add better private properties to all classes that need it (Chunk, Block)
     Remove privates from type files
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
+    Waiting for https://github.com/orgs/community/discussions/36226
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Look at Github actions permissions and assign them to the Github actions
@@ -21,5 +22,5 @@ Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
--Add Microsoft credentials to Github actions and local
-Change all references from library to package
+_Add Microsoft credentials to Github actions and local
+    Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
