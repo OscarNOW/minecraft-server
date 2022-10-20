@@ -36,6 +36,10 @@ export class Server {
             legacy: boolean
         }): string | Text | null;
         defaultClientProperties?(client: Client): defaultClientProperties;
+        proxy?: {
+            outgoingCallback: (client: Client, name: string, packet: object) => void;
+            getIncomingCallback: (incomingCallback: (client: Client, name: string, packet: object) => void) => void;
+        }
     });
 
     readonly clients: Client[];

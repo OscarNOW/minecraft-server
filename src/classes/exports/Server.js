@@ -34,12 +34,17 @@ const events = Object.freeze([
 const privates = new WeakMap();
 
 class Server {
-    constructor({ serverList, wrongVersionConnect, defaultClientProperties } = {}) {
+    constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
+
         this.serverList = serverList ?? (() => ({}));
         this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}', settings.version));
         this.defaultClientProperties = defaultClientProperties;
-        this.clients = [];
+        this.p.proxy = proxy;
 
+        const ingoingCallback = (client, name, packet) => client.p.receivePacket(name, packet);
+        this.p.proxy.getIngoingCallback(ingoingCallback);
+
+        this.clients = [];
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
