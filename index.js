@@ -1,1 +1,1 @@
-module.exports = hello;
+module.exports = require('./src/index.js');
