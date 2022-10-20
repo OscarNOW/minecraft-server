@@ -1,6 +1,8 @@
 export class ProxyClient {
     constructor(information?: {
         latency?: number;
+        username?: string;
+        uuid?: string;
     });
 
     latency: number;

@@ -1,5 +1,5 @@
 class ProxyClient {
-    constructor({ latency = 0 } = {}) {
+    constructor({ latency = 0, username = '', uuid = '' } = {}) {
         this.events = [];
         this.hooks = [];
 
@@ -25,9 +25,9 @@ class ProxyClient {
             socket: {
                 readyState: 'open' //todo: change to closed when client leaves
             },
-            latency: 0, //todo: make this customizable
-            username: '', //todo: make this customizable
-            uuid: '', //todo: make this customizable
+            latency,
+            username,
+            uuid,
             profile: {
                 properties: [{
                     value: toBase64(JSON.stringify({
