@@ -71,6 +71,11 @@ class ProxyClient {
     onPacket(callback) {
         this.events.push({ callback });
     }
+
+    end() {
+        this.client.socket.readyState = 'closed';
+        this.sendPacket('end');
+    }
 }
 
 function toBase64(inp) {

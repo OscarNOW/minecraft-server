@@ -13,5 +13,6 @@ export class ProxyClient {
     latency: number;
 
     sendPacket(name: string, packet: object): void;
+    end(): void;
     onPacket(callback: (name: string, packet: object) => void): void;
 }
