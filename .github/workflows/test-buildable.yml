@@ -20,6 +20,8 @@ on:
       - "!**.yml"
       - ".github/workflows/test-buildable.yml"
 
+permissions: {}
+
 jobs:
   test-buildable:
     runs-on: ubuntu-latest
