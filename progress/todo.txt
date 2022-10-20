@@ -12,7 +12,6 @@ _Change Github actions from status checks to check runs (https://docs.github.com
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Look at Github actions permissions and assign them to the Github actions
--Capitalize all documentation files (see npmignore)
 Add good first issue label
 Implement client.blocks
 Add hints to CustomError

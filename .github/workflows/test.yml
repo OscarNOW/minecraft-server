@@ -3,11 +3,13 @@ name: Test
 on:
   workflow_dispatch:
   pull_request:
-    paths-ignore:
-      - "**.txt"
-      - "**.md"
-      - "**.xlsx"
-      - "**.d.ts"
+    paths:
+      - "!**.txt"
+      - "!**.md"
+      - "!**.xlsx"
+      - "!**.d.ts"
+      - "!**.yml"
+      - ".github/workflows/test.yml"
 
 jobs:
   test:

@@ -3,11 +3,13 @@ name: Light Test
 on:
   workflow_dispatch:
   push:
-    paths-ignore:
-      - "**.txt"
-      - "**.md"
-      - "**.xlsx"
-      - "**.d.ts"
+    paths:
+      - "!**.txt"
+      - "!**.md"
+      - "!**.xlsx"
+      - "!**.d.ts"
+      - "!**.yml"
+      - ".github/workflows/light-test.yml"
 
 jobs:
   test:
