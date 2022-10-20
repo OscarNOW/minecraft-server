@@ -21,5 +21,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
       - name: ESLint
         run: npx eslint ./src/ ./examples/ ./scripts/ --max-warnings 0
