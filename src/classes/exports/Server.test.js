@@ -14,7 +14,6 @@ if (fs.existsSync(path.resolve(__dirname, `../../../credentials/`)))
 module.exports = async (expect, warn) => {
     if (credentials === null) return warn(`Can't test server class without Microsoft account credentials. Create ${path.resolve(__dirname, '../../../credentials/microsoft.json')} with username and password properties`)
 
-    console.clear()
     console.log('Starting testing server')
 
     let serverPingAmount = 0;
@@ -94,7 +93,7 @@ module.exports = async (expect, warn) => {
     await wait(500);
 
     expect(left, true);
-    expect(leftClient.uuid, joinedClient.uuid);
+    expect(leftClient?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, true);
     expect(bot1KickedReason, random); //
     expect(server.clients.length, 0);
