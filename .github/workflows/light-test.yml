@@ -1,6 +1,7 @@
 name: Light Test
 
 on:
+  workflow_dispatch:
   push:
     paths-ignore:
       - "**.txt"
