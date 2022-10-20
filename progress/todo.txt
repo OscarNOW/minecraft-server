@@ -21,9 +21,6 @@ Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
--Add Microsoft credentials to Github actions and local
-    !Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
-    -Research possibilities to not use Microsoft credentials
-        -Create ProxyClient class
-            Move toBase64 function to separate file
+Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
+Rewrite Server tests with ProxyClient

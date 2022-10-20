@@ -8,7 +8,20 @@ for (let x = 0; x < 16; x++)
 
 let proxyClient = new ProxyClient();
 proxyClient.onPacket((name, packet) => {
-    console.log('<-', name, packet);
+    if (name == 'map_chunk')
+        console.log('<-', name, '...');
+    else
+        console.log('<-', name, packet);
+
+    if (name == 'login')
+        proxyClient.sendPacket('settings', {
+            locale: 'en_US',
+            viewDistance: 8,
+            chatFlags: 0,
+            chatColors: true,
+            skinParts: 0,
+            mainHand: 0
+        })
 })
 
 const server = new Server({
