@@ -1,7 +1,9 @@
 class ProxyClient {
-    constructor() {
+    constructor({ latency = 0 } = {}) {
         this.events = [];
         this.hooks = [];
+
+        this._latency = latency;
 
         this.client = {
             on: (name, callback) => {
@@ -50,6 +52,15 @@ class ProxyClient {
                 port: 25565 //todo: make this customizable
             }
         }
+    }
+
+    get latency() {
+        return this._latency;
+    }
+
+    set latency(value) {
+        this._latency = value;
+        this.client.latency = value;
     }
 
     sendPacket(name, packet) {

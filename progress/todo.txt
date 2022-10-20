@@ -26,6 +26,6 @@ Move manifest versions to settings.json
     -Research possibilities to not use Microsoft credentials
         -Create ProxyClient class
             Add disconnect method to ProxyClient
-            Add earlyClientInformation to ProxyClient
+            -Make ProxyClient more customizable
             Move ProxyClient class to separate package
             Move toBase64 function to separate file
