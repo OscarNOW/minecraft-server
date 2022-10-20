@@ -7,6 +7,8 @@ on:
       - package.json
       - package-lock.json
 
+permissions: {}
+
 jobs:
   dependency-review:
     name: Dependency review

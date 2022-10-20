@@ -11,7 +11,7 @@ _Change Github actions from status checks to check runs (https://docs.github.com
     Waiting for https://github.com/orgs/community/discussions/36226
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
-Look at Github actions permissions and assign them to the Github actions
+-Look at Github actions permissions and assign them to the Github actions
 Add good first issue label
 Implement client.blocks
 Add hints to CustomError
@@ -24,3 +24,4 @@ Move manifest versions to settings.json
 Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
 Rewrite Server tests with ProxyClient
+Write Client tests with ProxyClient
