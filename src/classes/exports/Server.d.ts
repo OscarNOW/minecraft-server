@@ -40,6 +40,8 @@ export class Server {
 
     readonly clients: Client[];
 
+    joinProxyClient(proxyClient: ProxyClient): void;
+
     close(): void;
 
     on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;

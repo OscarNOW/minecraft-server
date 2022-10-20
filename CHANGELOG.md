@@ -4,6 +4,7 @@ None
 ## New API
 ### ProxyClient
 * [\<ProxyClient>](https://oscarnow.github.io/minecraft-server/0.2.0/classes/ProxyClient)
+* [\<Server>.joinProxyClient](https://oscarnow.github.io/minecraft-server/0.2.0/classes/Server#joinProxyClient)
 
 ### Chunks
 * [\<Client>.setBlock(](https://oscarnow.github.io/minecraft-server/0.2.0/classes/Client#setBlock)

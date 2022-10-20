@@ -210,6 +210,10 @@ class Server {
         this.p._p = value;
     }
 
+    joinProxyClient(proxyClient) {
+        new Client(proxyClient.client, this, proxyClient.earlyInformation, this.defaultClientProperties);
+    }
+
     on(event, callback) {
         if (!events.includes(event))
             this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {

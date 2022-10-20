@@ -2,6 +2,54 @@ class ProxyClient {
     constructor() {
         this.events = [];
         this.hooks = [];
+
+        this.client = {
+            on: (name, callback) => {
+                this.hooks.push({
+                    callback: (nam, packet) => {
+                        if (name === nam)
+                            callback(packet);
+                    }
+                })
+            },
+            write: (name, packet) => {
+                for (const { callback } of this.events)
+                    callback(name, packet);
+            },
+            end: reason => {
+                this.client.write('kick_disconnect', reason)
+            },
+            id: Math.floor(Math.random() * 10000),
+            socket: {
+                readyState: 'open' //todo: change to closed when client leaves
+            },
+            latency: 0, //todo: make this customizable
+            username: '', //todo: make this customizable
+            uuid: '', //todo: make this customizable
+            profile: {
+                properties: [{
+                    value: toBase64(JSON.stringify({
+                        textures: {
+                            SKIN: {
+                                url: 'https://example.com/' //todo: make this customizable
+                            },
+                            CAPE: {
+                                url: 'https://example.com/' //todo: make this customizable
+                            }
+                        }
+                    }))
+                }]
+            }
+        }
+
+        this.earlyInformation = {
+            ip: '', //todo: make this customizable
+            version: '1.16.3',
+            connection: {
+                host: 'localhost', //todo: make this customizable
+                port: 25565 //todo: make this customizable
+            }
+        }
     }
 
     sendPacket(name, packet) {
@@ -12,11 +60,10 @@ class ProxyClient {
     onPacket(callback) {
         this.events.push({ callback });
     }
+}
 
-    emitPacket(name, packet) {
-        for (const { callback } of this.events)
-            callback(name, packet);
-    }
+function toBase64(inp) {
+    return Buffer.from(inp).toString('base64');
 }
 
 module.exports = ProxyClient;
