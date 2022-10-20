@@ -14,7 +14,8 @@ on:
       - "**.js"
       - .eslintrc.json
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
   eslint:
