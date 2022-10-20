@@ -25,7 +25,5 @@ Move manifest versions to settings.json
     !Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
     -Research possibilities to not use Microsoft credentials
         -Create ProxyClient class
-            Add disconnect method to ProxyClient
-            -Make ProxyClient more customizable
-            Move ProxyClient class to separate package
             Move toBase64 function to separate file
+Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
