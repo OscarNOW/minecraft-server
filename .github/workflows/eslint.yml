@@ -14,8 +14,7 @@ on:
       - "**.js"
       - .eslintrc.json
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   eslint:
@@ -25,4 +24,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: ESLint
-        run: npx eslint ./src/ ./examples/ ./scripts/ --max-warnings 0
+        run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
