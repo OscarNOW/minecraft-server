@@ -16,7 +16,7 @@ const defaultPrivate = {
             return;
 
         if (!this.p.visible)
-            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
+            return;
 
         let darkenSkyChanged = oldFlags.darkenSky != newFlags.darkenSky;
         let playEndMusicChanged = oldFlags.playEndMusic != newFlags.playEndMusic;
@@ -34,7 +34,7 @@ const defaultPrivate = {
             return;
 
         if (!this.p.visible)
-            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
+            return;
 
         if (name == 'health')
             this.p.sendPacket('boss_bar', {

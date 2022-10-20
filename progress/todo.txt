@@ -2,7 +2,6 @@ Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
-Remove error when trying to perform an action on a BossBar that is not visible
 Rewrite CustomError and change constructor arguments in better order
 Add options to doc redirect. For example /classes/Chunk?unstable=true will redirect to /unstable/classes/Chunk
 Add better private properties to all classes that need it (Chunk, Block)
@@ -11,8 +10,7 @@ _Change Github actions from status checks to check runs (https://docs.github.com
     Waiting for https://github.com/orgs/community/discussions/36226
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
-Add good first issue label
--Look at Github actions permissions and assign them to the Github actions
+Add good first issue label to issues
 Implement client.blocks
 Add hints to CustomError
     Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
