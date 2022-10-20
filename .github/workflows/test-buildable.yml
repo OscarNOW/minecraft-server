@@ -7,13 +7,11 @@ on:
       - main
     paths-ignore:
       - "**.txt"
-      - "**.md"
       - "**.xlsx"
   pull_request:
     types: [opened, reopened]
     paths-ignore:
       - "**.txt"
-      - "**.md"
       - "**.xlsx"
 
 jobs:
