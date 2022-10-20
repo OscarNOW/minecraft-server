@@ -64,7 +64,6 @@ class ProxyClient {
     }
 
     sendPacket(name, packet) {
-        console.log(1, this.hooks)
         for (const { callback } of this.hooks)
             callback(name, packet);
     }
