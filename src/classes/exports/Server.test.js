@@ -158,14 +158,14 @@ module.exports = async (expect, warn) => {
     console.log('Pinging test server')
     serverPingAmount = 0;
     let pinged = await ping();
-    let ip = '::1';
+    let ip = ['127.0.0.1', '::1', 'localhost'];
     expect(serverPingAmount, 1)
-    expect(pinged?.version?.name, `#1#${ip}#1#`)
+    expect(ip.map(a => `#1#${a}#1#`).includes(pinged?.version?.name), true)
     expect(pinged?.players?.online, 2)
     expect(pinged?.players?.max, 3)
-    expect(pinged?.players?.sample?.[0]?.name, `#4#${ip}#4#`)
-    expect(pinged?.players?.sample?.[1]?.name, `#5#${ip}#5#`)
-    expect(pinged?.description, { text: `#6#${ip}#6#\n#7#${ip}#7#` })
+    expect(ip.map(a => `#4#${a}#4#`).includes(pinged?.players?.sample?.[0]?.name), true)
+    expect(ip.map(a => `#5#${a}#5#`).includes(pinged?.players?.sample?.[1]?.name), true)
+    expect(ip.map(a => `#6#${a}#6#\n#7#${a}#7#`).includes(pinged?.description?.text), true)
 
     await wait(500);
     console.log('Closing test server');
