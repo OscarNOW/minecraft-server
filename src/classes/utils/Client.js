@@ -133,9 +133,6 @@ class Client {
 
         this.p.pubDynProperties = pubDynProperties;
 
-        //Initialize stateHandler
-        this.p.stateHandler.init.call(this);
-
         //Inject events
         for (const [eventName, eventCallback] of Object.entries(
             Object.assign({}, ...fs
@@ -149,7 +146,7 @@ class Client {
         //Start receiving packets
         this.p.client.on('packet', (packet, { name }) => this.p.receivePacket(name, packet));
 
-        //running constructors
+        //Run constructors
         for (const { func } of fs
             .readdirSync(path.resolve(__dirname, './Client/constructors/'))
             .filter(a => a.endsWith('.js'))
@@ -157,6 +154,9 @@ class Client {
             .sort(({ index: a }, { index: b }) => a - b)
         )
             func?.call?.(this)
+
+        //Initialize stateHandler
+        this.p.stateHandler.init.call(this);
 
     }
 
