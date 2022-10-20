@@ -3,7 +3,7 @@ const path = require('path');
 
 console.log('Transforming readme before...')
 
-let readme = fs.readFileSync(path.resolve(__dirname, './Readme.md')).toString()
+let readme = fs.readFileSync(path.resolve(__dirname, './README.md')).toString()
 
 readme = readme.replace(/\r\n/g, '\n').replace(/:warning:/g, '⚠').split('\n').filter(a => !a.includes('#gh-light-mode-only')).join('\n');
 let licensePosition = readme.split('\n').findIndex(a => a.includes('ISC%20license/github/dark.png'));
@@ -14,7 +14,7 @@ readme[licensePosition] = `
 `
 readme = readme.join('\n')
 
-fs.writeFileSync(path.resolve(__dirname, './Readme.md'), readme);
+fs.writeFileSync(path.resolve(__dirname, './README.md'), readme);
 
 console.log('Transforming types...')
 let types = fs.readFileSync(path.resolve(__dirname, './index.d.ts')).toString()

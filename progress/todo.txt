@@ -12,7 +12,7 @@ _Change Github actions from status checks to check runs (https://docs.github.com
 Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Look at Github actions permissions and assign them to the Github actions
-Capitalize all documentation files (see npmignore)
+-Capitalize all documentation files (see npmignore)
 Add good first issue label
 Implement client.blocks
 Add hints to CustomError
@@ -22,5 +22,5 @@ Add Chunk size (x: 16, y: 255, z: 16) to a data file
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
-_Add Microsoft credentials to Github actions and local
-    Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
++Add Microsoft credentials to Github actions and local
+    !Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
