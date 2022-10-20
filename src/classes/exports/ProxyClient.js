@@ -1,5 +1,5 @@
 class ProxyClient {
-    constructor({ latency = 0, username = '', uuid = '' } = {}) {
+    constructor({ latency = 0, username = '', uuid = '', ip = '', host = 'localhost', port = 25565, skinTextureUrl = 'https://example.com', capeTextureUrl = 'https://example.com' } = {}) {
         this.events = [];
         this.hooks = [];
 
@@ -23,7 +23,7 @@ class ProxyClient {
             },
             id: Math.floor(Math.random() * 10000),
             socket: {
-                readyState: 'open' //todo: change to closed when client leaves
+                readyState: 'open'
             },
             latency,
             username,
@@ -33,10 +33,10 @@ class ProxyClient {
                     value: toBase64(JSON.stringify({
                         textures: {
                             SKIN: {
-                                url: 'https://example.com/' //todo: make this customizable
+                                url: skinTextureUrl
                             },
                             CAPE: {
-                                url: 'https://example.com/' //todo: make this customizable
+                                url: capeTextureUrl
                             }
                         }
                     }))
@@ -45,11 +45,11 @@ class ProxyClient {
         }
 
         this.earlyInformation = {
-            ip: '', //todo: make this customizable
+            ip,
             version: '1.16.3',
             connection: {
-                host: 'localhost', //todo: make this customizable
-                port: 25565 //todo: make this customizable
+                host,
+                port
             }
         }
     }
