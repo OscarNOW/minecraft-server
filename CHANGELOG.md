@@ -2,15 +2,17 @@
 None
 
 ## New API
+### ProxyClient
+* [\<ProxyClient>](https://oscarnow.github.io/minecraft-server/0.2.0/classes/ProxyClient)
+
 ### Chunks
-* [\<Client>.setBlock(](https://oscarnow.github.io/minecraft-server/github/classes/Client#setBlock)
-* [\<Chunk>.blocks{](https://oscarnow.github.io/minecraft-server/github/classes/Chunk#blocks)
-* [\<LoadedChunk>](https://oscarnow.github.io/minecraft-server/github/classes/LoadedChunk)
-* [\<LoadedChunk>.setBlock(](https://oscarnow.github.io/minecraft-server/github/classes/LoadedChunk#setBlock)
+* [\<Client>.setBlock(](https://oscarnow.github.io/minecraft-server/0.2.0/classes/Client#setBlock)
+* [\<Chunk>.blocks{](https://oscarnow.github.io/minecraft-server/0.2.0/classes/Chunk#blocks)
+* [\<LoadedChunk>](https://oscarnow.github.io/minecraft-server/0.2.0/classes/LoadedChunk)
 
 ## Bug fixes
 None
 
 ## Documentation / Types
-* Updated [documentation](https://oscarnow.github.io/minecraft-server/github/) with loads of new features, for example
+* Updated [documentation](https://oscarnow.github.io/minecraft-server/0.2.0/) with loads of new features, for example
   * Changed the title to include the version

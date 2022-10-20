@@ -23,4 +23,5 @@ Create default block states
 Move manifest versions to settings.json
 -Add Microsoft credentials to Github actions and local
     !Waiting for https://github.com/PrismarineJS/mineflayer/issues/2807
-    Research possibilities to not use Microsoft credentials
+    -Research possibilities to not use Microsoft credentials
+        -Create ProxyClient class
