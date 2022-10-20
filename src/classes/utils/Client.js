@@ -144,8 +144,12 @@ class Client {
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this.p.client.on(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0));
+            this.p.mpOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0)); //using custom proxy
 
+        //Start receiving packets
+        this.p.client.on('packet', (packet, { name }) => this.p.receivePacket(name, packet));
+
+        //running constructors
         for (const { func } of fs
             .readdirSync(path.resolve(__dirname, './Client/constructors/'))
             .filter(a => a.endsWith('.js'))
