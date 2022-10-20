@@ -12,6 +12,8 @@ on:
       - "!**.yml"
       - ".github/workflows/test.yml"
 
+permissions: {}
+
 jobs:
   test:
     strategy:
