@@ -25,7 +25,7 @@ module.exports = {
             })
         }, sendKeepAliveInterval)
 
-        this.p.client.on('keep_alive', ({ keepAliveId }) => {
+        this.p.client.mpOn('keep_alive', ({ keepAliveId }) => {
             keepAlivePromises[keepAliveId[1]].resolved = true;
             keepAlivePromises[keepAliveId[1]].res();
         })
