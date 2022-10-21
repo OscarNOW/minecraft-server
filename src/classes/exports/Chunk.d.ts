@@ -3,7 +3,7 @@ export class Chunk {
 
     constructor();
 
-    blocks: blocksSegment;
+    readonly blocks: blocksSegment;
 
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
