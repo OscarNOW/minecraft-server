@@ -1,7 +1,7 @@
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
 class Block {
-    constructor(name, state, { x, y, z }) {
+    constructor(name, state = {}, { x, y, z }) {
         this._block = name;
         this._state = state;
         this._stateId = null;
