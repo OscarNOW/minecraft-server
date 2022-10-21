@@ -23,8 +23,8 @@ module.exports = {
 
             this.p.sendPacket('update_health', {
                 health: value,
-                food: this.p._food,
-                foodSaturation: this.p._foodSaturation
+                food: this.food,
+                foodSaturation: this.foodSaturation
             })
 
             this.p._health = value;
@@ -42,8 +42,8 @@ module.exports = {
 
             this.p.sendPacket('update_health', {
                 health: value,
-                food: this.p._food,
-                foodSaturation: this.p._foodSaturation
+                food: this.food,
+                foodSaturation: this.food
             })
 
             this.p._health = value;
