@@ -25,9 +25,6 @@ jobs:
       - name: Update version files
         run: node ./scripts/updateVersionFiles ${{ github.event.inputs.version }}
 
-      - name: Update package version
-        run: node ./scripts/setPackageVersion ${{ github.event.inputs.version }}
-
       - name: Build
         run: npm run build
 

@@ -2,6 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const newVersion = process.argv[2];
 
+if (newVersion !== undefined) {
+    let package = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')).toString());
+    package.version = newVersion;
+    fs.writeFileSync(path.join(__dirname, '../package.json'), JSON.stringify(package, null, 4));
+}
+
 const manifestPath = path.join(__dirname, '../docs/manifest.json');
 
 let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
