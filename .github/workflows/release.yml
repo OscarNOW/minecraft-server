@@ -55,7 +55,6 @@ jobs:
         uses: ncipollo/release-action@v1.11.1
         with:
           bodyFile: CHANGELOG.md
-          version: ${{ github.event.inputs.version }}
           commit: main
           name: ${{ github.event.inputs.version }}
 
@@ -78,6 +77,6 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          greater-version-only: true
+          check-version: true
 
           tag: latest
