@@ -11,7 +11,7 @@ None
 * [\<Chunk>.blocks{](https://oscarnow.github.io/minecraft-server/0.2.0/classes/Chunk#blocks)
 * [\<LoadedChunk>](https://oscarnow.github.io/minecraft-server/0.2.0/classes/LoadedChunk)
 
-## Bug fixes
+## Issues fixed
 None
 
 ## Documentation / Types
