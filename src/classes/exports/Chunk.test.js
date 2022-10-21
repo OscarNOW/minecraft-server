@@ -17,5 +17,5 @@ module.exports = expect => {
 
     expect(chunk.blocks?.[0]?.[0]?.[0].state, { snowy: true });
 
-    expect(chunk.setBlock('stone', { x: 0, y: 0, z: 0 }), chunk);
+    expect(chunk.setBlock('stone', { x: 0, y: 0, z: 0 }) === chunk, true);
 }
