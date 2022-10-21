@@ -10,7 +10,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.slot = 6;
 
     expect(client.slot, 6);
-    expect(sentPackets.find(v => v.name == 'slot'), {
+    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
         slot: 6
     });
 
@@ -18,7 +18,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.slot = '2';
 
     expect(client.slot, 2);
-    expect(sentPackets.find(v => v.name == 'slot'), {
+    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
         slot: 2
     });
 
@@ -26,7 +26,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.slot = 11;
 
     expect(client.slot, 2);
-    expect(sentPackets.find(v => v.name == 'slot'), {
+    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
         slot: 2
     });
 
@@ -34,7 +34,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.slot = '12';
 
     expect(client.slot, 3);
-    expect(sentPackets.find(v => v.name == 'slot'), {
+    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
         slot: 3
     });
 
