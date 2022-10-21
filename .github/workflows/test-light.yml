@@ -1,4 +1,4 @@
-name: Light Test
+name: Test light
 
 on:
   workflow_dispatch:
