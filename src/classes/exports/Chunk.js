@@ -1,4 +1,5 @@
-const { version } = require('../../settings.json')
+const { version } = require('../../settings.json');
+const { chunkSize } = require('../../functions/loader/data.js');
 
 const PChunk = require('prismarine-chunk')(version);
 
@@ -47,25 +48,25 @@ class Chunk {
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {
-        if (x < 0 || x > 15)
+        if (x < chunkSize.x.min || x > chunkSize.x.max)
             throw new CustomError('expectationNotMet', 'libraryUser', `x in  ${this.constructor.name}.setBlock(..., {x: x, ... }, ...)  `, {
                 got: x,
                 expectationType: 'value',
-                expectation: new Array(15).fill(0).map((_, i) => i),
+                expectation: new Array(chunkSize.x.max - chunkSize.x.min).fill(0).map((_, i) => i + chunkSize.x.min),
             }, this.setBlock).toString()
 
-        if (y < 0 || y > 255)
+        if (y < chunkSize.y.min || y > chunkSize.y.max)
             throw new CustomError('expectationNotMet', 'libraryUser', `y in  ${this.constructor.name}.setBlock(..., {y: y, ... }, ...)  `, {
                 got: y,
                 expectationType: 'value',
-                expectation: new Array(255).fill(0).map((_, i) => i),
+                expectation: new Array(chunkSize.y.max - chunkSize.y.min).fill(0).map((_, i) => i + chunkSize.y.min),
             }, this.setBlock).toString()
 
-        if (z < 0 || z > 15)
+        if (z < chunkSize.z.min || z > chunkSize.z.max)
             throw new CustomError('expectationNotMet', 'libraryUser', `z in  ${this.constructor.name}.setBlock(..., {z: z, ... }, ...)  `, {
                 got: z,
                 expectationType: 'value',
-                expectation: new Array(15).fill(0).map((_, i) => i),
+                expectation: new Array(chunkSize.z.max - chunkSize.z.min).fill(0).map((_, i) => i + chunkSize.z.min),
             }, this.setBlock).toString()
 
         if (this.chunkSet)

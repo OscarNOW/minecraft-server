@@ -42,4 +42,4 @@ server.on('connect', client => {
             client.chunk(chunk, { x, z });
 })
 
-server.joinProxyClient(proxyClient);
+// server.joinProxyClient(proxyClient);
