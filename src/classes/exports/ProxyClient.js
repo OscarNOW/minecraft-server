@@ -72,6 +72,10 @@ class ProxyClient {
         this.events.push({ callback });
     }
 
+    removeAllListeners() {
+        this.events = [];
+    }
+
     end() {
         this.client.socket.readyState = 'closed';
         this.sendPacket('end');
