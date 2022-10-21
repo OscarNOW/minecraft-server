@@ -45,6 +45,7 @@ class Client {
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/properties/private/static/'))
                 .filter(v => v.endsWith('.js'))
+                .filter(v => !v.endsWith('.test.js'))
                 .map(v => require(`./Client/properties/private/static/${v}`))
             )
         ))
@@ -55,6 +56,7 @@ class Client {
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/methods/private/'))
                 .filter(v => v.endsWith('.js'))
+                .filter(v => !v.endsWith('.test.js'))
                 .map(v => require(`./Client/methods/private/${v}`))
             )
         ))
@@ -68,6 +70,7 @@ class Client {
                 fs
                     .readdirSync(path.resolve(__dirname, './Client/methods/public/'))
                     .filter(v => v.endsWith('.js'))
+                    .filter(v => !v.endsWith('.test.js'))
                     .map(v => [v.split('.')[0], path.resolve(__dirname, './Client/methods/public/', v)])
                     .map(([name, path]) => [name, {
                         configurable: false,
@@ -90,6 +93,7 @@ class Client {
                     Object.assign({}, ...fs
                         .readdirSync(path.resolve(__dirname, './Client/properties/public/static/'))
                         .filter(v => v.endsWith('.js'))
+                        .filter(v => !v.endsWith('.test.js'))
                         .map(v => require(`./Client/properties/public/static/${v}`))
                     )
                 )
@@ -107,6 +111,7 @@ class Client {
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
                 .filter(v => v.endsWith('.js'))
+                .filter(v => !v.endsWith('.test.js'))
                 .map(v => require(`./Client/properties/public/dynamic/${v}`))
             )
         ))
@@ -116,6 +121,7 @@ class Client {
         let pubDynProperties = Object.assign({}, ...fs
             .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
             .filter(v => v.endsWith('.js'))
+            .filter(v => !v.endsWith('.test.js'))
             .map(v => require(`./Client/properties/public/dynamic/${v}`))
         );
 
@@ -138,6 +144,7 @@ class Client {
             Object.assign({}, ...fs
                 .readdirSync(path.resolve(__dirname, './Client/events/'))
                 .filter(a => a.endsWith('.js'))
+                .filter(v => !v.endsWith('.test.js'))
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
@@ -150,6 +157,7 @@ class Client {
         for (const { func } of fs
             .readdirSync(path.resolve(__dirname, './Client/constructors/'))
             .filter(a => a.endsWith('.js'))
+            .filter(v => !v.endsWith('.test.js'))
             .map(a => ({ name: a.split('.js')[0], ...require(`./Client/constructors/${a}`) }))
             .sort(({ index: a }, { index: b }) => a - b)
         )
