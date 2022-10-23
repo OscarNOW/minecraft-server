@@ -8,8 +8,8 @@ on:
         required: true
 
 jobs:
-  prepare:
-    name: Prepare
+  release:
+    name: Release
     runs-on: ubuntu-latest
     environment: release
     steps:
@@ -46,38 +46,14 @@ jobs:
           commit_user_email: actions@github.com
           commit_author: Doc-bot <actions@github.com>
 
-  github_release:
-    needs: prepare
-
-    name: Github Release
-    runs-on: ubuntu-latest
-    environment: release
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-
       - name: Github Release
         uses: ncipollo/release-action@v1.11.1
         with:
           bodyFile: CHANGELOG.md
           commit: main
+
           name: ${{ github.event.inputs.version }}
-
-          tag: latest
-
-  npm_release:
-    needs: prepare
-
-    name: NPM Release
-    runs-on: ubuntu-latest
-    environment: release
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
+          tag: ${{ github.event.inputs.version }}
 
       - name: NPM Release
         uses: JS-DevTools/npm-publish@v1
