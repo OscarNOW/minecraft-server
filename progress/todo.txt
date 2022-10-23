@@ -22,5 +22,4 @@ Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
 Rewrite Server tests with ProxyClient
 -Write Client tests with ProxyClient
-    Implement <Client>.removeListeners(
-        Use for cleanup (like proxyClient.removeListeners()) after Client test (in Client.test.js)
+    Use <Client>.removeAllListeners( for cleanup (like proxyClient.removeListeners()) after Client test (in Client.test.js)
