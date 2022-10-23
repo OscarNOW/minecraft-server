@@ -17,11 +17,11 @@ module.exports = ({ expect, client, proxyClient }) => {
     });
 
     sentPackets = [];
-    client.health = '2';
+    client.health = '12';
 
-    expect(client.health, 2);
+    expect(client.health, 12);
     expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
-        health: 2,
+        health: 12,
         food: client.food,
         foodSaturation: client.foodSaturation
     });
