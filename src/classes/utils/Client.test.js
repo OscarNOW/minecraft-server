@@ -16,8 +16,10 @@ module.exports = (expect, warn) => {
                     .filter(v => v.endsWith('.test.js'))
                     .map(v => require(`./Client/properties/public/dynamic/${v}`))
             ) {
-                testFileFunction({ expect, warn, server, proxyClient, client });
-                cleanUp({ client, proxyClient });
+                let cleanUp = () => cleanup({ server, client, proxyClient });
+
+                testFileFunction({ expect, warn, server, proxyClient, client, cleanUp });
+                cleanup({ client, proxyClient });
             }
 
             server.close();
@@ -42,7 +44,7 @@ module.exports = (expect, warn) => {
     })
 }
 
-function cleanUp({ client, proxyClient }) {
+function cleanup({ client, proxyClient }) {
     proxyClient.removeAllListeners();
     client.removeAllListeners();
 }
