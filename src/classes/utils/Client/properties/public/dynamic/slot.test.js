@@ -15,6 +15,14 @@ module.exports = ({ expect, client, proxyClient }) => {
     });
 
     sentPackets = [];
+    client.slot = 6;
+
+    expect(client.slot, 6);
+    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
+        slot: 6
+    });
+
+    sentPackets = [];
     client.slot = '2';
 
     expect(client.slot, 2);
