@@ -40,7 +40,6 @@ jobs:
         with:
           commit_message: "Release ${{ github.event.inputs.version }}"
           branch: main
-          file_pattern: ./docs/
 
           commit_user_name: Doc-bot
           commit_user_email: actions@github.com
