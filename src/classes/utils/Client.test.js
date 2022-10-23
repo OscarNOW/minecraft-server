@@ -10,14 +10,14 @@ module.exports = (expect, warn) => {
         const proxyClient = new ProxyClient();
 
         server.on('connect', client => {
-            for (const test of
+            for (const testFileFunction of
                 fs
                     .readdirSync(path.resolve(__dirname, './Client/properties/public/dynamic/'))
                     .filter(v => v.endsWith('.test.js'))
                     .map(v => require(`./Client/properties/public/dynamic/${v}`))
             ) {
-                test({ expect, warn, server, proxyClient, client });
-                proxyClient.removeAllListeners();
+                testFileFunction({ expect, warn, server, proxyClient, client });
+                cleanUp({ client, proxyClient });
             }
 
             server.close();
@@ -40,4 +40,9 @@ module.exports = (expect, warn) => {
         server.joinProxyClient(proxyClient);
 
     })
+}
+
+function cleanUp({ client, proxyClient }) {
+    proxyClient.removeAllListeners();
+    client.removeAllListeners();
 }
