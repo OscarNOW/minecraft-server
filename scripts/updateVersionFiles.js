@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const newVersion = process.argv[2];
 
+// Update version in package.json
 if (newVersion !== undefined) {
     let package = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')).toString());
     package.version = newVersion;
@@ -13,6 +14,7 @@ if (newVersion !== undefined) {
     fs.writeFileSync(path.join(__dirname, '../package-lock.json'), JSON.stringify(packageLock, null, 4));
 }
 
+// Update manifest
 const manifestPath = path.join(__dirname, '../docs/manifest.json');
 
 let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
@@ -24,7 +26,8 @@ if (newVersion !== undefined)
         path: newVersion
     })
 
-delete manifest.versions.find(({ latestStable }) => latestStable)?.name;
+if (manifest.versions.find(({ latestStable }) => latestStable))
+    manifest.versions.find(({ latestStable }) => latestStable).name = manifest.versions.find(({ latestStable }) => latestStable).path;
 delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable;
 
 manifest.versions = [...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || []), ...(manifest.versions.filter(({ unstable }) => unstable) || [])];
@@ -34,11 +37,12 @@ manifest.versions[0].name = `${manifest.versions[0].version} (latest stable)`;
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
 
+// Update bug report issue template
 let bugReport = fs.readFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml')).toString();
 bugReport = bugReport.split('\n');
 
-let versionLineStartIndex = bugReport.find(a => a.includes('#startVersionOptions')) + 1;
-let versionLineEndIndex = bugReport.find(a => a.includes('#endVersionOptions')) - 1;
+let versionLineStartIndex = bugReport.findIndex(a => a.includes('#startVersionOptions')) + 1;
+let versionLineEndIndex = bugReport.findIndex(a => a.includes('#endVersionOptions'));
 
 let newVersions = manifest.versions.map(({ name }) => name).map(a => `        - ${a}`);
 
