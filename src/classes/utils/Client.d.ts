@@ -295,6 +295,8 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
 
+    removeAllListeners(event?: 'itemUse' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
+
     on(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     on(event: 'chat', callback: (message: string) => void): void;
