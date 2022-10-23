@@ -1,12 +1,30 @@
 const CustomError = require('../../../CustomError.js');
 
-module.exports = function (event, callback) {
-    if (!this.p.events[event])
-        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
-            got: event,
-            expectationType: 'value',
-            expectation: Object.keys(this.p.events)
-        }, this.on, { server: this.server, client: this }));
+module.exports = function (event) {
+    if (event == 'change') {
+        const type = arguments[1];
+        const callback = arguments[2];
 
-    this.p.events[event].push({ callback, once: false });
+        if (!this.p.observables[type])
+            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  <${this.constructor.name}>.on('change', ${require('util').inspect(type)}, ...)  `, {
+                got: type,
+                expectationType: 'value',
+                expectation: Object.keys(this.p.observables)
+            }, this.on, { server: this.server, client: this }));
+
+        this.p.observables[type].push(callback);
+
+    } else {
+        const callback = arguments[1];
+
+        if (!this.p.events[event])
+            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
+                got: event,
+                expectationType: 'value',
+                expectation: Object.keys(this.p.events)
+            }, this.on, { server: this.server, client: this }));
+
+        this.p.events[event].push({ callback, once: false });
+
+    }
 }
