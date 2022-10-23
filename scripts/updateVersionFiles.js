@@ -4,14 +4,20 @@ const newVersion = process.argv[2];
 
 if (newVersion !== undefined) {
     let package = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')).toString());
+    console.log(package)
     package.version = newVersion;
+    console.log(package)
     fs.writeFileSync(path.join(__dirname, '../package.json'), JSON.stringify(package, null, 4));
 
     let packageLock = JSON.parse(fs.readFileSync(path.join(__dirname, '../package-lock.json')).toString());
+    console.log(packageLock.packages[''])
     packageLock.version = newVersion;
     packageLock.packages[''].version = newVersion;
+    console.log(packageLock.packages[''])
     fs.writeFileSync(path.join(__dirname, '../package-lock.json'), JSON.stringify(packageLock, null, 4));
 }
+
+process.exit();
 
 const manifestPath = path.join(__dirname, '../docs/manifest.json');
 
