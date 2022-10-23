@@ -5,12 +5,13 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
+        "updateVersionFiles": "node ./scripts/updateVersionFiles",
         "readme": "node ./scripts/readme",
         "minify": "node ./scripts/minify",
         "types": "node ./scripts/types",
         "docs": "node ./src/docs/generate",
         "test": "node ./scripts/test",
-        "build": "npm run readme && npm run minify && npm run types && npm run docs && npm test"
+        "build": "npm run updateVersionFiles && npm run readme && npm run minify && npm run types && npm run docs && npm test"
     },
     "keywords": [
         "minecraft",
