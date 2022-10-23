@@ -13,8 +13,6 @@ if (newVersion !== undefined) {
     fs.writeFileSync(path.join(__dirname, '../package-lock.json'), JSON.stringify(packageLock, null, 4));
 }
 
-process.exit();
-
 const manifestPath = path.join(__dirname, '../docs/manifest.json');
 
 let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
