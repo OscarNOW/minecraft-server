@@ -1,4 +1,4 @@
-const observables = [
+const changes = [
     'position',
     'slot',
     'health',
@@ -15,5 +15,5 @@ const observables = [
 ];
 
 module.exports = {
-    observables: () => Object.fromEntries(observables.map(a => [a, []]))
+    changeEvents: () => Object.fromEntries(changes.map(a => [a, []]))
 }

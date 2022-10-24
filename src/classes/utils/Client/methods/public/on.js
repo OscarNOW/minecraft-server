@@ -5,14 +5,14 @@ module.exports = function (event) {
         const type = arguments[1];
         const callback = arguments[2];
 
-        if (!this.p.observables[type])
+        if (!this.p.changeEvents[type])
             this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  <${this.constructor.name}>.on('change', ${require('util').inspect(type)}, ...)  `, {
                 got: type,
                 expectationType: 'value',
-                expectation: Object.keys(this.p.observables)
+                expectation: Object.keys(this.p.changeEvents)
             }, this.on, { server: this.server, client: this }));
 
-        this.p.observables[type].push(callback);
+        this.p.changeEvents[type].push(callback);
 
     } else {
         const callback = arguments[1];

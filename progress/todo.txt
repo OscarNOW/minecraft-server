@@ -21,6 +21,7 @@ Move manifest versions to settings.json
 Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
 Rewrite Server tests with ProxyClient
-+Write Client tests
+Write Client tests
     Add observable tests to Client
 -Change <Client>.observe(type, cb) to <Client>.on('change', type, cb)
+Change mpOn to clientOn
