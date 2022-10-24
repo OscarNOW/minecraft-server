@@ -21,7 +21,17 @@ module.exports = ({ expect, client, proxyClient }) => {
         foodSaturation: client.foodSaturation
     });
 
-    //todo: add test for setting twice
+    sentChangeEvents = [];
+    sentPackets = [];
+    client.health = 6;
+
+    expect(client.health, 6);
+    expect(sentChangeEvents, [6]);
+    expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
+        health: 6,
+        food: client.food,
+        foodSaturation: client.foodSaturation
+    });
 
     sentChangeEvents = [];
     sentPackets = [];
