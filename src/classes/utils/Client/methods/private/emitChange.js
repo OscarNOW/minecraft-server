@@ -3,6 +3,6 @@ module.exports = {
         for (const { callback } of this.p.changeEvents[type])
             callback(this[type])
 
-        //todo: implement once
+        this.p.changeEvents[type] = this.p.changeEvents[type].filter(({ once }) => once == false);
     }
 }
