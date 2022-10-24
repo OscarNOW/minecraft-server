@@ -28,7 +28,7 @@ module.exports = {
             })
 
             this.p._gamemode = value;
-            this.p.emitObservable('gamemode');
+            this.p.emitChange('gamemode');
         },
         setRaw: function (value, loginPacket) {
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))

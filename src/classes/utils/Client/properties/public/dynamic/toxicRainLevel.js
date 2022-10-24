@@ -26,7 +26,7 @@ module.exports = {
                 })
 
             this.p._toxicRainLevel = value;
-            this.p.emitObservable('toxicRainLevel');
+            this.p.emitChange('toxicRainLevel');
         },
         setRaw: function (value) {
             if (typeof value != 'number')

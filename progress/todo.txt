@@ -22,4 +22,5 @@ Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
 Rewrite Server tests with ProxyClient
 -Write Client tests
-    Add observable tests to Client
+    Add changeEvent (for properties) tests to Client
+Change mpOn to clientOn

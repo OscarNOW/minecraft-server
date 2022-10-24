@@ -45,7 +45,7 @@ module.exports = {
 
         if (changed) {
             require('../../properties/public/dynamic/position.js').position.update.call(this, this.p._position.raw)
-            this.p.emitObservable('position');
+            this.p.emitChange('position');
         }
     }
 }

@@ -28,7 +28,7 @@ module.exports = {
             })
 
             this.p._showRespawnScreen = value;
-            this.p.emitObservable('showRespawnScreen');
+            this.p.emitChange('showRespawnScreen');
         },
         setRaw: function (value, loginPacket) {
             if (typeof value != 'boolean')

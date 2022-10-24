@@ -19,8 +19,8 @@ const observables = [
 ];
 
 const defaultPrivate = {
-    emitObservable(observable) {
-        this.p.observables[observable].forEach(cb => cb(this[observable]))
+    emitObservable(type) {
+        this.p.observables[type].forEach(cb => cb(this[type]))
     }
 };
 
@@ -49,7 +49,7 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
             changed = true;
 
     if (changed)
-        this.p.emitObservable('position')
+        this.p.emitChange('position')
 }
 
 class Entity {
