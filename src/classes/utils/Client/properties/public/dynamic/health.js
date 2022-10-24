@@ -28,7 +28,7 @@ module.exports = {
             })
 
             this.p._health = value;
-            this.p.emitObservable('health');
+            this.p.emitChange('health');
         },
         setRaw: function (v) {
             const value = parseInt(v);

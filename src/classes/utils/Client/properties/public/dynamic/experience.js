@@ -31,7 +31,7 @@ module.exports = {
                 totalExperience
             })
 
-            this.p.emitObservable('experience');
+            this.p.emitChange('experience');
             this.p._experience.setRaw({ bar, level })
         },
         setRaw: function ({ bar, level }) {

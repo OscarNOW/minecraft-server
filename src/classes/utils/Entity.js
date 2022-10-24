@@ -49,7 +49,7 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
             changed = true;
 
     if (changed)
-        this.p.emitObservable('position')
+        this.p.emitChange('position')
 }
 
 class Entity {

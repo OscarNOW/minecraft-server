@@ -25,7 +25,7 @@ module.exports = {
             })
 
             this.p._difficulty = value;
-            this.p.emitObservable('difficulty');
+            this.p.emitChange('difficulty');
         },
         setRaw: function (value) {
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))

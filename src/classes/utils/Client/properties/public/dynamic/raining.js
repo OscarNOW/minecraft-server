@@ -25,7 +25,7 @@ module.exports = {
             })
 
             this.p._raining = value;
-            this.p.emitObservable('raining');
+            this.p.emitChange('raining');
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')

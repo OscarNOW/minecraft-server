@@ -28,7 +28,7 @@ module.exports = {
             })
 
             this.p._foodSaturation = value;
-            this.p.emitObservable('foodSaturation');
+            this.p.emitChange('foodSaturation');
         },
         setRaw(v) {
             const value = parseInt(v);
