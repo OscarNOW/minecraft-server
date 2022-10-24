@@ -12,7 +12,7 @@ module.exports = function (event) {
                 expectation: Object.keys(this.p.changeEvents)
             }, this.on, { server: this.server, client: this }));
 
-        this.p.changeEvents[type].push(callback);
+        this.p.changeEvents[type].push({ callback, once: false });
 
     } else {
         const callback = arguments[1];

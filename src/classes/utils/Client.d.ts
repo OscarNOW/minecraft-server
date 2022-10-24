@@ -327,18 +327,17 @@ export class Client {
         isMainHand: boolean
     }) => void): void;
 
-    // Not yet implemented
-    // once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    // once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
-    // once(event: 'change', type: 'position', callback: (changedValue: {
-    //     x: number;
-    //     y: number;
-    //     z: number;
-    //     yaw: number;
-    //     pitch: number;
-    // }) => void): void;
-    // once(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
-    // once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+    once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
+    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
+    once(event: 'change', type: 'position', callback: (changedValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
+    once(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     once(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
