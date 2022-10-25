@@ -23,10 +23,12 @@ module.exports = {
 
             value = value % 9;
 
-            this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
                 slot: value
-            })
+            });
+
+            this.p._slot = value;
+            this.p.emitChange('slot');
         },
         setRaw: function (v) {
             let value = parseInt(v);
