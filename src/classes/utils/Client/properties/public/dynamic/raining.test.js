@@ -36,7 +36,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.raining = false;
 
     expect(client.raining, false);
-    expect(sentChangeEvents, [false]);
+    expect(sentChangeEvents, []);
     expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
         reason: 7,
         gameMode: 0

@@ -26,7 +26,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.food = 6;
 
     expect(client.food, 6);
-    expect(sentChangeEvents, [6]);
+    expect(sentChangeEvents, []);
     expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
         health: client.health,
         food: 6,

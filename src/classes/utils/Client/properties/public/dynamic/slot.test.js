@@ -24,7 +24,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     client.slot = 6;
 
     expect(client.slot, 6);
-    expect(sentChangeEvents, [6]);
+    expect(sentChangeEvents, []);
     expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
         slot: 6
     });
