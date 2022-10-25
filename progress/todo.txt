@@ -28,3 +28,7 @@ Implement <Entity>.once(
 Implement <Entity>.removeAllListeners(
 Implement <Entity>.on('change', ...
 Add oldValue to change event
+Add emitChange to new Client properties:
+    bossBars
+    chunks
+    entities
