@@ -4,7 +4,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(client.slot, 5);
 
     let sentChangeEvents = [];
-    client.on('change', 'raining', v => sentChangeEvents.push(v))
+    client.on('change', 'slot', v => sentChangeEvents.push(v))
 
     let sentPackets = [];
     proxyClient.onPacket((name, packet) => sentPackets.push({ name, packet }));
