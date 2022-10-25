@@ -19,13 +19,16 @@ module.exports = {
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
+            let changed = value !== this.raining;
+
             this.p.sendPacket('game_state_change', {
                 reason: 7,
                 gameMode: value ? this.toxicRainLevel + 1 : 0
             })
 
             this.p._raining = value;
-            this.p.emitChange('raining');
+            if (changed)
+                this.p.emitChange('raining');
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')

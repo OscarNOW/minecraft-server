@@ -22,13 +22,16 @@ module.exports = {
                     expectation: ['survival', 'creative', 'adventure', 'spectator']
                 }, null, { server: this.server, client: this }));
 
+            let changed = value !== this.gamemode;
+
             this.p.sendPacket('game_state_change', {
                 reason: 3,
                 gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(value)
             })
 
             this.p._gamemode = value;
-            this.p.emitChange('gamemode');
+            if (changed)
+                this.p.emitChange('gamemode');
         },
         setRaw: function (value, loginPacket) {
             if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))

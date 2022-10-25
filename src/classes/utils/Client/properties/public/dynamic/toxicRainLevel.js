@@ -19,6 +19,8 @@ module.exports = {
                     expectation: 'number'
                 }, null, { server: this.server, client: this }));
 
+            let changed = value !== this.toxicRainLevel;
+
             if (this.raining)
                 this.p.sendPacket('game_state_change', {
                     reason: 7,
@@ -26,7 +28,8 @@ module.exports = {
                 })
 
             this.p._toxicRainLevel = value;
-            this.p.emitChange('toxicRainLevel');
+            if (changed)
+                this.p.emitChange('toxicRainLevel');
         },
         setRaw: function (value) {
             if (typeof value != 'number')

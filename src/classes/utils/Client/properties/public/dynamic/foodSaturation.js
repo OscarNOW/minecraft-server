@@ -21,6 +21,8 @@ module.exports = {
                     expectation: [0, 1, 2, 3, 4, 5]
                 }, null, { server: this.server, client: this }));
 
+            let changed = value !== this.foodSaturation;
+
             this.p.sendPacket('update_health', {
                 health: this.p._health,
                 food: this.p._food,
@@ -28,7 +30,8 @@ module.exports = {
             })
 
             this.p._foodSaturation = value;
-            this.p.emitChange('foodSaturation');
+            if (changed)
+                this.p.emitChange('foodSaturation');
         },
         setRaw(v) {
             const value = parseInt(v);

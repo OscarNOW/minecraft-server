@@ -25,14 +25,17 @@ module.exports = {
             else
                 totalExperience = (4.5 * Math.pow(totalLevel, 2)) - (162.5 * totalLevel) + 2220
 
+            let changed = level !== this.experience.level || bar !== this.experience.bar;
+
             this.p.sendPacket('experience', {
                 experienceBar: bar,
                 level,
                 totalExperience
             })
 
-            this.p._experience.setRaw({ bar, level })
-            this.p.emitChange('experience');
+            this.p._experience.setRaw({ bar, level });
+            if (changed)
+                this.p.emitChange('experience');
         },
         setRaw: function ({ bar, level }) {
 
