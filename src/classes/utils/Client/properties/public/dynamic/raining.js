@@ -19,7 +19,7 @@ module.exports = {
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.raining;
+            const changed = value !== this.raining;
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,

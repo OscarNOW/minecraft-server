@@ -19,7 +19,7 @@ module.exports = {
                     expectation: ['peaceful', 'easy', 'normal', 'hard']
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.difficulty;
+            const changed = value !== this.difficulty;
 
             this.p.sendPacket('difficulty', {
                 difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),

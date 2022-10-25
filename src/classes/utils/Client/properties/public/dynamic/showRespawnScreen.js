@@ -22,7 +22,7 @@ module.exports = {
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.showRespawnScreen;
+            const changed = value !== this.showRespawnScreen;
 
             this.p.sendPacket('game_state_change', {
                 reason: 11,

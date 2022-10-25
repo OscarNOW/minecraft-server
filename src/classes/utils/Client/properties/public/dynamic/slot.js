@@ -23,7 +23,7 @@ module.exports = {
 
             value = value % 9;
 
-            let changed = value !== this.slot;
+            const changed = value !== this.slot;
 
             this.p.sendPacket('held_item_slot', {
                 slot: value

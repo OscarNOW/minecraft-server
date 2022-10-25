@@ -22,7 +22,7 @@ module.exports = {
                     expectation: ['survival', 'creative', 'adventure', 'spectator']
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.gamemode;
+            const changed = value !== this.gamemode;
 
             this.p.sendPacket('game_state_change', {
                 reason: 3,

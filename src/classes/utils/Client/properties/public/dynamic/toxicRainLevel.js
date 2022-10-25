@@ -19,7 +19,7 @@ module.exports = {
                     expectation: 'number'
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.toxicRainLevel;
+            const changed = value !== this.toxicRainLevel;
 
             if (this.raining)
                 this.p.sendPacket('game_state_change', {

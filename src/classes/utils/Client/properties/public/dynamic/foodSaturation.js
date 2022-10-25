@@ -21,7 +21,7 @@ module.exports = {
                     expectation: [0, 1, 2, 3, 4, 5]
                 }, null, { server: this.server, client: this }));
 
-            let changed = value !== this.foodSaturation;
+            const changed = value !== this.foodSaturation;
 
             this.p.sendPacket('update_health', {
                 health: this.p._health,
