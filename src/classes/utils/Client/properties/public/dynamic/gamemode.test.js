@@ -15,7 +15,7 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'creative');
     expect(sentChangeEvents, ['creative']);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
+    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
         reason: 3,
         gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
     });
@@ -26,7 +26,7 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'creative');
     expect(sentChangeEvents, []);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
+    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
         reason: 3,
         gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
     });
@@ -37,7 +37,7 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'spectator');
     expect(sentChangeEvents, ['spectator']);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
+    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
         reason: 3,
         gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('spectator')
     });
