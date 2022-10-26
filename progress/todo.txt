@@ -33,5 +33,3 @@ Add emitChange to Client properties:
     chunks
     entities
 Add gamemodes to separate data file
--Make <Client>.health = 21 set to 20 and <Client>.health = -1 set to 0 (like slot)
-    -Same for food
