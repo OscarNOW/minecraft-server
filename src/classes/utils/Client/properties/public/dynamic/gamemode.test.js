@@ -15,10 +15,11 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'creative');
     expect(sentChangeEvents, ['creative']);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 3,
-        gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 3 &&
+        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -26,10 +27,11 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'creative');
     expect(sentChangeEvents, []);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 3,
-        gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 3 &&
+        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -37,9 +39,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.gamemode, 'spectator');
     expect(sentChangeEvents, ['spectator']);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 3,
-        gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf('spectator')
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 3 &&
+        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('spectator')
+    ), true);
 
 }
