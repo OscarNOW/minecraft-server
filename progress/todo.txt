@@ -2,12 +2,34 @@ Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
-Remove error when trying to perform an action on a Client that is not visible
 Rewrite CustomError and change constructor arguments in better order
-Move src scripts (like src/test) to separate folder
-Add better private properties to all classes that need it (Chunk)
-Change blockType to blockName
-Make oscarnow.github.io/minecraft-server/classes/ redirect to oscarnow.github.io/minecraft-server/0.1.0/classes/
-Change title of documentation pages
-Implement the LoadedChunk class
--Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
+Add options to doc redirect. For example /classes/Chunk?unstable=true will redirect to /unstable/classes/Chunk
+Add better private properties to all classes that need it (Chunk, Block)
+    Remove privates from type files
+_Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
+    Waiting for https://github.com/orgs/community/discussions/36226
+Make Client public static properties readonly
+Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
+Add good first issue label to issues
+Implement client.blocks
+Add hints to CustomError
+    Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
+    Add hint to unknown StateValue
+Create default block states
+    Create table of states and blocks
+Move manifest versions to settings.json
+Move toBase64 function in ProxyClient to separate file
+Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
+Rewrite Server tests with ProxyClient
+Write Client tests
+    Add setRaw tests to Client
+Change mpOn to clientOn
+Implement <Entity>.once(
+Implement <Entity>.removeAllListeners(
+Implement <Entity>.on('change', ...
+Add oldValue to change event
+Add emitChange to Client properties:
+    bossBars
+    chunks
+    entities
+Add gamemodes to separate data file

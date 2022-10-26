@@ -34,8 +34,8 @@ export class CustomError {
     server?: Server;
 
     error: Error;
-    [Symbol.toPrimitive](hint: 'string'): Error;
-    [Symbol.toPrimitive](hint: 'default'): Error;
+    [Symbol.toPrimitive](hint: 'string'): string;
+    [Symbol.toPrimitive](hint: 'default'): string;
     [Symbol.toPrimitive](hint: 'number'): number;
 
     generateMessage(): string;

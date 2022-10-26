@@ -8,17 +8,22 @@ module.exports = {
         get: function () {
             return this.p._food
         },
-        set: function (v) {
-            this.p.stateHandler.checkReady.call(this);
+        set: function (value) {
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
-            const value = parseInt(v);
+            value = Math.round(parseFloat(value));
+            if (value < 0) value = 0;
+            if (value > 20) value = 20;
 
-            if (isNaN(value) || value < 0 || value > 20)
+            if (isNaN(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `food in  <${this.constructor.name}>.food = ${require('util').inspect(value)}  `, {
-                    got: v,
-                    expectationType: 'value',
-                    expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                    got: arguments[0],
+                    expectationType: 'type',
+                    expectation: 'number'
                 }, null, { server: this.server, client: this }));
+
+            const changed = value !== this.food;
 
             this.p.sendPacket('update_health', {
                 health: this.health,
@@ -27,7 +32,8 @@ module.exports = {
             })
 
             this.p._food = value;
-            this.p.emitObservable('food');
+            if (changed)
+                this.p.emitChange('food');
         },
         setRaw: function (v) {
             const value = parseInt(v);

@@ -3,7 +3,8 @@ const { soundChannels } = require('../../../../../functions/loader/data.js');
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function ({ soundName, channel } = {}) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (channel && !soundChannels.includes(channel))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.stopSound({ channel: ${require('util').inspect(channel)} })  `, {

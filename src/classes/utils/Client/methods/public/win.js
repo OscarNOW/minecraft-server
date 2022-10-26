@@ -1,5 +1,6 @@
 module.exports = function (showCredits) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (!showCredits)
         throw new Error('Not implemented')

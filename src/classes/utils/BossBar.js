@@ -12,9 +12,11 @@ const { bossBars } = require('./Client/properties/public/dynamic/bossBars.js');
 const _p = Symbol('private');
 const defaultPrivate = {
     updateFlags: function (newFlags, oldFlags) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
         if (!this.p.visible)
-            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
+            return;
 
         let darkenSkyChanged = oldFlags.darkenSky != newFlags.darkenSky;
         let playEndMusicChanged = oldFlags.playEndMusic != newFlags.playEndMusic;
@@ -28,9 +30,11 @@ const defaultPrivate = {
             })
     },
     updateProperty: function (name) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
         if (!this.p.visible)
-            throw new Error("Can't perform this action on this bossBar, because it's not visible") //todo: use CustomError
+            return;
 
         if (name == 'health')
             this.p.sendPacket('boss_bar', {
@@ -85,11 +89,12 @@ const propertyNames = Object.freeze([
 
 class BossBar {
     constructor(client, sendPacket, p) {
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
         this.client = client;
         this.server = client.server;
         this.p.sendPacket = sendPacket;
-
-        this.client.p.stateHandler.checkReady.call(this.client);
 
         //initialization
         const bossBarUuid = uuid();

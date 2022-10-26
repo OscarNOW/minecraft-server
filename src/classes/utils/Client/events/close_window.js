@@ -2,7 +2,9 @@ const CustomError = require('../../CustomError.js');
 
 module.exports = {
     close_window: function ({ windowId }) {
-        this.p.stateHandler.checkReady.call(this);
+        if (!this.p.stateHandler.checkReady.call(this))
+            return;
+
         if (windowId !== this.p.windowId && windowId !== 0)
             this.p.emitError(new CustomError('expectationNotMet', 'client', `windowId in  <remote ${this.constructor.name}>.close_window({ windowId: ${require('util').inspect(windowId)} })  `, {
                 got: windowId,

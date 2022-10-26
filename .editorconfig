@@ -1,0 +1,15 @@
+root = true
+
+[*.{js,ts,json,yml,md,txt,gitignore,Dockerfile,npmignore}]
+end_of_line = lf
+insert_final_newline = false
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.{js,ts,json}]
+indent_size = 4
+indent_style = space
+
+[*.yml]
+indent_size = 2
+indent_style = space

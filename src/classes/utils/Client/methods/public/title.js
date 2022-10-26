@@ -3,7 +3,8 @@ const { defaults: { title: defaults } } = require('../../../../../settings.json'
 const Text = require('../../../../exports/Text');
 
 module.exports = function (p) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     let properties = p;
     if (properties === undefined) properties = {};

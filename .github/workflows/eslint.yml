@@ -1,16 +1,20 @@
 name: ESLint
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/eslint.yml
       - "**.js"
       - .eslintrc.json
   pull_request:
+    types: [opened, reopened]
     paths:
       - .github/workflows/eslint.yml
       - "**.js"
       - .eslintrc.json
+
+permissions: {}
 
 jobs:
   eslint:
@@ -20,4 +24,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: ESLint
-        run: npx eslint ./src/ ./examples/ --max-warnings 0
+        run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0

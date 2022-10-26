@@ -34,12 +34,14 @@ const events = Object.freeze([
 const privates = new WeakMap();
 
 class Server {
-    constructor({ serverList, wrongVersionConnect, defaultClientProperties } = {}) {
+    constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
+
         this.serverList = serverList ?? (() => ({}));
         this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}', settings.version));
         this.defaultClientProperties = defaultClientProperties;
-        this.clients = [];
+        this.p.proxy = proxy;
 
+        this.clients = [];
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
@@ -162,7 +164,8 @@ class Server {
                         }, this.constructor, { server: this }))
                 }
 
-            })
+            });
+
         })
 
         this.server.on('login', async client => {
@@ -205,6 +208,10 @@ class Server {
 
     set p(value) {
         this.p._p = value;
+    }
+
+    joinProxyClient(proxyClient) {
+        new Client(proxyClient.client, this, proxyClient.earlyInformation, this.defaultClientProperties);
     }
 
     on(event, callback) {

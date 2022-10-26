@@ -1,5 +1,6 @@
 module.exports = function ({ x, y, z }, playerVelocity, strength, destroyedBlocks) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     this.p.sendPacket('explosion', {
         x,

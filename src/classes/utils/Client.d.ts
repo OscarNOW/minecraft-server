@@ -59,11 +59,13 @@ export class Client {
     readonly sneaking: boolean;
     readonly onGround: boolean;
     readonly ping: number;
+
     readonly entities: {
         readonly [entityId: number]: EntityLike;
         readonly 0: Client;
     };
     readonly bossBars: BossBar[];
+    readonly chunks: LoadedChunk[];
 
     /* Writable changing */
     position: {
@@ -88,18 +90,6 @@ export class Client {
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     food: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
-
-    observe(type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    observe(type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
-    observe(type: 'position', callback: (changedValue: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }) => void): void;
-    observe(type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
-    observe(type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     particle(
         particleName: noDataParticle,
@@ -130,7 +120,7 @@ export class Client {
             y: number;
             z: number;
         },
-        block: blockType
+        block: blockName
     ): void;
     particle(
         particleName: 'dust',
@@ -225,6 +215,11 @@ export class Client {
     win(showCredits: boolean): void;
     kick(reason: textInput | Text): void;
     chat(message?: textInput | Text): void;
+    setBlock(block: blockName, location: {
+        x: number;
+        y: number;
+        z: number;
+    }, state?: blockState): this;
     title(properties: {
         fadeIn?: number;
         stay?: number;
@@ -288,6 +283,20 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
 
+    removeAllListeners(event?: 'itemUse' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
+
+    on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
+    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
+    on(event: 'change', type: 'position', callback: (changedValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
+    on(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    on(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+
     on(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     on(event: 'chat', callback: (message: string) => void): void;
@@ -317,6 +326,18 @@ export class Client {
         };
         isMainHand: boolean
     }) => void): void;
+
+    once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
+    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
+    once(event: 'change', type: 'position', callback: (changedValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }) => void): void;
+    once(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     once(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;

@@ -40,8 +40,7 @@ export class Server {
 
     readonly clients: Client[];
 
-    private server: any;
-    private intervals: NodeJS.Timer[];
+    joinProxyClient(proxyClient: ProxyClient): void;
 
     close(): void;
 

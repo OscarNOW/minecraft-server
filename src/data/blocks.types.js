@@ -10,6 +10,6 @@ for (const [name, values] of blockStates)
         newBlockStates.push([name, values])
 
 module.exports = {
-    blockType: convertToType(require('./blocks.json').map(a => a[0])),
+    blockName: convertToType(require('./blocks.json').map(a => a[0])),
     blockState: `{${newBlockStates.map(([name, values]) => `${name}?:${convertToType(values)};`).join('')}}`
 }

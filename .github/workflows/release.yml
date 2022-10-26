@@ -17,26 +17,28 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Use Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
 
       - name: Copy docs
         run: |
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
-          cp -r ./docs/unstable/. ./docs/${{ github.event.inputs.version }}/
-      - name: Update doc manifest
-        run: node ./src/updateDocManifest ${{ github.event.inputs.version }}
-
-      - name: Update package version
-        run: node ./src/setPackageVersion ${{ github.event.inputs.version }}
-
-      - name: Compile #todo //todo change name to build
-        run: npm run compile
+          cp -r ./docs/github/. ./docs/${{ github.event.inputs.version }}/
+      - name: Update version files
+        run: node ./scripts/updateVersionFiles ${{ github.event.inputs.version }}
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Release ${{ github.event.inputs.version }}"
           branch: main
-          file_pattern: ./docs/
 
           commit_user_name: Doc-bot
           commit_user_email: actions@github.com
@@ -46,16 +48,16 @@ jobs:
         uses: ncipollo/release-action@v1.11.1
         with:
           bodyFile: CHANGELOG.md
-          version: ${{ github.event.inputs.version }}
           commit: main
-          name: ${{ github.event.inputs.version }}
 
-          tag: latest
+          name: ${{ github.event.inputs.version }}
+          tag: ${{ github.event.inputs.version }}
+
       - name: NPM Release
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          greater-version-only: true
+          check-version: true
 
           tag: latest

@@ -1,22 +1,22 @@
 {
     "name": "@boem312/minecraft-server",
-    "version": "0.0.0",
+    "version": "0.2.0",
     "description": "Create Minecraft Servers with an easy to use API and with full control",
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "readme": "node ./src/readme",
-        "minify": "node ./src/minify",
-        "types": "node ./src/types",
+        "updateVersionFiles": "node ./scripts/updateVersionFiles",
+        "readme": "node ./scripts/readme",
+        "minify": "node ./scripts/minify",
+        "types": "node ./scripts/types",
         "docs": "node ./src/docs/generate",
-        "test": "node ./src/test",
-        "compile": "npm run readme && npm run minify && npm run types && npm run docs"
+        "test": "node ./scripts/test",
+        "build": "npm run updateVersionFiles && npm run readme && npm run minify && npm run types && npm run docs && npm test"
     },
     "keywords": [
         "minecraft",
         "server",
         "minecraft-server",
-        "library",
         "protocol",
         "wrapper"
     ],
@@ -37,9 +37,9 @@
         "prismarine-chunk": "^1.32.0"
     },
     "devDependencies": {
-        "eslint": "^8.24.0",
-        "mineflayer": "^4.4.0",
-        "typedoc": "^0.23.15",
+        "eslint": "^8.26.0",
+        "mineflayer": "^4.5.0",
+        "typedoc": "^0.23.18",
         "typedoc-theme-hierarchy": "^3.0.0"
     }
 }

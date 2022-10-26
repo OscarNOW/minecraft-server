@@ -1,21 +1,31 @@
 name: Test buildable
 
 on:
+  workflow_dispatch:
   push:
-    paths-ignore:
-      - "**.txt"
-      - "**.md"
-      - "**.xlsx"
+    branches:
+      - main
+    paths:
+      - "**.*"
+      - "!**.txt"
+      - "!**.xlsx"
+      - "!**.yml"
+      - ".github/workflows/test-buildable.yml"
   pull_request:
-    paths-ignore:
-      - "**.txt"
-      - "**.md"
-      - "**.xlsx"
+    types: [opened, reopened]
+    paths:
+      - "**.*"
+      - "!**.txt"
+      - "!**.xlsx"
+      - "!**.yml"
+      - ".github/workflows/test-buildable.yml"
+
+permissions: {}
 
 jobs:
-  test-buildable:
+  update-version-files:
     runs-on: ubuntu-latest
-    name: Test buildable
+    name: Update version files
 
     steps:
       - name: Checkout Repository
@@ -27,11 +37,57 @@ jobs:
           cache: npm
       - name: Install Dependencies
         run: npm ci
+
+      - name: Build-updateVersionFiles
+        run: npm run updateVersionFiles
+  readme:
+    runs-on: ubuntu-latest
+    name: Run readme
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Build-readme
         run: npm run readme
+  minify:
+    runs-on: ubuntu-latest
+    name: Minify
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Build-minify
         run: npm run minify
-      - name: Build-types
-        run: npm run types
-      - name: Build-docs
-        run: npm run docs
+  type-docs:
+    runs-on: ubuntu-latest
+    name: Generate types and docs
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+
+      - run: npm run types
+      - run: npm run docs

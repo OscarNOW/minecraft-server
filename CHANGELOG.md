@@ -1,13 +1,11 @@
-## Breaking changes
+## Existing API changes
+* Removed `<Client>.observe(` in favor of `<Client>.on('change', ...`
 
-## Bug fixes
+## New API
+* [`<Client>.removeAllListeners(`](https://oscarnow.github.io/minecraft-server/0.3.0/classes/Client#removeAllListeners)
 
-## Features
-New [LoadedChunk](https://oscarnow.github.io/minecraft-server/unstable/classes/LoadedChunk) class
-Updated [docs](https://oscarnow.github.io/minecraft-server/unstable/) with loads of new features
+## Issues fixed
+None
 
-## New packets covered
-
-## Packets changed
-
-## Types
+## Documentation / Types
+None

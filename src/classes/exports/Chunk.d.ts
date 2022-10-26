@@ -1,9 +1,11 @@
 export class Chunk {
     private chunk: any;
-    private isLoadedChunk: boolean;
 
     constructor();
-    setBlock(block: blockType, location: {
+
+    readonly blocks: blocksSegment;
+
+    setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
         y: number;
         z: number;

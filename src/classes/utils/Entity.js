@@ -19,8 +19,8 @@ const observables = [
 ];
 
 const defaultPrivate = {
-    emitObservable(observable) {
-        this.p.observables[observable].forEach(cb => cb(this[observable]))
+    emitObservable(type) {
+        this.p.observables[type].forEach(cb => cb(this[type]))
     }
 };
 
@@ -49,7 +49,7 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
             changed = true;
 
     if (changed)
-        this.p.emitObservable('position')
+        this.p.emitChange('position')
 }
 
 class Entity {
@@ -60,7 +60,7 @@ class Entity {
                 got: type,
                 expectationType: 'type',
                 expectation: 'entityType',
-                externalLink: '{docs}/types/entityType.html'
+                externalLink: '{docs}/types/entityType'
             }, this.constructor, { server: this.client.server, client: this.client }))
 
         this.client = client;
@@ -156,7 +156,8 @@ class Entity {
     }
 
     animation(animationType) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         if (entityAnimations[animationType] === undefined)
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
@@ -172,7 +173,8 @@ class Entity {
     }
 
     camera() {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         this.p.sendPacket('camera', {
             cameraId: this.id
@@ -180,14 +182,15 @@ class Entity {
     }
 
     sound({ sound, channel, volume, pitch }) {
-        this.client.p.stateHandler.checkReady.call(this.client);
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         if (!sounds.find(a => a.name == sound))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
                 got: sound,
                 expectationType: 'type',
                 expectation: 'soundName',
-                externalLink: '{docs}/types/soundName.html'
+                externalLink: '{docs}/types/soundName'
             }, this.sound, { server: this.client.server, client: this.client }))
         if (!soundChannels.includes(channel))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
@@ -208,13 +211,11 @@ class Entity {
     remove() {
         throw new Error('Not implemented')
 
-        // this.client.p.stateHandler.checkReady.call(this.client);
-
         // this.p.sendPacket('destroy_entities', {
         //     entityIds: [this.id]
         // })
 
-        // delete this.client.entities[this.id]        
+        // delete this.client.entities[this.id]
     }
 
     on(event, callback) {

@@ -3,17 +3,17 @@ const fs = require('fs');
 const path = require('path');
 const mc = require('minecraft-protocol');
 const Server = require('./Server');
+const version = require('../../settings.json').version;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let credentials = null;
-if (fs.existsSync(path.resolve(__dirname, `../../credentials/`)))
-    if (fs.existsSync(path.resolve(__dirname, `../../credentials/microsoft.json`)))
-        credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../../credentials/microsoft.json`)))
+if (fs.existsSync(path.resolve(__dirname, `../../../credentials/`)))
+    if (fs.existsSync(path.resolve(__dirname, `../../../credentials/microsoft.json`)))
+        credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../../../credentials/microsoft.json`)))
 
 module.exports = async (expect, warn) => {
-    if (credentials === null) return warn(`Can't test server class without Microsoft account credentials. Create ${path.resolve(__dirname, './credentials/microsoft.json')} with username and password properties`)
+    if (credentials === null) return warn(`Can't test server class without Microsoft account credentials. Create ${path.resolve(__dirname, '../../../credentials/microsoft.json')} with username and password properties`)
 
-    console.clear()
     console.log('Starting testing server')
 
     let serverPingAmount = 0;
@@ -93,7 +93,7 @@ module.exports = async (expect, warn) => {
     await wait(500);
 
     expect(left, true);
-    expect(leftClient.uuid, joinedClient.uuid);
+    expect(leftClient?.uuid, joinedClient?.uuid);
     expect(bot1Kicked, true);
     expect(bot1KickedReason, random); //
     expect(server.clients.length, 0);
@@ -157,14 +157,14 @@ module.exports = async (expect, warn) => {
     console.log('Pinging test server')
     serverPingAmount = 0;
     let pinged = await ping();
-    let ip = '::1';
+    let ip = ['127.0.0.1', '::1', 'localhost'];
     expect(serverPingAmount, 1)
-    expect(pinged?.version?.name, `#1#${ip}#1#`)
+    expect(ip.map(a => `#1#${a}#1#`).includes(pinged?.version?.name), true)
     expect(pinged?.players?.online, 2)
     expect(pinged?.players?.max, 3)
-    expect(pinged?.players?.sample?.[0]?.name, `#4#${ip}#4#`)
-    expect(pinged?.players?.sample?.[1]?.name, `#5#${ip}#5#`)
-    expect(pinged?.description, { text: `#6#${ip}#6#\n#7#${ip}#7#` })
+    expect(ip.map(a => `#4#${a}#4#`).includes(pinged?.players?.sample?.[0]?.name), true)
+    expect(ip.map(a => `#5#${a}#5#`).includes(pinged?.players?.sample?.[1]?.name), true)
+    expect(ip.map(a => `#6#${a}#6#\n#7#${a}#7#`).includes(pinged?.description?.text), true)
 
     await wait(500);
     console.log('Closing test server');
@@ -179,7 +179,8 @@ function bot({ kicked }) {
             host: 'localhost',
             username: credentials.username,
             password: credentials.password,
-            auth: 'microsoft'
+            auth: 'microsoft',
+            version
         })
 
         bot.on('chat', (username, message) => {
@@ -195,6 +196,6 @@ function ping() {
     return mc.ping({
         host: 'localhost',
         port: '25565',
-        version: '1.16.3'
+        version
     })
 }

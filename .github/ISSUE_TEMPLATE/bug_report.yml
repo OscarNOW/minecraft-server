@@ -1,0 +1,85 @@
+name: Bug Report
+description: Report a bug or unintended behaviour
+labels: [bug]
+assignees:
+  - OscarNOW
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing this bug report! We'll look at this as soon as possible.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: How did you find this bug? Tell a bit about the bug.
+      placeholder: |
+        I found the bug when I was working on...
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+    validations:
+      required: false
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: How can we reproduce this bug? Please provide an as short as possible list of steps.
+      placeholder: |
+        1. Use the following code...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen? Please provide a clear and concise description.
+      placeholder: |
+        I expected the following code to...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: OS
+    attributes:
+      label: OS
+      description: What operating system are you using?
+      options:
+        - macOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: input
+    id: OS-version
+    attributes:
+      label: OS Version
+      description: What OS version (and distro) do you use?
+      placeholder: Windows 10
+    validations:
+      required: true
+
+  - type: dropdown
+    id: package-version
+    attributes:
+      label: Package Version
+      description: What package version do you use? (get by running `npm list @boem312/minecraft-server`)
+      options:
+        # these version options are automatically updated in scripts/updateVersionFiles
+        #startVersionOptions
+        - 0.2.0 (latest stable)
+        - 0.1.0
+        - github
+        #endVersionOptions
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_information
+    attributes:
+      label: Additional information
+      description: If you have any additional information, please provide it here.

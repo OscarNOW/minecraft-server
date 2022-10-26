@@ -1,8 +1,6 @@
 module.exports = async function () {
     throw new Error('Not implemented');
 
-    // this.p.stateHandler.checkReady.call(this);
-
     // this.p.sendPacket('player_info', {
     //     action: 0,
     //     data: {

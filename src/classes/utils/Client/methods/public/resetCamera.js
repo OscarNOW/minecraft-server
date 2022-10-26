@@ -1,5 +1,6 @@
 module.exports = function () {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     this.p.sendPacket('camera', {
         cameraId: this.entityId

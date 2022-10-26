@@ -9,7 +9,8 @@ module.exports = {
             return this.p._foodSaturation
         },
         set: function (v) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             const value = parseInt(v);
 
@@ -20,6 +21,8 @@ module.exports = {
                     expectation: [0, 1, 2, 3, 4, 5]
                 }, null, { server: this.server, client: this }));
 
+            const changed = value !== this.foodSaturation;
+
             this.p.sendPacket('update_health', {
                 health: this.p._health,
                 food: this.p._food,
@@ -27,7 +30,8 @@ module.exports = {
             })
 
             this.p._foodSaturation = value;
-            this.p.emitObservable('foodSaturation');
+            if (changed)
+                this.p.emitChange('foodSaturation');
         },
         setRaw(v) {
             const value = parseInt(v);

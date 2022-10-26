@@ -4,7 +4,8 @@ const nonEntityWindowIdMapping = windows.filter(({ name }) => name != 'horse')
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (nonEntityWindowName) {
-    this.p.stateHandler.checkReady.call(this);
+    if (!this.p.stateHandler.checkReady.call(this))
+        return;
 
     if (!nonEntityWindowIdMapping.find(({ name }) => name == nonEntityWindowName))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `nonEntityWindowName in  <${this.constructor.name}>.window(${require('util').inspect(nonEntityWindowName)}, ...)  `, {

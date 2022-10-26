@@ -9,7 +9,8 @@ module.exports = {
             return this.p._slot
         },
         set: function (v) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             let value = parseInt(v);
 
@@ -22,10 +23,15 @@ module.exports = {
 
             value = value % 9;
 
-            this.p._slot = value;
+            const changed = value !== this.slot;
+
             this.p.sendPacket('held_item_slot', {
                 slot: value
-            })
+            });
+
+            this.p._slot = value;
+            if (changed)
+                this.p.emitChange('slot');
         },
         setRaw: function (v) {
             let value = parseInt(v);

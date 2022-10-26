@@ -9,7 +9,8 @@ module.exports = {
             return this.p._raining
         },
         set: function (value) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             if (typeof value != 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(value)}  `, {
@@ -18,13 +19,16 @@ module.exports = {
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
+            const changed = value !== this.raining;
+
             this.p.sendPacket('game_state_change', {
                 reason: 7,
                 gameMode: value ? this.toxicRainLevel + 1 : 0
             })
 
             this.p._raining = value;
-            this.p.emitObservable('raining');
+            if (changed)
+                this.p.emitChange('raining');
         },
         setRaw: function (value) {
             if (typeof value != 'boolean')

@@ -24,10 +24,10 @@
         ));
     }
 
-    console.log(`    .github/Readme.md`)
+    console.log(`    .github/README.md`)
     copiedFilePromises.push(fs.copyFile(
-        path.join(__dirname, `../../.github/Readme.md`),
-        path.join(__dirname, `./Readme.md`)
+        path.join(__dirname, `../../.github/README.md`),
+        path.join(__dirname, `./README.md`)
     ));
 
     await Promise.all(copiedFilePromises);
@@ -35,8 +35,8 @@
     console.clear();
     console.log('Deleting old files...')
 
-    await fs.rm(path.join(__dirname, '../../docs/unstable/'), { recursive: true, force: true });
-    await fs.mkdir(path.join(__dirname, '../../docs/unstable/'))
+    await fs.rm(path.join(__dirname, '../../docs/github/'), { recursive: true, force: true });
+    await fs.mkdir(path.join(__dirname, '../../docs/github/'))
 
     console.clear();
     require('./transformBefore.js');
@@ -72,7 +72,7 @@
 
         copiedFilePromises.push(fs.cp(
             path.join(__dirname, `../../${copyingFile}`),
-            path.join(__dirname, `../../docs/unstable/${copyingFile}`),
+            path.join(__dirname, `../../docs/github/${copyingFile}`),
             { recursive: true }
         ));
     }

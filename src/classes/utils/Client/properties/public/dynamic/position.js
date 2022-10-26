@@ -14,7 +14,8 @@ module.exports = {
             return this.p._position
         },
         set: function (pos = {}) {
-            this.p.stateHandler.checkReady.call(this);
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
 
             let teleportId = Math.floor(Math.random() * 1000000);
             while (teleportPromises.get(this)?.[teleportId])

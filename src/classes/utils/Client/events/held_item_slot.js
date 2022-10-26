@@ -10,6 +10,6 @@ module.exports = {
             }, null, { server: this.server, client: this }));
 
         this.p._slot = slotId;
-        this.p.emitObservable('slot');
+        this.p.emitChange('slot');
     }
 }
