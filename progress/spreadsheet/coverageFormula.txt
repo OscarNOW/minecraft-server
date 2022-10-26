@@ -4,10 +4,10 @@
     + (AANTAL.ALS(Packets!E5:E143; "partly implemented") * Settings!D7)
     + (AANTAL.ALS(Packets!E5:E143; "tried") * Settings!D8)
     + (AANTAL.ALS(Packets!E5:E143; "not started") * Settings!D9)
-
-    + (AANTAL.ALS(Miscellaneous!E4:E104; "fully implemented") * Settings!D5)
-    + (AANTAL.ALS(Miscellaneous!E4:E104; "working implemented") * Settings!D6)
-    + (AANTAL.ALS(Miscellaneous!E4:E104; "partly implemented") * Settings!D7)
-    + (AANTAL.ALS(Miscellaneous!E4:E104; "tried") * Settings!D8)
-    + (AANTAL.ALS(Miscellaneous!E4:E104; "not started") * Settings!D9)
-  ) / (RIJEN(Packets!E5:E143 + AANTALARG(Miscellaneous!E4:E104))
+    
+    + (AANTAL.ALS(Packets!F5:F143; "fully implemented") * Settings!D5)
+    + (AANTAL.ALS(Packets!F5:F143; "working implemented") * Settings!D6)
+    + (AANTAL.ALS(Packets!F5:F143; "partly implemented") * Settings!D7)
+    + (AANTAL.ALS(Packets!F5:F143; "tried") * Settings!D8)
+    + (AANTAL.ALS(Packets!F5:F143; "not started") * Settings!D9)
+  ) / (RIJEN(Packets!E5:E143) * 2)
