@@ -33,13 +33,24 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     sentChangeEvents = [];
     sentPackets = [];
-    client.food = '15';
+    client.food = '23';
 
-    expect(client.food, 15);
-    expect(sentChangeEvents, [15]);
+    expect(client.food, 20);
+    expect(sentChangeEvents, [20]);
     expect(!!sentPackets.find(({ name, packet: { food } }) =>
         name == 'update_health' &&
-        food == 15
+        food == 20
+    ), true);
+
+    sentChangeEvents = [];
+    sentPackets = [];
+    client.food = '-2';
+
+    expect(client.food, 0);
+    expect(sentChangeEvents, [0]);
+    expect(!!sentPackets.find(({ name, packet: { food } }) =>
+        name == 'update_health' &&
+        food == 0
     ), true);
 
 }
