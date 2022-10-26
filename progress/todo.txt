@@ -22,13 +22,16 @@ Move toBase64 function in ProxyClient to separate file
 Make "Client didn't respond to keep alive packet in time" error fire misbehavior event
 Rewrite Server tests with ProxyClient
 -Write Client tests
-    Add changeEvent (for properties) tests to Client
+    Add setRaw tests to Client
 Change mpOn to clientOn
 Implement <Entity>.once(
 Implement <Entity>.removeAllListeners(
 Implement <Entity>.on('change', ...
 Add oldValue to change event
-Add emitChange to new Client properties:
+Add emitChange to Client properties:
     bossBars
     chunks
     entities
+Add gamemodes to separate data file
+Make <Client>.health = 21 set to 20 and <Client>.health = -1 set to 0 (like slot)
+    Same for food
