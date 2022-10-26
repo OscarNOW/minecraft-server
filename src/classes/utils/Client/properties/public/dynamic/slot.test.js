@@ -15,9 +15,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.slot, 6);
     expect(sentChangeEvents, [6]);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
-        slot: 6
-    });
+    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
+        name == 'held_item_slot' &&
+        slot == 6
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -25,9 +26,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.slot, 6);
     expect(sentChangeEvents, []);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
-        slot: 6
-    });
+    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
+        name == 'held_item_slot' &&
+        slot == 6
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -35,9 +37,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.slot, 2);
     expect(sentChangeEvents, [2]);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
-        slot: 2
-    });
+    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
+        name == 'held_item_slot' &&
+        slot == 2
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -45,9 +48,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.slot, 1);
     expect(sentChangeEvents, [1]);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
-        slot: 1
-    });
+    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
+        name == 'held_item_slot' &&
+        slot == 1
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -55,8 +59,9 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.slot, 3);
     expect(sentChangeEvents, [3]);
-    expect(sentPackets.find(({ name }) => name == 'held_item_slot').packet, {
-        slot: 3
-    });
+    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
+        name == 'held_item_slot' &&
+        slot == 3
+    ), true);
 
 }

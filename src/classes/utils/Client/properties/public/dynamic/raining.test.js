@@ -15,10 +15,11 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.raining, true);
     expect(sentChangeEvents, [true]);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 7,
-        gameMode: 1
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 7 &&
+        gameMode == 1
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -26,10 +27,11 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.raining, false);
     expect(sentChangeEvents, [false]);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 7,
-        gameMode: 0
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 7 &&
+        gameMode == 0
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -37,8 +39,9 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.raining, false);
     expect(sentChangeEvents, []);
-    expect(sentPackets.find(({ name }) => name == 'game_state_change').packet, {
-        reason: 7,
-        gameMode: 0
-    });
+    expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
+        name == 'game_state_change' &&
+        reason == 7 &&
+        gameMode == 0
+    ), true);
 }

@@ -15,11 +15,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.health, 6);
     expect(sentChangeEvents, [6]);
-    expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
-        health: 6,
-        food: client.food,
-        foodSaturation: client.foodSaturation
-    });
+    expect(!!sentPackets.find(({ name, packet: { health } }) =>
+        name == 'update_health' &&
+        health == 6
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -27,11 +26,10 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.health, 6);
     expect(sentChangeEvents, []);
-    expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
-        health: 6,
-        food: client.food,
-        foodSaturation: client.foodSaturation
-    });
+    expect(!!sentPackets.find(({ name, packet: { health } }) =>
+        name == 'update_health' &&
+        health == 6
+    ), true);
 
     sentChangeEvents = [];
     sentPackets = [];
@@ -39,10 +37,9 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     expect(client.health, 12);
     expect(sentChangeEvents, [12]);
-    expect(sentPackets.find(({ name }) => name == 'update_health').packet, {
-        health: 12,
-        food: client.food,
-        foodSaturation: client.foodSaturation
-    });
+    expect(!!sentPackets.find(({ name, packet: { health } }) =>
+        name == 'update_health' &&
+        health == 12
+    ), true);
 
 }
