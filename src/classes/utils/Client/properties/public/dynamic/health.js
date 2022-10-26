@@ -12,7 +12,7 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            value = parseInt(value);
+            value = Math.round(parseFloat(value));
             if (value < 0) value = 0;
             if (value > 20) value = 20;
 
