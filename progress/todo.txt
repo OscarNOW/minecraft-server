@@ -32,4 +32,4 @@ Add emitChange to Client properties:
     bossBars
     chunks
     entities
-Add gamemodes to separate data file
+Change entityType type to entityName
