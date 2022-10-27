@@ -31,4 +31,4 @@ const server = new Server({
 
     })
 
-})
+});

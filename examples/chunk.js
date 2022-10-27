@@ -1,4 +1,4 @@
-const { Chunk } = require('@boem312/minecraft-server')
+const { Chunk } = require('@boem312/minecraft-server');
 let chunk = new Chunk();
 
 for (let x = 0; x < 16; x++)

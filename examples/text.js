@@ -16,10 +16,10 @@ const message = new Text([
             'strike'
         ]
     }
-])
+]);
 
-const server = new Server()
+const server = new Server();
 
 server.on('connect', client => {
     client.chat(message)
-})
+});
