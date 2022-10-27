@@ -1,3 +1,5 @@
+const gamemodes = require('../../../../../../data/gamemodes.json');
+
 module.exports = ({ expect, client, proxyClient }) => {
     client.gamemode = 'survival';
 
@@ -18,7 +20,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
         name == 'game_state_change' &&
         reason == 3 &&
-        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
+        gameMode == gamemodes.indexOf('creative')
     ), true);
 
     sentChangeEvents = [];
@@ -30,7 +32,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
         name == 'game_state_change' &&
         reason == 3 &&
-        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('creative')
+        gameMode == gamemodes.indexOf('creative')
     ), true);
 
     sentChangeEvents = [];
@@ -42,7 +44,7 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
         name == 'game_state_change' &&
         reason == 3 &&
-        gameMode == ['survival', 'creative', 'adventure', 'spectator'].indexOf('spectator')
+        gameMode == gamemodes.indexOf('spectator')
     ), true);
 
 }

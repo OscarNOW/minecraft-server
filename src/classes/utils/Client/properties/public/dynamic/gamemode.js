@@ -1,6 +1,8 @@
 const { defaults } = require('../../../../../../settings.json');
 const CustomError = require('../../../../CustomError.js');
 
+const gamemodes = require('../../../../../../data/gamemodes.json');
+
 module.exports = {
     gamemode: {
         info: {
@@ -15,18 +17,18 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
+            if (!gamemodes.includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
-                    expectation: ['survival', 'creative', 'adventure', 'spectator']
+                    expectation: gamemodes
                 }, null, { server: this.server, client: this }));
 
             const changed = value !== this.gamemode;
 
             this.p.sendPacket('game_state_change', {
                 reason: 3,
-                gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(value)
+                gameMode: gamemodes.indexOf(value)
             })
 
             this.p._gamemode = value;
@@ -34,21 +36,21 @@ module.exports = {
                 this.p.emitChange('gamemode');
         },
         setRaw: function (value, loginPacket) {
-            if (!['survival', 'creative', 'adventure', 'spectator'].includes(value))
+            if (!gamemodes.includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
-                    expectation: ['survival', 'creative', 'adventure', 'spectator']
+                    expectation: gamemodes
                 }, null, { server: this.server, client: this }));
 
             this.p._gamemode = value;
 
             if (loginPacket)
-                return { gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(value) }
+                return { gameMode: gamemodes.indexOf(value) }
             else
                 this.p.sendPacket('game_state_change', {
                     reason: 3,
-                    gameMode: ['survival', 'creative', 'adventure', 'spectator'].indexOf(value)
+                    gameMode: gamemodes.indexOf(value)
                 })
         },
         init: function () {
