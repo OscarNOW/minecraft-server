@@ -83,7 +83,7 @@ export class Client {
     raining: boolean;
     toxicRainLevel: number;
     showRespawnScreen: boolean;
-    gamemode: 'survival' | 'creative' | 'adventure' | 'spectator';
+    gamemode: gamemode;
     difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
@@ -294,7 +294,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }) => void): void;
-    on(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    on(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
     on(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     on(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
@@ -336,7 +336,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }) => void): void;
-    once(event: 'change', type: 'gamemode', callback: (changedValue: 'survival' | 'creative' | 'adventure' | 'spectator') => void): void;
+    once(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
     once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     once(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
@@ -387,7 +387,7 @@ type defaultClientProperties = {
     raining?: boolean;
     toxicRainLevel?: number;
     showRespawnScreen?: boolean;
-    gamemode?: 'survival' | 'creative' | 'adventure' | 'spectator';
+    gamemode?: gamemode;
     difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
 
     slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
