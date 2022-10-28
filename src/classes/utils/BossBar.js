@@ -89,8 +89,6 @@ const propertyNames = Object.freeze([
 
 class BossBar {
     constructor(client, sendPacket, p) {
-        if (!this.client.p.stateHandler.checkReady.call(this.client))
-            return;
 
         this.client = client;
         this.server = client.server;
@@ -131,6 +129,9 @@ class BossBar {
             writable: false,
             value: bossBarUuid
         })
+
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         this.p.sendPacket('boss_bar', {
             entityUUID: this.id,
