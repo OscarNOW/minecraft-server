@@ -7,7 +7,12 @@ module.exports = {
             return values.get(this);
         },
         setPrivate: function (value) {
+            const changed = value !== this.bossBars;
+
             values.set(this, value);
+
+            if (changed)
+                this.p.emitChange('chunks');
         }
     }
 }

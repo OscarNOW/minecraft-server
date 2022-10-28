@@ -12,7 +12,8 @@ const changes = [
     'experience',
     'sneaking',
     'onGround',
-    'bossBars'
+    'bossBars',
+    'chunks'
 ];
 
 module.exports = {
