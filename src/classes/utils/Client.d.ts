@@ -285,6 +285,7 @@ export class Client {
 
     removeAllListeners(event?: 'itemUse' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
+    on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     on(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
     on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
@@ -328,6 +329,7 @@ export class Client {
         isMainHand: boolean
     }) => void): void;
 
+    once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     once(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
     once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
