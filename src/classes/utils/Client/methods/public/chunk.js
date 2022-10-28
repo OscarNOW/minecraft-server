@@ -22,5 +22,5 @@ module.exports = function (chunk, { x, z }) {
         blockEntities: []
     })
 
-    chunks.setPrivate.call(this, [loadedChunk, ...this.chunks]);
+    chunks.setPrivate.call(this, Object.freeze([loadedChunk, ...this.chunks]));
 }
