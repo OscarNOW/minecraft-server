@@ -7,7 +7,9 @@ module.exports = {
             return values.get(this);
         },
         setPrivate: function (value) {
-            const changed = value !== this.bossBars;
+            const changed =
+                value.length !== this.chunks.length ||
+                value.some((a, i) => a !== this.chunks[i]);
 
             values.set(this, value);
 
