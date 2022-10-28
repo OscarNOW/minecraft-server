@@ -11,7 +11,8 @@ const changes = [
     'difficulty',
     'experience',
     'sneaking',
-    'onGround'
+    'onGround',
+    'bossBars'
 ];
 
 module.exports = {
