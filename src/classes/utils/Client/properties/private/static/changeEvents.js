@@ -13,7 +13,8 @@ const changes = [
     'sneaking',
     'onGround',
     'bossBars',
-    'chunks'
+    'chunks',
+    'entities'
 ];
 
 module.exports = {

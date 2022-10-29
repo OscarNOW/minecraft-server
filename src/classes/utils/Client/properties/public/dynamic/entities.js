@@ -7,7 +7,14 @@ module.exports = {
             return values.get(this);
         },
         setPrivate: function (value) {
+            const changed =
+                Object.keys(value).length !== Object.keys(this.entities).length ||
+                Object.keys(value).some(key => value[key] !== this.entities[key]);
+
             values.set(this, value);
+
+            if (changed)
+                this.p.emitChange('entities');
         }
     }
 }

@@ -5,6 +5,11 @@ type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
 
+type entities = {
+    readonly [entityId: number]: EntityLike;
+    readonly 0: Client;
+};
+
 export class Client {
     private constructor(client: any, server: Server, earlyInformation: {
         version: newVersion;
@@ -60,10 +65,7 @@ export class Client {
     readonly onGround: boolean;
     readonly ping: number;
 
-    readonly entities: {
-        readonly [entityId: number]: EntityLike;
-        readonly 0: Client;
-    };
+    readonly entities: entities;
     readonly bossBars: BossBar[];
     readonly chunks: LoadedChunk[];
 
@@ -285,6 +287,7 @@ export class Client {
 
     removeAllListeners(event?: 'itemUse' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
+    on(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     on(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
@@ -329,6 +332,7 @@ export class Client {
         isMainHand: boolean
     }) => void): void;
 
+    once(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     once(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
