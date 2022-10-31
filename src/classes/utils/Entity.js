@@ -59,8 +59,8 @@ class Entity {
             client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
                 got: type,
                 expectationType: 'type',
-                expectation: 'entityType',
-                externalLink: '{docs}/types/entityType'
+                expectation: 'entityName',
+                externalLink: '{docs}/types/entityName'
             }, this.constructor, { server: this.client.server, client: this.client }))
 
         this.client = client;
