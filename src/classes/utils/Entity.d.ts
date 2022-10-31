@@ -3,7 +3,7 @@ type Horse = import('./Horse').Horse;
 type EntityLike = Entity | Horse;
 
 export class Entity {
-    constructor(client: Client, type: entityType, id: number, position: {
+    constructor(client: Client, type: entityName, id: number, position: {
         x: number;
         y: number;
         z: number;
@@ -15,7 +15,7 @@ export class Entity {
     readonly server: Server;
     readonly id: number;
     readonly uuid: string;
-    readonly type: entityType;
+    readonly type: entityName;
     readonly living: boolean;
 
     position: {

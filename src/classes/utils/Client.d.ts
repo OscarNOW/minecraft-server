@@ -234,7 +234,7 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    entity(entityType: entityType, position: {
+    entity(entity: entityName, position: {
         x: number;
         y: number;
         z: number;
