@@ -1,3 +1,5 @@
+const { toBase64 } = require('../../functions/toBase64.js');
+
 class ProxyClient {
     constructor({ latency = 0, username = '', uuid = '', ip = '', host = 'localhost', port = 25565, skinTextureUrl = 'https://example.com', capeTextureUrl = 'https://example.com' } = {}) {
         this.events = [];
@@ -80,10 +82,6 @@ class ProxyClient {
         this.client.socket.readyState = 'closed';
         this.sendPacket('end');
     }
-}
-
-function toBase64(inp) {
-    return Buffer.from(inp).toString('base64');
 }
 
 module.exports = ProxyClient;
