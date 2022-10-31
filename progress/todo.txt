@@ -29,4 +29,3 @@ Implement <Entity>.removeAllListeners(
 Implement <Entity>.on('change', ...
 Add oldValue to change event
 Move <Client>.p.events to separate property file
-Change entityType type to entityName
