@@ -41,7 +41,7 @@ server.on('connect', client => {
     //     for (let z = -5; z < 5; z++)
     //         client.chunk(chunk, { x, z });
 
-    client.on('misbehavior', console.log)
+    client.on('misbehavior', a => console.log(a.toString()))
 })
 
 server.joinProxyClient(proxyClient);
