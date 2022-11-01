@@ -37,9 +37,11 @@ const server = new Server({
 
 console.log('Listening')
 server.on('connect', client => {
-    for (let x = -5; x < 5; x++)
-        for (let z = -5; z < 5; z++)
-            client.chunk(chunk, { x, z });
+    // for (let x = -5; x < 5; x++)
+    //     for (let z = -5; z < 5; z++)
+    //         client.chunk(chunk, { x, z });
+
+    client.on('misbehavior', console.log)
 })
 
-// server.joinProxyClient(proxyClient);
+server.joinProxyClient(proxyClient);
