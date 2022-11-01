@@ -34,7 +34,7 @@ module.exports = {
 
                 this.p.setTimeout(() => {
                     if (this.online && !teleportPromises.get(this)[teleportId].resolved)
-                        rej(new CustomError('expectationNotMet', 'client', `call in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
+                        rej(new CustomError('expectationNotMet', 'client', `response in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
                             got: 'no call',
                             expectationType: 'value',
                             expectation: ['call']

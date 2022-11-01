@@ -16,7 +16,7 @@ module.exports = {
 
                 this.p.setTimeout(() => {
                     if (this.online && !keepAlivePromises[currentId].resolved)
-                        rej(new CustomError('expectationNotMet', 'client', `call in  <remote ${this.constructor.name}>.keep_alive(...)  `, {
+                        rej(new CustomError('expectationNotMet', 'client', `response in  <remote ${this.constructor.name}>.keep_alive(...)  `, {
                             got: 'no call',
                             expectationType: 'value',
                             expectation: ['call']
