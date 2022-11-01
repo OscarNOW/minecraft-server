@@ -35,7 +35,7 @@ module.exports = {
                     if (this.online && !teleportPromises.get(this)[teleportId].resolved)
                         rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
                 }, teleportConfirmationTimeout)
-            });
+            }).catch(e => this.p.emitError(e));
 
             let oldPosition = oldPositions.get(this);
             let useRelative = '';
