@@ -1,6 +1,7 @@
 const { timing: { teleportConfirmationTimeout }, defaults } = require('../../../../../../settings.json');
 
 const Changable = require('../../../../Changable.js');
+const CustomError = require('../../../../CustomError.js');
 
 const teleportPromises = new WeakMap();
 const oldPositions = new WeakMap();
@@ -33,7 +34,11 @@ module.exports = {
 
                 this.p.setTimeout(() => {
                     if (this.online && !teleportPromises.get(this)[teleportId].resolved)
-                        rej(new Error(`Client didn't send teleport confirm after sending client teleport`))
+                        rej(new CustomError('expectationNotMet', 'client', `call in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
+                            got: 'no call',
+                            expectationType: 'value',
+                            expectation: ['call']
+                        }, null, { server: this.server, client: this }))
                 }, teleportConfirmationTimeout)
             }).catch(e => this.p.emitError(e));
 
