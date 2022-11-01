@@ -18,7 +18,7 @@ module.exports = {
 
                     delete keepAlivePromises[currentId];
                 }, keepAliveTimeout)
-            })
+            }).catch(e => this.p.emitError(e));
 
             this.p.sendPacket('keep_alive', {
                 keepAliveId: BigInt(currentId)
