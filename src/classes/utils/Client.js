@@ -17,7 +17,8 @@ const events = Object.freeze([
     'signEditorClose',
     'windowClose',
     'itemUse',
-    'inventoryClose'
+    'inventoryClose',
+    'misbehavior'
 ]);
 
 class Client {
