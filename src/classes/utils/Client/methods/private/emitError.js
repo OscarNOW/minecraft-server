@@ -4,7 +4,9 @@ module.exports = {
             if (this.p.events.misbehavior?.length > 0)
                 this.p.emit('misbehavior', customError);
             else
-                throw customError.toString();
+                setTimeout(() => { // to avoid unhandled promise rejection, but instead show error stack
+                    throw customError.toString();
+                }, 0);
         else
             this.server.p.emitError(customError);
     }
