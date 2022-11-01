@@ -1,5 +1,7 @@
 const { timing: { keepAliveTimeout, sendKeepAliveInterval } } = require('../../../../settings.json');
 
+const CustomError = require('../../CustomError.js');
+
 module.exports = {
     index: 0,
     func() {
@@ -14,7 +16,11 @@ module.exports = {
 
                 this.p.setTimeout(() => {
                     if (this.online && !keepAlivePromises[currentId].resolved)
-                        rej(new Error(`Client didn't respond to keep alive packet in time`));
+                        rej(new CustomError('expectationNotMet', 'client', `call in  <remote ${this.constructor.name}>.keep_alive(...)  `, {
+                            got: 'no call',
+                            expectationType: 'value',
+                            expectation: ['call']
+                        }, null, { server: this.server, client: this }))
 
                     delete keepAlivePromises[currentId];
                 }, keepAliveTimeout)
