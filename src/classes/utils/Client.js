@@ -2,24 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 const _p = Symbol('_privates');
-const events = Object.freeze([
-    'chat',
-    'digStart',
-    'digCancel',
-    'blockBreak',
-    'itemDrop',
-    'itemHandSwap',
-    'leftClick',
-    'rightClick',
-    'connect',
-    'join',
-    'leave',
-    'signEditorClose',
-    'windowClose',
-    'itemUse',
-    'inventoryClose',
-    'misbehavior'
-]);
 
 class Client {
     constructor(client, server, { version, connection: { host, port }, ip }, defaultClientProperties = () => ({})) {
@@ -39,7 +21,6 @@ class Client {
             host,
             port
         };
-        this.p.events = Object.fromEntries(events.map(event => [event, []]));
 
         //Inject private static properties
         for (const [key, value] of Object.entries(
