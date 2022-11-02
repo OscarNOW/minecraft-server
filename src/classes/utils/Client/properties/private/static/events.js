@@ -18,5 +18,5 @@ const events = [
 ];
 
 module.exports = {
-    changeEvents: () => Object.fromEntries(events.map(a => [a, []]))
+    events: () => Object.fromEntries(events.map(a => [a, []]))
 }
