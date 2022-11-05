@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<script>location = "{path}"</script>
 <html lang="en">
 
 <head>
@@ -7,10 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
+
+    <script>
+        function getParam(paramName) {
+            let value = location.search
+                .substr(1)
+                .split("&")
+                .find(item => item.split('=')[0] === paramName);
+
+            if (value)
+                return decodeURIComponent(value.slit('=')[1]);
+            else
+                return null;
+        }
+
+        let path = '{path.normal}';
+        if (getParam('unstable') == true)
+            path = '{path.unstable}';
+
+        location = path;
+
+    </script>
 </head>
 
 <body>
-    <a href="{path}">Redirecting to {name}...</a>
+    Redirecting...
 </body>
 
 </html>

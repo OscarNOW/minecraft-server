@@ -14,13 +14,17 @@ fs.writeFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css'),
 
 console.log('Generating index...')
 const versionManifest = require('../../docs/manifest.json')
+
 const latestStableVersion = versionManifest.versions.find(({ latestStable }) => latestStable);
 const latestStableVersionPath = latestStableVersion.path ?? latestStableVersion.name;
-const latestStableVersionName = latestStableVersion.name;
+
+const latestUnstableVersion = versionManifest.versions.find(({ latestUnstable }) => latestUnstable);
+const latestUnstableVersionPath = latestUnstableVersion.path ?? latestUnstableVersion.name;
+
 const redirectionPage = fs.readFileSync(path.resolve(__dirname, './redirectionPage.html')).toString()
-    .replaceAll('{path}', `{pathBefore}${latestStableVersionPath}/{path}`)
-    .replaceAll('{title}', `{title}${latestStableVersionName} docs minecraft-server`)
-    .replaceAll('{name}', latestStableVersionName);
+    .replaceAll('{path.normal}', `{pathBefore}${latestStableVersionPath}/{path}`)
+    .replaceAll('{path.unstable}', `{pathBefore}${latestUnstableVersionPath}/{path}`)
+    .replaceAll('{title}', `{title}x.x.x docs minecraft-server`);
 
 console.log('Generating version dropdown...')
 let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
