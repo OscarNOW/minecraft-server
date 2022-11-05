@@ -29,3 +29,5 @@ Implement <Entity>.removeAllListeners(
 Implement <Entity>.on('change', ...
 Add oldValue to change event
 Move <Client>.p.events to separate property file
+Add backspace keybind close to middle of keyboard
+Change workflows to not run on push, but every day
