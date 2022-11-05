@@ -1,6 +1,7 @@
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
+Rewrite scripts in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Rewrite CustomError and change constructor arguments in better order
 -Add options to doc redirect. For example /classes/Chunk?unstable=true will redirect to /unstable/classes/Chunk
