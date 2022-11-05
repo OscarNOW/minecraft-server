@@ -34,6 +34,9 @@ jobs:
       - name: Update version files
         run: node ./scripts/updateVersionFiles ${{ github.event.inputs.version }}
 
+      - name: Re-Build
+        run: npm run build
+
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
