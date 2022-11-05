@@ -15,13 +15,14 @@
                 .find(item => item.split('=')[0] === paramName);
 
             if (value)
-                return decodeURIComponent(value.slit('=')[1]);
+                return decodeURIComponent(value.split('=')[1]);
             else
                 return null;
         }
 
         let path = '{path.normal}';
-        if (getParam('unstable') == true)
+
+        if (getParam('unstable') == 'true')
             path = '{path.unstable}';
 
         location = path;
