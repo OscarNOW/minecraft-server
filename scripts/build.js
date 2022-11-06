@@ -44,10 +44,15 @@ executeJobs(jobs);
 
 async function executeJobs(jobs) {
     let promiseStates = new Array(jobs.length).fill('pending');
+    let latestLogs = new Array(jobs.length).fill('');
+
     let promises = jobs.map(job => {
-        let update = () => {
+        let update = t => {
+            if (t)
+                latestLogs[jobs.indexOf(job)] = t.split('\n')[t.split('\n').length - 2];
+
             updateProgress(jobs.indexOf(job), promiseStates);
-            printProgress(errors);
+            printProgress(errors, latestLogs);
         };
 
         let promise = job(update)
@@ -65,7 +70,7 @@ async function executeJobs(jobs) {
         return promise;
     });
 
-    printProgress(errors);
+    printProgress(errors, latestLogs);
 
     await Promise.all(promises);
 }
@@ -82,12 +87,12 @@ function updateProgress(ind, promiseStates) {
     }
 }
 
-function printProgress(errors) {
+function printProgress(errors, latestLogs) {
     const maxJobNameLength = jobs.reduce((max, job) => Math.max(max, job.name.length), 0);
 
     console.clear()
     for (const i in jobs)
-        console.log(`${jobs[i].name}:${' '.repeat(maxJobNameLength - jobs[i].name.length)} [${currentProgress[i].repeat(10)}${colors.reset}]`);
+        console.log(`${jobs[i].name}:${' '.repeat(maxJobNameLength - jobs[i].name.length)} [${currentProgress[i].repeat(10)}${colors.reset}] ${latestLogs[i]}`);
 
     if (errors.length > 0) {
         console.log('')
