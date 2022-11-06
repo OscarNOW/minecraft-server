@@ -46,6 +46,13 @@ async function executeJobs(jobs) {
     let promiseStates = new Array(jobs.length).fill('pending');
     let latestLogs = new Array(jobs.length).fill('');
 
+    const fakePromiseActions = [];
+    const fakePromises = new Array(jobs.length).fill(null).map(() => {
+        return new Promise((res, rej) => {
+            fakePromiseActions.push({ res, rej });
+        });
+    });
+
     let promises = jobs.map(job => {
         let update = t => {
             if (t)
@@ -55,16 +62,18 @@ async function executeJobs(jobs) {
             printProgress(errors, latestLogs);
         };
 
-        let promise = job(update, { promiseStates, promises, jobs })
+        let promise = job(update, { promiseStates, promises: fakePromises, jobs })
             .catch(e => {
                 promiseStates[jobs.indexOf(job)] = 'rejected';
                 errors.push(e);
                 update();
+                fakePromiseActions[jobs.indexOf(job)].rej(e);
             })
             .then(() => {
                 if (promiseStates[jobs.indexOf(job)] == 'pending')
                     promiseStates[jobs.indexOf(job)] = 'resolved';
                 update();
+                fakePromiseActions[jobs.indexOf(job)].res();
             });
 
         return promise;
