@@ -1,8 +1,10 @@
 const { spawn } = require('child_process');
 const path = require('path');
 
-module.exports = async function typeDocs(update) {
-    await npmRun('types', update)
+module.exports = async function docs(update, { jobs, promises }) {
+    const typesIndex = jobs.findIndex(({ name }) => name === 'types');
+
+    await promises[typesIndex];
     await npmRun('docs', update)
 }
 
