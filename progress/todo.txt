@@ -1,7 +1,8 @@
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
-Rewrite scripts in src/docs/
+Rewrite scripts/build
+Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Rewrite CustomError and change constructor arguments in better order
 Add better private properties to all classes that need it (Chunk, Block)
