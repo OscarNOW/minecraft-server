@@ -1,9 +1,9 @@
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
+Rewrite scripts in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Rewrite CustomError and change constructor arguments in better order
-Add options to doc redirect. For example /classes/Chunk?unstable=true will redirect to /unstable/classes/Chunk
 Add better private properties to all classes that need it (Chunk, Block)
     Remove privates from type files
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
@@ -28,4 +28,5 @@ Implement <Entity>.once(
 Implement <Entity>.removeAllListeners(
 Implement <Entity>.on('change', ...
 Add oldValue to change event
-Move <Client>.p.events to separate property file
+Add backspace keybind close to middle of keyboard
+Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version

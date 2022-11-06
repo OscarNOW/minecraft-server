@@ -1,14 +1,37 @@
-
 <!DOCTYPE html>
-<script>location = "../0.2.0/types/legacyVersion"</script>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>legacyVersion 0.2.0 (latest stable) docs minecraft-server</title>
+    <title>legacyVersion x.x.x docs minecraft-server</title>
+
+    <script>
+        function getParam(paramName) {
+            let value = location.search
+                .substr(1)
+                .split("&")
+                .find(item => item.split('=')[0] === paramName);
+
+            if (value)
+                return decodeURIComponent(value.split('=')[1]);
+            else
+                return null;
+        }
+
+        let path = '../0.2.0/types/legacyVersion';
+
+        if (getParam('unstable') == 'true')
+            path = '../github/types/legacyVersion';
+
+        location = path;
+
+    </script>
 </head>
+
 <body>
-    Redirecting to latest stable version...
+    Redirecting...
 </body>
+
 </html>

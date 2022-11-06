@@ -14,24 +14,17 @@ fs.writeFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css'),
 
 console.log('Generating index...')
 const versionManifest = require('../../docs/manifest.json')
+
 const latestStableVersion = versionManifest.versions.find(({ latestStable }) => latestStable);
 const latestStableVersionPath = latestStableVersion.path ?? latestStableVersion.name;
-const latestStableVersionName = latestStableVersion.name;
-const redirectionPage = `
-<!DOCTYPE html>
-<script>location = "{pathBefore}${latestStableVersionPath}/{path}"</script>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}${latestStableVersionName} docs minecraft-server</title>
-</head>
-<body>
-    Redirecting to latest stable version...
-</body>
-</html>
-`;
+
+const latestUnstableVersion = versionManifest.versions.find(({ latestUnstable }) => latestUnstable);
+const latestUnstableVersionPath = latestUnstableVersion.path ?? latestUnstableVersion.name;
+
+const redirectionPage = fs.readFileSync(path.resolve(__dirname, './redirectionPage.html')).toString()
+    .replaceAll('{path.normal}', `{pathBefore}${latestStableVersionPath}/{path}`)
+    .replaceAll('{path.unstable}', `{pathBefore}${latestUnstableVersionPath}/{path}`)
+    .replaceAll('{title}', `{title}x.x.x docs minecraft-server`);
 
 console.log('Generating version dropdown...')
 let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
