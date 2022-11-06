@@ -1,4 +1,3 @@
-const wait = ms => new Promise(res => setTimeout(res, ms));
 const colors = {
     reset: "\x1b[0m",
     bright: "\x1b[1m",
@@ -30,12 +29,11 @@ const colors = {
     }
 }
 
-const jobs = [
-    updateVersionFiles,
-    readme,
-    minify,
-    typeDocs
-];
+const fs = require('fs');
+const path = require('path');
+const jobs = fs
+    .readdirSync(path.join(__dirname, './build/'))
+    .map(file => require(path.join(__dirname, './build/', file)));
 
 const progressTypes = ['-', '\\', '|', '/'];
 let currentProgress = new Array(jobs.length).fill('.');
@@ -95,38 +93,4 @@ function printProgress(errors) {
         for (const error of errors)
             console.log(error)
     }
-}
-
-async function updateVersionFiles(update) {
-    update();
-    let int = setInterval(update, 500);
-    await wait(5000);
-    clearInterval(int);
-    update();
-}
-
-async function readme(update) {
-    update();
-    let int = setInterval(update, 500);
-    await wait(4000);
-    clearInterval(int);
-    update();
-}
-
-async function minify(update) {
-    update();
-    let int = setInterval(update, 500);
-    await wait(3000);
-    clearInterval(int);
-    update();
-}
-
-async function typeDocs(update) {
-    update();
-    let int = setInterval(update, 500);
-    await wait(1250);
-    clearInterval(int);
-    update();
-
-    throw 1;
 }
