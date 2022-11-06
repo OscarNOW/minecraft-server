@@ -65,6 +65,8 @@ async function executeJobs(jobs) {
         return promise;
     });
 
+    printProgress(errors);
+
     await Promise.all(promises);
 }
 
