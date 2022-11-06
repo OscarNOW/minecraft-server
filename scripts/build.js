@@ -55,7 +55,7 @@ async function executeJobs(jobs) {
             printProgress(errors, latestLogs);
         };
 
-        let promise = job(update)
+        let promise = job(update, { promiseStates, promises, jobs })
             .catch(e => {
                 promiseStates[jobs.indexOf(job)] = 'rejected';
                 errors.push(e);
