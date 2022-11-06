@@ -65,7 +65,7 @@ async function executeJobs(jobs) {
         let promise = job(update, { promiseStates, promises: fakePromises, jobs })
             .catch(e => {
                 promiseStates[jobs.indexOf(job)] = 'rejected';
-                errors.push(e);
+                errors.push([job.name, e]);
                 update();
                 fakePromiseActions[jobs.indexOf(job)].rej(e);
             })
@@ -107,6 +107,6 @@ function printProgress(errors, latestLogs) {
         console.log('')
         console.log('Errors:')
         for (const error of errors)
-            console.log(error)
+            console.log(...error)
     }
 }
