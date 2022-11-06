@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 module.exports = async function readme(update) {
-    await npmRun('readme', update)
+    return await npmRun('readme', update)
 }
 
 function npmRun(command, cb) {

@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 module.exports = async function updateVersionFiles(update) {
-    await npmRun('updateVersionFiles', update)
+    return await npmRun('updateVersionFiles', update)
 }
 
 function npmRun(command, cb) {

@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 module.exports = async function types(update) {
-    await npmRun('types', update)
+    return await npmRun('types', update)
 }
 
 function npmRun(command, cb) {
