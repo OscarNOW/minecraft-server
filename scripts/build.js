@@ -62,18 +62,24 @@ async function executeJobs(jobs) {
             printProgress(errors, latestLogs);
         };
 
-        let promise = job(update, { promiseStates, promises: fakePromises, jobs })
-            .catch(e => {
-                promiseStates[jobs.indexOf(job)] = 'rejected';
-                errors.push([job.name, e]);
-                update();
-                fakePromiseActions[jobs.indexOf(job)].rej(e);
-            })
-            .then(() => {
-                if (promiseStates[jobs.indexOf(job)] == 'pending')
-                    promiseStates[jobs.indexOf(job)] = 'resolved';
-                update();
-                fakePromiseActions[jobs.indexOf(job)].res();
+        let error = e => {
+            promiseStates[jobs.indexOf(job)] = 'rejected';
+            errors.push([job.name, e]);
+            update();
+            fakePromiseActions[jobs.indexOf(job)].res();
+        }
+
+        let promise = job(update, { promiseStates, promises: fakePromises, jobs }, error)
+            .catch(error)
+            .then(v => {
+                if (v === false)
+                    promiseStates[jobs.indexOf(job)] = 'rejected';
+                else {
+                    if (promiseStates[jobs.indexOf(job)] == 'pending')
+                        promiseStates[jobs.indexOf(job)] = 'resolved';
+                    update();
+                    fakePromiseActions[jobs.indexOf(job)].res();
+                }
             });
 
         return promise;
