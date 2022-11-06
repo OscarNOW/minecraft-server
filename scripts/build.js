@@ -65,7 +65,7 @@ async function executeJobs(jobs) {
         let error = e => {
             promiseStates[jobs.indexOf(job)] = 'rejected';
             errors.push([job.name, e]);
-            latestLogs[jobs.indexOf(job)] = `${colors.fg.red}${e} ${colors.reset}${latestLogs[jobs.indexOf(job)] == '' ? '' : `(${colors.fg.yellow}${latestLogs[jobs.indexOf(job)]}${colors.reset})`}`;
+            latestLogs[jobs.indexOf(job)] = `${colors.fg.red}${`${e}`.split('\n')[0]} ${colors.reset}${latestLogs[jobs.indexOf(job)] == '' ? '' : `(${colors.fg.yellow}${latestLogs[jobs.indexOf(job)]}${colors.reset})`}`;
             update();
             fakePromiseActions[jobs.indexOf(job)].res();
         }
