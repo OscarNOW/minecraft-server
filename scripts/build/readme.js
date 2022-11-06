@@ -6,9 +6,9 @@ module.exports = async function readme(update) {
 }
 
 function npmRun(command, cb) {
-    return new Promise(res => {
+    return new Promise((res, rej) => {
         spawn('npm.cmd', ['run', command], { cwd: path.join(__dirname, '../../') })
-            .on('close', res)
+            .on('close', code => code === 0 ? res : rej(`Exit code "${code}"`))
             .stdout.on('data', a => cb(a.toString()))
     })
 }
