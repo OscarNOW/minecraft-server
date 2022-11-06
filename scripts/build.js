@@ -89,6 +89,9 @@ async function executeJobs(jobs) {
     printProgress(errors, latestLogs, promiseStates);
 
     await Promise.all(promises);
+
+    if (errors.length > 0)
+        process.exit(1);
 }
 
 function updateProgress(ind, promiseStates) {
