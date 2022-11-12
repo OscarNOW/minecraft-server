@@ -130,7 +130,7 @@ class Client {
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this.p.mpOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0)); //using custom proxy
+            this.p.clientOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0)); //using custom proxy
 
         //Start receiving packets
         this.p.client.on('packet', (packet, { name }) => this.p.receivePacket(name, packet));
