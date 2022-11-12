@@ -34,5 +34,3 @@ Make a version placeholder in CHANGELOG.md so that {version} becomes the actual 
 Move scripts/build/*.js npmRun function to separate function file
 Remove ==
     Add eslint eqeqeq: always
-Setup Minecraft proxy
-    https://github.com/IceTank/mineflayer-proxy-inspector/issues/1
