@@ -1,4 +1,5 @@
 module.exports = function (event) {
+    //todo: add error when event isn't correct
     if (event)
         if (event === 'change')
             for (const type of Object.keys(this.p.changeEvents))
