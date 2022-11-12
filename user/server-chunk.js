@@ -23,11 +23,10 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    let cow = client.entity('cow', {
+    let boat = client.entity('boat', {
         x: 3,
         y: 100,
         z: 3
     });
 
-    cow.on('leftClick', () => console.log(1))
 })
