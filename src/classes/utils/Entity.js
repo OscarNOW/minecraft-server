@@ -25,7 +25,9 @@ const defaultPrivate = {
 
     emit(event, ...args) {
         if (this.p.events[event])
-            this.p.events[event].forEach(cb => cb(...args))
+            this.p.events[event].forEach(({ callback }) => callback(...args));
+
+        this.p.events[event] = this.p.events[event].filter(({ once }) => once === false);
     }
 };
 

@@ -43,7 +43,7 @@ module.exports = {
         } else if (mouse === 0)
             return //Duplicate of rightClick
         else if (mouse === 1)
-            emitter.emit('leftClick');
+            emitter.emit.call(targetObj, 'leftClick');
         else
             this.p.emitError(new CustomError('expectationNotMet', 'client', `mouse in  <remote ${this.constructor.name}>.use_entity({ mouse: ${require('util').inspect(mouse)} })  `, {
                 got: mouse,
