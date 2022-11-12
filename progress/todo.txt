@@ -31,7 +31,8 @@ Make a version placeholder in CHANGELOG.md so that {version} becomes the actual 
 Move scripts/build/*.js npmRun function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
 -Build failing
-    See Boat.d.ts
+    In Boat.d.ts
+    https://stackoverflow.com/questions/71353347/how-to-override-a-property-of-a-base-class-with-an-incompatible-type
     Error:
         Types of parameters 'event' and 'event' are incompatible.
         Type '"leftClick"' is not assignable to type '"steer"'.
