@@ -12,16 +12,19 @@ module.exports = {
             }, null, { server: this.server, client: this }));
 
         require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, sneaking);
+
+        const targetEntity = this.entities[target];
+
         let emitter;
 
-        if (this.entities[target] instanceof Client)
-            emitter = this.entities[target].p
-        else if (this.entities[target] instanceof Entity)
-            emitter = this.entities[target].privateEmitter
-        else if (this.entities[target].prototype instanceof Entity)
-            emitter = this.entities[target].privateEmitter
+        if (targetEntity instanceof Client)
+            emitter = targetEntity.p;
+        else if (targetEntity instanceof Entity)
+            emitter = targetEntity.privateEmitter;
+        else if (targetEntity.prototype instanceof Entity)
+            emitter = targetEntity.privateEmitter;
         else
-            emitter = this.entities[target];
+            emitter = targetEntity;
 
         if (mouse === 2) {
             if (hand !== 0 && hand !== 1)
