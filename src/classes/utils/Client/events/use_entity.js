@@ -13,14 +13,14 @@ module.exports = {
 
         require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, sneaking);
 
-        const targetEntity = this.entities[target];
+        const targetObj = this.entities[target];
 
         let emitter;
 
-        if (targetEntity instanceof Client)
-            emitter = targetEntity.p;
-        else if (targetEntity instanceof Entity || targetEntity.prototype instanceof Entity) //typeof entityLike
-            emitter = targetEntity.p;
+        if (targetObj instanceof Client)
+            emitter = targetObj.p;
+        else if (targetObj instanceof Entity || targetObj.prototype instanceof Entity) //typeof entityLike
+            emitter = targetObj.p;
         else
             throw new Error(`unknown type in <Client>.entities[${target}]`); //todo: use CustomError with library as fault
 
@@ -32,7 +32,7 @@ module.exports = {
                     expectation: [0, 1]
                 }, null, { server: this.server, client: this }));
 
-            emitter.emit('rightClick', {
+            emitter.emit.call(targetObj, 'rightClick', {
                 position: {
                     x: x,
                     y: y,
