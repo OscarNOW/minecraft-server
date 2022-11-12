@@ -29,3 +29,4 @@ Implement <Entity>.on('change', ...
 Add oldValue to change event
 Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 Move scripts/build/*.js npmRun function to separate function file
+Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
