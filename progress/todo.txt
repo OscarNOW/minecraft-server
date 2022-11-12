@@ -31,3 +31,5 @@ Make a version placeholder in CHANGELOG.md so that {version} becomes the actual 
 Move scripts/build/*.js npmRun function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
 -Build failing
+    Types of parameters 'event' and 'event' are incompatible.
+      Type '"leftClick"' is not assignable to type '"steer"'.
