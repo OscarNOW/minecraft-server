@@ -17,7 +17,7 @@ module.exports = {
                 this.entities[target].prototype instanceof Entity ? this.entities[target].privateEmitter :
                     this.entities[target];
 
-        if (mouse == 2) {
+        if (mouse === 2) {
             if (hand != 0 && hand != 1)
                 this.p.emitError(new CustomError('expectationNotMet', 'client', `hand in  <remote ${this.constructor.name}>.use_entity({ hand: ${require('util').inspect(hand)} })  `, {
                     got: hand,
@@ -31,11 +31,11 @@ module.exports = {
                     y: y,
                     z: z
                 },
-                isMainHand: hand == 0
+                isMainHand: hand === 0
             })
-        } else if (mouse == 0)
+        } else if (mouse === 0)
             return //Duplicate of rightClick
-        else if (mouse == 1)
+        else if (mouse === 1)
             emitter.emit('leftClick');
         else
             this.p.emitError(new CustomError('expectationNotMet', 'client', `mouse in  <remote ${this.constructor.name}>.use_entity({ mouse: ${require('util').inspect(mouse)} })  `, {

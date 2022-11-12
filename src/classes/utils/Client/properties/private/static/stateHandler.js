@@ -33,21 +33,21 @@ module.exports = {
         handleNewState: function (currentState) {
             let nextState = states[states.indexOf(currentState) + 1];
 
-            if (currentState == 'clientSpawned') {
+            if (currentState === 'clientSpawned') {
                 this.p.emit('join');
                 this.server.p.emit('join', this);
-            } else if (currentState == 'offline') {
+            } else if (currentState === 'offline') {
                 this.server.clients.splice(this.server.clients.indexOf(this), 1);
                 this.p.emit('leave');
                 this.server.p.emit('leave', this);
             }
 
-            if (nextState == 'loginSent') {
+            if (nextState === 'loginSent') {
 
                 this.p.sendLogin();
                 this.p.stateHandler.updateState.set.call(this, 'loginSent');
 
-            } else if (nextState == 'clientSpawned') {
+            } else if (nextState === 'clientSpawned') {
 
                 this.server.clients.push(this);
                 this.p.emit('connect');
@@ -92,7 +92,7 @@ module.exports = {
             },
 
             packetReceived: function (packet) {
-                if (packet == 'settings')
+                if (packet === 'settings')
                     this.p.stateHandler.updateState.set.call(this, 'settingsReceived');
                 else
                     this.p.emitError(new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {

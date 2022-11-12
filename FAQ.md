@@ -23,7 +23,7 @@ const server = new Server({
 const { Server } = require('minecraft-server')
 const server = new Server({
     defaultClientProperties: client => ({
-        position: client.username == 'notch' ? {
+        position: client.username === 'notch' ? {
             x: 3,
             y: 100,
             z: 3

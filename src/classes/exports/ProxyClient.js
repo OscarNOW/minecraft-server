@@ -11,7 +11,7 @@ class ProxyClient {
             on: (name, callback) => {
                 this.hooks.push({
                     callback: (nam, packet) => {
-                        if (name == 'packet' || name === nam)
+                        if (name === 'packet' || name === nam)
                             callback(packet, { name: nam });
                     }
                 })

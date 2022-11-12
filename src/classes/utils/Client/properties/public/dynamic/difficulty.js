@@ -22,7 +22,7 @@ module.exports = {
             const changed = value !== this.difficulty;
 
             this.p.sendPacket('difficulty', {
-                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),
+                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x === value),
                 difficultyLocked: true
             })
 
@@ -39,7 +39,7 @@ module.exports = {
                 }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('difficulty', {
-                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x == value),
+                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x === value),
                 difficultyLocked: true
             })
 

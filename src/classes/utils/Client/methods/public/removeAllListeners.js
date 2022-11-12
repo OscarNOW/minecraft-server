@@ -1,6 +1,6 @@
 module.exports = function (event) {
     if (event)
-        if (event == 'change')
+        if (event === 'change')
             for (const type of Object.keys(this.p.changeEvents))
                 this.p.changeEvents[type] = [];
         else

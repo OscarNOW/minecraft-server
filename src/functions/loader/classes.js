@@ -6,13 +6,13 @@ let utils = [];
 
 for (const file of fs
     .readdirSync(path.resolve(__dirname, '../../classes/exports/'))
-    .filter(file => file.split('.').length == 2)
+    .filter(file => file.split('.').length === 2)
 )
     xports.push(`../../classes/exports/${file}`)
 
 for (const file of fs
     .readdirSync(path.resolve(__dirname, '../../classes/utils/'))
-    .filter(file => file.split('.').length == 2)
+    .filter(file => file.split('.').length === 2)
 )
     utils.push(`../../classes/utils/${file}`)
 

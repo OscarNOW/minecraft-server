@@ -72,13 +72,13 @@ class Chunk {
         if (this.chunkSet)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
-        if (blockName == 'air') {
+        if (blockName === 'air') {
             delete this.blocks[x][y][z];
 
-            if (Object.keys(this.blocks[x][y]).length == 0)
+            if (Object.keys(this.blocks[x][y]).length === 0)
                 delete this.blocks[x][y];
 
-            if (Object.keys(this.blocks[x]).length == 0)
+            if (Object.keys(this.blocks[x]).length === 0)
                 delete this.blocks[x];
         } else {
             if (!this.blocks[x])

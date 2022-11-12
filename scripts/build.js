@@ -65,7 +65,7 @@ async function executeJobs(jobs) {
         let error = e => {
             promiseStates[jobs.indexOf(job)] = 'rejected';
             errors.push([job.name, e]);
-            latestLogs[jobs.indexOf(job)] = `${colors.fg.red}${`${e}`.split('\n')[0]} ${colors.reset}${latestLogs[jobs.indexOf(job)] == '' ? '' : `(${colors.fg.yellow}${latestLogs[jobs.indexOf(job)]}${colors.reset})`}`;
+            latestLogs[jobs.indexOf(job)] = `${colors.fg.red}${`${e}`.split('\n')[0]} ${colors.reset}${latestLogs[jobs.indexOf(job)] === '' ? '' : `(${colors.fg.yellow}${latestLogs[jobs.indexOf(job)]}${colors.reset})`}`;
             update();
             fakePromiseActions[jobs.indexOf(job)].res();
         }
@@ -76,7 +76,7 @@ async function executeJobs(jobs) {
                 if (v === false)
                     promiseStates[jobs.indexOf(job)] = 'rejected';
                 else {
-                    if (promiseStates[jobs.indexOf(job)] == 'pending')
+                    if (promiseStates[jobs.indexOf(job)] === 'pending')
                         promiseStates[jobs.indexOf(job)] = 'resolved';
                     update();
                     fakePromiseActions[jobs.indexOf(job)].res();
@@ -95,11 +95,11 @@ async function executeJobs(jobs) {
 }
 
 function updateProgress(ind, promiseStates) {
-    if (promiseStates[ind] == 'resolved')
+    if (promiseStates[ind] === 'resolved')
         currentProgress[ind] = `${colors.fg.green}✓`;
-    else if (promiseStates[ind] == 'rejected')
+    else if (promiseStates[ind] === 'rejected')
         currentProgress[ind] = `${colors.fg.red}✗`;
-    else if (promiseStates[ind] == 'pending') {
+    else if (promiseStates[ind] === 'pending') {
         const progressIndex = progressTypes.indexOf(currentProgress[ind]);
 
         currentProgress[ind] = progressTypes[(progressIndex + 1) % progressTypes.length];
@@ -111,7 +111,7 @@ function printProgress(errors, latestLogs, promiseStates) {
 
     console.clear()
     for (const i in jobs)
-        console.log(`${promiseStates[i] == 'rejected' ? colors.fg.yellow : ''}${jobs[i].name}${colors.reset}:${' '.repeat(maxJobNameLength - jobs[i].name.length)} [${currentProgress[i].repeat(10)}${colors.reset}] ${latestLogs[i]}`);
+        console.log(`${promiseStates[i] === 'rejected' ? colors.fg.yellow : ''}${jobs[i].name}${colors.reset}:${' '.repeat(maxJobNameLength - jobs[i].name.length)} [${currentProgress[i].repeat(10)}${colors.reset}] ${latestLogs[i]}`);
 
     if (errors.length > 0) {
         console.log('')

@@ -8,12 +8,12 @@ for (let x = 0; x < 16; x++)
 
 let proxyClient = new ProxyClient();
 proxyClient.onPacket((name, packet) => {
-    if (name == 'map_chunk')
+    if (name === 'map_chunk')
         console.log('<-', name, '...');
     else
         console.log('<-', name, packet);
 
-    if (name == 'login')
+    if (name === 'login')
         proxyClient.sendPacket('settings', {
             locale: 'en_US',
             viewDistance: 8,

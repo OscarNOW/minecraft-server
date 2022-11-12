@@ -6,7 +6,7 @@ module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitc
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
-    if (!sounds.find(a => a.name == sound))
+    if (!sounds.find(a => a.name === sound))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
             got: sound,
             expectationType: 'type',
@@ -28,7 +28,7 @@ module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitc
 
     //Multiplying by 8 is needed, see https://wiki.vg/index.php?title=Protocol&oldid=16091#Sound_Effect
     this.p.sendPacket('sound_effect', {
-        soundId: sounds.find(a => a.name == sound).id,
+        soundId: sounds.find(a => a.name === sound).id,
         soundCategory: soundChannels.indexOf(channel),
         x: Math.round(x * 8),
         y: Math.round(y * 8),

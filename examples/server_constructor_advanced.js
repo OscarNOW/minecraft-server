@@ -22,7 +22,7 @@ const server = new Server({
 
     defaultClientProperties: client => ({
         clearSky: true,
-        difficulty: client.username == 'notch' ? 'hard' : 'normal',
+        difficulty: client.username === 'notch' ? 'hard' : 'normal',
         food: 20,
         foodSaturation: 5,
         gamemode: 'survival',

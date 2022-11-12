@@ -4,7 +4,7 @@ module.exports = {
 
         let inp = this._input;
         if (inp !== null)
-            if (typeof inp == 'string') {
+            if (typeof inp === 'string') {
                 this.__reset();
                 this._array = Text.stringToArray(inp);
             } else {

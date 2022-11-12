@@ -14,7 +14,7 @@ const defaultPrivate = {
         for (const { callback } of this.p.events[name])
             callback(...args);
 
-        this.p.events[name] = this.p.events[name].filter(({ once }) => once == false);
+        this.p.events[name] = this.p.events[name].filter(({ once }) => once === false);
     },
     emitError(customError) {
         if (this.p.events.error.length > 0)
@@ -66,7 +66,7 @@ class Server {
                 let playerHover = [];
                 if (info?.players?.hover === undefined)
                     playerHover = undefined;
-                else if (typeof info?.players?.hover == 'string')
+                else if (typeof info?.players?.hover === 'string')
                     playerHover = info.players.hover.split('\n').map(val => {
                         return { name: `${val}`, id: '00000000-0000-4000-8000-000000000000' }
                     })

@@ -150,7 +150,7 @@ for (const file of [
         fs.mkdirSync(path.join(__dirname, '../../docs/', folder), { recursive: true });
 
     let pathBefore;
-    if (file.split('/').length == 1)
+    if (file.split('/').length === 1)
         pathBefore = './';
     else
         pathBefore = '../'.repeat(file.split('/').length - 1);

@@ -8,7 +8,7 @@ function getBlockStateId(blockName, state = {}, { function: func } = {}) {
     let stateIds = [];
     for (const { name, values } of block[2]) {
         if (values.indexOf(state[name]) === -1)
-            throw new CustomError('expectationNotMet', 'libraryUser', `stateValue in   <${this.constructor.name}>.${func}(${require('util').inspect(blockName)}, ..., { ${name}: stateValue })  `, [true, false].sort().join(',') == values.sort().join(',') ? {
+            throw new CustomError('expectationNotMet', 'libraryUser', `stateValue in   <${this.constructor.name}>.${func}(${require('util').inspect(blockName)}, ..., { ${name}: stateValue })  `, [true, false].sort().join(',') === values.sort().join(',') ? {
                 got: state[name],
                 expectationType: 'type',
                 expectation: 'boolean'
@@ -38,7 +38,7 @@ function getBlockStateId(blockName, state = {}, { function: func } = {}) {
 }
 
 function getBlock(blockName, { function: func } = {}) {
-    let block = blocks.find(a => a[0] == blockName)
+    let block = blocks.find(a => a[0] === blockName)
     if (block) return block
 
     throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, ...)  `, {

@@ -24,20 +24,20 @@ class CustomError {
         let got = valueToText(this.expectationInfo.got);
 
         let expected;
-        if (this.expectationInfo.expectationType == 'value')
+        if (this.expectationInfo.expectationType === 'value')
             expected = arrayToText(this.expectationInfo.expectation)
         else
             expected = typeToText(this.expectationInfo.expectation, this.expectationInfo.externalLink)
 
         let causer;
-        if (this.causer == 'client')
+        if (this.causer === 'client')
             causer = 'Minecraft Client'
-        else if (this.causer == 'libraryUser')
+        else if (this.causer === 'libraryUser')
             causer = 'Library User (probably you)'
-        else if (this.causer == 'library')
-            causer == 'Library itself. Please report this issue on Github (https://github.com/OscarNOW/minecraft-server/issues/new/choose)'
+        else if (this.causer === 'library')
+            causer === 'Library itself. Please report this issue on Github (https://github.com/OscarNOW/minecraft-server/issues/new/choose)'
 
-        if (this.type == 'expectationNotMet')
+        if (this.type === 'expectationNotMet')
             return `Unknown ${valueName}, got ${got}, expected ${expected}. Program that caused this error: ${causer}`;
     }
 
@@ -46,11 +46,11 @@ class CustomError {
     }
 
     [Symbol.toPrimitive](hint) {
-        if (hint == 'string')
+        if (hint === 'string')
             return this.error.stack;
-        else if (hint == 'default')
+        else if (hint === 'default')
             return this.error.stack;
-        else if (hint == 'number')
+        else if (hint === 'number')
             return NaN;
         else
             return null;
@@ -62,16 +62,16 @@ function arrayToText(ar) {
 
     arr = sortArray(arr)
 
-    if (arr.length == 0)
+    if (arr.length === 0)
         return valueToText()
 
-    if (arr.length == 1)
+    if (arr.length === 1)
         return valueToText(arr[0])
 
-    if (arr.length == 2 && arr.includes(true) && arr.includes(false))
+    if (arr.length === 2 && arr.includes(true) && arr.includes(false))
         return typeToText('boolean')
 
-    if (arr.filter(a => typeof a == 'number').length == arr.length && consecutive(arr))
+    if (arr.filter(a => typeof a === 'number').length === arr.length && consecutive(arr))
         return `a number between ${arr.sort()[0]} and ${arr.sort()[arr.length - 1]}`
 
     return `one of ${inspect(arr, { sorted: false })}`
@@ -112,10 +112,10 @@ function consecutive(a) {
 function sortArray(a) {
     let arr = Object.assign([], a);
 
-    if (arr.filter(a => !isNaN(parseInt(a))).length == arr.length)
+    if (arr.filter(a => !isNaN(parseInt(a))).length === arr.length)
         arr = arr.map(a => parseInt(a))
 
-    if (arr.filter(a => typeof a == 'number').length == arr.length)
+    if (arr.filter(a => typeof a === 'number').length === arr.length)
         arr = arr.sort((a, b) => a - b)
     else
         arr = arr.sort();

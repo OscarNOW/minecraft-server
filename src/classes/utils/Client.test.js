@@ -40,7 +40,7 @@ module.exports = (expect, warn) => {
         });
 
         proxyClient.onPacket(name => {
-            if (name == 'login')
+            if (name === 'login')
                 proxyClient.sendPacket('settings', {
                     locale: 'en_us',
                     viewDistance: 10,

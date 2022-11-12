@@ -14,6 +14,6 @@ module.exports = function (location, stage) {
     this.p.sendPacket('block_break_animation', {
         entityId: Math.floor(Math.random() * 1000),
         location,
-        destroyStage: stage == 0 ? 10 : stage - 1
+        destroyStage: stage === 0 ? 10 : stage - 1
     })
 }

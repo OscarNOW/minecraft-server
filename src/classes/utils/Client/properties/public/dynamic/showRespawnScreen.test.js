@@ -16,9 +16,9 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(client.showRespawnScreen, true);
     expect(sentChangeEvents, [true]);
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
-        name == 'game_state_change' &&
-        reason == 11 &&
-        gameMode == 0
+        name === 'game_state_change' &&
+        reason === 11 &&
+        gameMode === 0
     ), true);
 
     sentChangeEvents = [];
@@ -28,9 +28,9 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(client.showRespawnScreen, false);
     expect(sentChangeEvents, [false]);
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
-        name == 'game_state_change' &&
-        reason == 11 &&
-        gameMode == 1
+        name === 'game_state_change' &&
+        reason === 11 &&
+        gameMode === 1
     ), true); //
 
     sentChangeEvents = [];
@@ -40,8 +40,8 @@ module.exports = ({ expect, client, proxyClient }) => {
     expect(client.showRespawnScreen, false);
     expect(sentChangeEvents, []);
     expect(!!sentPackets.find(({ name, packet: { reason, gameMode } }) =>
-        name == 'game_state_change' &&
-        reason == 11 &&
-        gameMode == 1
+        name === 'game_state_change' &&
+        reason === 11 &&
+        gameMode === 1
     ), true); //
 }

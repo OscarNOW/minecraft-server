@@ -185,7 +185,7 @@ class Entity {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        if (!sounds.find(a => a.name == sound))
+        if (!sounds.find(a => a.name === sound))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
                 got: sound,
                 expectationType: 'type',
@@ -200,7 +200,7 @@ class Entity {
             }, this.sound, { server: this.client.server, client: this.client }))
 
         this.p.sendPacket('entity_sound_effect', {
-            soundId: sounds.find(a => a.name == sound).id,
+            soundId: sounds.find(a => a.name === sound).id,
             soundCategory: soundChannels.indexOf(channel),
             entityId: this.id,
             volume,

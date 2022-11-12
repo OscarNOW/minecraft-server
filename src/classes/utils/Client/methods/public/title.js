@@ -8,7 +8,7 @@ module.exports = function (p) {
 
     let properties = p;
     if (properties === undefined) properties = {};
-    else if (typeof p == 'string' || p instanceof Text || Array.isArray(p)) properties = { title: p };
+    else if (typeof p === 'string' || p instanceof Text || Array.isArray(p)) properties = { title: p };
 
     let { fadeIn = defaults.fadeIn, stay = defaults.stay, fadeOut = defaults.fadeOut, title = defaults.title, subTitle = defaults.subTitle } = properties;
 

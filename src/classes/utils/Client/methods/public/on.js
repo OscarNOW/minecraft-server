@@ -1,7 +1,7 @@
 const CustomError = require('../../../CustomError.js');
 
 module.exports = function (event) {
-    if (event == 'change') {
+    if (event === 'change') {
         const type = arguments[1];
         const callback = arguments[2];
 

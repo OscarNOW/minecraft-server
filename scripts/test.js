@@ -156,17 +156,17 @@ if (debug) {
 
     let sumText;
     if (githubAction)
-        if (testsRun == 0)
+        if (testsRun === 0)
             sumText = 'No tests were found'
         else if (testsFailed.length > 0)
             sumText = `${testsFailed.length} test${testsFailed.length > 1 ? 's' : ''} failed`
         else
             sumText = 'All tests passed'
     else {
-        if (testsRun == 0)
+        if (testsRun === 0)
             sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} NO TESTS FOUND ${colors.reset}`
         else if (testsFailed.length > 0)
-            sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length == 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
+            sumText = `${colors.bg.red}${colors.fg.white}${colors.bold} ${testsRun - testsFailed.length}/${testsRun} TEST${testsRun - testsFailed.length === 1 ? '' : 'S'} SUCCEEDED ${colors.reset}`
         else
             sumText = `${colors.bg.green}${colors.fg.black}${colors.bold} ALL TESTS SUCCEEDED ${colors.reset}`
     }
@@ -221,7 +221,7 @@ if (debug) {
                 console.log(val + colors.reset + spaces + (arr[ind].length > 29 ? '' : '|'))
             })
 
-            if (ind == testsFailed.length - 1)
+            if (ind === testsFailed.length - 1)
                 console.log('\\----------------------------/')
             else
                 console.log('+----------------------------+')
@@ -251,6 +251,6 @@ if (debug) {
         console.log();
     }
 
-    if (githubAction && (testsFailed.length > 0 || testsRun.length == 0))
+    if (githubAction && (testsFailed.length > 0 || testsRun.length === 0))
         process.exit(1);
 })();

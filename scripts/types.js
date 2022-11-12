@@ -146,11 +146,11 @@ function extractClass(text) {
     for (const letterIndex in text) {
         const letter = text[letterIndex]
 
-        if (letter == '{') braceCount++;
-        if (letter == '}') braceCount--;
+        if (letter === '{') braceCount++;
+        if (letter === '}') braceCount--;
 
         if (braceCount != 0) started = true;
-        if (braceCount == 0 && started) {
+        if (braceCount === 0 && started) {
             end = parseInt(letterIndex) + 1;
             break;
         }
@@ -177,12 +177,12 @@ function removeEndFromType(text) {
     for (const letterIndex in text) {
         const letter = text.split('')[letterIndex];
 
-        if (letter == '{') braceCount++;
-        if (letter == '}') braceCount--;
+        if (letter === '{') braceCount++;
+        if (letter === '}') braceCount--;
 
         out += letter;
 
-        if (braceCount == 0 && letter == ';')
+        if (braceCount === 0 && letter === ';')
             break;
 
     }

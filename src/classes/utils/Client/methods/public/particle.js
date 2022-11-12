@@ -39,7 +39,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     falling_dust: kicks client: 'expected text to be a string, was an object'
     */
 
-    else if (particleName == 'dust')
+    else if (particleName === 'dust')
         throw new Error('Not implemented')
     /*
     see /temp/prismarineType/particleData.jsonc
@@ -53,7 +53,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     kicks client: 'expected text to be a string. was an object'
     */
 
-    else if (particleName == 'item')
+    else if (particleName === 'item')
         throw new Error('Not implemented')
     /*
     see /temp/prismarineType/particleData.jsonc
@@ -66,7 +66,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     kicks client: 'expected text to be a string. was an object'
     */
 
-    else if (particleName == 'vibration') //Not in prismarine documentation
+    else if (particleName === 'vibration') //Not in prismarine documentation
         throw new Error('Not implemented')
 
 }

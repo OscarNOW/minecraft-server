@@ -36,35 +36,35 @@ const defaultPrivate = {
         if (!this.p.visible)
             return;
 
-        if (name == 'health')
+        if (name === 'health')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 2,
                 health: this.health
             });
-        else if (name == 'title')
+        else if (name === 'title')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 3,
                 title: JSON.stringify(this.title.chat)
             });
-        else if (name == 'color' || name == 'divisionAmount')
+        else if (name === 'color' || name === 'divisionAmount')
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 4,
-                color: bossBarColors.find(({ name }) => name == this.color).id,
-                dividers: bossBarDivisions.find(({ divisions }) => divisions == this.divisionAmount).id
+                color: bossBarColors.find(({ name }) => name === this.color).id,
+                dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id
             });
     },
     parseProperty: function (key, value) {
-        if (key == 'title')
+        if (key === 'title')
             if (!(value instanceof Text))
                 return new Text(value);
             else
                 return value;
-        else if (key == 'divisionAmount')
+        else if (key === 'divisionAmount')
             return `${value}`
-        else if (key == 'flags')
+        else if (key === 'flags')
             return new Changable(this.p.updateFlags, {
                 darkenSky: value.darkenSky,
                 playEndMusic: value.playEndMusic,
@@ -99,7 +99,7 @@ class BossBar {
         this.p.visible = true;
 
         // parseProperties
-        let properties = typeof p == 'object' ? Object.assign({}, p) : p;
+        let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, defaults.bossBar);
         properties = this.p.parseProperties.call(this, properties);
 
@@ -138,8 +138,8 @@ class BossBar {
             action: 0,
             title: JSON.stringify(this.title.chat),
             health: this.health,
-            color: bossBarColors.find(({ name }) => name == this.color).id,
-            dividers: bossBarDivisions.find(({ divisions }) => divisions == this.divisionAmount).id,
+            color: bossBarColors.find(({ name }) => name === this.color).id,
+            dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id,
             flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 
