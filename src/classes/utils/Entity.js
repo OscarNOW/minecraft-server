@@ -21,6 +21,11 @@ const observables = [
 const defaultPrivate = {
     emitObservable(type) {
         this.p.observables[type].forEach(cb => cb(this[type]))
+    },
+
+    emit(event, ...args) {
+        if (this.p.events[event])
+            this.p.events[event].forEach(cb => cb(...args))
     }
 };
 
