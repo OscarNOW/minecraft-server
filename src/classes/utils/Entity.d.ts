@@ -53,4 +53,14 @@ export class Entity {
         };
         isMainHand: boolean
     }) => void): void;
+
+    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'rightClick', callback: (clickInfo: {
+        position: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        isMainHand: boolean
+    }) => void): void;
 }

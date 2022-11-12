@@ -226,7 +226,18 @@ class Entity {
                 expectation: events
             }, this.on, { server: this.client.server, client: this.client }))
 
-        this.p.events[event].push(callback)
+        this.p.events[event].push({ callback, once: false });
+    }
+
+    once(event, callback) {
+        if (!events.includes(event))
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)  `, {
+                got: event,
+                expectationType: 'value',
+                expectation: events
+            }, this.on, { server: this.client.server, client: this.client }))
+
+        this.p.events[event].push({ callback, once: true });
     }
 }
 
