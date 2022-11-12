@@ -19,12 +19,10 @@ module.exports = {
 
         if (targetEntity instanceof Client)
             emitter = targetEntity.p;
-        else if (targetEntity instanceof Entity)
-            emitter = targetEntity.privateEmitter;
-        else if (targetEntity.prototype instanceof Entity)
-            emitter = targetEntity.privateEmitter;
+        else if (targetEntity instanceof Entity || targetEntity.prototype instanceof Entity) //typeof entityLike
+            emitter = targetEntity.p;
         else
-            emitter = targetEntity;
+            throw new Error(`unknown type in <Client>.entities[${target}]`); //todo: use CustomError with library as fault
 
         if (mouse === 2) {
             if (hand !== 0 && hand !== 1)
