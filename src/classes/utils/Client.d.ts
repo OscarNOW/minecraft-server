@@ -234,13 +234,27 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    entity(entity: entityName, position: {
+    entity(entity: 'horse', position: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
-    }): EntityLike;
+    }): Horse;
+    entity(entity: 'boat', position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }): Boat;
+    entity(entity: normalEntityName, position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }): Entity;
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {
