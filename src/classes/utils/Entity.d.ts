@@ -44,6 +44,8 @@ export class Entity {
         pitch: number;
     }) => void): void;
 
+    removeAllListeners(event?: 'leftClick' | 'rightClick'): void;
+
     on(event: 'leftClick', callback: () => void): void;
     on(event: 'rightClick', callback: (clickInfo: {
         position: {

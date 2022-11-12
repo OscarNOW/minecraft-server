@@ -218,6 +218,14 @@ class Entity {
         // delete this.client.entities[this.id]
     }
 
+    removeAllListeners(event) {
+        if (event)
+            this.p.events[event] = [];
+        else
+            for (const event of Object.keys(this.p.events))
+                this.p.events[event] = [];
+    }
+
     on(event, callback) {
         if (!events.includes(event))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
