@@ -16,7 +16,8 @@
         "no-undef": "error",
         "no-unused-vars": "warn",
         "no-const-assign": "error",
-        "no-unreachable": "warn"
+        "no-unreachable": "warn",
+        "eqeqeq": "error"
     },
     "globals": {
         "WeakMap": true,
