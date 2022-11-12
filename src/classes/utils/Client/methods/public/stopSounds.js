@@ -13,7 +13,7 @@ module.exports = function ({ soundName, channel } = {}) {
             expectation: [undefined, ...soundChannels]
         }, this.sound, { server: this.server, client: this }));
 
-    if (soundName && typeof soundName != 'string')
+    if (soundName && typeof soundName !== 'string')
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `soundName in  <${this.constructor.name}>.stopSound({ soundName: ${require('util').inspect(soundName)} })  `, {
             got: soundName,
             expectationType: 'type',

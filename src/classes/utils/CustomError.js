@@ -102,7 +102,7 @@ function consecutive(a) {
     for (let i = 0; i < arr.length - 1; i++) {
         let d = arr[i + 1] - arr[i];
 
-        if (d != 1)
+        if (d !== 1)
             return false;
     }
 

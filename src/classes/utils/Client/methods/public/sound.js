@@ -19,7 +19,7 @@ module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitc
             expectationType: 'value',
             expectation: soundChannels
         }, this.sound, { server: this.server, client: this }));
-    if (typeof volume != 'number' || volume < 0 || volume > 1)
+    if (typeof volume !== 'number' || volume < 0 || volume > 1)
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `volume in  <${this.constructor.name}>.sound({ volume: ${require('util').inspect(volume)} })  `, {
             got: volume,
             expectationType: 'type',

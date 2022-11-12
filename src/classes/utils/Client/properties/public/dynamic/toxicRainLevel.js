@@ -12,7 +12,7 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (typeof value != 'number')
+            if (typeof value !== 'number')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
@@ -32,7 +32,7 @@ module.exports = {
                 this.p.emitChange('toxicRainLevel');
         },
         setRaw: function (value) {
-            if (typeof value != 'number')
+            if (typeof value !== 'number')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',

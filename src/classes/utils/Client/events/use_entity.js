@@ -18,7 +18,7 @@ module.exports = {
                     this.entities[target];
 
         if (mouse === 2) {
-            if (hand != 0 && hand != 1)
+            if (hand !== 0 && hand !== 1)
                 this.p.emitError(new CustomError('expectationNotMet', 'client', `hand in  <remote ${this.constructor.name}>.use_entity({ hand: ${require('util').inspect(hand)} })  `, {
                     got: hand,
                     expectationType: 'value',

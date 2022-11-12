@@ -9,7 +9,7 @@ const englishMessages = Object.assign({}, JSON.parse(fs.readFileSync(path.join(_
 const CustomError = require('../utils/CustomError.js');
 const { formatJavaString } = require('../../functions/formatJavaString.js');
 
-const textModifiersWithoutReset = textModifiers.filter(({ name }) => name != 'reset');
+const textModifiersWithoutReset = textModifiers.filter(({ name }) => name !== 'reset');
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
 
 const hiddenProperties = [
@@ -125,7 +125,7 @@ class Text {
                 } else {
                     currentModifiers = component.modifiers;
                     text += '§r'
-                    if (component.color != 'default')
+                    if (component.color !== 'default')
                         text += `§${textColors.find(({ name }) => name === component.color).char}`
 
                     for (const modifier of component.modifiers)
@@ -375,7 +375,7 @@ function deMinifyChatComponent(chat) {
     if (
         typeof chat === 'object' &&
         !Array.isArray(chat) &&
-        chat != null
+        chat !== null
     ) {
         obj = chat;
     }
@@ -387,7 +387,7 @@ function deMinifyChatComponent(chat) {
 };
 
 function minifyChatComponent(chat, inherited) {
-    if (typeof chat != 'object')
+    if (typeof chat !== 'object')
         chat = { text: chat };
 
     let properties = {};
@@ -489,16 +489,16 @@ function convertModifierArrayToObject(modifiers) {
 function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     let difference = 0;
 
-    if (a.color != b.color) difference += `,color:"${b.color}"`.length;
-    if (a.insertion != b.insertion)
+    if (a.color !== b.color) difference += `,color:"${b.color}"`.length;
+    if (a.insertion !== b.insertion)
         if (b.insertion !== undefined)
             difference += `,insertion:"${b.insertion}"`.length;
         else
             difference += `,insertion:""`.length;
 
     if (
-        (a.clickEvent?.action != b.clickEvent?.action) ||
-        (a.clickEvent?.value != b.clickEvent?.value)
+        (a.clickEvent?.action !== b.clickEvent?.action) ||
+        (a.clickEvent?.value !== b.clickEvent?.value)
     )
         if (b.clickEvent !== undefined)
             difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length;
@@ -506,8 +506,8 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
             difference += `,clickEvent:{action:"change_page",value:0}`.length;
 
     if (
-        (a.hoverEvent?.action != b.hoverEvent?.action) ||
-        (Boolean(a.hoverEvent) != Boolean(b.hoverEvent)) ||
+        (a.hoverEvent?.action !== b.hoverEvent?.action) ||
+        (Boolean(a.hoverEvent) !== Boolean(b.hoverEvent)) ||
         ((a.hoverEvent && b.hoverEvent) ? !compareChatComponentInheritableProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         if (b.hoverEvent !== undefined)
@@ -526,10 +526,10 @@ function compareChatComponentInheritableProperties(a, b) {
     if (typeof a !== typeof b)
         return false;
 
-    if (typeof a != 'object' && typeof b != 'object')
+    if (typeof a !== 'object' && typeof b !== 'object')
         return a === b;
 
-    if (getTextComponentTypeValue(a)[0] != getTextComponentTypeValue(b)[0])
+    if (getTextComponentTypeValue(a)[0] !== getTextComponentTypeValue(b)[0])
         return false;
 
     for (const propertyName of ['color', 'insertion', 'clickEvent', ...textModifiersWithoutReset.map(({ name }) => name), 'hoverEvent'])
@@ -540,19 +540,19 @@ function compareChatComponentInheritableProperties(a, b) {
 }
 
 function compareChatComponentInheritableProperty(a, b, name) {
-    if (typeof a != typeof b) return false;
+    if (typeof a !== typeof b) return false;
 
     if (
-        typeof a != 'object' &&
-        typeof b != 'object'
+        typeof a !== 'object' &&
+        typeof b !== 'object'
     )
         return a === b;
 
-    if (name == 'clickEvent')
-        return a.action == b.action && a.value == b.value;
+    if (name === 'clickEvent')
+        return a.action === b.action && a.value === b.value;
 
-    if (name == 'hoverEvent')
-        return a.action == b.action && compareChatComponentInheritableProperties(a.value, b.value);
+    if (name === 'hoverEvent')
+        return a.action === b.action && compareChatComponentInheritableProperties(a.value, b.value);
 
     //todo: Use CustomError
     throw new Error(`Don't know how to compare ${name}`);
@@ -572,14 +572,14 @@ function getTextComponentTypeValue(component) {
 function getTextComponentDefaultText(component) {
     let [type, value] = getTextComponentTypeValue(component);
 
-    if (type == 'text')
+    if (type === 'text')
         return value;
 
-    if (type == 'translate')
+    if (type === 'translate')
         return formatJavaString(englishMessages[value] ?? value, ...((component.with || []).map(getTextComponentDefaultText)));
 
-    if (type == 'keybind')
-        return keybinds.find(({ code }) => code == component.keybind).default;
+    if (type === 'keybind')
+        return keybinds.find(({ code }) => code === component.keybind).default;
 
     throw new Error(`Unknown type ${type}`);
 }

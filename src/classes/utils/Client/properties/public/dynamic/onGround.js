@@ -11,7 +11,7 @@ module.exports = {
 
             values.set(this, newValue);
 
-            if (oldValue != newValue)
+            if (oldValue !== newValue)
                 this.p.emitChange('onGround');
         }
     }

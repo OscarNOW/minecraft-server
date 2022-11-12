@@ -31,7 +31,7 @@ module.exports = function (p) {
         text: JSON.stringify(title.chat)
     })
 
-    if (subTitle.hash != new Text('').hash) {
+    if (subTitle.hash !== new Text('').hash) {
         this.p.sendPacket('title', {
             action: 1,
             text: JSON.stringify(subTitle.chat)

@@ -18,7 +18,7 @@ module.exports = {
             'pitch',
             'yaw'
         ])
-            if (info[val] !== undefined && this.p._position[val] != info[val]) {
+            if (info[val] !== undefined && this.p._position[val] !== info[val]) {
                 changed = true;
                 this.p._position.setRaw(val, info[val]);
             }
@@ -33,9 +33,9 @@ module.exports = {
         let newY = parseInt(this.position.y);
 
         let viewPositionUpdate = false;
-        if (newChunk.x != oldChunk.x) viewPositionUpdate = true;
-        if (newChunk.z != oldChunk.z) viewPositionUpdate = true;
-        if (oldY != newY) viewPositionUpdate = true;
+        if (newChunk.x !== oldChunk.x) viewPositionUpdate = true;
+        if (newChunk.z !== oldChunk.z) viewPositionUpdate = true;
+        if (oldY !== newY) viewPositionUpdate = true;
 
         if (viewPositionUpdate)
             this.p.sendPacket('update_view_position', {

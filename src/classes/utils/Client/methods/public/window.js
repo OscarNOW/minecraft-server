@@ -1,5 +1,5 @@
 const { windows } = require('../../../../../functions/loader/data.js');
-const nonEntityWindowIdMapping = windows.filter(({ name }) => name != 'horse')
+const nonEntityWindowIdMapping = windows.filter(({ name }) => name !== 'horse')
 
 const CustomError = require('../../../CustomError.js');
 

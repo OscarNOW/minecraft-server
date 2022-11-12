@@ -85,7 +85,7 @@ if (debug) {
                 if (verbose)
                     console.log(`      Test ran`, { testsRun, id })
 
-                if (JSON.stringify(got) != JSON.stringify(expected)) { //todo implement better check
+                if (JSON.stringify(got) !== JSON.stringify(expected)) { //todo implement better check
                     if (verbose)
                         console.log('        Test failed')
 

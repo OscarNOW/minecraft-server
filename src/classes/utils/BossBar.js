@@ -18,9 +18,9 @@ const defaultPrivate = {
         if (!this.p.visible)
             return;
 
-        let darkenSkyChanged = oldFlags.darkenSky != newFlags.darkenSky;
-        let playEndMusicChanged = oldFlags.playEndMusic != newFlags.playEndMusic;
-        let createFogChanged = oldFlags.createFog != newFlags.createFog;
+        let darkenSkyChanged = oldFlags.darkenSky !== newFlags.darkenSky;
+        let playEndMusicChanged = oldFlags.playEndMusic !== newFlags.playEndMusic;
+        let createFogChanged = oldFlags.createFog !== newFlags.createFog;
 
         if (darkenSkyChanged || playEndMusicChanged || createFogChanged)
             this.p.sendPacket('boss_bar', {
@@ -164,7 +164,7 @@ class BossBar {
         })
 
         this.p.visible = false;
-        bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id != this.id)));
+        bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id !== this.id)));
     }
 
     get p() {

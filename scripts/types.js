@@ -51,7 +51,7 @@ types = {
             .map(a => ([a.substring(5).split(' ')[0], a]))
             .map(([key, value]) => [key, value.substring(key.length + 8)])
             .map(([key, value]) => [key, value.substring(0, value.length - 1)])
-            .filter(([key]) => key != '')
+            .filter(([key]) => key !== '')
     )
 }
 
@@ -66,7 +66,7 @@ types = {
             .map(a => ([a.substring(5).split(' ')[0], a]))
             .map(([key, value]) => [key, value.substring(key.length + 8)])
             .map(([key, value]) => [key, value.substring(0, value.length - 1)])
-            .filter(([key]) => key != '')
+            .filter(([key]) => key !== '')
     )
 }
 
@@ -149,7 +149,7 @@ function extractClass(text) {
         if (letter === '{') braceCount++;
         if (letter === '}') braceCount--;
 
-        if (braceCount != 0) started = true;
+        if (braceCount !== 0) started = true;
         if (braceCount === 0 && started) {
             end = parseInt(letterIndex) + 1;
             break;

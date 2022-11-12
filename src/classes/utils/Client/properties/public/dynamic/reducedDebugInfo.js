@@ -12,7 +12,7 @@ module.exports = {
             return this.p._reducedDebugInfo
         },
         setRaw: function (value, loginPacket) {
-            if (typeof value != 'boolean')
+            if (typeof value !== 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',

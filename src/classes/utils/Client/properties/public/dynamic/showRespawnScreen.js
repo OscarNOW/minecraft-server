@@ -15,7 +15,7 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (typeof value != 'boolean')
+            if (typeof value !== 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',
@@ -34,7 +34,7 @@ module.exports = {
                 this.p.emitChange('showRespawnScreen');
         },
         setRaw: function (value, loginPacket) {
-            if (typeof value != 'boolean')
+            if (typeof value !== 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'type',

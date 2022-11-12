@@ -77,14 +77,14 @@ class Server {
                 if (info.favicon) {
                     let imageInfo = imageSize(info.favicon);
 
-                    if (imageInfo.type != 'png')
+                    if (imageInfo.type !== 'png')
                         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
                             got: imageInfo.type,
                             expectationType: 'value',
                             expectation: ['png']
                         }, this.constructor, { server: this }))
 
-                    if (imageInfo.width != 64 || imageInfo.height != 64)
+                    if (imageInfo.width !== 64 || imageInfo.height !== 64)
                         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
                             got: `${imageInfo.width}x${imageInfo.height}`,
                             expectationType: 'value',
@@ -96,7 +96,7 @@ class Server {
                 return {
                     version: {
                         name: `${info?.version?.wrongText ?? infoVersion}`,
-                        protocol: versions.find(a => a.legacy == false && a.version == infoVersion).protocol ?? 0
+                        protocol: versions.find(a => a.legacy === false && a.version === infoVersion).protocol ?? 0
                     },
                     players: {
                         online: info.players.online,
@@ -118,9 +118,9 @@ class Server {
 
             client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
                 if (
-                    name == 'legacy_server_list_ping' &&
-                    state == 'handshaking' &&
-                    payload == 1
+                    name === 'legacy_server_list_ping' &&
+                    state === 'handshaking' &&
+                    payload === 1
                 )
                     handleLegacyPing(buffer, client, this.serverList)
             })
@@ -128,14 +128,14 @@ class Server {
             client.on('state', state => clientState = state)
 
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
-                const isLegacy = serverHost == '';
+                const isLegacy = serverHost === '';
 
                 this.p.clientInformation.get(client).clientEarlyInformation = {
                     ip: client.socket.remoteAddress,
                     version: isLegacy ?
                         'legacy' :
-                        (versions.find(a => a.legacy == false && a.protocol == protocolVersion)?.version ||
-                            versions.find(a => a.legacy == true && a.protocol == protocolVersion)?.version),
+                        (versions.find(a => a.legacy === false && a.protocol === protocolVersion)?.version ||
+                            versions.find(a => a.legacy === true && a.protocol === protocolVersion)?.version),
                     connection: {
                         host: isLegacy ? null : serverHost,
                         port: isLegacy ? null : serverPort
@@ -143,10 +143,10 @@ class Server {
                 };
                 this.p.clientInformation.get(client).clientLegacyPing = false;
 
-                if ((clientState == 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version != settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                if ((clientState === 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
                     let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
 
-                    if (typeof endReason == 'string')
+                    if (typeof endReason === 'string')
                         if (isLegacy) {
                             const buffer = Buffer.alloc(2);
                             buffer.writeUInt16BE(endReason.length);
@@ -192,7 +192,7 @@ class Server {
 
                 for (const [key, value] of Object.entries(defaultPrivate)) {
                     let newValue = value;
-                    if (typeof newValue == 'function')
+                    if (typeof newValue === 'function')
                         newValue = newValue.bind(this);
 
                     newPrivate[key] = newValue;
@@ -263,7 +263,7 @@ function handleLegacyPing(request, client, serverList) {
 function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     this.p.clientInformation.get(client).clientEarlyInformation = {
         ip: client.socket.remoteAddress,
-        version: protocol !== null ? (versions.find(a => a.legacy == true && a.protocol == protocol)?.version || versions.find(a => a.legacy == false && a.protocol == protocol)?.version) : null,
+        version: protocol !== null ? (versions.find(a => a.legacy === true && a.protocol === protocol)?.version || versions.find(a => a.legacy === false && a.protocol === protocol)?.version) : null,
         connection: {
             host: hostname,
             port
@@ -275,7 +275,7 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     let infoVersion = info.version?.correct ?? settings.version;
 
     const responseString = '\xa7' + [1,
-        parseInt(versions.find(a => a.legacy == true && a.version == infoVersion)?.protocol ?? 127),
+        parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
         `${info.description ?? ''}`,
         `${info.players.online}`,
@@ -297,7 +297,7 @@ function parseLegacyPing(requestLeft) {
     /* 1 */ request.push(hexToNumber(requestLeft.splice(0, requestLeft.join('').indexOf('fa')).join(''))) //payload
     /* 2 */ request.push(requestLeft.splice(0, 2).join('')) //fa
 
-    if (requestLeft.length == 0) return { protocol: null, hostname: null, port: null } //The client didn't send any information
+    if (requestLeft.length === 0) return { protocol: null, hostname: null, port: null } //The client didn't send any information
 
     /* 3 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //000b (=11) length of following string
     /* 4 */ request.push(hexToString(requestLeft.splice(0, request[3] * 4).join(''))) // MC|PingHost
