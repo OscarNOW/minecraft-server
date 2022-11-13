@@ -106,8 +106,7 @@ out = out.replace(/\/\//g, '\n//')
 out = out.replace(/\/\*/g, '\n/*')
 out = out.replace(/\*\//g, '*/\n')
 
-out = out.replace(/\*(.|[\r\n])*?\*/g, ''); //remove comments
-out = out.split('\n').filter(a => !a.startsWith('//')).join('\n')
+out = removeComments(out)
 
 out = out.split('\n')
 out = out.filter(a => a.trim().length > 0)
@@ -131,12 +130,22 @@ out = out.replace(/}\n/g, '};')
 out = out.replace(/;}/, '}')
 out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
+out = out.replace(/:\n/g, ':')
+
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
 console.clear();
 console.log('Done generating types')
 
+function removeComments(text) {
+    text = text.replace(/\*(.|[\r\n])*?\*/g, '');
+    text = text.split('\n').filter(a => !a.startsWith('//')).join('\n')
+
+    return text;
+}
+
 function extractClass(text) {
+    text = removeComments(text)
     text = text.substring(text.indexOf('export class ') + 7).split('')
 
     let braceCount = 0;
@@ -160,6 +169,7 @@ function extractClass(text) {
 }
 
 function extractTypes(text) {
+    text = removeComments(text)
     return getAllIndexes(text, 'type ')
         .map(start => text.substring(start))
         .map(text => removeEndFromType(text))
