@@ -246,6 +246,10 @@ export class Client {
         cEntityName extends 'boat' ? Boat :
         Entity;
 
+    // optional type does work when using boolean, example:
+    // cEntityName extends true ? Horse :
+    // Entity;
+
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {
