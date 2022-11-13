@@ -11,6 +11,6 @@ const customEntityClasses = [
 ];
 
 module.exports = {
-    entityName: convertToType(Object.keys(require('./entities.json'))),
+    entityName: convertToType(['normalEntityName', customEntityClasses.map(({ minecraft }) => minecraft)]),
     normalEntityName: convertToType(Object.keys(require('./entities.json')).filter(a => !customEntityClasses.find(({ minecraft }) => minecraft === a))),
 }
