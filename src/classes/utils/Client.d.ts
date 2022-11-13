@@ -242,7 +242,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }):
-        cEntityName extends 'horse' ? Horse :
+        cEntityName extends 'horse' ? Horse : // does not work, intellisense always uses Entity
         cEntityName extends 'boat' ? Boat :
         Entity;
 

@@ -23,10 +23,12 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    let boat = client.entity('boat', {
+    let a = client.entity('horse', {
         x: 3,
         y: 100,
         z: 3
     });
+
+    a
 
 })
