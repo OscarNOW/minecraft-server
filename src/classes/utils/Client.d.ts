@@ -246,7 +246,7 @@ export class Client {
         cEntityName extends 'boat' ? Boat :
         Entity;
 
-    // optional type does work when using boolean, example:
+    // optional return does work when using boolean, example:
     // cEntityName extends true ? Horse :
     // Entity;
 
