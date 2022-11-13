@@ -234,27 +234,18 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    entity(entity: 'horse', position: {
+
+    entity<cEntityName extends entityName>(entity: cEntityName, position: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
-    }): Horse;
-    entity(entity: 'boat', position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }): Boat;
-    entity(entity: normalEntityName, position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }): Entity;
+    }):
+        cEntityName extends 'horse' ? Horse :
+        cEntityName extends 'boat' ? Boat :
+        Entity;
+
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {
