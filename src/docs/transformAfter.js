@@ -163,7 +163,11 @@ console.log('Writing overwrites...')
 console.log('   style.css')
 fs.writeFileSync(path.resolve(__dirname, `../../docs/github/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
 
-function getAllIndexes(str, val) {
+console.log('Copying files...')
+console.log('    index.d.ts')
+fs.copyFileSync('./index.d.ts', './docs/github/index.d.ts');
+
+function getAllIndexes(str, val) { //todo: use (already existent) function file
     let indexes = [];
     let i = 0;
 
