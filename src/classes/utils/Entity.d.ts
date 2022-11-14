@@ -1,7 +1,16 @@
 type Client = import('./Client').Client;
 type Horse = import('./Horse').Horse;
 type Boat = import('./Boat').Boat;
+
 type EntityLike = Entity | Horse | Boat;
+type EntityConditional<name extends entityName> =
+    name extends 'horse' ? Horse :
+    name extends 'boat' ? Boat :
+    Entity;
+
+// EntityConditional does not work, optional ty.pe does work when using boolean, example:
+// cEntityName extends true ? Horse :
+// Entity;
 
 export class Entity {
     constructor(client: Client, type: entityName, id: number, position: {

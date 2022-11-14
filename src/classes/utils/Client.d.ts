@@ -235,20 +235,13 @@ export class Client {
         z: number;
     }): void;
 
-    entity<cEntityName extends entityName>(entity: cEntityName, position: {
+    entity<name extends entityName>(entity: name, position: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
-    }):
-        cEntityName extends 'horse' ? Horse : // does not work, intellisense always uses Entity
-        cEntityName extends 'boat' ? Boat :
-        Entity;
-
-    // optional return does work when using boolean, example:
-    // cEntityName extends true ? Horse :
-    // Entity;
+    }): EntityConditional<name>; //EntityCondition in Entity.d.ts
 
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;

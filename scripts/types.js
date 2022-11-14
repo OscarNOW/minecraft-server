@@ -106,31 +106,31 @@ out = out.replace(/\/\//g, '\n//')
 out = out.replace(/\/\*/g, '\n/*')
 out = out.replace(/\*\//g, '*/\n')
 
-out = removeComments(out)
+// out = removeComments(out)
 
-out = out.split('\n')
-out = out.filter(a => a.trim().length > 0)
-out = out.map(a => a.trim())
-out = out.join('\n')
+// out = out.split('\n')
+// out = out.filter(a => a.trim().length > 0)
+// out = out.map(a => a.trim())
+// out = out.join('\n')
 
-out = out.replace(/ => /g, '=>')
-out = out.replace(/: /g, ':')
+// out = out.replace(/ => /g, '=>')
+// out = out.replace(/: /g, ':')
 
-out = out.replace(/;\n/g, ';')
-out = out.replace(/\n;/g, ';')
-out = out.replace(/,\n/g, ',')
-out = out.replace(/{\n/g, '{')
-out = out.replace(/\n}/g, '}')
-out = out.replace(/\(\n/g, '(')
-out = out.replace(/\n\)/g, ')')
-out = out.replace(/, /g, ',')
-out = out.replace(/ \| /g, '|')
-out = out.replace(/readonly \[/g, 'readonly[')
-out = out.replace(/}\n/g, '};')
-out = out.replace(/;}/, '}')
-out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
+// out = out.replace(/;\n/g, ';')
+// out = out.replace(/\n;/g, ';')
+// out = out.replace(/,\n/g, ',')
+// out = out.replace(/{\n/g, '{')
+// out = out.replace(/\n}/g, '}')
+// out = out.replace(/\(\n/g, '(')
+// out = out.replace(/\n\)/g, ')')
+// out = out.replace(/, /g, ',')
+// out = out.replace(/ \| /g, '|')
+// out = out.replace(/readonly \[/g, 'readonly[')
+// out = out.replace(/}\n/g, '};')
+// out = out.replace(/;}/, '}')
+// out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
-out = out.replace(/:\n/g, ':')
+// out = out.replace(/:\n/g, ':')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
@@ -168,7 +168,7 @@ function extractClass(text) {
     return text.join('').substring(0, end)
 }
 
-function extractTypes(text) {
+function extractTypes(text) { //todo: does not work with conditional types and generics, see Entity.d.ts#entityConditional
     text = removeComments(text)
     return getAllIndexes(text, 'type ')
         .map(start => text.substring(start))
