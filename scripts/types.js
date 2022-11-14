@@ -48,9 +48,7 @@ types = {
             .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/exports/${a}`)).toString())
             .map(extractTypes)
             .flat()
-            .map(a => ([a.substring(5).split(' ')[0], a]))
-            .map(([key, value]) => [key, value.substring(key.length + 8)])
-            .map(([key, value]) => [key, value.substring(0, value.length - 1)])
+            .map(typeToNameValue)
             .filter(([key]) => key !== '')
     )
 }
@@ -63,9 +61,7 @@ types = {
             .map(a => fs.readFileSync(path.resolve(__dirname, `../src/classes/utils/${a}`)).toString())
             .map(extractTypes)
             .flat()
-            .map(a => ([a.substring(5).split(' ')[0], a]))
-            .map(([key, value]) => [key, value.substring(key.length + 8)])
-            .map(([key, value]) => [key, value.substring(0, value.length - 1)])
+            .map(typeToNameValue)
             .filter(([key]) => key !== '')
     )
 }
@@ -168,7 +164,13 @@ function extractClass(text) {
     return text.join('').substring(0, end)
 }
 
-function extractTypes(text) { //todo: does not work with conditional types and generics, see Entity.d.ts#entityConditional
+function typeToNameValue(type) { //todo: does not work with conditional types and generics, see Entity.d.ts#entityConditional
+    type = [type.split('=')[0].split('type ').slice(1).join('type '), type.split('=').slice(1).join('=')] //todo: remove semicolon at end of value
+
+    return type;
+}
+
+function extractTypes(text) {
     text = removeComments(text)
     return getAllIndexes(text, 'type ')
         .map(start => text.substring(start))
