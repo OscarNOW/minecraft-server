@@ -334,6 +334,17 @@ export class Client {
         };
         isMainHand: boolean
     }) => void): void;
+    on(event: 'blockPlace', callback: (placeInfo: {
+        clickedLocation: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        clickedFace: blockFace;
+
+        isMainHand: boolean;
+        headInsideBlock: boolean;
+    }) => void): void;
 
     once(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
@@ -378,6 +389,17 @@ export class Client {
             z: number;
         };
         isMainHand: boolean
+    }) => void): void;
+    once(event: 'blockPlace', callback: (placeInfo: {
+        clickedLocation: {
+            x: number;
+            y: number;
+            z: number;
+        };
+        clickedFace: blockFace;
+
+        isMainHand: boolean;
+        headInsideBlock: boolean;
     }) => void): void;
 }
 
