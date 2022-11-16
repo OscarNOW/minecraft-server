@@ -1,5 +1,5 @@
 ## Existing API changes
-* Removed `<Client>.observe(` in favor of `<Client>.on('change', ...`
+* Removed `<Client>.observe(` in favor of [`<Client>.on('change', ...`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#on)
 
 ## New API
 * [`<Client>.removeAllListeners(`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#removeAllListeners)
