@@ -7,7 +7,7 @@ module.exports = async function types(update) {
 
 function npmRun(command, cb) {
     return new Promise(res => {
-        spawn('npm.cmd', ['run', command], { cwd: path.join(__dirname, '../../') })
+        spawn('npm.cmd', ['run', command], { cwd: path.join(__dirname, '../../') }) //todo: does not work on linux
             .on('close', res)
             .stdout.on('data', a => cb(a.toString()))
     })
