@@ -3,10 +3,6 @@ const customEntityClasses = [
     {
         class: 'Horse',
         minecraft: 'horse'
-    },
-    {
-        class: 'Boat',
-        minecraft: 'boat'
     }
 ];
 

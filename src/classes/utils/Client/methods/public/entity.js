@@ -1,8 +1,7 @@
 const Entity = require('../../../Entity.js');
 const CustomEntityClasses = Object.fromEntries(
     [
-        'Horse',
-        'Boat'
+        'Horse'
     ]
         .map(a => [a.toLowerCase(), require(`../../../${a}.js`)]))
 
