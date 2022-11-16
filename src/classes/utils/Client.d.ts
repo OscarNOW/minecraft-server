@@ -241,7 +241,7 @@ export class Client {
         z: number;
         yaw: number;
         pitch: number;
-    }): EntityConditional<name>; //EntityCondition in Entity.d.ts
+    }): EntityConditional<name>; //EntityConditional in Entity.d.ts
 
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
