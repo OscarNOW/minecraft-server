@@ -110,6 +110,8 @@ out = out.map(a => a.trim())
 out = out.join('\n')
 
 out = out.replace(/ => /g, '=>')
+out = out.replace(/ \? /g, '?')
+out = out.replace(/ :/g, ':')
 out = out.replace(/: /g, ':')
 
 out = out.replace(/;\n/g, ';')
@@ -122,6 +124,7 @@ out = out.replace(/\n\)/g, ')')
 out = out.replace(/, /g, ',')
 out = out.replace(/ \| /g, '|')
 out = out.replace(/readonly \[/g, 'readonly[')
+out = out.replaceAll("extends '", "extends'")
 out = out.replace(/}\n/g, '};')
 out = out.replace(/;}/, '}')
 out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
@@ -166,6 +169,7 @@ function extractClass(text) {
 
 function typeToNameValue(type) {
     type = [type.split('=')[0].split('type ').slice(1).join('type '), type.split('=').slice(1).join('=').slice(0, -1)]
+    type = [type[0].trim(), type[1].trim()]
 
     return type;
 }
