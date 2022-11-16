@@ -31,7 +31,6 @@ Make a version placeholder in CHANGELOG.md so that {version} becomes the actual 
 Move scripts/build/*.js npmRun function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
 Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
-Improve after typedoc file writing speed
 Fix docs for <Boat>.on(, because inherited events are not shown
 Add docs title to settings.json
 Add typescript declaration file check
