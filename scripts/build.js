@@ -36,7 +36,6 @@ const jobs = fs
     .map(file => require(path.join(__dirname, './build/', file)));
 
 const progressTypes = ['-', '\\', '|', '/'];
-let currentProgress = new Array(jobs.length).fill('.');
 
 let errors = [];
 
@@ -45,6 +44,8 @@ executeJobs(jobs);
 async function executeJobs(jobs) {
     let promiseStates = new Array(jobs.length).fill('pending');
     let latestLogs = new Array(jobs.length).fill('');
+    let currentProgress = new Array(jobs.length).fill('.');
+    let buildProgress = ['.'];
 
     const fakePromiseActions = [];
     const fakePromises = new Array(jobs.length).fill(null).map(() => {
@@ -58,8 +59,8 @@ async function executeJobs(jobs) {
             if (t)
                 latestLogs[jobs.indexOf(job)] = t.split('\n')[t.split('\n').length - 2];
 
-            updateProgress(jobs.indexOf(job), promiseStates);
-            printProgress(errors, latestLogs, promiseStates);
+            updateProgress(jobs.indexOf(job), promiseStates, currentProgress, buildProgress);
+            printProgress(errors, latestLogs, promiseStates, currentProgress, buildProgress);
         };
 
         let error = e => {
@@ -86,7 +87,7 @@ async function executeJobs(jobs) {
         return promise;
     });
 
-    printProgress(errors, latestLogs, promiseStates);
+    printProgress(errors, latestLogs, promiseStates, currentProgress, buildProgress);
 
     await Promise.all(promises);
 
@@ -94,7 +95,7 @@ async function executeJobs(jobs) {
         process.exit(1);
 }
 
-function updateProgress(ind, promiseStates) {
+function updateProgress(ind, promiseStates, currentProgress, buildProgress) {
     if (promiseStates[ind] === 'resolved')
         currentProgress[ind] = `${colors.fg.green}✓`;
     else if (promiseStates[ind] === 'rejected')
@@ -104,12 +105,24 @@ function updateProgress(ind, promiseStates) {
 
         currentProgress[ind] = progressTypes[(progressIndex + 1) % progressTypes.length];
     }
+
+    const buildProgressIndex = progressTypes.indexOf(buildProgress[0]);
+
+    buildProgress[0] = progressTypes[(buildProgressIndex + 1) % progressTypes.length];
 }
 
-function printProgress(errors, latestLogs, promiseStates) {
+function printProgress(errors, latestLogs, promiseStates, currentProgress, buildProgress) {
     const maxJobNameLength = jobs.reduce((max, job) => Math.max(max, job.name.length), 0);
 
     console.clear()
+
+    console.log()
+    if (jobs.some((_, i) => promiseStates[i] === 'pending'))
+        console.log(`Build [${buildProgress[0].repeat(10)}]`);
+    else
+        console.log(`Build [${colors.fg.green}${'✓'.repeat(10)}${colors.reset}]`);
+    console.log()
+
     for (const i in jobs)
         console.log(`${promiseStates[i] === 'rejected' ? colors.fg.yellow : ''}${jobs[i].name}${colors.reset}:${' '.repeat(maxJobNameLength - jobs[i].name.length)} [${currentProgress[i].repeat(10)}${colors.reset}] ${latestLogs[i]}`);
 

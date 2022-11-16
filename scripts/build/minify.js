@@ -1,14 +1,26 @@
-const { spawn } = require('child_process');
+const { fork } = require('child_process');
 const path = require('path');
+const package = require('../../package.json');
 
 module.exports = async function minify(update, _, error) {
-    return await npmRun('minify', update, error)
+    return await runPackageScript('minify', update, error)
 }
 
-function npmRun(command, cb, error) {
+function runPackageScript(script, cb, error) {
+    const scriptCommand = package.scripts?.[script];
+
+    if (!scriptCommand)
+        throw new Error(`Unknown script "${script}" (${typeof script})`);
+
+    if (!scriptCommand.startsWith('node'))
+        throw new Error(`Not supported script "${script}" (${typeof script})`);
+
+    const scriptPath = path.join(__dirname, '../../', scriptCommand.split('node ').slice(1).join('node '));
+
     return new Promise(res => {
-        spawn('npm.cmd', ['run', command], { cwd: path.join(__dirname, '../../') }) //todo: does not work on linux
-            .on('close', code => [null, 0].includes(code) ? res() : (res(false), error(`Exited with code ${code}`))) //todo: why exit code check only in this file?
-            .stdout.on('data', a => cb(a.toString()))
+        let cp = fork(scriptPath, { cwd: path.join(__dirname, '../../'), stdio: 'pipe' });
+
+        cp.on('close', code => [null, 0].includes(code) ? res() : (res(false), error(`Exited with code ${code}`))); //todo: why exit code check only in this file?
+        cp.stdout.on('data', a => cb(a.toString()))
     })
 }
