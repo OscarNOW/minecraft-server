@@ -60,9 +60,10 @@ export class Client {
     readonly reducedDebugInfo: boolean;
 
     /* Readonly changing */
-    readonly online: boolean;
     readonly sneaking: boolean;
+    readonly sprinting: boolean;
     readonly onGround: boolean;
+    readonly online: boolean;
     readonly ping: number;
 
     readonly entities: entities;
@@ -293,7 +294,7 @@ export class Client {
     on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     on(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
+    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
     on(event: 'change', type: 'position', callback: (changedValue: {
         x: number;
         y: number;
@@ -338,7 +339,7 @@ export class Client {
     once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     once(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
     once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'onGround', callback: (changedValue: boolean) => void): void;
+    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
     once(event: 'change', type: 'position', callback: (changedValue: {
         x: number;
         y: number;

@@ -14,7 +14,8 @@ const changes = [
     'onGround',
     'bossBars',
     'chunks',
-    'entities'
+    'entities',
+    'sprinting'
 ];
 
 module.exports = {
