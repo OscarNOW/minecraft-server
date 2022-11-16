@@ -96,11 +96,7 @@ for (const [name, value] of Object.entries(types))
 
 console.log('Minifying output...')
 
-out = out.replace(/\r\n/g, '\n')
-
-out = out.replace(/\/\//g, '\n//')
-out = out.replace(/\/\*/g, '\n/*')
-out = out.replace(/\*\//g, '*/\n')
+out = out.replaceAll('\r\n', '\n')
 
 out = removeComments(out)
 
@@ -109,27 +105,29 @@ out = out.filter(a => a.trim().length > 0)
 out = out.map(a => a.trim())
 out = out.join('\n')
 
-out = out.replace(/ => /g, '=>')
-out = out.replace(/ \? /g, '?')
-out = out.replace(/ :/g, ':')
-out = out.replace(/: /g, ':')
+out = out.replaceAll(' => ', '=>')
+out = out.replaceAll(' ? ', '?')
+out = out.replaceAll(' :', ':')
+out = out.replaceAll(': ', ':')
+out = out.replaceAll(", ", ',')
+out = out.replaceAll(' | ', '|')
 
-out = out.replace(/;\n/g, ';')
-out = out.replace(/\n;/g, ';')
-out = out.replace(/,\n/g, ',')
-out = out.replace(/{\n/g, '{')
-out = out.replace(/\n}/g, '}')
-out = out.replace(/\(\n/g, '(')
-out = out.replace(/\n\)/g, ')')
-out = out.replace(/, /g, ',')
-out = out.replace(/ \| /g, '|')
-out = out.replace(/readonly \[/g, 'readonly[')
+out = out.replaceAll(':\n', ':')
+out = out.replaceAll(';\n', ';')
+out = out.replaceAll('\n;', ';')
+out = out.replaceAll(',\n', ',')
+out = out.replaceAll('{\n', '{')
+out = out.replaceAll('\n}', '}')
+out = out.replaceAll('(\n', '(')
+out = out.replaceAll('\n)', ')')
+
+out = out.replaceAll('}\n', '};')
+out = out.replaceAll(';}\n', '};')
+
+out = out.replaceAll('readonly [', 'readonly[')
 out = out.replaceAll("extends '", "extends'")
-out = out.replace(/}\n/g, '};')
-out = out.replace(/;}/, '}')
-out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
-out = out.replace(/:\n/g, ':')
+out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
 
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
 
@@ -137,6 +135,10 @@ console.clear();
 console.log('Done generating types')
 
 function removeComments(text) {
+    text = text.replaceAll('//', '\n//')
+    text = text.replaceAll('/*', '\n/*')
+    text = text.replaceAll('*/', '*/\n')
+
     text = text.replace(/\*(.|[\r\n])*?\*/g, '');
     text = text.split('\n').filter(a => !a.startsWith('//')).join('\n')
 
