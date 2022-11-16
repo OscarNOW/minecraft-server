@@ -35,3 +35,4 @@ Improve after typedoc file writing speed
 Fix docs for <Boat>.on(, because inherited events are not shown
 Add docs title to settings.json
 Add typescript declaration file check
+Use privates to store readonly values in Client instead of values WeakMap
