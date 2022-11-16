@@ -50,7 +50,7 @@ bugReport = [...bugReport.slice(0, versionLineStartIndex), ...newVersions, ...bu
 
 bugReport = bugReport.join('\n');
 
-fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport)
+fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport.replaceAll('\r\n', '\n'))
 
 function compareVersions(a, b) {
     a = a.split('.').map(c => parseInt(c));

@@ -155,7 +155,7 @@ for (const file of [
     else
         pathBefore = '../'.repeat(file.split('/').length - 1);
 
-    fs.writeFileSync(path.join(__dirname, `../../docs/${file}`), redirectionPage.replaceAll('{path}', filePath).replaceAll('{title}', name).replaceAll('{pathBefore}', pathBefore));
+    fs.writeFileSync(path.join(__dirname, `../../docs/${file}`), redirectionPage.replaceAll('{path}', filePath).replaceAll('{title}', name).replaceAll('{pathBefore}', pathBefore).replaceAll('\r\n', '\n'));
 
 };
 
