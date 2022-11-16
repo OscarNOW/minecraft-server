@@ -37,7 +37,7 @@ server.on('connect', client => {
 
 });
 ```
-3. Join the server with Minecraft Java Edition version `1.16.3` on port `25565`. Different versions and ports are currently not supported.
+1. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
 
 If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
