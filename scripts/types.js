@@ -164,8 +164,8 @@ function extractClass(text) {
     return text.join('').substring(0, end)
 }
 
-function typeToNameValue(type) { //todo: does not work with conditional types and generics, see Entity.d.ts#entityConditional
-    type = [type.split('=')[0].split('type ').slice(1).join('type '), type.split('=').slice(1).join('=')] //todo: remove semicolon at end of value
+function typeToNameValue(type) {
+    type = [type.split('=')[0].split('type ').slice(1).join('type '), type.split('=').slice(1).join('=').slice(0, -1)]
 
     return type;
 }
