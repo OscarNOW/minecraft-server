@@ -4,6 +4,7 @@
 ## New API
 * [`<Client>.removeAllListeners(`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#removeAllListeners)
 * [`<Client>.sprinting`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#sprinting)
+* [`<Client>.on('blockPlace', placeInfo => ...)`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#on.on-19)
 * [`Boat`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Boat) class
 
 ## Issues fixed
