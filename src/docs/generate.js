@@ -57,7 +57,7 @@
         ...settings.typedoc.arguments
     ].join(' '));
 
-    require('./transformAfter.js');
+    await require('./transformAfter.js');
 
     console.clear();
     console.log('Copying assets...')
