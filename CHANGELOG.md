@@ -3,7 +3,8 @@
 
 ## New API
 * [`<Client>.removeAllListeners(`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#removeAllListeners)
-* Added [`Boat`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Boat) class
+* [`<Client>.sprinting`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#sprinting)
+* [`Boat`](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Boat) class
 
 ## Issues fixed
 * Now, if the client doesn't respond to keep alive packets or doesn't send a teleport confirmation packet, we sent [the misbehavior event](https://oscarnow.github.io/minecraft-server/1.0.0/classes/Client#on.on-10).
