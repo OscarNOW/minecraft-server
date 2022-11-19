@@ -235,7 +235,6 @@ export class Client {
         x: number;
         z: number;
     }): void;
-
     entity<name extends entityName>(entity: name, position: {
         x: number;
         y: number;
@@ -243,7 +242,14 @@ export class Client {
         yaw: number;
         pitch: number;
     }): EntityConditional<name>; //EntityConditional in Entity.d.ts
-
+    tabItem(tabItemOptions?: {
+        name?: string;
+        displayName?: textInput | Text;
+        uuid?: string;
+        skinAccountUuid?: string;
+        gamemode?: gamemode;
+        ping?: number | null;
+    }): TabItem;
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {

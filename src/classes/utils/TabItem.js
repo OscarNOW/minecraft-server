@@ -1,0 +1,51 @@
+const { applyDefaults } = require('../../functions/applyDefaults');
+const { gamemodes } = require('../../functions/loader/data.js');
+
+const defaults = require('../../settings.json').defaults.tabItem;
+const { timing: { skinFetchTimeout } } = require('../../settings.json');
+
+const Text = require('../exports/Text.js');
+const axios = require('axios').default;
+
+class TabItem {
+    constructor(tabItemOptions) {
+        const options = applyDefaults(tabItemOptions, defaults);
+        let { name, uuid, gamemode, ping } = options;
+
+        this.name = name;
+        this.uuid = uuid;
+        this.gamemode = gamemode; //todo: add check if valid and emit CustomError if not
+        this.ping = ping; //todo: add check if valid and emit CustomError if not
+
+        let { displayName } = options;
+        if (!(displayName instanceof Text))
+            displayName = new Text(displayName);
+
+        this.displayName = displayName;
+
+        let { skinAccountUuid } = options;
+        //todo: check if skinAccountUuid is uuid to avoid uri injection
+
+        this.skinAccountUuid = skinAccountUuid;
+
+        this.sendPacket();
+    }
+    async getSkin() { //todo: make method private
+        return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+    }
+    async sendPacket() {
+        const { properties } = await this.getSkin();
+
+        //todo
+    }
+}
+
+async function get(url) {
+    const resp = await axios.get(url, { timeout: skinFetchTimeout });
+    const data = await resp.data;
+
+    return data;
+
+}
+
+module.exports = TabItem;

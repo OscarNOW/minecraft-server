@@ -23,6 +23,12 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
+    client.tabItem({
+        name: 'test',
+        skinAccountUuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5'
+    })
+
+    return;
     client.raw('player_info', {
         action: 0,
         data: [{
