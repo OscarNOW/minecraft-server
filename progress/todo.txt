@@ -44,3 +44,4 @@ Move isMainHand to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
 Test Github codespaces
 Beautify Client.d.ts
+-Implement <Client>.tabItem(
