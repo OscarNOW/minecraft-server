@@ -4,7 +4,6 @@ Rewrite src/test.js
 Rewrite scripts/build
 Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
-Rewrite CustomError and change constructor arguments in better order
 Add better private properties to all classes that need it (Chunk, Block)
     Remove privates from type files
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
@@ -13,14 +12,17 @@ Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Add good first issue label to issues
 Implement client.blocks
-Add hints to CustomError
-    Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
-    Add hint to unknown StateValue
+Improve CustomError
+    Add hints to CustomError
+        Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
+        Add hint to unknown StateValue
+    Implement not called customError
+        Use for position
+    Rewrite CustomError and change constructor arguments in better order
+    Add code property to CustomError (like keepAliveTimeout)
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
-Implement not called customError
-    Use for position
 Rewrite Server tests with ProxyClient
 Write Client tests
     Add setRaw tests to Client
