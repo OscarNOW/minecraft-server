@@ -31,6 +31,7 @@ Implement <Entity>.on('change', ...
 Add oldValue to change event
 Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 Move scripts/build/*.js npmRun function to separate function file
+Move TabItem/get function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
 Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
 Fix docs for <Boat>.on(, because inherited events are not shown
@@ -42,3 +43,4 @@ Move block faces (in block_dig event and block_place event) to separate data fil
 Move isMainHand to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
 Test Github codespaces
+Beautify Client.d.ts
