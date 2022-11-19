@@ -23,6 +23,6 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('blockPlace', console.log)
+    client.on('armSwing', client.chat);
 
 })
