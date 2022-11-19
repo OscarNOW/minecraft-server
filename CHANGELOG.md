@@ -2,7 +2,7 @@
 None
 
 ## New API
-None
+* [`<Client>.on('armSwing', isMainHand => ...)`](https://oscarnow.github.io/minecraft-server/1.1.0/classes/Client#on)
 
 ## Issues fixed
 None
