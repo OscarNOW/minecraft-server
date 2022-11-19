@@ -288,7 +288,7 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
 
-    removeAllListeners(event?: 'itemUse' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
+    removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
     on(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
@@ -305,7 +305,7 @@ export class Client {
     on(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
     on(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
-    on(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
+    on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     on(event: 'chat', callback: (message: string) => void): void;
     on(event: 'signEditorClose', callback: (signText: string[], location: {
@@ -361,7 +361,7 @@ export class Client {
     once(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
     once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
-    once(event: 'itemUse', callback: (isMainHand: boolean) => void): void;
+    once(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     once(event: 'chat', callback: (message: string) => void): void;
     once(event: 'signEditorClose', callback: (signText: string[], location: {
