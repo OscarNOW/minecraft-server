@@ -130,7 +130,11 @@ class Client {
                 .map(a => require(`./Client/events/${a}`))
             )
         ))
-            this.p.clientOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0)); //using custom proxy
+            //using custom proxy
+            //todo:         when using custom proxy, there is a noticeable slower join time for the Client,
+            //todo:         maybe check if custom proxy file has been modified, and if not use mp native events
+            //todo:         or find a way to make custom proxy faster
+            this.p.clientOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0));
 
         //Start receiving packets
         this.p.client.on('packet', (packet, { name }) => this.p.receivePacket(name, packet));
