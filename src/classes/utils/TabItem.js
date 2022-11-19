@@ -8,7 +8,11 @@ const Text = require('../exports/Text.js');
 const axios = require('axios').default;
 
 class TabItem {
-    constructor(tabItemOptions) {
+    constructor(tabItemOptions, client, sendPacket) {
+        this.client = client;
+        this.server = client.server;
+        this.sendPacket = sendPacket; //todo: make private
+
         const options = applyDefaults(tabItemOptions, defaults);
         let { name, uuid, gamemode, ping } = options;
 
@@ -18,7 +22,7 @@ class TabItem {
         this.ping = ping; //todo: add check if valid and emit CustomError if not
 
         let { displayName } = options;
-        if (!(displayName instanceof Text))
+        if (displayName !== null && !(displayName instanceof Text))
             displayName = new Text(displayName);
 
         this.displayName = displayName;
@@ -28,15 +32,32 @@ class TabItem {
 
         this.skinAccountUuid = skinAccountUuid;
 
-        this.sendPacket();
+        this.sendStartPacket();
     }
     async getSkin() { //todo: make method private
-        return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+        if (!this.skinAccountUuid)
+            return []
+        else
+            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
     }
-    async sendPacket() {
+    async sendStartPacket() {
         const { properties } = await this.getSkin();
 
-        //todo
+        let packet = {
+            action: 0,
+            data: [{
+                UUID: this.uuid,
+                name: this.name,
+                properties,
+                gamemode: gamemodes.indexOf(this.gamemode),
+                ping: this.ping === null ? -1 : this.ping
+            }]
+        };
+
+        if (this.displayName !== null)
+            packet.displayName = this.displayName.chat;
+
+        this.sendPacket('player_info', packet);
     }
 }
 
