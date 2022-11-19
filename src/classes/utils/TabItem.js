@@ -7,6 +7,7 @@ const { timing: { skinFetchTimeout } } = require('../../settings.json');
 const Text = require('../exports/Text.js');
 const axios = require('axios').default;
 
+//todo: add getters and setters that send packets
 class TabItem {
     constructor(tabItemOptions, client, sendPacket) {
         this.client = client;
@@ -36,7 +37,7 @@ class TabItem {
     }
     async getSkin() { //todo: make method private
         if (!this.skinAccountUuid)
-            return []
+            return { properties: [] }
         else
             return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
     }
