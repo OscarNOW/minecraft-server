@@ -55,17 +55,19 @@ Not all goals are fully finished.
 ## **Terms**
 
 ### Client
-A client is a person that is (going to be) connected to the server.
+The Client is the system that is connecting/connected to the Server.
+
+[Link to latest docs for Client](https://oscarnow.github.io/minecraft-server/classes/Client)
 
 ### Player
-A player is just a type of [entity](#entity). It is the thing that a [client](#client) sees, when they see other people. Each [client](#client) has it's own players. Here's an example:
+A player is just a type of [Entity](#entity). It is the thing that a [Client](#client) sees, when they see other people. Each [Client](#client) has it's own players. Here's an example:
 
 * Notch ([Client](#client))
     * jeb_ (Player)
 * jeb_ ([Client](#player))
     * Notch (Player)
 
-In this case, there are two [Clients](#client) online; `Notch` and `jeb_` and they both see eachother. A player doesn't have to be a [client](#client), it could also be a [NPC](#npc). Here's an example of that:
+In this case, there are two [Clients](#client) online; `Notch` and `jeb_` (top level) and they both see one another. A Player doesn't have to be a [Client](#client), it could also just look like one, without being actually connected to the server. Here's an example of that:
 
 * Notch ([Client](#client))
     * jeb_ (Player)
@@ -73,10 +75,7 @@ In this case, there are two [Clients](#client) online; `Notch` and `jeb_` and th
 * jeb_ ([Client](#player))
     * Hub (Player)
 
-Here `Notch` sees `jeb_`, but `jeb_` doesn't see `Notch`. Both `jeb_` and `Notch` see the [NPC](#npc) `Hub`. Hub isn't a [Client](#client) that is connected to the server, but is seen by `Notch` and `jeb_` as a player.
-
-### NPC
-Non player character, a [player](#player) who appears as a real human, but is just virtual and isn't connected to the server.
+Here `Notch` sees `jeb_`, but `jeb_` doesn't see `Notch`. Both `jeb_` and `Notch` see the Player (not connected to the server) `Hub`. Hub isn't a [Client](#client) that is connected to the server, but looks like one to `Notch` and `jeb_`.
 
 ### Entity
 Entities include all dynamic, moving objects throughout the Minecraft world. Some examples of entities are:
