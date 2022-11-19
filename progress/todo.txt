@@ -37,4 +37,6 @@ Add typescript declaration file check
 Use privates to store readonly values in Client instead of values WeakMap
 Make use of position and location consistent
 Move block faces (in block_dig event and block_place event) to separate data file
+Move isMainHand to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
+Test Github codespaces
