@@ -74,12 +74,13 @@
 <a href="#client" id="client" style="color: inherit; text-decoration: none;">
   <h3>Client</h3>
 </a>
-<p>A client is a person that is (going to be) connected to the server.</p>
+<p>The Client is the system that is connecting/connected to the Server.</p>
+<p><a href="https://oscarnow.github.io/minecraft-server/classes/Client">Link to latest docs for Client</a></p>
 
 <a href="#player" id="player" style="color: inherit; text-decoration: none;">
   <h3>Player</h3>
 </a>
-<p>A player is just a type of <a href="#entity">entity</a>. It is the thing that a <a href="#client">client</a> sees, when they see other people. Each <a href="#client">client</a> has it&#39;s own players. Here&#39;s an example:</p>
+<p>A player is just a type of <a href="#entity">Entity</a>. It is the thing that a <a href="#client">Client</a> sees, when they see other people. Each <a href="#client">Client</a> has it&#39;s own players. Here&#39;s an example:</p>
 <ul>
 <li>Notch (<a href="#client">Client</a>)<ul>
 <li>jeb_ (Player)</li>
@@ -90,7 +91,7 @@
 </ul>
 </li>
 </ul>
-<p>In this case, there are two <a href="#client">Clients</a> online; <code>Notch</code> and <code>jeb_</code> and they both see eachother. A player doesn&#39;t have to be a <a href="#client">client</a>, it could also be a <a href="#npc">NPC</a>. Here&#39;s an example of that:</p>
+<p>In this case, there are two <a href="#client">Clients</a> online; <code>Notch</code> and <code>jeb_</code> (top level) and they both see one another. A Player doesn&#39;t have to be a <a href="#client">Client</a>, it could also just look like one, without being actually connected to the server. Here&#39;s an example of that:</p>
 <ul>
 <li>Notch (<a href="#client">Client</a>)<ul>
 <li>jeb_ (Player)</li>
@@ -102,12 +103,7 @@
 </ul>
 </li>
 </ul>
-<p>Here <code>Notch</code> sees <code>jeb_</code>, but <code>jeb_</code> doesn&#39;t see <code>Notch</code>. Both <code>jeb_</code> and <code>Notch</code> see the <a href="#npc">NPC</a> <code>Hub</code>. Hub isn&#39;t a <a href="#client">Client</a> that is connected to the server, but is seen by <code>Notch</code> and <code>jeb_</code> as a player.</p>
-
-<a href="#npc" id="npc" style="color: inherit; text-decoration: none;">
-  <h3>NPC</h3>
-</a>
-<p>Non player character, a <a href="#player">player</a> who appears as a real human, but is just virtual and isn&#39;t connected to the server.</p>
+<p>Here <code>Notch</code> sees <code>jeb_</code>, but <code>jeb_</code> doesn&#39;t see <code>Notch</code>. Both <code>jeb_</code> and <code>Notch</code> see the Player (not connected to the server) <code>Hub</code>. Hub isn&#39;t a <a href="#client">Client</a> that is connected to the server, but looks like one to <code>Notch</code> and <code>jeb_</code>.</p>
 
 <a href="#entity" id="entity" style="color: inherit; text-decoration: none;">
   <h3>Entity</h3>
