@@ -69,6 +69,7 @@ export class Client {
     readonly entities: entities;
     readonly bossBars: BossBar[];
     readonly chunks: LoadedChunk[];
+    readonly tabItems: TabItem[];
 
     /* Writable changing */
     position: {
@@ -299,6 +300,7 @@ export class Client {
     on(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     on(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
+    on(event: 'change', type: 'tabItems', callback: (changedValue: TabItem[]) => void): void;
     on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
     on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
     on(event: 'change', type: 'position', callback: (changedValue: {
@@ -355,6 +357,7 @@ export class Client {
     once(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
     once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
     once(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
+    once(event: 'change', type: 'tabItems', callback: (changedValue: TabItem[]) => void): void;
     once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
     once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
     once(event: 'change', type: 'position', callback: (changedValue: {

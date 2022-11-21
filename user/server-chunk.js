@@ -24,17 +24,16 @@ server.on('connect', client => {
             client.chunk(chunk, { x, z });
 
     client.tabItem()
+    console.log(client.tabItems)
 
-    return;
-
-    client.raw('named_entity_spawn', {
-        entityId: 10,
-        playerUUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-        x: 3,
-        y: 101,
-        z: 3,
-        yaw: 0,
-        pitch: 0
-    })
+    // client.raw('named_entity_spawn', {
+    //     entityId: 10,
+    //     playerUUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+    //     x: 3,
+    //     y: 101,
+    //     z: 3,
+    //     yaw: 0,
+    //     pitch: 0
+    // })
 
 })

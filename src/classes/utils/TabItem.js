@@ -1,5 +1,6 @@
 const { applyDefaults } = require('../../functions/applyDefaults');
 const { gamemodes } = require('../../functions/loader/data.js');
+const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
 const defaults = require('../../settings.json').defaults.tabItem;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
@@ -32,6 +33,8 @@ class TabItem {
         //todo: check if skinAccountUuid is uuid to avoid uri injection
 
         this.skinAccountUuid = skinAccountUuid;
+
+        tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
 
         this.sendStartPacket();
     }
