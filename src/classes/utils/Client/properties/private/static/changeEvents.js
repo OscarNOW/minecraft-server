@@ -15,7 +15,8 @@ const changes = [
     'bossBars',
     'chunks',
     'entities',
-    'sprinting'
+    'sprinting',
+    'tabItems'
 ];
 
 module.exports = {
