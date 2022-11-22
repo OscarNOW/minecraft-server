@@ -1,5 +1,5 @@
-var lut = [];
-for (var i = 0; i < 256; i++)
+let lut = [];
+for (let i = 0; i < 256; i++)
     lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
 
 function uuid() {
@@ -14,4 +14,4 @@ function uuid() {
         lut[d3 & 0xff] + lut[d3 >> 8 & 0xff] + lut[d3 >> 16 & 0xff] + lut[d3 >> 24 & 0xff];
 }
 
-module.exports = Object.freeze({ uuid })
+module.exports = Object.freeze({ uuid });
