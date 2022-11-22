@@ -1,3 +1,13 @@
+Pre-release
+
+Fix todo-imp
+-Implement <Client>.tabItem(
+    Add players entity id to entity id object
+Create <Text> onChange event and use in TabItem
+
+
+Anytime
+
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
@@ -6,6 +16,8 @@ Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Add better private properties to all classes that need it (Chunk, Block)
     Remove privates from type files
+    Make <Server>.server private and not show up in console.log(
+Use privates to store readonly values in Client instead of values WeakMap
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
     Waiting for https://github.com/orgs/community/discussions/36226
 Make Client public static properties readonly
@@ -38,13 +50,10 @@ Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
 Fix docs for <Boat>.on(, because inherited events are not shown
 Add docs title to settings.json
 Add typescript declaration file check
-Use privates to store readonly values in Client instead of values WeakMap
 Make use of position and location consistent
 Move block faces (in block_dig event and block_place event) to separate data file
 Move isMainHand to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
 Test Github codespaces
 Beautify Client.d.ts
--Implement <Client>.tabItem(
-    Add players entity id to entity id object
 At all places where an error is emitted, try to continue the code as much as possible
