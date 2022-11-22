@@ -3,5 +3,7 @@ Create guide
     Put examples in guide
     Add screenshots
 Create PR for minecraft-protocol to exclude optional files from npm build
-Add more extensive tests
 Move ProxyClient class to separate package
+Implement combining of packets
+    Like in remove entities
+    Like in player_info

@@ -23,6 +23,7 @@ Improve CustomError
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json
+Add more extensive tests
 Rewrite Server tests with ProxyClient
 Write Client tests
     Add setRaw tests to Client
@@ -45,3 +46,5 @@ Remove positional arguments in event callback in favor of objects (or make it at
 Test Github codespaces
 Beautify Client.d.ts
 -Implement <Client>.tabItem(
+    Add players entity id to entity id object
+At all places where an error is emitted, try to continue the code as much as possible
