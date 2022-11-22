@@ -7,38 +7,89 @@ const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const Text = require('../exports/Text.js');
 const axios = require('axios').default;
+const path = require('path');
 
-//todo: add getters and setters that send packets
+const _p = Symbol('private');
+const defaultPrivate = {
+    parseProperty: function (key, value) {
+        if (key === 'displayName' && value !== null && !(value instanceof Text))
+            return new Text(value);
+        else if (key === 'skinAccountUuid')
+            return value; //todo-imp: check if skinAccountUuid is valid uuid to avoid uri injection
+        else return value;
+    },
+    parseProperties: function (properties) {
+        for (const [key, value] of Object.entries(properties))
+            properties[key] = this.p.parseProperty.call(this, key, value);
+
+        return properties;
+    },
+    updateProperty: function (name) {
+        throw new Error('Not implemented'); //not implemented
+    }
+};
+
+const writablePropertyNames = Object.freeze([
+    'gamemode',
+    'ping',
+    'displayName'
+]);
+
+const readonlyPropertyNames = Object.freeze([
+    'name',
+    'uuid',
+    'skinAccountUuid'
+])
+
+
 class TabItem {
-    constructor(tabItemOptions, client, sendPacket, cb) {
+    constructor(p, client, sendPacket, cb) {
         this.client = client;
         this.server = client.server;
-        this.sendPacket = sendPacket; //todo: make private
+        this.p.sendPacket = sendPacket;
 
-        const options = applyDefaults(tabItemOptions, defaults);
-        let { name, uuid, gamemode, ping } = options;
+        // parseProperties
+        let properties = typeof p === 'object' ? Object.assign({}, p) : p;
+        properties = applyDefaults(properties, defaults);
+        properties = this.p.parseProperties.call(this, properties);
 
-        this.name = name;
-        this.uuid = uuid;
-        this.gamemode = gamemode; //todo: add check if valid and emit CustomError if not
-        this.ping = ping; //todo: add check if valid and emit CustomError if not
+        // set private properties
+        this.p._ = {};
+        for (const propertyName of writablePropertyNames)
+            this.p._[propertyName] = properties[propertyName];
+        for (const propertyName of readonlyPropertyNames)
+            this.p._[propertyName] = properties[propertyName];
 
-        let { displayName } = options;
-        if (displayName !== null && !(displayName instanceof Text))
-            displayName = new Text(displayName);
+        // define getters and setters
+        for (const propertyName of writablePropertyNames)
+            Object.defineProperty(this, propertyName, {
+                configurable: false,
+                enumerable: true,
+                get: () => this.p._[propertyName],
+                set: newValue => {
+                    // let oldValue = this.p._[propertyName];
+                    this.p._[propertyName] = newValue;
 
-        this.displayName = displayName;
+                    this.p.updateProperty.call(this, propertyName);
+                }
+            });
+        for (const propertyName of readonlyPropertyNames)
+            Object.defineProperty(this, propertyName, {
+                configurable: false,
+                enumerable: true,
+                get: () => this.p._[propertyName]
+            });
 
-        let { skinAccountUuid } = options;
-        //todo-imp: check if skinAccountUuid is valid uuid to avoid uri injection
 
-        this.skinAccountUuid = skinAccountUuid;
-
-        tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
 
         this
             .sendStartPacket()
-            .then(() => cb(this));
+            .then(() => {
+                tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
+                cb(this);
+            });
     }
     async getSkin() { //todo: make method private
         if (!this.skinAccountUuid)
@@ -63,7 +114,32 @@ class TabItem {
         if (this.displayName !== null)
             packet.displayName = this.displayName.chat;
 
-        this.sendPacket('player_info', packet);
+        this.p.sendPacket('player_info', packet);
+    }
+
+    get p() {
+        let callPath = new Error().stack.split('\n')[2];
+
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (callPath.startsWith(folderPath)) {
+            if (!this[_p])
+                this[_p] = Object.assign({}, defaultPrivate);
+
+            return this[_p];
+        } else
+            return this.p._p
+    }
+
+    set p(value) {
+        this.p._p = value;
     }
 }
 
