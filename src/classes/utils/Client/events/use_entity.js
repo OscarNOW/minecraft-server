@@ -5,7 +5,7 @@ const CustomError = require('../../CustomError.js');
 module.exports = {
     use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {
         if (!this.entities[target])
-            this.p.emitError(new CustomError('expectationNotMet', 'client', `target in  <remote ${this.constructor.name}>.use_entity({ target: ${require('util').inspect(target)} })  `, {
+            return this.p.emitError(new CustomError('expectationNotMet', 'client', `target in  <remote ${this.constructor.name}>.use_entity({ target: ${require('util').inspect(target)} })  `, {
                 got: target,
                 expectationType: 'value',
                 expectation: Object.keys(this.entities)
