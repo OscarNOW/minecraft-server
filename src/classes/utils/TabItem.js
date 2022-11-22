@@ -6,6 +6,7 @@ const defaults = require('../../settings.json').defaults.tabItem;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const Text = require('../exports/Text.js');
+const CustomError = require('./CustomError.js');
 const axios = require('axios').default;
 const path = require('path');
 
@@ -15,7 +16,14 @@ const defaultPrivate = {
         if (key === 'displayName' && value !== null && !(value instanceof Text))
             return new Text(value);
         else if (key === 'skinAccountUuid')
-            return value; //todo-imp: check if skinAccountUuid is valid uuid to avoid uri injection
+            if (value.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g))
+                return value;
+            else
+                return this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `skinAccountUuid in  <Client.tabItem({ skinAccountUuid: skinAccountUuid })  `, {
+                    got: value,
+                    expectationType: 'type',
+                    expectation: 'v4uuid',
+                }).toString())
         else return value;
     },
     parseProperties: function (properties) {
