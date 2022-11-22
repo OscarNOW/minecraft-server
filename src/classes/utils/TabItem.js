@@ -30,7 +30,7 @@ class TabItem {
         this.displayName = displayName;
 
         let { skinAccountUuid } = options;
-        //todo: check if skinAccountUuid is valid uuid to avoid uri injection
+        //todo-imp: check if skinAccountUuid is valid uuid to avoid uri injection
 
         this.skinAccountUuid = skinAccountUuid;
 
