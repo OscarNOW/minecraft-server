@@ -6,7 +6,7 @@ export class TabItem {
         skinAccountUuid?: string;
         gamemode?: gamemode;
         ping?: number | null;
-    }, client: Client, sendPacket: (packetName: string, packet: object) => void);
+    }, client: Client, sendPacket: (packetName: string, packet: object) => void, finishedCallback: () => void);
 
     readonly client: Client;
     readonly server: Server;

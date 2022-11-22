@@ -250,7 +250,7 @@ export class Client {
         skinAccountUuid?: string;
         gamemode?: gamemode;
         ping?: number | null;
-    }): TabItem;
+    }): Promise<TabItem>;
     window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {

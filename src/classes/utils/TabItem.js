@@ -10,7 +10,7 @@ const axios = require('axios').default;
 
 //todo: add getters and setters that send packets
 class TabItem {
-    constructor(tabItemOptions, client, sendPacket) {
+    constructor(tabItemOptions, client, sendPacket, cb) {
         this.client = client;
         this.server = client.server;
         this.sendPacket = sendPacket; //todo: make private
@@ -30,21 +30,21 @@ class TabItem {
         this.displayName = displayName;
 
         let { skinAccountUuid } = options;
-        //todo: check if skinAccountUuid is uuid to avoid uri injection
+        //todo: check if skinAccountUuid is valid uuid to avoid uri injection
 
         this.skinAccountUuid = skinAccountUuid;
 
         tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
 
-        this.sendStartPacket();
+        this.sendStartPacket(cb);
     }
     async getSkin() { //todo: make method private
         if (!this.skinAccountUuid)
-            return { properties: [] }
+            return { properties: [] } //todo: maybe set default to uuid, because empty array causes Client to load skin from uuid
         else
             return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
     }
-    async sendStartPacket() {
+    async sendStartPacket(cb) {
         const { properties } = await this.getSkin();
 
         let packet = {
@@ -62,6 +62,8 @@ class TabItem {
             packet.displayName = this.displayName.chat;
 
         this.sendPacket('player_info', packet);
+
+        cb(this);
     }
 }
 
