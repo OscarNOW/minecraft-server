@@ -52,6 +52,31 @@ const defaultPrivate = {
                     displayName: JSON.stringify(this.displayName.chat)
                 }]
             })
+    },
+    async getSkin() {
+        if (!this.skinAccountUuid)
+            return { properties: [] }
+        else
+            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+    },
+    async sendStartPacket() {
+        const { properties } = await this.p.getSkin();
+
+        let packet = {
+            action: 0,
+            data: [{
+                UUID: this.uuid,
+                name: this.name,
+                properties,
+                gamemode: gamemodes.indexOf(this.gamemode),
+                ping: this.ping === null ? -1 : this.ping
+            }]
+        };
+
+        if (this.displayName !== null)
+            packet.data[0].displayName = JSON.stringify(this.displayName.chat);
+
+        this.p.sendPacket('player_info', packet);
     }
 };
 
@@ -110,36 +135,11 @@ class TabItem {
             return;
 
         this
-            .sendStartPacket()
+            .p.sendStartPacket()
             .then(() => {
                 tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
                 cb(this);
             });
-    }
-    async getSkin() { //todo: make method private
-        if (!this.skinAccountUuid)
-            return { properties: [] } //todo: maybe set default to uuid, because empty array causes Client to load skin from uuid
-        else
-            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
-    }
-    async sendStartPacket() {
-        const { properties } = await this.getSkin();
-
-        let packet = {
-            action: 0,
-            data: [{
-                UUID: this.uuid,
-                name: this.name,
-                properties,
-                gamemode: gamemodes.indexOf(this.gamemode),
-                ping: this.ping === null ? -1 : this.ping
-            }]
-        };
-
-        if (this.displayName !== null)
-            packet.data[0].displayName = JSON.stringify(this.displayName.chat);
-
-        this.p.sendPacket('player_info', packet);
     }
 
     get p() {
@@ -173,7 +173,6 @@ async function get(url) {
     const data = await resp.data;
 
     return data;
-
 }
 
 module.exports = TabItem;
