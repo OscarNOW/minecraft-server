@@ -2,7 +2,6 @@ Pre-release
 
 Fix todo-imp
 -Implement <Client>.tabItem(
-    Add players entity id to entity id object
 Create <Text> onChange event and use in TabItem
 
 
