@@ -25,7 +25,33 @@ const defaultPrivate = {
         return properties;
     },
     updateProperty: function (name) {
-        throw new Error('Not implemented'); //not implemented
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
+        if (name === 'gamemode')
+            this.p.sendPacket('player_info', {
+                action: 1,
+                data: [{
+                    UUID: this.uuid,
+                    gamemode: gamemodes.indexOf(this.gamemode)
+                }]
+            })
+        else if (name === 'ping')
+            this.p.sendPacket('player_info', {
+                action: 2,
+                data: [{
+                    UUID: this.uuid,
+                    ping: this.ping
+                }]
+            })
+        else if (name === 'displayName') //todo: use <Text> onChange event
+            this.p.sendPacket('player_info', {
+                action: 3,
+                data: [{
+                    UUID: this.uuid,
+                    displayName: JSON.stringify(this.displayName.chat)
+                }]
+            })
     }
 };
 
@@ -39,8 +65,7 @@ const readonlyPropertyNames = Object.freeze([
     'name',
     'uuid',
     'skinAccountUuid'
-])
-
+]);
 
 class TabItem {
     constructor(p, client, sendPacket, cb) {
@@ -68,7 +93,7 @@ class TabItem {
                 get: () => this.p._[propertyName],
                 set: newValue => {
                     // let oldValue = this.p._[propertyName];
-                    this.p._[propertyName] = newValue;
+                    this.p._[propertyName] = this.p.parseProperty(propertyName, newValue);
 
                     this.p.updateProperty.call(this, propertyName);
                 }
@@ -112,7 +137,7 @@ class TabItem {
         };
 
         if (this.displayName !== null)
-            packet.displayName = this.displayName.chat;
+            packet.data[0].displayName = JSON.stringify(this.displayName.chat);
 
         this.p.sendPacket('player_info', packet);
     }
