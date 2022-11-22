@@ -36,7 +36,9 @@ class TabItem {
 
         tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
 
-        this.sendStartPacket(cb);
+        this
+            .sendStartPacket()
+            .then(() => cb(this));
     }
     async getSkin() { //todo: make method private
         if (!this.skinAccountUuid)
@@ -44,7 +46,7 @@ class TabItem {
         else
             return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
     }
-    async sendStartPacket(cb) {
+    async sendStartPacket() {
         const { properties } = await this.getSkin();
 
         let packet = {
@@ -62,8 +64,6 @@ class TabItem {
             packet.displayName = this.displayName.chat;
 
         this.sendPacket('player_info', packet);
-
-        cb(this);
     }
 }
 
