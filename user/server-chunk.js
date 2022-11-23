@@ -24,12 +24,16 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    await client.tabItem({
+    let tabItem = await client.tabItem({
         name: 'Jeroen64',
         displayName: [{ text: 'Hello', modifiers: ['bold'] }],
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     });
+
+    let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem)
+
+    // client.on('chat', a => eval(a))
 
     // client.raw('player_info', {
     //     action: 0,
