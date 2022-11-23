@@ -11,11 +11,11 @@ export class TabItem {
     readonly client: Client;
     readonly server: Server;
 
-    readonly name: string;
+    readonly name: string; //todo: make writable by sending packets to remove old TabItem and add new one (with same class instance)
     displayName?: Text;
 
-    readonly uuid: string;
-    readonly skinAccountUuid?: string;
+    readonly uuid: string; //todo: make writable by sending packets to remove old TabItem and add new one (with same class instance)
+    readonly skinAccountUuid?: string; //todo: make writable by sending packets to remove old TabItem and add new one (with same class instance)
 
     gamemode: gamemode;
     ping: number | null;
