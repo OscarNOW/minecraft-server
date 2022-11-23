@@ -23,6 +23,7 @@ jobs:
         os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     name: Node ${{ matrix.node-version }}, ${{ matrix.os }}
 
     steps:
