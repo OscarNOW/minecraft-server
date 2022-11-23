@@ -143,7 +143,7 @@ class TabItem {
             return;
 
         this
-            .p.sendStartPacket()
+            .p.sendStartPacket.call(this)
             .then(() => {
                 tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
                 cb(this);
