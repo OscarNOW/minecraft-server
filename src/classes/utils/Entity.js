@@ -56,11 +56,11 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
             changed = true;
 
     if (changed)
-        this.p.emitChange('position')
+        this.p.emitObservable.call(this, 'position')
 }
 
 class Entity {
-    constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket) {
+    constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket, extraInfo, { sendSpawnPacket = true } = {}) {
         let e = getEntity(type);
         if (e === undefined)
             client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
@@ -83,36 +83,37 @@ class Entity {
         this.p._position = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch })
         this.p.events = Object.fromEntries(events.map(a => [a, []]));
 
-        if (this.living)
-            this.p.sendPacket('spawn_entity_living', {
-                entityId: this.id,
-                entityUUID: this.uuid,
-                type: this.p.typeId,
-                x: this.position.x,
-                y: this.position.y,
-                z: this.position.z,
-                yaw: this.position.yaw,
-                pitch: this.position.pitch,
-                headPitch: 0,
-                velocityX: 0,
-                velocityY: 0,
-                velocityZ: 0
-            })
-        else
-            this.p.sendPacket('spawn_entity', {
-                entityId: this.id,
-                objectUUID: this.uuid,
-                type: this.p.typeId,
-                x: this.position.x,
-                y: this.position.y,
-                z: this.position.z,
-                pitch: this.position.pitch,
-                yaw: this.position.yaw,
-                objectData: 0,
-                velocityX: 0,
-                velocityY: 0,
-                velocityZ: 0
-            })
+        if (sendSpawnPacket !== false)
+            if (this.living)
+                this.p.sendPacket('spawn_entity_living', {
+                    entityId: this.id,
+                    entityUUID: this.uuid,
+                    type: this.p.typeId,
+                    x: this.position.x,
+                    y: this.position.y,
+                    z: this.position.z,
+                    yaw: this.position.yaw,
+                    pitch: this.position.pitch,
+                    headPitch: 0, //todo
+                    velocityX: 0, //todo
+                    velocityY: 0, //todo
+                    velocityZ: 0 //todo
+                })
+            else
+                this.p.sendPacket('spawn_entity', {
+                    entityId: this.id,
+                    objectUUID: this.uuid,
+                    type: this.p.typeId,
+                    x: this.position.x,
+                    y: this.position.y,
+                    z: this.position.z,
+                    pitch: this.position.pitch,
+                    yaw: this.position.yaw,
+                    objectData: 0, //todo
+                    velocityX: 0, //todo
+                    velocityY: 0, //todo
+                    velocityZ: 0 //todo
+                })
     }
 
     get p() {

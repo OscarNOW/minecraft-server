@@ -11,7 +11,7 @@ type entities = {
 };
 
 export class Client {
-    private constructor(client: any, server: Server, earlyInformation: {
+    private constructor(client: any, server: Server, earlyInfo: {
         version: newVersion;
         ip: string;
         connection: {
@@ -236,13 +236,20 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    entity<name extends entityName>(entity: name, position: {
+    entity<name extends defaultArgumentEntityName>(entity: name, position: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
     }): EntityConditional<name>; //EntityConditional in Entity.d.ts
+    entity(entity: 'player', position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }, playerInfo: TabItem): EntityConditional<'player'>;
     tabItem(tabItemOptions?: {
         name?: string;
         displayName?: textInput | Text;

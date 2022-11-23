@@ -1,13 +1,14 @@
 const Entity = require('../../../Entity.js');
 const CustomEntityClasses = Object.fromEntries(
     [
-        'Horse'
+        'Horse',
+        'Player'
     ]
         .map(a => [a.toLowerCase(), require(`../../../${a}.js`)]))
 
 const { entities } = require('../../properties/public/dynamic/entities.js');
 
-module.exports = function (type, { x, y, z, yaw, pitch }) {
+module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
@@ -16,9 +17,8 @@ module.exports = function (type, { x, y, z, yaw, pitch }) {
         if (!this.entities[ii])
             entityId = ii;
 
-    const entityClass = CustomEntityClasses[type] || Entity;
-
-    let entity = new entityClass(this, type, entityId, { x, y, z, yaw, pitch }, this.p.sendPacket);
+    const EntityClass = CustomEntityClasses[type] || Entity;
+    const entity = new EntityClass(this, type, entityId, { x, y, z, yaw, pitch }, this.p.sendPacket, extraInformation);
 
     let newEntities = Object.assign({}, this.entities);
     newEntities[entityId] = entity;
