@@ -9,8 +9,6 @@ on:
       - "!**.md"
       - "!**.xlsx"
       - "!**.d.ts"
-      - "!**.yml"
-      - ".github/workflows/light-test.yml"
 
 permissions: {}
 
@@ -23,6 +21,7 @@ jobs:
         os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     name: Node ${{ matrix.node-version }}, ${{ matrix.os }}
 
     steps:

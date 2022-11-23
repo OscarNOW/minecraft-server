@@ -20,6 +20,7 @@ jobs:
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
