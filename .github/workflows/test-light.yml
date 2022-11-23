@@ -9,8 +9,6 @@ on:
       - "!**.md"
       - "!**.xlsx"
       - "!**.d.ts"
-      - "!**.yml"
-      - ".github/workflows/light-test.yml"
 
 permissions: {}
 
