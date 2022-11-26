@@ -6,4 +6,6 @@ export class Player extends Entity {
         yaw?: number;
         pitch?: number;
     }, sendPacket: (packetName: string, packet: object) => void, playerInfo: TabItem);
+
+    readonly playerInfo: TabItem;
 }
