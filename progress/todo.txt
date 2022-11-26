@@ -2,6 +2,7 @@ Pre-release
 
 Fix todo-imp
 -Implement <Client>.entity('player', ...)
+    Better defaults for TabItem
 Create <Text> onChange event and use in TabItem
 Change names of types starting with 'normal' to better name, like 'normalEntity' to 'noSpecialClassEntity'
 
@@ -57,3 +58,7 @@ Remove positional arguments in event callback in favor of objects (or make it at
 Test Github codespaces
 Beautify Client.d.ts
 At all places where an error is emitted, try to continue the code as much as possible
+Rename leftClick to something else (because in air doesn't trigger)
+    Test if mainHand is rightHand same event is triggered
+<Entity>.yaw += 10; in a loop isn't working
+Make some <Entity>.sound options optional
