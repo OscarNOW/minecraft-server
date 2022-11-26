@@ -1,5 +1,6 @@
 const { defaults } = require('../../settings.json')
 const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
+const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { entities: clientEntities } = require('./Client/properties/public/dynamic/entities.js');
 
 const { uuid } = require('../../functions/uuid.js');
@@ -32,7 +33,8 @@ const defaultPrivate = {
     }
 };
 
-const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
+const changePosition = function (pos, oldValue) {
+    const { x, y, z, yaw: ya, pitch } = applyDefaults(pos, oldValue);
     const yaw = ya % 360;
 
     const xChange = Math.abs(x - oldValue.x);
@@ -90,17 +92,13 @@ const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.
             onGround: true //todo
         });
 
-    //todo: use <Array>.some
-    let changed = false;
-    for (const val of [
+    let changed = [
         'x',
         'y',
         'z',
         'yaw',
         'pitch'
-    ])
-        if (arguments[0][val] !== undefined && oldValue[val] !== arguments[0][val])
-            changed = true;
+    ].some(val => arguments[0][val] !== undefined && oldValue[val] !== arguments[0][val])
 
     if (changed)
         this.p.emitObservable.call(this, 'position')
