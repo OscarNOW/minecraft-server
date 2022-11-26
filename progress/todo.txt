@@ -63,3 +63,4 @@ Rename leftClick to something else (because in air doesn't trigger)
     Test if mainHand is rightHand same event is triggered
 <Entity>.yaw += 10; in a loop isn't working
 Make some <Entity>.sound options optional
+Implement build check, so that only modified files have to be built
