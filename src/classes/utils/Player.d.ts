@@ -7,5 +7,5 @@ export class Player extends Entity {
         pitch?: number;
     }, sendPacket: (packetName: string, packet: object) => void, playerInfo: TabItem);
 
-    readonly playerInfo: TabItem;
+    playerInfo: TabItem;
 }
