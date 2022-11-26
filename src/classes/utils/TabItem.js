@@ -1,7 +1,6 @@
 const { applyDefaults } = require('../../functions/applyDefaults');
 const { gamemodes } = require('../../functions/loader/data.js');
 const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
-const { uuid } = require('../../functions/uuid.js');
 
 const defaults = require('../../settings.json').defaults.tabItem;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
@@ -25,11 +24,6 @@ const defaultPrivate = {
                     expectationType: 'type',
                     expectation: 'v4uuid',
                 }).toString())
-        else if (key === 'uuid')
-            if (value === null)
-                return uuid();
-            else
-                return value;
         else return value;
     },
     parseProperties: function (properties) {
