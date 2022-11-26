@@ -33,18 +33,64 @@ const defaultPrivate = {
 };
 
 const changePosition = function ({ x = oldValue.x, y = oldValue.y, z = oldValue.z, yaw: ya = oldValue.yaw, pitch = oldValue.pitch }, oldValue) {
-    let yaw = ya % 360;
+    const yaw = ya % 360;
 
-    this.p.sendPacket('entity_teleport', {
-        entityId: this.id,
-        x,
-        y,
-        z,
-        yaw,
-        pitch,
-        onGround: true
-    });
+    const xChange = Math.abs(x - oldValue.x);
+    const yChange = Math.abs(y - oldValue.y);
+    const zChange = Math.abs(z - oldValue.z);
 
+    let usingSmallChangePacket = true;
+
+    if (xChange >= 8) usingSmallChangePacket = false;
+    if (yChange >= 8) usingSmallChangePacket = false;
+    if (zChange >= 8) usingSmallChangePacket = false;
+
+    if (usingSmallChangePacket) {
+        const locationChanged = x !== oldValue.x || y !== oldValue.y || z !== oldValue.z;
+        const rotationChanged = yaw !== oldValue.yaw || pitch !== oldValue.pitch;
+
+        const dX = ((x * 32) - (oldValue.x * 32)) * 128;
+        const dY = ((y * 32) - (oldValue.y * 32)) * 128;
+        const dZ = ((z * 32) - (oldValue.z * 32)) * 128;
+
+        if (locationChanged && rotationChanged)
+            this.p.sendPacket('entity_move_look', {
+                entityId: this.id,
+                dX,
+                dY,
+                dZ,
+                yaw,
+                pitch,
+                onGround: true //todo
+            })
+        else if (locationChanged)
+            this.p.sendPacket('rel_entity_move', {
+                entityId: this.id,
+                dX,
+                dY,
+                dZ,
+                onGround: true //todo
+            })
+        else if (rotationChanged)
+            this.p.sendPacket('entity_look', {
+                entityId: this.id,
+                yaw,
+                pitch,
+                onGround: true //todo
+            })
+
+    } else
+        this.p.sendPacket('entity_teleport', {
+            entityId: this.id,
+            x,
+            y,
+            z,
+            yaw,
+            pitch,
+            onGround: true //todo
+        });
+
+    //todo: use <Array>.some
     let changed = false;
     for (const val of [
         'x',
