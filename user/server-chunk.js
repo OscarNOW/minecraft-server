@@ -38,14 +38,14 @@ server.on('connect', async client => {
 
     let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem1);
 
-    client.on('armSwing', () => {
-        player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
-    })
+    // client.on('armSwing', () => {
+    //     player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
+    // })
 
-    while (client.online) {
-        player.position.z += 0.2;
-        await wait(100);
-    }
+    // while (client.online) {
+    //     player.position.z += 0.2;
+    //     await wait(100);
+    // }
 
     // client.on('chat', a => eval(a))
 
