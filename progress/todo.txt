@@ -2,6 +2,7 @@ Pre-release
 
 Fix todo-imp
 -Implement <Client>.entity('player', ...)
+    Implement playerInfo that is not tabItem, but normal object
     Better defaults for TabItem
 Create <Text> onChange event and use in TabItem
 Change names of types starting with 'normal' to better name, like 'normalEntity' to 'noSpecialClassEntity'
