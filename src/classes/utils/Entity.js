@@ -1,5 +1,6 @@
 const { defaults } = require('../../settings.json')
 const { entities, entityAnimations, sounds, soundChannels } = require('../../functions/loader/data.js');
+const { entities: clientEntities } = require('./Client/properties/public/dynamic/entities.js');
 
 const { uuid } = require('../../functions/uuid.js');
 const path = require('path');
@@ -217,13 +218,14 @@ class Entity {
     }
 
     remove() {
-        throw new Error('Not implemented')
+        this.p.sendPacket('entity_destroy', {
+            entityIds: [this.id]
+        });
 
-        // this.p.sendPacket('destroy_entities', {
-        //     entityIds: [this.id]
-        // })
+        let newClientEntities = Object.assign({}, this.client.entities);
+        delete newClientEntities[this.id];
 
-        // delete this.client.entities[this.id]
+        clientEntities.setPrivate.call(this.client, Object.freeze(newClientEntities));
     }
 
     removeAllListeners(event) {
