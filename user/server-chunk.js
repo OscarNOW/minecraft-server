@@ -1,5 +1,5 @@
 const { Server, Chunk } = require('../');
-// const wait = ms => new Promise(res => setTimeout(res, ms));
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
@@ -24,14 +24,16 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    let tabItem = await client.tabItem({
+    const tabItem = await client.tabItem({
         name: 'Jeroen64',
-        displayName: [{ text: 'Hello', modifiers: ['bold'] }],
+        displayName: 'Hello',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     });
 
-    let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem)
+    const player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem);
+
+    console.log(player.playerInfo)
 
     // client.on('chat', a => eval(a))
 
