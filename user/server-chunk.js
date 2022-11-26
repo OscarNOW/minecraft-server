@@ -24,16 +24,28 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    const tabItem = await client.tabItem({
+    const tabItem1 = await client.tabItem({
         name: 'Jeroen64',
-        displayName: 'Hello',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     });
 
-    const player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem);
+    const tabItem2 = await client.tabItem({
+        name: 'Notch',
+        uuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5',
+        skinAccountUuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5'
+    });
 
-    console.log(player.playerInfo)
+    let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem1);
+
+    client.on('armSwing', () => {
+        player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
+    })
+
+    while (client.online) {
+        player.position.z += 0.2;
+        await wait(100);
+    }
 
     // client.on('chat', a => eval(a))
 
