@@ -34,11 +34,11 @@
         "axios": "^1.2.0-alpha.1",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
-        "minecraft-protocol": "^1.36.1",
+        "minecraft-protocol": "^1.36.2",
         "prismarine-chunk": "^1.32.0"
     },
     "devDependencies": {
-        "eslint": "^8.28.0",
+        "eslint": "^8.29.0",
         "mineflayer": "^4.5.0",
         "typedoc": "^0.23.21",
         "typedoc-theme-hierarchy": "^3.0.0"
