@@ -1,0 +1,34 @@
+TabItem:
+name
+    (used for both displayName and name for TabItem)
+    default: ""
+uuid
+    (used for both uuid and skinAccountUuid for TabItem and Player)
+    default: random v4 uuid for uuid, and no skinAccountUuid
+ping
+    (used for ping for TabItem and Player)
+    default: null
+-
+    (gamemode is for TabItem)
+    value: default from src/settings
+
+
+Player (from TabItem):
+gamemode
+    (used for gamemode for Player and TabItem)
+    default: default from src/settings
+
+
+Player (from playerInfo object):
+name
+    (used for both displayName and name for Player)
+    default: ""
+uuid
+    (used for both uuid and skinAccountUuid for Player)
+    default: random v4 uuid for uuid, and no skinAccountUuidG
+gamemode
+    (used for gamemode for Player)
+    default: default from src/settings
+-
+    (ping is for Player)
+    value: null
