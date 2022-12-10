@@ -66,7 +66,7 @@ module.exports = {
             if (file.info?.callAfterLogin)
                 callAfterLogin.push(() => file.setRaw.call(this, value, true))
             else
-                ret = file.setRaw.call(this, value, true);
+                ret = file.setRaw.call(this, value, true); //todo: call setRaw also for properties that are not in defaultProperties
 
             if (file.info?.loginPacket && ret)
                 for (const [key, value] of Object.entries(ret))
