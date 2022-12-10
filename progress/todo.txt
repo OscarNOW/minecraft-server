@@ -6,10 +6,12 @@ Fix todo-imp
     Better defaults for TabItem
 Create <Text> onChange event and use in TabItem
 Change names of types starting with 'normal' to better name, like 'normalEntity' to 'noSpecialClassEntity'
+Change src/settings.defaults.gamemode from number to name
 
 
 Anytime
 
+Make library loading faster
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
