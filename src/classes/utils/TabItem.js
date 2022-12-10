@@ -13,13 +13,13 @@ const path = require('path');
 const _p = Symbol('private');
 const defaultPrivate = {
     parseProperty: function (key, value) {
-        if (key === 'displayName' && value !== null && !(value instanceof Text))
-            return new Text(value);
-        else if (key === 'skinAccountUuid')
+        if (key === 'name' && !(value instanceof Text))
+            return new Text(value)
+        else if (key === 'uuid')
             if (value.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g))
                 return value;
             else
-                return this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `skinAccountUuid in  <Client.tabItem({ skinAccountUuid: skinAccountUuid })  `, {
+                return this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `uuid in  <Client>.tabItem({ uuid: uuid })  `, {
                     got: value,
                     expectationType: 'type',
                     expectation: 'v4uuid',
@@ -36,68 +36,53 @@ const defaultPrivate = {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        if (name === 'gamemode')
-            this.p.sendPacket('player_info', {
-                action: 1,
-                data: [{
-                    UUID: this.uuid,
-                    gamemode: gamemodes.indexOf(this.gamemode)
-                }]
-            })
-        else if (name === 'ping')
+        if (name === 'ping')
             this.p.sendPacket('player_info', {
                 action: 2,
                 data: [{
                     UUID: this.uuid,
-                    ping: this.ping
+                    ping: this.ping === null ? -1 : this.ping
                 }]
             })
-        else if (name === 'displayName') //todo: use <Text> onChange event
+        else if (name === 'name')
+            //todo: use <Text> onChange event
+            //todo: also update name by removing TabItem and adding it again
             this.p.sendPacket('player_info', {
                 action: 3,
                 data: [{
                     UUID: this.uuid,
-                    displayName: JSON.stringify(this.displayName.chat)
+                    displayName: JSON.stringify(this.name.chat)
                 }]
             })
     },
     async getSkin() {
-        if (!this.skinAccountUuid)
+        if (this.p.skinAccountUuid === null)
             return { properties: [] }
         else
-            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
     },
     async sendStartPacket() {
-        const { properties } = await this.p.getSkin();
-
-        let packet = {
+        this.p.sendPacket('player_info', {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: this.name,
-                properties,
+                name: this.name.string,
+                displayName: JSON.stringify(this.name.chat),
+                properties: (await this.p.getSkin()).properties,
                 gamemode: gamemodes.indexOf(this.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
-        };
-
-        if (this.displayName !== null)
-            packet.data[0].displayName = JSON.stringify(this.displayName.chat);
-
-        this.p.sendPacket('player_info', packet);
+        });
     }
 };
 
 const writablePropertyNames = Object.freeze([
-    'gamemode',
     'ping',
-    'displayName'
+    'name'
 ]);
 
 const readonlyPropertyNames = Object.freeze([
-    'name',
-    'uuid',
-    'skinAccountUuid'
+    'uuid'
 ]);
 
 class TabItem {
@@ -106,9 +91,16 @@ class TabItem {
         this.server = client.server;
         this.p.sendPacket = sendPacket;
 
-        // parseProperties
+        // applyDefaults
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, defaults);
+        if (properties.uuid === null) {
+            properties.uuid = null; //todo: generate uuid
+            this.p.skinAccountUuid = null;
+        } else
+            this.p.skinAccountUuid = properties.uuid;
+
+        // parseProperties
         properties = this.p.parseProperties.call(this, properties);
 
         // set private properties
