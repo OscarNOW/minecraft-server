@@ -244,11 +244,8 @@ export class Client {
         pitch: number;
     }): EntityConditional<name>; //EntityConditional in Entity.d.ts
     tabItem(tabItemOptions?: {
-        name?: string;
-        displayName?: textInput | Text;
+        name?: textInput | Text;
         uuid?: string;
-        skinAccountUuid?: string;
-        gamemode?: gamemode;
         ping?: number | null;
     }): Promise<TabItem>;
     window(windowType: nonEntityWindowName): void;
