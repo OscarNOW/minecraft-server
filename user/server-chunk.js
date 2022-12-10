@@ -1,4 +1,5 @@
 const { Server, Chunk } = require('../');
+console.log('Loaded library')
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
@@ -24,19 +25,13 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    const tabItem1 = await client.tabItem({
-        name: 'Jeroen64',
-        uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-        skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
-    });
+    // let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
+    //     name: 'Jeroen64',
+    //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+    //     skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
+    // });
 
-    const tabItem2 = await client.tabItem({
-        name: 'Notch',
-        uuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5',
-        skinAccountUuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5'
-    });
-
-    let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, tabItem1);
+    // client.on('chat', () => { player.playerInfo.name = 'Hi' })
 
     // client.on('armSwing', () => {
     //     player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
