@@ -44,17 +44,29 @@ server.on('connect', async client => {
 
     // client.on('chat', a => eval(a))
 
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-    //         name: 'Jeroen64',
-    //         properties: [],
-    //         gamemode: 0,
-    //         ping: -1,
-    //         displayName: JSON.stringify([{ text: 'Hello', bold: true }])
-    //     }]
-    // })
+    client.raw('player_info', {
+        action: 0,
+        data: [{
+            UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+            name: '2',
+            properties: [],
+            gamemode: 1,
+            ping: 5,
+            // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+        }]
+    })
+
+    client.raw('player_info', {
+        action: 0,
+        data: [{
+            UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+            name: '1',
+            properties: [],
+            gamemode: 0,
+            ping: -1,
+            // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+        }]
+    })
 
     // client.raw('named_entity_spawn', {
     //     entityId: 10,
