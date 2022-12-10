@@ -1,4 +1,5 @@
 const { applyDefaults } = require('../../functions/applyDefaults');
+const { uuid } = require('../../functions/uuid');
 const { gamemodes } = require('../../functions/loader/data.js');
 const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
@@ -96,7 +97,7 @@ class TabItem {
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, tabItemDefaults);
         if (properties.uuid === null) {
-            properties.uuid = null; //todo: generate uuid
+            properties.uuid = uuid();
             this.p.skinAccountUuid = null;
         } else
             this.p.skinAccountUuid = properties.uuid;
