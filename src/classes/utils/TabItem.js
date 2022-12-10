@@ -2,7 +2,8 @@ const { applyDefaults } = require('../../functions/applyDefaults');
 const { gamemodes } = require('../../functions/loader/data.js');
 const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
-const defaults = require('../../settings.json').defaults.tabItem;
+const settings = require('../../settings.json');
+const tabItemDefaults = settings.defaults.tabItem;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const Text = require('../exports/Text.js');
@@ -66,10 +67,10 @@ const defaultPrivate = {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: this.name.string,
+                name: this.name.string.slice('§r'.length),
                 displayName: JSON.stringify(this.name.chat),
-                properties: (await this.p.getSkin()).properties,
-                gamemode: gamemodes.indexOf(this.gamemode),
+                properties: (await this.p.getSkin.call(this)).properties,
+                gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
         });
@@ -93,12 +94,13 @@ class TabItem {
 
         // applyDefaults
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
-        properties = applyDefaults(properties, defaults);
+        properties = applyDefaults(properties, tabItemDefaults);
         if (properties.uuid === null) {
             properties.uuid = null; //todo: generate uuid
             this.p.skinAccountUuid = null;
         } else
             this.p.skinAccountUuid = properties.uuid;
+        this.p.gamemode = settings.defaults.gamemode;
 
         // parseProperties
         properties = this.p.parseProperties.call(this, properties);
