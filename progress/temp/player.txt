@@ -1,5 +1,5 @@
 TabItem:
-name
+name //todo: split to name and shortName, because normal name can not be longer than 16 characters
     (used for both displayName and name for TabItem)
     default: ""
 uuid
