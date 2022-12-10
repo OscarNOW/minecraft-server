@@ -25,6 +25,22 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
+    client.tabItem({
+        name: [
+            {
+                text: 'Press '
+            },
+            {
+                keybind: 'key.jump',
+                color: 'green',
+                modifiers: ['bold', 'italic']
+            },
+            {
+                text: ' to jump'
+            }
+        ]
+    })
+
     // let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
     //     name: 'Jeroen64',
     //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
