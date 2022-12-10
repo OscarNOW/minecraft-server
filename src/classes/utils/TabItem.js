@@ -17,7 +17,7 @@ const defaultPrivate = {
         if (key === 'name' && !(value instanceof Text))
             return new Text(value)
         else if (key === 'uuid')
-            if (value.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g))
+            if ((typeof value !== 'string') || value.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g))
                 return value;
             else
                 return this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `uuid in  <Client>.tabItem({ uuid: uuid })  `, {
@@ -57,7 +57,7 @@ const defaultPrivate = {
             })
     },
     async getSkin() {
-        if (this.p.skinAccountUuid === null)
+        if (typeof this.p.skinAccountUuid !== 'string')
             return { properties: [] }
         else
             return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
