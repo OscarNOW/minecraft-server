@@ -8,7 +8,6 @@ const tabItemDefaults = settings.defaults.tabItem;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const Text = require('../exports/Text.js');
-const CustomError = require('./CustomError.js');
 const axios = require('axios').default;
 const path = require('path');
 
