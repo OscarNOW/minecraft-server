@@ -7,4 +7,4 @@ type playerInfo = {
     readonly name: string; //todo: make changable
     readonly uuid: string; //todo: make changable
     gamemode: gamemode;
-}
+};
