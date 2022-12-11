@@ -29,17 +29,17 @@ name
         ""
 
 
-Player (from playerInfo object):
+Player (from object):
+gamemode
+    (used for gamemode for Player)
+    default: default from src/settings
 name
     (max length: 16)
     (used for both displayName and name for Player)
     default: ""
 uuid
     (used for both uuid and skinAccountUuid for Player)
-    default: random v4 uuid for uuid, and no skinAccountUuidG
-gamemode
-    (used for gamemode for Player)
-    default: default from src/settings
+    default: random v4 uuid for uuid, and no skinAccountUuid
 -
     (ping is for Player)
     value: null
