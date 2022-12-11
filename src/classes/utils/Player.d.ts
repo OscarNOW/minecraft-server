@@ -1,10 +1,29 @@
-export class Player extends Entity {
-    tabItem?: TabItem;
-    playerInfo: playerInfo;
-}
+//todo: code not yet implemented
 
-type playerInfo = {
-    readonly name: string; //todo: make changable
+export class Player extends Entity {
+    constructor(
+        client: Client,
+        type: entityName,
+        id: number,
+        position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw?: number;
+            pitch?: number;
+        },
+        sendPacket: (packetName: string, packet: object) => void,
+        extraInfo: {
+            tabItem?: TabItem;
+            name?: string;
+            uuid?: string;
+            gamemode?: gamemode;
+        }
+    );
+
+    tabItem?: TabItem;
+
     readonly uuid: string; //todo: make changable
+    readonly name: string; //todo: make changable
     gamemode: gamemode;
-};
+}
