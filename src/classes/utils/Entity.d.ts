@@ -9,13 +9,21 @@ type EntityConditional<name extends entityName> =
     Entity;
 
 export class Entity {
-    constructor(client: Client, type: entityName, id: number, position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw?: number;
-        pitch?: number;
-    }, sendPacket: (packetName: string, packet: object) => void, extraEntityInfo?: undefined, overwrites?: { sendSpawnPacket?: () => void });
+    constructor(
+        client: Client,
+        type: entityName,
+        id: number,
+        position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw?: number;
+            pitch?: number;
+        },
+        sendPacket: (packetName: string, packet: object) => void,
+        extraInfo?: undefined,
+        overwrites?: { sendSpawnPacket?: () => void }
+    );
 
     readonly client: Client;
     readonly server: Server;
