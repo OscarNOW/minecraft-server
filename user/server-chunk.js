@@ -26,19 +26,9 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
     client.tabItem({
-        name: [
-            {
-                text: 'Press '
-            },
-            {
-                keybind: 'key.jump',
-                color: 'green',
-                modifiers: ['bold', 'italic']
-            },
-            {
-                text: ' to jump'
-            }
-        ]
+        name: 'Jeroen64',
+        uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+        ping: 0
     })
 
     // let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
@@ -64,11 +54,23 @@ server.on('connect', async client => {
     //     action: 0,
     //     data: [{
     //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-    //         name: '§a§l§nJeroen64',
+    //         name: '',
     //         properties: [],
     //         gamemode: 1,
     //         ping: 5,
-    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+    //         displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+    //     }]
+    // })
+
+    // client.raw('player_info', {
+    //     action: 0,
+    //     data: [{
+    //         UUID: '069a79f4-44e9-4726-a5be-fca90e38aaf5',
+    //         name: '',
+    //         properties: [],
+    //         gamemode: 1,
+    //         ping: 5,
+    //         displayName: JSON.stringify([{ text: 'World', bold: true }])
     //     }]
     // })
 
