@@ -17,15 +17,6 @@ const defaultPrivate = {
     parseProperty: function (key, value) {
         if (key === 'name' && !(value instanceof Text))
             return new Text(value)
-        else if (key === 'uuid')
-            if ((typeof value !== 'string') || value.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g))
-                return value;
-            else
-                return this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `uuid in  <Client>.tabItem({ uuid: uuid })  `, {
-                    got: value,
-                    expectationType: 'type',
-                    expectation: 'v4uuid',
-                }).toString())
         else return value;
     },
     parseProperties: function (properties) {
@@ -48,7 +39,6 @@ const defaultPrivate = {
             })
         else if (name === 'name')
             //todo: use <Text> onChange event
-            //todo: also update name by removing TabItem and adding it again
             this.p.sendPacket('player_info', {
                 action: 3,
                 data: [{
@@ -58,7 +48,9 @@ const defaultPrivate = {
             })
     },
     async getSkin() {
-        if (typeof this.p.skinAccountUuid !== 'string')
+        const isValidUuid = (typeof value === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
+
+        if (!isValidUuid)
             return { properties: [] }
         else
             return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
@@ -68,7 +60,7 @@ const defaultPrivate = {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: this.name.string.slice('§r'.length),
+                name: '',
                 displayName: JSON.stringify(this.name.chat),
                 properties: (await this.p.getSkin.call(this)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
@@ -97,7 +89,10 @@ class TabItem {
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, tabItemDefaults);
         if (properties.uuid === null) {
-            properties.uuid = uuid();
+            properties.uuid = uuid().split('');
+            properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+            properties.uuid = properties.uuid.join('');
+
             this.p.skinAccountUuid = null;
         } else
             this.p.skinAccountUuid = properties.uuid;
