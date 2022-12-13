@@ -119,8 +119,8 @@ class Player extends Entity {
 
         if (extraInfo.name === null)
             if (this.tabItem)
-                if (this.tabItem.name.string.length <= 16)
-                    extraInfo.name = this.tabItem.name.string;
+                if (this.tabItem.name.string.slice(2).length <= 16)
+                    extraInfo.name = this.tabItem.name.string.slice(2);
                 else if (this.tabItem.name.uncolored.length <= 16)
                     extraInfo.name = this.tabItem.name.uncolored;
                 else
@@ -161,7 +161,7 @@ class Player extends Entity {
             if (extraInfo.gamemode !== this.tabItem.p.gamemode)
                 /* await */ this.p2.updateProperty.call(this, 'gamemode');
 
-            if (extraInfo.name.string !== this.tabItem.p.name)
+            if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
                 /* await */ this.p2.updateProperty.call(this, 'name');
 
             if (extraInfo.uuid !== this.tabItem.uuid)

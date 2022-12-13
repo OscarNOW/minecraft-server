@@ -132,8 +132,8 @@ class TabItem {
             });
 
         // set name
-        if (this.name.string.length <= 16)
-            this.p.name = this.name.string;
+        if (this.name.string.slice(2).length <= 16)
+            this.p.name = this.name.string.slice(2);
         else if (this.name.uncolored.length <= 16)
             this.p.name = this.name.uncolored;
         else
