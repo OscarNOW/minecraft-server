@@ -243,6 +243,7 @@ export class Client {
         yaw: number;
         pitch: number;
     }): EntityConditional<name>; //EntityConditional in Entity.d.ts
+    //todo: implement entity('player', ...)
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;
