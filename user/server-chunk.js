@@ -25,11 +25,11 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.tabItem({
-        name: 'Jeroen64',
-        uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-        ping: 0
-    })
+    // client.tabItem({
+    //     name: 'Jeroen64',
+    //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+    //     ping: 0
+    // })
 
     // let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
     //     name: 'Jeroen64',
@@ -54,7 +54,7 @@ server.on('connect', async client => {
     //     action: 0,
     //     data: [{
     //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-    //         name: '',
+    //         name: 'abc',
     //         properties: [],
     //         gamemode: 1,
     //         ping: 5,
@@ -74,15 +74,15 @@ server.on('connect', async client => {
     //     }]
     // })
 
-    // client.raw('named_entity_spawn', {
-    //     entityId: 10,
-    //     playerUUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813', //Jeroen64
-    //     x: 3,
-    //     y: 101,
-    //     z: 3,
-    //     yaw: 0,
-    //     pitch: 0
-    // });
+    client.raw('named_entity_spawn', {
+        entityId: 10,
+        playerUUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813', //Jeroen64
+        x: 3,
+        y: 101,
+        z: 3,
+        yaw: 0,
+        pitch: 0
+    });
 
     // client.raw('player_info', {
     //     action: 4,
