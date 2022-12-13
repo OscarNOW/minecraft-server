@@ -47,7 +47,7 @@ const defaultPrivate = {
             })
     },
     async getSkin() {
-        const isValidUuid = (typeof value === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
+        const isValidUuid = (typeof this.p.skinAccountUuid === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
 
         if (!isValidUuid)
             return { properties: [] }
@@ -59,13 +59,17 @@ const defaultPrivate = {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: '',
+                name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
                 properties: (await this.p.getSkin.call(this)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
         });
+    },
+    async respawn() {
+        throw new Error('not implemented');
+        //todo: implement removing all tabItems (so that order doesn't mess up) and resending packets for all tabItems
     }
 };
 
@@ -87,7 +91,7 @@ class TabItem {
         // applyDefaults
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, tabItemDefaults);
-        if (properties.uuid === null) {
+        if (properties.uuid === null) { //todo: maybe move to parseProperties
             properties.uuid = uuid().split('');
             properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
             properties.uuid = properties.uuid.join('');
@@ -115,7 +119,7 @@ class TabItem {
                 get: () => this.p._[propertyName],
                 set: newValue => {
                     // let oldValue = this.p._[propertyName];
-                    this.p._[propertyName] = this.p.parseProperty(propertyName, newValue);
+                    this.p._[propertyName] = this.p.parseProperty.call(this, propertyName, newValue);
 
                     this.p.updateProperty.call(this, propertyName);
                 }
@@ -126,6 +130,14 @@ class TabItem {
                 enumerable: true,
                 get: () => this.p._[propertyName]
             });
+
+        // set name
+        if (this.name.string.slice(2).length <= 16)
+            this.p.name = this.name.string.slice(2);
+        else if (this.name.uncolored.length <= 16)
+            this.p.name = this.name.uncolored;
+        else
+            this.p.name = '';
 
 
         if (!this.client.p.stateHandler.checkReady.call(this.client))

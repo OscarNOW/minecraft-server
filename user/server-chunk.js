@@ -25,11 +25,19 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.tabItem({
+    // let tabItem = await client.tabItem({
+    //     name: 'Jeroen64',
+    //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
+    // });
+
+    //todo: test code underneath and play around more with Player and TabItem
+    client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-        ping: 0
-    })
+        gamemode: 'creative'
+    });
+
+    // client.on('chat', a => { console.log(a); eval(a) })
 
     // let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
     //     name: 'Jeroen64',
@@ -54,7 +62,7 @@ server.on('connect', async client => {
     //     action: 0,
     //     data: [{
     //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-    //         name: '',
+    //         name: 'abc',
     //         properties: [],
     //         gamemode: 1,
     //         ping: 5,

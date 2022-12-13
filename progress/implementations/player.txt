@@ -12,8 +12,12 @@ ping
     (gamemode is for TabItem)
     value: default from src/settings
 -
-    (name is for Player)
-    value: ""
+    (max length: 16)
+    (name is for TabItem)
+    value:            (choose next if too long)
+        this.name (remove "§r" from start)
+        uncolored this.name
+        ""
 
 
 Player (from TabItem):
@@ -24,7 +28,7 @@ name
     (max length: 16)
     (used for name for Player)
     default:            (choose next if too long)
-        TabItem.name
+        TabItem.name (remove "§r" from start)
         uncolored TabItem.name
         ""
 
@@ -35,7 +39,7 @@ gamemode
     default: default from src/settings
 name
     (max length: 16)
-    (used for both displayName and name for Player)
+    (used for name for Player)
     default: ""
 uuid
     (used for both uuid and skinAccountUuid for Player)
@@ -43,3 +47,6 @@ uuid
 -
     (ping is for Player)
     value: null
+-
+    (displayName is for Player)
+    value: undefined
