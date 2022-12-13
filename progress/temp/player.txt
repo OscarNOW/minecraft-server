@@ -12,7 +12,7 @@ ping
     (gamemode is for TabItem)
     value: default from src/settings
 -
-    (name is for Player)
+    (name is for TabItem)
     value: ""
 
 
