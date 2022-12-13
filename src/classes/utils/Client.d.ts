@@ -254,7 +254,7 @@ export class Client {
         name?: string;
         uuid?: string;
         gamemode?: gamemode;
-    }): EntityConditional<'player'>;
+    }): EntityConditional<'player'>; //todo: make return Promise that resolves to EntityConditional<'player'>
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;
