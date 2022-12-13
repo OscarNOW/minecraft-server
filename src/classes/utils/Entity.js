@@ -122,6 +122,9 @@ class Entity {
         this.id = id;
         this.uuid = uuid();
 
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
         this.p.typeId = e.id;
         this.p.observables = Object.fromEntries(observables.map(a => [a, []]));
         this.p.sendPacket = sendPacket;
