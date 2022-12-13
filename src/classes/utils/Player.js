@@ -77,7 +77,7 @@ const defaultPrivate = {
 
         this.p.sendPacket('named_entity_spawn', {
             entityId: this.id,
-            playerUUID: this.playerInfo.uuid,
+            playerUUID: this.uuid,
             x: this.position.x,
             y: this.position.y,
             z: this.position.z,
@@ -89,7 +89,7 @@ const defaultPrivate = {
             this.p.sendPacket('player_info', { //remove temporary tabItem
                 action: 4,
                 data: [{
-                    UUID: this.playerInfo.uuid
+                    UUID: this.uuid
                 }]
             });
     },
@@ -107,7 +107,7 @@ const writablePropertyNames = Object.freeze([
 
 class Player extends Entity {
     constructor(client, type, id, position, sendPacket, extraInfo) {
-        super(type, id, position, sendPacket, undefined, { sendSpawnPacket: false });
+        super(client, type, id, position, sendPacket, undefined, { sendSpawnPacket: false });
 
         // applyDefaults
         extraInfo = applyDefaults(extraInfo, playerDefaults);
@@ -155,13 +155,13 @@ class Player extends Entity {
 
         if (this.tabItem) {
             if (extraInfo.gamemode !== this.tabItem.p.gamemode)
-                /* await */ this.p2.updateProperty('gamemode');
+                /* await */ this.p2.updateProperty.call(this, 'gamemode');
 
             if (extraInfo.name !== this.tabItem.p.name)
-                /* await */ this.p2.updateProperty('name');
+                /* await */ this.p2.updateProperty.call(this, 'name');
 
             if (extraInfo.uuid !== this.tabItem.uuid)
-                /* await */ this.p2.updateProperty('uuid');
+                /* await */ this.p2.updateProperty.call(this, 'uuid');
         }
 
         // define getters and setters
