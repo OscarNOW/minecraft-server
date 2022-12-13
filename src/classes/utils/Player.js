@@ -131,8 +131,10 @@ class Player extends Entity {
         // if(extraInfo.name.length > 16) //todo: throw error
 
         if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
-            this.uuid = this.tabItem.uuid;
-            this.p2.skinAccountUuid = this.tabItem.uuid
+            extraInfo.uuid = this.tabItem.uuid;
+
+            this.uuid = extraInfo.uuid;
+            this.p2.skinAccountUuid = extraInfo.uuid
         }
         else if (extraInfo.uuid !== null) {
             this.uuid = extraInfo.uuid;
@@ -142,6 +144,7 @@ class Player extends Entity {
             extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
             extraInfo.uuid = extraInfo.uuid.join('');
 
+            this.uuid = extraInfo.uuid;
             this.p2.skinAccountUuid = null;
         };
 
@@ -153,11 +156,12 @@ class Player extends Entity {
         for (const propertyName of writablePropertyNames)
             this.p2._[propertyName] = extraInfo[propertyName];
 
+        // update properties if not same as tabItem
         if (this.tabItem) {
             if (extraInfo.gamemode !== this.tabItem.p.gamemode)
                 /* await */ this.p2.updateProperty.call(this, 'gamemode');
 
-            if (extraInfo.name !== this.tabItem.p.name)
+            if (extraInfo.name.string !== this.tabItem.p.name)
                 /* await */ this.p2.updateProperty.call(this, 'name');
 
             if (extraInfo.uuid !== this.tabItem.uuid)
