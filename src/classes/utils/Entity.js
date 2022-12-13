@@ -105,18 +105,36 @@ const changePosition = function (pos, oldValue) {
 }
 
 class Entity {
-    constructor(client, type, id, { x, y, z, yaw = defaults.entity.position.yaw, pitch = defaults.entity.position.pitch }, sendPacket, extraInfo, { sendSpawnPacket = true } = {}) {
+    constructor(
+        client,
+        type,
+        id,
+        {
+            x,
+            y,
+            z,
+            yaw = defaults.entity.position.yaw,
+            pitch = defaults.entity.position.pitch
+        },
+        sendPacket,
+        extraInfo,
+        {
+            sendSpawnPacket = true
+        } = {}
+    ) {
+
+        this.client = client;
+        this.sever = client.server;
+
         let e = getEntity(type);
         if (e === undefined)
-            client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
+            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
                 got: type,
                 expectationType: 'type',
                 expectation: 'entityName',
                 externalLink: '{docs}/types/entityName'
             }, this.constructor, { server: this.client.server, client: this.client }))
 
-        this.client = client;
-        this.sever = client.server;
         this.type = type;
         this.living = e.living;
         this.id = id;
