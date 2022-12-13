@@ -172,7 +172,7 @@ class Player extends Entity {
                 get: () => this.p2._[propertyName],
                 set: newValue => {
                     // let oldValue = this.p2._[propertyName];
-                    this.p2._[propertyName] = this.p2.parseProperty(propertyName, newValue);
+                    this.p2._[propertyName] = this.p2.parseProperty.call(this, propertyName, newValue);
 
                     this.p2.updateProperty.call(this, propertyName);
                 }

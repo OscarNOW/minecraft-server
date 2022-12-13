@@ -119,7 +119,7 @@ class TabItem {
                 get: () => this.p._[propertyName],
                 set: newValue => {
                     // let oldValue = this.p._[propertyName];
-                    this.p._[propertyName] = this.p.parseProperty(propertyName, newValue);
+                    this.p._[propertyName] = this.p.parseProperty.call(this, propertyName, newValue);
 
                     this.p.updateProperty.call(this, propertyName);
                 }
