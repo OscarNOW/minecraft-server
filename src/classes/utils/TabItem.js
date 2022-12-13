@@ -68,7 +68,8 @@ const defaultPrivate = {
         });
     },
     async respawn() {
-        throw new Error('not implemented'); //todo: implement deleting and recreating tab item
+        throw new Error('not implemented');
+        //todo: implement removing all tabItems (so that order doesn't mess up) and resending packets for all tabItems
     }
 };
 

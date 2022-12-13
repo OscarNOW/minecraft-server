@@ -8,7 +8,7 @@ export class TabItem {
     readonly client: Client;
     readonly server: Server;
 
-    readonly name: Text; //todo: make writable by sending packets to remove old TabItem and add new one (with same class instance)
-    readonly uuid: string; //todo: make writable by sending packets to remove old TabItem and add new one (with same class instance)
+    readonly name: Text; //todo: make writable by using <TabItem>.p.respawn()
+    readonly uuid: string; //todo: make writable by using <TabItem>.p.respawn()
     ping: number | null;
 }
