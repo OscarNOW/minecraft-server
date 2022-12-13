@@ -242,8 +242,19 @@ export class Client {
         z: number;
         yaw: number;
         pitch: number;
-    }): EntityConditional<name>; //EntityConditional in Entity.d.ts
-    //todo: implement entity('player', ...)
+    }): EntityConditional<name>;
+    entity(entity: 'player', position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }, playerInfo: {
+        tabItem?: TabItem;
+        name?: string;
+        uuid?: string;
+        gamemode?: gamemode;
+    }): EntityConditional<'player'>;
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;

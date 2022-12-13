@@ -1,6 +1,6 @@
 const { convertToType } = require('../functions/convertToType.js');
 const specialArgumentEntityNames = [
-
+    'player'
 ];
 
 module.exports = {
