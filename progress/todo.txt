@@ -10,6 +10,7 @@ Change names of types starting with 'normal' to better name, like 'normalEntity'
 
 Anytime
 
+Move shared functions between TabItem and Player (like getSkin) to separate function file
 enableRespawnScreen on the loginPacket is undefined
 Make library loading faster
 Resolve "todo: " and "not implemented" in code
