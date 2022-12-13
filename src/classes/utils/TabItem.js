@@ -100,7 +100,6 @@ class TabItem {
         } else
             this.p.skinAccountUuid = properties.uuid;
         this.p.gamemode = settings.defaults.gamemode;
-        this.p.name = '';
 
         // parseProperties
         properties = this.p.parseProperties.call(this, properties);
@@ -131,6 +130,14 @@ class TabItem {
                 enumerable: true,
                 get: () => this.p._[propertyName]
             });
+
+        // set name
+        if (this.name.string.length <= 16)
+            this.p.name = this.name.string;
+        else if (this.name.uncolored.length <= 16)
+            this.p.name = this.name.uncolored;
+        else
+            this.p.name = '';
 
 
         if (!this.client.p.stateHandler.checkReady.call(this.client))
