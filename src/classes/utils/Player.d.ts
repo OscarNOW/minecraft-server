@@ -21,9 +21,9 @@ export class Player extends Entity {
         }
     );
 
-    tabItem?: TabItem;
+    readonly tabItem?: TabItem; //todo: make changable
 
-    readonly uuid: string; //todo: make changable
-    readonly name: string; //todo: make changable
+    uuid: string;
+    name: string;
     gamemode: gamemode;
 }
