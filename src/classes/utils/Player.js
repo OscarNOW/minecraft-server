@@ -2,6 +2,7 @@ const path = require('path');
 const axios = require('axios').default;
 
 const Entity = require('./Entity.js');
+const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { uuid } = require('../../functions/uuid.js');
@@ -128,7 +129,12 @@ class Player extends Entity {
             else
                 extraInfo.name = '';
 
-        // if(extraInfo.name.length > 16) //todo: throw error
+        if (extraInfo.name.length > 16)
+            return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
+                got: extraInfo.name,
+                expectationType: 'type',
+                expectation: 'string.length <= 16',
+            }, null, { server: this.server, client: this.client }))
 
         if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
             extraInfo.uuid = this.tabItem.uuid;
