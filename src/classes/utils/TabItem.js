@@ -47,7 +47,7 @@ const defaultPrivate = {
             })
     },
     async getSkin() {
-        const isValidUuid = (typeof value === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
+        const isValidUuid = (typeof this.p.skinAccountUuid === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
 
         if (!isValidUuid)
             return { properties: [] }
@@ -59,13 +59,16 @@ const defaultPrivate = {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: '',
+                name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
                 properties: (await this.p.getSkin.call(this)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
         });
+    },
+    async respawn() {
+        throw new Error('not implemented'); //todo: implement deleting and recreating tab item
     }
 };
 
@@ -87,7 +90,7 @@ class TabItem {
         // applyDefaults
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, tabItemDefaults);
-        if (properties.uuid === null) {
+        if (properties.uuid === null) { //todo: maybe move to parseProperties
             properties.uuid = uuid().split('');
             properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
             properties.uuid = properties.uuid.join('');
@@ -96,6 +99,7 @@ class TabItem {
         } else
             this.p.skinAccountUuid = properties.uuid;
         this.p.gamemode = settings.defaults.gamemode;
+        this.p.name = '';
 
         // parseProperties
         properties = this.p.parseProperties.call(this, properties);
