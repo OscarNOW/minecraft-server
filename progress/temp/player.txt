@@ -12,8 +12,12 @@ ping
     (gamemode is for TabItem)
     value: default from src/settings
 -
+    (max length: 16)
     (name is for TabItem)
-    value: ""
+    value:            (choose next if too long)
+        this.name
+        uncolored this.name
+        ""
 
 
 Player (from TabItem):
