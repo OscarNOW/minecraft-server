@@ -41,7 +41,7 @@ server.on('connect', async client => {
         gamemode: 'creative'
     });
 
-    console.log(require('util').inspect(player, { depth: 0, colors: true }))
+    // console.log(require('util').inspect(player, { depth: 0, colors: true }))
 
     // client.on('chat', a => { console.log(a); eval(a) })
 
