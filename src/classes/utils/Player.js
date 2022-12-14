@@ -31,9 +31,16 @@ const defaultPrivate = {
             return;
 
         if (name === 'gamemode')
-            if (this.tabItem)
-                throw new Error('not implemented'); //todo: send gamemode change packet and change this.tabItem.p.gamemode
-            else
+            if (this.tabItem) {
+                this.p.sendPacket('player_info', {
+                    action: 1,
+                    data: [{
+                        UUID: this.uuid,
+                        gamemode: gamemodes.indexOf(this.gamemode),
+                    }]
+                });
+                this.tabItem.p.gamemode = this.gamemode;
+            } else
                 await this.p2.respawn.call(this);
 
         if (name === 'uuid')
