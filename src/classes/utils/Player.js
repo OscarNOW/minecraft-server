@@ -107,7 +107,7 @@ const writablePropertyNames = Object.freeze([
 ]);
 
 class Player extends Entity {
-    constructor(client, type, id, position, sendPacket, extraInfo) {
+    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
         super(client, type, id, position, sendPacket, undefined, { sendSpawnPacket: false });
 
         // applyDefaults
@@ -162,33 +162,37 @@ class Player extends Entity {
         for (const propertyName of writablePropertyNames)
             this.p2._[propertyName] = extraInfo[propertyName];
 
-        // update properties if not same as tabItem
-        if (this.tabItem) {
-            if (extraInfo.gamemode !== this.tabItem.p.gamemode)
-                /* await */ this.p2.updateProperty.call(this, 'gamemode');
+        (async () => {
+            // update properties if not same as tabItem
+            if (this.tabItem) {
+                if (extraInfo.gamemode !== this.tabItem.p.gamemode)
+                    await this.p2.updateProperty.call(this, 'gamemode');
 
-            if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
-                /* await */ this.p2.updateProperty.call(this, 'name');
+                if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
+                    await this.p2.updateProperty.call(this, 'name');
 
-            if (extraInfo.uuid !== this.tabItem.uuid)
-                /* await */ this.p2.updateProperty.call(this, 'uuid');
-        }
+                if (extraInfo.uuid !== this.tabItem.uuid)
+                    await this.p2.updateProperty.call(this, 'uuid');
+            }
 
-        // define getters and setters
-        for (const propertyName of writablePropertyNames)
-            Object.defineProperty(this, propertyName, {
-                configurable: false,
-                enumerable: true,
-                get: () => this.p2._[propertyName],
-                set: newValue => {
-                    // let oldValue = this.p2._[propertyName];
-                    this.p2._[propertyName] = this.p2.parseProperty.call(this, propertyName, newValue);
+            // define getters and setters
+            for (const propertyName of writablePropertyNames)
+                Object.defineProperty(this, propertyName, {
+                    configurable: false,
+                    enumerable: true,
+                    get: () => this.p2._[propertyName],
+                    set: newValue => {
+                        // let oldValue = this.p2._[propertyName];
+                        this.p2._[propertyName] = this.p2.parseProperty.call(this, propertyName, newValue);
 
-                    this.p2.updateProperty.call(this, propertyName);
-                }
-            });
+                        this.p2.updateProperty.call(this, propertyName);
+                    }
+                });
 
-        /* await */ this.p2.spawn.call(this);
+            await this.p2.spawn.call(this);
+
+            whenDone();
+        })();
     }
 
     get p2() {

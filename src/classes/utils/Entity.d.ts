@@ -22,7 +22,8 @@ export class Entity {
         },
         sendPacket: (packetName: string, packet: object) => void,
         extraInfo?: undefined,
-        overwrites?: { sendSpawnPacket?: () => void }
+        overwrites?: { sendSpawnPacket?: () => void },
+        whenDone?: (instance: this) => void
     );
 
     readonly client: Client;

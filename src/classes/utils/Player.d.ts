@@ -18,7 +18,9 @@ export class Player extends Entity {
             name?: string;
             uuid?: string;
             gamemode?: gamemode;
-        }
+        },
+        overwrites?: undefined,
+        whenDone?: (instance: this) => void
     );
 
     readonly tabItem?: TabItem; //todo: make changable
