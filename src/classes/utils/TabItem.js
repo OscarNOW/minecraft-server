@@ -47,12 +47,19 @@ const defaultPrivate = {
             })
     },
     async getSkin() {
+        if (this.p.textures)
+            return this.p.textures; //todo: remove cached texture if uuid changes
+
         const isValidUuid = (typeof this.p.skinAccountUuid === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
+        let textures;
 
         if (!isValidUuid)
-            return { properties: [] }
+            textures = { properties: [] }
         else
-            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+            textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+
+        this.p.textures = textures;
+        return textures;
     },
     async sendStartPacket() {
         this.p.sendPacket('player_info', {
