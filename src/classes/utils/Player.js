@@ -39,9 +39,9 @@ const defaultPrivate = {
         if (name === 'uuid')
             if (this.tabItem) {
                 this.tabItem.p._.uuid = this.uuid;
-                await this.tabItem.p.respawn();
+                await this.tabItem.p.respawn.call(this.tabItem);
             } else
-                await this.p2.respawn();
+                await this.p2.respawn.call(this);
 
         if (name === 'name')
             if (this.tabItem) {
