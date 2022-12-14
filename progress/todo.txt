@@ -3,7 +3,7 @@ Pre-release
 Fix todo-imp
 -Implement <Client>.entity('player', ...)
 Create <Text> onChange event and use in TabItem
-Cache texture properties in Player and TabItem
+-Cache texture properties in Player and TabItem
 
 
 Anytime
