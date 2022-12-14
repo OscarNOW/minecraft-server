@@ -34,7 +34,7 @@ const defaultPrivate = {
             if (this.tabItem)
                 throw new Error('not implemented'); //todo: send gamemode change packet and change this.tabItem.p.gamemode
             else
-                await this.p2.respawn();
+                await this.p2.respawn.call(this);
 
         if (name === 'uuid')
             if (this.tabItem) {
@@ -46,9 +46,9 @@ const defaultPrivate = {
         if (name === 'name')
             if (this.tabItem) {
                 this.tabItem.p._.name = this.name;
-                await this.tabItem.p.respawn();
+                await this.tabItem.p.respawn.call(this.tabItem);
             } else
-                await this.p2.respawn();
+                await this.p2.respawn.call(this);
     },
     async getSkin() {
         const isValidUuid = (typeof this.p2.skinAccountUuid === 'string') && this.p2.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
