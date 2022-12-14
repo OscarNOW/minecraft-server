@@ -43,12 +43,15 @@ const defaultPrivate = {
             } else
                 await this.p2.respawn.call(this);
 
-        if (name === 'uuid')
+        if (name === 'uuid') {
+            this.p2.textures = null;
+
             if (this.tabItem) {
                 this.tabItem.p._.uuid = this.uuid;
                 await this.tabItem.p.respawn.call(this.tabItem);
             } else
                 await this.p2.respawn.call(this);
+        }
 
         if (name === 'name')
             if (this.tabItem) {
@@ -57,13 +60,21 @@ const defaultPrivate = {
             } else
                 await this.p2.respawn.call(this);
     },
-    async getSkin() {
+    async getTextures() {
+        if (this.p2.textures)
+            return this.p2.textures;
+
         const isValidUuid = (typeof this.p2.skinAccountUuid === 'string') && this.p2.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
+        let textures;
 
         if (!isValidUuid)
-            return { properties: [] }
+            textures = { properties: [] }
         else
-            return await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p2.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+            textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p2.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
+
+        this.p2.textures = textures;
+
+        return textures;
     },
     remove: function () {
         this.p.sendPacket('entity_destroy', {
@@ -77,7 +88,7 @@ const defaultPrivate = {
                 data: [{
                     UUID: this.uuid,
                     name: this.name.string.slice(2),
-                    properties: (await this.p2.getSkin.call(this)).properties,
+                    properties: (await this.p2.getTextures.call(this)).properties,
                     gamemode: gamemodes.indexOf(this.gamemode),
                     ping: -1
                 }]
@@ -145,19 +156,15 @@ class Player extends Entity {
 
         if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
             extraInfo.uuid = this.tabItem.uuid;
-
-            this.uuid = extraInfo.uuid;
             this.p2.skinAccountUuid = extraInfo.uuid
         }
-        else if (extraInfo.uuid !== null) {
-            this.uuid = extraInfo.uuid;
+        else if (extraInfo.uuid !== null)
             this.p2.skinAccountUuid = extraInfo.uuid;
-        } else if (extraInfo.uuid === null) {
+        else if (extraInfo.uuid === null) {
             extraInfo.uuid = uuid().split('');
             extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
             extraInfo.uuid = extraInfo.uuid.join('');
 
-            this.uuid = extraInfo.uuid;
             this.p2.skinAccountUuid = null;
         };
 
