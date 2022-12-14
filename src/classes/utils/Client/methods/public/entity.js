@@ -1,13 +1,13 @@
 const Entity = require('../../../Entity.js');
-const CustomEntityClasses = Object.fromEntries(
+const customEntityClasses = Object.fromEntries(
     [
         'Horse',
         'Player'
     ]
         .map(a => [a.toLowerCase(), require(`../../../${a}.js`)]));
 
-const AsyncEntityClasses = Object.freeze([
-    'Player'
+const asyncEntityClasses = Object.freeze([
+    'player'
 ]);
 
 const { entities } = require('../../properties/public/dynamic/entities.js');
@@ -21,7 +21,7 @@ module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
         if (!this.entities[ii])
             entityId = ii;
 
-    const EntityClass = CustomEntityClasses[type] || Entity;
+    const EntityClass = customEntityClasses[type] || Entity;
 
     const afterEntityCreation = entity => {
         let newEntities = Object.assign({}, this.entities);
@@ -30,7 +30,7 @@ module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
         entities.setPrivate.call(this, Object.freeze(newEntities));
     };
 
-    if (AsyncEntityClasses.includes(type))
+    if (asyncEntityClasses.includes(type))
         return (async () => {
             const entity = await new Promise(res =>
                 new EntityClass(this, type, entityId, { x, y, z, yaw, pitch }, this.p.sendPacket, extraInformation, undefined, res)
