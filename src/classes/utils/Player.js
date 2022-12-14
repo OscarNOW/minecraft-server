@@ -73,7 +73,6 @@ const defaultPrivate = {
             textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p2.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
 
         this.p2.textures = textures;
-
         return textures;
     },
     remove: function () {
