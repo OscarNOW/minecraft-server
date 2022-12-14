@@ -191,7 +191,7 @@ class Player extends Entity {
 
             await this.p2.spawn.call(this);
 
-            whenDone();
+            whenDone(this);
         })();
     }
 
