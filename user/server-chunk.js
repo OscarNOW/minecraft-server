@@ -19,6 +19,11 @@ const server = new Server({
     })
 });
 
+const uuid = {
+    'Jeroen64': '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+    'Notch': '069a79f4-44e9-4726-a5be-fca90e38aaf5'
+}
+
 console.log('Listening')
 server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
@@ -30,10 +35,9 @@ server.on('connect', async client => {
     //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     // });
 
-    //todo: test code underneath and play around more with Player and TabItem
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
-        uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+        uuid: uuid.Jeroen64,
         gamemode: 'creative'
     });
 
