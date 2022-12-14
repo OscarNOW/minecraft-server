@@ -1,6 +1,6 @@
 const { Server, Chunk } = require('../');
 console.log('Loaded library')
-const wait = ms => new Promise(res => setTimeout(res, ms));
+// const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
@@ -31,11 +31,13 @@ server.on('connect', async client => {
     // });
 
     //todo: test code underneath and play around more with Player and TabItem
-    client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
+    let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         gamemode: 'creative'
     });
+
+    console.log(require('util').inspect(player, { depth: 0, colors: true }))
 
     // client.on('chat', a => { console.log(a); eval(a) })
 
