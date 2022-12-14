@@ -70,7 +70,7 @@ const defaultPrivate = {
                 data: [{
                     UUID: this.uuid,
                     name: this.name.string.slice(2),
-                    properties: await this.p2.getSkin.call(this),
+                    properties: (await this.p2.getSkin.call(this)).properties,
                     gamemode: gamemodes.indexOf(this.gamemode),
                     ping: -1
                 }]
