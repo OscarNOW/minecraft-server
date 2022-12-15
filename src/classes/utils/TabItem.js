@@ -50,7 +50,8 @@ const defaultPrivate = {
 
             this.p.respawn.call(this, oldValue);
             if (this.player) {
-                //todo: change player uuid and respawn player
+                this.player.p2._.uuid = this.uuid;
+                this.player.p2.respawn.call(this.player);
             }
         }
     },
@@ -95,7 +96,8 @@ const defaultPrivate = {
 
         this.p.remove.call(this, oldUuid);
         await this.p.spawn.call(this, textures);
-        // todo-: implement removing all tabItems (so that order doesn't mess up)
+        // todo: maybe implement removing all tabItems (so that order doesn't mess up)
+        // todo: not sure if needed, because order seems to be fine
     }
 };
 
