@@ -22,7 +22,10 @@ export class Entity {
         },
         sendPacket: (packetName: string, packet: object) => void,
         extraInfo?: undefined,
-        overwrites?: { sendSpawnPacket?: () => void },
+        overwrites?: {
+            sendSpawnPacket?: boolean,
+            beforeRemove?: (() => void)[];
+        },
         whenDone?: (instance: this) => void
     );
 

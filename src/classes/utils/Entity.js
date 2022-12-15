@@ -119,12 +119,14 @@ class Entity {
         sendPacket,
         extraInfo,
         {
-            sendSpawnPacket = true
+            sendSpawnPacket = true,
+            beforeRemove = []
         } = {}
     ) {
 
         this.client = client;
         this.sever = client.server;
+        this.p.beforeRemove = beforeRemove;
 
         let e = getEntity(type);
         if (e === undefined)
@@ -283,6 +285,9 @@ class Entity {
     }
 
     remove() {
+        for (const func of this.p.beforeRemove)
+            func();
+
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
         });
