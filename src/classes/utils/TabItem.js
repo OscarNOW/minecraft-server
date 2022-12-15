@@ -24,7 +24,7 @@ const defaultPrivate = {
 
         return properties;
     },
-    updateProperty: function (name) {
+    updateProperty: function (name, oldValue) {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
@@ -48,7 +48,7 @@ const defaultPrivate = {
         else if (name === 'uuid') {
             this.p.textures = null;
 
-            this.p.respawn.call(this);
+            this.p.respawn.call(this, oldValue);
             if (this.player) {
                 //todo: change player uuid and respawn player
             }
@@ -82,18 +82,18 @@ const defaultPrivate = {
             }]
         });
     },
-    remove() {
+    remove(oldUuid) {
         this.p.sendPacket('player_info', {
             action: 4,
             data: [{
-                UUID: this.uuid
+                UUID: oldUuid
             }]
         });
     },
-    async respawn() {
+    async respawn(oldUuid) {
         const textures = await this.p.getTextures.call(this); //load textures before removing tabItem
 
-        this.p.remove.call(this);
+        this.p.remove.call(this, oldUuid);
         await this.p.spawn.call(this, textures);
         // todo-: implement removing all tabItems (so that order doesn't mess up)
     }
@@ -139,10 +139,10 @@ class TabItem {
                 enumerable: true,
                 get: () => this.p._[propertyName],
                 set: newValue => {
-                    // let oldValue = this.p._[propertyName];
+                    let oldValue = this.p._[propertyName];
                     this.p._[propertyName] = this.p.parseProperty.call(this, propertyName, newValue);
 
-                    this.p.updateProperty.call(this, propertyName);
+                    this.p.updateProperty.call(this, propertyName, oldValue);
                 }
             });
 
