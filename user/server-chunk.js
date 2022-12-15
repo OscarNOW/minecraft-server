@@ -1,6 +1,6 @@
 const { Server, Chunk } = require('../');
 console.log('Loaded library')
-// const wait = ms => new Promise(res => setTimeout(res, ms));
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
@@ -21,7 +21,8 @@ const server = new Server({
 
 const uuid = {
     'Jeroen64': '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-    'Notch': '069a79f4-44e9-4726-a5be-fca90e38aaf5'
+    'Notch': '069a79f4-44e9-4726-a5be-fca90e38aaf5',
+    'Dream': 'ec70bcaf-702f-4bb8-b48d-276fa52a780c'
 }
 
 console.log('Listening')
@@ -31,19 +32,19 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
 
-    let tabItem = await client.tabItem({
-        name: 'Jeroen64',
+    let tabItem2 = await client.tabItem({
+        name: 'tabItem2',
+        uuid: uuid.Notch
+    });
+
+    let tabItem1 = await client.tabItem({
+        name: 'tabItem1',
         uuid: uuid.Jeroen64
     });
 
-    let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
-        tabItem
-    });
-
-    player.name = 'Hello player';
-    tabItem.name = 'Hello tabItem';
-
-
+    // client.on('change', 'slot', () => {
+    //     tabItem1.uuid = uuid.Dream;
+    // });
 
     // console.log(require('util').inspect(player, { depth: 0, colors: true }))
 
