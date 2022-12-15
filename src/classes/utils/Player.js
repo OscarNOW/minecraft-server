@@ -129,7 +129,15 @@ const writablePropertyNames = Object.freeze([
 
 class Player extends Entity {
     constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
-        super(client, type, id, position, sendPacket, undefined, { sendSpawnPacket: false });
+        super(client, type, id, position, sendPacket, undefined, {
+            sendSpawnPacket: false,
+            beforeRemove: [(() => {
+                if (this.tabItem) {
+                    this.tabItem.player = null;
+                    this.tabItem = null;
+                }
+            })]
+        });
 
         // applyDefaults
         extraInfo = applyDefaults(extraInfo, playerDefaults);
