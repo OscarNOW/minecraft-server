@@ -40,10 +40,8 @@ server.on('connect', async client => {
         tabItem
     });
 
-    player.uuid = uuid.Notch;
-
-    tabItem.name = 'Hello world';
-
+    player.name = 'Hello player';
+    tabItem.name = 'Hello tabItem';
 
 
 
