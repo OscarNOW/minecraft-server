@@ -69,7 +69,7 @@ const defaultPrivate = {
         this.p.textures = textures;
         return textures;
     },
-    async sendStartPacket() {
+    async spawn() {
         this.p.sendPacket('player_info', {
             action: 0,
             data: [{
@@ -82,9 +82,18 @@ const defaultPrivate = {
             }]
         });
     },
+    remove() {
+        this.p.sendPacket('player_info', {
+            action: 4,
+            data: [{
+                UUID: this.uuid
+            }]
+        });
+    },
     async respawn() {
-        throw new Error('not implemented');
-        //todo: implement removing all tabItems (so that order doesn't mess up) and resending packets for all tabItems
+        this.p.remove.call(this);
+        await this.p.spawn.call(this);
+        // todo-: implement removing all tabItems (so that order doesn't mess up)
     }
 };
 
@@ -148,7 +157,7 @@ class TabItem {
             return;
 
         this
-            .p.sendStartPacket.call(this)
+            .p.spawn.call(this)
             .then(() => {
                 tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
                 cb(this);
