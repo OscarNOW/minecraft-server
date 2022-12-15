@@ -8,7 +8,9 @@ export class TabItem {
     readonly client: Client;
     readonly server: Server;
 
-    readonly name: Text; //todo: make writable by using <TabItem>.p.respawn()
-    readonly uuid: string; //todo: make writable by using <TabItem>.p.respawn()
+    readonly player?: Player; //todo: make changable
+
+    uuid: string;
+    name: Text;
     ping: number | null;
 }
