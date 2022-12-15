@@ -166,6 +166,18 @@ class TabItem {
             });
     }
 
+    remove() {
+        if (!this.client.p.stateHandler.checkReady.call(this.client))
+            return;
+
+        if (this.player) {
+            this.player.tabItem = null;
+            this.player = null;
+        }
+        this.p.remove.call(this, this.uuid);
+        tabItems.setPrivate.call(this.client, Object.freeze(this.client.tabItems.filter(tabItem => tabItem !== this)));
+    }
+
     get p() {
         let callPath = new Error().stack.split('\n')[2];
 
