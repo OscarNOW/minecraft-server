@@ -41,14 +41,12 @@ server.on('connect', async client => {
         x: 3,
         y: 100,
         z: 3
-    }, {
-        tabItem
-    });
+    }, { tabItem });
 
-    player.remove();
+    tabItem.remove();
 
-    console.log(1)
-    tabItem.uuid = 5;
+    player.name = 'Jeroen64';
+    player.uuid = uuid.Jeroen64;
 
     // client.on('change', 'slot', () => {
     //     tabItem1.uuid = uuid.Dream;
@@ -74,8 +72,6 @@ server.on('connect', async client => {
     //     player.position.z += 0.2;
     //     await wait(100);
     // }
-
-    // client.on('chat', a => eval(a))
 
     // client.raw('player_info', {
     //     action: 0,
