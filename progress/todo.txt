@@ -2,8 +2,6 @@ Pre-release
 
 Fix todo-imp
 -Implement <Client>.entity('player', ...)
-    -Cache texture properties in Player and TabItem
-    Import skin before removing Player and TabItem
 Create <Text> onChange event and use in TabItem
 
 

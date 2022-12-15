@@ -69,14 +69,14 @@ const defaultPrivate = {
         this.p.textures = textures;
         return textures;
     },
-    async spawn() {
+    async spawn(textures) {
         this.p.sendPacket('player_info', {
             action: 0,
             data: [{
                 UUID: this.uuid,
                 name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
-                properties: (await this.p.getTextures.call(this)).properties,
+                properties: (textures || await this.p.getTextures.call(this)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
@@ -91,8 +91,10 @@ const defaultPrivate = {
         });
     },
     async respawn() {
+        const textures = await this.p.getTextures.call(this); //load textures before removing tabItem
+
         this.p.remove.call(this);
-        await this.p.spawn.call(this);
+        await this.p.spawn.call(this, textures);
         // todo-: implement removing all tabItems (so that order doesn't mess up)
     }
 };

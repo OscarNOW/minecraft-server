@@ -82,14 +82,14 @@ const defaultPrivate = {
             entityIds: [this.id]
         });
     },
-    spawn: async function () {
+    spawn: async function (textures) {
         if (!this.tabItem)
             this.p.sendPacket('player_info', { //create temporary tabItem
                 action: 0,
                 data: [{
                     UUID: this.uuid,
                     name: this.name.string.slice(2),
-                    properties: (await this.p2.getTextures.call(this)).properties,
+                    properties: (textures || await this.p2.getTextures.call(this)).properties,
                     gamemode: gamemodes.indexOf(this.gamemode),
                     ping: -1
                 }]
@@ -114,8 +114,10 @@ const defaultPrivate = {
             });
     },
     respawn: async function () {
+        const textures = await this.p2.getTextures.call(this);
+
         this.p2.remove.call(this);
-        await this.p2.spawn.call(this);
+        await this.p2.spawn.call(this, textures);
     }
 };
 
