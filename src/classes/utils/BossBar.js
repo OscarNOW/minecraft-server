@@ -118,9 +118,9 @@ class BossBar {
                 get: () => this.p._[propertyName],
                 set: newValue => {
                     // let oldValue = this.p._[propertyName];
-                    this.p._[propertyName] = newValue;
+                    this.p._[propertyName] = newValue; //todo: call parseProperty here
 
-                    this.p.updateProperty.call(this, propertyName); //todo: parseProperty not called when updating property??
+                    this.p.updateProperty.call(this, propertyName);
                 }
             })
         Object.defineProperty(this, 'id', {
