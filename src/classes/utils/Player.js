@@ -56,7 +56,7 @@ const defaultPrivate = {
 
         if (name === 'name')
             if (this.tabItem) {
-                this.tabItem.p._.name = this.name;
+                this.tabItem.p.name = this.name.string.slice(2);
                 await this.tabItem.p.respawn.call(this.tabItem);
                 await this.p2.respawn.call(this);
             } else
