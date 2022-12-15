@@ -96,8 +96,6 @@ const defaultPrivate = {
 
         this.p.remove.call(this, oldUuid);
         await this.p.spawn.call(this, textures);
-        // todo: maybe implement removing all tabItems (so that order doesn't mess up)
-        // todo: not sure if needed, because order seems to be fine
     }
 };
 
