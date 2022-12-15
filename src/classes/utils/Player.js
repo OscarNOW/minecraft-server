@@ -187,6 +187,9 @@ class Player extends Entity {
         for (const propertyName of writablePropertyNames)
             this.p2._[propertyName] = extraInfo[propertyName];
 
+        if (this.tabItem)
+            this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
+
         (async () => {
             // update properties if not same as tabItem
             if (this.tabItem) {
