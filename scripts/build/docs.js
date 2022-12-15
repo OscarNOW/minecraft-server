@@ -23,7 +23,7 @@ function runPackageScript(script, cb, error) {
     return new Promise(res => {
         let cp = fork(scriptPath, { cwd: path.join(__dirname, '../../'), stdio: 'pipe' });
 
-        cp.on('close', code => [null, 0].includes(code) ? res() : (res(false), error(`Exited with code ${code}`))); //todo: why exit code check only in this file?
+        cp.on('close', code => [null, 0].includes(code) ? res() : (res(false), error(`Exited with code ${code}`)));
         cp.stdout.on('data', a => cb(a.toString()))
     })
 }
