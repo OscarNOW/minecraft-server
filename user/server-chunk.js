@@ -30,16 +30,22 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    // let tabItem = await client.tabItem({
-    //     name: 'Jeroen64',
-    //     uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
-    // });
+
+    let tabItem = await client.tabItem({
+        name: 'Jeroen64',
+        uuid: uuid.Jeroen64
+    });
 
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
-        name: 'Jeroen64',
-        uuid: uuid.Jeroen64,
-        gamemode: 'creative'
+        tabItem
     });
+
+    player.uuid = uuid.Notch;
+
+    tabItem.name = 'Hello world';
+
+
+
 
     // console.log(require('util').inspect(player, { depth: 0, colors: true }))
 
@@ -67,12 +73,12 @@ server.on('connect', async client => {
     // client.raw('player_info', {
     //     action: 0,
     //     data: [{
-    //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
+    //         UUID: uuid.Jeroen64,
     //         name: 'abc',
     //         properties: [],
     //         gamemode: 1,
     //         ping: 5,
-    //         displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
     //     }]
     // })
 
@@ -90,7 +96,7 @@ server.on('connect', async client => {
 
     // client.raw('named_entity_spawn', {
     //     entityId: 10,
-    //     playerUUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813', //Jeroen64
+    //     playerUUID: uuid.Jeroen64,
     //     x: 3,
     //     y: 101,
     //     z: 3,
@@ -101,8 +107,20 @@ server.on('connect', async client => {
     // client.raw('player_info', {
     //     action: 4,
     //     data: [{
-    //         UUID: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813', //Jeroen64
+    //         UUID: uuid.Jeroen64
     //     }]
     // });
+
+    // client.raw('player_info', {
+    //     action: 0,
+    //     data: [{
+    //         UUID: uuid.Jeroen64,
+    //         name: 'Hello world',
+    //         properties: [],
+    //         gamemode: 1,
+    //         ping: 5,
+    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+    //     }]
+    // })
 
 });
