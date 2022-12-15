@@ -240,15 +240,15 @@ export class Client {
         x: number;
         y: number;
         z: number;
-        yaw: number;
-        pitch: number;
+        yaw?: number;
+        pitch?: number;
     }): EntityConditional<name>;
     entity(entity: 'player', position: {
         x: number;
         y: number;
         z: number;
-        yaw: number;
-        pitch: number;
+        yaw?: number;
+        pitch?: number;
     }, playerInfo: {
         tabItem?: TabItem;
         name?: string;
