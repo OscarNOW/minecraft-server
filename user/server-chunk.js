@@ -32,15 +32,23 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
 
-    let tabItem2 = await client.tabItem({
-        name: 'tabItem2',
+    let tabItem = await client.tabItem({
+        name: 'Notch',
         uuid: uuid.Notch
     });
 
-    let tabItem1 = await client.tabItem({
-        name: 'tabItem1',
-        uuid: uuid.Jeroen64
+    let player = await client.entity('player', {
+        x: 3,
+        y: 100,
+        z: 3
+    }, {
+        tabItem
     });
+
+    player.remove();
+
+    console.log(1)
+    tabItem.uuid = 5;
 
     // client.on('change', 'slot', () => {
     //     tabItem1.uuid = uuid.Dream;
