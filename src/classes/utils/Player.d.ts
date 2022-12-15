@@ -13,7 +13,7 @@ export class Player extends Entity {
             pitch?: number;
         },
         sendPacket: (packetName: string, packet: object) => void,
-        extraInfo: {
+        extraInfo?: {
             tabItem?: TabItem;
             name?: string;
             uuid?: string;

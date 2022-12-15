@@ -249,7 +249,7 @@ export class Client {
         z: number;
         yaw?: number;
         pitch?: number;
-    }, playerInfo: {
+    }, playerInfo?: {
         tabItem?: TabItem;
         name?: string;
         uuid?: string;
