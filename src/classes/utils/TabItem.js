@@ -45,10 +45,18 @@ const defaultPrivate = {
                     displayName: JSON.stringify(this.name.chat)
                 }]
             })
+        else if (name === 'uuid') {
+            this.p.textures = null;
+
+            this.p.respawn.call(this);
+            if (this.player) {
+                //todo: change player uuid and respawn player
+            }
+        }
     },
-    async getSkin() {
+    async getTextures() {
         if (this.p.textures)
-            return this.p.textures; //todo: remove cached texture if uuid changes
+            return this.p.textures;
 
         const isValidUuid = (typeof this.p.skinAccountUuid === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
         let textures;
@@ -68,7 +76,7 @@ const defaultPrivate = {
                 UUID: this.uuid,
                 name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
-                properties: (await this.p.getSkin.call(this)).properties,
+                properties: (await this.p.getTextures.call(this)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
@@ -82,10 +90,7 @@ const defaultPrivate = {
 
 const writablePropertyNames = Object.freeze([
     'ping',
-    'name'
-]);
-
-const readonlyPropertyNames = Object.freeze([
+    'name',
     'uuid'
 ]);
 
@@ -115,8 +120,6 @@ class TabItem {
         this.p._ = {};
         for (const propertyName of writablePropertyNames)
             this.p._[propertyName] = properties[propertyName];
-        for (const propertyName of readonlyPropertyNames)
-            this.p._[propertyName] = properties[propertyName];
 
         // define getters and setters
         for (const propertyName of writablePropertyNames)
@@ -130,12 +133,6 @@ class TabItem {
 
                     this.p.updateProperty.call(this, propertyName);
                 }
-            });
-        for (const propertyName of readonlyPropertyNames)
-            Object.defineProperty(this, propertyName, {
-                configurable: false,
-                enumerable: true,
-                get: () => this.p._[propertyName]
             });
 
         // set name
