@@ -49,6 +49,7 @@ const defaultPrivate = {
             if (this.tabItem) {
                 this.tabItem.p._.uuid = this.uuid;
                 await this.tabItem.p.respawn.call(this.tabItem);
+                await this.p2.respawn.call(this);
             } else
                 await this.p2.respawn.call(this);
         }
@@ -57,6 +58,7 @@ const defaultPrivate = {
             if (this.tabItem) {
                 this.tabItem.p._.name = this.name;
                 await this.tabItem.p.respawn.call(this.tabItem);
+                await this.p2.respawn.call(this);
             } else
                 await this.p2.respawn.call(this);
     },
