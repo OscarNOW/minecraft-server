@@ -161,7 +161,7 @@ class TabItem {
         this
             .p.spawn.call(this)
             .then(() => {
-                tabItems.setPrivate.call(this.client, Object.freeze([...this.client.tabItems, this]));
+                tabItems.setPrivate.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
                 cb(this);
             });
     }
@@ -175,7 +175,14 @@ class TabItem {
             this.player = null;
         }
         this.p.remove.call(this, this.uuid);
-        tabItems.setPrivate.call(this.client, Object.freeze(this.client.tabItems.filter(tabItem => tabItem !== this)));
+        tabItems.setPrivate.call(this.client,
+            Object.freeze(
+                sortTabItems(
+                    this.client.tabItems
+                        .filter(tabItem => tabItem !== this)
+                )
+            )
+        );
     }
 
     get p() {
@@ -209,6 +216,14 @@ async function get(url) {
     const data = await resp.data;
 
     return data;
+}
+
+function sortTabItems(t) {
+    let tabItems = Object.assign([], t);
+
+    tabItems.sort((a, b) => a.p.name === b.p.name ? 0 : a.p.name < b.p.name ? -1 : 1);
+
+    return tabItems;
 }
 
 module.exports = TabItem;
