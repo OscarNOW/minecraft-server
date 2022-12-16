@@ -5,7 +5,10 @@ module.exports = {
     showRespawnScreen: {
         info: {
             loginPacket: [
-                'enableRespawnScreen'
+                {
+                    name: 'showRespawnScreen',
+                    minecraftName: 'enableRespawnScreen'
+                }
             ]
         },
         get: function () {
@@ -44,7 +47,7 @@ module.exports = {
             this.p._showRespawnScreen = value;
 
             if (loginPacket)
-                return { enableRespawnScreen: value ? 0 : 1 }
+                return { enableRespawnScreen: value }
             else
                 this.p.sendPacket('game_state_change', {
                     reason: 11,

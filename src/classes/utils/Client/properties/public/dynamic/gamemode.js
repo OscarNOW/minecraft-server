@@ -7,7 +7,10 @@ module.exports = {
     gamemode: {
         info: {
             loginPacket: [
-                'gameMode'
+                {
+                    name: 'gamemode',
+                    minecraftName: 'gameMode'
+                }
             ]
         },
         get: function () {

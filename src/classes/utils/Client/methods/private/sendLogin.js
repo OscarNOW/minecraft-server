@@ -81,9 +81,9 @@ module.exports = {
             .flat()
             .filter(a => a.info?.loginPacket)
             .forEach(file => {
-                for (const key of file.info.loginPacket)
-                    if (loginPacket[key] === undefined)
-                        loginPacket[key] = defaults[key];
+                for (const { name, minecraftName } of file.info.loginPacket)
+                    if (loginPacket[minecraftName] === undefined)
+                        loginPacket[minecraftName] = defaults[name];
             })
 
         this.p.sendPacket('login', loginPacket);

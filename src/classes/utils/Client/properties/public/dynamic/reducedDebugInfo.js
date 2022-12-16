@@ -5,7 +5,10 @@ module.exports = {
     reducedDebugInfo: {
         info: {
             loginPacket: [
-                'reducedDebugInfo'
+                {
+                    name: 'reducedDebugInfo',
+                    minecraftName: 'reducedDebugInfo'
+                }
             ]
         },
         get: function () {
