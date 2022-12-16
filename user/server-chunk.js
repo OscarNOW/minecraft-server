@@ -32,10 +32,15 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
 
-    // let tabItem = await client.tabItem({
-    //     name: 'Notch',
-    //     uuid: uuid.Notch
-    // });
+    let tabItem1 = await client.tabItem({
+        name: 'bbb'
+    });
+
+    let tabItem2 = await client.tabItem({
+        name: 'aaa'
+    });
+
+    console.log(client.tabItems.map(a => a.name.string))
 
     // let player = await client.entity('player', {
     //     x: 3,
@@ -68,31 +73,31 @@ server.on('connect', async client => {
     //     await wait(100);
     // }
 
-    client.raw('player_info', {
-        action: 0,
-        data: [{
-            UUID: uuid.Notch,
-            name: 'bbb',
-            properties: [],
-            gamemode: 1,
-            ping: 5,
-            displayName: '"ccc"'
-            // displayName: JSON.stringify([{ text: 'World', bold: true }])
-        }]
-    })
+    // client.raw('player_info', {
+    //     action: 0,
+    //     data: [{
+    //         UUID: uuid.Notch,
+    //         name: 'bbb',
+    //         properties: [],
+    //         gamemode: 1,
+    //         ping: 5,
+    //         displayName: '"ccc"'
+    //         // displayName: JSON.stringify([{ text: 'World', bold: true }])
+    //     }]
+    // })
 
-    client.raw('player_info', {
-        action: 0,
-        data: [{
-            UUID: uuid.Jeroen64,
-            name: 'aaa',
-            properties: [],
-            gamemode: 1,
-            ping: 5,
-            displayName: '"ddd"'
-            // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
-        }]
-    })
+    // client.raw('player_info', {
+    //     action: 0,
+    //     data: [{
+    //         UUID: uuid.Jeroen64,
+    //         name: 'aaa',
+    //         properties: [],
+    //         gamemode: 1,
+    //         ping: 5,
+    //         displayName: '"ddd"'
+    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+    //     }]
+    // })
 
     // client.raw('named_entity_spawn', {
     //     entityId: 10,
