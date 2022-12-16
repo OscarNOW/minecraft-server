@@ -32,21 +32,16 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
 
-    let tabItem = await client.tabItem({
-        name: 'Notch',
-        uuid: uuid.Notch
-    });
+    // let tabItem = await client.tabItem({
+    //     name: 'Notch',
+    //     uuid: uuid.Notch
+    // });
 
-    let player = await client.entity('player', {
-        x: 3,
-        y: 100,
-        z: 3
-    }, { tabItem });
-
-    tabItem.remove();
-
-    player.name = 'Jeroen64';
-    player.uuid = uuid.Jeroen64;
+    // let player = await client.entity('player', {
+    //     x: 3,
+    //     y: 100,
+    //     z: 3
+    // }, { tabItem });
 
     // client.on('change', 'slot', () => {
     //     tabItem1.uuid = uuid.Dream;
@@ -73,29 +68,31 @@ server.on('connect', async client => {
     //     await wait(100);
     // }
 
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: uuid.Jeroen64,
-    //         name: 'abc',
-    //         properties: [],
-    //         gamemode: 1,
-    //         ping: 5,
-    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
-    //     }]
-    // })
+    client.raw('player_info', {
+        action: 0,
+        data: [{
+            UUID: uuid.Notch,
+            name: 'bbb',
+            properties: [],
+            gamemode: 1,
+            ping: 5,
+            displayName: '"ccc"'
+            // displayName: JSON.stringify([{ text: 'World', bold: true }])
+        }]
+    })
 
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: '069a79f4-44e9-4726-a5be-fca90e38aaf5',
-    //         name: '',
-    //         properties: [],
-    //         gamemode: 1,
-    //         ping: 5,
-    //         displayName: JSON.stringify([{ text: 'World', bold: true }])
-    //     }]
-    // })
+    client.raw('player_info', {
+        action: 0,
+        data: [{
+            UUID: uuid.Jeroen64,
+            name: 'aaa',
+            properties: [],
+            gamemode: 1,
+            ping: 5,
+            displayName: '"ddd"'
+            // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
+        }]
+    })
 
     // client.raw('named_entity_spawn', {
     //     entityId: 10,
