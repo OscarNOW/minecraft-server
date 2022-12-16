@@ -1,8 +1,6 @@
 Pre-release
 
 Fix todo-imp
--Implement <Client>.entity('player', ...)
-Put <Client>.tabItems in same order as MC Client
 Create <Text> onChange event and use in TabItem
 
 
