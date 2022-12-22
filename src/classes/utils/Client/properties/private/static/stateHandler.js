@@ -44,7 +44,7 @@ module.exports = {
 
             if (nextState === 'loginSent') {
 
-                this.p.sendLogin();
+                this.p.sendLoginPacket();
                 this.p.stateHandler.updateState.set.call(this, 'loginSent');
 
             } else if (nextState === 'clientSpawned') {
