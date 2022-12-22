@@ -14,7 +14,7 @@ None
 * [`Player` class](https://oscarnow.github.io/minecraft-server/1.1.0/classes/Player)
 
 ## Issues fixed
-None
+* Fixed issues with the login packet
 
 ## Documentation / Types
 None

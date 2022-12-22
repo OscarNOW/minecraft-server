@@ -2,7 +2,7 @@ Pre-release
 
 Fix todo-imp
 Create <Text> onChange event and use in TabItem
-0Fix todo's in sendLoginPacket
+Fix todo's in sendLoginPacket
 
 
 Anytime

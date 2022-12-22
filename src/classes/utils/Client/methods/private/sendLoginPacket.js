@@ -8,11 +8,7 @@ const { dimensionCodec } = require('../../../../../functions/loader/data.js');
 
 module.exports = {
     sendLoginPacket() {
-        let callAfterLogin = [];
-
-        this.p.defaultProperties = this.p.defaultClientProperties(this);
-
-        let loginPacket = {
+        const loginPacket = Object.freeze({
             entityId: this.p.client.id,
             isHardcore: false,
             previousGameMode: 255,
@@ -43,51 +39,46 @@ module.exports = {
             viewDistance: 1000,
             isDebug: false,
             isFlat: false
-        };
+        });
 
-        for (const [key, value] of Object.entries(this.p.defaultProperties)) {
-            if (!this.p.pubDynProperties[key])
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
-                    got: key,
-                    expectationType: 'value',
-                    expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor, { server: this.server, client: this }));
+        let customLoginProperties = {};
+        let callAfterLogin = []; //todo: split into different state in stateHandler
 
-            let file = this.p.pubDynProperties[key];
+        //get overwritten login properties
+        this.p.defaultProperties = this.p.defaultClientProperties(this);
+        for (const [name, value] of Object.entries(this.p.defaultProperties)) {
+            let file = this.p.pubDynProperties[name];
 
-            if (!file.setRaw)
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `key in  new ${this.constructor.name}>({ defaultClientProperties: () => ({ ${key}: ... }) })  `, {
-                    got: key,
-                    expectationType: 'value',
-                    expectation: Object.keys(this.p.pubDynProperties).filter(a => this.p.pubDynProperties[a].setRaw)
-                }, this.constructor, { server: this.server, client: this }));
-
-            let ret;
             if (file.info?.callAfterLogin)
                 callAfterLogin.push(() => file.setRaw.call(this, value, true))
-            else
-                ret = file.setRaw.call(this, value, true); //todo: call setRaw also for properties that are not in defaultProperties
+            else if (file.info?.loginPacket) //todo: what does this property mean? (and what's the difference with info.callAfterLogin)
+                customLoginProperties[name] = value;
+        };
 
-            if (file.info?.loginPacket && ret)
-                for (const [key, value] of Object.entries(ret))
-                    loginPacket[key] = value;
-        }
-
-        fs
+        //set login properties that were not given
+        for (const file of fs
             .readdirSync(path.resolve(__dirname, '../../properties/public/dynamic/'))
             .filter(a => a.endsWith('.js'))
             .map(a => require(`../../properties/public/dynamic/${a}`))
             .map(a => Object.values(a))
             .flat()
             .filter(a => a.info?.loginPacket)
-            .forEach(file => {
-                for (const { name, minecraftName } of file.info.loginPacket)
-                    if (loginPacket[minecraftName] === undefined)
-                        loginPacket[minecraftName] = defaults[name];
-            })
+        )
+            for (const { name, minecraftName } of file.info.loginPacket)
+                if (customLoginProperties[name] === undefined)
+                    customLoginProperties[name] = defaults[name];
 
-        this.p.sendPacket('login', loginPacket);
+        //convert properties to packet format
+        let loginPacketProperties = {};
+        for (const [name, value] of Object.entries(customLoginProperties)) {
+            let file = this.p.pubDynProperties[name];
 
-        for (const a of callAfterLogin) a();
+            for (const { minecraftName } of file.info.loginPacket)
+                loginPacketProperties[minecraftName] = file.setRaw.call(this, value, true)[minecraftName];
+        }
+
+        this.p.sendPacket('login', { ...loginPacket, ...loginPacketProperties });
+
+        for (const a of callAfterLogin) a(); //todo: move to different state in stateHandler
     }
 }
