@@ -1,4 +1,4 @@
-const { Server, Chunk } = require('../');
+const { Server, Chunk } = require('../../');
 console.log('Loaded library')
 
 let chunk = new Chunk();
