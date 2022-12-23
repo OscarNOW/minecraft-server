@@ -7,6 +7,8 @@ for (let x = 0; x < 16; x++)
         for (let y = 0; y < 100; y++)
             chunk.setBlock('dirt', { x, y, z })
 
+console.log('Created chunk')
+
 const server = new Server({
     defaultClientProperties: () => ({
         gamemode: 'creative',
@@ -18,9 +20,12 @@ const server = new Server({
     })
 });
 
-console.log('Listening')
+console.log('Created server')
+
 server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 });
+
+console.log('Listening')
