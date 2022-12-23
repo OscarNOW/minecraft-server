@@ -1,3 +1,5 @@
+console.time('load')
+
 const { Server, Chunk } = require('../../');
 console.log('Loaded library')
 
@@ -29,3 +31,5 @@ server.on('connect', async client => {
 });
 
 console.log('Listening')
+
+console.timeEnd('load')
