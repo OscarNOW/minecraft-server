@@ -30,3 +30,7 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 });
 console.timeEnd('listen  ')
+
+console.time('close   ')
+server.close();
+console.timeEnd('close   ')
