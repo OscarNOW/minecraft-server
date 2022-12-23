@@ -1,7 +1,8 @@
 Pre-release
 
 -Make library loading faster
-    lazy load class imports and module imports
+    Lazy load classes by loading when instantiated
+    lazy load class imports and module imports (maybe?)
 Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
 Remove functions/loader/classes.utils in favor of require directly
