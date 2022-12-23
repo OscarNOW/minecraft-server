@@ -1,5 +1,5 @@
 ## Security
-* Updated insecure packages
+* Updated insecure `jsonwebtoken` package
 
 ## Existing API changes
 None
