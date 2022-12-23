@@ -1,13 +1,16 @@
 Pre-release
 
+-Make library loading faster
+    lazy load class imports and module imports
 Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
+Remove functions/loader/classes.utils in favor of require directly
+Make all code use functions/loader/data
 
 Anytime
 
 Allow for two Players (and TabItems) to share same uuid (by actually setting them to different uuids, but use skin of original)
 Move shared functions between TabItem and Player (like getSkin) to separate function file
--Make library loading faster
 Resolve "todo: " and "not implemented" in code
 Make tests for functions
 Rewrite src/test.js
