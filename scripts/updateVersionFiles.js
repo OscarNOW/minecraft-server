@@ -27,10 +27,12 @@ if (newVersion !== undefined)
     })
 
 if (manifest.versions.find(({ latestStable }) => latestStable))
-    manifest.versions.find(({ latestStable }) => latestStable).name = manifest.versions.find(({ latestStable }) => latestStable).path;
-delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable;
+    manifest.versions.find(({ latestStable }) => latestStable).name =
+        manifest.versions.find(({ latestStable }) => latestStable).path;
 
-manifest.versions = [...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || []), ...(manifest.versions.filter(({ unstable }) => unstable) || [])];
+delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable; //todo: why is this here?
+
+manifest.versions = [...(manifest.versions.filter(({ unstable }) => unstable) || []), ...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [])];
 
 manifest.versions[0].latestStable = true;
 manifest.versions[0].name = `${manifest.versions[0].version} (latest stable)`;
