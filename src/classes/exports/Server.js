@@ -1,7 +1,7 @@
 const { versions } = require('../../functions/loader/data.js')
 const settings = require('../../settings.json')
 
-const mc = require('minecraft-protocol');
+const mc = require('minecraft-protocol'); // todo-time: takes long, maybe lazy load?
 const endianToggle = require('endian-toggle');
 const imageSize = require('image-size');
 const path = require('path');

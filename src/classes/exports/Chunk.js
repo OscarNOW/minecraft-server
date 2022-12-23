@@ -1,7 +1,7 @@
 const { version } = require('../../settings.json');
 const { chunkSize } = require('../../functions/loader/data.js');
 
-const PChunk = require('prismarine-chunk')(version);
+const PChunk = require('prismarine-chunk')(version); // todo-time: takes long, lazy load
 
 const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
@@ -13,7 +13,7 @@ class Chunk {
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
-        this._chunk = new PChunk(); //todo: only create class when setting chunk
+        this._chunk = new PChunk(); // todo-time: only create class when setting chunk
         this.isChunkSet = !chunk?.chunk;
 
         this.blocks = {};
