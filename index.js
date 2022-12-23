@@ -1,1 +1,1 @@
-module.exports = require('./src/functions/loader/classes.js').exports;
+module.exports = require('./src/functions/loader/classes.js');
