@@ -1,4 +1,4 @@
-const createLazy = require('./createLazy.js');
+const createLazyClass = require('./createLazyClass.js');
 
 class Person {
     constructor(name, age) {
@@ -23,9 +23,4 @@ class Person {
     }
 };
 
-const LazyPerson = createLazy(() => {
-    console.log('loading class')
-    return Person;
-}, 'Person');
-
-console.log(LazyPerson)
+const LazyPerson = createLazyClass(() => Person, 'Person');
