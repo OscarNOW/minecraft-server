@@ -64,7 +64,7 @@ module.exports = {
             .flat()
             .filter(a => a.info?.loginPacket)
         )
-            for (const { name, minecraftName } of file.info.loginPacket)
+            for (const { name } of file.info.loginPacket)
                 if (customLoginProperties[name] === undefined)
                     customLoginProperties[name] = defaults[name];
 
