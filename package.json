@@ -39,7 +39,7 @@
     },
     "devDependencies": {
         "eslint": "^8.30.0",
-        "mineflayer": "^4.0.0",
+        "mineflayer": "^4.6.0",
         "typedoc": "^0.23.23",
         "typedoc-theme-hierarchy": "^3.0.2"
     }
