@@ -5,13 +5,13 @@ module.exports = (loadTarget, name) => {
             cachedTarget = loadTarget();
 
         return cachedTarget;
-    }
+    };
 
     const Placeholder = class { };
     Placeholder.prototype = Object.create(null);
     Object.defineProperty(Placeholder, 'name', {
         value: name || ''
-    })
+    });
 
     const lazy = new Proxy(Placeholder, {
         getPrototypeOf() {
