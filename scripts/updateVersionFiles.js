@@ -34,8 +34,8 @@ delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable;
 
 manifest.versions = [...(manifest.versions.filter(({ unstable }) => unstable) || []), ...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [])];
 
-manifest.versions[0].latestStable = true;
-manifest.versions[0].name = `${manifest.versions[0].version} (latest stable)`;
+manifest.versions.find(({ unstable }) => !unstable).latestStable = true;
+manifest.versions.find(({ unstable }) => !unstable).name = `${manifest.versions[0].version} (latest stable)`;
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
 
