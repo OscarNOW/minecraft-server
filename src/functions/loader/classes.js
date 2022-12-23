@@ -1,31 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const { createLazyClass } = require('../createLazyClass.js');
 
-let xports = [];
+let exportFilePaths = [];
 
 for (const file of fs
     .readdirSync(path.resolve(__dirname, '../../classes/exports/'))
     .filter(file => file.split('.').length === 2)
 )
-    xports.push(`../../classes/exports/${file}`)
+    exportFilePaths.push([`../../classes/exports/${file}`, file.split('.')[0]]);
 
-let cachedExports = {};
 let lazyExports = {};
 
-for (const xport of xports) {
-    const name = xport.split('.js')[0].split('\\').pop().split('/').pop();
-
-    Object.defineProperty(lazyExports, name, {
-        configurable: false,
-        enumerable: true,
-        get: () => {
-            if (cachedExports[name])
-                return cachedExports[name];
-
-            cachedExports[name] = require(xport);
-            return cachedExports[name];
-        }
-    })
-}
+for (const [exportFilePath, name] of exportFilePaths)
+    lazyExports[name] = createLazyClass(() => require(exportFilePath), name);
 
 module.exports = Object.freeze(lazyExports)
