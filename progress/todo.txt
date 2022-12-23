@@ -1,10 +1,9 @@
 Pre-release
 
-
-Anytime
-
 Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
+
+Anytime
 
 Allow for two Players (and TabItems) to share same uuid (by actually setting them to different uuids, but use skin of original)
 Move shared functions between TabItem and Player (like getSkin) to separate function file
