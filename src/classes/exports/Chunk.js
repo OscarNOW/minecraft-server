@@ -13,7 +13,7 @@ class Chunk {
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
-        this._chunk = new PChunk();
+        this._chunk = new PChunk(); //todo: only create class when setting chunk
         this.isChunkSet = !chunk?.chunk;
 
         this.blocks = {};
