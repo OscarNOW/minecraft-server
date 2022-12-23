@@ -27,6 +27,8 @@
         "BigInt": true,
         "Symbol": true,
         "Set": true,
-        "WeakSet": true
+        "WeakSet": true,
+        "Proxy": true,
+        "Reflect": true
     }
 }
