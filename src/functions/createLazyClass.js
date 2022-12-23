@@ -1,4 +1,4 @@
-module.exports = (loadTarget, name) => {
+function createLazyClass(loadTarget, name) {
     let cachedTarget;
     const target = () => {
         if (cachedTarget === undefined)
@@ -31,3 +31,5 @@ module.exports = (loadTarget, name) => {
     return lazy;
 
 };
+
+module.exports = Object.freeze({ createLazyClass });
