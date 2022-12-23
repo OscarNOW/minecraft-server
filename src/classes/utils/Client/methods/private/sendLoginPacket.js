@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const CustomError = require('../../../CustomError.js');
-
 const { defaults } = require('../../../../../settings.json');
 const { dimensionCodec } = require('../../../../../functions/loader/data.js');
 
