@@ -1,7 +1,7 @@
 const { version } = require('../../settings.json');
 const { chunkSize } = require('../../functions/loader/data.js');
 
-const PChunk = require('prismarine-chunk')(version); // todo-time: takes long, lazy load
+const PChunk = require('prismarine-chunk')(version); // todo-time: takes long, lazy load, maybe replace functionality with own faster class
 
 const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
