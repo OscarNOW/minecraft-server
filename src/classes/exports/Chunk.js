@@ -14,7 +14,7 @@ class Chunk {
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
         this._chunk = new PChunk();
-        this.chunkSet = !chunk?.chunk;
+        this.isChunkSet = !chunk?.chunk;
 
         this.blocks = {};
         if (chunk?.blocks)
@@ -34,7 +34,7 @@ class Chunk {
     }
 
     get chunk() {
-        if (this.chunkSet)
+        if (this.isChunkSet)
             return this._chunk;
 
         for (const x in this.blocks)
@@ -42,7 +42,7 @@ class Chunk {
                 for (const z in this.blocks[x][y])
                     this._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
 
-        this.chunkSet = true;
+        this.isChunkSet = true;
 
         return this._chunk;
     }
@@ -69,7 +69,7 @@ class Chunk {
                 expectation: new Array(chunkSize.z.max - chunkSize.z.min).fill(0).map((_, i) => i + chunkSize.z.min),
             }, this.setBlock).toString()
 
-        if (this.chunkSet)
+        if (this.isChunkSet)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         if (blockName === 'air') {
