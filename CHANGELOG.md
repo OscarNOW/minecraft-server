@@ -1,3 +1,6 @@
+## Security
+* Updated insecure packages
+
 ## Existing API changes
 None
 
