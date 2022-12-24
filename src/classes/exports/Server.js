@@ -1,6 +1,7 @@
 const { versions } = require('../../functions/loader/data.js')
 const settings = require('../../settings.json')
 
+//lazy load minecraft-protocol
 let cachedMc;
 const mc = () => {
     if (cachedMc === undefined)
