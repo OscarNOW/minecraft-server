@@ -15,7 +15,7 @@ class CustomError {
             this.client = client;
 
         this.error = new Error(this.generateMessage())
-        Error.captureStackTrace(this.error, this.context);
+        // Error.captureStackTrace(this.error, this.context);
     }
 
     generateMessage() {
