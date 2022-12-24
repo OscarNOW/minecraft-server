@@ -47,9 +47,7 @@ module.exports = {
         for (const [name, value] of Object.entries(this.p.defaultProperties)) {
             let file = this.p.pubDynProperties[name];
 
-            if (file.info?.callAfterLogin)
-                callAfterLogin.push(() => file.setRaw.call(this, value, true))
-            else if (file.info?.loginPacket) //todo: what does this property mean? (and what's the difference with info.callAfterLogin)
+            if ((!file.info?.callAfterLogin) && file.info?.loginPacket) //todo: what does the loginPacket property mean? (and what's the difference with info.callAfterLogin)
                 customLoginProperties[name] = value;
         };
 
@@ -76,7 +74,5 @@ module.exports = {
         }
 
         this.p.sendPacket('login', { ...loginPacket, ...loginPacketProperties });
-
-        for (const a of callAfterLogin) a(); //todo: move to different state in stateHandler
     }
 }

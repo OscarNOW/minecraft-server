@@ -5,9 +5,10 @@ const states = Object.freeze([
     'connected',
     'loginSent',
     'settingsReceived',
+    'afterLoginPacketsSent',
     'clientSpawned',
     'offline'
-])
+]);
 
 module.exports = {
     state: () => states[0],
@@ -53,6 +54,11 @@ module.exports = {
 
                 this.p.sendLoginPacket();
                 this.p.stateHandler.updateState.set.call(this, 'loginSent');
+
+            } else if (nextState === 'afterLoginPacketsSent') {
+
+                this.p.sendAfterLoginPackets();
+                this.p.stateHandler.updateState.set.call(this, 'afterLoginPacketsSent');
 
             } else if (nextState === 'clientSpawned') {
 
