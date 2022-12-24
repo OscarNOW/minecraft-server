@@ -217,7 +217,7 @@ export class Client {
     demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;
-    kick(reason: textInput | Text): void;
+    kick(reason: textInput | Text): void; //todo: rename to remove, for constistency
     chat(message?: textInput | Text): void;
     setBlock(block: blockName, location: {
         x: number;
