@@ -5,18 +5,18 @@ module.exports = function (chunk, { x, z }) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
-    this.p.sendPacket('map_chunk', { //todo-time: takes long, maybe implement cache so that chunk and getMask only have to be called once
+    this.p.sendPacket('map_chunk', {
         x,
         z,
         groundUp: true,
-        biomes: chunk.chunk.dumpBiomes?.(),
+        biomes: chunk.chunkData.biomes,
         heightmaps: {
             type: 'compound',
             name: '',
             value: {}
         },
-        bitMap: chunk.chunk.getMask(),
-        chunkData: chunk.chunk.dump(),
+        bitMap: chunk.chunkData.bitMap,
+        chunkData: chunk.chunkData.chunkData,
         blockEntities: []
     });
 
