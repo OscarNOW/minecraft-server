@@ -40,7 +40,6 @@ module.exports = {
         });
 
         let customLoginProperties = {};
-        let callAfterLogin = []; //todo: split into different state in stateHandler
 
         //get overwritten login properties
         this.p.defaultProperties = this.p.defaultClientProperties(this);
