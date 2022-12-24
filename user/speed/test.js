@@ -28,19 +28,20 @@ let joinCount = 0;
 console.time('listen  ')
 server.on('connect', client => {
     joinCount++;
+
     console.time(`join-${joinCount}  `)
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 });
-server.on('join', client => {
-    client.kick();
-
+server.on('join', async client => {
     console.timeEnd(`join-${joinCount}  `)
+
+    client.kick();
 
     if (joinCount === 2) {
         console.time('close   ')
-        server.close();
+        await server.close();
         console.timeEnd('close   ')
     }
 });
