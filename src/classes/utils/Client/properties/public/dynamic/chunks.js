@@ -1,20 +1,38 @@
-let values = new WeakMap();
-
 module.exports = {
     chunks: {
         get: function () {
-            if (!values.has(this)) values.set(this, Object.freeze([]));
-            return values.get(this);
+
+            if (!this.p._chunks) {
+                this.p.chunksGenerated = true;
+                this.p._chunks = Object.freeze([]);
+            };
+
+            if (!this.p.chunksGenerated) {
+                this.p.chunksGenerated = true;
+                this.p.chunks = Object.freeze(this.p._chunks
+                    .map(generator => generator()) //generator calls (new LoadedChunk(...)) for every LoadedChunk
+                );
+            }
+
+            return this.p._chunk;
+        },
+        getPrivate: function () {
+            if (!this.p._chunks) {
+                this.p.chunksGenerated = true;
+                this.p._chunks = Object.freeze([]);
+            }
+
+            return this.p._chunks;
         },
         setPrivate: function (value) {
             const changed =
-                value.length !== this.chunks.length ||
-                value.some((a, i) => a !== this.chunks[i]);
+                value.length !== this.p._chunks?.length ||
+                value.some((a, i) => a !== this.p._chunks?.[i]);
 
-            values.set(this, value);
+            this.p._chunks = value;
 
             if (changed)
-                this.p.emitChange('chunks');
+                this.p.emitChange('chunks'); //will generate chunks if not already generated
         }
     }
 }
