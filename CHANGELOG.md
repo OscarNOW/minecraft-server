@@ -7,8 +7,7 @@ None
 ## Speed improvements
 * Loading library
 * Generating chunks
-* Creating a server
-* Client joining a server
+* Connecting a client to the server
 
 ## Issues fixed
 * Fixed bug in `<Client>.end()`
