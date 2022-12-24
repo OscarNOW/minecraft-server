@@ -1,8 +1,6 @@
 Pre-release
 
--Make library loading faster
-    -Fix todo-time
-Fix todo's in sendLoginPacket
++Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
 Make all code use functions/loader/data
 
