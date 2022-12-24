@@ -39,7 +39,7 @@ server.on('join', async client => {
 
     client.kick();
 
-    if (joinCount === 2) {
+    if (joinCount === 3) {
         console.time('close   ')
         await server.close();
         console.timeEnd('close   ')
