@@ -27,7 +27,7 @@ module.exports = {
             if (loginPacket)
                 return { reducedDebugInfo: value }
             else
-                throw new Error(`Can't set "reducedDebugInfo"`)
+                throw new Error(`Can't set "reducedDebugInfo"`) //todo: use CustomError
         },
         init: function () {
             this.p._reducedDebugInfo = defaults.reducedDebugInfo;
