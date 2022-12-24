@@ -14,6 +14,8 @@ const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
+let chunkDataCache = {};
+
 class Chunk {
     constructor(chunk, blockUpdateCallback, blocksOffset) {
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
@@ -59,6 +61,17 @@ class Chunk {
             this._hash = crypto.createHash('sha256').update(this.chunk.toJson()).digest('base64');
 
         return this._hash;
+    }
+
+    get chunkData() {
+        if (chunkDataCache[this.hash] === undefined)
+            chunkDataCache[this.hash] = {
+                biomes: this.chunk.dumpBiomes?.(),
+                bitMap: this.chunk.getMask(),
+                chunkData: this.chunk.dump()
+            };
+
+        return chunkDataCache[this.hash];
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {

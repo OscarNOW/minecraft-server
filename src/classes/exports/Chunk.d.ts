@@ -5,6 +5,11 @@ export class Chunk {
 
     readonly blocks: blocksSegment;
     readonly hash: string;
+    private readonly chunkData: {
+        biomes: any,
+        bitMap: any,
+        chunkData: any
+    }
 
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
