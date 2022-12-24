@@ -33,7 +33,11 @@ module.exports = {
         handleNewState: function (currentState) {
             let nextState = states[states.indexOf(currentState) + 1];
 
-            if (currentState === 'clientSpawned') {
+            if (currentState === 'settingsReceived') {
+                this.server.clients.push(this);
+                this.p.emit('connect');
+                this.server.p.emit('connect', this);
+            } else if (currentState === 'clientSpawned') {
                 this.p.emit('join');
                 this.server.p.emit('join', this);
             } else if (currentState === 'offline') {
@@ -42,16 +46,15 @@ module.exports = {
                 this.server.p.emit('leave', this);
             }
 
+            if (currentState !== this.p.state)
+                return; // state has changed
+
             if (nextState === 'loginSent') {
 
                 this.p.sendLoginPacket();
                 this.p.stateHandler.updateState.set.call(this, 'loginSent');
 
             } else if (nextState === 'clientSpawned') {
-
-                this.server.clients.push(this);
-                this.p.emit('connect');
-                this.server.p.emit('connect', this);
 
                 this.position = {};
 
@@ -83,6 +86,7 @@ module.exports = {
                     }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
 
                 this.p.state = stateName;
+                console.log('set', stateName)
                 this.p.stateHandler.handleNewState.call(this, stateName);
 
             },
