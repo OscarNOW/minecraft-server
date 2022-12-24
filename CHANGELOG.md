@@ -11,6 +11,7 @@ None
 
 ## Issues fixed
 * Fixed bug in `<Client>.end()`
+* Fixed bug where responses to legacy pings weren't being defaulted
 
 ## Documentation / Types
 * Docs list unstable versions before stable versions

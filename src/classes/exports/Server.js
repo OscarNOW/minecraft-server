@@ -132,7 +132,7 @@ class Server {
                     state === 'handshaking' &&
                     payload === 1
                 )
-                    handleLegacyPing(buffer, client, this.serverList)
+                    handleLegacyPing.call(this, buffer, client, this.serverList)
             })
 
             client.on('state', state => clientState = state)
@@ -267,7 +267,7 @@ function hexToNumber(hex) {
 }
 
 function handleLegacyPing(request, client, serverList) {
-    respondToLegacyPing(parseLegacyPing(request), client, serverList);
+    respondToLegacyPing.call(this, parseLegacyPing(request), client, serverList);
 }
 
 function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
@@ -284,10 +284,16 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     let info = serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing });
     let infoVersion = info.version?.correct ?? settings.version;
 
+    if (!info) info = {};
+    if (!info.players) info.players = {};
+    if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
+    if (info.players.online === undefined) info.players.online = this.clients.length;
+    if (info.description === undefined) info.description = settings.defaults.serverList.motd;
+
     const responseString = '\xa7' + [1,
         parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
-        `${info.description ?? ''}`,
+        `${info.description}`,
         `${info.players.online}`,
         `${info.players.max}`
     ].join('\0');
