@@ -18,10 +18,10 @@ class Chunk {
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
-        //copy prismarine chunk to allow new chunk to be changed without affecting the original
         this._chunk = null;
-
         this.blocks = {};
+
+        //copy prismarine chunk to allow new chunk to be changed without affecting the original
         if (chunk?.blocks)
 
             for (const x in chunk.blocks)
