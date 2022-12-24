@@ -247,7 +247,7 @@ class Server {
     }
 
     async close() {
-        await wait(200); //to avoid weird bugs
+        await wait(500); //to avoid weird bugs
 
         for (const client of this.clients) client.p.shutdown();
         this.server.close();
