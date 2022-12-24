@@ -1,5 +1,5 @@
 const { versions } = require('../../functions/loader/data.js')
-const settings = require('../../settings.json')
+const settings = require('../../settings.json');
 
 //lazy load minecraft-protocol
 let cachedMc;
@@ -16,6 +16,8 @@ const path = require('path');
 
 const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
+
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
 const defaultPrivate = {
     emit(name, ...args) {
@@ -244,12 +246,11 @@ class Server {
         this.p.events[event].push({ callback, once: true })
     }
 
-    close() {
-        setTimeout(() => {
-            for (const client of this.clients) client.p.shutdown();
-            this.server.close();
-            console.log('closed')
-        }, 200) //to avoid weird bugs
+    async close() {
+        await wait(200); //to avoid weird bugs
+
+        for (const client of this.clients) client.p.shutdown();
+        this.server.close();
     }
 }
 

@@ -42,7 +42,7 @@ export class Server {
 
     joinProxyClient(proxyClient: ProxyClient): void;
 
-    close(): void;
+    close(): Promise<void>;
 
     on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
     on(event: 'error', callback: (customError: CustomError) => void): void;
