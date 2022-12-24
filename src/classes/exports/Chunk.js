@@ -1,7 +1,13 @@
 const { version } = require('../../settings.json');
 const { chunkSize } = require('../../functions/loader/data.js');
 
-const PChunk = require('prismarine-chunk')(version); // todo-time: takes long, lazy load, maybe replace functionality with own faster class
+let cachedPChunk;
+const PChunk = () => {
+    if (cachedPChunk === undefined)
+        cachedPChunk = require('prismarine-chunk')(version);
+
+    return cachedPChunk;
+};
 
 const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
@@ -13,8 +19,7 @@ class Chunk {
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
-        this._chunk = new PChunk(); // todo-time: only create class when setting chunk
-        this.isChunkSet = !chunk?.chunk;
+        this._chunk = null;
 
         this.blocks = {};
         if (chunk?.blocks)
@@ -34,15 +39,15 @@ class Chunk {
     }
 
     get chunk() {
-        if (this.isChunkSet)
+        if (this._chunk)
             return this._chunk;
+
+        this._chunk = new (PChunk())();
 
         for (const x in this.blocks)
             for (const y in this.blocks[x])
                 for (const z in this.blocks[x][y])
                     this._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
-
-        this.isChunkSet = true;
 
         return this._chunk;
     }
@@ -69,7 +74,7 @@ class Chunk {
                 expectation: new Array(chunkSize.z.max - chunkSize.z.min).fill(0).map((_, i) => i + chunkSize.z.min),
             }, this.setBlock).toString()
 
-        if (this.isChunkSet)
+        if (this._chunk)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         if (blockName === 'air') {
