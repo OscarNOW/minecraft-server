@@ -5,7 +5,10 @@ None
 None
 
 ## Speed improvements
-* New speed improvements by lazy loading expensive modules
+* Loading library
+* Generating chunks
+* Creating a server
+* Client joining a server
 
 ## Issues fixed
 * Fixed bug in `<Client>.end()`
