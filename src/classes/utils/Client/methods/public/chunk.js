@@ -1,7 +1,7 @@
 const LoadedChunk = require('../../../LoadedChunk.js');
 const { chunks } = require('../../properties/public/dynamic/chunks.js');
 
-module.exports = function (chunk, { x, z }) { //todo-time: very slow
+module.exports = function (chunk, { x, z }) { //todo-time: very slow (from 1s to 3s for multiple chunks)
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
