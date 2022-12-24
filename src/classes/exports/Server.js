@@ -248,7 +248,8 @@ class Server {
         setTimeout(() => {
             for (const client of this.clients) client.p.shutdown();
             this.server.close();
-        }, 10)
+            console.log('closed')
+        }, 200) //to avoid weird bugs
     }
 }
 
