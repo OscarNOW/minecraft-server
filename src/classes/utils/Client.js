@@ -131,9 +131,9 @@ class Client {
             )
         ))
             //using custom proxy
-            //todo:         when using custom proxy, there is a noticeable slower join time for the Client,
-            //todo:         maybe check if custom proxy file has been modified, and if not use mp native events
-            //todo:         or find a way to make custom proxy faster
+            //todo-time:         when using custom proxy, there is a noticeable slower join time for the Client,
+            //todo-time:         maybe check if custom proxy file has been modified, and if not use mp native events
+            //todo-time:         or find a way to make custom proxy faster
             this.p.clientOn(eventName, (...args) => setTimeout(() => eventCallback.call(this, ...args), 0));
 
         //Start receiving packets
