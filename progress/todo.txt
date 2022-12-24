@@ -8,6 +8,7 @@ Make all code use functions/loader/data
 
 Anytime
 
+Check and update examples with new API
 Allow for two Players (and TabItems) to share same uuid (by actually setting them to different uuids, but use skin of original)
 Move shared functions between TabItem and Player (like getSkin) to separate function file
 Resolve "todo: " and "not implemented" in code
