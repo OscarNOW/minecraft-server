@@ -24,22 +24,27 @@ const server = new Server({
 console.timeEnd('server  ')
 
 let joinCount = 0;
+let startJoinTime;
+let joinTimes = [];
 
 console.time('listen  ')
 server.on('connect', client => {
     joinCount++;
 
-    console.time(`join-${joinCount}  `)
+    startJoinTime = performance.now();
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 });
 server.on('join', async client => {
-    console.timeEnd(`join-${joinCount}  `)
+    joinTimes.push(performance.now() - startJoinTime);
 
     client.kick();
 
     if (joinCount === 3) {
+        console.log(`join-1  : ${joinTimes[0].toFixed(2)}ms`)
+        console.log(`join-n  : ${(joinTimes.slice(1).reduce((a, b) => a + b, 0) / joinTimes.length).toFixed(2)}ms`)
+
         console.time('close   ')
         await server.close();
         console.timeEnd('close   ')
