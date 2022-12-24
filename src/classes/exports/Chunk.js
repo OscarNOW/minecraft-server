@@ -9,6 +9,7 @@ const PChunk = () => {
     return cachedPChunk;
 };
 
+const crypto = require('crypto');
 const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
@@ -18,6 +19,7 @@ class Chunk {
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
+        this._hash = chunk?.hash || null;
         this._chunk = null;
         this.blocks = {};
 
@@ -50,6 +52,13 @@ class Chunk {
                     this._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
 
         return this._chunk;
+    }
+
+    get hash() {
+        if (this._hash === null)
+            this._hash = crypto.createHash('sha256').update(this.chunk.toJson()).digest('base64');
+
+        return this._hash;
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {

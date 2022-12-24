@@ -2,7 +2,7 @@
 None
 
 ## New API
-None
+* Added [`<Chunk>.hash`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Chunk#hash)
 
 ## Speed improvements
 * Loading library

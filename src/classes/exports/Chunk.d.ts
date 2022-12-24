@@ -4,6 +4,7 @@ export class Chunk {
     constructor();
 
     readonly blocks: blocksSegment;
+    readonly hash: string;
 
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
