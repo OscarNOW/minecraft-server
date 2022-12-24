@@ -79,7 +79,7 @@ module.exports = {
                     this.p.emitError(new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
                         got: stateName,
                         expectationType: 'value',
-                        expectation: states.slice(oldIndex)
+                        expectation: states.slice(oldIndex + 1)
                     }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
 
                 this.p.state = stateName;
