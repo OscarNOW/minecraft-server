@@ -114,7 +114,7 @@ class Server {
                         sample: playerHover
                     },
                     description: { //todo: replace with Text instance
-                        text: `${info.description}`
+                        text: `${info.description}` //todo: add support for Text
                     },
                     favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
                 }
@@ -293,7 +293,7 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     const responseString = '\xa7' + [1,
         parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
-        `${info.description}`,
+        `${info.description}`, //todo: add support for Text, maybe convert to string?
         `${info.players.online}`,
         `${info.players.max}`
     ].join('\0');
