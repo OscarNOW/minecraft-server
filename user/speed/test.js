@@ -23,18 +23,25 @@ const server = new Server({
 });
 console.timeEnd('server  ')
 
+let joinCount = 0;
+
 console.time('listen  ')
 server.on('connect', client => {
-    console.time('join    ')
+    joinCount++;
+    console.time(`join-${joinCount}  `)
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 });
-server.on('join', () => {
-    console.timeEnd('join    ')
+server.on('join', client => {
+    client.kick();
 
-    console.time('close   ')
-    server.close();
-    console.timeEnd('close   ')
+    console.timeEnd(`join-${joinCount}  `)
+
+    if (joinCount === 2) {
+        console.time('close   ')
+        server.close();
+        console.timeEnd('close   ')
+    }
 });
 console.timeEnd('listen  ')
