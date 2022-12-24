@@ -24,13 +24,17 @@ const server = new Server({
 console.timeEnd('server  ')
 
 console.time('listen  ')
-server.on('connect', async client => {
+server.on('connect', client => {
+    console.time('join    ')
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 });
-console.timeEnd('listen  ')
+server.on('join', () => {
+    console.timeEnd('join    ')
 
-console.time('close   ')
-server.close();
-console.timeEnd('close   ')
+    console.time('close   ')
+    server.close();
+    console.timeEnd('close   ')
+});
+console.timeEnd('listen  ')
