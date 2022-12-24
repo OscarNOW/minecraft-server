@@ -13,7 +13,7 @@ const server = new Server({
         ]),
 
         players: {
-            online: server.playerCount,
+            online: server.clients.length,
             max: Math.floor(Math.random() * 100) + 5,
             hover: `More\nthan\n1\nline!`
         },
