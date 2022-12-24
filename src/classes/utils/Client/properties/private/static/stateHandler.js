@@ -86,7 +86,6 @@ module.exports = {
                     }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
 
                 this.p.state = stateName;
-                console.log('set', stateName)
                 this.p.stateHandler.handleNewState.call(this, stateName);
 
             },
