@@ -23,7 +23,7 @@ export class Server {
                     uuid: string;
                 }[];
             };
-            description?: string | Text;
+            description?: string; //todo: use Text
             favicon?: Buffer;
         };
         wrongVersionConnect?(info: {

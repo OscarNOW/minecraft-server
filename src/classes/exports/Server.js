@@ -1,7 +1,14 @@
 const { versions } = require('../../functions/loader/data.js')
 const settings = require('../../settings.json')
 
-const mc = require('minecraft-protocol'); // todo-time: takes long, maybe lazy load?
+let cachedMc;
+const mc = () => {
+    if (cachedMc === undefined)
+        cachedMc = require('minecraft-protocol');
+
+    return cachedMc;
+};
+
 const endianToggle = require('endian-toggle');
 const imageSize = require('image-size');
 const path = require('path');
@@ -45,7 +52,7 @@ class Server {
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
-        this.server = mc.createServer({
+        this.server = mc().createServer({
             encryption: true,
             host: 'localhost',
             version: settings.version,
@@ -103,7 +110,7 @@ class Server {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: { //Chat component
+                    description: { //todo: replace with Text instance
                         text: `${info.description}`
                     },
                     favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
