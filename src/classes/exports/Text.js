@@ -61,7 +61,15 @@ class Text {
             });
     }
 
-    //todo: implement change event
+    __reset() {
+        for (const hiddenProperty of hiddenProperties)
+            this[hiddenProperty] = null;
+    }
+
+    __emitChange() {
+        for (const { callback } of this.events.change)
+            callback(this);
+    }
 
     removeAllListeners(event) {
         if (event)
@@ -102,11 +110,6 @@ class Text {
             return this.uncolored.length;
         else
             return null;
-    }
-
-    __reset() {
-        for (const hiddenProperty of hiddenProperties)
-            this[hiddenProperty] = null;
     }
 
     static stringToUncolored(string) {

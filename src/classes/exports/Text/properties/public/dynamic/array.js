@@ -17,5 +17,6 @@ module.exports = {
     set(val) {
         this.__reset();
         this._input = val;
+        this.__emitChange();
     }
 }
