@@ -7,7 +7,7 @@ const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { uuid } = require('../../functions/uuid.js');
 
-const gamemodes = require('../../data/gamemodes.json');
+const { gamemodes } = require('../../functions/loader/data.js');
 
 const defaults = require('../../settings.json').defaults;
 const playerDefaults = defaults.player;

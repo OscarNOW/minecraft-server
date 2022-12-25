@@ -1,7 +1,7 @@
 const { defaults } = require('../../../../../../settings.json');
 const CustomError = require('../../../../CustomError.js');
 
-const gamemodes = require('../../../../../../data/gamemodes.json');
+const { gamemodes } = require('../../../../../../functions/loader/data.js');
 
 module.exports = {
     gamemode: {

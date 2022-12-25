@@ -1,4 +1,4 @@
-const gamemodes = require('../../../../../../data/gamemodes.json');
+const { gamemodes } = require('../../../../../../functions/loader/data.js');
 
 module.exports = ({ expect, client, proxyClient }) => {
     client.gamemode = 'survival';
