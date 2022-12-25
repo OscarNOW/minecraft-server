@@ -12,6 +12,11 @@ export class Text {
     [Symbol.toPrimitive](hint: 'number'): number;
     [Symbol.toPrimitive](hint: 'default'): textArrayComponent[];
 
+    removeAllListeners(event?: 'change'): void;
+
+    on(event: 'change', listener: (text: Text) => void): void;
+    once(event: 'change', listener: (text: Text) => void): void;
+
     static stringToArray(text: string): textArrayComponent[];
     static stringToUncolored(text: string): string;
     static parseArray(text: optionalTextArray): textArrayComponent[];
@@ -193,7 +198,7 @@ type chatComponent = string | number | boolean | chatComponent[] | {
         objective: string;
         value: number;
     };
-    
+
     //copy from other
 };
 //*/

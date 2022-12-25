@@ -21,6 +21,10 @@ const hiddenProperties = [
     '_hash'
 ];
 
+const events = Object.freeze([
+    'change'
+]);
+
 let properties = {};
 
 for (const file of fs.readdirSync(path.join(__dirname, './Text/properties/public/dynamic/')).filter(a => a.endsWith('.js')))
@@ -46,6 +50,8 @@ class Text {
 
         this._input = text;
 
+        this.events = Object.freeze(Object.fromEntries(events.map(a => [a, []])));
+
         for (const [name, { get, set }] of Object.entries(properties))
             Object.defineProperty(this, name, {
                 configurable: false,
@@ -53,6 +59,38 @@ class Text {
                 get,
                 set
             });
+    }
+
+    //todo: implement change event
+
+    removeAllListeners(event) {
+        if (event)
+            this.events[event] = [];
+        else
+            for (const event of Object.keys(this.events))
+                this.events[event] = [];
+    }
+
+    on(event, callback) {
+        if (!this.events[event])
+            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
+                got: event,
+                expectationType: 'value',
+                expectation: Object.keys(this.events)
+            }, this.on));
+
+        this.events[event].push({ callback, once: false });
+    }
+
+    once(event, callback) {
+        if (!this.events[event])
+            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)  `, {
+                got: event,
+                expectationType: 'value',
+                expectation: Object.keys(this.events)
+            }, this.on));
+
+        this.events[event].push({ callback, once: true });
     }
 
     [Symbol.toPrimitive](hint) {
