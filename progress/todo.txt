@@ -1,6 +1,6 @@
 Pre-release
 
-Create <Text> onChange event and use in TabItem
+-Create <Text> onChange event and use in TabItem
 Make all code use functions/loader/data
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
