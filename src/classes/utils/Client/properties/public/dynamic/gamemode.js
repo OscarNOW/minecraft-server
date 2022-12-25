@@ -6,6 +6,8 @@ const gamemodes = require('../../../../../../data/gamemodes.json');
 module.exports = {
     gamemode: {
         info: {
+            defaultable: true,
+            defaultSetTime: 'loginPacket',
             loginPacket: [
                 {
                     name: 'gamemode',

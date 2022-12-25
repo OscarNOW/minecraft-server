@@ -4,6 +4,8 @@ const CustomError = require('../../../../CustomError.js');
 module.exports = {
     reducedDebugInfo: {
         info: {
+            defaultable: true,
+            defaultSetTime: 'loginPacket',
             loginPacket: [
                 {
                     name: 'reducedDebugInfo',

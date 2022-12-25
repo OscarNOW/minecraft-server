@@ -3,7 +3,8 @@ const CustomError = require('../../../../CustomError.js');
 module.exports = {
     food: {
         info: {
-            callAfterLogin: true
+            defaultable: true,
+            defaultSetTime: 'afterLogin'
         },
         get: function () {
             return this.p._food

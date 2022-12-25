@@ -4,6 +4,8 @@ const CustomError = require('../../../../CustomError.js');
 module.exports = {
     showRespawnScreen: {
         info: {
+            defaultable: true,
+            defaultSetTime: 'loginPacket',
             loginPacket: [
                 {
                     name: 'showRespawnScreen',

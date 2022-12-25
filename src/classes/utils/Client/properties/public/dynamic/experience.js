@@ -3,7 +3,8 @@ const Changable = require('../../../../Changable.js');
 module.exports = {
     experience: {
         info: {
-            callAfterLogin: true
+            defaultable: true,
+            defaultSetTime: 'afterLogin'
         },
         get: function () {
             return this.p._experience;

@@ -9,7 +9,8 @@ const oldPositions = new WeakMap();
 module.exports = {
     position: {
         info: {
-            callAfterLogin: true
+            defaultable: true,
+            defaultSetTime: 'afterLogin'
         },
         get: function () {
             return this.p._position

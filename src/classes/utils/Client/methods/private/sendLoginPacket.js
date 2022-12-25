@@ -46,7 +46,7 @@ module.exports = {
         for (const [name, value] of Object.entries(this.p.defaultProperties)) {
             let file = this.p.pubDynProperties[name];
 
-            if ((!file.info?.callAfterLogin) && file.info?.loginPacket) //todo: what does the loginPacket property mean? (and what's the difference with info.callAfterLogin)
+            if (file.info?.defaultAble && file.info.defaultSetTime === 'loginPacket')
                 customLoginProperties[name] = value;
         };
 
@@ -57,9 +57,9 @@ module.exports = {
             .map(a => require(`../../properties/public/dynamic/${a}`))
             .map(a => Object.values(a))
             .flat()
-            .filter(a => a.info?.loginPacket)
+            .filter(a => a.info?.defaultable && a.info?.defaultSetTime === 'loginPacket')
         )
-            for (const { name } of file.info.loginPacket)
+            for (const { name } of file.info?.loginPacket || [])
                 if (customLoginProperties[name] === undefined)
                     customLoginProperties[name] = defaults[name];
 
@@ -68,7 +68,7 @@ module.exports = {
         for (const [name, value] of Object.entries(customLoginProperties)) {
             let file = this.p.pubDynProperties[name];
 
-            for (const { minecraftName } of file.info.loginPacket)
+            for (const { minecraftName } of file.info?.loginPacket || [])
                 loginPacketProperties[minecraftName] = file.setRaw.call(this, value, true)[minecraftName];
         }
 
