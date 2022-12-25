@@ -3,9 +3,9 @@ const server = new Server({
 
     serverList: ({ ip }) => ({
 
-        description: `My server\nYour ip is ${ip}`,
+        description: `A minecraft server\nYour ip is ${ip}`,
         players: {
-            online: server.playerCount,
+            online: server.clients.length,
             max: 100
         },
         version: {

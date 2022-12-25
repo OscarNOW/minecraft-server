@@ -3,7 +3,7 @@ Pre-release
 +Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
 Make all code use functions/loader/data
-Check and update examples with new API
+Rename Server serverList function players to clients
 
 Major update
 

@@ -13,7 +13,7 @@ const server = new Server({
         ]),
 
         players: {
-            online: server.clients.length,
+            online: server.clients.length + 5,
             max: Math.floor(Math.random() * 100) + 5,
             hover: `More\nthan\n1\nline!`
         },
@@ -22,8 +22,8 @@ const server = new Server({
             wrongText: 'Wrong version!',
 
             /*  Tell client that the correct version is their version, so they
-                always think they have the correct version. Client version is null
-                when the version of the client is unknown                           */
+                always think they have the correct version. Reported client
+                version is null when the version of the client is unknown      */
             correct: version === null ? '1.16.3' : version
         },
 

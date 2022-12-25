@@ -6,13 +6,13 @@ const server = new Server({
     serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
         description: `Hi there!\n${legacy ? "You've sent a legacy ping" : "You've sent a normal ping"}`,
         players: {
-            online: server.playerCount,
-            max: 100,
+            online: server.clients.length,
+            max: 100, // only for serverList, doesn't affect actual max clients
             hover: [ip, `${host}: ${port}`, version].join('\n')
         },
         version: {
             wrongText: 'Please use version 1.16.3',
-            correct: '1.16.3'
+            correct: '1.16.3' // only for serverList, doesn't affect actual correct version
         },
         favicon: fs.readFileSync('./favicon.png')
     }),
