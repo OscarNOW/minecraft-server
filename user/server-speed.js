@@ -1,5 +1,5 @@
 console.time('loading ')
-const { Server, Chunk } = require('../../');
+const { Server, Chunk } = require('../');
 console.timeEnd('loading ')
 
 console.time('chunk   ')
