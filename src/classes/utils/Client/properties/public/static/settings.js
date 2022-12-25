@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = { //todo: change to dynamic with setPrivate
     locale: () => Object.freeze({
         langCode: null,
         englishName: null,
