@@ -2,6 +2,8 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
+Make Client public static properties readonly
+    Move Client settings to dynamic properties
 
 Major update
 
@@ -18,16 +20,15 @@ Rewrite src/test.js
 Rewrite scripts/build
 Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
-Add better private properties to all classes that need it (Chunk, Block)
+Add better private properties to all classes that need it (Chunk, Block, Text)
     Remove privates from type files
     Make <Server>.server private and not show up in console.log(
 Use privates to store readonly values in Client instead of values WeakMap
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
     Waiting for https://github.com/orgs/community/discussions/36226
-Make Client public static properties readonly
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
 Add good first issue label to issues
-Implement client.blocks
+Implement <Client>.blocks
 Improve CustomError
     Add hints to CustomError
         Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
@@ -38,7 +39,7 @@ Improve CustomError
     Add code property to CustomError (like keepAliveTimeout)
 Create default block states
     Create table of states and blocks
-Move manifest versions to settings.json
+Move manifest versions to settings.json?
 Add more extensive tests
 Rewrite Server tests with ProxyClient
 Write Client tests
