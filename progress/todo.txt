@@ -1,12 +1,13 @@
 Pre-release
 
-+Fix todo's in sendLoginPacket
 Create <Text> onChange event and use in TabItem
 Make all code use functions/loader/data
-Rename Server serverList function players to clients
+Move setRaw to same set function with extra argument whether changeEvents should be emitted
+    Keep loginPacket generation in separate function
 
 Major update
 
+Rename Server serverList function players to clients
 Rename <Client>.kick to <Client>.remove for consistency
 
 Anytime
