@@ -36,11 +36,11 @@ export class Client {
         cape?: string;
     };
     readonly locale: {
-        readonly langCode: string;
-        readonly englishName: string;
-        readonly menuName: string;
-        readonly version?: string;
-        readonly region?: string;
+        readonly langCode: langCode;
+        readonly englishName: langEnglishName;
+        readonly menuName: langMenuName;
+        readonly version?: langVersion;
+        readonly region?: langRegion;
     };
     readonly chatSettings: {
         readonly visible: 'all' | 'commands' | 'none';
