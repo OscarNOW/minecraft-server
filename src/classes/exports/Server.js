@@ -1,4 +1,4 @@
-const { versions } = require('../../functions/loader/data.js')
+const { versions } = require('../../functions/loader/data.js');
 const settings = require('../../settings.json');
 
 //lazy load minecraft-protocol
@@ -39,7 +39,7 @@ const events = Object.freeze([
     'join',
     'leave',
     'error'
-])
+]);
 
 const privates = new WeakMap();
 
@@ -101,7 +101,7 @@ class Server {
                             expectation: ['64x64']
                         }, this.constructor, { server: this }))
 
-                }
+                };
 
                 return {
                     version: {
@@ -117,7 +117,7 @@ class Server {
                         text: `${info.description}` //todo: add support for Text
                     },
                     favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
-                }
+                };
             }
         });
 
@@ -133,9 +133,9 @@ class Server {
                     payload === 1
                 )
                     handleLegacyPing.call(this, buffer, client, this.serverList)
-            })
+            });
 
-            client.on('state', state => clientState = state)
+            client.on('state', state => clientState = state);
 
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
                 const isLegacy = serverHost === '';
@@ -172,7 +172,7 @@ class Server {
                             expectationType: 'type',
                             expectation: 'string | null'
                         }, this.constructor, { server: this }))
-                }
+                };
 
             });
 
