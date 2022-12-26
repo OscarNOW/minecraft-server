@@ -2,6 +2,9 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
+<Entity>.yaw += 10; in a loop isn't working
+Add oldValue to change event
+Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
 
 Major update
 
@@ -45,12 +48,10 @@ Write Client tests
     Add setRaw tests to Client
 Implement <Entity>.on('change', ...
     Remove <Entity>.observe(
-Add oldValue to change event
 Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 Move scripts/build/*.js npmRun function to separate function file
 Move TabItem/get function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
-Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
 Fix docs for <Boat>.on(, because inherited events are not shown
 Add docs title to settings.json
 Add typescript declaration file check
@@ -63,6 +64,5 @@ Beautify Client.d.ts
 At all places where an error is emitted, try to continue the code as much as possible
 Rename leftClick to something else (because in air doesn't trigger)
     Test if mainHand is rightHand same event is triggered
-<Entity>.yaw += 10; in a loop isn't working
 Make some <Entity>.sound options optional
 Implement build check, so that only modified files have to be built
