@@ -2,7 +2,6 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
--Move Client settings to dynamic properties
 Improve speed of creating Server
 Change local codes from string to actual values
 
