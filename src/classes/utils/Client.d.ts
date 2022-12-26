@@ -32,8 +32,8 @@ export class Client {
         readonly port: number
     };
     readonly textures: {
-        skin: string;
-        cape?: string;
+        readonly skin: string;
+        readonly cape?: string;
     };
     readonly locale: {
         readonly langCode: langCode;
