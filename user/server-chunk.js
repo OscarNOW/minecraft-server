@@ -8,7 +8,7 @@ for (let x = 0; x < 16; x++)
             chunk.setBlock('dirt', { x, y, z })
 
 const server = new Server({
-    defaultClientProperties: () => ({
+    defaultClientProperties: () => ({ //todo: doesn't work
         gamemode: 'creative',
         position: {
             x: 5,
@@ -23,4 +23,6 @@ server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
+
+    console.log(client.locale)
 });
