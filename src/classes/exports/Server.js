@@ -10,8 +10,16 @@ const mc = () => {
     return cachedMc;
 };
 
+//lazy load image-size
+let cachedImageSize;
+const imageSize = () => {
+    if (cachedImageSize === undefined)
+        cachedImageSize = require('image-size');
+
+    return cachedImageSize;
+};
+
 const endianToggle = require('endian-toggle');
-const imageSize = require('image-size'); //todo-time: takes long, lazy load
 const path = require('path');
 
 const Client = require('../utils/Client.js');
@@ -85,7 +93,7 @@ class Server {
                         playerHover.push({ name: value.name, id: value.uuid })
 
                 if (info.favicon) {
-                    let imageInfo = imageSize(info.favicon);
+                    let imageInfo = imageSize()(info.favicon);
 
                     if (imageInfo.type !== 'png')
                         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
