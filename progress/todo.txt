@@ -2,9 +2,8 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
--defaultClientProperties don't work
 Improve speed of creating Server
-Change local codes from string to actual values
+Change <Client>.local codes from string to actual values
 
 Major update
 
