@@ -2,8 +2,8 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
-Make Client public static properties readonly
-    Move Client settings to dynamic properties
+-Move Client settings to dynamic properties
+Improve speed of creating Server
 
 Major update
 
