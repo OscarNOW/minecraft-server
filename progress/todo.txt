@@ -2,7 +2,7 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
-Improve speed of creating Server
+-Improve speed of creating Server
 
 Major update
 
