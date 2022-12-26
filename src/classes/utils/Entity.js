@@ -34,8 +34,13 @@ const defaultPrivate = {
 };
 
 const changePosition = function (pos, oldValue) {
-    const { x, y, z, yaw: ya, pitch } = applyDefaults(pos, oldValue);
-    const yaw = ya % 360;
+    const { x, y, z, yaw: ya, pitch: pit } = applyDefaults(pos, oldValue);
+
+    let yaw = ya % 256;
+    if (yaw > 127) yaw -= 256;
+
+    let pitch = pit % 256;
+    if (pitch > 127) pitch -= 256;
 
     const xChange = Math.abs(x - oldValue.x);
     const yChange = Math.abs(y - oldValue.y);
