@@ -39,6 +39,8 @@ export class Client {
         readonly langCode: langCode;
         readonly englishName: langEnglishName;
         readonly menuName: langMenuName;
+        readonly serious: boolean
+
         readonly version?: langVersion;
         readonly region?: langRegion;
     };
