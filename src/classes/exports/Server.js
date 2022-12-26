@@ -11,7 +11,7 @@ const mc = () => {
 };
 
 const endianToggle = require('endian-toggle');
-const imageSize = require('image-size');
+const imageSize = require('image-size'); //todo-time: takes long, lazy load
 const path = require('path');
 
 const Client = require('../utils/Client.js');
@@ -46,20 +46,15 @@ const privates = new WeakMap();
 class Server {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
 
-        console.time('server-1')
         this.serverList = serverList ?? (() => ({}));
         this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}', settings.version));
         this.defaultClientProperties = defaultClientProperties;
         this.p.proxy = proxy;
-        console.timeEnd('server-1')
 
-        console.time('server-2')
         this.clients = [];
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
-        console.timeEnd('server-2')
 
-        console.time('server-3')
         this.server = mc().createServer({
             encryption: true,
             host: 'localhost',
@@ -125,9 +120,7 @@ class Server {
                 }
             }
         });
-        console.timeEnd('server-3')
 
-        console.time('server-4')
         this.server.on('connection', client => {
             this.p.clientInformation.set(client, {});
 
@@ -184,13 +177,10 @@ class Server {
             });
 
         });
-        console.timeEnd('server-4')
 
-        console.time('server-5')
         this.server.on('login', async client => {
             new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
         });
-        console.timeEnd('server-5')
 
     }
 
