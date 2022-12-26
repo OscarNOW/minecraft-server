@@ -14,7 +14,8 @@ None
 ## Issues fixed
 * Fixed bug in `<Client>.end()`
 * Fixed bug where responses to legacy pings weren't being defaulted
-* Fixed issue where Client settings where all null
+* Fixed bug where Client settings where all null
+* Fixed bug where Client could get kicked if you set the yaw or pitch of an Entity to high or low
 
 ## Documentation / Types
 * Docs list unstable versions before stable versions
