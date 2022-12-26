@@ -52,7 +52,7 @@
         `--out ${settings.typedoc.paths.out}`,
         `--plugin ${settings.typedoc.paths.plugin}`,
         ...settings.typedoc.sort.map(a => `--sort ${a}`),
-        ...Object.entries(settings.typedoc.valueSettings).map(([key, value]) => `--${key} ${value}`),
+        ...Object.entries(settings.typedoc.namedSettings).map(([name, value]) => `--${name} ${value}`),
         ...settings.typedoc.settings.map(a => `--${a}`),
         ...settings.typedoc.arguments
     ].join(' '));
