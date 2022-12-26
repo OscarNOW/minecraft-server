@@ -8,6 +8,7 @@ None
 ## Speed improvements
 * Loading library
 * Generating chunks
+* Creating a server
 * Connecting a client to the server
 
 ## Issues fixed
