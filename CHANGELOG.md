@@ -16,3 +16,4 @@ None
 
 ## Documentation / Types
 * Docs list unstable versions before stable versions
+* Made [`<Client>.locale` properties](https://oscarnow.github.io/minecraft-server/1.20/classes/Client#locale) explicit instead of `string`
