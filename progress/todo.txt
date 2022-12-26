@@ -4,7 +4,6 @@ Move setRaw to same set function with extra argument whether changeEvents should
     Keep loginPacket generation in separate function
 <Entity>.yaw += 10; in a loop isn't working
 Add oldValue to change event
-Rename settings.typedoc.valueSettings to settings.typedoc.namedSettings
 
 Major update
 
