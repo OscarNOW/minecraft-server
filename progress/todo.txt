@@ -3,6 +3,7 @@ Pre-release
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
 -Add oldValue to change event
+Move difficulties to data file and create type
 
 Major update
 
