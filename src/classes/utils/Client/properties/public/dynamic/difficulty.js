@@ -11,27 +11,26 @@ module.exports = {
         get: function () {
             return this.p._difficulty
         },
-        set: function (value) {
+        set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (!difficulties.includes(value))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
-                    got: value,
+            if (!difficulties.includes(newValue))
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(newValue)}  `, {
+                    got: newValue,
                     expectationType: 'value',
                     expectation: difficulties
                 }, null, { server: this.server, client: this }));
 
-            const changed = value !== this.difficulty;
+            const oldValue = this.difficulty;
+            this.p._difficulty = newValue;
 
             this.p.sendPacket('difficulty', {
-                difficulty: difficulties.findIndex(x => x === value),
+                difficulty: difficulties.findIndex(x => x === newValue),
                 difficultyLocked: true
-            })
+            });
 
-            const oldValue = this.difficulty;
-            this.p._difficulty = value;
-            if (changed)
+            if (oldValue !== newValue)
                 this.p.emitChange('difficulty', oldValue);
         },
         setRaw: function (value) {

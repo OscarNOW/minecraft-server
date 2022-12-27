@@ -9,11 +9,11 @@ module.exports = {
         setPrivate: function (value) {
             const oldValue = [...value];
 
-            const changed =
-                value.length !== this.bossBars.length ||
-                value.some((a, i) => a !== this.bossBars[i]);
-
             values.set(this, value);
+
+            const changed =
+                value.length !== oldValue.length ||
+                value.some((a, i) => a !== oldValue[i]);
 
             if (changed)
                 this.p.emitChange('bossBars', oldValue);

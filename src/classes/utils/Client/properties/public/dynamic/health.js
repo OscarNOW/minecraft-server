@@ -9,32 +9,31 @@ module.exports = {
         get: function () {
             return this.p._health
         },
-        set: function (value) {
+        set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            value = Math.round(parseFloat(value));
-            if (value < 0) value = 0;
-            if (value > 20) value = 20;
+            newValue = Math.round(parseFloat(newValue));
+            if (newValue < 0) newValue = 0;
+            if (newValue > 20) newValue = 20;
 
-            if (isNaN(value))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `health in  <${this.constructor.name}>.health = ${require('util').inspect(value)}  `, {
+            if (isNaN(newValue))
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `health in  <${this.constructor.name}>.health = ${require('util').inspect(newValue)}  `, {
                     got: arguments[0],
                     expectationType: 'type',
                     expectation: 'number'
                 }, null, { server: this.server, client: this }));
 
-            const changed = value !== this.health;
+            const oldValue = this.health;
+            this.p._health = newValue;
 
             this.p.sendPacket('update_health', {
-                health: value,
+                health: newValue,
                 food: this.food,
                 foodSaturation: this.foodSaturation
-            })
+            });
 
-            const oldValue = this.health;
-            this.p._health = value;
-            if (changed)
+            if (oldValue !== newValue)
                 this.p.emitChange('health', oldValue);
         },
         setRaw: function (v) {

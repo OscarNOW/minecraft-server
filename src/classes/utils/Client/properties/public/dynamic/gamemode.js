@@ -18,27 +18,26 @@ module.exports = {
         get: function () {
             return this.p._gamemode
         },
-        set: function (value) {
+        set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (!gamemodes.includes(value))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(value)}  `, {
-                    got: value,
+            if (!gamemodes.includes(newValue))
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(newValue)}  `, {
+                    got: newValue,
                     expectationType: 'value',
                     expectation: gamemodes
                 }, null, { server: this.server, client: this }));
 
-            const changed = value !== this.gamemode;
+            const oldValue = this.gamemode;
+            this.p._gamemode = newValue;
 
             this.p.sendPacket('game_state_change', {
                 reason: 3,
-                gameMode: gamemodes.indexOf(value)
-            })
+                gameMode: gamemodes.indexOf(newValue)
+            });
 
-            const oldValue = this.gamemode;
-            this.p._gamemode = value;
-            if (changed)
+            if (oldValue !== newValue)
                 this.p.emitChange('gamemode', oldValue);
         },
         setRaw: function (value, loginPacket) {

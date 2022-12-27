@@ -8,7 +8,7 @@ module.exports = {
                     menuName: null,
                     version: null,
                     region: null
-                })
+                });
 
             return this.p._locale;
         },

@@ -5,7 +5,7 @@ module.exports = {
                 this.p._chatSettings = Object.freeze({
                     visible: null,
                     colors: null
-                })
+                });
 
             return this.p._chatSettings;
         },

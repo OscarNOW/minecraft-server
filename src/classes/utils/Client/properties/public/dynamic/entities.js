@@ -9,11 +9,11 @@ module.exports = {
         setPrivate: function (value) {
             const oldValue = [...this.entities];
 
-            const changed =
-                Object.keys(value).length !== Object.keys(this.entities).length ||
-                Object.keys(value).some(key => value[key] !== this.entities[key]);
-
             values.set(this, value);
+
+            const changed =
+                Object.keys(value).length !== Object.keys(oldValue).length ||
+                Object.keys(value).some(key => value[key] !== oldValue[key]);
 
             if (changed)
                 this.p.emitChange('entities', oldValue);

@@ -6,14 +6,14 @@ module.exports = {
             if (!values.has(this)) values.set(this, Object.freeze([]));
             return values.get(this);
         },
-        setPrivate: function (value) {
+        setPrivate: function (newValue) {
             const oldValue = [...this.tabItems];
 
-            const changed =
-                value.length !== this.tabItems.length ||
-                value.some((a, i) => a !== this.tabItems[i]);
+            values.set(this, newValue);
 
-            values.set(this, value);
+            const changed =
+                newValue.length !== oldValue.length ||
+                newValue.some((a, i) => a !== oldValue[i]);
 
             if (changed)
                 this.p.emitChange('tabItems', oldValue);

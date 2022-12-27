@@ -14,20 +14,20 @@ module.exports = {
             ]
         },
         get: function () {
-            return this.p._reducedDebugInfo
+            return this.p._reducedDebugInfo;
         },
-        setRaw: function (value, loginPacket) {
-            if (typeof value !== 'boolean')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(value)}  `, {
-                    got: value,
+        setRaw: function (newValue, loginPacket) {
+            if (typeof newValue !== 'boolean')
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(newValue)}  `, {
+                    got: newValue,
                     expectationType: 'type',
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
-            this.p._reducedDebugInfo = value;
+            this.p._reducedDebugInfo = newValue;
 
             if (loginPacket)
-                return { reducedDebugInfo: value }
+                return { reducedDebugInfo: newValue }
             else
                 throw new Error(`Can't set "reducedDebugInfo"`) //todo: use CustomError
         },

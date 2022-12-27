@@ -13,26 +13,24 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            let value = parseInt(v);
+            let newValue = parseInt(v);
+            newValue = newValue % 9;
 
-            if (isNaN(value))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(value)}  `, {
+            if (isNaN(newValue))
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(newValue)}  `, {
                     got: v,
                     expectationType: 'type',
                     expectation: 'number'
                 }, null, { server: this.server, client: this }));
 
-            value = value % 9;
-
-            const changed = value !== this.slot;
+            const oldValue = this.slot;
+            this.p._slot = newValue;
 
             this.p.sendPacket('held_item_slot', {
-                slot: value
+                slot: newValue
             });
 
-            const oldValue = this.slot;
-            this.p._slot = value;
-            if (changed)
+            if (oldValue !== newValue)
                 this.p.emitChange('slot', oldValue);
         },
         setRaw: function (v) {

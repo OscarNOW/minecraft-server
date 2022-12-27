@@ -10,7 +10,7 @@ module.exports = {
                     leftLeg: null,
                     rightLeg: null,
                     hat: null
-                })
+                });
 
             return this.p._visibleSkinParts;
         },

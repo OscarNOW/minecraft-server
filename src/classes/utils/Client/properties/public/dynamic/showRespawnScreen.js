@@ -16,27 +16,26 @@ module.exports = {
         get: function () {
             return this.p._showRespawnScreen
         },
-        set: function (value) {
+        set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (typeof value !== 'boolean')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(value)}  `, {
-                    got: value,
+            if (typeof newValue !== 'boolean')
+                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(newValue)}  `, {
+                    got: newValue,
                     expectationType: 'type',
                     expectation: 'boolean'
                 }, null, { server: this.server, client: this }));
 
-            const changed = value !== this.showRespawnScreen;
+            const oldValue = this.showRespawnScreen;
+            this.p._showRespawnScreen = newValue;
 
             this.p.sendPacket('game_state_change', {
                 reason: 11,
-                gameMode: value ? 0 : 1
-            })
+                gameMode: newValue ? 0 : 1
+            });
 
-            const oldValue = this.showRespawnScreen;
-            this.p._showRespawnScreen = value;
-            if (changed)
+            if (oldValue !== newValue)
                 this.p.emitChange('showRespawnScreen', oldValue);
         },
         setRaw: function (value, loginPacket) {

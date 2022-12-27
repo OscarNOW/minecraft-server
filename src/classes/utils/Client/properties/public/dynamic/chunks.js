@@ -26,16 +26,19 @@ module.exports = {
         },
         setPrivate: function (value) {
             let oldValue;
-            if (this.p.changeEventHasListeners('chunks'))
+            let changed;
+
+            if (this.p.changeEventHasListeners('chunks')) {
                 oldValue = [...this.chunks];
 
-            const changed =
-                value.length !== this.p._chunks?.length ||
-                value.some((a, i) => a !== this.p._chunks?.[i]);
+                changed =
+                    value.length !== this.p._chunks?.length ||
+                    value.some((a, i) => a !== this.p._chunks?.[i]);
+            }
 
             this.p._chunks = value;
 
-            if (changed && this.p.changeEventHasListeners('chunks'))
+            if (this.p.changeEventHasListeners('chunks') && changed)
                 this.p.emitChange('chunks', oldValue); //will generate chunks if not already generated
         }
     }
