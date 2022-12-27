@@ -14,7 +14,7 @@ module.exports = {
             ]
         },
         get: function () {
-            return this.p._showRespawnScreen
+            return this.p._showRespawnScreen;
         },
         set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
@@ -54,7 +54,7 @@ module.exports = {
                 this.p.sendPacket('game_state_change', {
                     reason: 11,
                     gameMode: value ? 0 : 1
-                })
+                });
         },
         init: function () {
             this.p._showRespawnScreen = defaults.showRespawnScreen;

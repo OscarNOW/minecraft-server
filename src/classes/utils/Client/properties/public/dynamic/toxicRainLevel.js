@@ -27,7 +27,7 @@ module.exports = {
                 this.p.sendPacket('game_state_change', {
                     reason: 7,
                     gameMode: newValue + 1
-                })
+                });
 
             if (oldValue !== newValue)
                 this.p.emitChange('toxicRainLevel', oldValue);
@@ -40,13 +40,13 @@ module.exports = {
                     expectation: 'number'
                 }, null, { server: this.server, client: this }));
 
+            this.p._toxicRainLevel = value;
+
             if (this.raining)
                 this.p.sendPacket('game_state_change', {
                     reason: 7,
                     gameMode: value + 1
-                })
-
-            this.p._toxicRainLevel = value;
+                });
         },
         init: function () {
             this.p._toxicRainLevel = 0;

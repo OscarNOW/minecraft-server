@@ -13,7 +13,7 @@ module.exports = {
             defaultSetTime: 'afterLogin'
         },
         get: function () {
-            return this.p._position
+            return this.p._position;
         },
         set: function (pos = {}) {
             if (!this.p.stateHandler.checkReady.call(this))
@@ -109,8 +109,8 @@ module.exports = {
             }));
         },
         confirm: function (teleportId) {
-            teleportPromises.get(this)[teleportId].resolved = true
-            teleportPromises.get(this)[teleportId].res()
+            teleportPromises.get(this)[teleportId].resolved = true;
+            teleportPromises.get(this)[teleportId].res();
         },
         update(position) {
             oldPositions.set(this, Object.freeze({

@@ -7,7 +7,7 @@ module.exports = {
             defaultSetTime: 'afterLogin'
         },
         get: function () {
-            return this.p._slot
+            return this.p._slot;
         },
         set: function (v) {
             if (!this.p.stateHandler.checkReady.call(this))
@@ -48,7 +48,7 @@ module.exports = {
             this.p._slot = value;
             this.p.sendPacket('held_item_slot', {
                 slot: value
-            })
+            });
         },
         init: function () {
             this.p._slot = 0;

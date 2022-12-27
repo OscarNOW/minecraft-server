@@ -7,7 +7,7 @@ module.exports = {
             defaultSetTime: 'afterLogin'
         },
         get: function () {
-            return this.p._health
+            return this.p._health;
         },
         set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
@@ -46,13 +46,13 @@ module.exports = {
                     expectation: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                 }, null, { server: this.server, client: this }));
 
+            this.p._health = value;
+
             this.p.sendPacket('update_health', {
                 health: value,
                 food: this.food,
                 foodSaturation: this.food
-            })
-
-            this.p._health = value;
+            });
         },
         init: function () {
             this.p._health = 20;

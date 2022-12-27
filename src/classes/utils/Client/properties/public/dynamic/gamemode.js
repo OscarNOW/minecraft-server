@@ -16,7 +16,7 @@ module.exports = {
             ]
         },
         get: function () {
-            return this.p._gamemode
+            return this.p._gamemode;
         },
         set: function (newValue) {
             if (!this.p.stateHandler.checkReady.call(this))
@@ -56,7 +56,7 @@ module.exports = {
                 this.p.sendPacket('game_state_change', {
                     reason: 3,
                     gameMode: gamemodes.indexOf(value)
-                })
+                });
         },
         init: function () {
             this.p._gamemode = defaults.gamemode;

@@ -34,7 +34,7 @@ module.exports = {
                 changed =
                     value.length !== this.p._chunks?.length ||
                     value.some((a, i) => a !== this.p._chunks?.[i]);
-            }
+            };
 
             this.p._chunks = value;
 
