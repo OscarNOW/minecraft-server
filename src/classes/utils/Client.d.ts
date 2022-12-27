@@ -308,21 +308,27 @@ export class Client {
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
-    on(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
-    on(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
-    on(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
-    on(event: 'change', type: 'tabItems', callback: (changedValue: TabItem[]) => void): void;
-    on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
-    on(event: 'change', type: 'position', callback: (changedValue: {
+    on(event: 'change', type: 'entities', callback: (newValue: entities, oldValue: entities) => void): void;
+    on(event: 'change', type: 'chunks', callback: (newValue: LoadedChunk[], oldValue: LoadedChunk[]) => void): void;
+    on(event: 'change', type: 'bossBars', callback: (newValue: BossBar[], oldValue: BossBar[]) => void): void;
+    on(event: 'change', type: 'tabItems', callback: (newValue: TabItem[], oldValue: TabItem[]) => void): void;
+    on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (newValue: number, oldValue: number) => void): void;
+    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (newValue: boolean, oldValue: boolean) => void): void;
+    on(event: 'change', type: 'position', callback: (newValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }, oldValue: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
     }) => void): void;
-    on(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
-    on(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+    on(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
+    on(event: 'change', type: 'difficulty', callback: (newValue: 'peaceful' | 'easy' | 'normal' | 'hard', oldValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
@@ -365,21 +371,27 @@ export class Client {
         headInsideBlock: boolean;
     }) => void): void;
 
-    once(event: 'change', type: 'entities', callback: (changedValue: entities) => void): void;
-    once(event: 'change', type: 'chunks', callback: (changedValue: LoadedChunk[]) => void): void;
-    once(event: 'change', type: 'bossBars', callback: (changedValue: BossBar[]) => void): void;
-    once(event: 'change', type: 'tabItems', callback: (changedValue: TabItem[]) => void): void;
-    once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (changedValue: number) => void): void;
-    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (changedValue: boolean) => void): void;
-    once(event: 'change', type: 'position', callback: (changedValue: {
+    once(event: 'change', type: 'entities', callback: (newValue: entities, oldValue: entities) => void): void;
+    once(event: 'change', type: 'chunks', callback: (newValue: LoadedChunk[], oldValue: LoadedChunk[]) => void): void;
+    once(event: 'change', type: 'bossBars', callback: (newValue: BossBar[], oldValue: BossBar[]) => void): void;
+    once(event: 'change', type: 'tabItems', callback: (newValue: TabItem[], oldValue: TabItem[]) => void): void;
+    once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (newValue: number, oldValue: number) => void): void;
+    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (newValue: boolean, oldValue: boolean) => void): void;
+    once(event: 'change', type: 'position', callback: (newValue: {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }, oldValue: {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
     }) => void): void;
-    once(event: 'change', type: 'gamemode', callback: (changedValue: gamemode) => void): void;
-    once(event: 'change', type: 'difficulty', callback: (changedValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+    once(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
+    once(event: 'change', type: 'difficulty', callback: (newValue: 'peaceful' | 'easy' | 'normal' | 'hard', oldValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
 
     once(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
