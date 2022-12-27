@@ -1,7 +1,7 @@
 module.exports = {
-    emitChange(type) {
+    emitChange(type, oldValue) {
         for (const { callback } of this.p.changeEvents[type])
-            callback(this[type])
+            callback(this[type], oldValue);
 
         this.p.changeEvents[type] = this.p.changeEvents[type].filter(({ once }) => once === false);
     }
