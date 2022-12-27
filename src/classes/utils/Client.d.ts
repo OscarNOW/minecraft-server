@@ -90,7 +90,7 @@ export class Client {
     toxicRainLevel: number;
     showRespawnScreen: boolean;
     gamemode: gamemode;
-    difficulty: 'peaceful' | 'easy' | 'normal' | 'hard';
+    difficulty: difficulty;
 
     slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
@@ -328,7 +328,7 @@ export class Client {
         pitch: number;
     }) => void): void;
     on(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
-    on(event: 'change', type: 'difficulty', callback: (newValue: 'peaceful' | 'easy' | 'normal' | 'hard', oldValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+    on(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
 
     on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
@@ -391,7 +391,7 @@ export class Client {
         pitch: number;
     }) => void): void;
     once(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
-    once(event: 'change', type: 'difficulty', callback: (newValue: 'peaceful' | 'easy' | 'normal' | 'hard', oldValue: 'peaceful' | 'easy' | 'normal' | 'hard') => void): void;
+    once(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
 
     once(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
@@ -453,7 +453,7 @@ type defaultClientProperties = {
     toxicRainLevel?: number;
     showRespawnScreen?: boolean;
     gamemode?: gamemode;
-    difficulty?: 'peaceful' | 'easy' | 'normal' | 'hard';
+    difficulty?: difficulty;
 
     slot?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     health?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;

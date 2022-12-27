@@ -1,5 +1,7 @@
 const CustomError = require('../../../../CustomError.js');
 
+const { difficulties } = require('../../../../../../functions/loader/data.js');
+
 module.exports = {
     difficulty: {
         info: {
@@ -13,17 +15,17 @@ module.exports = {
             if (!this.p.stateHandler.checkReady.call(this))
                 return;
 
-            if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
+            if (!difficulties.includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
-                    expectation: ['peaceful', 'easy', 'normal', 'hard']
+                    expectation: difficulties
                 }, null, { server: this.server, client: this }));
 
             const changed = value !== this.difficulty;
 
             this.p.sendPacket('difficulty', {
-                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x === value),
+                difficulty: difficulties.findIndex(x => x === value),
                 difficultyLocked: true
             })
 
@@ -33,15 +35,15 @@ module.exports = {
                 this.p.emitChange('difficulty', oldValue);
         },
         setRaw: function (value) {
-            if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))
+            if (!difficulties.includes(value))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(value)}  `, {
                     got: value,
                     expectationType: 'value',
-                    expectation: ['peaceful', 'easy', 'normal', 'hard']
+                    expectation: difficulties
                 }, null, { server: this.server, client: this }));
 
             this.p.sendPacket('difficulty', {
-                difficulty: ['peaceful', 'easy', 'normal', 'hard'].findIndex(x => x === value),
+                difficulty: difficulties.findIndex(x => x === value),
                 difficultyLocked: true
             })
 
