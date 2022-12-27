@@ -4,6 +4,7 @@ None
 ## New API
 * Added [`<Chunk>.hash`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Chunk#hash)
 * Added [`<Client>.locale.serious`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#locale)
+* Added `oldValue` argument to [`Client change event`](https://oscarnow.github.io/minecraft-server/github/classes/Client#on)
 
 ## Speed improvements
 * Loading library
