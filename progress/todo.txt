@@ -2,8 +2,6 @@ Pre-release
 
 Move setRaw to same set function with extra argument whether changeEvents should be emitted
     Keep loginPacket generation in separate function
--Clean up Client dynamic properties
-    Clean up setRaw
 
 Major update
 
