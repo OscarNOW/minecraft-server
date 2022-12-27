@@ -34,9 +34,10 @@ module.exports = {
                 totalExperience
             })
 
+            const oldValue = this.p._experience.raw;
             this.p._experience.setRaw({ bar, level });
             if (changed)
-                this.p.emitChange('experience');
+                this.p.emitChange('experience', oldValue);
         },
         setRaw: function ({ bar, level }) {
 

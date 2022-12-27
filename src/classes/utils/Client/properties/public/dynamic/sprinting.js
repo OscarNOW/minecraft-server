@@ -7,12 +7,12 @@ module.exports = {
             return values.get(this);
         },
         setPrivate: function (newValue) {
-            let oldValue = this.sprinting;
+            const oldValue = this.sprinting;
 
             values.set(this, newValue);
 
             if (oldValue !== newValue)
-                this.p.emitChange('sprinting');
+                this.p.emitChange('sprinting', oldValue);
         }
     }
 }

@@ -30,9 +30,10 @@ module.exports = {
                 slot: value
             });
 
+            const oldValue = this.slot;
             this.p._slot = value;
             if (changed)
-                this.p.emitChange('slot');
+                this.p.emitChange('slot', oldValue);
         },
         setRaw: function (v) {
             let value = parseInt(v);

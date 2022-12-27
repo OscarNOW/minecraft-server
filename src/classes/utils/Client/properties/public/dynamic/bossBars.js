@@ -7,6 +7,8 @@ module.exports = {
             return values.get(this);
         },
         setPrivate: function (value) {
+            const oldValue = [...value];
+
             const changed =
                 value.length !== this.bossBars.length ||
                 value.some((a, i) => a !== this.bossBars[i]);
@@ -14,7 +16,7 @@ module.exports = {
             values.set(this, value);
 
             if (changed)
-                this.p.emitChange('bossBars');
+                this.p.emitChange('bossBars', oldValue);
         }
     }
 }

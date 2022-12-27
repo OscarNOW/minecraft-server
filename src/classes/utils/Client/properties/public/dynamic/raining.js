@@ -27,9 +27,10 @@ module.exports = {
                 gameMode: value ? this.toxicRainLevel + 1 : 0
             })
 
+            const oldValue = this.raining;
             this.p._raining = value;
             if (changed)
-                this.p.emitChange('raining');
+                this.p.emitChange('raining', oldValue);
         },
         setRaw: function (value) {
             if (typeof value !== 'boolean')

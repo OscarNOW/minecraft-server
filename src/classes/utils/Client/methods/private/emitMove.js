@@ -3,6 +3,8 @@ module.exports = {
         if (!this.p.positionSet)
             return;
 
+        const oldPosition = this.p._position.raw;
+
         let oldChunk = {
             x: Math.floor(this.position.x / 16),
             z: Math.floor(this.position.z / 16)
@@ -45,7 +47,7 @@ module.exports = {
 
         if (changed) {
             require('../../properties/public/dynamic/position.js').position.update.call(this, this.p._position.raw)
-            this.p.emitChange('position');
+            this.p.emitChange('position', oldPosition);
         }
     }
 }

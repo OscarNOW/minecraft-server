@@ -31,7 +31,7 @@ module.exports = {
 
             this.p._chunks = value;
 
-            if (changed)
+            if (changed) //todo: add oldValue while lazy loading still works
                 this.p.emitChange('chunks'); //will generate chunks if not already generated
         }
     }

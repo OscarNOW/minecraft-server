@@ -34,9 +34,10 @@ module.exports = {
                 gameMode: value ? 0 : 1
             })
 
+            const oldValue = this.showRespawnScreen;
             this.p._showRespawnScreen = value;
             if (changed)
-                this.p.emitChange('showRespawnScreen');
+                this.p.emitChange('showRespawnScreen', oldValue);
         },
         setRaw: function (value, loginPacket) {
             if (typeof value !== 'boolean')

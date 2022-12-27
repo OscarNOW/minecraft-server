@@ -27,9 +27,10 @@ module.exports = {
                 difficultyLocked: true
             })
 
+            const oldValue = this.difficulty;
             this.p._difficulty = value;
             if (changed)
-                this.p.emitChange('difficulty');
+                this.p.emitChange('difficulty', oldValue);
         },
         setRaw: function (value) {
             if (!['peaceful', 'easy', 'normal', 'hard'].includes(value))

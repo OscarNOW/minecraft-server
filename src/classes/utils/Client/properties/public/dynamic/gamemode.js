@@ -36,9 +36,10 @@ module.exports = {
                 gameMode: gamemodes.indexOf(value)
             })
 
+            const oldValue = this.gamemode;
             this.p._gamemode = value;
             if (changed)
-                this.p.emitChange('gamemode');
+                this.p.emitChange('gamemode', oldValue);
         },
         setRaw: function (value, loginPacket) {
             if (!gamemodes.includes(value))

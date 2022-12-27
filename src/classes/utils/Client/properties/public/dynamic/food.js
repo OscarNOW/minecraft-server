@@ -32,9 +32,10 @@ module.exports = {
                 foodSaturation: this.foodSaturation
             })
 
+            const oldValue = this.food;
             this.p._food = value;
             if (changed)
-                this.p.emitChange('food');
+                this.p.emitChange('food', oldValue);
         },
         setRaw: function (v) {
             const value = parseInt(v);
