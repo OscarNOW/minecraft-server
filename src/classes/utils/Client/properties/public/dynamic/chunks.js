@@ -25,14 +25,18 @@ module.exports = {
             return this.p._chunks;
         },
         setPrivate: function (value) {
+            let oldValue;
+            if (this.p.changeEventHasListeners('chunks'))
+                oldValue = [...this.chunks];
+
             const changed =
                 value.length !== this.p._chunks?.length ||
                 value.some((a, i) => a !== this.p._chunks?.[i]);
 
             this.p._chunks = value;
 
-            if (changed) //todo: add oldValue while lazy loading still works
-                this.p.emitChange('chunks'); //will generate chunks if not already generated
+            if (changed && this.p.changeEventHasListeners('chunks'))
+                this.p.emitChange('chunks', oldValue); //will generate chunks if not already generated
         }
     }
 }
