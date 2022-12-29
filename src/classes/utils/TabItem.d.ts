@@ -11,7 +11,8 @@ export class TabItem {
     readonly player?: Player; //todo: make changable
 
     uuid: string;
-    name: Text;
+    get name(): Text;
+    set name(name: textInput | Text);
     ping: number | null;
 
     remove(): void;

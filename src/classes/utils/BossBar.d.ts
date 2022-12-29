@@ -1,7 +1,8 @@
 export class BossBar {
     constructor(client: Client, sendPacket: (packetName: string, packet: object) => void, bossBarInfo?: optionalBossBarInfo);
 
-    title: Text;
+    get title(): Text;
+    set title(title: textInput | Text);
     health: number;
     color: bossBarColorName;
     divisionAmount: bossBarDivisionAmount;
