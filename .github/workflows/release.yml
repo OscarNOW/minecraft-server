@@ -48,20 +48,20 @@ jobs:
           commit_user_email: actions@github.com
           commit_author: Doc-bot <actions@github.com>
 
-      - name: Github Release
-        uses: ncipollo/release-action@v1.11.1
-        with:
-          bodyFile: CHANGELOG.md
-          commit: main
+      # - name: Github Release
+      #   uses: ncipollo/release-action@v1.11.1
+      #   with:
+      #     bodyFile: CHANGELOG.md
+      #     commit: main
 
-          name: ${{ github.event.inputs.version }}
-          tag: ${{ github.event.inputs.version }}
+      #     name: ${{ github.event.inputs.version }}
+      #     tag: ${{ github.event.inputs.version }}
 
-      - name: NPM Release
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
-          check-version: true
+      # - name: NPM Release
+      #   uses: JS-DevTools/npm-publish@v1
+      #   with:
+      #     token: ${{ secrets.NPM_TOKEN }}
+      #     access: public
+      #     check-version: true
 
-          tag: latest
+      #     tag: latest
