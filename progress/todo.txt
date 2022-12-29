@@ -1,5 +1,14 @@
 Pre-release
 
+Improve quality score on NPM
+    https://itnext.io/increasing-an-npm-packages-search-score-fb557f859300
+    https://npms.io/about
+    Change release workflow to wait after committing before publishing to npm so that NPM can see checks passing
+    Check if NPM can see tests
+        Add test coverage reporter
+    Check if github pages is allowed for home page
+        Custom domain is not needed, but it does improve score
+    Add badges?
 Make brandReceived separate state in stateHandler?
 Implement something to let user know when Client brand is sent
     maybe event?
