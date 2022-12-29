@@ -1,6 +1,9 @@
 Pre-release
 
-Some Client public dynamic properties use init and others init when get is called. Make this consistent
+Make all Client public dynamic properties use init
+Change name: function(params) {} to name(params) {}
+    Client public dynamic properties
+    Other places
 
 Major update
 
