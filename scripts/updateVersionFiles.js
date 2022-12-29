@@ -12,6 +12,10 @@ if (newVersion !== undefined) {
     packageLock.version = newVersion;
     packageLock.packages[''].version = newVersion;
     fs.writeFileSync(path.join(__dirname, '../package-lock.json'), JSON.stringify(packageLock, null, 4));
+
+    let changelog = fs.readFileSync(path.join(__dirname, '../CHANGELOG.md')).toString();
+    changelog = changelog.replaceAll('{version}', newVersion);
+    fs.writeFileSync(path.join(__dirname, '../CHANGELOG.md'), changelog);
 }
 
 // Update manifest
