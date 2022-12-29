@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p.onGround;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = this.onGround;
 
             this.p.onGround = newValue;
@@ -14,7 +14,7 @@ module.exports = {
             if (oldValue !== newValue)
                 this.p.emitChange('onGround', oldValue);
         },
-        init: function () {
+        init() {
             this.p.onGround = false;
         }
     }

@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p.entities;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = { ...this.entities };
 
             this.p.entities = newValue;
@@ -18,7 +18,7 @@ module.exports = {
             if (changed)
                 this.p.emitChange('entities', oldValue);
         },
-        init: function () {
+        init() {
             this.p.entities = Object.freeze({ 0: this });
         }
     }

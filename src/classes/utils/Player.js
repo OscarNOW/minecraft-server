@@ -15,18 +15,18 @@ const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const _p = Symbol('private (Player)');
 const defaultPrivate = {
-    parseProperty: function (key, value) {
+    parseProperty(key, value) {
         if (key === 'name' && !(value instanceof Text))
             return new Text(value)
         else return value;
     },
-    parseProperties: function (properties) {
+    parseProperties(properties) {
         for (const [key, value] of Object.entries(properties))
             properties[key] = this.p2.parseProperty.call(this, key, value);
 
         return properties;
     },
-    updateProperty: async function (name) {
+    async updateProperty(name) {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
@@ -77,12 +77,12 @@ const defaultPrivate = {
         this.p2.textures = textures;
         return textures;
     },
-    remove: function () {
+    remove() {
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
         });
     },
-    spawn: async function (textures) {
+    async spawn(textures) {
         if (!this.tabItem)
             this.p.sendPacket('player_info', { //create temporary tabItem
                 action: 0,
@@ -113,7 +113,7 @@ const defaultPrivate = {
                 }]
             });
     },
-    respawn: async function () {
+    async respawn() {
         const textures = await this.p2.getTextures.call(this);
 
         this.p2.remove.call(this);

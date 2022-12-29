@@ -8,7 +8,7 @@ const faces = Object.freeze({
 });
 
 module.exports = {
-    block_place: function ({ hand, location: { x, y, z }, direction, cursorX, cursorY, cursorZ, insideBlock }) {
+    block_place({ hand, location: { x, y, z }, direction, cursorX, cursorY, cursorZ, insideBlock }) {
         //todo: check inputs and add CustomError
 
         //todo: get block that is being placed, add that to event callback, and update LoadedChunk with said block

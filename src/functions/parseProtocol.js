@@ -7,7 +7,7 @@ proto.addProtocol(protocol, []);
 let parsers = {};
 
 module.exports = {
-    parseProtocol: function (type, data) {
+    parseProtocol(type, data) {
         if (!parsers[type])
             parsers[type] = new Parser(proto, type);
 

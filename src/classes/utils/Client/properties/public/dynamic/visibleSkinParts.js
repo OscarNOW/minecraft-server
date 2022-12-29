@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._visibleSkinParts;
         },
-        set: function (value) {
+        set(value) {
             this.p._visibleSkinParts = value;
         },
-        init: function () {
+        init() {
             this.p._visibleSkinParts = Object.freeze({
                 cape: null,
                 torso: null,

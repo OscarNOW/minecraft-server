@@ -11,7 +11,7 @@ const clientVisibleSkinParts = require('../properties/public/dynamic/visibleSkin
 const clientRightHanded = require('../properties/public/dynamic/rightHanded.js').rightHanded;
 
 module.exports = {
-    settings: function ({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {
+    settings({ locale, viewDistance, chatFlags, chatColors, skinParts, mainHand }) {
         let langCode = locale.toLowerCase();
         if (!languages[langCode])
             this.p.emitError(new CustomError('expectationNotMet', 'client', `locale in  <remote ${this.constructor.name}>.settings({ locale: ${require('util').inspect(langCode)} })  `, {

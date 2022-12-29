@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._viewDistance;
         },
-        set: function (value) {
+        set(value) {
             this.p._viewDistance = value;
         },
-        init: function () {
+        init() {
             this.p._viewDistance = null;
         }
     }

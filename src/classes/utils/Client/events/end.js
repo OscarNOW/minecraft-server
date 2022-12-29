@@ -1,5 +1,5 @@
 module.exports = {
-    end: function () {
+    end() {
         this.p.shutdown()
     }
 }

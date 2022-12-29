@@ -6,10 +6,10 @@ module.exports = {
             defaultable: true,
             defaultSetTime: 'afterLogin'
         },
-        get: function () {
+        get() {
             return this.p._experience;
         },
-        set: function ({ bar, level } = {}, beforeReady) {
+        set({ bar, level } = {}, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -38,7 +38,7 @@ module.exports = {
             if ((!beforeReady) && level !== oldValue.level || bar !== oldValue.bar)
                 this.p.emitChange('experience', oldValue);
         },
-        init: function () {
+        init() {
             this.p._experience = new Changable((function (i) { this.experience = i }).bind(this), {
                 bar: 0,
                 level: 0

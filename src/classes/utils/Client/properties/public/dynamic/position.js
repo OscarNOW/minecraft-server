@@ -9,10 +9,10 @@ module.exports = {
             defaultable: true,
             defaultSetTime: 'afterLogin'
         },
-        get: function () {
+        get() {
             return this.p._position;
         },
-        set: function (pos = {}, beforeReady) {
+        set(pos = {}, beforeReady) {
             if (beforeReady) {
                 for (const [key, value] of Object.entries(pos))
                     this.p._position.setRaw(key, value)
@@ -95,7 +95,7 @@ module.exports = {
 
             }
         },
-        init: function () {
+        init() {
             this.p.positionSet = false;
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
 
@@ -108,7 +108,7 @@ module.exports = {
                 isFirst: true
             });
         },
-        confirm: function (teleportId) {
+        confirm(teleportId) {
             this.p.teleportPromises[teleportId].resolved = true;
             this.p.teleportPromises[teleportId].res();
         },

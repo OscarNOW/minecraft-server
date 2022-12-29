@@ -14,7 +14,7 @@ module.exports = {
     state: () => states[0],
     stateHandler: () => ({
 
-        checkReady: function () {
+        checkReady() {
             const loginSentIndex = states.indexOf('loginSent');
             const currentIndex = states.indexOf(this.p.state);
             const offlineIndex = states.indexOf('offline');
@@ -27,11 +27,11 @@ module.exports = {
             return true;
         },
 
-        init: function () {
+        init() {
             this.p.stateHandler.updateState.set.call(this, 'connected');
         },
 
-        handleNewState: function (currentState) {
+        handleNewState(currentState) {
             let nextState = states[states.indexOf(currentState) + 1];
 
             if (currentState === 'settingsReceived') {
@@ -72,7 +72,7 @@ module.exports = {
 
         updateState: {
 
-            set: function (stateName) {
+            set(stateName) {
                 const oldIndex = states.indexOf(this.p.state);
 
                 if (!states.includes(stateName))
@@ -96,11 +96,11 @@ module.exports = {
 
             },
 
-            close: function () {
+            close() {
                 this.p.stateHandler.updateState.set.call(this, 'offline');
             },
 
-            packetReceived: function (packet) {
+            packetReceived(packet) {
                 if (packet === 'settings')
                     this.p.stateHandler.updateState.set.call(this, 'settingsReceived');
                 else

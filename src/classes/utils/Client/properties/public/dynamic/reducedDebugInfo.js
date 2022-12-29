@@ -15,10 +15,10 @@ module.exports = {
                 }
             ]
         },
-        get: function () {
+        get() {
             return this.p._reducedDebugInfo;
         },
-        set: function (newValue, beforeReady, loginPacket) {
+        set(newValue, beforeReady, loginPacket) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -34,7 +34,7 @@ module.exports = {
             if (loginPacket)
                 return { reducedDebugInfo: newValue }
         },
-        init: function () {
+        init() {
             this.p._reducedDebugInfo = defaults.reducedDebugInfo;
         }
     }

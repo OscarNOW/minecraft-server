@@ -1,6 +1,6 @@
 module.exports = {
     ping: {
-        get: function () {
+        get() {
             return this.p.client.latency;
         }
     }

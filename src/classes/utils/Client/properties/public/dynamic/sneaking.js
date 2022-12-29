@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._sneaking;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = this.sneaking;
 
             this.p._sneaking = newValue;
@@ -14,7 +14,7 @@ module.exports = {
             if (oldValue !== newValue)
                 this.p.emitChange('sneaking', oldValue);
         },
-        init: function () {
+        init() {
             this.p._sneaking = false;
         }
     }

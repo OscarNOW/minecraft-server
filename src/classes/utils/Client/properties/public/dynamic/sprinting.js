@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._sprinting;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = this.sprinting;
 
             this.p._sprinting = newValue;
@@ -14,7 +14,7 @@ module.exports = {
             if (oldValue !== newValue)
                 this.p.emitChange('sprinting', oldValue);
         },
-        init: function () {
+        init() {
             this.p._sprinting = false;
         }
     }

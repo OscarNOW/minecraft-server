@@ -1,7 +1,7 @@
 const CustomError = require('../../CustomError.js');
 
 module.exports = {
-    held_item_slot: function ({ slotId }) {
+    held_item_slot({ slotId }) {
         if (slotId < 0 || slotId > 8)
             this.p.emitError(new CustomError('expectationNotMet', 'client', `slotId in  <remote ${this.constructor.name}>.held_item_slot({ slotId: ${require('util').inspect(slotId)} })  `, {
                 got: slotId,

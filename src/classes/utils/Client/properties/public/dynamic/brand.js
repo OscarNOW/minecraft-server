@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._brand;
         },
-        set: function (value) {
+        set(value) {
             this.p._brand = value;
         },
-        init: function () {
+        init() {
             this.p._brand = undefined;
         }
     }

@@ -1,5 +1,5 @@
 module.exports = {
-    entityId: function () {
+    entityId() {
         return this.p.client.id;
     }
 }

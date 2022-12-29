@@ -10,7 +10,7 @@ const faces = Object.freeze({
 });
 
 module.exports = {
-    block_dig: function ({ status, location: { x, y, z }, face }) {
+    block_dig({ status, location: { x, y, z }, face }) {
         if (status === 0)
             if (faces[face])
                 this.p.emit('digStart', { x, y, z }, faces[face])

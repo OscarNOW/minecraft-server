@@ -6,10 +6,10 @@ module.exports = {
             defaultable: true,
             defaultSetTime: 'afterLogin'
         },
-        get: function () {
+        get() {
             return this.p._tabFooter;
         },
-        set: function (v, beforeReady) {
+        set(v, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -28,7 +28,7 @@ module.exports = {
             if ((!beforeReady) && oldValue !== newValue)
                 this.p.emitChange('tabFooter', oldValue);
         },
-        init: function () {
+        init() {
             this.p._tabFooter = new Text('');
         }
     }

@@ -1,7 +1,7 @@
 const CustomError = require('../../CustomError.js');
 
 module.exports = {
-    close_window: function ({ windowId }) {
+    close_window({ windowId }) {
         if (!this.p.stateHandler.checkReady.call(this))
             return;
 

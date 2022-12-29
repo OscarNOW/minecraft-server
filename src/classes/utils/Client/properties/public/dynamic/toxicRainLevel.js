@@ -6,10 +6,10 @@ module.exports = {
             defaultable: true,
             defaultSetTime: 'afterLogin'
         },
-        get: function () {
+        get() {
             return this.p._toxicRainLevel;
         },
-        set: function (newValue, beforeReady) {
+        set(newValue, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -32,7 +32,7 @@ module.exports = {
             if ((!beforeReady) && oldValue !== newValue)
                 this.p.emitChange('toxicRainLevel', oldValue);
         },
-        init: function () {
+        init() {
             this.p._toxicRainLevel = 0;
         }
     }

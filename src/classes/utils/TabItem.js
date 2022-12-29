@@ -13,18 +13,18 @@ const path = require('path');
 
 const _p = Symbol('private');
 const defaultPrivate = {
-    parseProperty: function (key, value) {
+    parseProperty(key, value) {
         if (key === 'name' && !(value instanceof Text))
             return new Text(value)
         else return value;
     },
-    parseProperties: function (properties) {
+    parseProperties(properties) {
         for (const [key, value] of Object.entries(properties))
             properties[key] = this.p.parseProperty.call(this, key, value);
 
         return properties;
     },
-    updateProperty: function (name, oldValue) {
+    updateProperty(name, oldValue) {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 

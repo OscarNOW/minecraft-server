@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p.bossBars;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = [...this.bossBars];
 
             this.p.bossBars = newValue;
@@ -18,7 +18,7 @@ module.exports = {
             if (changed)
                 this.p.emitChange('bossBars', oldValue);
         },
-        init: function () {
+        init() {
             this.p.bossBars = Object.freeze([]);
         }
     }

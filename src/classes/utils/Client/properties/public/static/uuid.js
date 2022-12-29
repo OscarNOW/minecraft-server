@@ -1,5 +1,5 @@
 module.exports = {
-    uuid: function () {
+    uuid() {
         return this.p.client.uuid;
     }
 }

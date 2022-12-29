@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._locale;
         },
-        set: function (value) {
+        set(value) {
             this.p._locale = value;
         },
-        init: function () {
+        init() {
             this.p._locale = Object.freeze({
                 langCode: null,
                 englishName: null,

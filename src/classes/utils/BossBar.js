@@ -11,7 +11,7 @@ const { bossBars } = require('./Client/properties/public/dynamic/bossBars.js');
 
 const _p = Symbol('private');
 const defaultPrivate = {
-    updateFlags: function (newFlags, oldFlags) {
+    updateFlags(newFlags, oldFlags) {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
@@ -29,7 +29,7 @@ const defaultPrivate = {
                 flags: parseInt([newFlags.createFog, newFlags.playEndMusic, newFlags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
             })
     },
-    updateProperty: function (name) {
+    updateProperty(name) {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
@@ -56,7 +56,7 @@ const defaultPrivate = {
                 dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id
             });
     },
-    parseProperty: function (key, value) {
+    parseProperty(key, value) {
         if (key === 'title')
             if (!(value instanceof Text))
                 return new Text(value);
@@ -72,7 +72,7 @@ const defaultPrivate = {
             });
         else return value;
     },
-    parseProperties: function (properties) {
+    parseProperties(properties) {
         for (const [key, value] of Object.entries(properties))
             properties[key] = this.p.parseProperty.call(this, key, value);
 

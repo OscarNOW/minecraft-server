@@ -15,10 +15,10 @@ module.exports = {
                 }
             ]
         },
-        get: function () {
+        get() {
             return this.p._gamemode;
         },
-        set: function (newValue, beforeReady, loginPacket) {
+        set(newValue, beforeReady, loginPacket) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -44,7 +44,7 @@ module.exports = {
             if (loginPacket)
                 return { gameMode: gamemodes.indexOf(newValue) }
         },
-        init: function () {
+        init() {
             this.p._gamemode = defaults.gamemode;
         }
     }

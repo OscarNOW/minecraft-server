@@ -6,10 +6,10 @@ module.exports = {
             defaultable: true,
             defaultSetTime: 'afterLogin'
         },
-        get: function () {
+        get() {
             return this.p._foodSaturation;
         },
-        set: function (v, beforeReady) {
+        set(v, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
@@ -36,7 +36,7 @@ module.exports = {
             if ((!beforeReady) && oldValue !== newValue)
                 this.p.emitChange('foodSaturation', oldValue);
         },
-        init: function () {
+        init() {
             this.p._foodSaturation = 5;
         }
     }

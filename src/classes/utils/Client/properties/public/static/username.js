@@ -1,5 +1,5 @@
 module.exports = {
-    username: function () {
+    username() {
         return this.p.client.username;
     }
 }

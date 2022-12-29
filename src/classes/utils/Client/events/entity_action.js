@@ -2,8 +2,8 @@ const { sneaking } = require('../properties/public/dynamic/sneaking.js');
 const { sprinting } = require('../properties/public/dynamic/sprinting.js');
 
 module.exports = {
-    // entity_action: function ({ entityId, actionId, jumpBoost }) {
-    entity_action: function ({ actionId }) {
+    // entity_action({ entityId, actionId, jumpBoost }) {
+    entity_action({ actionId }) {
 
         //sneaking
         if (actionId === 0)

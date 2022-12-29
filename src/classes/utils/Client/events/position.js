@@ -1,14 +1,14 @@
 module.exports = {
-    position: function (i) {
+    position(i) {
         return this.p.emitMove.call(this, i);
     },
-    position_look: function (i) {
+    position_look(i) {
         return this.p.emitMove.call(this, i);
     },
-    look: function (i) {
+    look(i) {
         return this.p.emitMove.call(this, i);
     },
-    flying: function (i) {
+    flying(i) {
         return this.p.emitMove.call(this, i);
     }
 }

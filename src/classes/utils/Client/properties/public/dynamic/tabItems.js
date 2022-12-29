@@ -3,10 +3,10 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._tabItems;
         },
-        set: function (newValue) {
+        set(newValue) {
             const oldValue = [...this.tabItems];
 
             this.p._tabItems = newValue;
@@ -18,7 +18,7 @@ module.exports = {
             if (changed)
                 this.p.emitChange('tabItems', oldValue);
         },
-        init: function () {
+        init() {
             this.p._tabItems = Object.freeze([]);
         }
     }

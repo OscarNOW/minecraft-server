@@ -5,7 +5,7 @@ const CustomError = require('../../CustomError.js');
 const { sneaking: clientSneaking } = require('../properties/public/dynamic/sneaking.js');
 
 module.exports = {
-    use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {
+    use_entity({ target, mouse, hand, x, y, z, sneaking }) {
         if (!this.entities[target])
             return this.p.emitError(new CustomError('expectationNotMet', 'client', `target in  <remote ${this.constructor.name}>.use_entity({ target: ${require('util').inspect(target)} })  `, {
                 got: target,

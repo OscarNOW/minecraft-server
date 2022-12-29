@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._chatSettings;
         },
-        set: function (value) {
+        set(value) {
             this.p._chatSettings = value;
         },
-        init: function () {
+        init() {
             this.p._chatSettings = Object.freeze({
                 visible: null,
                 colors: null

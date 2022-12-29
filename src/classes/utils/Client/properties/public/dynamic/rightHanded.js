@@ -3,13 +3,13 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
             return this.p._rightHanded;
         },
-        set: function (value) {
+        set(value) {
             this.p._rightHanded = value;
         },
-        init: function () {
+        init() {
             this.p._rightHanded = null;
         }
     }

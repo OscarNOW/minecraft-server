@@ -1,6 +1,6 @@
 module.exports = {
     online: {
-        get: function () {
+        get() {
             return this.p.client.socket.readyState === 'open';
         }
     }

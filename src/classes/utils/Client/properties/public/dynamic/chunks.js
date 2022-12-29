@@ -3,7 +3,7 @@ module.exports = {
         info: {
             preventSet: true
         },
-        get: function () {
+        get() {
 
             if (!this.p._chunks) {
                 this.p.chunksGenerated = true;
@@ -19,7 +19,7 @@ module.exports = {
 
             return this.p._chunks;
         },
-        getPrivate: function () {
+        getPrivate() {
             if (!this.p._chunks) {
                 this.p.chunksGenerated = false;
                 this.p._chunks = Object.freeze([]);
@@ -27,7 +27,7 @@ module.exports = {
 
             return this.p._chunks;
         },
-        set: function (value) {
+        set(value) {
             let oldValue;
             let changed;
 
