@@ -13,7 +13,7 @@ module.exports = {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
-            let newValue = Math.round(parseFloat(newValue));
+            let newValue = Math.round(parseFloat(v));
             if (newValue < 0) newValue = 0;
             if (newValue > 20) newValue = 20;
 
