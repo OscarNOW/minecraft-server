@@ -315,7 +315,7 @@ class Entity {
 
         this.p.sendPacket('combat_event', {
             event: 2,
-            playerId: this.player.entityId,
+            playerId: this.client.entityId,
             entityId: this.id, //killer
             message: JSON.stringify(deathMessage.chat)
         });
