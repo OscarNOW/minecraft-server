@@ -24,7 +24,4 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    console.log(client.chunks.length)
-    client.chunks = ['abc']
-    console.log(client.chunks.length)
 });
