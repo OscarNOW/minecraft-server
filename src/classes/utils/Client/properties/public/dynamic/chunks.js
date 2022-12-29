@@ -12,10 +12,10 @@ module.exports = {
 
             if (!this.p.chunksGenerated) {
                 this.p.chunksGenerated = true;
-                this.p.chunks = Object.freeze(this.p._chunks
-                    .map(generator => generator()) //generator calls (new LoadedChunk(...)) for every LoadedChunk
+                this.p._chunks = Object.freeze(
+                    this.p._chunks.map(generator => generator()) //generator calls (new LoadedChunk(...)) for every LoadedChunk
                 );
-            }
+            };
 
             return this.p._chunk;
         },
