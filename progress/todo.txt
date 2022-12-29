@@ -2,6 +2,7 @@ Pre-release
 
 Replace properties where you can set textInput or Text but only get Text with separate getter and setter
 Change newValue in packet send in client dynamic properties to this.something
+Delete <Client>.particle from types and delete file, because not implemented
 
 Major update
 
