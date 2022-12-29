@@ -3,9 +3,6 @@ const { timing: { teleportConfirmationTimeout }, defaults } = require('../../../
 const Changable = require('../../../../Changable.js');
 const CustomError = require('../../../../CustomError.js');
 
-const teleportPromises = new WeakMap();
-const oldPositions = new WeakMap();
-
 module.exports = {
     position: {
         info: {
@@ -20,35 +17,35 @@ module.exports = {
                 for (const [key, value] of Object.entries(pos))
                     this.p._position.setRaw(key, value)
 
-                oldPositions.set(this, Object.freeze({
+                this.p.oldPositions = Object.freeze({
                     x: this.p._position.x,
                     y: this.p._position.y,
                     z: this.p._position.z,
                     yaw: this.p._position.yaw,
                     pitch: this.p._position.pitch,
                     isFirst: true
-                }));
+                });
             } else {
 
                 if (!this.p.stateHandler.checkReady.call(this))
                     return;
 
                 let teleportId = Math.floor(Math.random() * 1000000);
-                while (teleportPromises.get(this)?.[teleportId])
+                while (this.p.teleportPromises?.[teleportId])
                     teleportId = Math.floor(Math.random() * 1000000);
 
                 new Promise((res, rej) => {
-                    let obj = teleportPromises.get(this) || {};
+                    let obj = this.p.teleportPromises || {};
                     obj[teleportId] = {
                         res,
                         rej,
                         resolved: false
                     }
 
-                    teleportPromises.set(this, obj)
+                    this.p.teleportPromises = obj;
 
                     this.p.setTimeout(() => {
-                        if (this.online && !teleportPromises.get(this)[teleportId].resolved)
+                        if (this.online && !this.p.teleportPromises[teleportId].resolved)
                             rej(new CustomError('expectationNotMet', 'client', `response in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
                                 got: 'no call',
                                 expectationType: 'value',
@@ -57,7 +54,7 @@ module.exports = {
                     }, teleportConfirmationTimeout)
                 }).catch(e => this.p.emitError(e));
 
-                let oldPosition = oldPositions.get(this);
+                let oldPosition = this.p.oldPositions;
                 let useRelative = '';
                 let values = {};
 
@@ -87,14 +84,14 @@ module.exports = {
                     teleportId
                 });
 
-                oldPositions.set(this, Object.freeze({
+                this.p.oldPositions = Object.freeze({
                     x: this.p._position.x,
                     y: this.p._position.y,
                     z: this.p._position.z,
                     yaw: this.p._position.yaw,
                     pitch: this.p._position.pitch,
                     isFirst: false
-                }));
+                });
 
             }
         },
@@ -102,28 +99,28 @@ module.exports = {
             this.p.positionSet = false;
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
 
-            oldPositions.set(this, Object.freeze({
+            this.p.oldPositions = Object.freeze({
                 x: this.p._position.x,
                 y: this.p._position.y,
                 z: this.p._position.z,
                 yaw: this.p._position.yaw,
                 pitch: this.p._position.pitch,
                 isFirst: true
-            }));
+            });
         },
         confirm: function (teleportId) {
-            teleportPromises.get(this)[teleportId].resolved = true;
-            teleportPromises.get(this)[teleportId].res();
+            this.p.teleportPromises[teleportId].resolved = true;
+            this.p.teleportPromises[teleportId].res();
         },
         update(position) {
-            oldPositions.set(this, Object.freeze({
+            this.p.oldPositions = Object.freeze({
                 x: position.x,
                 y: position.y,
                 z: position.z,
                 yaw: position.yaw,
                 pitch: position.pitch,
                 isFirst: false
-            }));
+            });
         }
     }
 }

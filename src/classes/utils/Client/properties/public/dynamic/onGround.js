@@ -1,21 +1,21 @@
-let values = new WeakMap();
-
 module.exports = {
     onGround: {
         info: {
             preventSet: true
         },
         get: function () {
-            if (!values.has(this)) values.set(this, false);
-            return values.get(this);
+            return this.p.onGround;
         },
         set: function (newValue) {
             const oldValue = this.onGround;
 
-            values.set(this, newValue);
+            this.p.onGround = newValue;
 
             if (oldValue !== newValue)
                 this.p.emitChange('onGround', oldValue);
+        },
+        init: function () {
+            this.p.onGround = false;
         }
     }
 }

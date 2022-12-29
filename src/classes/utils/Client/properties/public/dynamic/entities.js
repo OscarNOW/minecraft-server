@@ -1,25 +1,25 @@
-let values = new WeakMap();
-
 module.exports = {
     entities: {
         info: {
             preventSet: true
         },
         get: function () {
-            if (!values.has(this)) values.set(this, Object.freeze({ 0: this }));
-            return values.get(this);
+            return this.p.entities;
         },
-        set: function (value) {
+        set: function (newValue) {
             const oldValue = { ...this.entities };
 
-            values.set(this, value);
+            this.p.entities = newValue;
 
             const changed =
-                Object.keys(oldValue).length !== Object.keys(value).length ||
-                Object.keys(oldValue).some(key => oldValue[key] !== value[key]);
+                Object.keys(oldValue).length !== Object.keys(newValue).length ||
+                Object.keys(oldValue).some(key => oldValue[key] !== newValue[key]);
 
             if (changed)
                 this.p.emitChange('entities', oldValue);
+        },
+        init: function () {
+            this.p.entities = Object.freeze({ 0: this });
         }
     }
 }

@@ -1,18 +1,15 @@
-let values = new WeakMap();
-
 module.exports = {
     tabItems: {
         info: {
             preventSet: true
         },
         get: function () {
-            if (!values.has(this)) values.set(this, Object.freeze([]));
-            return values.get(this);
+            return this.p._tabItems;
         },
         set: function (newValue) {
             const oldValue = [...this.tabItems];
 
-            values.set(this, newValue);
+            this.p._tabItems = newValue;
 
             const changed =
                 newValue.length !== oldValue.length ||
@@ -20,6 +17,9 @@ module.exports = {
 
             if (changed)
                 this.p.emitChange('tabItems', oldValue);
+        },
+        init: function () {
+            this.p._tabItems = Object.freeze([]);
         }
     }
 }

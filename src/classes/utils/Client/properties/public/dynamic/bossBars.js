@@ -1,25 +1,25 @@
-let values = new WeakMap();
-
 module.exports = {
     bossBars: {
         info: {
             preventSet: true
         },
         get: function () {
-            if (!values.has(this)) values.set(this, Object.freeze([]));
-            return values.get(this);
+            return this.p.bossBars;
         },
-        set: function (value) {
-            const oldValue = [...value];
+        set: function (newValue) {
+            const oldValue = [...this.bossBars];
 
-            values.set(this, value);
+            this.p.bossBars = newValue;
 
             const changed =
-                value.length !== oldValue.length ||
-                value.some((a, i) => a !== oldValue[i]);
+                newValue.length !== oldValue.length ||
+                newValue.some((a, i) => a !== oldValue[i]);
 
             if (changed)
                 this.p.emitChange('bossBars', oldValue);
+        },
+        init: function () {
+            this.p.bossBars = Object.freeze([]);
         }
     }
 }
