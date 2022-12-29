@@ -27,7 +27,7 @@ class Changable {
         if (value !== undefined)
             this[valuesSymbol][valuesOrKey] = value
         else
-            this[valuesSymbol] = valuesOrKey;
+            this[valuesSymbol] = Object.assign({}, valuesOrKey);
     }
 
     get raw() {
