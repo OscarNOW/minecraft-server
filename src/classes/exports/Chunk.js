@@ -23,23 +23,33 @@ class Chunk {
 
         this._hash = chunk?.hash || null;
         this._chunk = null;
-        this.blocks = {};
+        this._blocks = null;
+
+        this.inheritedChunk = chunk;
+    }
+
+    get blocks() {
+        if (this._blocks)
+            return this._blocks;
+
+        this._blocks = {};
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
-        if (chunk?.blocks)
+        if (this.inheritedChunk?.blocks)
 
-            for (const x in chunk.blocks)
-                for (const y in chunk.blocks[x])
-                    for (const z in chunk.blocks[x][y]) {
-                        if (!this.blocks[x])
-                            this.blocks[x] = {};
+            for (const x in this.inheritedChunk.blocks)
+                for (const y in this.inheritedChunk.blocks[x])
+                    for (const z in this.inheritedChunk.blocks[x][y]) {
+                        if (!this._blocks[x])
+                            this._blocks[x] = {};
 
-                        if (!this.blocks[x][y])
-                            this.blocks[x][y] = {};
+                        if (!this._blocks[x][y])
+                            this._blocks[x][y] = {};
 
-                        this.blocks[x][y][z] = new Block(chunk.blocks[x][y][z].block, chunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
-                    }
+                        this._blocks[x][y][z] = new Block(this.inheritedChunk.blocks[x][y][z].block, this.inheritedChunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
+                    };
 
+        return this._blocks;
     }
 
     get chunk() {
