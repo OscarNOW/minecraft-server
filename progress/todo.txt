@@ -1,6 +1,5 @@
 Pre-release
 
-Change newValue in packet send in client dynamic properties to this.something
 
 Major update
 
