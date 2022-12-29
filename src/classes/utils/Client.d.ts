@@ -87,6 +87,8 @@ export class Client {
     };
     get tabHeader(): Text;
     set tabHeader(text: Text | textInput);
+    get tabFooter(): Text;
+    set tabFooter(text: Text | textInput);
 
     raining: boolean;
     toxicRainLevel: number;
@@ -98,6 +100,8 @@ export class Client {
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     food: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
+
+    // methods
 
     particle(
         particleName: noDataParticle,
