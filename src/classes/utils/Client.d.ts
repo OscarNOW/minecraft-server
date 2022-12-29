@@ -449,11 +449,12 @@ type defaultClientProperties = {
         yaw?: number;
         pitch?: number;
     }
-
     experience?: {
         bar?: number;
         level?: number;
     };
+    tabHeader?: Text | textInput;
+    tabFooter?: Text | textInput;
 
     raining?: boolean;
     toxicRainLevel?: number;
