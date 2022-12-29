@@ -5,6 +5,8 @@ None
 * Added [`<Chunk>.hash`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Chunk#hash)
 * Added [`<Client>.locale.serious`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#locale)
 * Added `oldValue` argument to [`Client change event`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#on)
+* [`<Client>.tabHeader`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabHeader)
+* [`<Client>.tabFooter`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabFooter)
 
 ## Speed improvements
 * Loading library
