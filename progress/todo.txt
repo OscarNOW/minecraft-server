@@ -1,6 +1,5 @@
 Pre-release
 
--Improve speed of generating chunks
 
 Major update
 
