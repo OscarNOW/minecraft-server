@@ -24,7 +24,13 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
+    const cow = client.entity('cow', {
+        x: 4,
+        y: 100,
+        z: 4
+    });
+
     client.on('change', 'slot', () => {
-        client.chunks.find(({ x, z }) => x === 0 && z === 0)?.remove?.();
+        cow.killClient();
     });
 });
