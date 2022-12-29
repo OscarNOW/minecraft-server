@@ -16,7 +16,8 @@ const changes = [
     'chunks',
     'entities',
     'sprinting',
-    'tabItems'
+    'tabItems',
+    'tabHeader'
 ];
 
 module.exports = {
