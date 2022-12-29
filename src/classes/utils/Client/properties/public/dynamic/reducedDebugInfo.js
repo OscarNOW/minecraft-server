@@ -4,6 +4,8 @@ const CustomError = require('../../../../CustomError.js');
 module.exports = {
     reducedDebugInfo: {
         info: {
+            preventSet: true,
+
             defaultable: true,
             defaultSetTime: 'loginPacket',
             loginPacket: [
@@ -16,7 +18,10 @@ module.exports = {
         get: function () {
             return this.p._reducedDebugInfo;
         },
-        setRaw: function (newValue, loginPacket) {
+        set: function (newValue, beforeReady, loginPacket) {
+            if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
+                return;
+
             if (typeof newValue !== 'boolean')
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(newValue)}  `, {
                     got: newValue,
@@ -28,8 +33,6 @@ module.exports = {
 
             if (loginPacket)
                 return { reducedDebugInfo: newValue }
-            else
-                throw new Error(`Can't set "reducedDebugInfo"`) //todo: use CustomError
         },
         init: function () {
             this.p._reducedDebugInfo = defaults.reducedDebugInfo;

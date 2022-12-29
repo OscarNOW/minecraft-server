@@ -9,8 +9,8 @@ module.exports = {
         get: function () {
             return this.p._experience;
         },
-        set: function ({ bar, level } = {}) {
-            if (!this.p.stateHandler.checkReady.call(this))
+        set: function ({ bar, level } = {}, beforeReady) {
+            if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
             if (bar === undefined) bar = this.experience.bar;
@@ -35,31 +35,8 @@ module.exports = {
                 totalExperience
             });
 
-            if (level !== oldValue.level || bar !== oldValue.bar)
+            if ((!beforeReady) && level !== oldValue.level || bar !== oldValue.bar)
                 this.p.emitChange('experience', oldValue);
-        },
-        setRaw: function ({ bar, level }) {
-
-            if (bar === undefined) bar = this.experience.bar;
-            if (level === undefined) level = this.experience.level;
-            if (level === null) level = undefined;
-
-            let totalExperience;
-
-            if (level >= 0 && level <= 15)
-                totalExperience = Math.pow(level, 2) + (level * 6);
-            else if (level >= 16 && level <= 30)
-                totalExperience = (2.5 * Math.pow(level, 2)) - (40.5 * level) + 360;
-            else
-                totalExperience = (4.5 * Math.pow(level, 2)) - (162.5 * level) + 2220;
-
-            this.p._experience.setRaw({ bar, level });
-
-            this.p.sendPacket('experience', {
-                experienceBar: bar,
-                level,
-                totalExperience
-            });
         },
         init: function () {
             this.p._experience = new Changable((function (i) { this.experience = i }).bind(this), {

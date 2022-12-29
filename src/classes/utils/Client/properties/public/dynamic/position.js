@@ -15,85 +15,88 @@ module.exports = {
         get: function () {
             return this.p._position;
         },
-        set: function (pos = {}) {
-            if (!this.p.stateHandler.checkReady.call(this))
-                return;
+        set: function (pos = {}, beforeReady) {
+            if (beforeReady) {
+                for (const [key, value] of Object.entries(pos))
+                    this.p._position.setRaw(key, value)
 
-            let teleportId = Math.floor(Math.random() * 1000000);
-            while (teleportPromises.get(this)?.[teleportId])
-                teleportId = Math.floor(Math.random() * 1000000);
+                oldPositions.set(this, Object.freeze({
+                    x: this.p._position.x,
+                    y: this.p._position.y,
+                    z: this.p._position.z,
+                    yaw: this.p._position.yaw,
+                    pitch: this.p._position.pitch,
+                    isFirst: true
+                }));
+            } else {
 
-            new Promise((res, rej) => {
-                let obj = teleportPromises.get(this) || {};
-                obj[teleportId] = {
-                    res,
-                    rej,
-                    resolved: false
-                }
+                if (!this.p.stateHandler.checkReady.call(this))
+                    return;
 
-                teleportPromises.set(this, obj)
+                let teleportId = Math.floor(Math.random() * 1000000);
+                while (teleportPromises.get(this)?.[teleportId])
+                    teleportId = Math.floor(Math.random() * 1000000);
 
-                this.p.setTimeout(() => {
-                    if (this.online && !teleportPromises.get(this)[teleportId].resolved)
-                        rej(new CustomError('expectationNotMet', 'client', `response in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
-                            got: 'no call',
-                            expectationType: 'value',
-                            expectation: ['call']
-                        }, null, { server: this.server, client: this }))
-                }, teleportConfirmationTimeout)
-            }).catch(e => this.p.emitError(e));
+                new Promise((res, rej) => {
+                    let obj = teleportPromises.get(this) || {};
+                    obj[teleportId] = {
+                        res,
+                        rej,
+                        resolved: false
+                    }
 
-            let oldPosition = oldPositions.get(this);
-            let useRelative = '';
-            let values = {};
+                    teleportPromises.set(this, obj)
 
-            for (const key of [
-                'pitch',
-                'yaw',
-                'z',
-                'y',
-                'x',
-            ]) {
-                let val = pos[key] ?? oldPosition[key];
+                    this.p.setTimeout(() => {
+                        if (this.online && !teleportPromises.get(this)[teleportId].resolved)
+                            rej(new CustomError('expectationNotMet', 'client', `response in  <remote ${this.constructor.name}>.teleport_confirm(...)  `, {
+                                got: 'no call',
+                                expectationType: 'value',
+                                expectation: ['call']
+                            }, null, { server: this.server, client: this }))
+                    }, teleportConfirmationTimeout)
+                }).catch(e => this.p.emitError(e));
 
-                if (oldPosition && (!oldPosition.isFirst) && (Math.abs(val - oldPosition[key]) < Math.abs(val))) {
-                    useRelative += '1'
-                    values[key] = val - oldPosition[key]
-                } else {
-                    useRelative += '0'
-                    values[key] = val
-                }
-            };
+                let oldPosition = oldPositions.get(this);
+                let useRelative = '';
+                let values = {};
 
-            this.p.positionSet = true;
+                for (const key of [
+                    'pitch',
+                    'yaw',
+                    'z',
+                    'y',
+                    'x',
+                ]) {
+                    let val = pos[key] ?? oldPosition[key];
 
-            this.p.sendPacket('position', {
-                ...values,
-                flags: parseInt(useRelative, 2),
-                teleportId
-            });
+                    if (oldPosition && (!oldPosition.isFirst) && (Math.abs(val - oldPosition[key]) < Math.abs(val))) {
+                        useRelative += '1'
+                        values[key] = val - oldPosition[key]
+                    } else {
+                        useRelative += '0'
+                        values[key] = val
+                    }
+                };
 
-            oldPositions.set(this, Object.freeze({
-                x: this.p._position.x,
-                y: this.p._position.y,
-                z: this.p._position.z,
-                yaw: this.p._position.yaw,
-                pitch: this.p._position.pitch,
-                isFirst: false
-            }));
-        },
-        setRaw: function (position = {}) {
-            for (const [key, value] of Object.entries(position))
-                this.p._position.setRaw(key, value)
+                this.p.positionSet = true;
 
-            oldPositions.set(this, Object.freeze({
-                x: this.p._position.x,
-                y: this.p._position.y,
-                z: this.p._position.z,
-                yaw: this.p._position.yaw,
-                pitch: this.p._position.pitch,
-                isFirst: true
-            }));
+                this.p.sendPacket('position', {
+                    ...values,
+                    flags: parseInt(useRelative, 2),
+                    teleportId
+                });
+
+                oldPositions.set(this, Object.freeze({
+                    x: this.p._position.x,
+                    y: this.p._position.y,
+                    z: this.p._position.z,
+                    yaw: this.p._position.yaw,
+                    pitch: this.p._position.pitch,
+                    isFirst: false
+                }));
+
+            }
         },
         init: function () {
             this.p.positionSet = false;
