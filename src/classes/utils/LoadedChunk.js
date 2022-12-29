@@ -1,5 +1,5 @@
 const Chunk = require('../exports/Chunk.js');
-const { chunks } = require('./Client/properties/dynamic/chunks.js')
+const { chunks } = require('./Client/properties/public/dynamic/chunks.js')
 
 function updateBlock({ x, y, z, stateId }) {
     this.sendPacket('block_change', {
