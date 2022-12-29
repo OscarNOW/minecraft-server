@@ -1,5 +1,6 @@
 Pre-release
 
+Some Client public dynamic properties use init and others init when get is called. Make this consistent
 
 Major update
 
