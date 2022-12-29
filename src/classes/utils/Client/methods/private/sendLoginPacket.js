@@ -67,7 +67,7 @@ module.exports = {
         let loginPacketProperties = {};
         for (const [name, value] of Object.entries(customLoginProperties)) {
             const file = this.p.pubDynProperties[name];
-            const generatedLoginProperties = file.getLoginProperties.call(this, value)
+            const generatedLoginProperties = file.set.call(this, value, true, true);
 
             for (const { minecraftName } of file.info?.loginPacket || [])
                 loginPacketProperties[minecraftName] = generatedLoginProperties[minecraftName];
