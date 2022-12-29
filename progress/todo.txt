@@ -1,8 +1,7 @@
 Pre-release
 
--Move setRaw to same set function with extra argument whether changeEvents should be emitted
 Implement clientDynamicProperties\file.info.preventSet
-    Change setPrivate to set with preventSet
+    -Change setPrivate to set with preventSet
 
 Major update
 
