@@ -17,11 +17,11 @@ module.exports = {
                 );
             };
 
-            return this.p._chunk;
+            return this.p._chunks;
         },
         getPrivate: function () {
             if (!this.p._chunks) {
-                this.p.chunksGenerated = true;
+                this.p.chunksGenerated = false;
                 this.p._chunks = Object.freeze([]);
             }
 
