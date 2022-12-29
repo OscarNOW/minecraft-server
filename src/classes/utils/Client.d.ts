@@ -86,9 +86,9 @@ export class Client {
         level: number;
     };
     get tabHeader(): Text;
-    set tabHeader(text: Text | textInput);
+    set tabHeader(text: textInput | Text);
     get tabFooter(): Text;
-    set tabFooter(text: Text | textInput);
+    set tabFooter(text: textInput | Text);
 
     raining: boolean;
     toxicRainLevel: number;
@@ -144,7 +144,7 @@ export class Client {
     demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;
-    kick(reason: textInput | Text): void; //todo: rename to remove, for constistency
+    kick(reason: textInput | Text): void; //todo: rename to remove, for consistency
     chat(message?: textInput | Text): void;
     setBlock(block: blockName, location: {
         x: number;
@@ -372,8 +372,8 @@ type defaultClientProperties = {
         bar?: number;
         level?: number;
     };
-    tabHeader?: Text | textInput;
-    tabFooter?: Text | textInput;
+    tabHeader?: textInput | Text;
+    tabFooter?: textInput | Text;
 
     raining?: boolean;
     toxicRainLevel?: number;
