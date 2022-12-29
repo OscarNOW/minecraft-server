@@ -1,6 +1,7 @@
 Pre-release
 
 Make all Client public dynamic properties use init
+-Use privates to store readonly values in Client instead of values WeakMap
 Change name: function(params) {} to name(params) {}
     Client public dynamic properties
     Other places
@@ -30,7 +31,6 @@ Add checks to check if input from constructor is valid with errors when wrong in
 Add better private properties to all classes that need it (Chunk, Block, Text)
     Remove privates from type files
     Make <Server>.server private and not show up in console.log(
-Use privates to store readonly values in Client instead of values WeakMap
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
     Waiting for https://github.com/orgs/community/discussions/36226
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
