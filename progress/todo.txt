@@ -1,8 +1,7 @@
 Pre-release
 
 Replace properties where you can set textInput or Text but only get Text with separate getter and setter
--Tab header
-Tab footer
+Change newValue in packet send in client dynamic properties to this.something
 
 Major update
 
