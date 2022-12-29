@@ -24,13 +24,11 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    const cow = client.entity('cow', {
-        x: 4,
-        y: 100,
-        z: 4
-    });
-
     client.on('change', 'slot', () => {
-        cow.killClient();
+        client.die({
+            text: 'Hello world',
+            color: 'red',
+            modifiers: ['underlined', 'italic']
+        })
     });
 });
