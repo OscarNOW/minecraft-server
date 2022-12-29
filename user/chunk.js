@@ -24,11 +24,15 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('change', 'slot', () => {
+    client.on('respawn', () => {
         client.die({
             text: 'Hello world',
             color: 'red',
             modifiers: ['underlined', 'italic']
-        })
+        });
     });
 });
+
+server.on('join', client => {
+    client.die();
+})
