@@ -1,7 +1,7 @@
 Pre-release
 
 -Move setRaw to same set function with extra argument whether changeEvents should be emitted
-    Keep loginPacket generation in separate function
+    -Keep loginPacket generation in separate function
 
 Major update
 
