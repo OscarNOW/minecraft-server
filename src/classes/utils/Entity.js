@@ -8,6 +8,7 @@ const path = require('path');
 
 const CustomError = require('./CustomError.js')
 const Changable = require('./Changable.js');
+const Text = require('../exports/Text.js');
 
 const _p = Symbol('private');
 
@@ -293,6 +294,8 @@ class Entity {
         for (const func of this.p.beforeRemove)
             func();
 
+        //todo: check if Client is ready?
+
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
         });
@@ -301,6 +304,21 @@ class Entity {
         delete newClientEntities[this.id];
 
         clientEntities.set.call(this.client, Object.freeze(newClientEntities));
+    }
+
+    killClient(deathMessage = '') {
+
+        //todo: check if Client is ready?
+
+        if (!(deathMessage instanceof Text))
+            deathMessage = new Text(deathMessage);
+
+        this.p.sendPacket('combat_event', {
+            event: 2,
+            playerId: this.player.entityId,
+            entityId: this.id, //killer
+            message: JSON.stringify(deathMessage.chat)
+        });
     }
 
     removeAllListeners(event) {

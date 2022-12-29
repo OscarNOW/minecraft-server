@@ -53,6 +53,7 @@ export class Entity {
         pitch: number;
     }): void;
     remove(): void;
+    killClient(deathMessage: textInput | Text): void;
 
     observe(observable: 'position', callback: (position: {
         x: number;
