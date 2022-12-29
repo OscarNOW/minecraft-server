@@ -1,4 +1,5 @@
 const { Server, Chunk } = require('../');
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
@@ -23,15 +24,7 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('respawn', () => {
-        client.kill({
-            text: 'Hello world',
-            color: 'red',
-            modifiers: ['underlined', 'italic']
-        });
-    });
-});
+    await wait(1000)
 
-server.on('join', client => {
-    client.kill();
-})
+    client.chat(client.brand);
+});
