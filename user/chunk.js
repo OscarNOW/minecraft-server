@@ -1,5 +1,4 @@
 const { Server, Chunk } = require('../');
-console.log('Loaded library')
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
