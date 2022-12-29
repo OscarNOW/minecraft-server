@@ -26,7 +26,7 @@ module.exports = {
             this.p._difficulty = newValue;
 
             this.p.sendPacket('difficulty', {
-                difficulty: difficulties.findIndex(x => x === newValue),
+                difficulty: difficulties.findIndex(x => x === this.difficulty),
                 difficultyLocked: true
             });
 

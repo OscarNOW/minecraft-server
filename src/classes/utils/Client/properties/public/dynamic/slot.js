@@ -27,7 +27,7 @@ module.exports = {
             this.p._slot = newValue;
 
             this.p.sendPacket('held_item_slot', {
-                slot: newValue
+                slot: this.slot
             });
 
             if ((!beforeReady) && oldValue !== newValue)

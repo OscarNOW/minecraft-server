@@ -35,7 +35,7 @@ module.exports = {
             if (!loginPacket)
                 this.p.sendPacket('game_state_change', {
                     reason: 3,
-                    gameMode: gamemodes.indexOf(newValue)
+                    gameMode: gamemodes.indexOf(this.gamemode)
                 });
 
             if ((!beforeReady) && oldValue !== newValue)

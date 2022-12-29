@@ -29,7 +29,7 @@ module.exports = {
 
             this.p.sendPacket('update_health', {
                 health: this.health,
-                food: newValue,
+                food: this.food,
                 foodSaturation: this.foodSaturation
             });
 

@@ -21,7 +21,7 @@ module.exports = {
             this.p._tabHeader = newValue;
 
             this.p.sendPacket('playerlist_header', {
-                header: JSON.stringify(newValue.chat),
+                header: JSON.stringify(this.tabHeader.chat),
                 footer: JSON.stringify(this.tabFooter.chat)
             })
 

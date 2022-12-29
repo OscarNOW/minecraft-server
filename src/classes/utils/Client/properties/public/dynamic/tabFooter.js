@@ -22,7 +22,7 @@ module.exports = {
 
             this.p.sendPacket('playerlist_header', {
                 header: JSON.stringify(this.tabHeader.chat),
-                footer: JSON.stringify(newValue.chat)
+                footer: JSON.stringify(this.tabFooter.chat)
             })
 
             if ((!beforeReady) && oldValue !== newValue)

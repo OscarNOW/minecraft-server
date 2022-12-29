@@ -25,7 +25,7 @@ module.exports = {
 
             this.p.sendPacket('game_state_change', {
                 reason: 7,
-                gameMode: newValue ? this.toxicRainLevel + 1 : 0
+                gameMode: this.raining ? this.toxicRainLevel + 1 : 0
             });
 
             if ((!beforeReady) && oldValue !== newValue)

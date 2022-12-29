@@ -33,7 +33,7 @@ module.exports = {
             if (!loginPacket)
                 this.p.sendPacket('game_state_change', {
                     reason: 11,
-                    gameMode: newValue ? 0 : 1
+                    gameMode: this.showRespawnScreen ? 0 : 1
                 });
 
             if ((!beforeReady) && oldValue !== newValue)

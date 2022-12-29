@@ -28,9 +28,9 @@ module.exports = {
             this.p._foodSaturation = newValue;
 
             this.p.sendPacket('update_health', {
-                health: this.p._health,
-                food: this.p._food,
-                foodSaturation: newValue
+                health: this.health,
+                food: this.food,
+                foodSaturation: this.foodSaturation
             });
 
             if ((!beforeReady) && oldValue !== newValue)
