@@ -1,6 +1,9 @@
 Pre-release
 
-
+Make brandReceived separate state in stateHandler?
+Implement something to let user know when Client brand is sent
+    maybe event?
+    make <Client>.brand a Promise?
 
 Major update
 
