@@ -85,6 +85,8 @@ export class Client {
         bar: number;
         level: number;
     };
+    get tabHeader(): Text;
+    set tabHeader(text: Text | textInput);
 
     raining: boolean;
     toxicRainLevel: number;
