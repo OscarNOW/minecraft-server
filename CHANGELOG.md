@@ -7,6 +7,7 @@ None
 * Added `oldValue` argument to [`Client change event`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#on)
 * [`<Client>.tabHeader`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabHeader)
 * [`<Client>.tabFooter`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabFooter)
+* [`<Client>.die(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#die)
 * [`<LoadedChunk>.remove(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/LoadedChunk#remove)
 
 ## Speed improvements
