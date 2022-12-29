@@ -1,8 +1,6 @@
 Pre-release
 
-Change name: function(params) {} to name(params) {}
-    Client public dynamic properties
-    Other places
+
 
 Major update
 
