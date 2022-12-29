@@ -1,7 +1,5 @@
 Pre-release
 
-Implement clientDynamicProperties\file.info.preventSet
-    -Change setPrivate to set with preventSet
 
 Major update
 
