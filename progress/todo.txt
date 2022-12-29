@@ -1,6 +1,5 @@
 Pre-release
 
--Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 
 Major update
 
@@ -12,11 +11,15 @@ Implement <Entity>.on('change', ...
 
 Anytime
 
+Tests
+    Make tests for functions
+    Rewrite src/test.js
+    Add more extensive tests
+    Rewrite Server tests with ProxyClient
+    Write Client tests
+        Add clientDefaultProperty tests to Client
 Allow for two Players (and TabItems) to share same uuid (by actually setting them to different uuids, but use skin of original)
 Move shared functions between TabItem and Player (like getSkin) to separate function file
-Resolve "todo: " and "not implemented" in code
-Make tests for functions
-Rewrite src/test.js
 Rewrite scripts/build
 Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
@@ -40,19 +43,14 @@ Improve CustomError
 Create default block states
     Create table of states and blocks
 Move manifest versions to settings.json?
-Add more extensive tests
-Rewrite Server tests with ProxyClient
-Write Client tests
-    Add setRaw tests to Client
 Move scripts/build/*.js npmRun function to separate function file
 Move TabItem/get function to separate function file
-Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
+Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file
 Fix docs for <Boat>.on(, because inherited events are not shown
 Add docs title to settings.json
 Add typescript declaration file check
 Make use of position and location consistent
 Move block faces (in block_dig event and block_place event) to separate data file
-Move isMainHand to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
 Test Github codespaces
 Beautify Client.d.ts
