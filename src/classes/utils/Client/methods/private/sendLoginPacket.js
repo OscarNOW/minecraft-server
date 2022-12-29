@@ -66,10 +66,11 @@ module.exports = {
         //convert properties to packet format
         let loginPacketProperties = {};
         for (const [name, value] of Object.entries(customLoginProperties)) {
-            let file = this.p.pubDynProperties[name];
+            const file = this.p.pubDynProperties[name];
+            const generatedLoginProperties = file.getLoginProperties.call(this, value)
 
             for (const { minecraftName } of file.info?.loginPacket || [])
-                loginPacketProperties[minecraftName] = file.setRaw.call(this, value, true)[minecraftName];
+                loginPacketProperties[minecraftName] = generatedLoginProperties[minecraftName];
         }
 
         this.p.sendPacket('login', { ...loginPacket, ...loginPacketProperties });

@@ -5,6 +5,6 @@ module.exports = {
                 .map(([name, value]) => [this.p.pubDynProperties[name], value])
                 .filter(([file, value]) => [file.info?.callAfterLogin, value])
         )
-            file.setRaw.call(this, value, false);
+            file.set.call(this, value, true);
     }
 }
