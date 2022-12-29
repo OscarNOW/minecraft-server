@@ -9,4 +9,6 @@ export class LoadedChunk extends Chunk {
 
     x: number;
     z: number;
+
+    remove(): void;
 }
