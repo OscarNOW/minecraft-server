@@ -276,7 +276,7 @@ export class Client {
         z: number;
     }) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
-    on(event: 'leftClick', callback: () => void): void;
+    on(event: 'leftClick' | 'respawn', callback: () => void): void;
     on(event: 'rightClick', callback: (clickInfo: {
         position: {
             x: number;
@@ -339,7 +339,7 @@ export class Client {
         z: number;
     }) => void): void;
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
-    once(event: 'leftClick', callback: () => void): void;
+    once(event: 'leftClick' | 'respawn', callback: () => void): void;
     once(event: 'rightClick', callback: (clickInfo: {
         position: {
             x: number;

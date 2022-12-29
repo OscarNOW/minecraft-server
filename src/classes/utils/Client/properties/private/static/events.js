@@ -16,7 +16,8 @@ const events = [
     'inventoryClose',
     'misbehavior',
     'blockPlace',
-    'armSwing'
+    'armSwing',
+    'respawn'
 ];
 
 module.exports = {
