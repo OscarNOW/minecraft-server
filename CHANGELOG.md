@@ -7,7 +7,7 @@ None
 * Added [`<Client>.locale.serious`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#locale)
 * [`<Client>.tabHeader`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabHeader)
 * [`<Client>.tabFooter`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#tabFooter)
-* [`<Client>.die(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#die)
+* [`<Client>.kill(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#kill)
 * [`<Entity>.killClient(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Entity#killClient)
 * [`<LoadedChunk>.remove(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/LoadedChunk#remove)
 

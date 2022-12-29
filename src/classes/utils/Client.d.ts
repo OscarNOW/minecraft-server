@@ -230,7 +230,7 @@ export class Client {
     pufferFishSound(): void;
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
-    die(deathMessage?: textInput | Text): void;
+    kill(deathMessage?: textInput | Text): void;
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 

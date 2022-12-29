@@ -25,7 +25,7 @@ server.on('connect', async client => {
             client.chunk(chunk, { x, z });
 
     client.on('respawn', () => {
-        client.die({
+        client.kill({
             text: 'Hello world',
             color: 'red',
             modifiers: ['underlined', 'italic']
@@ -34,5 +34,5 @@ server.on('connect', async client => {
 });
 
 server.on('join', client => {
-    client.die();
+    client.kill();
 })
