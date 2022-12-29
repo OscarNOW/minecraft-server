@@ -110,7 +110,7 @@ class Client {
         Object.defineProperties(this,
             Object.fromEntries(
                 Object.entries(pubDynProperties)
-                    .map(([name, { info: { preventSet }, get, set }]) => [name, {
+                    .map(([name, { info: { preventSet } = {}, get, set }]) => [name, {
                         configurable: false,
                         enumerable: true,
                         get: get?.bind?.(this),
