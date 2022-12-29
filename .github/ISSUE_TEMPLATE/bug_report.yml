@@ -72,8 +72,7 @@ body:
         # these version options are automatically updated in scripts/updateVersionFiles
         #startVersionOptions
         - github
-        - 1.2.0 (latest stable)
-        - 1.1.0
+        - 1.1.0 (latest stable)
         - 1.0.0
         - 0.2.0
         - 0.1.0
