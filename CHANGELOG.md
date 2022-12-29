@@ -18,13 +18,14 @@ None
 * Connecting a client to the server
 * Accessing [`<Client>.chunks`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#chunks)
 
+## Documentation / Types
+* Docs list unstable versions before stable versions
+* Made [`<Client>.locale` properties](https://oscarnow.github.io/minecraft-server/1.20/classes/Client#locale) explicit instead of `string`
+
 ## Issues fixed
 * Fixed bug in [`<Client>.end()`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#end)
 * Fixed bug where responses to legacy pings weren't being defaulted
 * Fixed bug where Client settings where all null
 * Fixed bug where Client could get kicked if you set the yaw or pitch of an Entity to high or low
 * Fixed bug where [`<Client>.chunks`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#chunks) was sometimes `undefined`
-
-## Documentation / Types
-* Docs list unstable versions before stable versions
-* Made [`<Client>.locale` properties](https://oscarnow.github.io/minecraft-server/1.20/classes/Client#locale) explicit instead of `string`
+* Fixed bug where [`<Client>.entity(`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#entity) would crash
