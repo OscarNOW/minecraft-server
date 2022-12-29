@@ -14,6 +14,7 @@ None
 * Generating chunks
 * Creating a server
 * Connecting a client to the server
+* Accessing [`<Client>.chunks`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#chunks)
 
 ## Issues fixed
 * Fixed bug in [`<Client>.end()`](https://oscarnow.github.io/minecraft-server/1.2.0/classes/Client#end)
