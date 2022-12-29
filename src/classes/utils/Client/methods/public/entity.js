@@ -27,7 +27,7 @@ module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
         let newEntities = Object.assign({}, this.entities);
         newEntities[entityId] = entity;
 
-        entities.setPrivate.call(this, Object.freeze(newEntities));
+        entities.set.call(this, Object.freeze(newEntities));
     };
 
     if (asyncEntityClasses.includes(type))

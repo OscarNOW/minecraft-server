@@ -2,6 +2,8 @@ const Client = require('../../Client.js');
 const Entity = require('../../Entity.js');
 const CustomError = require('../../CustomError.js');
 
+const { sneaking: clientSneaking } = require('../properties/public/dynamic/sneaking.js');
+
 module.exports = {
     use_entity: function ({ target, mouse, hand, x, y, z, sneaking }) {
         if (!this.entities[target])
@@ -11,7 +13,7 @@ module.exports = {
                 expectation: Object.keys(this.entities)
             }, null, { server: this.server, client: this }));
 
-        require('../properties/public/dynamic/sneaking.js').sneaking.setPrivate.call(this, sneaking);
+        clientSneaking.set.call(this, sneaking);
 
         const targetObj = this.entities[target];
 

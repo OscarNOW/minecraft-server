@@ -23,7 +23,7 @@ module.exports = function (chunk, { x, z }) {
     const loadedChunk = () => new LoadedChunk(this, chunk, { x, z }, this.p.sendPacket);
 
     if (this.p.generatedChunks)
-        chunks.setPrivate.call(this, Object.freeze([loadedChunk(), ...chunks.getPrivate.call(this)])); //generate loadedChunk and add it to chunks
+        chunks.set.call(this, Object.freeze([loadedChunk(), ...chunks.getPrivate.call(this)])); //generate loadedChunk and add it to chunks
     else
-        chunks.setPrivate.call(this, Object.freeze([loadedChunk, ...chunks.getPrivate.call(this)])); //don't generate loadedChunk, and add generator to chunks, so that chunks can generate it when needed
+        chunks.set.call(this, Object.freeze([loadedChunk, ...chunks.getPrivate.call(this)])); //don't generate loadedChunk, and add generator to chunks, so that chunks can generate it when needed
 }

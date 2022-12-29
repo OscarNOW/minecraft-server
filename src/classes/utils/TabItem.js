@@ -161,7 +161,7 @@ class TabItem {
         this
             .p.spawn.call(this)
             .then(() => {
-                tabItems.setPrivate.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+                tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
                 cb(this);
             });
     }
@@ -175,7 +175,7 @@ class TabItem {
             this.player = null;
         }
         this.p.remove.call(this, this.uuid);
-        tabItems.setPrivate.call(this.client,
+        tabItems.set.call(this.client,
             Object.freeze(
                 sortTabItems(
                     this.client.tabItems

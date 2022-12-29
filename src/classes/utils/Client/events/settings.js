@@ -23,21 +23,21 @@ module.exports = {
         let obj = languages[langCode];
         obj.langCode = langCode;
 
-        clientLocale.setPrivate.call(this, Object.freeze(obj));
-        clientViewDistance.setPrivate.call(this, viewDistance);
+        clientLocale.set.call(this, Object.freeze(obj));
+        clientViewDistance.set.call(this, viewDistance);
 
         if (chatFlags === 0)
-            clientChatSettings.setPrivate.call(this, Object.freeze({
+            clientChatSettings.set.call(this, Object.freeze({
                 visible: 'all',
                 colors: chatColors
             }));
         else if (chatFlags === 1)
-            clientChatSettings.setPrivate.call(this, Object.freeze({
+            clientChatSettings.set.call(this, Object.freeze({
                 visible: 'commands',
                 colors: chatColors
             }));
         else if (chatFlags === 2)
-            clientChatSettings.setPrivate.call(this, Object.freeze({
+            clientChatSettings.set.call(this, Object.freeze({
                 visible: 'none',
                 colors: chatColors
             }));
@@ -49,7 +49,7 @@ module.exports = {
             }, null, { server: this.server, client: this }));
 
         let bsp = Number(skinParts).toString(2).padStart(7, '0').split('').map(bit => Number(bit) === 1);
-        clientVisibleSkinParts.setPrivate.call(this, Object.freeze({
+        clientVisibleSkinParts.set.call(this, Object.freeze({
             cape: bsp[6],
             torso: bsp[5],
             leftArm: bsp[4],
@@ -60,9 +60,9 @@ module.exports = {
         }));
 
         if (mainHand === 0)
-            clientRightHanded.setPrivate.call(this, false);
+            clientRightHanded.set.call(this, false);
         else if (mainHand === 1)
-            clientRightHanded.setPrivate.call(this, true);
+            clientRightHanded.set.call(this, true);
         else
             this.p.emitError(new CustomError('expectationNotMet', 'client', `mainHand in  <remote ${this.constructor.name}>.settings({ mainHand: ${require('util').inspect(mainHand)} })  `, {
                 got: mainHand,

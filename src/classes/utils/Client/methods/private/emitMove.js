@@ -1,3 +1,6 @@
+const { onGround } = require('../../properties/public/dynamic/onGround.js');
+const { position } = require('../../properties/public/dynamic/position.js');
+
 module.exports = {
     emitMove(info) {
         if (!this.p.positionSet)
@@ -25,7 +28,7 @@ module.exports = {
                 this.p._position.setRaw(val, info[val]);
             }
 
-        require('../../properties/public/dynamic/onGround.js').onGround.setPrivate.call(this, info.onGround);
+        onGround.set.call(this, info.onGround);
 
         let newChunk = {
             x: Math.floor(this.position.x / 16),
@@ -46,7 +49,7 @@ module.exports = {
             })
 
         if (changed) {
-            require('../../properties/public/dynamic/position.js').position.update.call(this, this.p._position.raw)
+            position.update.call(this, this.p._position.raw);
             this.p.emitChange('position', oldPosition);
         }
     }

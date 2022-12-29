@@ -300,7 +300,7 @@ class Entity {
         let newClientEntities = Object.assign({}, this.client.entities);
         delete newClientEntities[this.id];
 
-        clientEntities.setPrivate.call(this.client, Object.freeze(newClientEntities));
+        clientEntities.set.call(this.client, Object.freeze(newClientEntities));
     }
 
     removeAllListeners(event) {

@@ -143,7 +143,7 @@ class BossBar {
             flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 
-        bossBars.setPrivate.call(this.client, Object.freeze([...this.client.bossBars, this]));
+        bossBars.set.call(this.client, Object.freeze([...this.client.bossBars, this]));
     }
 
     get flags() {
@@ -164,7 +164,7 @@ class BossBar {
         })
 
         this.p.visible = false;
-        bossBars.setPrivate.call(this, Object.freeze(this.bossBars.filter(a => a.id !== this.id)));
+        bossBars.set.call(this, Object.freeze(this.bossBars.filter(a => a.id !== this.id)));
     }
 
     get p() {
