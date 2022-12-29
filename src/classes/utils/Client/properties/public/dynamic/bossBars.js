@@ -2,11 +2,14 @@ let values = new WeakMap();
 
 module.exports = {
     bossBars: {
+        info: {
+            preventSet: true
+        },
         get: function () {
             if (!values.has(this)) values.set(this, Object.freeze([]));
             return values.get(this);
         },
-        setPrivate: function (value) {
+        set: function (value) {
             const oldValue = [...value];
 
             values.set(this, value);

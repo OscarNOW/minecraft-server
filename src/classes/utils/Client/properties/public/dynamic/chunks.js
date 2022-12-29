@@ -1,5 +1,8 @@
 module.exports = {
     chunks: {
+        info: {
+            preventSet: true
+        },
         get: function () {
 
             if (!this.p._chunks) {
@@ -24,7 +27,7 @@ module.exports = {
 
             return this.p._chunks;
         },
-        setPrivate: function (value) {
+        set: function (value) {
             let oldValue;
             let changed;
 

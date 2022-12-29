@@ -2,11 +2,14 @@ let values = new WeakMap();
 
 module.exports = {
     onGround: {
+        info: {
+            preventSet: true
+        },
         get: function () {
             if (!values.has(this)) values.set(this, false);
             return values.get(this);
         },
-        setPrivate: function (newValue) {
+        set: function (newValue) {
             const oldValue = this.onGround;
 
             values.set(this, newValue);

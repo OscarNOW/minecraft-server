@@ -1,5 +1,8 @@
 module.exports = {
     visibleSkinParts: {
+        info: {
+            preventSet: true
+        },
         get: function () {
             if (!this.p._visibleSkinParts)
                 this.p._visibleSkinParts = Object.freeze({
@@ -14,7 +17,7 @@ module.exports = {
 
             return this.p._visibleSkinParts;
         },
-        setPrivate: function (value) {
+        set: function (value) {
             this.p._visibleSkinParts = value;
         }
     }

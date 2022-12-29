@@ -2,11 +2,14 @@ let values = new WeakMap();
 
 module.exports = {
     entities: {
+        info: {
+            preventSet: true
+        },
         get: function () {
             if (!values.has(this)) values.set(this, Object.freeze({ 0: this }));
             return values.get(this);
         },
-        setPrivate: function (value) {
+        set: function (value) {
             const oldValue = [...this.entities];
 
             values.set(this, value);

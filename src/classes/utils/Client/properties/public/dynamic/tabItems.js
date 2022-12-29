@@ -2,11 +2,14 @@ let values = new WeakMap();
 
 module.exports = {
     tabItems: {
+        info: {
+            preventSet: true
+        },
         get: function () {
             if (!values.has(this)) values.set(this, Object.freeze([]));
             return values.get(this);
         },
-        setPrivate: function (newValue) {
+        set: function (newValue) {
             const oldValue = [...this.tabItems];
 
             values.set(this, newValue);
