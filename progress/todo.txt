@@ -1,7 +1,5 @@
 Pre-release
 
-Make all Client public dynamic properties use init
--Use privates to store readonly values in Client instead of values WeakMap
 Change name: function(params) {} to name(params) {}
     Client public dynamic properties
     Other places
