@@ -1,5 +1,6 @@
 Pre-release
 
+-Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 
 Major update
 
@@ -43,7 +44,6 @@ Add more extensive tests
 Rewrite Server tests with ProxyClient
 Write Client tests
     Add setRaw tests to Client
-Make a version placeholder in CHANGELOG.md so that {version} becomes the actual version
 Move scripts/build/*.js npmRun function to separate function file
 Move TabItem/get function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file (maybe data file)
