@@ -45,6 +45,10 @@ server.on('join', async client => {
         console.log(`join-1  : ${joinTimes[0].toFixed(2)}ms`)
         console.log(`join-n  : ${(joinTimes.slice(1).reduce((a, b) => a + b, 0) / joinTimes.length).toFixed(2)}ms`)
 
+        console.time('chunks  ');
+        (() => { })(client.chunks); //generate chunks
+        console.timeEnd('chunks  ');
+
         console.time('close   ')
         await server.close();
         console.timeEnd('close   ')
