@@ -24,19 +24,7 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.tabHeader = {
-        text: 'Header hello',
-        color: 'green',
-        modifiers: ['bold', 'italic']
-    };
-
-    client.tabFooter = {
-        text: 'Footer hello',
-        color: 'red',
-        modifiers: ['underlined', 'strikethrough']
-    };
-
-    client.tabItem({
-        name: 'Notch'
-    })
+    client.on('change', 'slot', () => {
+        client.chunks.find(({ x, z }) => x === 0 && z === 0)?.remove?.();
+    });
 });
