@@ -9,7 +9,6 @@ Improve quality score on NPM
     Check if github pages is allowed for home page
         Custom domain is not needed, but it does improve score
     Add badges?
-Make brandReceived separate state in stateHandler?
 Implement something to let user know when Client brand is sent
     maybe event?
     make <Client>.brand a Promise?
