@@ -36,16 +36,26 @@ module.exports = {
             let nextState = states[states.indexOf(currentState) + 1];
 
             if (currentState === 'settingsReceived') {
+
                 this.server.clients.push(this);
                 this.p.emit('connect');
                 this.server.p.emit('connect', this);
+
             } else if (currentState === 'clientSpawned') {
+
                 this.p.emit('join');
                 this.server.p.emit('join', this);
+
+            } else if (currentState === 'brandReceived') {
+
+                this.p.emit('brandReceive');
+
             } else if (currentState === 'offline') {
+
                 this.server.clients.splice(this.server.clients.indexOf(this), 1);
                 this.p.emit('leave');
                 this.server.p.emit('leave', this);
+
             }
 
             if (currentState !== this.p.state)

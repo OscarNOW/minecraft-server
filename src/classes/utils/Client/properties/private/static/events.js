@@ -17,7 +17,8 @@ const events = [
     'misbehavior',
     'blockPlace',
     'armSwing',
-    'respawn'
+    'respawn',
+    'brandReceive'
 ];
 
 module.exports = {
