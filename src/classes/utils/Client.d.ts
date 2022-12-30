@@ -27,7 +27,7 @@ export class Client {
     readonly entityId: number;
     readonly version: newVersion;
     readonly ip: string;
-    readonly brand?: string;
+    readonly brand: string | null;
     readonly connection: {
         readonly host: string;
         readonly port: number
