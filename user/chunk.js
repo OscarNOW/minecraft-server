@@ -22,8 +22,8 @@ server.on('connect', client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
-});
 
-server.on('join', client => {
-    client.chat(client.brand);
-})
+    client.on('brandReceive', () => {
+        client.chat(client.brand);
+    })
+});
