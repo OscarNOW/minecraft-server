@@ -7,6 +7,7 @@ const states = Object.freeze([
     'settingsReceived',
     'afterLoginPacketsSent',
     'clientSpawned',
+    'brandReceived',
     'offline'
 ]);
 
@@ -103,6 +104,8 @@ module.exports = {
             packetReceived(packet) {
                 if (packet === 'settings')
                     this.p.stateHandler.updateState.set.call(this, 'settingsReceived');
+                else if (packet === 'brand')
+                    this.p.stateHandler.updateState.set.call(this, 'brandReceived');
                 else
                     this.p.emitError(new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {
                         got: packet,
