@@ -1,5 +1,4 @@
 const { Server, Chunk } = require('../');
-const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
@@ -19,12 +18,12 @@ const server = new Server({
 });
 
 console.log('Listening')
-server.on('connect', async client => {
+server.on('connect', client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    await wait(1000)
-
-    client.chat(client.brand);
+    client.on('brandReceive', () => {
+        client.chat(client.brand);
+    })
 });

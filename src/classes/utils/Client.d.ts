@@ -27,7 +27,7 @@ export class Client {
     readonly entityId: number;
     readonly version: newVersion;
     readonly ip: string;
-    readonly brand?: string;
+    readonly brand: string | null;
     readonly connection: {
         readonly host: string;
         readonly port: number
@@ -265,7 +265,7 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    on(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose', callback: () => void): void;
+    on(event: 'connect' | 'join' | 'brandReceive' | 'leave' | 'windowClose' | 'inventoryClose' | 'leftClick' | 'respawn' | 'itemHandSwap', callback: () => void): void;
     on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -277,7 +277,6 @@ export class Client {
         z: number;
     }) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
-    on(event: 'leftClick' | 'respawn', callback: () => void): void;
     on(event: 'rightClick', callback: (clickInfo: {
         position: {
             x: number;
@@ -328,7 +327,7 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    once(event: 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose', callback: () => void): void;
+    once(event: 'connect' | 'join' | 'brandReceive' | 'leave' | 'windowClose' | 'inventoryClose' | 'leftClick' | 'respawn' | 'itemHandSwap', callback: () => void): void;
     once(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -340,7 +339,6 @@ export class Client {
         z: number;
     }) => void): void;
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
-    once(event: 'leftClick' | 'respawn', callback: () => void): void;
     once(event: 'rightClick', callback: (clickInfo: {
         position: {
             x: number;

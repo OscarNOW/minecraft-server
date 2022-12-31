@@ -10,7 +10,7 @@ module.exports = {
             this.p._brand = value;
         },
         init() {
-            this.p._brand = undefined;
+            this.p._brand = null;
         }
     }
 }
