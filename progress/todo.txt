@@ -1,17 +1,6 @@
 Pre-release
 
-Improve quality score on NPM
-    https://itnext.io/increasing-an-npm-packages-search-score-fb557f859300
-    https://npms.io/about
-    Change release workflow to wait after committing before publishing to npm so that NPM can see checks passing
-    Check if NPM can see tests
-        Add test coverage reporter
-    Check if github pages is allowed for home page
-        Custom domain is not needed, but it does improve score
-    Add badges?
-Implement something to let user know when Client brand is sent
-    maybe event?
-    make <Client>.brand a Promise?
+
 
 Major update
 
@@ -23,6 +12,16 @@ Implement <Entity>.on('change', ...
 
 Anytime
 
+Create PR for minecraft-protocol to exclude optional files from npm build
+Improve quality score on NPM
+    https://itnext.io/increasing-an-npm-packages-search-score-fb557f859300
+    https://npms.io/about
+    Change release workflow to wait after committing before publishing to npm so that NPM can see checks passing
+    Check if NPM can see tests
+        Add test coverage reporter
+    Check if github pages is allowed for home page
+        Custom domain is not needed, but it does improve score
+    Add badges?
 Tests
     Make tests for functions
     Rewrite src/test.js
@@ -63,7 +62,6 @@ Add typescript declaration file check
 Make use of position and location consistent
 Move block faces (in block_dig event and block_place event) to separate data file
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
-Test Github codespaces
 Beautify Client.d.ts
 At all places where an error is emitted, try to continue the code as much as possible
 Rename leftClick to something else (because in air doesn't trigger)
