@@ -18,6 +18,10 @@ Update data
 
 Major update
 
+Change <Client>.brand
+    Change <Client>.on('brandReceived') to <Client>.on('change', 'brand')
+    Change <Client>.brand from "string | null" to "string | undefined"
+    Maybe remove from stateHandler, because sending brand is optional?
 Rename <Block>.block to <Block>.name
 Rename <Client>.locale.langCode to code
 Rename Server serverList function players to clients
