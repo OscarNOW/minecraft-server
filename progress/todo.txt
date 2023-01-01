@@ -1,6 +1,7 @@
 Pre-release
 
 -Inventory
+    Implement packets sent from Client (see Spreadsheet)
 Test when playing a sound if the played sound is correct
 Update data
     Change data\bossBarColors to array with strings where id is index
