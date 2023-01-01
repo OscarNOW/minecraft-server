@@ -1,6 +1,7 @@
 type Entity = import('./Entity').Entity;
 type Horse = import('./Horse').Horse;
 type BossBar = import('./BossBar').BossBar;
+type Item = import('./Item').Item;
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
@@ -63,6 +64,39 @@ export class Client {
     readonly reducedDebugInfo: boolean;
 
     /* Readonly changing */
+    readonly inventory: {
+        readonly armor: {
+            readonly helmet?: Item;
+            readonly chestplate?: Item;
+            readonly leggings?: Item;
+            readonly boots?: Item;
+        };
+        readonly offhand?: Item;
+        readonly crafting: {
+            readonly output?: Item;
+            readonly slots: {
+                1?: Item;
+                2?: Item;
+                3?: Item;
+                4?: Item;
+            };
+        };
+        readonly hotbar: {
+            0?: Item;
+            1?: Item;
+            2?: Item;
+            3?: Item;
+            4?: Item;
+            5?: Item;
+            6?: Item;
+            7?: Item;
+            8?: Item;
+        };
+        readonly slots: {
+            readonly [slot: number]: Item | undefined;
+        };
+    };
+
     readonly sneaking: boolean;
     readonly sprinting: boolean;
     readonly onGround: boolean;
