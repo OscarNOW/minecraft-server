@@ -83,10 +83,10 @@ export class Client {
         readonly crafting: {
             readonly output?: Item;
             readonly slots: {
+                0?: Item;
                 1?: Item;
                 2?: Item;
                 3?: Item;
-                4?: Item;
             };
         };
         readonly hotbar: {
