@@ -1,14 +1,18 @@
 type Entity = import('./Entity').Entity;
+type EntityLike = import('./Entity').EntityLike;
+
 type Horse = import('./Horse').Horse;
 type BossBar = import('./BossBar').BossBar;
 type Item = import('./Item').Item;
+
 type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
 
 type entities = {
     readonly [entityId: number]: EntityLike;
-    readonly 0: Client;
+} & {
+    readonly 0: Client
 };
 
 export class Client {
