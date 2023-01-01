@@ -1,6 +1,7 @@
 Pre-release
 
 -Inventory
+    -Implement Item class
     Implement packets sent from Client (see Spreadsheet)
 Test when playing a sound if the played sound is correct
 Update data
@@ -17,6 +18,7 @@ Update data
 
 Major update
 
+Rename <Block>.block to <Block>.name
 Rename <Client>.locale.langCode to code
 Rename Server serverList function players to clients
 Rename <Client>.kick to <Client>.remove for consistency
