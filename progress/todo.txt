@@ -1,7 +1,8 @@
 Pre-release
 
 Inventory
-Fix all imports in type files
+-Fix all imports in type files
+-Fix all types
 
 Major update
 
