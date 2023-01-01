@@ -1,6 +1,6 @@
 Pre-release
 
-Inventory
+-Inventory
 Test when playing a sound if the played sound is correct
 Update data
     Change data\bossBarColors to array with strings where id is index
