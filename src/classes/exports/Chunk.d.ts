@@ -1,15 +1,15 @@
 export class Chunk {
-    private chunk: any;
+    private chunk: unknown;
 
     constructor();
 
     readonly blocks: blocksSegment;
     readonly hash: string;
     private readonly chunkData: {
-        biomes: any,
-        bitMap: any,
-        chunkData: any
-    }
+        biomes: unknown,
+        bitMap: unknown,
+        chunkData: unknown
+    };
 
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;

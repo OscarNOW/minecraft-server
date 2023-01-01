@@ -16,7 +16,7 @@ type entities = {
 };
 
 export class Client {
-    private constructor(client: any, server: Server, earlyInfo: {
+    private constructor(client: unknown, server: Server, earlyInfo: {
         version: newVersion;
         ip: string;
         connection: {

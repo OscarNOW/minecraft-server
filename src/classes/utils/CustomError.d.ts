@@ -4,11 +4,11 @@ export class CustomError {
         causer: 'client' | 'libraryUser' | 'library',
         valueName: string,
         expectationInfo: {
-            got: any;
+            got: unknown;
             expectationType: 'value';
             expectation: unknown[];
         } | {
-            got: any;
+            got: unknown;
             expectationType: 'type';
             expectation: string;
             externalLink?: string;
@@ -19,11 +19,11 @@ export class CustomError {
     causer: 'client' | 'libraryUser' | 'library';
     valueName: string;
     expectationInfo: {
-        got: any;
+        got: unknown;
         expectationType: 'value';
         expectation: unknown[];
     } | {
-        got: any;
+        got: unknown;
         expectationType: 'type';
         expectation: string;
         externalLink?: string;
