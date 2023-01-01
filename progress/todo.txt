@@ -1,6 +1,7 @@
 Pre-release
 
 Inventory
+Fix all imports in type files
 
 Major update
 
