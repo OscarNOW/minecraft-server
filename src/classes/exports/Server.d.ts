@@ -1,4 +1,7 @@
+type ProxyClient = import('./ProxyClient').ProxyClient;
+
 type Client = import('../utils/Client').Client;
+type CustomError = import('../utils/CustomError').CustomError;
 
 export class Server {
     constructor(serverOptions: {

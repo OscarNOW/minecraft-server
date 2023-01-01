@@ -1,3 +1,5 @@
+type blocksSegment = import('../utils/Block').blocksSegment;
+
 export class Chunk {
     private chunk: unknown;
 

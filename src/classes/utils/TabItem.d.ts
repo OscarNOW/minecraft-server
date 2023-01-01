@@ -1,3 +1,10 @@
+type Client = import('./Client').Client;
+type Player = import('./Player').Player;
+
+type Server = import('../exports/Server').Server;
+type Text = import('../exports/Text').Text;
+type textInput = import('../exports/Text').textInput;
+
 export class TabItem {
     constructor(tabItemOptions: {
         name?: textInput | Text;
@@ -8,7 +15,7 @@ export class TabItem {
     readonly client: Client;
     readonly server: Server;
 
-    readonly player?: Player; //todo: make changable
+    readonly player?: Player; //todo: make writable
 
     uuid: string;
     get name(): Text;

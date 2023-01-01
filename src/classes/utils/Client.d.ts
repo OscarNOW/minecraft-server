@@ -1,13 +1,17 @@
+type Horse = import('./Horse').Horse;
+type Item = import('./Item').Item;
+type LoadedChunk = import('./LoadedChunk').LoadedChunk;
+type TabItem = import('./TabItem').TabItem;
 type Entity = import('./Entity').Entity;
 type EntityLike = import('./Entity').EntityLike;
-
-type Horse = import('./Horse').Horse;
+type EntityConditional<a> = import('./Entity').EntityConditional<a>;
 type BossBar = import('./BossBar').BossBar;
-type Item = import('./Item').Item;
+type optionalBossBarInfo = import('./BossBar').optionalBossBarInfo;
 
-type Text = import('../exports/Text').Text;
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
+type Text = import('../exports/Text').Text;
+type textInput = import('../exports/Text').textInput;
 
 type entities = {
     readonly [entityId: number]: EntityLike;

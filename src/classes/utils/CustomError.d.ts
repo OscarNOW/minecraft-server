@@ -1,3 +1,7 @@
+type Client = import('./Client').Client;
+
+type Server = import('../exports/Server').Server;
+
 export class CustomError {
     constructor(
         type: 'expectationNotMet',
@@ -28,12 +32,12 @@ export class CustomError {
         expectation: string;
         externalLink?: string;
     };
-    context: Function;
+    readonly context: Function;
 
-    client?: Client;
-    server?: Server;
+    readonly client?: Client;
+    readonly server?: Server;
 
-    error: Error;
+    readonly error: Error;
     [Symbol.toPrimitive](hint: 'string'): string;
     [Symbol.toPrimitive](hint: 'default'): string;
     [Symbol.toPrimitive](hint: 'number'): number;

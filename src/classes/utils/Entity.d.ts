@@ -2,6 +2,10 @@ type Client = import('./Client').Client;
 type Horse = import('./Horse').Horse;
 type Player = import('./Player').Player;
 
+type Server = import('../exports/Server').Server;
+type Text = import('../exports/Text').Text;
+type textInput = import('../exports/Text').textInput;
+
 type EntityLike = Entity | Horse;
 type EntityConditional<name extends entityName> =
     name extends 'horse' ? Horse :
@@ -26,7 +30,7 @@ export class Entity {
             sendSpawnPacket?: boolean,
             beforeRemove?: (() => void)[];
         },
-        whenDone?: (instance: this) => void
+        whenDone?: (instance: Entity) => void
     );
 
     readonly client: Client;

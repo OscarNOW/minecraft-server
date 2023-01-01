@@ -1,4 +1,5 @@
-//todo: code not yet implemented
+type Client = import('./Client').Client;
+type TabItem = import('./TabItem').TabItem;
 
 export class Player extends Entity {
     constructor(
@@ -20,10 +21,10 @@ export class Player extends Entity {
             gamemode?: gamemode;
         },
         overwrites?: undefined,
-        whenDone?: (instance: this) => void
+        whenDone?: (instance: Player) => void
     );
 
-    readonly tabItem?: TabItem; //todo: make changable
+    readonly tabItem?: TabItem; //todo: make writable
 
     uuid: string;
     name: string;
