@@ -1,8 +1,18 @@
 Pre-release
 
 Inventory
--Fix all types
-    -Fix all imports in type files
+Test when playing a sound if the played sound is correct
+Update data
+    Change data\bossBarColors to array with strings where id is index
+    Change data\bossBarDivisions to array with strings where id is index
+    Change data\entities to array where id is index
+    Change data\entityAnimations to array where id is index
+    Change data\particles to array where id is index
+    Change data\demoMessages to array with objects with name and id
+    Move data\keybinds[any].default to language specific
+        Create folder for language specific?
+    Create data converter in data loader
+        Make data converter convert data\items to array with object with useful keys
 
 Major update
 
