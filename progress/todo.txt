@@ -2,8 +2,7 @@ Pre-release
 
 Inventory
 -Fix all types
-    Fix all imports in type files
-    Replace any with unknown
+    Fix all imports in type files    
 
 Major update
 
