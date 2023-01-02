@@ -11,5 +11,5 @@ export class Slot {
     readonly hasMaxStackSize: boolean;
 
     static stackable(slot1: Slot, slot2: Slot): boolean;
-    static stack(slot1: Slot, slot2: Slot): Slot;
+    static stack(slot1: Slot, slot2: Slot): [Slot, Slot];
 }
