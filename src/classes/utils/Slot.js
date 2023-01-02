@@ -1,6 +1,6 @@
 class Slot {
     constructor() {
-        //todo: create properties
+        //todo
     };
 
     static stackable(slot1, slot2) {

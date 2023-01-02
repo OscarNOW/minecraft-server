@@ -3,11 +3,12 @@
 export class Slot {
     constructor(info: {
         id: number, //todo: make explicit
-        count: number,
+        amount: number,
         nbt: unknown //todo: make known
     });
 
-    //todo: create properties
+    readonly amount: number;
+    readonly hasMaxStackSize: boolean;
 
     static stackable(slot1: Slot, slot2: Slot): boolean;
 }
