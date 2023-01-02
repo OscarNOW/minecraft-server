@@ -1,8 +1,14 @@
 Pre-release
 
 -Inventory
-    -Implement Item class
+    Implement Item class
     Implement packets sent from Client (see Spreadsheet)
+        -Implement window_click
+Implement windows
+    Implement Window class
+        Make inventory inherit that
+    Create openedWindow property in Client
+        Set that to inventory when Client clicks in inventory
 Test when playing a sound if the played sound is correct
 Update data
     Change data\bossBarColors to array with strings where id is index
