@@ -6,12 +6,17 @@ const cursorSlotId = -1; //todo: move to data file
 // https://minecraft.fandom.com/wiki/Inventory#Managing_inventory
 
 module.exports = {
+    // window_click({ windowId, slot: clickedSlotId, mouseButton, mode, item: claimedClickedSlot }) {
     window_click({ windowId, slot: clickedSlotId, mouseButton, mode }) {
         // todo: implement confirmation (with action)
+        // todo: check if claimedClickedSlot is same as clickedSlot and throw error if not
+        // todo:    sometimes claimedClickedSlot is empty, but clickedSlot is not
         // todo: only works for clicks in inventory when only inventory is open
 
         if (windowId === 0) { // inventory
-            const clickedSlot = inventory.getSlot.call(this, clickedSlotId);
+            const clickedSlot = clickedSlotId === -999 ?
+                null :
+                inventory.getSlot.call(this, clickedSlotId);
 
             const cursorSlot = inventory.getSlot.call(this, cursorSlotId);
             const stackable = Slot.stackable(clickedSlot, cursorSlot);
@@ -34,7 +39,7 @@ module.exports = {
                             inventory.setSlot.call(this, cursorSlotId, smaller);
                             inventory.setSlot.call(this, clickedSlotId, bigger);
                         } else { // drop one from cursor slot to clicked slot
-                            const { slot1: newCursorSlot, slot2: newClickedSlot } = Slot.dropOne(cursorSlot, clickedSlot);
+                            const { slot1: newCursorSlot, slot2: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
                             inventory.setSlot.call(this, cursorSlotId, newCursorSlot);
                             inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
                         }
@@ -46,7 +51,31 @@ module.exports = {
                 }
             } else if (mode === 1) { // shift click
                 if (mouseButton === 0 || mouseButton === 1) { // left click and right click have same behavior
+                    // todo: implemented
+                    // todo: how exactly does the Client decide which slots to move to?
+                }
+            } else if (mode === 2) { // number key click
+                //todo: check if mouseButton >= 0 && mouseButton <= 8, and if not, emit misbehavior
 
+                const numberKeySlotId = mouseButton + 36; // 36 is the first slot in the hotbar
+                const numberKeySlot = inventory.getSlot.call(this, numberKeySlotId);
+
+                if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
+                else { // swap clicked slot with number key slot
+                    let oldNumberKeySlot = numberKeySlot;
+                    inventory.setSlot.call(this, numberKeySlotId, clickedSlot);
+                    inventory.setSlot.call(this, clickedSlotId, oldNumberKeySlot);
+                }
+            } else if (mode === 3) { } // middle mouse click, not possible in inventory
+            else if (mode === 4) { // drop
+                if (mouseButton === 0) { // drop key click
+                    if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
+                    else if (clickedSlot === undefined) { } // nothing happens if clicked slot is empty
+                    else { // drop one from clicked slot
+                        const { slot1: newClickedSlot, slot2: droppedSlot } = Slot.moveOne(clickedSlot);
+                        inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
+                        // todo: drop droppedSlot
+                    }
                 }
             }
         }
