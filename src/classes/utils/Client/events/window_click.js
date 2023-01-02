@@ -116,9 +116,11 @@ module.exports = {
                         }
                     }
                 }
+            } else if (mode === 5) { // drag
+                //todo: implement dragging
+            } else if (mode === 6) { // double click
+                //todo: implement double click
             }
-            // else
-            // not implemented
         }
         // else
         // not implemented
