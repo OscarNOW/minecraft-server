@@ -13,6 +13,7 @@ module.exports = {
         // todo:    sometimes claimedClickedSlot is empty, but clickedSlot is not
         // todo: only works for clicks in inventory when only inventory is open
         // todo: emit events when certain things happen (like clicking on a slot or outside window)
+        // todo: move all to separate files (in folder structure)
 
         if (windowId === 0) { // inventory
             const clickedSlot = clickedSlotId === -999 ?
