@@ -11,5 +11,8 @@ export class Slot {
     readonly hasMaxStackSize: boolean;
 
     static stackable(slot1: Slot, slot2: Slot): boolean;
-    static stack(slot1: Slot, slot2: Slot): [Slot, Slot];
+
+    static stack(slot1: Slot, slot2: Slot): { stack: Slot, rest: Slot };
+    static split(slot: Slot): { bigger: Slot, smaller: Slot };
+    static moveOne(slot1: Slot, slot2: Slot): { slot1: Slot, slot2: Slot }; //todo: rename to dropOne?
 }

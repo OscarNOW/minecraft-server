@@ -1,16 +1,12 @@
 class Slot {
-    constructor() {
-        //todo
-    };
+    constructor() { }; // todo: see types for implementation
 
-    static stackable(slot1, slot2) {
-        //todo
-    }
+    static stackable() { }; // todo: see types for implementation
 
-    static stack(slot1, slot2) {
-        // when one of slots is undefined, they're stackable
-        //todo
-    }
+    // when at least one of slots is undefined, they're stackable
+    static stack() { } // todo: see types for implementation
+    static split() { } // todo: see types for implementation
+    static moveOne() { } // todo: see types for implementation
 };
 
 module.exports = Slot;
