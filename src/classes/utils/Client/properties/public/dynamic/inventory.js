@@ -11,6 +11,7 @@ module.exports = {
         },
         init() {
             this.p._inventory = { //todo: Object.freeze
+                cursor: undefined,
                 armor: {
                     helmet: undefined,
                     chestplate: undefined,
@@ -48,7 +49,9 @@ module.exports = {
             //todo: make work with Object.freeze
             //todo: create separate map function
             //todo: create changed set
-            if (id >= 0 && id <= 4) // 2x2 crafting
+            if (id === -1) // cursor
+                this.p._inventory.cursor = slot;
+            else if (id >= 0 && id <= 4) // 2x2 crafting
                 if (id === 0)
                     this.p._inventory.crafting.output = slot;
                 else
