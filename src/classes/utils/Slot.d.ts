@@ -8,4 +8,6 @@ export class Slot {
     });
 
     //todo: create properties
+
+    static stackable(slot1: Slot, slot2: Slot): boolean;
 }
