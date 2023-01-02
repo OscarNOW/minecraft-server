@@ -86,7 +86,8 @@ module.exports = {
                     inventory.setSlot.call(this, clickedSlotId, oldNumberKeySlot);
 
                 }
-            } else if (mode === 3) {  // middle mouse click, not possible in inventory
+            } else if (mode === 3) { // middle mouse click
+                // not possible in inventory
                 // todo: emit misbehavior
             } else if (mode === 4) { // drop
                 if (clickedSlotId === -999) { // click outside window
