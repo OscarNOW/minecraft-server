@@ -6,7 +6,8 @@ const cursorSlotId = -1; //todo: move to data file
 // https://minecraft.fandom.com/wiki/Inventory#Managing_inventory
 
 module.exports = {
-    window_click({ windowId, slot: clickedSlotId, mouseButton, action, mode }) {
+    window_click({ windowId, slot: clickedSlotId, mouseButton, mode }) {
+        // todo: implement confirmation (with action)
         // todo: only works for clicks in inventory when only inventory is open
 
         if (windowId === 0) { // inventory
