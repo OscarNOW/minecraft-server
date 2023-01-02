@@ -43,7 +43,11 @@ module.exports = {
                 }
             };
         },
-        setSlot(id, slot) { //todo: use set function and make work with Object.freeze
+        setSlot(id, slot) {
+            //todo: use set function
+            //todo: make work with Object.freeze
+            //todo: create separate map function
+            //todo: create changed set
             if (id >= 0 && id <= 4) // 2x2 crafting
                 if (id === 0)
                     this.p._inventory.crafting.output = slot;
