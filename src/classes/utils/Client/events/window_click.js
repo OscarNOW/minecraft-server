@@ -12,6 +12,7 @@ module.exports = {
         // todo: check if claimedClickedSlot is same as clickedSlot and throw error if not
         // todo:    sometimes claimedClickedSlot is empty, but clickedSlot is not
         // todo: only works for clicks in inventory when only inventory is open
+        // todo: emit events when certain things happen (like clicking on a slot or outside window)
 
         if (windowId === 0) { // inventory
             const clickedSlot = clickedSlotId === -999 ?
@@ -23,30 +24,45 @@ module.exports = {
 
             if (mode === 0) { // normal click
                 if (mouseButton === 0) { // left mouse click
-                    if (stackable) { // stack both slots
+                    if (stackable) {
+
+                        // stack both slots
                         const { stack, rest } = Slot.stack(clickedSlot, cursorSlot);
                         inventory.setSlot.call(this, cursorSlotId, stack);
                         inventory.setSlot.call(this, clickedSlotId, rest);
-                    } else { // swap slots
+
+                    } else {
+
+                        // swap slots
                         let oldCursorSlot = cursorSlot;
                         inventory.setSlot.call(this, cursorSlotId, clickedSlot);
                         inventory.setSlot.call(this, clickedSlotId, oldCursorSlot);
+
                     }
                 } else if (mouseButton === 1) { // right mouse click
                     if (stackable) {
-                        if (cursorSlot === undefined) { // move half of clicked slot to cursor slot
+                        if (cursorSlot === undefined) {
+
+                            // move half of clicked slot to cursor slot
                             const { bigger, smaller } = Slot.split(clickedSlot);
                             inventory.setSlot.call(this, cursorSlotId, smaller);
                             inventory.setSlot.call(this, clickedSlotId, bigger);
-                        } else { // drop one from cursor slot to clicked slot
+
+                        } else {
+
+                            // drop one from cursor slot to clicked slot
                             const { slot1: newCursorSlot, slot2: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
                             inventory.setSlot.call(this, cursorSlotId, newCursorSlot);
                             inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
+
                         }
-                    } else { // swap slots, same as left click
+                    } else {
+
+                        // swap slots, same as left click
                         let oldCursorSlot = cursorSlot;
                         inventory.setSlot.call(this, cursorSlotId, clickedSlot);
                         inventory.setSlot.call(this, clickedSlotId, oldCursorSlot);
+
                     }
                 }
             } else if (mode === 1) { // shift click
@@ -61,23 +77,48 @@ module.exports = {
                 const numberKeySlot = inventory.getSlot.call(this, numberKeySlotId);
 
                 if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
-                else { // swap clicked slot with number key slot
+                else {
+
+                    // swap clicked slot with number key slot
                     let oldNumberKeySlot = numberKeySlot;
                     inventory.setSlot.call(this, numberKeySlotId, clickedSlot);
                     inventory.setSlot.call(this, clickedSlotId, oldNumberKeySlot);
+
                 }
-            } else if (mode === 3) { } // middle mouse click, not possible in inventory
-            else if (mode === 4) { // drop
-                if (mouseButton === 0) { // drop key click
-                    if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
-                    else if (clickedSlot === undefined) { } // nothing happens if clicked slot is empty
-                    else { // drop one from clicked slot
-                        const { slot1: newClickedSlot, slot2: droppedSlot } = Slot.moveOne(clickedSlot);
-                        inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
-                        // todo: drop droppedSlot
+            } else if (mode === 3) {  // middle mouse click, not possible in inventory
+                // todo: emit misbehavior
+            } else if (mode === 4) { // drop
+                if (clickedSlotId === -999) { // click outside window
+                    // todo: emit event
+                } else { // click on slot
+                    if (mouseButton === 0) { // drop key click
+                        if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
+                        else if (clickedSlot === undefined) { } // nothing happens if clicked slot is empty
+                        else {
+
+                            // drop one from clicked slot
+                            const { slot1: newClickedSlot } = Slot.moveOne(clickedSlot);
+                            // const { slot1: newClickedSlot, slot2: droppedSlot } = Slot.moveOne(clickedSlot);
+                            inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
+                            // todo: drop droppedSlot
+
+                        }
+                    } else if (mouseButton === 1) { // ctrl + drop key click
+                        if (cursorSlot !== undefined) { } // nothing happens if cursor slot is not empty
+                        else if (clickedSlot === undefined) { } // nothing happens if clicked slot is empty
+                        else {
+
+                            // drop all from clicked slot
+                            // let oldClickedSlot = clickedSlot;
+                            inventory.setSlot.call(this, clickedSlotId, undefined);
+                            // todo: drop oldClickedSlot
+
+                        }
                     }
                 }
             }
+            // else
+            // not implemented
         }
         // else
         // not implemented
