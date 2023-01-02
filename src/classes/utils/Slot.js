@@ -8,6 +8,7 @@ class Slot {
     }
 
     static stack(slot1, slot2) {
+        // when one of slots is undefined, they're stackable
         //todo
     }
 };
