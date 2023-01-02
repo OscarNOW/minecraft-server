@@ -1,4 +1,5 @@
 class Slot {
+    //id could be -1, when Slot is empty
     constructor() { }; // todo: see types for implementation
 
     static stackable() { }; // todo: see types for implementation

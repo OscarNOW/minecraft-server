@@ -14,5 +14,5 @@ export class Slot {
 
     static stack(slot1: Slot, slot2: Slot): { stack: Slot, rest: Slot };
     static split(slot: Slot): { bigger: Slot, smaller: Slot };
-    static moveOne(slot1: Slot, slot2: Slot): { slot1: Slot, slot2: Slot }; //todo: rename to dropOne?
+    static moveOne(slot1: Slot, slot2: Slot): { slot1: Slot, slot2: Slot };
 }
