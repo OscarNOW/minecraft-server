@@ -8,7 +8,7 @@ for (let x = 0; x < 16; x++)
 
 const server = new Server({
     defaultClientProperties: () => ({
-        gamemode: 'creative',
+        gamemode: 'survival',
         position: {
             x: 5,
             y: 101,
@@ -22,4 +22,8 @@ server.on('connect', client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
+
+    client.on('chat', () => {
+        client.gamemode = client.gamemode === 'survival' ? 'creative' : 'survival';
+    });
 });

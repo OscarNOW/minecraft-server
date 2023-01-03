@@ -73,6 +73,7 @@ export class Client {
 
     /* Readonly changing */
     readonly inventory: {
+        readonly cursor?: Item;
         readonly armor: {
             readonly helmet?: Item;
             readonly chestplate?: Item;
