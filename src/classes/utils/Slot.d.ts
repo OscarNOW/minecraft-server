@@ -10,6 +10,7 @@ export class Slot {
     readonly amount: number;
     readonly hasMaxStackSize: boolean;
 
+    static newEmpty(): Slot;
     static stackable(slot1: Slot, slot2: Slot): boolean;
 
     static stack(slot1: Slot, slot2: Slot): { stack: Slot, rest: Slot };
