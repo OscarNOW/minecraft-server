@@ -151,7 +151,7 @@ module.exports = {
             } else if (mode === 5) { // drag
                 //todo: implement dragging
             } else if (mode === 6) { // double click
-                //todo: implement double click
+                // todo: Client sometimes sends double click packet, but nothing seems to happen. Needs further testing
             }
         }
         // else
