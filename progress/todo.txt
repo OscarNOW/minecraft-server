@@ -24,6 +24,7 @@ Update data
 
 Major update
 
+Change src\settings.defaults.serverList.maxPlayers to 0
 Change <Client>.brand
     Change <Client>.on('brandReceived') to <Client>.on('change', 'brand')
     Change <Client>.brand from "string | null" to "string | undefined"
@@ -77,7 +78,6 @@ Improve CustomError
     Add code property to CustomError (like keepAliveTimeout)
 Create default block states
     Create table of states and blocks
-Move manifest versions to settings.json?
 Move scripts/build/*.js npmRun function to separate function file
 Move TabItem/get function to separate function file
 Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file
