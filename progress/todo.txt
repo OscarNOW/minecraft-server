@@ -2,6 +2,8 @@ Pre-release
 
 Inventory
     -Implement Slot class
+        Check that undefined never gets passed to a Slot method
+    Make <Client>.inventory have empty Slots instead of undefined
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
 Implement <Block>.displayName
