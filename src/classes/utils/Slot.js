@@ -1,6 +1,18 @@
+const { items } = require('../../functions/loader/data.js');
+
 class Slot {
     //id could be -1, when Slot is empty
-    constructor() { }; // todo: see types for implementation
+    // constructor({ id, amount, nbt }) {
+    constructor({ id, amount }) {
+        this.id = id;
+        this.amount = amount;
+
+        let itemInfo = items.find(item => item[0] === this.id);
+
+        this.name = itemInfo[2];
+        this.displayName = itemInfo[1];
+        this.maxStackSize = itemInfo[3];
+    };
 
     // create new Slot each time
     static newEmpty() { }; // todo: see types for implementation

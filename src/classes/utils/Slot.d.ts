@@ -1,13 +1,17 @@
 //todo: maybe split into loadedSlot and Slot and move to exports?
 export class Slot {
-    constructor(info: {
+    private constructor(info: {
         id: number, //todo: make explicit
         amount: number,
         nbt: unknown //todo: make known
     });
 
+    private readonly id: number;
+
     readonly amount: number;
-    readonly hasMaxStackSize: boolean;
+    readonly name: itemName;
+    readonly maxStackSize: boolean;
+    readonly displayName: itemDisplayName;
 
     static newEmpty(): Slot;
     static stackable(slot1: Slot, slot2: Slot): boolean;
