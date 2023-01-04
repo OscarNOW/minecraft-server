@@ -34,7 +34,6 @@ class Slot {
         return false;
     };
 
-    // return new Slots, do not modify original
     static stack(from, to) {
         if (!Slot.stackable(from, to))
             return [from, to];
@@ -51,12 +50,13 @@ class Slot {
 
     };
 
-    // return new Slot, do not modify original
-    // when Slot is undefined, use newEmpty
-    static split() { }; // todo: see types for implementation
+    static split(slot) {
+        const bigger = new Slot({ id: slot.id, amount: Math.ceil(slot.amount / 2) });
+        const smaller = new Slot({ id: slot.id, amount: Math.floor(slot.amount / 2) });
 
-    // return new Slots, do not modify original
-    // use move function
+        return { bigger, smaller };
+    };
+
     static moveOne(from, to) {
         if (!Slot.stackable(from, to))
             return [from, to];
@@ -66,7 +66,6 @@ class Slot {
     };
 };
 
-// move amount from from to to, return new Slots without modifying originals
 function move(from, to, amount) {
     if (from.amount < amount)
         throw new Error('Trying to move more items than available.') // todo: emit CustomError
