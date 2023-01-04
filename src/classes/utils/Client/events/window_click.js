@@ -71,7 +71,7 @@ module.exports = {
                             } else {
 
                                 // drop one from cursor slot to clicked slot
-                                const { slot1: newCursorSlot, slot2: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
+                                const { from: newCursorSlot, to: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
                                 inventory.setSlot.call(this, cursorSlotId, newCursorSlot);
                                 inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
 
