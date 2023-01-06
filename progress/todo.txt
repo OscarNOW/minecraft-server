@@ -1,9 +1,10 @@
 Pre-release
 
--Inventory
-    Implement Item class
+Inventory
+    Make <Client>.inventory have empty Slots instead of undefined
     Implement packets sent from Client (see Spreadsheet)
-        -Implement window_click
+        Implement window_click
+Implement <Block>.displayName
 Implement windows
     Implement Window class
         Make inventory inherit that
@@ -21,6 +22,9 @@ Update data
         Create folder for language specific?
     Create data converter in data loader
         Make data converter convert data\items to array with object with useful keys
+Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
+    Remove privates from type files
+    Make <Server>.server private and not show up in console.log(
 
 Major update
 
@@ -60,9 +64,6 @@ Move shared functions between TabItem and Player (like getSkin) to separate func
 Rewrite scripts/build
 Rewrite js files in src/docs/
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
-Add better private properties to all classes that need it (Chunk, Block, Text)
-    Remove privates from type files
-    Make <Server>.server private and not show up in console.log(
 _Change Github actions from status checks to check runs (https://docs.github.com/en/developers/apps/guides/creating-ci-tests-with-the-checks-api)
     Waiting for https://github.com/orgs/community/discussions/36226
 Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error

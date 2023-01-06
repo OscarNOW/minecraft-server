@@ -22,7 +22,10 @@ module.exports = {
                 inventory.getSlot.call(this, clickedSlotId);
 
             const cursorSlot = inventory.getSlot.call(this, cursorSlotId);
-            const stackable = Slot.stackable(clickedSlot, cursorSlot);
+
+            let stackable = null;
+            if (clickedSlot !== null)
+                stackable = Slot.stackable(clickedSlot, cursorSlot);
 
             if (mode === 0) { // click
                 if (clickedSlotId === -999) { // click outside window
@@ -36,8 +39,8 @@ module.exports = {
                     } else if (mouseButton === 1) { // right mouse click
 
                         // drop one from cursorSlot
-                        const { slot1: newCursorSlot } = Slot.moveOne(cursorSlot, Slot.newEmpty());
-                        // const { slot1: newCursorSlot, slot2: dropSlot } = Slot.moveOne(cursorSlot, Slot.newEmpty());
+                        const { from: newCursorSlot } = Slot.moveOne(cursorSlot, Slot.newEmpty());
+                        // const { from: newCursorSlot, to: dropSlot } = Slot.moveOne(cursorSlot, Slot.newEmpty());
                         inventory.setSlot.call(this, cursorSlotId, newCursorSlot);
                         // todo: drop dropSlot
 
@@ -71,7 +74,7 @@ module.exports = {
                             } else {
 
                                 // drop one from cursor slot to clicked slot
-                                const { slot1: newCursorSlot, slot2: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
+                                const { from: newCursorSlot, to: newClickedSlot } = Slot.moveOne(cursorSlot, clickedSlot);
                                 inventory.setSlot.call(this, cursorSlotId, newCursorSlot);
                                 inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
 
@@ -129,8 +132,8 @@ module.exports = {
                         else {
 
                             // drop one from clicked slot
-                            const { slot1: newClickedSlot } = Slot.moveOne(clickedSlot);
-                            // const { slot1: newClickedSlot, slot2: droppedSlot } = Slot.moveOne(clickedSlot);
+                            const { from: newClickedSlot } = Slot.moveOne(clickedSlot, Slot.newEmpty());
+                            // const { from: newClickedSlot, to: droppedSlot } = Slot.moveOne(clickedSlot, Slot.newEmpty());
                             inventory.setSlot.call(this, clickedSlotId, newClickedSlot);
                             // todo: drop droppedSlot
 
@@ -151,7 +154,9 @@ module.exports = {
             } else if (mode === 5) { // drag
                 //todo: implement dragging
             } else if (mode === 6) { // double click
-                // todo: Client sometimes sends double click packet, but nothing seems to happen. Needs further testing
+
+                //  todo: Client sends packet, but doesn't do anything themselves. The Server should implement the behavior.
+
             }
         }
         // else
