@@ -35,7 +35,7 @@
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
         "minecraft-protocol": "^1.38.1",
-        "prismarine-chunk": "^1.32.0",
+        "prismarine-chunk": "^1.33.0",
         "protodef": "^1.15.0"
     },
     "devDependencies": {
