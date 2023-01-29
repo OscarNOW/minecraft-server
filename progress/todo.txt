@@ -1,5 +1,6 @@
 Pre-release
 
+Add typedoc to special thanks in .github/README for generating part of the docs
 -Fix CodeQL security
 Inventory
     Implement packets sent from Client (see Spreadsheet)
