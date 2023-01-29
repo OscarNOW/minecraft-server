@@ -14,9 +14,12 @@ name: "CodeQL"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 4 */2 * *"
+    - cron: "0 4 */3 * *"
+  push: # this exists so that Code Scanning can compare pull requests against the state of the base branch
+    branches: [master]
+    paths:
+      - "nonExistentPath"
   pull_request:
-    types: [opened, reopened]
     paths:
       - "**.*"
       - "!**.txt"
@@ -28,7 +31,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       actions: read
       contents: read
