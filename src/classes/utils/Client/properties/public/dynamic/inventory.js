@@ -1,3 +1,5 @@
+const Slot = require('../../../../Slot.js');
+
 module.exports = {
     inventory: {
         info: {
@@ -11,36 +13,36 @@ module.exports = {
         },
         init() {
             this.p._inventory = { //todo: Object.freeze
-                cursor: undefined,
+                cursor: Slot.newEmpty(),
                 armor: {
-                    helmet: undefined,
-                    chestplate: undefined,
-                    leggings: undefined,
-                    boots: undefined
+                    helmet: Slot.newEmpty(),
+                    chestplate: Slot.newEmpty(),
+                    leggings: Slot.newEmpty(),
+                    boots: Slot.newEmpty()
                 },
-                offhand: undefined,
+                offhand: Slot.newEmpty(),
                 crafting: {
-                    output: undefined,
+                    output: Slot.newEmpty(),
                     slots: {
-                        0: undefined,
-                        1: undefined,
-                        2: undefined,
-                        3: undefined
+                        0: Slot.newEmpty(),
+                        1: Slot.newEmpty(),
+                        2: Slot.newEmpty(),
+                        3: Slot.newEmpty()
                     }
                 },
                 hotbar: {
-                    0: undefined,
-                    1: undefined,
-                    2: undefined,
-                    3: undefined,
-                    4: undefined,
-                    5: undefined,
-                    6: undefined,
-                    7: undefined,
-                    8: undefined
+                    0: Slot.newEmpty(),
+                    1: Slot.newEmpty(),
+                    2: Slot.newEmpty(),
+                    3: Slot.newEmpty(),
+                    4: Slot.newEmpty(),
+                    5: Slot.newEmpty(),
+                    6: Slot.newEmpty(),
+                    7: Slot.newEmpty(),
+                    8: Slot.newEmpty()
                 },
                 slots: {
-                    ...Object.fromEntries(Array(27).fill(0).map((_, i) => [i, undefined]))
+                    ...Object.fromEntries(Array(27).fill(0).map((_, i) => [i, Slot.newEmpty()]))
                 }
             };
         },
