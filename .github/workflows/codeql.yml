@@ -63,3 +63,21 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
+          upload: false # disable the upload here - we will upload in a different action
+          output: sarif-results
+
+      - name: Filter documentation
+        uses: zbazztian/filter-sarif@master
+        with:
+          # filter out all documentation files
+          patterns: |
+            -docs/**.js
+            -docs/**.css
+            -docs/**.html
+          input: sarif-results/${{ matrix.language }}.sarif
+          output: sarif-results/${{ matrix.language }}.sarif
+
+      - name: Upload analysis
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: sarif-results/${{ matrix.language }}.sarif
