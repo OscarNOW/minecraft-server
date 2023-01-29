@@ -175,7 +175,7 @@ class Server {
                         } else
                             client.end(endReason)
                     else if (endReason !== null)
-                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => ${require('util').inspect(endReason)} })  `, {
+                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => endReason })  `, {
                             got: endReason,
                             expectationType: 'type',
                             expectation: 'string | null'
