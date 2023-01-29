@@ -3,6 +3,7 @@ Pre-release
 Inventory
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
+    Fix doc types for <Client>.inventory
 Implement <Block>.displayName
 Implement windows
     Implement Window class
