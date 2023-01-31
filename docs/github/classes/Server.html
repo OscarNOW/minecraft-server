@@ -607,7 +607,7 @@
 /*eslint-env browser */
 /*eslint-disable no-unused-vars*/
 
-const path = `/${location.href.split('/')[3]}/`
+const path = `/${window.location.pathname.split('/')[1]}/`; // like /minecraft-server/
 
 let cachedVersions;
 async function getVersions() {
@@ -630,8 +630,7 @@ async function getManifest() {
 }
 
 async function versionChange(version) {
-    let currentLocation = window.location.href.split(path).pop().split('/');
-    currentLocation = currentLocation.slice(1, currentLocation.length).join('/');
+    let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
 
     location = `${path}${version}/${currentLocation}`;
 }
