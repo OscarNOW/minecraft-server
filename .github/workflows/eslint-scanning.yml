@@ -19,8 +19,8 @@ jobs:
 
       - name: Install ESLint
         run: |
-          npm ci eslint
-          npm ci @microsoft/eslint-formatter-sarif
+          npm ci eslint@8.10.0
+          npm ci @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
         run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
