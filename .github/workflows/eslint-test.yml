@@ -1,4 +1,4 @@
-name: ESLint
+name: ESLint-test
 
 on:
   workflow_dispatch:
@@ -18,11 +18,11 @@ permissions: {}
 
 jobs:
   eslint:
-    name: ESLint
+    name: ESLint-test
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: ESLint
+      - name: Run ESLint
         run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
