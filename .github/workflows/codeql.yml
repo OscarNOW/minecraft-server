@@ -15,10 +15,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 4 */3 * *"
-  push: # this exists so that Code Scanning can compare pull requests against the state of the base branch
-    branches: [master]
-    paths:
-      - "nonExistentPath"
   pull_request:
     paths:
       - "**.*"
@@ -66,4 +62,4 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
-          paths-ignore: "docs/"
+          paths-ignore: "docs/" # Not working
