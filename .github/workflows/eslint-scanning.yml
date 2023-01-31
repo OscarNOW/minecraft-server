@@ -24,7 +24,8 @@ jobs:
         run: npm ci @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
-        run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
+        run:
+          ./node-modules/.bin/eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
           --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
         continue-on-error: true
