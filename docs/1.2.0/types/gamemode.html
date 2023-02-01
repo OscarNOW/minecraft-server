@@ -1913,7 +1913,8 @@
         if (currentLocation.split('').some(c => !currentLocationAllowedChars.split('').includes(c.toLowerCase())))
             throw new Error('Invalid currentLocation');
 
-        location = `${path}${version}/${currentLocation}`;
+        const newPath = `${path}${version}/${currentLocation}`;
+        window.location.replace(newPath);
     }
 
     (async () => {
