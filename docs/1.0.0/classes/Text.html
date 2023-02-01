@@ -196,7 +196,8 @@
                                 </path>
                                 <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c">
                                 </path>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="arrayToChat.arrayToChat-1">
                             array<wbr/>To<wbr/>Chat<span class="tsd-signature-symbol">(</span>text<span
@@ -237,7 +238,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="arrayToString.arrayToString-1">
                             array<wbr/>To<wbr/>String<span class="tsd-signature-symbol">(</span>text<span
@@ -276,7 +278,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="minifyChat.minifyChat-1">minify<wbr/>Chat<span
                                 class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><a
@@ -317,7 +320,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="parseArray.parseArray-1">parse<wbr/>Array<span
                                 class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><a
@@ -360,7 +364,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="parseChat.parseChat-1">parse<wbr/>Chat<span
                                 class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><a
@@ -401,7 +406,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="stringToArray.stringToArray-1">
                             string<wbr/>To<wbr/>Array<span class="tsd-signature-symbol">(</span>text<span
@@ -442,7 +448,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
                         <li class="tsd-signature tsd-anchor-link" id="stringToUncolored.stringToUncolored-1">
                             string<wbr/>To<wbr/>Uncolored<span class="tsd-signature-symbol">(</span>text<span
@@ -586,7 +593,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <div class="tsd-signature">chat<span class="tsd-signature-symbol">:</span> <a
                             href="../types/chatComponent" class="tsd-signature-type"
                             data-tsd-kind="Type alias">chatComponent</a></div>
@@ -600,7 +608,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <div class="tsd-signature">hash<span class="tsd-signature-symbol">:</span> <span
                             class="tsd-signature-type">string</span></div>
                 </section>
@@ -2199,6 +2208,24 @@
 
     async function versionChange(version) {
         let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
+
+        if (path.split('/').length > 3)
+            throw new Error('Invalid path');
+
+        const allowedVersionChars = '0123456789.abcdefghijklmnopqrstuvwxyz';
+
+        // if version does not only include characters from allowedVersionChars
+        if (version.split('').some(c => !allowedVersionChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid version');
+
+        if (currentLocation.split('/').length > 2)
+            throw new Error('Invalid currentLocation');
+
+        const currentLocationAllowedChars = 'abcdefghijklmnopqrstuvwxyz/';
+
+        // if currentLocation does not only include characters from currentLocationAllowedChars
+        if (currentLocation.split('').some(c => !currentLocationAllowedChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid currentLocation');
 
         location = `${path}${version}/${currentLocation}`;
     }

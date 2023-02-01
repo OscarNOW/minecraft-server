@@ -320,7 +320,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
                         <li class="tsd-signature tsd-anchor-link" id="sendPacket.sendPacket-1">send<wbr/>Packet<span
                                 class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">:
@@ -364,7 +365,8 @@
                                 <use href="#icon-anchor-a"></use>
                                 <use href="#icon-anchor-b"></use>
                                 <use href="#icon-anchor-c"></use>
-                            </svg></a></h3>
+                            </svg></a>
+                    </h3>
                     <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
                         <li class="tsd-signature tsd-anchor-link" id="constructor.new_LoadedChunk">new
                             <wbr/>Loaded<wbr/>Chunk<span class="tsd-signature-symbol">(</span>client<span
@@ -385,7 +387,8 @@
                                     <use href="#icon-anchor-a"></use>
                                     <use href="#icon-anchor-b"></use>
                                     <use href="#icon-anchor-c"></use>
-                                </svg></a></li>
+                                </svg></a>
+                        </li>
                         <li class="tsd-description">
                             <div class="tsd-parameters">
                                 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -1890,6 +1893,24 @@
 
     async function versionChange(version) {
         let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
+
+        if (path.split('/').length > 3)
+            throw new Error('Invalid path');
+
+        const allowedVersionChars = '0123456789.abcdefghijklmnopqrstuvwxyz';
+
+        // if version does not only include characters from allowedVersionChars
+        if (version.split('').some(c => !allowedVersionChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid version');
+
+        if (currentLocation.split('/').length > 2)
+            throw new Error('Invalid currentLocation');
+
+        const currentLocationAllowedChars = 'abcdefghijklmnopqrstuvwxyz/';
+
+        // if currentLocation does not only include characters from currentLocationAllowedChars
+        if (currentLocation.split('').some(c => !currentLocationAllowedChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid currentLocation');
 
         location = `${path}${version}/${currentLocation}`;
     }

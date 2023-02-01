@@ -67,7 +67,8 @@
                     class="tsd-signature-symbol">?: </span><a href="textInput" class="tsd-signature-type"
                     data-tsd-kind="Type alias">textInput</a><span class="tsd-signature-symbol"> | </span><a
                     href="../classes/Text" class="tsd-signature-type" data-tsd-kind="Class">Text</a><span
-                    class="tsd-signature-symbol">; </span><br /><span class="tsd-signature-symbol">}</span></div>
+                    class="tsd-signature-symbol">; </span><br /><span class="tsd-signature-symbol">}</span>
+            </div>
             <div class="tsd-type-declaration">
                 <h4>Type declaration</h4>
                 <ul class="tsd-parameters">
@@ -1936,6 +1937,24 @@
 
     async function versionChange(version) {
         let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
+
+        if (path.split('/').length > 3)
+            throw new Error('Invalid path');
+
+        const allowedVersionChars = '0123456789.abcdefghijklmnopqrstuvwxyz';
+
+        // if version does not only include characters from allowedVersionChars
+        if (version.split('').some(c => !allowedVersionChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid version');
+
+        if (currentLocation.split('/').length > 2)
+            throw new Error('Invalid currentLocation');
+
+        const currentLocationAllowedChars = 'abcdefghijklmnopqrstuvwxyz/';
+
+        // if currentLocation does not only include characters from currentLocationAllowedChars
+        if (currentLocation.split('').some(c => !currentLocationAllowedChars.split('').includes(c.toLowerCase())))
+            throw new Error('Invalid currentLocation');
 
         location = `${path}${version}/${currentLocation}`;
     }
