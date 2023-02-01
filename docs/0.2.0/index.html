@@ -160,7 +160,8 @@
         <p>Here <code>Notch</code> sees <code>jeb_</code>, but <code>jeb_</code> doesn&#39;t see <code>Notch</code>.
           Both <code>jeb_</code> and <code>Notch</code> see the <a href="#npc">NPC</a> <code>Hub</code>. Hub isn&#39;t a
           <a href="#client">Client</a> that is connected to the server, but is seen by <code>Notch</code> and
-          <code>jeb_</code> as a player.</p>
+          <code>jeb_</code> as a player.
+        </p>
 
         <a href="#npc" id="npc" style="color: inherit; text-decoration: none;">
           <h3>NPC</h3>
@@ -1474,7 +1475,7 @@
   /*eslint-env browser */
   /*eslint-disable no-unused-vars*/
 
-  const path = `/${location.href.split('/')[3]}/`
+  const path = `/${window.location.pathname.split('/')[1]}/`; // like /minecraft-server/
 
   let cachedVersions;
   async function getVersions() {
