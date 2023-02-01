@@ -23,10 +23,10 @@ on:
 permissions: {}
 
 jobs:
-  combined:
+  test-buildable-light:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    name: Test buildable
+    name: Test buildable light
 
     steps:
       - name: Checkout Repository
