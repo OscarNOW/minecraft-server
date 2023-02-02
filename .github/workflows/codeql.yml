@@ -15,13 +15,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 4 */3 * *"
-  # pull_request:
-  #   paths:
-  #     - "**.*"
-  #     - "!**.txt"
-  #     - "!**.xlsx"
-  #     - "!**.yml"
-  #     - ".github/workflows/codeql.yml"
+  pull_request:
+    paths:
+      - "**.*"
+      - "!**.txt"
+      - "!**.xlsx"
+      - "!**.yml"
+      - ".github/workflows/codeql.yml"
 
 jobs:
   analyze:
