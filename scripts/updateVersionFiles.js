@@ -47,18 +47,19 @@ fs.writeFileSync(manifestPath, JSON.stringify(manifest));
 let bugReport = fs.readFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml')).toString();
 bugReport = bugReport.split('\n');
 
-let versionLineStartIndex = bugReport.findIndex(a => a.includes('#startVersionOptions')) + 1;
-let versionLineEndIndex = bugReport.findIndex(a => a.includes('#endVersionOptions'));
+const versionLineStartIndex = bugReport.findIndex(a => a.includes('#startVersionOptions')) + 1;
+const versionLineEndIndex = bugReport.findIndex(a => a.includes('#endVersionOptions'));
 
-let newVersions = manifest.versions.map(({ name }) => name).map(a => `        - ${a}`);
+const supportedVersionNames = manifest.versions.filter(({ hasSupport }) => hasSupport).map(({ name }) => name).map(a => `        - ${a}`);
 
-bugReport = [...bugReport.slice(0, versionLineStartIndex), ...newVersions, ...bugReport.slice(versionLineEndIndex)];
+bugReport = [...bugReport.slice(0, versionLineStartIndex), ...supportedVersionNames, ...bugReport.slice(versionLineEndIndex)];
 
 bugReport = bugReport.join('\n');
+bugReport = bugReport.replaceAll('\r\n', '\n');
 
-fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport.replaceAll('\r\n', '\n'))
+fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport);
 
-function compareVersions(a, b) {
+function compareVersions(a, b) { //todo: move to function file
     a = a.split('.').map(c => parseInt(c));
     b = b.split('.').map(c => parseInt(c));
 
