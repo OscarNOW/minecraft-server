@@ -1,5 +1,5 @@
 const faces = Object.fromEntries(
-    require('../../../../functions/loader/data.js').faces.map((name, ind) => [ind, name])
+    require('../../../../functions/loader/data.js').blockFaces.map((name, ind) => [ind, name])
 );
 
 module.exports = {
