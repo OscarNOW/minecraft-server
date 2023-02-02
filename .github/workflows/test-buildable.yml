@@ -3,12 +3,6 @@ name: Test buildable
 on:
   workflow_dispatch:
   pull_request:
-    paths:
-      - "**.*"
-      - "!**.txt"
-      - "!**.xlsx"
-      - "!**.yml"
-      - ".github/workflows/test-buildable.yml"
 
 permissions: {}
 
@@ -21,15 +15,32 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .
+            :!**.txt
+            :!**.xlsx
+            :!**.yml
+            .github/workflows/test-buildable.yml
+
       - name: Use Node 18.x
+        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: npm
       - name: Install Dependencies
+        if: steps.changed.outputs.changed == 'true'
         run: npm ci
 
       - name: Build-updateVersionFiles
+        if: steps.changed.outputs.changed == 'true'
         run: npm run updateVersionFiles
   readme:
     runs-on: ubuntu-latest
@@ -39,15 +50,32 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .
+            :!**.txt
+            :!**.xlsx
+            :!**.yml
+            .github/workflows/test-buildable.yml
+
       - name: Use Node 18.x
+        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: npm
       - name: Install Dependencies
+        if: steps.changed.outputs.changed == 'true'
         run: npm ci
 
       - name: Build-readme
+        if: steps.changed.outputs.changed == 'true'
         run: npm run readme
   minify:
     runs-on: ubuntu-latest
@@ -57,15 +85,32 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .
+            :!**.txt
+            :!**.xlsx
+            :!**.yml
+            .github/workflows/test-buildable.yml
+
       - name: Use Node 18.x
+        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: npm
       - name: Install Dependencies
+        if: steps.changed.outputs.changed == 'true'
         run: npm ci
 
       - name: Build-minify
+        if: steps.changed.outputs.changed == 'true'
         run: npm run minify
   type-docs:
     runs-on: ubuntu-latest
@@ -75,13 +120,31 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .
+            :!**.txt
+            :!**.xlsx
+            :!**.yml
+            .github/workflows/test-buildable.yml
+
       - name: Use Node 18.x
+        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: npm
       - name: Install Dependencies
+        if: steps.changed.outputs.changed == 'true'
         run: npm ci
 
       - run: npm run types
+        if: steps.changed.outputs.changed == 'true'
       - run: npm run docs
+        if: steps.changed.outputs.changed == 'true'

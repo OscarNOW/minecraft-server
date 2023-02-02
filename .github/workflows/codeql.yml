@@ -19,12 +19,7 @@ on:
     branches-ignore:
       - main
   pull_request:
-    paths:
-      - "**.*"
-      - "!**.txt"
-      - "!**.xlsx"
-      - "!**.yml"
-      - ".github/workflows/codeql.yml"
+    types: [opened, reopened]
 
 jobs:
   analyze:
@@ -48,9 +43,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .
+            :!**.txt
+            :!**.xlsx
+            :!**.yml
+            .github/workflows/codeql.yml
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
+        if: steps.changed.outputs.changed == 'true'
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
@@ -62,6 +71,7 @@ jobs:
           # queries: security-extended,security-and-quality
 
       - name: Perform CodeQL Analysis
+        if: steps.changed.outputs.changed == 'true'
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
