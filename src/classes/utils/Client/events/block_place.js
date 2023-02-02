@@ -1,11 +1,6 @@
-const faces = Object.freeze({
-    0: '-Y',
-    1: '+Y',
-    2: '-Z',
-    3: '+Z',
-    4: '-X',
-    5: '+X'
-});
+const faces = Object.fromEntries(
+    require('../../../../functions/loader/data.js').faces.map((name, ind) => [ind, name])
+);
 
 module.exports = {
     block_place({ hand, location: { x, y, z }, direction, cursorX, cursorY, cursorZ, insideBlock }) {
@@ -27,6 +22,6 @@ module.exports = {
             clickedFace,
             isMainHand,
             headInsideBlock: insideBlock
-        })
+        });
     }
 }

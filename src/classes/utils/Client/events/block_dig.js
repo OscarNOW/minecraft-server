@@ -1,13 +1,8 @@
 const CustomError = require('../../CustomError.js')
 
-const faces = Object.freeze({
-    0: '-Y',
-    1: '+Y',
-    2: '-Z',
-    3: '+Z',
-    4: '-X',
-    5: '+X'
-});
+const faces = Object.fromEntries(
+    require('../../../../functions/loader/data.js').faces.map((name, ind) => [ind, name])
+);
 
 module.exports = {
     block_dig({ status, location: { x, y, z }, face }) {
