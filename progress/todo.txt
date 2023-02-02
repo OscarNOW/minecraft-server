@@ -1,5 +1,6 @@
 Pre-release
 
+Implement retry step in github workflows
 Add typedoc to special thanks in .github/README for generating part of the docs
 -Fix CodeQL security
     Make sure CodeQL docs ignoring works
