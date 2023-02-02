@@ -22,10 +22,7 @@ jobs:
         uses: MarceloPrado/has-changed-path@v1.0
         id: changed
         with:
-          paths: |
-            .github/workflows/eslint.yml
-            "**.js"
-            .eslintrc.json
+          paths: .github/workflows/eslint.yml "**.js" .eslintrc.json
 
       - name: Run ESLint
         if: steps.changed.outputs.changed == 'true'

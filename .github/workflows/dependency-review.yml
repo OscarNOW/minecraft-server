@@ -18,10 +18,7 @@ jobs:
         uses: MarceloPrado/has-changed-path@v1.0
         id: changed
         with:
-          paths: |
-            package.json
-            package-lock.json
-            .github/workflows/dependency-review.yml
+          paths: package.json package-lock.json .github/workflows/dependency-review.yml
 
       - name: Dependency Review
         if: steps.changed.outputs.changed == 'true'
