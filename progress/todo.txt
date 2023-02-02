@@ -1,9 +1,5 @@
 Pre-release
 
-Add typedoc to special thanks in .github/README for generating part of the docs
--Fix CodeQL security
-    Make sure CodeQL docs ignoring works
-        https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/customizing-code-scanning#specifying-directories-to-scan
 Inventory
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
