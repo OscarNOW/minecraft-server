@@ -46,9 +46,7 @@ class CustomError {
     }
 
     [Symbol.toPrimitive](hint) {
-        if (hint === 'string')
-            return this.error.stack;
-        else if (hint === 'default')
+        if (hint === 'string' || hint === 'default')
             return this.error.stack;
         else if (hint === 'number')
             return NaN;

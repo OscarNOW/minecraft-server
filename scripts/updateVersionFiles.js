@@ -67,5 +67,5 @@ function compareVersions(a, b) {
         if (a[i] < b[i]) return -1;
     }
 
-    return 1;
+    return 0;
 }

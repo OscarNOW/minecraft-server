@@ -19,9 +19,11 @@ module.exports = {
 
         let emitter;
 
-        if (targetObj instanceof Client)
-            emitter = targetObj.p;
-        else if (targetObj instanceof Entity || targetObj.prototype instanceof Entity) //typeof entityLike
+        if (
+            targetObj instanceof Client ||
+            targetObj instanceof Entity ||
+            targetObj.prototype instanceof Entity // inherits from Entity, typeof EntityLike
+        )
             emitter = targetObj.p;
         else
             throw new Error(`unknown type in <Client>.entities[${target}]`); //todo: use CustomError with library as fault

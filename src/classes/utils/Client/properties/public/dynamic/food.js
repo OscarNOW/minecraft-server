@@ -17,7 +17,7 @@ module.exports = {
             if (newValue < 0) newValue = 0;
             if (newValue > 20) newValue = 20;
 
-            if (isNaN(newValue))
+            if (Number.isNaN(newValue))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `food in  <${this.constructor.name}>.food = ${require('util').inspect(newValue)}  `, {
                     got: arguments[0],
                     expectationType: 'type',

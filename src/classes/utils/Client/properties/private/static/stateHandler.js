@@ -20,12 +20,7 @@ module.exports = {
             const currentIndex = states.indexOf(this.p.state);
             const offlineIndex = states.indexOf('offline');
 
-            if (currentIndex < loginSentIndex)
-                return false;
-            else if (currentIndex >= offlineIndex)
-                return false;
-
-            return true;
+            return loginSentIndex < currentIndex && currentIndex < offlineIndex;
         },
 
         init() {

@@ -5,7 +5,7 @@ const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
 const settings = require('../../settings.json');
 const tabItemDefaults = settings.defaults.tabItem;
-const { timing: { skinFetchTimeout } } = require('../../settings.json');
+const skinFetchTimeout = settings.timing.skinFetchTimeout;
 
 const Text = require('../exports/Text.js');
 const axios = require('axios').default;
@@ -163,7 +163,8 @@ class TabItem {
             .then(() => {
                 tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
                 cb(this);
-            });
+            })
+            .catch(e => { throw e });
     }
 
     remove() {

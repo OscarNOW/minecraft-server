@@ -134,7 +134,7 @@ class Text {
     }
 
     static arrayToString(a) {
-        let array = this.parseArray(a);
+        let array = Text.parseArray(a);
 
         let text = '§r';
         let currentModifiers = [];
@@ -287,11 +287,11 @@ class Text {
             modifiers: currentModifiers
         })
 
-        return this.parseArray(arr);
+        return Text.parseArray(arr);
     }
 
     static arrayToChat(a) { //todo: implement translate
-        let array = this.parseArray(a);
+        let array = Text.parseArray(a);
         let out;
 
         for (const v of array) {
@@ -335,11 +335,11 @@ class Text {
         if (out === undefined)
             out = { text: '' }
 
-        return this.minifyChat(out);
+        return Text.minifyChat(out);
     }
 
     static minifyChat(chat) {
-        chat = this.parseChat(chat);
+        chat = Text.parseChat(chat);
         chat = Object.assign({}, chat);
 
         chat = minifyChatComponent(chat, defaultInheritedChatProperties);

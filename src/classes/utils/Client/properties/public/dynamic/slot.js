@@ -16,7 +16,7 @@ module.exports = {
             let newValue = parseInt(v);
             newValue = newValue % 9;
 
-            if (isNaN(newValue))
+            if (Number.isNaN(newValue))
                 this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(newValue)}  `, {
                     got: v,
                     expectationType: 'type',

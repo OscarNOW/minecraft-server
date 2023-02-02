@@ -46,7 +46,7 @@ server.on('join', async client => {
         console.log(`join-n  : ${(joinTimes.slice(1).reduce((a, b) => a + b, 0) / joinTimes.length).toFixed(2)}ms`)
 
         console.time('chunks  ');
-        (() => { })(client.chunks); //generate chunks
+        Object.getOwnPropertyDescriptor(Object.getPrototypeOf(client), 'chunks').get(); // generate chunks
         console.timeEnd('chunks  ');
 
         console.time('close   ')
