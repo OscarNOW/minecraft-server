@@ -50,7 +50,7 @@ jobs:
         uses: MarceloPrado/has-changed-path@v1.0
         id: changed
         with:
-          paths: . :!**.txt :!**.xlsx :!**.yml .github/workflows/codeql.yml
+          paths: . :^**.txt' :^**.xlsx :^**.yml .github/workflows/codeql.yml
 
       - name: CodeQL (DEBUG)
         if: steps.changed.outputs.changed == 'true'
