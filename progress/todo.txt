@@ -39,6 +39,8 @@ Rename Server serverList function players to clients
 Rename <Client>.kick to <Client>.remove for consistency
 Implement <Entity>.on('change', ...
     Remove <Entity>.observe(
+Rename leftClick to something else (because in air doesn't trigger)
+    Test if mainHand is rightHand same event is triggered
 
 Anytime
 
@@ -89,7 +91,5 @@ Make use of position and location consistent
 Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
 Beautify Client.d.ts
 At all places where an error is emitted, try to continue the code as much as possible
-Rename leftClick to something else (because in air doesn't trigger)
-    Test if mainHand is rightHand same event is triggered
 Make some <Entity>.sound options optional
 Implement build check, so that only modified files have to be built
