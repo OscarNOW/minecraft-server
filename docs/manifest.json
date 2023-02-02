@@ -7,7 +7,7 @@
             "unstable": true,
             "latestUnstable": true,
             "hasDocs": true,
-            "hasSupport": false
+            "hasSupport": true
         },
         {
             "version": "1.2.0",
