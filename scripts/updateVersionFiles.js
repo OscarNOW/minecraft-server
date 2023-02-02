@@ -80,6 +80,13 @@ function compareVersions(a, b) { //todo: move to function file
 
 function generateVersionDisplayName(version) {
     let name = version.path;
+
+    if (!version.hasSupport)
+        name += ' (no support)';
+
+    if (version.unstable)
+        name += ' (unstable)';
+
     if (version.latestStable)
         name += ' (latest stable)';
 
