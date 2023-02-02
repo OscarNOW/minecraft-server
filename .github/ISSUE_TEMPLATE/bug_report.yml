@@ -49,9 +49,9 @@ body:
       label: OS
       description: What operating system are you using?
       options:
-        - macOS
         - Windows
         - Linux
+        - MacOS
     validations:
       required: true
   - type: input
