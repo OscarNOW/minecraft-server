@@ -2,16 +2,8 @@ name: ESLint
 
 on:
   push:
-    paths:
-      - .github/workflows/eslint.yml
-      - "**.js"
-      - .eslintrc.json
   pull_request:
     types: [opened, reopened]
-    paths:
-      - .github/workflows/eslint.yml
-      - "**.js"
-      - .eslintrc.json
 
 permissions: {}
 
@@ -23,5 +15,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Check if changed
+        uses: MarceloPrado/has-changed-path@v1.0
+        id: changed
+        with:
+          paths: |
+            .github/workflows/eslint.yml
+            "**.js"
+            .eslintrc.json
+
       - name: Run ESLint
+        if: steps.changed.outputs.changed == 'true'
         run: npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0
