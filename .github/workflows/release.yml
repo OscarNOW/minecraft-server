@@ -24,19 +24,29 @@ jobs:
           node-version: 18.x
           cache: npm
       - name: Install Dependencies
-        run: npm ci
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 2
+          max_attempts: 3
+          command: npm ci
       - name: Build
-        run: npm run build
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          command: npm run build
 
       - name: Copy docs
         run: |
           mkdir -p "./docs/${{ github.event.inputs.version }}/"
           cp -r ./docs/github/. ./docs/${{ github.event.inputs.version }}/
-      - name: Update version files
-        run: node ./scripts/updateVersionFiles ${{ github.event.inputs.version }}
 
-      - name: Re-Build
-        run: npm run build
+      - name: Re-build
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          command: npm run build
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
