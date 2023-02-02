@@ -1,6 +1,7 @@
 Pre-release
 
 Implement retry step in github workflows
+    https://stackoverflow.com/questions/71574593/how-to-automatically-retry-github-action-jobs-on-failure
 Add typedoc to special thanks in .github/README for generating part of the docs
 -Fix CodeQL security
     Make sure CodeQL docs ignoring works
