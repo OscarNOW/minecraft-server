@@ -15,6 +15,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 4 */3 * *"
+  push:
+    branches-ignore:
+      - main
   pull_request:
     paths:
       - "**.*"
