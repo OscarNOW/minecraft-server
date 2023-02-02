@@ -57,9 +57,15 @@ bugReport = bugReport.split('\n');
 const versionLineStartIndex = bugReport.findIndex(a => a.includes('#startVersionOptions')) + 1;
 const versionLineEndIndex = bugReport.findIndex(a => a.includes('#endVersionOptions'));
 
-const supportedVersionNames = manifest.versions.filter(({ hasSupport }) => hasSupport).map(({ name }) => name).map(a => `        - ${a}`);
+const supportedVersionNames = manifest.versions
+    .filter(({ hasSupport }) => hasSupport)
+    .map(({ name }) => name).map(a => `        - ${a}`);
 
-bugReport = [...bugReport.slice(0, versionLineStartIndex), ...supportedVersionNames, ...bugReport.slice(versionLineEndIndex)];
+bugReport = [
+    ...bugReport.slice(0, versionLineStartIndex),
+    ...supportedVersionNames,
+    ...bugReport.slice(versionLineEndIndex)
+];
 
 bugReport = bugReport.join('\n');
 bugReport = bugReport.replaceAll('\r\n', '\n');
