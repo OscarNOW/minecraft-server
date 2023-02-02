@@ -84,6 +84,9 @@ function generateVersionDisplayName(version) {
     if (!version.hasSupport)
         name += ' (no support)';
 
+    if (!version.hasDocs)
+        name += ' (no docs)';
+
     if (version.unstable)
         name += ' (unstable)';
 
