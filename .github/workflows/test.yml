@@ -11,11 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 18.x]
+        node-version: [16.x, 18.x]
         os: [ubuntu-latest, macOS-latest, windows-latest]
         exclude:
           - node-version: 18.x
-            os: windows-latest
+            os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
