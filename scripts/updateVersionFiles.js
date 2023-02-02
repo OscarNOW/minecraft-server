@@ -27,19 +27,26 @@ if (newVersion !== undefined)
     manifest.versions.push({
         version: newVersion,
         name: newVersion,
-        path: newVersion
-    })
+        path: newVersion,
+        hasDocs: true,
+        hasSupport: true
+    });
 
+//reset latest stable
 if (manifest.versions.find(({ latestStable }) => latestStable))
-    manifest.versions.find(({ latestStable }) => latestStable).name =
-        manifest.versions.find(({ latestStable }) => latestStable).path;
+    delete manifest.versions.find(({ latestStable }) => latestStable).latestStable;
 
-delete manifest.versions.find(({ latestStable }) => latestStable)?.latestStable; //todo: why is this here?
-
-manifest.versions = [...(manifest.versions.filter(({ unstable }) => unstable) || []), ...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [])];
+manifest.versions = [
+    ...(manifest.versions.filter(({ unstable }) => unstable) || [])?.sort((a, b) => compareVersions(a.version, b.version)?.reverse?.() || []),
+    ...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [])
+];
 
 manifest.versions.find(({ unstable }) => !unstable).latestStable = true;
-manifest.versions.find(({ unstable }) => !unstable).name = `${manifest.versions.find(({ unstable }) => !unstable).version} (latest stable)`;
+
+manifest.versions = manifest.versions.map(a => {
+    a.name = generateVersionDisplayName(a);
+    return a;
+});
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
 
@@ -69,4 +76,12 @@ function compareVersions(a, b) { //todo: move to function file
     }
 
     return 0;
+};
+
+function generateVersionDisplayName(version) {
+    let name = version.path;
+    if (version.latestStable)
+        name += ' (latest stable)';
+
+    return name;
 }
