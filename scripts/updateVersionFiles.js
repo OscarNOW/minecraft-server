@@ -36,9 +36,13 @@ if (newVersion !== undefined)
 if (manifest.versions.find(({ latestStable }) => latestStable))
     delete manifest.versions.find(({ latestStable }) => latestStable).latestStable;
 
+const unstableVersions = manifest.versions.filter(({ unstable }) => unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [];
+const stableVersions = manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [];
+
 manifest.versions = [
-    ...(manifest.versions.filter(({ unstable }) => unstable) || [])?.sort((a, b) => compareVersions(a.version, b.version)?.reverse?.() || []),
-    ...(manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [])
+    stableVersions[0],
+    ...unstableVersions,
+    ...stableVersions.slice(1)
 ];
 
 manifest.versions.find(({ unstable }) => !unstable).latestStable = true;
