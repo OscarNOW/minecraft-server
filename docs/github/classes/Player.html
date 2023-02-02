@@ -755,14 +755,22 @@
 /*eslint-disable no-unused-vars*/
 
 const path = `/${window.location.pathname.split('/')[1]}/`; // like /minecraft-server/
+const currentVersionPath = location.pathname.split('/')[2]; // like 0.0.0
 
-let cachedVersions;
 async function getVersions() {
-    if (cachedVersions)
-        return cachedVersions;
+    return (await getManifest()).versions;
+}
 
-    cachedVersions = (await getManifest()).versions;
-    return cachedVersions;
+async function getDocVersions() {
+    let versions = await getVersions();
+
+    const currentVersion = versions.find(({ path, version, name }) => (path ?? version ?? name) === currentVersionPath);
+    // put currentVersion first
+    versions = [currentVersion, ...versions.filter(version => version !== currentVersion)];
+
+    versions = versions.filter(({ hasDocs }) => hasDocs);
+
+    return versions;
 }
 
 let cachedManifest;
@@ -803,18 +811,14 @@ async function versionChange(version) {
 
 (async () => {
 
-    let versions = await getVersions();
-    let currentVersion = location.pathname.split('/')[2];
-
-    currentVersion = versions.find(({ name, path }) => (path ?? name) === currentVersion);
-    versions = versions.filter(({ path }) => path !== currentVersion.path);
-    versions = [currentVersion, ...versions];
+    const versions = await getDocVersions();
+    const currentVersion = versions.find(({ path, version, name }) => (path ?? version ?? name) === currentVersionPath);
 
     const versionDropdown = document.getElementById('versionDropdown');
     versionDropdown.innerHTML = versions.map(({ name, path }) => `<option value="${path ?? name}">${name}</option>\`).join('')`)
 
     const titleElement = document.getElementsByTagName('title')[0];
-    titleElement.innerHTML = titleElement.innerHTML.replace('x.x.x', currentVersion.path);
+    titleElement.innerHTML = titleElement.innerHTML.replace('x.x.x', currentVersion.name);
 
 })();
 </script>
