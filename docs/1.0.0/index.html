@@ -1556,7 +1556,7 @@
     let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
 
     const newPath = `${path}${version}/${currentLocation}`;
-    window.location.replace(encodeURIComponent(newPath));
+    window.open(newPath, '_self');
   }
 
   (async () => {

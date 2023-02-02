@@ -1815,7 +1815,7 @@
             throw new Error('Invalid currentLocation');
 
         const newPath = `${path}${version}/${currentLocation}`;
-        window.location.replace(encodeURIComponent(newPath));
+        window.open(newPath, '_self');
     }
 
     (async () => {
