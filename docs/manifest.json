@@ -1,1 +1,56 @@
-{"versions":[{"version":"1.2.0","name":"1.2.0 (latest stable)","path":"1.2.0","hasDocs":true,"hasSupport":true,"latestStable":true},{"version":"-1.0.0","name":"github (unstable)","path":"github","unstable":true,"latestUnstable":true,"hasDocs":true,"hasSupport":true},{"version":"1.1.0","name":"1.1.0","path":"1.1.0","hasDocs":true,"hasSupport":true},{"version":"1.0.0","name":"1.0.0","path":"1.0.0","hasDocs":true,"hasSupport":true},{"version":"0.2.0","name":"0.2.0 (no support)","path":"0.2.0","hasDocs":true,"hasSupport":false},{"version":"0.1.0","path":"0.1.0","name":"0.1.0 (no support)","hasDocs":true,"hasSupport":false},{"version":"0.0.0","path":"0.0.0","name":"0.0.0 (no support) (no docs)","hasDocs":false,"hasSupport":false}]}
+{
+    "versions": [
+        {
+            "version": "1.2.0",
+            "name": "1.2.0 (latest stable)",
+            "path": "1.2.0",
+            "hasDocs": true,
+            "hasSupport": true,
+            "latestStable": true
+        },
+        {
+            "version": "-1.0.0",
+            "name": "github (unstable)",
+            "path": "github",
+            "unstable": true,
+            "latestUnstable": true,
+            "hasDocs": true,
+            "hasSupport": true
+        },
+        {
+            "version": "1.1.0",
+            "name": "1.1.0",
+            "path": "1.1.0",
+            "hasDocs": true,
+            "hasSupport": true
+        },
+        {
+            "version": "1.0.0",
+            "name": "1.0.0",
+            "path": "1.0.0",
+            "hasDocs": true,
+            "hasSupport": true
+        },
+        {
+            "version": "0.2.0",
+            "name": "0.2.0 (no support)",
+            "path": "0.2.0",
+            "hasDocs": true,
+            "hasSupport": false
+        },
+        {
+            "version": "0.1.0",
+            "path": "0.1.0",
+            "name": "0.1.0 (no support)",
+            "hasDocs": false,
+            "hasSupport": false
+        },
+        {
+            "version": "0.0.0",
+            "path": "0.0.0",
+            "name": "0.0.0 (no support) (no docs)",
+            "hasDocs": false,
+            "hasSupport": false
+        }
+    ]
+}
