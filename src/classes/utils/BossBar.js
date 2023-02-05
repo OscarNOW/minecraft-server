@@ -52,7 +52,7 @@ const defaultPrivate = {
             this.p.sendPacket('boss_bar', {
                 entityUUID: this.id,
                 action: 4,
-                color: bossBarColors.find(({ name }) => name === this.color).id,
+                color: bossBarColors.indexOf(this.color),
                 dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id
             });
     },
@@ -138,7 +138,7 @@ class BossBar {
             action: 0,
             title: JSON.stringify(this.title.chat),
             health: this.health,
-            color: bossBarColors.find(({ name }) => name === this.color).id,
+            color: bossBarColors.indexOf(this.color),
             dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id,
             flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
