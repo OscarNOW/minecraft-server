@@ -12,6 +12,7 @@ None
 ## New API
 * [`<Client>.brand`](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#brand)
 * [`<Client>.inventory`](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#inventory)
+* [`The description in the serverlist can now be a Text instance or textInput`](https://oscarnow.github.io/minecraft-server/{version}/classes/Server#constructor)
 
 ## Documentation / Types
 None

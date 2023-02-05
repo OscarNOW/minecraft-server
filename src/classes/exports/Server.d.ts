@@ -26,7 +26,7 @@ export class Server {
                     uuid: string;
                 }[];
             };
-            description?: string; //todo: use Text
+            description?: Text | textInput;
             favicon?: Buffer;
         };
         wrongVersionConnect?(info: {

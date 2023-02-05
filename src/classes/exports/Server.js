@@ -22,6 +22,8 @@ const imageSize = () => {
 const endianToggle = require('endian-toggle');
 const path = require('path');
 
+const Text = require('./Text.js');
+
 const Client = require('../utils/Client.js');
 const CustomError = require('../utils/CustomError.js');
 
@@ -75,11 +77,15 @@ class Server {
                 let info = Object.assign({}, this.serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing }));
                 let infoVersion = info.version?.correct ?? settings.version;
 
+                //todo: use applyDefaults?
                 if (!info) info = {};
                 if (!info.players) info.players = {};
                 if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
                 if (info.players.online === undefined) info.players.online = this.clients.length;
                 if (info.description === undefined) info.description = settings.defaults.serverList.motd;
+
+                if (info.description !== undefined && !(info.description instanceof Text))
+                    info.description = new Text(info.description);
 
                 let playerHover = [];
                 if (info?.players?.hover === undefined)
@@ -121,9 +127,7 @@ class Server {
                         max: info.players.max,
                         sample: playerHover
                     },
-                    description: { //todo: replace with Text instance
-                        text: `${info.description}` //todo: add support for Text
-                    },
+                    description: info.description.chat,
                     favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
                 };
             }
