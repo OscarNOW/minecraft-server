@@ -144,7 +144,7 @@ class Server {
                     state === 'handshaking' &&
                     payload === 1
                 )
-                    handleLegacyPing.call(this, buffer, client, this.serverList)
+                    handleLegacyPing.call(this, buffer, client, this.serverList); //todo: check which versions are included in "legacy" and maybe add support for older serverlist versions?
             });
 
             client.on('state', state => clientState = state);
@@ -294,7 +294,7 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     this.p.clientInformation.get(client).clientLegacyPing = true
 
     let info = serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing });
-    let infoVersion = info.version?.correct ?? settings.version;
+    let infoVersion = info.version?.correct ?? settings.version; //todo: maybe use "info.version.correct =" like below?
 
     if (!info) info = {};
     if (!info.players) info.players = {};
