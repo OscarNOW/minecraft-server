@@ -306,7 +306,7 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     const responseString = '\xa7' + [1,
         parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
-        info.description.string,
+        info.description.string.split('\n')[0], // legacy version only supports one line
         `${info.players.online}`,
         `${info.players.max}`
     ].join('\0');
