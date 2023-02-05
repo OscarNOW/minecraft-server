@@ -11,13 +11,12 @@ Implement windows
     Create openedWindow property in Client
         Set that to inventory when Client clicks in inventory
 Test when playing a sound if the played sound is correct
-Update data
-    Change data\bossBarColors to array with strings where id is index
-    Change data\bossBarDivisions to array with strings where id is index
+-Update data
     Change data\entities to array where id is index
     Change data\entityAnimations to array where id is index
     Change data\particles to array where id is index
     Change data\demoMessages to array with objects with name and id
+    Add types to data
     Move data\keybinds[any].default to language specific
         Create folder for language specific?
     Create data converter in data loader
