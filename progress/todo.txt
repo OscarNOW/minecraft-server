@@ -13,9 +13,8 @@ Implement windows
 Test when playing a sound if the played sound is correct
 -Update data
     Change data\entities to array where id is index
-    Change data\entityAnimations to array where id is index
     Change data\particles to array where id is index
-    Change data\demoMessages to array with objects with name and id
+    Change data\blocks to exclude id and instead use index?
     Add types to data
     Move data\keybinds[any].default to language specific
         Create folder for language specific?
