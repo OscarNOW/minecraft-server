@@ -301,11 +301,12 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
     if (info.players.online === undefined) info.players.online = this.clients.length;
     if (info.description === undefined) info.description = settings.defaults.serverList.motd;
+    if (!(info.description instanceof Text)) info.description = new Text(info.description);
 
     const responseString = '\xa7' + [1,
         parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
-        `${info.description}`, //todo: add support for Text, maybe convert to string?
+        info.description.string,
         `${info.players.online}`,
         `${info.players.max}`
     ].join('\0');
