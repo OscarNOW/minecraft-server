@@ -17,7 +17,7 @@ module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
         return;
 
     let entityId = null;
-    for (let ii = 1; entityId === null; ii++)
+    for (let ii = 1; entityId === null; ii++) //generate a new entityId thats not already used in this.entities
         if (!this.entities[ii])
             entityId = ii;
 

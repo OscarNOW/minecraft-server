@@ -352,11 +352,8 @@ class Entity {
     }
 }
 
-function getEntity(type) {
-    if (entities[type])
-        return entities[type]
-
-    return undefined;
+function getEntity(searchName) {
+    return entities.find(({ name }) => name === searchName) ?? undefined;
 }
 
 module.exports = Entity

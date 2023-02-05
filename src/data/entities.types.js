@@ -4,6 +4,10 @@ const specialArgumentEntityNames = [
 ];
 
 module.exports = {
-    entityName: ['defaultArgumentEntityName', ...specialArgumentEntityNames.map(a => `"${a}"`)].join('|'),
-    defaultArgumentEntityName: convertToType(Object.values(Object.keys(require('./entities.json'))).filter(a => !specialArgumentEntityNames.includes(a)))
+    entityName: ['defaultArgumentEntityName', ...specialArgumentEntityNames.map(a => `"${a}"`)].join('|'), //todo: use covertToType
+    defaultArgumentEntityName: convertToType(
+        require('./entities.json')
+            .map(({ name }) => name)
+            .filter(a => !specialArgumentEntityNames.includes(a))
+    )
 }
