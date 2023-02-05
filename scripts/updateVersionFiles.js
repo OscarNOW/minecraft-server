@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const newVersion = process.argv[2];
 
+const { compareNumberSeparatedStrings } = require('../src/functions/loader/data.js');
+
 // Update version in package.json
 if (newVersion !== undefined) {
     let package = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')).toString());
@@ -36,8 +38,8 @@ if (newVersion !== undefined)
 if (manifest.versions.find(({ latestStable }) => latestStable))
     delete manifest.versions.find(({ latestStable }) => latestStable).latestStable;
 
-const unstableVersions = manifest.versions.filter(({ unstable }) => unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [];
-const stableVersions = manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareVersions(a.version, b.version))?.reverse?.() || [];
+const unstableVersions = manifest.versions.filter(({ unstable }) => unstable)?.sort((a, b) => compareNumberSeparatedStrings(a.version, b.version))?.reverse?.() || [];
+const stableVersions = manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareNumberSeparatedStrings(a.version, b.version))?.reverse?.() || [];
 
 manifest.versions = [
     stableVersions[0],
@@ -75,18 +77,6 @@ bugReport = bugReport.join('\n');
 bugReport = bugReport.replaceAll('\r\n', '\n');
 
 fs.writeFileSync(path.join(__dirname, '../.github/ISSUE_TEMPLATE/bug_report.yml'), bugReport);
-
-function compareVersions(a, b) { //todo: move to function file
-    a = a.split('.').map(c => parseInt(c));
-    b = b.split('.').map(c => parseInt(c));
-
-    for (let i = 0; i < a.length; i++) {
-        if (a[i] > b[i]) return 1;
-        if (a[i] < b[i]) return -1;
-    }
-
-    return 0;
-};
 
 function generateVersionDisplayName(version) {
     let name = version.path;
