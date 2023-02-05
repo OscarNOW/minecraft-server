@@ -6,15 +6,15 @@ module.exports = function (message) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
-    if (demoMessages[message] === undefined)
+    if (!demoMessages.find(({ name }) => name === message))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `message in  <${this.constructor.name}>.demo(${require('util').inspect(message)})  `, {
             got: message,
             expectationType: 'value',
-            expectation: Object.keys(demoMessages)
+            expectation: demoMessages.map(({ name }) => name)
         }, this.demo, { server: this.server, client: this }));
 
     this.p.sendPacket('game_state_change', {
         reason: 5,
-        gameMode: demoMessages[message]
+        gameMode: demoMessages.find(({ name }) => name === message).id
     })
 }
