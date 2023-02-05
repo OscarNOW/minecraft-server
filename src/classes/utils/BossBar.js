@@ -53,7 +53,7 @@ const defaultPrivate = {
                 entityUUID: this.id,
                 action: 4,
                 color: bossBarColors.indexOf(this.color),
-                dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id
+                dividers: bossBarDivisions.indexOf(this.divisionAmount)
             });
     },
     parseProperty(key, value) {
@@ -139,7 +139,7 @@ class BossBar {
             title: JSON.stringify(this.title.chat),
             health: this.health,
             color: bossBarColors.indexOf(this.color),
-            dividers: bossBarDivisions.find(({ divisions }) => divisions === this.divisionAmount).id,
+            dividers: bossBarDivisions.indexOf(this.divisionAmount),
             flags: parseInt([this.flags.createFog, this.flags.playEndMusic, this.flags.darkenSky].map(a => a ? '1' : '0').join(''), 2)
         })
 
