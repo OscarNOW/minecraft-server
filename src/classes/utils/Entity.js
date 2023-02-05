@@ -241,16 +241,16 @@ class Entity {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        if (entityAnimations[animationType] === undefined)
+        if (!entityAnimations.includes(animationType))
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
                 got: animationType,
                 expectationType: 'value',
-                expectation: Object.keys(entityAnimations)
+                expectation: entityAnimations
             }, this.rawListeners, { server: this.client.server, client: this.client }))
 
         this.p.sendPacket('animation', {
             entityId: this.id,
-            animation: entityAnimations[animationType]
+            animation: entityAnimations.indexOf(animationType)
         })
     }
 
