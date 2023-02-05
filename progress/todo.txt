@@ -1,5 +1,6 @@
 Pre-release
 
+The @ in the docs in the title bar stays visible in search
 Inventory
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
