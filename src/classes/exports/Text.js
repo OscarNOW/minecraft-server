@@ -290,7 +290,7 @@ class Text {
         return Text.parseArray(arr);
     }
 
-    static arrayToChat(a) { //todo: implement translate
+    static arrayToChat(a) { // todo: "implement translate", is old todo. After testing, translate seems to be working fine. Needs further testing and looking.
         let array = Text.parseArray(a);
         let out;
 
