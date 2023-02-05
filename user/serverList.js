@@ -2,7 +2,7 @@ const { Server, Text } = require('../');
 
 const server = new Server({
 
-    serverList: ({ ip, connection: { host, port }, version }) => ({
+    serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
 
         description: new Text([
             { text: `Connected through: `, color: 'gray' },
@@ -14,7 +14,7 @@ const server = new Server({
         players: {
             online: server.clients.length,
             max: Math.floor(Math.random() * 100) + 5,
-            hover: `More\nthan\n1\nline!`
+            hover: `Legacy:\n${legacy ? 'Yes' : 'No'}\n\nVersion:\n${version}`
         },
 
         version: {
