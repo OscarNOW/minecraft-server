@@ -97,3 +97,4 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 * [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
 * [minecraft-protocol](https://github.com/PrismarineJS/node-minecraft-protocol) for parsing all the packets and helping with the login process.
 * [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the package.
+* [Typedoc](https://typedoc.org/) for generating part of the documentation.
