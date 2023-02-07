@@ -29,7 +29,7 @@ module.exports = (async () => {
         .replaceAll('{title}', `{title}x.x.x docs minecraft-server`);
 
     console.log('Generating version dropdown...')
-    let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
+    let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel" class="title">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
 
     console.log('Generating version dropdown script...')
     let docScript = `
