@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const newVersion = process.argv[2];
 
-const { compareNumberSeparatedStrings } = require('../src/functions/compareNumberSeparatedStrings.js');
+const { compareDotSeparatedStrings } = require('../src/functions/compareDotSeparatedStrings.js');
 
 // Update version in package.json
 if (newVersion !== undefined) {
@@ -38,8 +38,8 @@ if (newVersion !== undefined)
 if (manifest.versions.find(({ latestStable }) => latestStable))
     delete manifest.versions.find(({ latestStable }) => latestStable).latestStable;
 
-const unstableVersions = manifest.versions.filter(({ unstable }) => unstable)?.sort((a, b) => compareNumberSeparatedStrings(a.version, b.version))?.reverse?.() || [];
-const stableVersions = manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareNumberSeparatedStrings(a.version, b.version))?.reverse?.() || [];
+const unstableVersions = manifest.versions.filter(({ unstable }) => unstable)?.sort((a, b) => compareDotSeparatedStrings(a.version, b.version))?.reverse?.() || [];
+const stableVersions = manifest.versions.filter(({ unstable }) => !unstable)?.sort((a, b) => compareDotSeparatedStrings(a.version, b.version))?.reverse?.() || [];
 
 manifest.versions = [
     stableVersions[0],
