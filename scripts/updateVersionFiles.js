@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const newVersion = process.argv[2];
 
-const { compareNumberSeparatedStrings } = require('../src/functions/loader/data.js');
+const { compareNumberSeparatedStrings } = require('../src/functions/compareNumberSeparatedStrings.js');
 
 // Update version in package.json
 if (newVersion !== undefined) {
