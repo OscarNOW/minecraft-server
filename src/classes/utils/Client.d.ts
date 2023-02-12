@@ -19,6 +19,8 @@ type entities = {
     readonly 0: Client
 };
 
+type state = 'connecting' | 'connected' | 'loginSent' | 'settingsReceived' | 'afterLoginPacketsSent' | 'clientSpawned' | 'brandReceived' | 'offline';
+
 export class Client {
     private constructor(client: unknown, server: Server, earlyInfo: {
         version: newVersion;
@@ -72,6 +74,51 @@ export class Client {
     readonly reducedDebugInfo: boolean;
 
     /* Readonly changing */
+    private readonly p: { // todo: make more explicitly typed
+        client: unknown;
+        defaultClientProperties: (client: Client) => defaultClientProperties;
+        changeEvents: {
+            [event: string]: ((newValue: unknown, oldValue: unknown) => void)[];
+        };
+        events: {
+            [event: string]: ((...args: unknown[]) => void)[];
+        };
+        intervals: NodeJS.Timeout[];
+        shutdownCallbacks: (() => void)[];
+        state: state;
+        stateHandler: {
+            checkReady: () => boolean;
+            init: () => void;
+            handleNewState: (currentState: state) => void;
+            updateState: {
+                set: (stateName: state) => void;
+                close: () => void;
+                packetReceived: (packetName: string) => void;
+            };
+        };
+        timeouts: NodeJS.Timeout[];
+        changeEventHasListeners: (changeEvent: string) => boolean;
+        clientOn: (name: string, callback: (...args: unknown[]) => void) => void;
+        emit: (name: string, ...args: unknown[]) => void;
+        emitChange: (type: string, oldValue: unknown) => void;
+        emitError: (customError: customError) => void;
+        emitMove: (info: {
+            x: number;
+            y: number;
+            z: number;
+            yaw: number;
+            pitch: number;
+        }) => void;
+        receivePacket: (name: string, packet: object) => void;
+        sendAfterLoginPackets: () => void;
+        sendLoginPacket: () => void;
+        sendPacket: (name: string, packet: object) => void;
+        setInterval: (callback: () => void, time: number) => void;
+        setTimeout: (callback: () => void, delay: number) => void;
+        shutdown: () => void;
+        bossBars: bossBar[];
+        //todo: rest of p
+    };
     readonly inventory: {
         readonly cursor?: Item;
         readonly armor: {
