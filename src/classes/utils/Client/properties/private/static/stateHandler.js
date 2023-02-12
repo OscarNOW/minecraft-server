@@ -1,6 +1,6 @@
 const CustomError = require('../../../../CustomError.js');
 
-const states = Object.freeze([
+const states = Object.freeze([ // also change <Client>.p.state type in Client.d.ts if this is changed
     'connecting',
     'connected',
     'loginSent',
