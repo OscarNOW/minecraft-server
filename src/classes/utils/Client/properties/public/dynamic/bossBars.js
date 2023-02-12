@@ -4,7 +4,7 @@ module.exports = {
             preventSet: true
         },
         get() {
-            return this.p.bossBars;
+            return this.p.bossBars; // todo: add _ before name. For example: this.p._name
         },
         set(newValue) {
             const oldValue = [...this.bossBars];

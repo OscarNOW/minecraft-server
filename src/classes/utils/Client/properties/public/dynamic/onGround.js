@@ -4,7 +4,7 @@ module.exports = {
             preventSet: true
         },
         get() {
-            return this.p.onGround;
+            return this.p.onGround; // todo: add _ before name? For example: this.p._name
         },
         set(newValue) {
             const oldValue = this.onGround;

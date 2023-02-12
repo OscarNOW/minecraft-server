@@ -4,7 +4,7 @@ module.exports = {
             preventSet: true
         },
         get() {
-            return this.p.entities;
+            return this.p.entities; // todo: add _ before name. For example: this.p._name
         },
         set(newValue) {
             const oldValue = { ...this.entities };
