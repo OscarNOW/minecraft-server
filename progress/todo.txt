@@ -1,5 +1,6 @@
 Pre-release
 
+Add types for privates
 Inventory
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
