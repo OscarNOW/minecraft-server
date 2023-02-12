@@ -24,6 +24,7 @@ Rename leftClick to something else (because in air doesn't trigger)
 
 Anytime
 
+Add slot data file
 Inventory
     Implement packets sent from Client (see Spreadsheet)
         Implement window_click
