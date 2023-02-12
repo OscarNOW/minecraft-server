@@ -163,14 +163,14 @@ class Client {
 
         let folderPath = path.resolve(__dirname, '../../');
 
-        if (callPath.startsWith(folderPath))
-            return this[_p];
-        else
-            return this.p._p
+        if (!callPath.startsWith(folderPath))
+            console.warn('(minecraft-server) WARNING: Detected access to private properties from outside of the module. This is not recommended and may cause unexpected behavior.');
+
+        return this[_p];
     }
 
     set p(value) {
-        this.p._p = value;
+        console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
     }
 }
 

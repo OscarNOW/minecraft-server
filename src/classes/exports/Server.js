@@ -208,28 +208,28 @@ class Server {
 
         let folderPath = path.resolve(__dirname, '../../');
 
-        if (callPath.startsWith(folderPath)) {
-            if (!privates.get(this)) {
-                let newPrivate = {};
+        if (!callPath.startsWith(folderPath))
+            console.warn('(minecraft-server) WARNING: Detected access to private properties from outside of the module. This is not recommended and may cause unexpected behavior.');
 
-                for (const [key, value] of Object.entries(defaultPrivate)) {
-                    let newValue = value;
-                    if (typeof newValue === 'function')
-                        newValue = newValue.bind(this);
+        if (!privates.get(this)) { //todo: create private when instantiating class
+            let newPrivate = {};
 
-                    newPrivate[key] = newValue;
-                }
+            for (const [key, value] of Object.entries(defaultPrivate)) {
+                let newValue = value;
+                if (typeof newValue === 'function')
+                    newValue = newValue.bind(this);
 
-                privates.set(this, newPrivate);
+                newPrivate[key] = newValue;
             }
 
-            return privates.get(this);
-        } else
-            return this.p._p
+            privates.set(this, newPrivate);
+        }
+
+        return privates.get(this);
     }
 
     set p(value) {
-        this.p._p = value;
+        console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
     }
 
     joinProxyClient(proxyClient) {
