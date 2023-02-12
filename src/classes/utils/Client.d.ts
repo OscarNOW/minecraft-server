@@ -116,8 +116,87 @@ export class Client {
         setInterval: (callback: () => void, time: number) => void;
         setTimeout: (callback: () => void, delay: number) => void;
         shutdown: () => void;
-        bossBars: bossBar[];
-        //todo: rest of p
+        bossBars: bossBar[]; // todo: add underscore before name
+        _brand: string | null;
+        _chatSettings: {
+            visible: 'all' | 'commands' | 'none';
+            colors: boolean;
+        };
+        _difficulty: difficulty;
+        entities: entities; // todo: add underscore before name
+        _experience: {
+            bar: number;
+            level: number;
+        };
+        _food: number;
+        _foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
+        _gamemode: gamemode;
+        _health: number;
+        _inventory: unknown; // todo: create inventory type
+        _locale: unknown; // todo: create locale type
+        onGround: boolean;
+        positionSet: boolean;
+        _position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw: number;
+            pitch: number;
+        };
+        oldPositions: { // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
+            x: number;
+            y: number;
+            z: number;
+            yaw: number;
+            pitch: number;
+            isFirst: boolean;
+        };
+        _raining: boolean;
+        _reducedDebugInfo: boolean;
+        _rightHanded: boolean;
+        _showRespawnScreen: boolean;
+        _slot: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+        _sneaking: boolean;
+        _sprinting: boolean;
+        _tabFooter: Text;
+        _tabHeader: Text;
+        _tabItems: TabItem[];
+        _toxicRainLevel: number;
+        _viewDistance: number;
+        _visibleSkinParts: {
+            cape: boolean;
+            torso: boolean;
+            leftArm: boolean;
+            rightArm: boolean;
+            leftLeg: boolean;
+            rightLeg: boolean;
+            hat: boolean;
+        };
+        pubDynProperties: {
+            [property: string]: {
+                info?: {
+                    preventSet?: boolean;
+                    defaultable?: false;
+                    defaultSetTime?: 'afterLogin' | 'loginPacket';
+                    loginPacket: {
+                        name: string;
+                        minecraftName: string;
+                    }[];
+                };
+                get?: () => unknown;
+                set?: (newValue: unknown, beforeReady?: boolean, loginPacket?: boolean) => void | { [minecraftName: string]: unknown };
+                init?: () => void;
+                [otherProperty: string | symbol]: unknown;
+            }
+        };
+        mpEvents: {
+            [event: string]: ((...args: unknown[]) => void)[]; // todo: make more explicit
+        };
+        defaultProperties: {
+            [property: string]: unknown;
+        };
+        chunksGenerated: boolean;
+        _chunks: (LoadedChunk[]) | ((() => LoadedChunk)[]);
     };
     readonly inventory: {
         readonly cursor?: Item;
