@@ -45,14 +45,14 @@ For more examples, please see [the examples folder](https://github.com/OscarNOW/
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
-## Goals
-Not all goals are fully finished.
+## Key features
 
-* **Full protocol coverage**, every packet is implemented in the library with an easy to use API.
-* **Everything is per Client**, meaning you can, for example, have different server lists, or different worlds based on the Client.
+* **Fast**, starting a server with this library is way faster than using the default Java server.
 * **Easy to use**, you can create servers in an intuitive way.
+* **Everything is per Client**, meaning you can send different information to different Clients.
 
 ## **Terms**
+These are some terms that are used in the code and documentation.
 
 ### Client
 The Client is the system that is connecting/connected to the Server.
