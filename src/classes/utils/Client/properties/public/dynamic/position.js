@@ -17,7 +17,7 @@ module.exports = {
                 for (const [key, value] of Object.entries(pos))
                     this.p._position.setRaw(key, value)
 
-                this.p.oldPositions = Object.freeze({
+                this.p.oldPositions = Object.freeze({ // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                     x: this.p._position.x,
                     y: this.p._position.y,
                     z: this.p._position.z,
@@ -54,7 +54,7 @@ module.exports = {
                     }, teleportConfirmationTimeout)
                 }).catch(e => this.p.emitError(e));
 
-                let oldPosition = this.p.oldPositions;
+                let oldPosition = this.p.oldPositions; // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                 let useRelative = '';
                 let values = {};
 
@@ -84,7 +84,7 @@ module.exports = {
                     teleportId
                 });
 
-                this.p.oldPositions = Object.freeze({
+                this.p.oldPositions = Object.freeze({ // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                     x: this.p._position.x,
                     y: this.p._position.y,
                     z: this.p._position.z,
@@ -99,7 +99,7 @@ module.exports = {
             this.p.positionSet = false;
             this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
 
-            this.p.oldPositions = Object.freeze({
+            this.p.oldPositions = Object.freeze({ // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                 x: this.p._position.x,
                 y: this.p._position.y,
                 z: this.p._position.z,
@@ -113,7 +113,7 @@ module.exports = {
             this.p.teleportPromises[teleportId].res();
         },
         update(position) {
-            this.p.oldPositions = Object.freeze({
+            this.p.oldPositions = Object.freeze({ // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                 x: position.x,
                 y: position.y,
                 z: position.z,
