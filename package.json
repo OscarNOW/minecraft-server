@@ -39,7 +39,7 @@
         "protodef": "^1.15.0"
     },
     "devDependencies": {
-        "mineflayer": "^4.8.0",
+        "mineflayer": "^4.8.1",
         "eslint": "^8.34.0",
         "typedoc": "^0.23.25",
         "typedoc-theme-hierarchy": "^3.0.2"
