@@ -1,4 +1,4 @@
-const changes = [
+const changes = [ // if this is changed, make sure to also change changeEvent in Client.d.ts
     'position',
     'slot',
     'health',
