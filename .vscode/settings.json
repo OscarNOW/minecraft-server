@@ -1,5 +1,5 @@
 {
     "search.exclude": {
-        "**/docs": true
+        "docs/": true
     }
 }
