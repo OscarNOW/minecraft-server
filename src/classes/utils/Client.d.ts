@@ -13,6 +13,53 @@ type Chunk = import('../exports/Chunk').Chunk;
 type Text = import('../exports/Text').Text;
 type textInput = import('../exports/Text').textInput;
 
+type changeEventType =
+    'entities' |
+    'chunks' |
+    'bossBars' |
+    'tabItems' |
+    'slot' |
+    'health' |
+    'food' |
+    'foodSaturation' |
+    'toxicRainLevel' |
+    'raining' |
+    'showRespawnScreen' |
+    'sneaking' |
+    'sprinting' |
+    'onGround' |
+    'position' |
+    'gamemode' |
+    'difficulty' |
+    'inventory';
+
+type changeEventReturn<changeEventType extends changeEventType> =
+    changeEventType extends 'entities' ? entities :
+    changeEventType extends 'chunks' ? LoadedChunk[] :
+    changeEventType extends 'bossBars' ? bossBar[] :
+    changeEventType extends 'tabItems' ? TabItem[] :
+    changeEventType extends 'gamemode' ? gamemode :
+    changeEventType extends 'difficulty' ? difficulty :
+    changeEventType extends 'inventory' ? inventory :
+    changeEventType extends 'slot' ? number :
+    changeEventType extends 'health' ? number :
+    changeEventType extends 'food' ? number :
+    changeEventType extends 'foodSaturation' ? number :
+    changeEventType extends 'toxicRainLevel' ? number :
+    changeEventType extends 'raining' ? boolean :
+    changeEventType extends 'showRespawnScreen' ? boolean :
+    changeEventType extends 'sneaking' ? boolean :
+    changeEventType extends 'sprinting' ? boolean :
+    changeEventType extends 'onGround' ? boolean :
+    changeEventType extends 'position' ? {
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    } :
+    never;
+
 type entities = {
     readonly [entityId: number]: EntityLike;
 } & {
@@ -406,29 +453,7 @@ export class Client {
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
-    on(event: 'change', type: 'entities', callback: (newValue: entities, oldValue: entities) => void): void;
-    on(event: 'change', type: 'chunks', callback: (newValue: LoadedChunk[], oldValue: LoadedChunk[]) => void): void;
-    on(event: 'change', type: 'bossBars', callback: (newValue: BossBar[], oldValue: BossBar[]) => void): void;
-    on(event: 'change', type: 'tabItems', callback: (newValue: TabItem[], oldValue: TabItem[]) => void): void;
-    on(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (newValue: number, oldValue: number) => void): void;
-    on(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (newValue: boolean, oldValue: boolean) => void): void;
-    on(event: 'change', type: 'position', callback: (newValue: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }, oldValue: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }) => void): void;
-    on(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
-    on(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
-    on(event: 'change', type: 'inventory', callback: (newValue: inventory, oldValue: inventory) => void): void;
-
+    on<currentChangeEventType extends changeEventType>(event: 'change', type: currentChangeEventType, callback: (newValue: changeEventReturn<currentChangeEventType>, oldValue: changeEventReturn<currentChangeEventType>) => void): void;
     on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     on(event: 'chat', callback: (message: string) => void): void;
@@ -469,29 +494,7 @@ export class Client {
         headInsideBlock: boolean;
     }) => void): void;
 
-    once(event: 'change', type: 'entities', callback: (newValue: entities, oldValue: entities) => void): void;
-    once(event: 'change', type: 'chunks', callback: (newValue: LoadedChunk[], oldValue: LoadedChunk[]) => void): void;
-    once(event: 'change', type: 'bossBars', callback: (newValue: BossBar[], oldValue: BossBar[]) => void): void;
-    once(event: 'change', type: 'tabItems', callback: (newValue: TabItem[], oldValue: TabItem[]) => void): void;
-    once(event: 'change', type: 'slot' | 'health' | 'food' | 'foodSaturation' | 'toxicRainLevel', callback: (newValue: number, oldValue: number) => void): void;
-    once(event: 'change', type: 'raining' | 'showRespawnScreen' | 'sneaking' | 'sprinting' | 'onGround', callback: (newValue: boolean, oldValue: boolean) => void): void;
-    once(event: 'change', type: 'position', callback: (newValue: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }, oldValue: {
-        x: number;
-        y: number;
-        z: number;
-        yaw: number;
-        pitch: number;
-    }) => void): void;
-    once(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
-    once(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
-    once(event: 'change', type: 'inventory', callback: (newValue: inventory, oldValue: inventory) => void): void;
-
+    once<currentChangeEventType extends changeEventType>(event: 'change', type: currentChangeEventType, callback: (newValue: changeEventReturn<currentChangeEventType>, oldValue: changeEventReturn<currentChangeEventType>) => void): void;
     once(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;
     once(event: 'chat', callback: (message: string) => void): void;
