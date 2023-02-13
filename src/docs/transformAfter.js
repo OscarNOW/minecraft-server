@@ -11,7 +11,7 @@ module.exports = (async () => {
     margin-left: 5px;
     margin-right: 5px;
 }
-.tsd-panel .tsd-typography>table {
+.tsd-panel.tsd-typography>table {
     border: 2px solid;
     border-radius: 5px;
 }
