@@ -24,6 +24,7 @@ Rename leftClick to something else (because in air doesn't trigger)
 
 Anytime
 
+Implement <Client>.on('change', (type, newValue, oldValue) => { ... })
 Add slot data file
 Inventory
     Implement packets sent from Client (see Spreadsheet)
