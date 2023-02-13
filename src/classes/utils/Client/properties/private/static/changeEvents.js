@@ -18,7 +18,8 @@ const changes = [
     'sprinting',
     'tabItems',
     'tabHeader',
-    'tabFooter'
+    'tabFooter',
+    'inventory'
 ];
 
 module.exports = {

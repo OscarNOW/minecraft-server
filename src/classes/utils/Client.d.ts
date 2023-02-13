@@ -19,6 +19,40 @@ type entities = {
     readonly 0: Client
 };
 
+type inventory = {
+    readonly cursor?: Item;
+    readonly armor: {
+        readonly helmet?: Item;
+        readonly chestplate?: Item;
+        readonly leggings?: Item;
+        readonly boots?: Item;
+    };
+    readonly offhand?: Item;
+    readonly crafting: {
+        readonly output?: Item;
+        readonly slots: {
+            0?: Item;
+            1?: Item;
+            2?: Item;
+            3?: Item;
+        };
+    };
+    readonly hotbar: {
+        0?: Item;
+        1?: Item;
+        2?: Item;
+        3?: Item;
+        4?: Item;
+        5?: Item;
+        6?: Item;
+        7?: Item;
+        8?: Item;
+    };
+    readonly slots: {
+        readonly [slot: number]: Item | undefined;
+    };
+};
+
 type state = 'connecting' | 'connected' | 'loginSent' | 'settingsReceived' | 'afterLoginPacketsSent' | 'clientSpawned' | 'brandReceived' | 'offline';
 
 export class Client {
@@ -123,7 +157,7 @@ export class Client {
             colors: boolean;
         };
         _difficulty: difficulty;
-        entities: entities; // todo: add underscore before name
+        entities: entities; // todo: add underscore before <Client>.p.entities so that it becomes <Client>.p._entities
         _experience: {
             bar: number;
             level: number;
@@ -132,7 +166,7 @@ export class Client {
         _foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
         _gamemode: gamemode;
         _health: number;
-        _inventory: unknown; // todo: create inventory type
+        _inventory: inventory;
         _locale: unknown; // todo: create locale type
         onGround: boolean;
         positionSet: boolean;
@@ -198,39 +232,7 @@ export class Client {
         chunksGenerated: boolean;
         _chunks: (LoadedChunk[]) | ((() => LoadedChunk)[]);
     };
-    readonly inventory: {
-        readonly cursor?: Item;
-        readonly armor: {
-            readonly helmet?: Item;
-            readonly chestplate?: Item;
-            readonly leggings?: Item;
-            readonly boots?: Item;
-        };
-        readonly offhand?: Item;
-        readonly crafting: {
-            readonly output?: Item;
-            readonly slots: {
-                0?: Item;
-                1?: Item;
-                2?: Item;
-                3?: Item;
-            };
-        };
-        readonly hotbar: {
-            0?: Item;
-            1?: Item;
-            2?: Item;
-            3?: Item;
-            4?: Item;
-            5?: Item;
-            6?: Item;
-            7?: Item;
-            8?: Item;
-        };
-        readonly slots: {
-            readonly [slot: number]: Item | undefined;
-        };
-    };
+    readonly inventory: inventory;
 
     readonly sneaking: boolean;
     readonly sprinting: boolean;
@@ -425,6 +427,7 @@ export class Client {
     }) => void): void;
     on(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
     on(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
+    on(event: 'change', type: 'inventory', callback: (newValue: inventory, oldValue: inventory) => void): void;
 
     on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     on(event: 'misbehavior', callback: (customError: CustomError) => void): void;
@@ -487,6 +490,7 @@ export class Client {
     }) => void): void;
     once(event: 'change', type: 'gamemode', callback: (newValue: gamemode, oldValue: gamemode) => void): void;
     once(event: 'change', type: 'difficulty', callback: (newValue: difficulty, oldValue: difficulty) => void): void;
+    once(event: 'change', type: 'inventory', callback: (newValue: inventory, oldValue: inventory) => void): void;
 
     once(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;
     once(event: 'misbehavior', callback: (customError: CustomError) => void): void;

@@ -8,8 +8,13 @@ module.exports = {
         get() {
             return this.p._inventory;
         },
-        set(newValue) {
+        set(newValue, beforeReady) {
+            const oldValue = this.p._inventory;
+
             this.p._inventory = newValue;
+
+            if (!beforeReady && oldValue !== newValue)
+                this.p.emitChange('inventory', oldValue);
         },
         init() {
             this.p._inventory = { //todo: Object.freeze
@@ -51,6 +56,9 @@ module.exports = {
             //todo: make work with Object.freeze
             //todo: create separate map function
             //todo: create changed set
+
+            // todo: set oldValue to copy of inventory, because when inventory is modified below, it also modifies oldValue, so oldValue isn't the old value anymore
+
             if (id === -1) // cursor
                 this.p._inventory.cursor = slot;
             else if (id >= 0 && id <= 4) // 2x2 crafting
@@ -73,6 +81,9 @@ module.exports = {
                 this.p._inventory.hotbar[id - 36] = slot;
             else if (id === 45) // offhand
                 this.p._inventory.offhand = slot;
+
+            // if(!beforeReady) // todo: check if ready
+            this.p.emitChange('inventory', this.p._inventory); // todo: use oldValue, see above
         },
         getSlot(id) {
             //todo: see setSlot
