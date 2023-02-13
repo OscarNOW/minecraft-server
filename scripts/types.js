@@ -96,46 +96,48 @@ for (const [name, value] of Object.entries(types))
 
 console.log('Minifying output...')
 
-out = out.replaceAll('\r\n', '\n')
+out = out.replaceAll('\r\n', '\n');
 
-out = removeComments(out)
+out = removeComments(out);
 
-out = out.split('\n')
-out = out.filter(a => a.trim().length > 0)
-out = out.map(a => a.trim())
-out = out.join('\n')
+out = out.split('\n');
+out = out.filter(a => a.trim().length > 0);
+out = out.map(a => a.trim());
+out = out.join('\n');
 
-out = out.replaceAll(' =>', '=>')
-out = out.replaceAll('=> ', '=>')
-out = out.replaceAll(' ?', '?')
-out = out.replaceAll('? ', '?')
-out = out.replaceAll(' :', ':')
-out = out.replaceAll(': ', ':')
-out = out.replaceAll(" ,", ',')
-out = out.replaceAll(", ", ',')
-out = out.replaceAll(' |', '|')
-out = out.replaceAll('| ', '|')
-out = out.replaceAll(' &', '&')
-out = out.replaceAll('& ', '&')
+out = out.replaceAll(' =>', '=>');
+out = out.replaceAll('=> ', '=>');
+out = out.replaceAll(' ?', '?');
+out = out.replaceAll('? ', '?');
+out = out.replaceAll(' :', ':');
+out = out.replaceAll(': ', ':');
+out = out.replaceAll(" ,", ',');
+out = out.replaceAll(", ", ',');
+out = out.replaceAll(' |', '|');
+out = out.replaceAll('| ', '|');
+out = out.replaceAll(' &', '&');
+out = out.replaceAll('& ', '&');
 
-out = out.replaceAll(':\n', ':')
-out = out.replaceAll(';\n', ';')
-out = out.replaceAll('\n;', ';')
-out = out.replaceAll(',\n', ',')
-out = out.replaceAll('{\n', '{')
-out = out.replaceAll('\n}', '}')
-out = out.replaceAll('(\n', '(')
-out = out.replaceAll('\n)', ')')
+out = out.replaceAll('|\n', '|');
+out = out.replaceAll('\n|', '|');
+out = out.replaceAll(':\n', ':');
+out = out.replaceAll(';\n', ';');
+out = out.replaceAll('\n;', ';');
+out = out.replaceAll(',\n', ',');
+out = out.replaceAll('{\n', '{');
+out = out.replaceAll('\n}', '}');
+out = out.replaceAll('(\n', '(');
+out = out.replaceAll('\n)', ')');
 
-out = out.replaceAll('}\n', '};')
-out = out.replaceAll(';}\n', '};')
+out = out.replaceAll('}\n', '};');
+out = out.replaceAll(';}\n', '};');
 
-out = out.replaceAll('readonly [', 'readonly[')
-out = out.replaceAll("extends '", "extends'")
+out = out.replaceAll('readonly [', 'readonly[');
+out = out.replaceAll("extends '", "extends'");
 
-out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '')
+out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '');
 
-fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out)
+fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out);
 
 console.clear();
 console.log('Done generating types')
