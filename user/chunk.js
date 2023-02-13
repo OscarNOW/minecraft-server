@@ -8,7 +8,7 @@ for (let x = 0; x < 16; x++)
 
 const server = new Server({
     defaultClientProperties: () => ({
-        gamemode: 'survival',
+        gamemode: 'creative',
         position: {
             x: 5,
             y: 101,
@@ -23,5 +23,7 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    console.log(client.p);
+    client.on('change', 'inventory', inventory => {
+        console.log(inventory)
+    })
 });
