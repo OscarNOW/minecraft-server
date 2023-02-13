@@ -16,6 +16,7 @@ docs/
 examples/
 scripts/
 assets/
+logs/
 
 # User folders
 progress/
