@@ -4,12 +4,16 @@ module.exports = (async () => {
     const path = require('path');
 
     console.log('Transforming customCss...')
-    let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css')).toString()
+    let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css')).toString() // todo: doesn't this add customCss to customCss each time it's run?
     customCss = customCss.replace('.category__link--ts', '.none');
     customCss += `
 #versionDropdownLabel {
     margin-left: 5px;
     margin-right: 5px;
+}
+.tsd-panel .tsd-typography>table {
+    border: 2px solid;
+    border-radius: 5px;
 }
 `
     fs.writeFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css'), customCss);
