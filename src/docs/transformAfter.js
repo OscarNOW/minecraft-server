@@ -6,6 +6,7 @@ module.exports = (async () => {
     console.log('Transforming customCss...')
     let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css')).toString() // todo: doesn't this add customCss to customCss each time it's run?
     customCss = customCss.replace('.category__link--ts', '.none');
+    // todo: change border-radius and padding of code element
     customCss += `
 #versionDropdownLabel {
     margin-left: 5px;
