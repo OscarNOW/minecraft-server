@@ -10,9 +10,9 @@ In this release, there are many small code quality improvements.
 None
 
 ## New API
-* [`<Client>.brand`](https://oscarnow.github.io/minecraft-server/1.3.1/classes/Client#brand)
-* [`<Client>.inventory`](https://oscarnow.github.io/minecraft-server/1.3.1/classes/Client#inventory)
-* [`The description in the serverlist can now be a Text instance or textInput`](https://oscarnow.github.io/minecraft-server/1.3.1/classes/Server#constructor)
+* [`<Client>.brand`](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#brand)
+* [`<Client>.inventory`](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#inventory)
+* [`The description in the serverlist can now be a Text instance or textInput`](https://oscarnow.github.io/minecraft-server/{version}/classes/Server#constructor)
 
 ## Documentation / Types
 None
