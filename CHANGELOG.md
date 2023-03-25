@@ -2,7 +2,7 @@
 None
 
 ## New API
-None
+[<Server>.on('listening', () => { })](https://oscarnow.github.io/minecraft-server/{version}/classes/Server#on)
 
 ## Documentation / Types
 None
