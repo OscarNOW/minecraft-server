@@ -7,9 +7,9 @@ const version = require('../../settings.json').version;
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let credentials = null;
-if (fs.existsSync(path.resolve(__dirname, `../../../credentials/`)))
-    if (fs.existsSync(path.resolve(__dirname, `../../../credentials/microsoft.json`)))
-        credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../../../credentials/microsoft.json`)))
+if (fs.existsSync(path.resolve(__dirname, '../../../credentials/')))
+    if (fs.existsSync(path.resolve(__dirname, '../../../credentials/microsoft.json')))
+        credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../../credentials/microsoft.json')))
 
 module.exports = async (expect, warn) => {
     if (credentials === null) return warn(`Can't test server class without Microsoft account credentials. Create ${path.resolve(__dirname, '../../../credentials/microsoft.json')} with username and password properties`)

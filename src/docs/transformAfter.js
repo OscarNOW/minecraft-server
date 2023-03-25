@@ -31,10 +31,10 @@ module.exports = (async () => {
     const redirectionPage = fs.readFileSync(path.resolve(__dirname, './redirectionPage.html')).toString()
         .replaceAll('{path.normal}', `{pathBefore}${latestStableVersionPath}/{path}`)
         .replaceAll('{path.unstable}', `{pathBefore}${latestUnstableVersionPath}/{path}`)
-        .replaceAll('{title}', `{title}x.x.x docs minecraft-server`);
+        .replaceAll('{title}', '{title}x.x.x docs minecraft-server');
 
     console.log('Generating version dropdown...')
-    let versionDropdown = `<label for="versionDropdown" id="versionDropdownLabel" class="title">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>`;
+    let versionDropdown = '<label for="versionDropdown" id="versionDropdownLabel" class="title">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>';
 
     console.log('Generating version dropdown script...')
     let docScript = `
@@ -50,9 +50,9 @@ ${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
 
     let newTopMenu = menu;
 
-    for (const index of getAllIndexes(menu, `<li><a class="category__link js-category-link category__link--ts" href="`)) {
-        let value = menu.substring(index + `<li><a class="category__link js-category-link category__link--ts" href="`.length);
-        value = value.substring(0, value.indexOf(`</a>`) + 4);
+    for (const index of getAllIndexes(menu, '<li><a class="category__link js-category-link category__link--ts" href="')) {
+        let value = menu.substring(index + '<li><a class="category__link js-category-link category__link--ts" href="'.length);
+        value = value.substring(0, value.indexOf('</a>') + 4);
 
         let name = value.split('"')[0];
         let isClass = name.includes('classes/')
@@ -164,7 +164,7 @@ ${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
 
     console.log('Writing overwrites...')
     console.log('   style.css')
-    fs.writeFileSync(path.resolve(__dirname, `../../docs/github/assets/style.css`), fs.readFileSync(path.resolve(__dirname, `./overwrites/style.css`)).toString());
+    fs.writeFileSync(path.resolve(__dirname, '../../docs/github/assets/style.css'), fs.readFileSync(path.resolve(__dirname, './overwrites/style.css')).toString());
 
     console.log('Copying files...')
     console.log('    index.d.ts')

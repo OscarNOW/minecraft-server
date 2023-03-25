@@ -159,7 +159,7 @@ class Server {
                     handleLegacyPing.call(this, buffer, client, this.serverList); //todo: check which versions are included in "legacy" and maybe add support for older serverlist versions?
             });
 
-            client.on('state', state => clientState = state);
+            client.on('state', state => { clientState = state });
 
             client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
                 const isLegacy = serverHost === '';
@@ -202,7 +202,7 @@ class Server {
 
         });
 
-        this.server.on('login', async client => {
+        this.server.on('login', client => {
             new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
         });
 

@@ -5,7 +5,7 @@ module.exports = function () {
         return;
 
     if (this.p.windowId === null || this.p.windowId === undefined)
-        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `window  opened window  `, {
+        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', 'window  opened window  ', {
             got: 'no open window',
             expectationType: 'value',
             expectation: 'open window'

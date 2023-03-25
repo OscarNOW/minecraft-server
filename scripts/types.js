@@ -83,7 +83,7 @@ types = Object.fromEntries(Object.entries(types)
 
 console.log('Generating output...')
 
-let out = ``
+let out = ''
 
 for (const exportClass of exportClasses)
     out += `export ${exportClass}`;
@@ -111,8 +111,8 @@ out = out.replaceAll(' ?', '?');
 out = out.replaceAll('? ', '?');
 out = out.replaceAll(' :', ':');
 out = out.replaceAll(': ', ':');
-out = out.replaceAll(" ,", ',');
-out = out.replaceAll(", ", ',');
+out = out.replaceAll(' ,', ',');
+out = out.replaceAll(', ', ',');
 out = out.replaceAll(' |', '|');
 out = out.replaceAll('| ', '|');
 out = out.replaceAll(' &', '&');

@@ -24,10 +24,10 @@
         ));
     }
 
-    console.log(`    .github/README.md`)
+    console.log('    .github/README.md')
     copiedFilePromises.push(fs.copyFile(
-        path.join(__dirname, `../../.github/README.md`),
-        path.join(__dirname, `./README.md`)
+        path.join(__dirname, '../../.github/README.md'),
+        path.join(__dirname, './README.md')
     ));
 
     await Promise.all(copiedFilePromises);

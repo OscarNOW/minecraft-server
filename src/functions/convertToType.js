@@ -1,5 +1,5 @@
 module.exports = Object.freeze({
-    convertToType: (values) => {
+    convertToType: values => {
         let type = values.map(a => {
             if (['number', 'boolean'].includes(typeof a))
                 return a;

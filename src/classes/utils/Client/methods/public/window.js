@@ -18,5 +18,5 @@ module.exports = function (nonEntityWindowName) {
     // const windowId = 1; //could be anything except 0
     // this.p.windowId = windowId;
 
-    throw new Error(`Not implemented`)
+    throw new Error('Not implemented')
 }

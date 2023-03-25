@@ -36,7 +36,7 @@ const defaultPrivate = {
                     action: 1,
                     data: [{
                         UUID: this.uuid,
-                        gamemode: gamemodes.indexOf(this.gamemode),
+                        gamemode: gamemodes.indexOf(this.gamemode)
                     }]
                 });
                 this.tabItem.p.gamemode = this.gamemode;
@@ -162,7 +162,7 @@ class Player extends Entity {
             return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
                 got: extraInfo.name,
                 expectationType: 'type',
-                expectation: 'string.length <= 16',
+                expectation: 'string.length <= 16'
             }, null, { server: this.server, client: this.client }))
 
         if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {

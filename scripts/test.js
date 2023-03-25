@@ -23,32 +23,32 @@ const stringify = obj => ({
 })
 
 const colors = Object.freeze({
-    reset: "\x1b[0m",
-    bold: "\x1b[1m",
-    dim: "\x1b[2m",
-    underscore: "\x1b[4m",
-    blink: "\x1b[5m",
-    reverse: "\x1b[7m",
-    hidden: "\x1b[8m",
+    reset: '\x1b[0m',
+    bold: '\x1b[1m',
+    dim: '\x1b[2m',
+    underscore: '\x1b[4m',
+    blink: '\x1b[5m',
+    reverse: '\x1b[7m',
+    hidden: '\x1b[8m',
     fg: {
-        black: "\x1b[30m",
-        red: "\x1b[31m",
-        green: "\x1b[32m",
-        yellow: "\x1b[33m",
-        blue: "\x1b[34m",
-        magenta: "\x1b[35m",
-        cyan: "\x1b[36m",
-        white: "\x1b[37m",
+        black: '\x1b[30m',
+        red: '\x1b[31m',
+        green: '\x1b[32m',
+        yellow: '\x1b[33m',
+        blue: '\x1b[34m',
+        magenta: '\x1b[35m',
+        cyan: '\x1b[36m',
+        white: '\x1b[37m'
     },
     bg: {
-        black: "\x1b[40m",
-        red: "\x1b[41m",
-        green: "\x1b[42m",
-        yellow: "\x1b[43m",
-        blue: "\x1b[44m",
-        magenta: "\x1b[45m",
-        cyan: "\x1b[46m",
-        white: "\x1b[47m"
+        black: '\x1b[40m',
+        red: '\x1b[41m',
+        green: '\x1b[42m',
+        yellow: '\x1b[43m',
+        blue: '\x1b[44m',
+        magenta: '\x1b[45m',
+        cyan: '\x1b[46m',
+        white: '\x1b[47m'
     }
 });
 
@@ -83,7 +83,7 @@ if (debug) {
                 testsRun++;
 
                 if (verbose)
-                    console.log(`      Test ran`, { testsRun, id })
+                    console.log('      Test ran', { testsRun, id })
 
                 if (JSON.stringify(got) !== JSON.stringify(expected)) { //todo implement better check
                     if (verbose)
@@ -198,7 +198,7 @@ if (debug) {
             let arr = [];
 
             colArr.push(`| ${colors.bg.red}${colors.bold} FAILED `)
-            arr.push(`|  FAILED `)
+            arr.push('|  FAILED ')
             colArr.push(`| GOT:      ${colors.bg.black} ${val.got.color} `)
             arr.push(`| GOT:       ${val.got.text} `)
             colArr.push(`| EXPECTED: ${colors.bg.black} ${val.expected.color} `)
@@ -235,7 +235,7 @@ if (debug) {
 
             fs.mkdirSync(path.resolve(__dirname, '../logs/tests/'), { recursive: true })
 
-            let p = path.resolve(__dirname, `../logs/tests/latest.json`);
+            let p = path.resolve(__dirname, '../logs/tests/latest.json');
             fs.writeFileSync(p, JSON.stringify(jsonOut, null, 4));
             console.log(p)
 
@@ -244,7 +244,7 @@ if (debug) {
 
     if (!silenceWarnings & jsonOut.warnings.length > 0) {
         if (githubAction)
-            console.log(`WARNINGS`)
+            console.log('WARNINGS')
         else
             console.log(`${colors.bg.yellow}${colors.fg.black} WARNINGS ${colors.reset}`)
         for (const v of jsonOut.warnings) console.log(v)

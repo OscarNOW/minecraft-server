@@ -17,7 +17,7 @@ for (const file of [
     ...fs
         .readdirSync(path.resolve(__dirname, '../src/', './data/messages/realms/'))
         .filter(file => file.endsWith('.json'))
-        .map(a => `./data/messages/realms/${a}`),
+        .map(a => `./data/messages/realms/${a}`)
 ]) {
     console.log(`   ${file}`);
     fs.writeFileSync(path.resolve(__dirname, '../src/', file), JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/', file)))))

@@ -63,7 +63,7 @@ module.exports = {
                     'yaw',
                     'z',
                     'y',
-                    'x',
+                    'x'
                 ]) {
                     let val = pos[key] ?? oldPosition[key];
 

@@ -235,7 +235,7 @@ class Text {
                     throw new CustomError('expectationNotMet', 'libraryUser', `colorLetter in  ${this.constructor.name}.stringToArray(<includes colorLetter ${val}>)  `, {
                         got: val,
                         expectationType: 'value',
-                        expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)],
+                        expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)]
                     }, Text.stringToArray).toString()
                 else {
                     if (textColors.find(({ char }) => char === val)) {
@@ -535,7 +535,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         if (b.insertion !== undefined)
             difference += `,insertion:"${b.insertion}"`.length;
         else
-            difference += `,insertion:""`.length;
+            difference += ',insertion:""'.length;
 
     if (
         (a.clickEvent?.action !== b.clickEvent?.action) ||
@@ -544,7 +544,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         if (b.clickEvent !== undefined)
             difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length;
         else
-            difference += `,clickEvent:{action:"change_page",value:0}`.length;
+            difference += ',clickEvent:{action:"change_page",value:0}'.length;
 
     if (
         (a.hoverEvent?.action !== b.hoverEvent?.action) ||
@@ -554,7 +554,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         if (b.hoverEvent !== undefined)
             difference += `,hoverEvent:{action:"${b.hoverEvent?.action}",value:${JSON.stringify(b.hoverEvent?.value)}}`.length;
         else
-            difference += `,hoverEvent:{action:"show_text",value:""}`.length;
+            difference += ',hoverEvent:{action:"show_text",value:""}'.length;
 
     for (const { name } of textModifiersWithoutReset)
         if (a[name] !== b[name])

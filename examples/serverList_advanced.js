@@ -6,16 +6,16 @@ const server = new Server({
     serverList: ({ ip, connection: { host, port }, version }) => ({
 
         description: new Text([
-            { text: `Connected through: `, color: 'gray' },
+            { text: 'Connected through: ', color: 'gray' },
             { text: `${host}:${port}`, color: 'white', modifiers: ['bold'] },
-            { text: `\nYour ip: `, color: 'gray' },
+            { text: '\nYour ip: ', color: 'gray' },
             { text: ip, color: 'white', modifiers: ['bold'] }
         ]),
 
         players: {
             online: server.clients.length + 5,
             max: Math.floor(Math.random() * 100) + 5,
-            hover: `More\nthan\n1\nline!`
+            hover: 'More\nthan\n1\nline!'
         },
 
         version: {
