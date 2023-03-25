@@ -1,6 +1,6 @@
 {
     "name": "@boem312/minecraft-server",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "description": "Create Minecraft Servers with an easy to use API and with full control",
     "main": "index.js",
     "types": "index.d.ts",
