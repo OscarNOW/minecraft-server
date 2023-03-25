@@ -68,8 +68,7 @@ class Server {
 
         this.server = mc().createServer({ //todo: change to private property
             encryption: true,
-            host: 'localhost',
-            version: settings.version, //todo-imp: check if works
+            version: settings.version,
             motd: settings.defaults.serverList.motd,
             maxPlayers: settings.defaults.serverList.maxPlayers,
             keepAlive: false,
@@ -166,10 +165,7 @@ class Server {
 
                 this.p.clientInformation.get(client).clientEarlyInformation = {
                     ip: client.socket.remoteAddress,
-                    version: isLegacy ?
-                        'legacy' :
-                        (versions.find(a => a.legacy === false && a.protocol === protocolVersion)?.version ||
-                            versions.find(a => a.legacy === true && a.protocol === protocolVersion)?.version),
+                    version: protocolVersion,
                     connection: {
                         host: isLegacy ? null : serverHost,
                         port: isLegacy ? null : serverPort
