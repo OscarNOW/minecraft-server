@@ -117,7 +117,7 @@ export class Client {
     readonly username: string;
     readonly uuid: string;
     readonly entityId: number;
-    readonly version: newVersion;
+    readonly version: newVersion; //todo: change to protocolVersions
     readonly ip: string;
     readonly brand: string | null;
     readonly connection: {
