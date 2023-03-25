@@ -45,6 +45,7 @@ const defaultPrivate = {
 };
 
 const events = Object.freeze([
+    'listening',
     'connect',
     'join',
     'leave',
@@ -65,7 +66,7 @@ class Server {
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
-        this.server = mc().createServer({
+        this.server = mc().createServer({ //todo: change to private property
             encryption: true,
             host: 'localhost',
             version: settings.version, //todo-imp: check if works
@@ -141,6 +142,8 @@ class Server {
                 };
             }
         });
+
+        this.server.on('listening', () => this.p.emit('listening'));
 
         this.server.on('connection', client => {
             this.p.clientInformation.set(client, {});
