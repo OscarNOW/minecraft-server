@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { versions } = require('../../functions/loader/data.js');
+
 const _p = Symbol('_privates');
 
 class Client {
@@ -15,7 +17,8 @@ class Client {
         this.p.client = client;
         this.p.defaultClientProperties = defaultClientProperties;
         this.server = server;
-        this.version = version;
+        this.version = versions.find(a => a.legacy === false && a.protocol === version)?.version || versions.find(a => a.legacy === true && a.protocol === version)?.version || null;
+        this.p.protocolVersion = version;
         this.ip = ip;
         this.connection = {
             host,
