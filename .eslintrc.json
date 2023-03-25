@@ -37,7 +37,6 @@
         "no-unused-vars": "warn",
         "no-unreachable": "warn",
         "eqeqeq": "warn",
-        "prefer-const": "warn",
         "no-extra-boolean-cast": "warn",
         "arrow-parens": [
             "warn",
