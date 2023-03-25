@@ -25,7 +25,7 @@ const uuid = {
     'Dream': 'ec70bcaf-702f-4bb8-b48d-276fa52a780c'
 }
 
-console.log('Listening')
+server.on('listening', () => console.log('Listening'))
 server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)

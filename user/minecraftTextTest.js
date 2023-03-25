@@ -1,7 +1,7 @@
 const { Server } = require('../');
 const server = new Server();
 
-server.on('connect', async client => {
+server.on('connect', client => {
     client.raw('chat', {
         message: JSON.stringify(
             [

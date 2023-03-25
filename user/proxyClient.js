@@ -29,7 +29,7 @@ const server = new Server({
     })
 });
 
-console.log('Listening')
+server.on('listening', () => console.log('Listening'))
 server.on('connect', client => {
     client.on('misbehavior', a => console.log(a.toString()))
 })

@@ -54,4 +54,4 @@ server.on('join', async client => {
         console.timeEnd('close   ')
     }
 });
-console.timeEnd('listen  ')
+server.on('listening', () => console.timeEnd('listen  '))

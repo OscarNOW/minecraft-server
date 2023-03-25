@@ -26,6 +26,6 @@ server.on('join', client => {
         y: 102,
         z: 3
     }
-    client.on('chat', a => eval(a))
+    // client.on('chat', a => eval(a))
 
 })
