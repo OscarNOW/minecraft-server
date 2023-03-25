@@ -39,7 +39,10 @@
         "eqeqeq": "warn",
         "prefer-const": "warn",
         "no-extra-boolean-cast": "warn",
-        "arrow-parens": "warn",
+        "arrow-parens": [
+            "as-needed",
+            "warn"
+        ],
         "comma-dangle": [
             "warn",
             "never"
