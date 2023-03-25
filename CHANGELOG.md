@@ -8,4 +8,4 @@ None
 None
 
 ## Issues fixed
-None
+* Fixed bug when connecting to the server with a legacy client.
