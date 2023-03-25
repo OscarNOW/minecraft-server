@@ -40,8 +40,8 @@
         "prefer-const": "warn",
         "no-extra-boolean-cast": "warn",
         "arrow-parens": [
-            "as-needed",
-            "warn"
+            "warn",
+            "as-needed"
         ],
         "comma-dangle": [
             "warn",
