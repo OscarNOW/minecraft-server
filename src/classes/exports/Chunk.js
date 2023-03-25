@@ -4,7 +4,7 @@ const { chunkSize } = require('../../functions/loader/data.js');
 let cachedPChunk;
 const PChunk = () => {
     if (cachedPChunk === undefined)
-        cachedPChunk = require('prismarine-chunk')(version);
+        cachedPChunk = require('prismarine-chunk')(`${version}`);
 
     return cachedPChunk;
 };
