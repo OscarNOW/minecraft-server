@@ -6,6 +6,21 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-undef": "error",
+        "no-const-assign": "error",
+        "no-this-before-super": "error",
+        "constructor-super": "error",
+        "no-cond-assign": "error",
+        "no-use-before-define": [
+            "error",
+            {
+                "functions": false,
+                "classes": false,
+                "variables": true,
+                "allowNamedExports": false
+            }
+        ],
+        "no-eval": "error",
         "indent": [
             "warn",
             4,
@@ -13,15 +28,29 @@
                 "SwitchCase": 1
             }
         ],
-        "no-undef": "error",
-        "no-const-assign": "error",
-        "no-this-before-super": "error",
-        "constructor-super": "error",
-        "no-eval": "error",
+        "no-dupe-else-if": "warn",
+        "no-unneeded-ternary": "warn",
+        "no-return-assign": "warn",
+        "operator-assignment": "warn",
+        "require-await": "warn",
         "no-var": "warn",
         "no-unused-vars": "warn",
         "no-unreachable": "warn",
-        "eqeqeq": "warn"
+        "eqeqeq": "warn",
+        "prefer-const": "warn",
+        "no-extra-boolean-cast": "warn",
+        "arrow-parens": "warn",
+        "comma-dangle": [
+            "warn",
+            "never"
+        ],
+        "quotes": [
+            "warn",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ]
     },
     "globals": {
         "WeakMap": true,
