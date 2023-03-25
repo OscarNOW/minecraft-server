@@ -1,14 +1,16 @@
 Pre-release
 
+Fix todo-imp
 Create benchmark and add documentation file for that.
--Add types for privates
 Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
     Remove privates from type files
     Make <Server>.server private and not show up in console.log(
+-Change settings.version to protocolVersion
 
-Major update
+Breaking changes (major update)
 
-Change src\settings.defaults.serverList.maxPlayers to 0
+Change supplied earlyInfo version to protocolVersion
+Change src\settings.defaults.serverList.maxPlayers to 0?
 Change <Client>.brand
     Change <Client>.on('brandReceived') to <Client>.on('change', 'brand')
     Change <Client>.brand from "string | null" to "string | undefined"
