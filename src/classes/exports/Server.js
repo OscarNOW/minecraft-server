@@ -68,14 +68,23 @@ class Server {
         this.server = mc().createServer({
             encryption: true,
             host: 'localhost',
-            version: settings.version,
+            version: settings.version, //todo-imp: check if works
             motd: settings.defaults.serverList.motd,
             maxPlayers: settings.defaults.serverList.maxPlayers,
             keepAlive: false,
             hideErrors: true,
             beforePing: (response, client) => {
-                let info = Object.assign({}, this.serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing }));
-                let infoVersion = info.version?.correct ?? settings.version;
+                let info = Object.assign({}, this.serverList({
+                    ...this.p.clientInformation.get(client).clientEarlyInformation,
+                    version: //todo: give protocolVersion instead of versionName
+                        versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ||
+                        versions.find(a => a.legacy === !this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version,
+
+                    legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
+                }));
+
+                let infoVersionWrongText = `${info.version?.wrongText ?? info.version?.correct ?? versions.find(a => a.legacy === false && a.protocol === settings.version).version}`;
+                let infoVersionProtocol = info.version?.correct ? versions.find(a => a.legacy === false && a.version === infoVersionWrongText).protocol : settings.version;
 
                 //todo: use applyDefaults?
                 if (!info) info = {};
@@ -119,8 +128,8 @@ class Server {
 
                 return {
                     version: {
-                        name: `${info?.version?.wrongText ?? infoVersion}`,
-                        protocol: versions.find(a => a.legacy === false && a.version === infoVersion).protocol ?? 0
+                        name: infoVersionWrongText,
+                        protocol: infoVersionProtocol
                     },
                     players: {
                         online: info.players.online,
@@ -165,7 +174,7 @@ class Server {
                 };
                 this.p.clientInformation.get(client).clientLegacyPing = false;
 
-                if ((clientState === 'login' && this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy) { //Check for wrongVersion doesn't work when legacy
+                if ((clientState === 'login' && (this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy)) {
                     let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
 
                     if (typeof endReason === 'string')
@@ -285,7 +294,7 @@ function handleLegacyPing(request, client, serverList) {
 function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     this.p.clientInformation.get(client).clientEarlyInformation = {
         ip: client.socket.remoteAddress,
-        version: protocol !== null ? (versions.find(a => a.legacy === true && a.protocol === protocol)?.version || versions.find(a => a.legacy === false && a.protocol === protocol)?.version) : null,
+        version: protocol ?? null,
         connection: {
             host: hostname,
             port
@@ -293,7 +302,14 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     }
     this.p.clientInformation.get(client).clientLegacyPing = true
 
-    let info = serverList({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: this.p.clientInformation.get(client).clientLegacyPing });
+    let info = serverList({
+        ...this.p.clientInformation.get(client).clientEarlyInformation,
+        version: //todo: give protocolVersion instead of versionName
+            versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ||
+            versions.find(a => a.legacy === !this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version,
+
+        legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
+    });
     let infoVersion = info.version?.correct ?? settings.version; //todo: maybe use "info.version.correct =" like below?
 
     if (!info) info = {};

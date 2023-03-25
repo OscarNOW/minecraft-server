@@ -104,7 +104,7 @@ type state = 'connecting' | 'connected' | 'loginSent' | 'settingsReceived' | 'af
 
 export class Client {
     private constructor(client: unknown, server: Server, earlyInfo: {
-        version: newVersion;
+        version: newVersion; //todo: change to protocolVersion
         ip: string;
         connection: {
             host: string;
