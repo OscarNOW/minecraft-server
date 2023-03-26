@@ -72,12 +72,13 @@ body:
         # these version options are automatically updated in scripts/updateVersionFiles
         #startVersionOptions
         - 1.3.2
-        - github (26-3-2023 21:57:51)
+        - github (26-3-2023 22:7:8)
         - 1.3.1
         - 1.3.0
         - 1.2.0
         - 1.1.0
         - 1.0.0
+        - other (specify in additional information)
         #endVersionOptions
     validations:
       required: true
