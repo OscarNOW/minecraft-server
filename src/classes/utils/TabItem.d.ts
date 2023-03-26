@@ -22,5 +22,7 @@ export class TabItem {
     set name(name: textInput | Text);
     ping: number | null;
 
+    //todo: implement on('change')
+
     remove(): void;
 }
