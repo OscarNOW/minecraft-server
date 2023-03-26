@@ -185,7 +185,7 @@ export class Client {
         clientOn: (name: string, callback: (...args: unknown[]) => void) => void;
         emit: (name: string, ...args: unknown[]) => void;
         emitChange: (type: string, oldValue: unknown) => void;
-        emitError: (customError: customError) => void;
+        emitError: (customError: CustomError) => void;
         emitMove: (info: {
             x: number;
             y: number;
