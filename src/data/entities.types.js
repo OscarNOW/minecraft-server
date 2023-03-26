@@ -1,6 +1,7 @@
 const { convertToType } = require('../functions/convertToType.js');
 const specialArgumentEntityNames = [
-    'player'
+    'player',
+    'experience_orb'
 ];
 
 module.exports = {

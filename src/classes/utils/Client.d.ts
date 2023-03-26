@@ -399,7 +399,6 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    //todo: add special case for experience orb
     entity<name extends defaultArgumentEntityName>(entity: name, position: {
         x: number;
         y: number;
@@ -407,6 +406,15 @@ export class Client {
         yaw?: number;
         pitch?: number;
     }): EntityConditional<name>;
+    entity(entity: 'experience_orb', position: {
+        x: number;
+        y: number;
+        z: number;
+        yaw?: number;
+        pitch?: number;
+    }, experienceOrbInfo?: {
+        experience?: number;
+    }): Promise<EntityConditional<'experience_orb'>>;
     entity(entity: 'player', position: {
         x: number;
         y: number;
