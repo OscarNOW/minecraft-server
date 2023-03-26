@@ -45,7 +45,7 @@ export class Server {
 
     joinProxyClient(proxyClient: ProxyClient): void;
 
-    close(): Promise<void>; //todo: change to async function?
+    close(): Promise<void>;
 
     on(event: 'listening', callback: () => void): void;
     on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
