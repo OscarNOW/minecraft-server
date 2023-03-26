@@ -129,6 +129,9 @@ const writablePropertyNames = Object.freeze([
 
 class Player extends Entity {
     constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
+        //todo: pass extraInfo to super
+        //todo: also call overwrites.beforeRemove when player is removed
+        //todo: don't send spawn packet if sendSpawnPacket is false
         super(client, type, id, position, sendPacket, undefined, {
             sendSpawnPacket: false,
             beforeRemove: [(() => {
