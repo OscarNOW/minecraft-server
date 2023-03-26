@@ -293,21 +293,33 @@ export class Client {
     readonly tabItems: TabItem[];
 
     /* Writable changing */
-    position: {
+    get tabHeader(): Text;
+    get tabFooter(): Text;
+    get experience(): {
+        bar: number;
+        level: number;
+    };
+    get position(): {
         x: number;
         y: number;
         z: number;
         yaw: number;
         pitch: number;
     };
-    experience: {
+
+    set tabHeader(text: textInput | Text);
+    set tabFooter(text: textInput | Text);
+    set experience(experience: Partial<{
         bar: number;
         level: number;
-    };
-    get tabHeader(): Text;
-    set tabHeader(text: textInput | Text);
-    get tabFooter(): Text;
-    set tabFooter(text: textInput | Text);
+    }>);
+    set position(position: Partial<{
+        x: number;
+        y: number;
+        z: number;
+        yaw: number;
+        pitch: number;
+    }>);
 
     raining: boolean;
     toxicRainLevel: number;
