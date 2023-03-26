@@ -5,8 +5,9 @@ type TabItem = import('./TabItem').TabItem;
 type Entity = import('./Entity').Entity;
 type EntityLike = import('./Entity').EntityLike;
 type BossBar = import('./BossBar').BossBar;
-type EntityConditional<a> = import('./Entity').EntityConditional<a>;
+type WorldBorder = import('./WorldBorder').WorldBorder;
 
+type EntityConditional<a> = import('./Entity').EntityConditional<a>;
 type optionalBossBarInfo = import('./BossBar').optionalBossBarInfo;
 
 type Server = import('../exports/Server').Server;
