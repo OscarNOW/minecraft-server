@@ -30,7 +30,6 @@ if (newVersion !== undefined)
         version: newVersion,
         name: newVersion, //todo: rename name to displayName
         path: newVersion,
-        persistentName: newVersion,
         hasDocs: true,
         hasSupport: true
     });
