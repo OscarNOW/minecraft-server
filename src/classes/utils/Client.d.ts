@@ -1,16 +1,18 @@
 type Horse = import('./Horse').Horse;
-type Item = import('./Item').Item;
+type Slot = import('./Slot').Slot;
 type LoadedChunk = import('./LoadedChunk').LoadedChunk;
 type TabItem = import('./TabItem').TabItem;
 type Entity = import('./Entity').Entity;
 type EntityLike = import('./Entity').EntityLike;
-type EntityConditional<a> = import('./Entity').EntityConditional<a>;
 type BossBar = import('./BossBar').BossBar;
+type EntityConditional<a> = import('./Entity').EntityConditional<a>;
+
 type optionalBossBarInfo = import('./BossBar').optionalBossBarInfo;
 
 type Server = import('../exports/Server').Server;
 type Chunk = import('../exports/Chunk').Chunk;
 type Text = import('../exports/Text').Text;
+
 type textInput = import('../exports/Text').textInput;
 
 type changeEventType =
@@ -33,25 +35,25 @@ type changeEventType =
     'difficulty' |
     'inventory';
 
-type changeEventReturn<changeEventType extends changeEventType> =
-    changeEventType extends 'entities' ? entities :
-    changeEventType extends 'chunks' ? LoadedChunk[] :
-    changeEventType extends 'bossBars' ? bossBar[] :
-    changeEventType extends 'tabItems' ? TabItem[] :
-    changeEventType extends 'gamemode' ? gamemode :
-    changeEventType extends 'difficulty' ? difficulty :
-    changeEventType extends 'inventory' ? inventory :
-    changeEventType extends 'slot' ? number :
-    changeEventType extends 'health' ? number :
-    changeEventType extends 'food' ? number :
-    changeEventType extends 'foodSaturation' ? number :
-    changeEventType extends 'toxicRainLevel' ? number :
-    changeEventType extends 'raining' ? boolean :
-    changeEventType extends 'showRespawnScreen' ? boolean :
-    changeEventType extends 'sneaking' ? boolean :
-    changeEventType extends 'sprinting' ? boolean :
-    changeEventType extends 'onGround' ? boolean :
-    changeEventType extends 'position' ? {
+type changeEventReturn<currentChangeEventType extends changeEventType> =
+    currentChangeEventType extends 'entities' ? entities :
+    currentChangeEventType extends 'chunks' ? LoadedChunk[] :
+    currentChangeEventType extends 'bossBars' ? BossBar[] :
+    currentChangeEventType extends 'tabItems' ? TabItem[] :
+    currentChangeEventType extends 'gamemode' ? gamemode :
+    currentChangeEventType extends 'difficulty' ? difficulty :
+    currentChangeEventType extends 'inventory' ? inventory :
+    currentChangeEventType extends 'slot' ? number :
+    currentChangeEventType extends 'health' ? number :
+    currentChangeEventType extends 'food' ? number :
+    currentChangeEventType extends 'foodSaturation' ? number :
+    currentChangeEventType extends 'toxicRainLevel' ? number :
+    currentChangeEventType extends 'raining' ? boolean :
+    currentChangeEventType extends 'showRespawnScreen' ? boolean :
+    currentChangeEventType extends 'sneaking' ? boolean :
+    currentChangeEventType extends 'sprinting' ? boolean :
+    currentChangeEventType extends 'onGround' ? boolean :
+    currentChangeEventType extends 'position' ? {
         x: number;
         y: number;
         z: number;
@@ -67,36 +69,36 @@ type entities = {
 };
 
 type inventory = {
-    readonly cursor?: Item;
+    readonly cursor?: Slot;
     readonly armor: {
-        readonly helmet?: Item;
-        readonly chestplate?: Item;
-        readonly leggings?: Item;
-        readonly boots?: Item;
+        readonly helmet?: Slot;
+        readonly chestplate?: Slot;
+        readonly leggings?: Slot;
+        readonly boots?: Slot;
     };
-    readonly offhand?: Item;
+    readonly offhand?: Slot;
     readonly crafting: {
-        readonly output?: Item;
+        readonly output?: Slot;
         readonly slots: {
-            0?: Item;
-            1?: Item;
-            2?: Item;
-            3?: Item;
+            0?: Slot;
+            1?: Slot;
+            2?: Slot;
+            3?: Slot;
         };
     };
     readonly hotbar: {
-        0?: Item;
-        1?: Item;
-        2?: Item;
-        3?: Item;
-        4?: Item;
-        5?: Item;
-        6?: Item;
-        7?: Item;
-        8?: Item;
+        0?: Slot;
+        1?: Slot;
+        2?: Slot;
+        3?: Slot;
+        4?: Slot;
+        5?: Slot;
+        6?: Slot;
+        7?: Slot;
+        8?: Slot;
     };
     readonly slots: {
-        readonly [slot: number]: Item | undefined;
+        readonly [slot: number]: Slot | undefined;
     };
 };
 
@@ -197,7 +199,7 @@ export class Client {
         setInterval: (callback: () => void, time: number) => void;
         setTimeout: (callback: () => void, delay: number) => void;
         shutdown: () => void;
-        bossBars: bossBar[]; // todo: add underscore before name
+        bossBars: BossBar[]; // todo: add underscore before name
         _brand: string | null;
         _chatSettings: {
             visible: 'all' | 'commands' | 'none';
@@ -279,6 +281,8 @@ export class Client {
         chunksGenerated: boolean;
         _chunks: (LoadedChunk[]) | ((() => LoadedChunk)[]);
     };
+
+    readonly worldBorder: WorldBorder;
     readonly inventory: inventory;
 
     readonly sneaking: boolean;
