@@ -73,6 +73,7 @@ type textArrayComponent = {
     };
 };
 
+//todo: maybe use Partial type?
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
 type optionalTextArrayComponent = string | number | boolean | {
     text?: string;
