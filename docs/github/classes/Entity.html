@@ -479,7 +479,7 @@ async function getManifest() {
     return cachedManifest;
 }
 
-async function versionChange(version) {
+function versionChange(version) {
     let currentLocation = window.location.pathname.split('/').slice(3).join('/'); // like classes/Block
 
     if (path.split('/').length > 3)
