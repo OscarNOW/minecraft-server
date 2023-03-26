@@ -77,10 +77,9 @@ const supportedVersionNames = manifest.versions
 bugReport = [
     ...bugReport.slice(0, versionLineStartIndex),
     ...supportedVersionNames,
+    '        - other (specify in additional information)',
     ...bugReport.slice(versionLineEndIndex)
 ];
-
-bugReport.push('        - other (specify in additional information)')
 
 bugReport = bugReport.join('\n');
 bugReport = bugReport.replaceAll('\r\n', '\n');
