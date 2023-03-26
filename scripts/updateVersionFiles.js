@@ -52,7 +52,7 @@ for (const version of manifest.versions) {
     if (version.isPersistent !== false)
         version.persistentName = version.name;
     else
-        version.persistentName = `${version.name} (${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()})`;
+        version.persistentName = `${version.path} (${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()})`;
 };
 
 manifest.versions = manifest.versions.map(a => {
