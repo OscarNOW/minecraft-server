@@ -13,7 +13,7 @@ const asyncEntityClasses = Object.freeze([
 
 const { entities } = require('../../properties/public/dynamic/entities.js');
 
-module.exports = function (type, { x, y, z, yaw, pitch }, extraInformation) {
+module.exports = function (type, { x, y, z, yaw, pitch } = {}, extraInformation) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
