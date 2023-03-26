@@ -9,6 +9,7 @@ const defaultPrivate = {
     _radius: defaultWorldBorder.radius,
     _warningSeconds: defaultWorldBorder.warningSeconds,
     _warningBlocks: defaultWorldBorder.warningBlocks,
+    // updateCenter({ x, z } = {}, oldValue) {
     updateCenter({ x, z } = {}) {
         const newCenter = {
             x: x ?? this.p._center.x,
@@ -40,18 +41,73 @@ class WorldBorder {
         this.p._center = new Changable((value, oldValue) => this.p.updateCenter(value, oldValue), defaultWorldBorder.center);
     }
 
+    transitionRadius(radius, time) {
+        let oldRadius = this.radius;
+        this.p._radius = radius;
+
+        this.p.sendPacket('world_border', {
+            action: 1,
+            old_radius: oldRadius * 2, // the provided old_radius is not a radius, but a diameter
+            new_radius: this.radius * 2, // the provided new_radius is not a radius, but a diameter
+            speed: time
+        });
+    }
+
     reset() {
         this.p.sendPacket('world_border', {
             action: 3,
             x: 0,
             z: 0,
-            old_radius: this.p._radius,
-            new_radius: defaultWorldBorder.radius,
+            old_radius: this.p._radius * 2, // old_radius is not a radius, but a diameter
+            new_radius: defaultWorldBorder.radius * 2, // new_radius is not a radius, but a diameter
             speed: 0,
             portalBoundary: defaultWorldBorder.portalBoundary,
             warning_time: defaultWorldBorder.warningSeconds,
             warning_blocks: defaultWorldBorder.warningBlocks
         });
+    }
+
+    set radius(newValue) {
+        // let oldValue = this.radius;
+        this.p._radius = newValue;
+
+        this.p.sendPacket('world_border', {
+            action: 0,
+            radius: this.radius * 2 // the provided radius is not a radius, but a diameter
+        });
+    }
+
+    set warningSeconds(newValue) {
+        // let oldValue = this.p._warningSeconds;
+        this.p._warningSeconds = newValue;
+
+        this.p.sendPacket('world_border', {
+            action: 4,
+            warning_time: this.warningSeconds
+        });
+    }
+
+    set warningBlocks(newValue) {
+        // let oldValue = this.p._warningBlocks;
+        this.p._warningBlocks = newValue;
+
+        this.p.sendPacket('world_border', {
+            action: 5,
+            warning_blocks: this.warningBlocks
+        });
+    }
+
+
+    get radius() {
+        return this.p._radius;
+    }
+
+    get warningSeconds() {
+        return this.p._warningSeconds;
+    }
+
+    get warningBlocks() {
+        return this.p._warningBlocks;
     }
 
     get center() {

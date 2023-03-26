@@ -16,5 +16,6 @@ export class WorldBorder {
 
     //todo: implement on('change')
 
+    transitionRadius(radius: number, millisecondTime: number): void;
     reset(): void;
 }
