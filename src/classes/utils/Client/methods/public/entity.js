@@ -1,11 +1,11 @@
 const Entity = require('../../../Entity.js');
 const customEntityClasses = Object.fromEntries(
     [
-        'Horse',
-        'Player',
-        'ExperienceOrb'
+        ['horse', 'Horse'],
+        ['player', 'Player'],
+        ['experience_orb', 'ExperienceOrb']
     ]
-        .map(a => [a.toLowerCase(), require(`../../../${a}.js`)]));
+        .map(([minecraftName, className]) => [minecraftName, require(`../../../${className}.js`)]));
 
 const asyncEntityClasses = Object.freeze([
     'player'
