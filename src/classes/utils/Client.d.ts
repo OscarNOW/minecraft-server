@@ -399,6 +399,7 @@ export class Client {
         x: number;
         z: number;
     }): void;
+    //todo: add special case for experience orb
     entity<name extends defaultArgumentEntityName>(entity: name, position: {
         x: number;
         y: number;

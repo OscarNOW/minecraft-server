@@ -1,6 +1,8 @@
-type Client = import('./Client').Client;
 type Horse = import('./Horse').Horse;
 type Player = import('./Player').Player;
+type ExperienceOrb = import('./ExperienceOrb').ExperienceOrb;
+
+type Client = import('./Client').Client;
 
 type Server = import('../exports/Server').Server;
 type Text = import('../exports/Text').Text;
@@ -10,6 +12,7 @@ type EntityLike = Entity | Horse;
 type EntityConditional<name extends entityName> =
     name extends 'horse' ? Horse :
     name extends 'player' ? Player :
+    name extends 'experience_orb' ? ExperienceOrb :
     Entity;
 
 export class Entity {
