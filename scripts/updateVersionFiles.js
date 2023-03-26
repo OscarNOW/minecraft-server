@@ -80,6 +80,8 @@ bugReport = [
     ...bugReport.slice(versionLineEndIndex)
 ];
 
+bugReport.push('        - other (specify in additional information)')
+
 bugReport = bugReport.join('\n');
 bugReport = bugReport.replaceAll('\r\n', '\n');
 

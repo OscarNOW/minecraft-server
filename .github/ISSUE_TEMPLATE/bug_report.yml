@@ -67,7 +67,7 @@ body:
     id: package-version
     attributes:
       label: Package Version
-      description: Get the package version by running `npm list @boem312/minecraft-server`. If the version you're using is not listed, we no longer support it.
+      description: Get the package version by running `npm list @boem312/minecraft-server`.
       options:
         # these version options are automatically updated in scripts/updateVersionFiles
         #startVersionOptions
