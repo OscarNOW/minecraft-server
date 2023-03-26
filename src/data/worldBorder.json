@@ -1,0 +1,10 @@
+{
+    "center": {
+        "x": 0,
+        "y": 0
+    },
+    "radius": 29999984,
+    "portalBoundary": 29999984,
+    "warningSeconds": 15,
+    "warningBlocks": 100
+}
