@@ -2,7 +2,7 @@ const Entity = require('./Entity.js');
 const defaultExperience = require('../../settings.json').defaults.experienceOrb.experience;
 
 class ExperienceOrb extends Entity {
-    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
+    constructor(client, type, id, position, sendPacket, extraInfo, overwrites = {}, whenDone) {
         super(client, type, id, position, sendPacket, extraInfo, {
             ...overwrites,
             sendSpawnPacket: false
