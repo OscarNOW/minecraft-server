@@ -410,8 +410,6 @@ export class Client {
         x: number;
         y: number;
         z: number;
-        yaw?: number;
-        pitch?: number;
     }, experienceOrbInfo?: {
         experience?: number;
     }): Promise<EntityConditional<'experience_orb'>>;
