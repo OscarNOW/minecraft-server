@@ -28,8 +28,9 @@ let manifest = JSON.parse(fs.readFileSync(manifestPath).toString());
 if (newVersion !== undefined)
     manifest.versions.push({
         version: newVersion,
-        name: newVersion,
+        name: newVersion, //todo: rename name to displayName
         path: newVersion,
+        persistentName: newVersion,
         hasDocs: true,
         hasSupport: true
     });
@@ -48,6 +49,12 @@ manifest.versions = [
 ];
 
 manifest.versions.find(({ unstable }) => !unstable).latestStable = true;
+for (const version of manifest.versions) {
+    if (version.isPersistent !== false)
+        version.persistentName = version.name;
+    else
+        version.persistentName = `${version.name} (${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()})`;
+};
 
 manifest.versions = manifest.versions.map(a => {
     a.name = generateVersionDisplayName(a);
