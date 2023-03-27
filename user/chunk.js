@@ -23,7 +23,7 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    client.on('digStart', ({ x, y, z }) => {
-        client.acknowledgeDigStart({ x, y, z }, true);
+    client.on('blockBreak', ({ x, y, z }) => {
+        client.acknowledgeDigCancel({ x, y, z }, true);
     });
 });
