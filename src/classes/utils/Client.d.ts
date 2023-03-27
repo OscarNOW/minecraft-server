@@ -479,6 +479,11 @@ export class Client {
         y: number;
         z: number;
     }, successful: boolean): void;
+    acknowledgeDigCancel(location: {
+        x: number;
+        y: number;
+        z: number;
+    }, successful): void;
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
