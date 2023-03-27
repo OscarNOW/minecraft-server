@@ -5,7 +5,7 @@ export class Block {
     readonly y: number;
     readonly z: number;
 
-    readonly block: blockName;
+    readonly block: blockName; //todo: rename block to name
     readonly state: blockState;
 }
 
