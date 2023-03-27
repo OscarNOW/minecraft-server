@@ -474,6 +474,11 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
     kill(deathMessage?: textInput | Text): void;
+    acknowledgeDigStart(location: {
+        x: number;
+        y: number;
+        z: number;
+    }, successful: boolean): void;
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
