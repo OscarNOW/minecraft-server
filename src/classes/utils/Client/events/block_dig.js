@@ -18,7 +18,7 @@ module.exports = {
 
         else if (status === 1)
             this.p.emit('digCancel', { x, y, z })
-        else if (status === 2)
+        else if (status === 2) //todo: update Client world
             this.p.emit('blockBreak', { x, y, z })
         else if (status === 3)
             this.p.emit('itemDrop', true)
