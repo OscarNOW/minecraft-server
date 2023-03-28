@@ -382,7 +382,7 @@ export class Client {
     win(showCredits: boolean): void;
     kick(reason: textInput | Text): void; //todo: rename to remove, for consistency
     chat(message?: textInput | Text): void;
-    setBlock(block: blockName, location: {
+    setBlock(block: blockName, location: { //todo: add overwrite where you can pass a Block class
         x: number;
         y: number;
         z: number;
@@ -502,11 +502,16 @@ export class Client {
         y: number;
         z: number;
     }, blockFace: blockFace) => void): void;
-    on(event: 'digCancel' | 'blockBreak', callback: (location: {
+    on(event: 'digCancel', callback: (location: {
         x: number;
         y: number;
         z: number;
     }) => void): void;
+    on(event: 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, previousBlock: Block) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
     on(event: 'rightClick', callback: (clickInfo: {
         position: {
@@ -543,11 +548,16 @@ export class Client {
         y: number;
         z: number;
     }, blockFace: blockFace) => void): void;
-    once(event: 'digCancel' | 'blockBreak', callback: (location: {
+    once(event: 'digCancel', callback: (location: {
         x: number;
         y: number;
         z: number;
     }) => void): void;
+    once(event: 'blockBreak', callback: (location: {
+        x: number;
+        y: number;
+        z: number;
+    }, previousBlock: Block) => void): void;
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
     once(event: 'rightClick', callback: (clickInfo: {
         position: {
