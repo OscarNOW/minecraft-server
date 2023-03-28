@@ -85,6 +85,13 @@ class Chunk {
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {
+        if (blockName === undefined)
+            throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  ${this.constructor.name}.setBlock(blockName, ..., ...)  `, {
+                got: blockName,
+                expectationType: 'type',
+                expectation: 'blockName'
+            }, this.setBlock).toString()
+
         if (x < chunkSize.x.min || x > chunkSize.x.max)
             throw new CustomError('expectationNotMet', 'libraryUser', `x in  ${this.constructor.name}.setBlock(..., {x: x, ... }, ...)  `, {
                 got: x,
