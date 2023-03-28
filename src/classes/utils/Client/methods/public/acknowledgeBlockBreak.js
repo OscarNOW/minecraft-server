@@ -4,6 +4,8 @@ module.exports = function ({ x, y, z }, successful) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
+    //todo: automatically reset to oldBlock when successful is false
+
     const chunkX = Math.floor(x / 16);
     const chunkZ = Math.floor(z / 16);
 
