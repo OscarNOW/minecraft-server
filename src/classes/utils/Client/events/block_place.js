@@ -17,6 +17,8 @@ module.exports = {
             z: z + cursorZ
         }
 
+        //todo: update Client blocks, see block_dig for reference
+
         this.p.emit('blockPlace', {
             clickedLocation,
             clickedFace,
