@@ -2,6 +2,8 @@ const { blocks } = require('./loader/data.js');
 const CustomError = require('../classes/utils/CustomError.js');
 
 function getBlockStateId(blockName, state = {}, { function: func } = {}) {
+    //todo: implement cache
+
     let block = getBlock.call(this, blockName, { function: func })
     if (!block[2]) return block[1];
 
