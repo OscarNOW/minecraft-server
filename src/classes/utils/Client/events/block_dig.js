@@ -4,7 +4,6 @@ const Block = require('../../Block.js');
 const faces = Object.fromEntries(
     require('../../../../functions/loader/data.js').blockFaces.map((name, ind) => [ind, name])
 );
-const chunkSize = require('../../../../functions/loader/data.js').chunkSize;
 
 module.exports = {
     block_dig({ status, location: { x, y, z }, face }) {
@@ -21,21 +20,23 @@ module.exports = {
         else if (status === 1)
             this.p.emit('digCancel', { x, y, z })
         else if (status === 2) {
-            const oldBlock = this.chunks.find(({ blocks, x: chunkX, z: chunkZ }) => {
+            const chunkX = Math.floor(x / 16);
+            const chunkZ = Math.floor(z / 16);
 
-                const xOffset = chunkX * ((chunkSize.x.max - chunkSize.x.min) + 1);
-                const yOffset = 0;
-                const zOffset = chunkZ * ((chunkSize.z.max - chunkSize.z.min) + 1);
+            const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
 
-                const newX = x - xOffset;
-                const newY = y - yOffset;
-                const newZ = z - zOffset;
+            let chunkRelativeX = x % 16; //todo: use chunkSize instead of 16
+            let chunkRelativeY = y;
+            let chunkRelativeZ = z % 16; //todo: use chunkSize instead of 16
 
-                return Boolean(blocks[newX]?.[newY]?.[newZ])
+            if (chunkRelativeX < 0) chunkRelativeX += 16;
+            if (chunkRelativeY < 0) chunkRelativeY += 16;
+            if (chunkRelativeZ < 0) chunkRelativeZ += 16;
 
-            })?.blocks?.[x]?.[y]?.[z];
+            const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeY];
 
-            this.setBlock('air', { x, y, z });
+            chunk.checkNewBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ });
+            chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
 
             this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', { x, y, z }, {}));
         } else if (status === 3)
