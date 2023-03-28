@@ -1,8 +1,9 @@
-const CustomError = require('../../CustomError.js')
+const CustomError = require('../../CustomError.js');
 
 const faces = Object.fromEntries(
     require('../../../../functions/loader/data.js').blockFaces.map((name, ind) => [ind, name])
 );
+const chunkSize = require('../../../../functions/loader/data.js').chunkSize;
 
 module.exports = {
     block_dig({ status, location: { x, y, z }, face }) {
@@ -18,9 +19,25 @@ module.exports = {
 
         else if (status === 1)
             this.p.emit('digCancel', { x, y, z })
-        else if (status === 2) //todo: update Client world
-            this.p.emit('blockBreak', { x, y, z })
-        else if (status === 3)
+        else if (status === 2) {
+            const oldBlock = this.chunks.find(({ blocks, x: chunkX, z: chunkZ }) => {
+
+                const xOffset = chunkX * ((chunkSize.x.max - chunkSize.x.min) + 1);
+                const yOffset = 0;
+                const zOffset = chunkZ * ((chunkSize.z.max - chunkSize.z.min) + 1);
+
+                const newX = x - xOffset;
+                const newY = y - yOffset;
+                const newZ = z - zOffset;
+
+                return Boolean(blocks[newX]?.[newY]?.[newZ])
+
+            })?.blocks?.[x]?.[y]?.[z];
+
+            this.setBlock('air', { x, y, z });
+
+            this.p.emit('blockBreak', { x, y, z }, oldBlock);
+        } else if (status === 3)
             this.p.emit('itemDrop', true)
         else if (status === 4)
             this.p.emit('itemDrop', false)
