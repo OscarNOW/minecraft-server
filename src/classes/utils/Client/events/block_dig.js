@@ -38,7 +38,7 @@ module.exports = {
             chunk.checkNewBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ });
             chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
 
-            this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', { x, y, z }, {}));
+            this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', {}, { x, y, z }));
         } else if (status === 3)
             this.p.emit('itemDrop', true)
         else if (status === 4)
