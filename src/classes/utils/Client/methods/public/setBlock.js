@@ -9,7 +9,6 @@ module.exports = function (block, { x, y, z }, state) {
     if (!chunk)
         return;
 
-    //todo: mod doesn't work with negative numbers
     let blockX = x % 16; //todo: use chunkSize instead of 16
     let blockY = y;
     let blockZ = z % 16; //todo: use chunkSize instead of 16
