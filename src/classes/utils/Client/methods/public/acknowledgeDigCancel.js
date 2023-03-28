@@ -1,7 +1,5 @@
 const blocks = require('../../../../../data/blocks.json');
 
-//todo see todo in block_dig in Client events
-
 module.exports = function ({ x, y, z }, successful) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
