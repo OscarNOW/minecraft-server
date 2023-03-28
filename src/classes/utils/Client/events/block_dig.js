@@ -1,4 +1,5 @@
 const CustomError = require('../../CustomError.js');
+const Block = require('../../Block.js');
 
 const faces = Object.fromEntries(
     require('../../../../functions/loader/data.js').blockFaces.map((name, ind) => [ind, name])
@@ -36,7 +37,7 @@ module.exports = {
 
             this.setBlock('air', { x, y, z });
 
-            this.p.emit('blockBreak', { x, y, z }, oldBlock);
+            this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', { x, y, z }, {}));
         } else if (status === 3)
             this.p.emit('itemDrop', true)
         else if (status === 4)
