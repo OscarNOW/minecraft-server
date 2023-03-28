@@ -33,7 +33,7 @@ module.exports = {
             if (chunkRelativeY < 0) chunkRelativeY += 16;
             if (chunkRelativeZ < 0) chunkRelativeZ += 16;
 
-            const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeY];
+            const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
 
             chunk.checkNewBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ });
             chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
