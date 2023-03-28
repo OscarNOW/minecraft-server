@@ -1,0 +1,26 @@
+Implement <Client>.on('change', (type, newValue, oldValue) => { ... })
+Inventory
+    Implement packets sent from Client (see Spreadsheet)
+        Implement window_click
+    Fix doc types for <Client>.inventory
+Implement <Block>.displayName
+Implement windows
+    Implement Window class
+        Make inventory inherit that
+    Create openedWindow property in Client
+        Set that to inventory when Client clicks in inventory
+Allow for two Players (and TabItems) to share same uuid (by actually setting them to different uuids, but use skin of original)
+Fill <Chunk>.blocks with empty objects so that <Chunk>.blocks[x][y][z] never throws an error
+Implement <Client>.blocks
+    Use in code
+Improve CustomError
+    Add hints to CustomError
+        Add hint to Chunk unknown x, y and z to include "Chunk positions are relative to the Chunk"
+        Add hint to unknown StateValue
+    Implement not called customError
+        Use for position
+    Rewrite CustomError and change constructor arguments in better order
+    Add code property to CustomError (like keepAliveTimeout)
+Create default block states
+    Create table of states and blocks
+Make some <Entity>.sound options optional

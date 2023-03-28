@@ -1,0 +1,14 @@
+Change supplied earlyInfo version to protocolVersion
+Change src\settings.defaults.serverList.maxPlayers to 0?
+Change <Client>.brand
+    Change <Client>.on('brandReceived') to <Client>.on('change', 'brand')
+    Change <Client>.brand from "string | null" to "string | undefined"
+    Remove from stateHandler, because sending brand is optional
+Rename <Block>.block to <Block>.name
+Rename <Client>.locale.langCode to code
+Rename Server serverList function players to clients
+Rename <Client>.kick to <Client>.remove for consistency
+Implement <Entity>.on('change', ...
+    Remove <Entity>.observe(
+Rename leftClick to something else (because in air doesn't trigger)
+    Test if mainHand is rightHand same event is triggered

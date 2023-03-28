@@ -1,0 +1,42 @@
+Add slot data file
+Test when playing a sound if the played sound is correct
+Update data
+    Change data\particles to array where id is index
+    Add types to data
+    Move data\keybinds[any].default to language specific
+        Create folder for language specific?
+    Create data converter in data loader
+        Make data converter convert data\items to array with object with useful keys
+Create PR for minecraft-protocol to exclude optional files from npm build
+Improve quality score on NPM
+    https://itnext.io/increasing-an-npm-packages-search-score-fb557f859300
+    https://npms.io/about
+    Change release workflow to wait after committing before publishing to npm so that NPM can see checks passing
+    Check if NPM can see tests
+        Add test coverage reporter
+    Check if github pages is allowed for home page
+        Custom domain is not needed, but it does improve score
+    Add badges?
+Tests
+    Make tests for functions
+    Rewrite src/test.js
+    Add more extensive tests
+    Rewrite Server tests with ProxyClient
+    Write Client tests
+        Add clientDefaultProperty tests to Client
+Move shared functions between TabItem and Player (like getSkin) to separate function file
+Rewrite scripts/build
+Rewrite js files in src/docs/
+Add checks to check if input from constructor is valid with errors when wrong in BossBar class
+Add good first issue label to issues
+Move scripts/build/*.js npmRun function to separate function file
+Move TabItem/get function to separate function file
+Move <Client>.entity( CustomEntityClasses to separate file so that entities.types.js can access same file
+Fix docs for <Boat>.on(, because inherited events are not shown
+Add docs title to settings.json
+Add typescript declaration file check
+Make use of position and location consistent in type files
+Remove positional arguments in event callback in favor of objects (or make it atleast consistent)
+Beautify Client.d.ts
+At all places where an error is emitted, try to continue the code as much as possible
+Implement build check, so that only modified files have to be built
