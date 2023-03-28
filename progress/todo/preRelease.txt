@@ -1,3 +1,4 @@
+Use data loader
 -Acknowledge player digging
 Use Partial and separate getter and setters where needed
 Create benchmark and add documentation file for that.
