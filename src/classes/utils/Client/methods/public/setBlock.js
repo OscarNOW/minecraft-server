@@ -9,9 +9,9 @@ module.exports = function (block, { x, y, z }, state) {
     if (!chunk)
         return;
 
-    const blockX = x % 16;
+    const blockX = x % 16; //todo: use chunkSize instead of 16
     const blockY = y;
-    const blockZ = z % 16;
+    const blockZ = z % 16; //todo: use chunkSize instead of 16
 
     chunk.setBlock(block, { x: blockX, y: blockY, z: blockZ }, state);
 
