@@ -128,7 +128,7 @@ class Chunk {
         }
 
         if (this.blockUpdateCallback)
-            this.blockUpdateCallback(this.blocks[x][y][z]);
+            this.blockUpdateCallback(this.blocks[x]?.[y]?.[z] ?? new Block('air', {}, { x, y, z }));
 
         return this;
     }
