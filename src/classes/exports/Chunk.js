@@ -84,7 +84,8 @@ class Chunk {
         return chunkDataCache[this.hash];
     }
 
-    setBlock(blockName, { x, y, z }, state = {}) {
+    // setBlockChecks(blockName, { x, y, z }, state = {}) {
+    checkNewBlock(blockName, { x, y, z }) {
         if (blockName === undefined)
             throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  ${this.constructor.name}.setBlock(blockName, ..., ...)  `, {
                 got: blockName,
@@ -112,7 +113,9 @@ class Chunk {
                 expectationType: 'value',
                 expectation: new Array(chunkSize.z.max - chunkSize.z.min).fill(0).map((_, i) => i + chunkSize.z.min)
             }, this.setBlock).toString()
+    }
 
+    updateBlock(blockName, { x, y, z }, state = {}) {
         if (this._chunk)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
@@ -133,9 +136,17 @@ class Chunk {
 
             this.blocks[x][y][z] = new Block(blockName, state, { x: x + this.blocksOffset.x, y: y + this.blocksOffset.y, z: z + this.blocksOffset.z });
         }
+    }
 
+    sendNewBlockPacket({ x, y, z }) {
         if (this.blockUpdateCallback)
             this.blockUpdateCallback(this.blocks[x]?.[y]?.[z] ?? new Block('air', {}, { x: x + this.blocksOffset.x, y: y + this.blocksOffset.y, z: z + this.blocksOffset.z }));
+    }
+
+    setBlock(blockName, { x, y, z }, state = {}) {
+        this.checkNewBlock(blockName, { x, y, z });
+        this.updateBlock(blockName, { x, y, z }, state);
+        this.sendNewBlockPacket({ x, y, z });
 
         return this;
     }
