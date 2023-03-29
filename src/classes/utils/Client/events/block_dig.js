@@ -35,7 +35,6 @@ module.exports = {
 
             const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
 
-            chunk.checkNewBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ });
             chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
 
             this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', {}, { x, y, z }));

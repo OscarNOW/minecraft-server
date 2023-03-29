@@ -116,6 +116,8 @@ class Chunk {
     }
 
     updateBlock(blockName, { x, y, z }, state = {}) {
+        this.checkNewBlock(blockName, { x, y, z });
+
         if (this._chunk)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
@@ -144,7 +146,6 @@ class Chunk {
     }
 
     setBlock(blockName, { x, y, z }, state = {}) {
-        this.checkNewBlock(blockName, { x, y, z });
         this.updateBlock(blockName, { x, y, z }, state);
         this.sendNewBlockPacket({ x, y, z });
 
