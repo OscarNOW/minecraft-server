@@ -387,6 +387,11 @@ export class Client {
         y: number;
         z: number;
     }, state?: blockState): this;
+    updateBlock(block: blockName, location: {
+        x: number;
+        y: number;
+        z: number;
+    }, state?: blockState): this;
     title(properties: {
         fadeIn?: number;
         stay?: number;
