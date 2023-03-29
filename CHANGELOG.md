@@ -5,6 +5,7 @@ None
 * [<Server>.on('listening', () => { })](https://oscarnow.github.io/minecraft-server/{version}/classes/Server#on)
 * [<Client>.entity('experience_orb', ...)](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#entity.entity-2)
 * [previousBlock argument in <Client>.on('blockBreak', location, previousBlock)](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#on)
+* [<Chunk>.updateBlock(](https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk#updateBlock)
 
 * [<Client>.acknowledgeBlockBreak](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#acknowledgeBlockBreak)
 * [<Client>.acknowledgeAcknowledgeDigCancel](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#acknowledgeDigCancel)
