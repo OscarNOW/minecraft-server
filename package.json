@@ -11,7 +11,8 @@
         "types": "node ./scripts/types",
         "docs": "node ./src/docs/generate",
         "test": "node ./scripts/test",
-        "build": "node ./scripts/build"
+        "build": "node ./scripts/build",
+        "eslint": "npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0"
     },
     "keywords": [
         "minecraft",
