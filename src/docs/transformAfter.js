@@ -1,3 +1,5 @@
+const typedocName = require('../settings.json').typedoc.namedSettings.name;
+
 module.exports = (async () => {
     const fs = require('fs');
     const fsp = fs.promises;
@@ -31,7 +33,7 @@ module.exports = (async () => {
     const redirectionPage = fs.readFileSync(path.resolve(__dirname, './redirectionPage.html')).toString()
         .replaceAll('{path.normal}', `{pathBefore}${latestStableVersionPath}/{path}`)
         .replaceAll('{path.unstable}', `{pathBefore}${latestUnstableVersionPath}/{path}`)
-        .replaceAll('{title}', '{title}x.x.x docs minecraft-server');
+        .replaceAll('{title}', `{title}x.x.x docs ${typedocName}`);
 
     console.log('Generating version dropdown...')
     let versionDropdown = '<label for="versionDropdown" id="versionDropdownLabel" class="title">@</label><select id="versionDropdown" class="title" onchange="versionChange(this.value)"></select>';
@@ -86,9 +88,9 @@ ${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
         content = content.replace(thisMenu, newMenu);
 
         const homeLinks = [
-            '<a href="../index.html" class="title">minecraft-server</a>',
-            '<a href="index.html" class="title">minecraft-server</a>',
-            '<a href="" class="title">minecraft-server</a>'
+            `<a href="../index.html" class="title">${typedocName}</a>`,
+            `<a href="index.html" class="title">${typedocName}</a>`,
+            `<a href="" class="title">${typedocName}</a>`
         ];
         let replaced = false;
 
