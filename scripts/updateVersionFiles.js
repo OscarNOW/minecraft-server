@@ -71,7 +71,7 @@ const versionLineEndIndex = bugReport.findIndex(a => a.includes('#endVersionOpti
 
 const supportedVersionNames = manifest.versions
     .filter(({ hasSupport }) => hasSupport)
-    .map(({ persistentName }) => persistentName)
+    .map(({ name }) => name)
     .map(a => `        - ${a}`);
 
 bugReport = [
