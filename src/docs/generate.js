@@ -44,7 +44,7 @@
     console.clear();
     console.log('Generating docs...')
 
-    await exec([
+    const command = [
         'typedoc',
         settings.typedoc.paths.types,
         `--readme ${settings.typedoc.paths.readme}`,
@@ -55,7 +55,10 @@
         ...Object.entries(settings.typedoc.namedSettings).map(([name, value]) => `--${name} ${value}`),
         ...settings.typedoc.settings.map(a => `--${a}`),
         ...settings.typedoc.arguments
-    ].join(' '));
+    ].join(' ');
+
+    console.log(command)
+    await exec(command);
 
     await require('./transformAfter.js');
 
