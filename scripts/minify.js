@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-console.clear();
 console.log('Minifying JSON files...')
 
 for (const file of [
@@ -23,5 +22,4 @@ for (const file of [
     fs.writeFileSync(path.resolve(__dirname, '../src/', file), JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/', file)))))
 }
 
-console.clear();
 console.log('Done minifying')
