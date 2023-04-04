@@ -5,7 +5,7 @@
         "arguments": [],
         "namedSettings": {
             "theme": "hierarchy",
-            "name": "@boem312/\"minecraft-server\"",
+            "name": "@boem312/minecraft-server",
             "gitRemote": "origin",
             "logLevel": "Verbose"
         },
