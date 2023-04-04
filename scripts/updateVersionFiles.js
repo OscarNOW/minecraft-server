@@ -48,12 +48,6 @@ manifest.versions = [
 ];
 
 manifest.versions.find(({ unstable }) => !unstable).latestStable = true;
-for (const version of manifest.versions) {
-    if (version.isPersistent !== false)
-        version.persistentName = version.path;
-    else
-        version.persistentName = `${version.path} (${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()})`;
-};
 
 manifest.versions = manifest.versions.map(a => {
     a.name = generateVersionDisplayName(a);
