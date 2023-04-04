@@ -6,7 +6,6 @@
 
     const settings = require('../settings.json');
 
-    console.clear();
     console.log('Copying files...')
 
     let copyingFiles = [
@@ -32,16 +31,13 @@
 
     await Promise.all(copiedFilePromises);
 
-    console.clear();
     console.log('Deleting old files...')
 
     await fs.rm(path.join(__dirname, '../../docs/github/'), { recursive: true, force: true });
     await fs.mkdir(path.join(__dirname, '../../docs/github/'))
 
-    console.clear();
     require('./transformBefore.js');
 
-    console.clear();
     console.log('Generating docs...')
 
     const command = [
@@ -62,7 +58,6 @@
 
     await require('./transformAfter.js');
 
-    console.clear();
     console.log('Copying assets...')
 
     copyingFiles = [
@@ -82,7 +77,6 @@
 
     await Promise.all(copiedFilePromises);
 
-    console.clear();
     console.log('Done generating docs')
 
 })();
