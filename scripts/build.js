@@ -56,8 +56,14 @@ async function executeJobs(jobs) {
 
     let promises = jobs.map(job => {
         let update = t => {
+            t = t ?? '';
+            t = t.split('\n')?.[t.split('\n').length - 2] ?? '';
+
+            if (t.length > 100)
+                t = t.substring(0, 20) + '...';
+
             if (t)
-                latestLogs[jobs.indexOf(job)] = t.split('\n')[t.split('\n').length - 2];
+                latestLogs[jobs.indexOf(job)] = t;
 
             updateProgress(jobs.indexOf(job), promiseStates, currentProgress, buildProgress);
             printProgress(errors, latestLogs, promiseStates, currentProgress, buildProgress);
