@@ -60,7 +60,7 @@ async function executeJobs(jobs) {
             t = t.split('\n')?.[t.split('\n').length - 2] ?? '';
 
             if (t.length > 100)
-                t = t.substring(0, 20) + '...';
+                t = t.substring(0, 100) + '...';
 
             if (t)
                 latestLogs[jobs.indexOf(job)] = t;
