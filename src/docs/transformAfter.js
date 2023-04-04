@@ -97,7 +97,7 @@ ${fs.readFileSync(path.resolve(__dirname, './docScript.js')).toString()}
         for (const homeLink of homeLinks) {
             if (!content.includes(homeLink)) continue;
 
-            console.log(`Replacing homeLink in ${file}...`)
+            console.log(`Replacing homeLink in ${file}`)
             let versionDropdownIndex = content.indexOf(homeLink) + homeLink.length - 1;
             content = content.split('');
             content[versionDropdownIndex] += versionDropdown;
