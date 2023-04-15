@@ -5,3 +5,4 @@ Create benchmark and add documentation file for that.
 Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
     Remove privates from type files
     Make <Server>.server private and not show up in console.log(
+Create file at build time where all generated types go so that type files can import those
