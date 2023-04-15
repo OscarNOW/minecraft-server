@@ -1,5 +1,5 @@
 const { ProtoDef, Parser } = require('protodef');
-const protocol = require('../data/protocol.json');
+const { protocol } = require('../functions/loader/data.js');
 
 const proto = new ProtoDef();
 proto.addProtocol(protocol, []);

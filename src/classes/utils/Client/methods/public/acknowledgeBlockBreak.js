@@ -1,4 +1,4 @@
-const blocks = require('../../../../../data/blocks.json');
+const { blocks } = require('../../../../../functions/loader/data.js');
 
 module.exports = function ({ x, y, z }, successful) {
     if (!this.p.stateHandler.checkReady.call(this))

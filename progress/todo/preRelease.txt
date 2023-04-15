@@ -1,4 +1,3 @@
-Use data loader
 Implement <Client>.blocks
     Use in code
 Use Partial and separate getter and setters where needed

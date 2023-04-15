@@ -1,5 +1,4 @@
-const blocks = require('../../../../../data/blocks.json');
-const chunkSize = require('../../../../../data/chunkSize.json');
+const { blocks, chunkSize } = require('../../../../../functions/loader/data.js');
 
 module.exports = function ({ x, y, z }, successful) {
     if (!this.p.stateHandler.checkReady.call(this))
