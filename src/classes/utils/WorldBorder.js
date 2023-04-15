@@ -1,6 +1,6 @@
 const Changable = require('./Changable.js');
 
-const { defaultWorldBorder } = require('../../functions/loader/data.js');
+const { worldBorder: defaultWorldBorder } = require('../../functions/loader/data.js');
 
 const path = require('path');
 
