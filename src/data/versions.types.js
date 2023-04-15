@@ -4,5 +4,5 @@ const versions = require('./versions.json');
 module.exports = {
     legacyVersion: convertToType(versions.filter(a => a.legacy).map(a => a.version)),
     newVersion: convertToType(versions.filter(a => !a.legacy).map(a => a.version)),
-    version: convertToType(['legacyVersion', 'newVersion'])
+    version: 'legacyVersion | newVersion'
 }
