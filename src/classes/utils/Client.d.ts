@@ -6,6 +6,8 @@ type Entity = import('./Entity').Entity;
 type EntityLike = import('./Entity').EntityLike;
 type BossBar = import('./BossBar').BossBar;
 type WorldBorder = import('./WorldBorder').WorldBorder;
+type Block = import('./Block').Block;
+type CustomError = import('./CustomError').CustomError;
 
 type EntityConditional<a> = import('./Entity').EntityConditional<a>;
 type optionalBossBarInfo = import('./BossBar').optionalBossBarInfo;
@@ -66,7 +68,7 @@ type changeEventReturn<currentChangeEventType extends changeEventType> =
 type entities = {
     readonly [entityId: number]: EntityLike;
 } & {
-    readonly 0: Client
+    readonly 0: Client;
 };
 
 type inventory = {
