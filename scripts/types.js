@@ -65,24 +65,29 @@ types = {
     )
 }
 
+let dataTypes = Object.assign({}, ...fs
+    .readdirSync(path.resolve(__dirname, '../src/data/'))
+    .filter(a => a.endsWith('.types.js'))
+    .map(a => require(`../src/data/${a}`))
+);
+
 types = {
-    ...types, ...Object.assign({}, ...fs
-        .readdirSync(path.resolve(__dirname, '../src/data/'))
-        .filter(a => a.endsWith('.types.js'))
-        .map(a => require(`../src/data/${a}`))
-    )
+    ...types, ...dataTypes
 }
 
 console.log(Object.keys(types).map(a => `    ${a}`).join('\n'))
 console.log('Sorting types...')
+
+dataTypes = Object.fromEntries(Object.entries(dataTypes)
+    .sort((a, b) => a[1].length - b[1].length)
+)
 
 types = Object.fromEntries(Object.entries(types)
     .sort((a, b) => a[1].length - b[1].length)
 )
 
 console.log('Generating output...')
-
-let out = ''
+let out = '';
 
 for (const exportClass of exportClasses)
     out += `export ${exportClass}`;
@@ -93,52 +98,66 @@ for (const utilClass of utilClasses)
 for (const [name, value] of Object.entries(types))
     out += `type ${name}=${value};`
 
+
+let typesOut = '';
+
+for (const [name, value] of Object.entries(dataTypes))
+    typesOut += `export type ${name}=${value};`
+
 console.log('Minifying output...')
+out = minifyTypeFile(out);
+typesOut = minifyTypeFile(typesOut);
 
-out = out.replaceAll('\r\n', '\n');
-
-out = removeComments(out);
-
-out = out.split('\n');
-out = out.filter(a => a.trim().length > 0);
-out = out.map(a => a.trim());
-out = out.join('\n');
-
-out = out.replaceAll(' =>', '=>');
-out = out.replaceAll('=> ', '=>');
-out = out.replaceAll(' ?', '?');
-out = out.replaceAll('? ', '?');
-out = out.replaceAll(' :', ':');
-out = out.replaceAll(': ', ':');
-out = out.replaceAll(' ,', ',');
-out = out.replaceAll(', ', ',');
-out = out.replaceAll(' |', '|');
-out = out.replaceAll('| ', '|');
-out = out.replaceAll(' &', '&');
-out = out.replaceAll('& ', '&');
-
-out = out.replaceAll('|\n', '|');
-out = out.replaceAll('\n|', '|');
-out = out.replaceAll(':\n', ':');
-out = out.replaceAll(';\n', ';');
-out = out.replaceAll('\n;', ';');
-out = out.replaceAll(',\n', ',');
-out = out.replaceAll('{\n', '{');
-out = out.replaceAll('\n}', '}');
-out = out.replaceAll('(\n', '(');
-out = out.replaceAll('\n)', ')');
-
-out = out.replaceAll('}\n', '};');
-out = out.replaceAll(';}\n', '};');
-
-out = out.replaceAll('readonly [', 'readonly[');
-out = out.replaceAll("extends '", "extends'");
-
-out = out.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '');
-
+console.log('Saving output...')
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out);
+fs.writeFileSync(path.resolve(__dirname, './types.d.ts'), typesOut);
 
 console.log('Done generating types')
+
+function minifyTypeFile(typeFile) {
+    typeFile = typeFile.replaceAll('\r\n', '\n');
+
+    typeFile = removeComments(typeFile);
+
+    typeFile = typeFile.split('\n');
+    typeFile = typeFile.filter(a => a.trim().length > 0);
+    typeFile = typeFile.map(a => a.trim());
+    typeFile = typeFile.join('\n');
+
+    typeFile = typeFile.replaceAll(' =>', '=>');
+    typeFile = typeFile.replaceAll('=> ', '=>');
+    typeFile = typeFile.replaceAll(' ?', '?');
+    typeFile = typeFile.replaceAll('? ', '?');
+    typeFile = typeFile.replaceAll(' :', ':');
+    typeFile = typeFile.replaceAll(': ', ':');
+    typeFile = typeFile.replaceAll(' ,', ',');
+    typeFile = typeFile.replaceAll(', ', ',');
+    typeFile = typeFile.replaceAll(' |', '|');
+    typeFile = typeFile.replaceAll('| ', '|');
+    typeFile = typeFile.replaceAll(' &', '&');
+    typeFile = typeFile.replaceAll('& ', '&');
+
+    typeFile = typeFile.replaceAll('|\n', '|');
+    typeFile = typeFile.replaceAll('\n|', '|');
+    typeFile = typeFile.replaceAll(':\n', ':');
+    typeFile = typeFile.replaceAll(';\n', ';');
+    typeFile = typeFile.replaceAll('\n;', ';');
+    typeFile = typeFile.replaceAll(',\n', ',');
+    typeFile = typeFile.replaceAll('{\n', '{');
+    typeFile = typeFile.replaceAll('\n}', '}');
+    typeFile = typeFile.replaceAll('(\n', '(');
+    typeFile = typeFile.replaceAll('\n)', ')');
+
+    typeFile = typeFile.replaceAll('}\n', '};');
+    typeFile = typeFile.replaceAll(';}\n', '};');
+
+    typeFile = typeFile.replaceAll('readonly [', 'readonly[');
+    typeFile = typeFile.replaceAll("extends '", "extends'");
+
+    typeFile = typeFile.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '');
+
+    return typeFile;
+}
 
 function removeComments(text) {
     text = text.replaceAll('//', '\n//')
