@@ -8,7 +8,7 @@ export class Block {
     readonly stateId: number;
 }
 
-type blocksSegment = {
+type relativeBlocksSegment = {
     [relativeX: number]: {
         [relativeY: number]: {
             [relativeZ: number]: Block;

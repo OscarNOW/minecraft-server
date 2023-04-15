@@ -1,11 +1,11 @@
-type blocksSegment = import('../utils/Block').blocksSegment;
+type relativeBlocksSegment = import('../utils/Block').relativeBlocksSegment;
 
 export class Chunk {
     private chunk: unknown;
 
     constructor();
 
-    readonly blocks: blocksSegment;
+    readonly blocks: relativeBlocksSegment;
     readonly hash: string;
     private readonly chunkData: {
         biomes: unknown,
