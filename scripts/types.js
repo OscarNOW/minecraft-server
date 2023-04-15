@@ -110,7 +110,7 @@ typesOut = minifyTypeFile(typesOut);
 
 console.log('Saving output...')
 fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out);
-fs.writeFileSync(path.resolve(__dirname, './types.d.ts'), typesOut);
+fs.writeFileSync(path.resolve(__dirname, '../src/types.d.ts'), typesOut);
 
 console.log('Done generating types')
 
