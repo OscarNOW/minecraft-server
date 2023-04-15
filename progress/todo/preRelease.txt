@@ -1,4 +1,4 @@
-Implement <Client>.blocks
+-Implement <Client>.blocks
     Use in code
 Use Partial and separate getter and setters where needed
 Create benchmark and add documentation file for that.
