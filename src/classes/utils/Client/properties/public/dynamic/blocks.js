@@ -4,7 +4,7 @@ module.exports = {
     blocks: {
         get() {
             if (!this.p.blocksGenerated) {
-                this.p._blocks = generateBlocks();
+                this.p._blocks = generateBlocks.call(this);
                 this.p.blocksGenerated = true;
             }
 
@@ -12,7 +12,7 @@ module.exports = {
         },
         setBlocks(blocks) {
             if (!this.p.blocksGenerated) {
-                this.p._blocks = generateBlocks();
+                this.p._blocks = generateBlocks.call(this);
                 this.p.blocksGenerated = true;
             }
 
@@ -40,7 +40,7 @@ module.exports = {
             this.p._blocks = () => ({});
             this.p.onFirstChangeEventListener('blocks', () => {
                 if (!this.blocksGenerated) {
-                    this.p._blocks = generateBlocks();
+                    this.p._blocks = generateBlocks.call(this);
                     this.blocksGenerated = true;
                 }
             });
