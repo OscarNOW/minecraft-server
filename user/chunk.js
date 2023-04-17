@@ -1,18 +1,19 @@
 const { Server, Chunk } = require('../');
 
 let chunk = new Chunk();
-for (let x = 0; x < 16; x++)
-    for (let z = 0; z < 16; z++)
-        for (let y = 0; y < 100; y++)
-            chunk.setBlock('dirt', { x, y, z })
+// for (let x = 0; x < 16; x++)
+//     for (let z = 0; z < 16; z++)
+//         for (let y = 0; y < 100; y++)
+//             chunk.setBlock('dirt', { x, y, z })
+chunk.setBlock('dirt', { x: 1, y: 2, z: 3 })
 
 const server = new Server({
     defaultClientProperties: () => ({
         gamemode: 'creative',
         position: {
-            x: 5,
-            y: 101,
-            z: 5
+            x: 1,
+            y: 3,
+            z: 3
         }
     })
 });
