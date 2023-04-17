@@ -57,7 +57,7 @@ function getLazyBlocksX() {
     const blocksX = getBlocksX.call(this);
 
     for (const blockX of blocksX)
-        Object.defineProperty(this, blockX, {
+        Object.defineProperty(blocks, blockX, {
             configurable: false,
             enumerable: true,
             get: () => getLazyBlocksY.call(this, blockX)
@@ -71,7 +71,7 @@ function getLazyBlocksY(x) {
     const blocksY = getBlocksY.call(this, x);
 
     for (const blockY of blocksY)
-        Object.defineProperty(this, blockY, {
+        Object.defineProperty(blocks, blockY, {
             configurable: false,
             enumerable: true,
             get: () => getLazyBlocksZ.call(this, x, blockY)
@@ -85,7 +85,7 @@ function getLazyBlocksZ(x, y) {
     const blocksZ = getBlocksZ.call(this, x, y);
 
     for (const blockZ of blocksZ)
-        Object.defineProperty(this, blockZ, {
+        Object.defineProperty(blocks, blockZ, {
             configurable: false,
             enumerable: true,
             get: () => getSpecificBlock.call(this, x, y, blockZ)
