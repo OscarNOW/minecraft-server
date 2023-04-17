@@ -1,14 +1,17 @@
 # ![Banner Image](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
+    <a href="https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
+        <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod">
+    </a>
+    <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
+        <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
+    </a>
     <a href="https://www.npmjs.com/package/@boem312/minecraft-server">
         <img src="https://img.shields.io/npm/dt/@boem312/minecraft-server" alt="NPM downloads">
     </a>
     <a href="https://github.com/OscarNOW/minecraft-server/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
-    </a>
-    <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
-        <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
     </a>
 </p>
 
@@ -25,7 +28,7 @@ This is a library that gives you access to an easy to use API that you can use t
 
 ## **Installation and usage**
 1. Install with `npm i @boem312/minecraft-server`.
-2. Now you can use the library. Here's an example code:
+2. Now you can use the library. Here's some example code:
 ```js
 const { Server } = require('@boem312/minecraft-server');
 const server = new Server();
@@ -37,7 +40,7 @@ server.on('connect', client => {
 
 });
 ```
-1. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
+3. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
 
 If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
