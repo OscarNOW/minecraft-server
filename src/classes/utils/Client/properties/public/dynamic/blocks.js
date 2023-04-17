@@ -98,7 +98,8 @@ function getBlocksX() {
     let blocksX = [];
 
     for (const chunk of this.chunks)
-        for (const relativeX in chunk.blocks) {
+        for (let relativeX in chunk.blocks) {
+            relativeX = parseInt(relativeX);
             const x = chunk.x * (chunkSize.x.max - chunkSize.x.min) + relativeX;
             if (!blocksX.includes(x)) blocksX.push(x);
         }
@@ -113,7 +114,8 @@ function getBlocksY(x) {
         const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
         if (!chunk.blocks[relativeX]) continue;
 
-        for (const relativeY in chunk.blocks) {
+        for (let relativeY in chunk.blocks) {
+            relativeY = parseInt(relativeY);
             const y = chunk.y * (chunkSize.y.max - chunkSize.y.min) + relativeY;
             if (!blocksY.includes(y)) blocksY.push(y);
         }
@@ -132,7 +134,8 @@ function getBlocksZ(x, y) {
         const relativeY = y - chunk.y * (chunkSize.y.max - chunkSize.y.min);
         if (!chunk.blocks[relativeX][relativeY]) continue;
 
-        for (const relativeZ in chunk.blocks[relativeX][relativeY]) {
+        for (let relativeZ in chunk.blocks[relativeX][relativeY]) {
+            relativeZ = parseInt(relativeZ);
             const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
             if (!blocksZ.includes(z)) blocksZ.push(z);
         }
