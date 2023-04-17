@@ -21,6 +21,21 @@ type textInput = import('../exports/Text').textInput;
 type gamemode = import('../../types').gamemode;
 type difficulty = import('../../types').difficulty;
 type newVersion = import('../../types').newVersion;
+type langCode = import('../../types').langCode;
+type langEnglishName = import('../../types').langEnglishName;
+type langMenuName = import('../../types').langMenuName;
+type langVersion = import('../../types').langVersion;
+type langRegion = import('../../types').langRegion;
+type noDataParticle = import('../../types').noDataParticle;
+type itemName = import('../../types').itemName;
+type demoMessage = import('../../types').demoMessage;
+type blockName = import('../../types').blockName;
+type blockState = import('../../types').blockState;
+type defaultArgumentEntityName = import('../../types').defaultArgumentEntityName;
+type nonEntityWindowName = import('../../types').nonEntityWindowName;
+type soundName = import('../../types').soundName;
+type soundChannel = import('../../types').soundChannel;
+type blockFace = import('../../types').blockFace;
 
 type blocksSegment = {
     [x: number]: {
