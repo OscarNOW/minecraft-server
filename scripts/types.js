@@ -167,7 +167,7 @@ function removeComments(text) {
     text = text.replaceAll('\r\n', '\n')
     text = text.replaceAll('//', '\n//')
 
-    text = text.replace(/\/\*[^\*](.|\n)*\*\//g, ''); // matches multiline comments except for docstring
+    text = text.replace(/\/\*[^\*](.|\n)*?\*\//g, ''); // matches multiline comments except for docstring
     text = text.split('\n').filter(a => !a.startsWith('//')).join('\n')
 
     return text;
