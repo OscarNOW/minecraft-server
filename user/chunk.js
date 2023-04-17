@@ -8,7 +8,7 @@ for (let x = 0; x < 16; x++)
 
 const server = new Server({
     defaultClientProperties: () => ({
-        gamemode: 'survival',
+        gamemode: 'creative',
         position: {
             x: 5,
             y: 101,
@@ -23,8 +23,9 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    // client.on('blockBreak', ({ x, y, z }, oldBlock) => {
-    //     client.updateBlock(oldBlock.block, { x, y, z }, oldBlock.state);
-    //     client.acknowledgeBlockBreak({ x, y, z }, false);
-    // })
+    client.on('blockBreak', ({ x, y, z }, oldBlock) => {
+        console.log(`${oldBlock.block} -> ${client.blocks[x]?.[y]?.[z]}`)
+        client.updateBlock(oldBlock.block, { x, y, z }, oldBlock.state);
+        client.acknowledgeBlockBreak({ x, y, z }, false);
+    })
 });
