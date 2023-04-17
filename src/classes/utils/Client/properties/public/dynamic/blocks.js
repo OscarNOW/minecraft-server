@@ -1,44 +1,71 @@
+const { chunkSize } = require('../../../../../../functions/loader/data.js');
+
 module.exports = {
     blocks: {
-        info: {
-            preventSet: true
-        },
         get() {
             if (!this.p.blocksGenerated) {
-                this.p._blocks = this.p._blocks();
+                this.p._blocks = generateBlocks();
                 this.p.blocksGenerated = true;
             }
 
             return this.p._blocks;
         },
-        set(value) {
-            let oldValue;
-            let changed;
+        setBlocks(blocks) {
+            if (!this.p.blocksGenerated) {
+                this.p._blocks = generateBlocks();
+                this.p.blocksGenerated = true;
+            }
 
-            //todo: check if blocks are generated and if not, generate them by calling value function
+            const oldBlocks = deepCopyBlocksSegment(this.blocks);
 
-            //only compute changed and oldValue if there are change listeners for blocks
-            if (this.p.changeEventHasListeners('blocks')) {
-                oldValue = deepCopyBlocksSegment(this.blocks); //generates blocks if not already generated
-                changed = compareBlocksSegment(oldValue, value);
-            };
+            for (const x in blocks) {
+                if (!this.blocks[x])
+                    this.blocks[x] = {};
 
-            this.p._blocks = value;
+                for (const y in blocks[x]) {
+                    if (!this.blocks[x][y])
+                        this.blocks[x][y] = {};
 
-            if (this.p.changeEventHasListeners('blocks') && changed)
-                this.p.emitChange('blocks', oldValue);
+                    for (const z in blocks[x][y])
+                        this.blocks[x][y][z] = blocks[x][y][z];
+                }
+            }
+
+            const changed = !compareBlocksSegment(oldBlocks, this.blocks);
+            if (changed)
+                this.p.emitChange('blocks', oldBlocks)
         },
         init() {
             this.blocksGenerated = false;
             this.p._blocks = () => ({});
             this.p.onFirstChangeEventListener('blocks', () => {
                 if (!this.blocksGenerated) {
-                    this.p._blocks = this.p._blocks();
+                    this.p._blocks = generateBlocks();
                     this.blocksGenerated = true;
                 }
             });
         }
     }
+}
+
+function generateBlocks() {
+    this.blocks = {};
+
+    for (const chunk of this.chunks)
+        for (const relativeX in chunk.blocks) {
+            const x = chunk.x * (chunkSize.x.max - chunkSize.x.min) + relativeX;
+            this.blocks[x] = {};
+
+            for (const y in chunk.blocks[relativeX]) {
+                this.blocks[x][y] = {};
+
+                for (const relativeZ in chunk.blocks[relativeX][y]) {
+                    const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
+
+                    this.blocks[x][y][z] = chunk.blocks[relativeX][y][relativeZ];
+                }
+            }
+        }
 }
 
 function deepCopyBlocksSegment(blocksSegment) {
