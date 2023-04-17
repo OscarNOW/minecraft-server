@@ -1,3 +1,4 @@
+Make sure all classes and object can be serialized to JSON with JSON.stringify
 Implement <Client>.on('change', (type, newValue, oldValue) => { ... })
 Inventory
     Implement packets sent from Client (see Spreadsheet)
