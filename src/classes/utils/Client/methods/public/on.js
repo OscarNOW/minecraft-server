@@ -1,5 +1,5 @@
 const CustomError = require('../../../CustomError.js');
-const { firstChangeEventListenerListeners } = require('./onFirstChangeEventListener.js');
+const { firstChangeEventListenerListeners } = require('../private/onFirstChangeEventListener.js');
 
 module.exports = function (event) {
     if (event === 'change') {
