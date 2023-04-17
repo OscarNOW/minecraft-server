@@ -1,7 +1,7 @@
 # ![Banner Image](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
-    <a href="(https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
+    <a href="https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
         <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod">
     </a>
     <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
