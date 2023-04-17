@@ -1,3 +1,4 @@
+Add JSDoc to type files
 Add slot data file
 Test when playing a sound if the played sound is correct
 Update data
