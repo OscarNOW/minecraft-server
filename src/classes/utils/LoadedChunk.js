@@ -18,7 +18,7 @@ function updateBlock(block) {
     const absoluteX = x + this.x * 16; //todo: use chunkSize
     if (!this.blocksX.includes(absoluteX)) this.blocksX.push(absoluteX);
 
-    blocks.setBlocks({ [x]: { [y]: { [z]: block } } });
+    blocks.setBlocks.call(this.client, { [x]: { [y]: { [z]: block } } });
 }
 
 class LoadedChunk extends Chunk {
