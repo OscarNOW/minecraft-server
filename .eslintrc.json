@@ -34,7 +34,12 @@
         "operator-assignment": "warn",
         "require-await": "warn",
         "no-var": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": [
+            "warn",
+            {
+                "args": "none"
+            }
+        ],
         "no-unreachable": "warn",
         "eqeqeq": "warn",
         "no-extra-boolean-cast": "warn",
