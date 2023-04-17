@@ -353,28 +353,6 @@ export class Client {
 
     // methods
 
-    //todo-imp: remove docstring
-    /**
-     * @param {string} name - The name of the property
-     * @param {any} value - The value of the property
-     * @param {boolean} [beforeReady=false] - If the property should be set before the client is ready
-     * @param {boolean} [loginPacket=false] - If the property should be set in the login packet
-     * @returns {boolean} If the property was set
-     * @memberof Player
-     * @description Sets a property of the player
-     * @example
-     * // Set the player's gamemode to creative
-     * bot.p.setProperty('gamemode', 1);
-     * @example
-     * // Set the player's gamemode to creative before the client is ready
-     * bot.p.setProperty('gamemode', 1, true);
-     * @example
-     * // Set the player's gamemode to creative in the login packet
-     * bot.p.setProperty('gamemode', 1, false, true);
-     * @example
-     * // Set the player's gamemode to creative before the client is ready and in the login packet
-     * bot.p.setProperty('gamemode', 1, true, true);
-     */
     particle(
         particleName: noDataParticle,
         visibleFromFar: boolean,
