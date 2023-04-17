@@ -26,7 +26,12 @@ class LoadedChunk extends Chunk {
         super(chunk, block => updateBlock.call(this, block), { x: x * 16, y: 0, z: z * 16 });
 
         this.sendPacket = sendPacket; // todo: make private
-        this.blocksX = chunk?.blocksX ?? [];
+        if (chunk instanceof LoadedChunk)
+            this.blocksX = chunk?.blocksX ?? [];
+        else if (chunk instanceof Chunk)
+            this.blocksX = generateBlocksX.call(this, chunk);
+        else
+            throw new Error('Passed chunk is not instanceof Chunk or LoadedChunk')
 
         this.client = client;
         this.server = client.server;
@@ -43,6 +48,16 @@ class LoadedChunk extends Chunk {
 
         chunks.set.call(this.client, Object.freeze(this.client.chunks.filter(chunk => chunk !== this)));
     }
+}
+
+function generateBlocksX(chunk) {
+    let blocksX = [];
+
+    for (const x in chunk.blocks)
+        if (!blocksX.includes(x))
+            blocksX.push(x);
+
+    return blocksX;
 }
 
 module.exports = LoadedChunk;
