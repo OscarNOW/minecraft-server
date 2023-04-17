@@ -18,11 +18,11 @@ tasks:
   #       gp env TAILSCALE_STATE_MYPROJECT="$(sudo cat /var/lib/tailscale/tailscaled.state)"
   #     fi
 
-ports:
-  - port: 25565
-    onOpen: notify
-    name: Minecraft Server
-    visibility: public
+# ports:
+#   - port: 25565
+#     onOpen: notify
+#     name: Minecraft Server
+#     visibility: public
 
 vscode:
   extensions:
