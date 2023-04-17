@@ -1,3 +1,4 @@
+Fix todo in <Client>.chunks
 -Implement <Client>.blocks
     Use in code
 Use Partial and separate getter and setters where needed
