@@ -15,6 +15,9 @@ function updateBlock(block) {
         type: stateId
     })
 
+    const absoluteX = x + this.x * 16; //todo: use chunkSize
+    if (!this.blocksX.includes(absoluteX)) this.blocksX.push(absoluteX);
+
     blocks.setBlocks({ [x]: { [y]: { [z]: block } } });
 }
 
@@ -23,6 +26,7 @@ class LoadedChunk extends Chunk {
         super(chunk, block => updateBlock.call(this, block), { x: x * 16, y: 0, z: z * 16 });
 
         this.sendPacket = sendPacket; // todo: make private
+        this.blocksX = chunk?.blocksX ?? [];
 
         this.client = client;
         this.server = client.server;

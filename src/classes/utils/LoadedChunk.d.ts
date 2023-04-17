@@ -6,6 +6,7 @@ type Server = import('../exports/Server').Server;
 export class LoadedChunk extends Chunk {
     private constructor(client: Client, pChunk: unknown, chunkPosition: { x: number; z: number });
     private sendPacket(name: string, contents: object): void;
+    private readonly blocksX: number[];
 
     readonly client: Client;
     readonly server: Server;

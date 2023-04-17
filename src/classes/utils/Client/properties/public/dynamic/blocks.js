@@ -98,11 +98,9 @@ function getBlocksX() {
     let blocksX = [];
 
     for (const chunk of this.chunks)
-        for (let relativeX in chunk.blocks) {
-            relativeX = parseInt(relativeX);
-            const x = chunk.x * (chunkSize.x.max - chunkSize.x.min) + relativeX;
-            if (!blocksX.includes(x)) blocksX.push(x);
-        }
+        for (const blockX of chunk.blocksX)
+            if (!blocksX.includes(blockX))
+                blocksX.push(blockX);
 
     return blocksX;
 }
