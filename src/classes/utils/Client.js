@@ -38,11 +38,16 @@ class Client {
 
         //Inject private methods
         for (const [key, value] of Object.entries(
-            Object.assign({}, ...fs
-                .readdirSync(path.resolve(__dirname, './Client/methods/private/'))
-                .filter(v => v.endsWith('.js'))
-                .filter(v => !v.endsWith('.test.js'))
-                .map(v => require(`./Client/methods/private/${v}`))
+            Object.fromEntries(
+                Object.entries(
+                    Object.assign({}, ...fs
+                        .readdirSync(path.resolve(__dirname, './Client/methods/private/'))
+                        .filter(v => v.endsWith('.js'))
+                        .filter(v => !v.endsWith('.test.js'))
+                        .map(v => require(`./Client/methods/private/${v}`))
+                    )
+                )
+                    .filter(([key, value]) => typeof value === 'function')
             )
         ))
             this.p[key] = value.bind(this)
