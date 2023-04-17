@@ -24,10 +24,8 @@ server.on('connect', client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    console.log(client.blocks)
-
     client.on('blockBreak', ({ x, y, z }, oldBlock) => {
-        console.log(`${oldBlock.block} -> ${client.blocks[x]?.[y]?.[z]}`)
+        console.log(`(${x}, ${y}, ${z}) ${oldBlock.block} -> ${client.blocks[x]?.[y]?.[z]}`)
         client.updateBlock(oldBlock.block, { x, y, z }, oldBlock.state);
         client.acknowledgeBlockBreak({ x, y, z }, false);
     })
