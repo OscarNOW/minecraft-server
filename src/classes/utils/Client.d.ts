@@ -18,6 +18,10 @@ type Text = import('../exports/Text').Text;
 
 type textInput = import('../exports/Text').textInput;
 
+type gamemode = import('../../types').gamemode;
+type difficulty = import('../../types').difficulty;
+type newVersion = import('../../types').newVersion;
+
 type blocksSegment = {
     [x: number]: {
         [y: number]: {
