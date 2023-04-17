@@ -40,7 +40,7 @@ module.exports = function (chunk, { x, z }) {
                 blocks[x] = {};
 
                 for (const y in chunk.blocks[relativeX]) {
-                    blocks[y] = {};
+                    blocks[x][y] = {};
 
                     for (const relativeZ in chunk.blocks[relativeX][y]) {
                         const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
