@@ -8,9 +8,12 @@ const faces = Object.fromEntries(
 module.exports = {
     block_dig({ status, location: { x, y, z }, face }) {
         if (status === 0)
-            if (faces[face])
+            if (faces[face]) {
                 this.p.emit('digStart', { x, y, z }, faces[face])
-            else
+
+                if (this.gamemode === 'creative') //normal blockBreak event doesn't get emitted when in creative mode
+                    emitBlockBreak.call(this, { x, y, z });
+            } else
                 this.p.emitError(new CustomError('expectationNotMet', 'client', `face in  <remote ${this.constructor.name}>.block_dig({ face: ${require('util').inspect(face)} })  `, {
                     got: face,
                     expectationType: 'value',
@@ -19,26 +22,9 @@ module.exports = {
 
         else if (status === 1)
             this.p.emit('digCancel', { x, y, z })
-        else if (status === 2) {
-            const chunkX = Math.floor(x / 16);
-            const chunkZ = Math.floor(z / 16);
-
-            const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
-
-            let chunkRelativeX = x % 16; //todo: use chunkSize instead of 16
-            let chunkRelativeY = y;
-            let chunkRelativeZ = z % 16; //todo: use chunkSize instead of 16
-
-            if (chunkRelativeX < 0) chunkRelativeX += 16;
-            if (chunkRelativeY < 0) chunkRelativeY += 16;
-            if (chunkRelativeZ < 0) chunkRelativeZ += 16;
-
-            const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
-
-            chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
-
-            this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', {}, { x, y, z }));
-        } else if (status === 3)
+        else if (status === 2)
+            emitBlockBreak.call(this, { x, y, z })
+        else if (status === 3)
             this.p.emit('itemDrop', true)
         else if (status === 4)
             this.p.emit('itemDrop', false)
@@ -53,4 +39,25 @@ module.exports = {
                 expectation: [0, 1, 2, 3, 4, 5, 6]
             }, null, { server: this.server, client: this }))
     }
+}
+
+function emitBlockBreak({ x, y, z }) {
+    const chunkX = Math.floor(x / 16);
+    const chunkZ = Math.floor(z / 16);
+
+    const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
+
+    let chunkRelativeX = x % 16; //todo: use chunkSize instead of 16
+    let chunkRelativeY = y;
+    let chunkRelativeZ = z % 16; //todo: use chunkSize instead of 16
+
+    if (chunkRelativeX < 0) chunkRelativeX += 16;
+    if (chunkRelativeY < 0) chunkRelativeY += 16;
+    if (chunkRelativeZ < 0) chunkRelativeZ += 16;
+
+    const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
+
+    chunk.updateBlock('air', { x: chunkRelativeX, y: chunkRelativeY, z: chunkRelativeZ }, {});
+
+    this.p.emit('blockBreak', { x, y, z }, oldBlock ?? new Block('air', {}, { x, y, z }));
 }
