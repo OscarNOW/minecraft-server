@@ -53,7 +53,9 @@ server.on('join', async client => {
         client.chunks; // generate chunks
         console.timeEnd('chunks  ');
 
-        //todo: add time check for <Client>.blocks
+        console.time('blocks  ');
+        client.blocks; // generate blocks
+        console.timeEnd('blocks  ');
 
         console.time('close   ')
         await server.close();
