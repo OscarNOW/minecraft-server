@@ -28,7 +28,7 @@ This is a library that gives you access to an easy to use API that you can use t
 
 ## **Installation and usage**
 1. Install with `npm i @boem312/minecraft-server`.
-2. Now you can use the library. Here's an example code:
+2. Now you can use the library. Here's some example code:
 ```js
 const { Server } = require('@boem312/minecraft-server');
 const server = new Server();
@@ -40,7 +40,7 @@ server.on('connect', client => {
 
 });
 ```
-1. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
+3. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
 
 If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
