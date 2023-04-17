@@ -4,6 +4,7 @@ None
 ## New API
 * [<Server>.on('listening', () => { })](https://oscarnow.github.io/minecraft-server/{version}/classes/Server#on)
 * [<Client>.entity('experience_orb', ...)](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#entity.entity-2)
+* [<Client>.blocks](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#blocks)
 * [previousBlock argument in <Client>.on('blockBreak', location, previousBlock)](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#on)
 
 * [<Chunk>.updateBlock(](https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk#updateBlock)

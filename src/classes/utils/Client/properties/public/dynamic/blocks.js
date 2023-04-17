@@ -1,5 +1,3 @@
-//todo: add to changelog
-
 module.exports = {
     blocks: {
         info: {
