@@ -1,14 +1,17 @@
 # ![Banner Image](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
 <p align="center">
+    <a href="(https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
+        <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod">
+    </a>
+    <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
+        <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
+    </a>
     <a href="https://www.npmjs.com/package/@boem312/minecraft-server">
         <img src="https://img.shields.io/npm/dt/@boem312/minecraft-server" alt="NPM downloads">
     </a>
     <a href="https://github.com/OscarNOW/minecraft-server/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/OscarNOW/minecraft-server" alt="Github contributors">
-    </a>
-    <a href="https://vscode.dev/github/OscarNOW/minecraft-server">
-        <img src="https://img.shields.io/badge/open%20in-vscode-brightgreen" alt="Open in vscode">
     </a>
 </p>
 
