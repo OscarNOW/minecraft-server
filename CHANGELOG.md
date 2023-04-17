@@ -21,4 +21,5 @@ None
 None
 
 ## Issues fixed
+* Fixed bug where [the blockBreak event](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#on) would not get emitted when the player was in creative mode
 * Fixed bug when connecting to the server with a legacy client.
