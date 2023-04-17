@@ -21,6 +21,7 @@ module.exports = {
             let oldValue;
             let changed;
 
+            //todo: what if chunks aren't generated, but there are listeners?
             if (this.p.changeEventHasListeners('chunks')) {
                 oldValue = [...this.chunks];
 
