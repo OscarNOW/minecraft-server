@@ -38,6 +38,7 @@ module.exports = {
         init() {
             this.p.chunksGenerated = false;
             this.p._chunks = Object.freeze([]);
+            //todo: use onFirstChangeEventListener like in <Client>.blocks
         }
     }
 }
