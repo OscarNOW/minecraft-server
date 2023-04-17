@@ -1,4 +1,5 @@
 const CustomError = require('../../../CustomError.js');
+const { firstChangeEventListenerListeners } = require('./onFirstChangeEventListener.js');
 
 module.exports = function (event) {
     if (event === 'change') {
@@ -12,6 +13,7 @@ module.exports = function (event) {
                 expectation: Object.keys(this.p.changeEvents)
             }, this.on, { server: this.server, client: this }));
 
+        if (this.p.changeEvents[type].length === 0) firstChangeEventListenerListeners[type]?.forEach?.(cb => cb({ callback, once: true }))
         this.p.changeEvents[type].push({ callback, once: true });
 
     } else {
