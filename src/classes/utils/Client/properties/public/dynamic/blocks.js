@@ -49,23 +49,25 @@ module.exports = {
 }
 
 function generateBlocks() {
-    this.blocks = {};
+    let blocks = {};
 
     for (const chunk of this.chunks)
         for (const relativeX in chunk.blocks) {
             const x = chunk.x * (chunkSize.x.max - chunkSize.x.min) + relativeX;
-            this.blocks[x] = {};
+            blocks[x] = {};
 
             for (const y in chunk.blocks[relativeX]) {
-                this.blocks[x][y] = {};
+                blocks[x][y] = {};
 
                 for (const relativeZ in chunk.blocks[relativeX][y]) {
                     const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
 
-                    this.blocks[x][y][z] = chunk.blocks[relativeX][y][relativeZ];
+                    blocks[x][y][z] = chunk.blocks[relativeX][y][relativeZ];
                 }
             }
         }
+
+    return blocks;
 }
 
 function deepCopyBlocksSegment(blocksSegment) {
