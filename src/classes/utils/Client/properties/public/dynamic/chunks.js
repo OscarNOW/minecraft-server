@@ -5,26 +5,16 @@ module.exports = {
         },
         get() {
 
-            if (!this.p._chunks) {
-                this.p.chunksGenerated = true;
-                this.p._chunks = Object.freeze([]);
-            };
-
             if (!this.p.chunksGenerated) {
-                this.p.chunksGenerated = true;
                 this.p._chunks = Object.freeze(
                     this.p._chunks.map(generator => generator()) //generator calls (new LoadedChunk(...)) for every LoadedChunk
                 );
+                this.p.chunksGenerated = true;
             };
 
             return this.p._chunks;
         },
         getPrivate() {
-            if (!this.p._chunks) {
-                this.p.chunksGenerated = false;
-                this.p._chunks = Object.freeze([]);
-            }
-
             return this.p._chunks;
         },
         set(value) {
@@ -43,6 +33,10 @@ module.exports = {
 
             if (this.p.changeEventHasListeners('chunks') && changed)
                 this.p.emitChange('chunks', oldValue); //will generate chunks if not already generated
+        },
+        init() {
+            this.p.chunksGenerated = false;
+            this.p._chunks = Object.freeze([]);
         }
     }
 }
