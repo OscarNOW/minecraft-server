@@ -19,7 +19,8 @@ const changes = [ // if this is changed, make sure to also change changeEvent in
     'tabItems',
     'tabHeader',
     'tabFooter',
-    'inventory'
+    'inventory',
+    'blocks'
 ];
 
 module.exports = {

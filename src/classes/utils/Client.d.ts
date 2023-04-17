@@ -18,6 +18,14 @@ type Text = import('../exports/Text').Text;
 
 type textInput = import('../exports/Text').textInput;
 
+type blocksSegment = {
+    [x: number]: {
+        [y: number]: {
+            [z: number]: Block;
+        };
+    };
+};
+
 type changeEventType =
     'entities' |
     'chunks' |
@@ -40,6 +48,7 @@ type changeEventType =
 
 type changeEventReturn<currentChangeEventType extends changeEventType> =
     currentChangeEventType extends 'entities' ? entities :
+    currentChangeEventType extends 'blocks' ? blocksSegment :
     currentChangeEventType extends 'chunks' ? LoadedChunk[] :
     currentChangeEventType extends 'bossBars' ? BossBar[] :
     currentChangeEventType extends 'tabItems' ? TabItem[] :
@@ -282,7 +291,9 @@ export class Client {
             [property: string]: unknown;
         };
         chunksGenerated: boolean;
+        blocksGenerated: boolean;
         _chunks: (LoadedChunk[]) | ((() => LoadedChunk)[]);
+        _blocks: (blocksSegment) | ((() => blocksSegment)[]);
     };
 
     readonly worldBorder: WorldBorder;
@@ -295,6 +306,7 @@ export class Client {
     readonly ping: number;
 
     readonly entities: entities;
+    readonly blocks: blocksSegment;
     readonly bossBars: BossBar[];
     readonly chunks: LoadedChunk[];
     readonly tabItems: TabItem[];

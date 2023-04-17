@@ -1,7 +1,9 @@
 const Chunk = require('../exports/Chunk.js');
 const { chunks } = require('./Client/properties/public/dynamic/chunks.js')
 
-function updateBlock({ x, y, z, stateId }) {
+function updateBlock(block) {
+    const { x, y, z, stateId } = block;
+
     this.sendPacket('block_change', {
         location: {
             x,
@@ -10,6 +12,10 @@ function updateBlock({ x, y, z, stateId }) {
         },
         type: stateId
     })
+
+    if (!this.client.blocks[x]) this.client.blocks[x] = {};
+    if (!this.client.blocks[x][y]) this.client.blocks[x][y] = {};
+    this.client.blocks[x][y][z] = block;
 }
 
 class LoadedChunk extends Chunk {
