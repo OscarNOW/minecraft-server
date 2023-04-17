@@ -1,4 +1,4 @@
-Add JSDoc to type files
+Create benchmark and add documentation file for that.
 Add slot data file
 Test when playing a sound if the played sound is correct
 Update data
