@@ -154,17 +154,20 @@ function minifyTypeFile(typeFile) {
     typeFile = typeFile.replaceAll('readonly [', 'readonly[');
     typeFile = typeFile.replaceAll("extends '", "extends'");
 
+    typeFile = typeFile.replaceAll('/**', '\n/**');
+
     typeFile = typeFile.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '');
 
     return typeFile;
 }
 
 function removeComments(text) {
+    if (text.includes('/**'))
+        debugger;
+    text = text.replaceAll('\r\n', '\n')
     text = text.replaceAll('//', '\n//')
-    text = text.replaceAll('/*', '\n/*')
-    text = text.replaceAll('*/', '*/\n')
 
-    text = text.replace(/\*(.|[\r\n])*?\*/g, '');
+    text = text.replace(/\/\*[^\*](.|\n)*\*\//g, ''); // matches multiline comments except for docstring
     text = text.split('\n').filter(a => !a.startsWith('//')).join('\n')
 
     return text;
