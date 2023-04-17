@@ -49,25 +49,115 @@ module.exports = {
 }
 
 function generateBlocks() {
-    let blocks = {};
+    return getLazyBlocksX.call(this);
+}
+
+function getLazyBlocksX() {
+    const blocks = {};
+    const blocksX = getBlocksX.call(this);
+
+    for (const blockX of blocksX)
+        Object.defineProperty(this, blockX, {
+            configurable: false,
+            enumerable: true,
+            get: () => getLazyBlocksY.call(this, blockX)
+        })
+
+    return blocks;
+}
+
+function getLazyBlocksY(x) {
+    const blocks = {};
+    const blocksY = getBlocksY.call(this, x);
+
+    for (const blockY of blocksY)
+        Object.defineProperty(this, blockY, {
+            configurable: false,
+            enumerable: true,
+            get: () => getLazyBlocksZ.call(this, x, blockY)
+        })
+
+    return blocks;
+}
+
+function getLazyBlocksZ(x, y) {
+    const blocks = {};
+    const blocksZ = getBlocksZ.call(this, x, y);
+
+    for (const blockZ of blocksZ)
+        Object.defineProperty(this, blockZ, {
+            configurable: false,
+            enumerable: true,
+            get: () => getSpecificBlock.call(this, x, y, blockZ)
+        })
+
+    return blocks;
+}
+
+function getBlocksX() {
+    let blocksX = [];
 
     for (const chunk of this.chunks)
         for (const relativeX in chunk.blocks) {
             const x = chunk.x * (chunkSize.x.max - chunkSize.x.min) + relativeX;
-            blocks[x] = {};
-
-            for (const y in chunk.blocks[relativeX]) {
-                blocks[x][y] = {};
-
-                for (const relativeZ in chunk.blocks[relativeX][y]) {
-                    const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
-
-                    blocks[x][y][z] = chunk.blocks[relativeX][y][relativeZ];
-                }
-            }
+            if (!blocksX.includes(x)) blocksX.push(x);
         }
 
-    return blocks;
+    return blocksX;
+}
+
+function getBlocksY(x) {
+    let blocksY = [];
+
+    for (const chunk of this.chunks) {
+        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
+        if (!chunk.blocks[relativeX]) continue;
+
+        for (const relativeY in chunk.blocks) {
+            const y = chunk.y * (chunkSize.y.max - chunkSize.y.min) + relativeY;
+            if (!blocksY.includes(y)) blocksY.push(y);
+        }
+    }
+
+    return blocksY;
+}
+
+function getBlocksZ(x, y) {
+    let blocksZ = [];
+
+    for (const chunk of this.chunks) {
+        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
+        if (!chunk.blocks[relativeX]) continue;
+
+        const relativeY = y - chunk.y * (chunkSize.y.max - chunkSize.y.min);
+        if (!chunk.blocks[relativeX][relativeY]) continue;
+
+        for (const relativeZ in chunk.blocks[relativeX][relativeY]) {
+            const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
+            if (!blocksZ.includes(z)) blocksZ.push(z);
+        }
+    }
+
+    return blocksZ;
+}
+
+function getSpecificBlock(x, y, z) {
+    const chunkX = Math.floor(x / 16);
+    const chunkZ = Math.floor(z / 16);
+
+    const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
+
+    let chunkRelativeX = x % (chunkSize.x.max - chunkSize.x.min);
+    let chunkRelativeY = y % (chunkSize.y.max - chunkSize.y.min);
+    let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min);
+
+    if (chunkRelativeX < 0) chunkRelativeX += 16;
+    if (chunkRelativeY < 0) chunkRelativeY += 16;
+    if (chunkRelativeZ < 0) chunkRelativeZ += 16;
+
+    const block = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
+
+    return block;
 }
 
 function deepCopyBlocksSegment(blocksSegment) {
