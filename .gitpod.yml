@@ -1,5 +1,6 @@
 tasks:
-  - init: npm install
+  - command: npm install -g npm #update npm
+  - command: npm install
   - name: tailscaled
     command: |
       if [ -n "${TAILSCALE_STATE_MYPROJECT}" ]; then
