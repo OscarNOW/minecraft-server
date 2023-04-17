@@ -394,6 +394,9 @@ export class Client {
     demo(message: demoMessage): void;
     elderGuardian(): void;
     win(showCredits: boolean): void;
+    /**
+     * @description Kicks the player from the server
+     */
     kick(reason: textInput | Text): void; //todo: rename to remove, for consistency
     chat(message?: textInput | Text): void;
     setBlock(block: blockName, location: { //todo: add overwrite where you can pass a Block class
