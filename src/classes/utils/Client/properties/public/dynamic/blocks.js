@@ -112,7 +112,7 @@ function getBlocksY(x) {
         const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
         if (!chunk.blocks[relativeX]) continue;
 
-        for (let relativeY in chunk.blocks) {
+        for (let relativeY in chunk.blocks[relativeX]) {
             relativeY = parseInt(relativeY);
             const y = relativeY;
             if (!blocksY.includes(y)) blocksY.push(y);
