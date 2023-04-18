@@ -52,7 +52,7 @@ export class Server {
          *          wrongText: 'Please use 1.16.3'
          *      }
          *
-         * })         *
+         * })
          * @example serverList: ({ ip, connection: { host, port }, version }) => ({
          *
          *      description: new Text([
@@ -71,7 +71,7 @@ export class Server {
          *      version: {
          *          wrongText: 'Wrong version!',
          *
-         *          /*  Tell client that the correct version is their version, so they
+         *          / *  Tell client that the correct version is their version, so they
          *              always think they have the correct version. Reported client
          *              version is null when the version of the client is unknown      * /
          *          correct: version === null ? '1.16.3' : version
