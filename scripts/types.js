@@ -119,19 +119,15 @@ fs.writeFileSync(path.resolve(__dirname, '../src/types.d.ts'), typesOut);
 
 console.log('Done generating types')
 
-const whitespaceRegex = Object.freeze({
-    specialCharacters: '<>=?:,|&;{}()\\\'"\[\]\n/',
-    normalCharacters: 'a-zA-Z0-9',
-    whitespaceCharacters: ' \t\n',
-    preventJSDoc: '(?<=^[^*]*)'
-});
-
 function minifyTypeFile(typeFile) {
     typeFile = typeFile.replaceAll('\r\n', '\n');
 
     typeFile = removeComments(typeFile);
 
-    const { specialCharacters, normalCharacters, whitespaceCharacters, preventJSDoc } = whitespaceRegex;
+    const specialCharacters = '<>=?:,|&;{}()\\\'"\[\]\n/';
+    const normalCharacters = 'a-zA-Z0-9';
+    const whitespaceCharacters = ' \t\n';
+    const preventJSDoc = '(?<=^[^*]*)';
 
     typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${normalCharacters}])`, 'gm'), ''); // remove whitespace before text
     typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${normalCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}])`, 'gm'), ''); // remove whitespace after text
