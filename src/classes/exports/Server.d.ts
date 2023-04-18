@@ -37,6 +37,7 @@ type CustomError = import('../utils/CustomError').CustomError;
  *              })
  *
  *          });
+ *
  */
 export class Server {
     constructor(serverOptions: {
@@ -53,6 +54,7 @@ export class Server {
          *              }
          *
          *         })
+         *
          * @example serverList: ({ ip, connection: { host, port }, version }) => ({
          *
          *              description: new Text([
@@ -80,6 +82,7 @@ export class Server {
          *              favicon: fs.readFileSync('./favicon.png')
          *
          *          })
+         *
          */
         serverList?(info: {
             ip: string,

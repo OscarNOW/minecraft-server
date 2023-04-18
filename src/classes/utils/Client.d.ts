@@ -542,6 +542,7 @@ export class Client {
      * @example client.on('change', 'slot', slot => {
      *              console.log(`${client.username} switched slot to ${slot}`)
      *          });
+     *
      */
     on<currentChangeEventType extends changeEventType>(event: 'change', type: currentChangeEventType, callback: (newValue: changeEventReturn<currentChangeEventType>, oldValue: changeEventReturn<currentChangeEventType>) => void): void;
     on(event: 'itemUse' | 'armSwing', callback: (isMainHand: boolean) => void): void;

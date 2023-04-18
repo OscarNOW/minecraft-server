@@ -22,6 +22,7 @@ export class Text {
      *                  ]
      *              }
      *  ]);
+     *
      */
     constructor(text: textInput);
 
