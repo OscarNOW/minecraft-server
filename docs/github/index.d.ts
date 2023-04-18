@@ -31,7 +31,15 @@ export export class Text{constructor(text:textInput);array:textArrayComponent[];
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Block
  */
-export declare class Block{readonly x:number;readonly y:number;readonly z:number;readonly block:blockName;readonly state:blockState;readonly stateId:number;}
+export declare class Block{
+/**
+ * The absolute x of the block, relative to the world and not to the chunk.
+ */
+readonly x:number;readonly y:number;
+/**
+ * The absolute z of the block, relative to the world and not to the chunk.
+ */
+readonly z:number;readonly block:blockName;readonly state:blockState;readonly stateId:number;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/BossBar
  */
