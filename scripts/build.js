@@ -125,6 +125,8 @@ function printProgress(errors, latestLogs, promiseStates, currentProgress, build
     console.log()
     if (jobs.some((_, i) => promiseStates[i] === 'pending'))
         console.log(`Build [${buildProgress[0].repeat(10)}]`);
+    else if (jobs.some((_, i) => promiseStates[i] === 'rejected'))
+        console.log(`Build [${colors.fg.red}${'✗'.repeat(10)}${colors.reset}]`);
     else
         console.log(`Build [${colors.fg.green}${'✓'.repeat(10)}${colors.reset}]`);
     console.log()
