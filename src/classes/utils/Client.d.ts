@@ -325,6 +325,9 @@ export class Client {
     readonly ping: number;
 
     readonly entities: entities;
+    /**
+     * The blocks in the world, not relative to a chunk.
+     */
     readonly blocks: blocksSegment;
     readonly bossBars: BossBar[];
     readonly chunks: LoadedChunk[];
@@ -415,11 +418,18 @@ export class Client {
     win(showCredits: boolean): void;
     kick(reason: textInput | Text): void; //todo: rename to remove, for consistency
     chat(message?: textInput | Text): void;
+    /**
+     * @param location The absolute location of the block, not relative to a chunk.
+     */
     setBlock(block: blockName, location: { //todo: add overwrite where you can pass a Block class
         x: number;
         y: number;
         z: number;
     }, state?: blockState): this;
+    /**
+     * Set a block without sending a packet to the client.
+     * @param location The absolute location of the block, not relative to a chunk.
+     */
     updateBlock(block: blockName, location: {
         x: number;
         y: number;
