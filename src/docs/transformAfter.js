@@ -5,6 +5,9 @@ module.exports = (async () => {
     const fsp = fs.promises;
     const path = require('path');
 
+    if (!fs.existsSync(path.resolve(__dirname, '../../docs/github/classes/')))
+        throw new Error('Typedoc failed to generate classes folder. Exiting...');
+
     console.log('Transforming customCss...')
     let customCss = fs.readFileSync(path.resolve(__dirname, '../../docs/github/assets/custom.css')).toString() // todo: doesn't this add customCss to customCss each time it's run?
     customCss = customCss.replace('.category__link--ts', '.none');
