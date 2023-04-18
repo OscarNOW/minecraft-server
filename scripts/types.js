@@ -111,7 +111,12 @@ typesOut = typesOut.replaceAll('{version}', version);
 
 (async () => {
     console.log('Minifying output...');
-    [out, typesOut] = /*await Promise.all*/([minifyTypeFile(out), minifyTypeFile(typesOut)]);
+
+    console.log('out...')
+    out = minifyTypeFile(out);
+
+    console.log('typesOut...')
+    typesOut = minifyTypeFile(typesOut);
 
     console.log('Saving output...')
     await Promise.all([
