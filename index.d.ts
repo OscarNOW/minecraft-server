@@ -1,8 +1,12 @@
 
 /**
- * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Chunk
+ * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Chunk *
  */
-export export class Chunk{private chunk:unknown;constructor();
+export export class Chunk{private chunk:unknown;
+/**
+ * @example const chunk = new Chunk(Test);
+ */
+constructor();
 /**
  * The blocks in the chunk relative to the chunk.
  */

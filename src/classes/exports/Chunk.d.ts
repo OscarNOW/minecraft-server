@@ -4,7 +4,7 @@ type blockName = import('../../types').blockName;
 type blockState = import('../../types').blockState;
 
 /**
- * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk *
  */
 export class Chunk {
     private chunk: unknown;
@@ -36,6 +36,10 @@ export class Chunk {
     //todo: add overwrite where you can pass a Block class
     /**
      * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
+     * @example for (let x = 0; x < 16; x++)
+     *  for (let z = 0; z < 16; z++)
+     *      for (let y = 0; y < 100; y++)
+     *          chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
      */
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
