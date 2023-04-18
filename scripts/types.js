@@ -142,7 +142,7 @@ function minifyTypeFile(typeFile) {
 
     //todo: make replacing async
     typeFile = typeFile.replace(regex, ''); //remove all whitespace
-    typeFile = typeFile.replace(/^[ \t]+(?= \*( |\/))/gm, ''); //remove all whitespace before jsdoc
+    typeFile = typeFile.replace(/^[ \t]+(?= \*[ \/\n])/gm, ''); //remove all whitespace before jsdoc
     typeFile = typeFile.replace(/[ \t]+(?=\n)/g, ''); //remove whitespace at end of lines
     typeFile = typeFile.replaceAll('/**', '\n/**'); //add newlines before jsdoc
 
