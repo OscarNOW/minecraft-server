@@ -136,7 +136,7 @@ function minifyTypeFile(typeFile) {
     typeFile = typeFile.replaceAll(' :', ':');
     typeFile = typeFile.replaceAll(': ', ':');
     typeFile = typeFile.replaceAll(' ,', ',');
-    typeFile = typeFile.replaceAll(', ', ',');
+    // typeFile = typeFile.replaceAll(', ', ','); //disabled because of jsdoc
     typeFile = typeFile.replaceAll(' |', '|');
     typeFile = typeFile.replaceAll('| ', '|');
     typeFile = typeFile.replaceAll(' &', '&');
