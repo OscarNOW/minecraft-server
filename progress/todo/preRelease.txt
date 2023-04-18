@@ -1,3 +1,5 @@
 Fix todo in <Client>.chunks
-Add JSDoc to type files
+-Add JSDoc to type files
+    -Add examples from example folder to JSDoc
+    Add empty line at the end of examples in JSDoc
 Use Partial and separate getter and setters where needed
