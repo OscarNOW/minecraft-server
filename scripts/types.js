@@ -124,21 +124,17 @@ function minifyTypeFile(typeFile) {
 
     typeFile = removeComments(typeFile);
 
-    const specialCharacters = '<>=?:,|&;{}()\\\'"\[\]\n/';
+    const specialCharacters = '<>=?:,|&;{}()\\\\\'"\\[\\]\\n/';
     const normalCharacters = 'a-zA-Z0-9';
-    const whitespaceCharacters = ' \t\n';
+    const whitespaceCharacters = ' \\t\\n';
     const preventJSDoc = '(?<=^[^*]*)';
 
-    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${normalCharacters}])`, 'gm'), ''); // remove whitespace before text
-    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${normalCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}])`, 'gm'), ''); // remove whitespace after text
-    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${specialCharacters}])[${whitespaceCharacters}]+(${specialCharacters}])`, 'gm'), ''); // remove whitespace between special characters
+    const regexString = `${preventJSDoc}(((?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${normalCharacters}]))|((?<=[${normalCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}]))|((?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}])))`;
+    const regex = new RegExp(regexString, 'gm');
+    console.log(regex)
 
-    // typeFile = typeFile.replaceAll('/**', '\n/**');
-
-    // typeFile = typeFile.split('\n');
-    // typeFile = typeFile.map(a => a.trim());
-    // typeFile = typeFile.filter(a => a.length > 0);
-    // typeFile = typeFile.join('\n');
+    typeFile = typeFile.replace(regex, '');
+    typeFile = typeFile.replaceAll('/**', '\n/**');
 
     return typeFile;
 }
