@@ -1,5 +1,8 @@
 type relativeBlocksSegment = import('../utils/Block').relativeBlocksSegment;
 
+type blockName = import('../../types').blockName;
+type blockState = import('../../types').blockState;
+
 export class Chunk {
     private chunk: unknown;
 
