@@ -59,8 +59,8 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-oscarknap@ziggo.nl.
+reported to the community leaders responsible for enforcement by [opening a
+new problem discussion](https://github.com/OscarNOW/minecraft-server/discussions/new?category=problem).
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
