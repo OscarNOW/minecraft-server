@@ -141,8 +141,9 @@ function minifyTypeFile(typeFile) {
     const regex = new RegExp(regexString, 'gm');
 
     //todo: make replacing async
-    typeFile = typeFile.replace(regex, '');
-    typeFile = typeFile.replaceAll('/**', '\n/**');
+    typeFile = typeFile.replace(regex, ''); //remove all whitespace
+    typeFile = typeFile.replaceAll(/^ +(?= \*( |\/))/gm, ''); //remove all whitespace before jsdoc
+    typeFile = typeFile.replaceAll('/**', '\n/**'); //add newlines before jsdoc
 
     return typeFile;
 }
@@ -169,8 +170,8 @@ function extractClass(text) {
     text = text.substring(startIndex);
     text.replace('export class ', 'class ')
 
-    text = text.split('')
     let letterIndex = text.indexOf('class ');
+    text = text.split('')
     let braceCount = 0;
     let started = false;
     let end;
