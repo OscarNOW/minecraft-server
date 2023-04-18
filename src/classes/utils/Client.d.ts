@@ -638,7 +638,7 @@ type defaultClientProperties = {
         z?: number;
         yaw?: number;
         pitch?: number;
-    }
+    };
     experience?: {
         bar?: number;
         level?: number;
