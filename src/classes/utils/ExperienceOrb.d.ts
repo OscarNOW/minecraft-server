@@ -1,5 +1,8 @@
 import { Entity } from "./Entity";
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/ExperienceOrb
+ */
 export class ExperienceOrb extends Entity {
     constructor(
         client: Client,

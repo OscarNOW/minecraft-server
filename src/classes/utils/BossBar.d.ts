@@ -1,3 +1,7 @@
+
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/BossBar
+ */
 export class BossBar {
     constructor(client: Client, sendPacket: (packetName: string, packet: object) => void, bossBarInfo?: optionalBossBarInfo);
 

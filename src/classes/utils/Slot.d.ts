@@ -1,4 +1,8 @@
 //todo: maybe split into loadedSlot and Slot and move to exports?
+
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Slot
+ */
 export class Slot {
     private constructor(info: {
         id: number, //todo: make explicit

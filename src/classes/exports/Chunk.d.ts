@@ -3,6 +3,9 @@ type relativeBlocksSegment = import('../utils/Block').relativeBlocksSegment;
 type blockName = import('../../types').blockName;
 type blockState = import('../../types').blockState;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk
+ */
 export class Chunk {
     private chunk: unknown;
 

@@ -2,6 +2,9 @@ type Client = import('./Client').Client;
 
 type Server = import('../exports/Server').Server;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/CustomError
+ */
 export class CustomError {
     constructor(
         type: 'expectationNotMet',

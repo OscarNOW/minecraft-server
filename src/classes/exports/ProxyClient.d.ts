@@ -1,3 +1,8 @@
+
+//todo: add description
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/ProxyClient
+ */
 export class ProxyClient {
     constructor(information?: {
         latency?: number;

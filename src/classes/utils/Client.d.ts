@@ -135,6 +135,9 @@ type inventory = {
 
 type state = 'connecting' | 'connected' | 'loginSent' | 'settingsReceived' | 'afterLoginPacketsSent' | 'clientSpawned' | 'brandReceived' | 'offline';
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Client
+ */
 export class Client {
     private constructor(client: unknown, server: Server, earlyInfo: {
         version: newVersion; //todo: change to protocolVersion

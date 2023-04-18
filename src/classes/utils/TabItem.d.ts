@@ -5,6 +5,9 @@ type Server = import('../exports/Server').Server;
 type Text = import('../exports/Text').Text;
 type textInput = import('../exports/Text').textInput;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/TabItem
+ */
 export class TabItem {
     constructor(tabItemOptions: {
         name?: textInput | Text;

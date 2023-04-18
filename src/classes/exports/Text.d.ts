@@ -1,3 +1,7 @@
+
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Text
+ */
 export class Text {
     constructor(text: textInput);
 

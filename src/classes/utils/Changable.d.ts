@@ -1,3 +1,7 @@
+
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Changable
+ */
 export class Changable {
     constructor(
         changeCallback: (values: {

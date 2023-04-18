@@ -15,6 +15,9 @@ type EntityConditional<name extends entityName> =
     name extends 'experience_orb' ? ExperienceOrb :
     Entity;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Entity
+ */
 export class Entity {
     constructor(
         client: Client,

@@ -1,3 +1,7 @@
+
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Block
+ */
 export class Block {
     readonly x: number;
     readonly y: number;

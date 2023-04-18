@@ -1,6 +1,9 @@
 type Client = import('./Client').Client;
 type Server = import('../exports/Server').Server;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/WorldBorder
+ */
 export class WorldBorder {
     constructor();
 

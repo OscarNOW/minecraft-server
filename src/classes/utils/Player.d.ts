@@ -1,6 +1,9 @@
 type Client = import('./Client').Client;
 type TabItem = import('./TabItem').TabItem;
 
+/**
+ * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Player
+ */
 export class Player extends Entity {
     constructor(
         client: Client,
