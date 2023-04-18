@@ -5,6 +5,4 @@ If you found a security vulnerability, don't open a public issue, because attack
 To report a security vulnerability, [open a new Github draft security advisory](https://github.com/OscarNOW/minecraft-server/security/advisories/new).
 
 ## Known security vulnerabilities
-| Version | Known security vulnerabilities |
-| ------- | ------------------------------ |
-| 0.0.0   | None                           |
+There are currently no known security vulnerabilities in any of the versions.
