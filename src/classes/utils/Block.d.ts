@@ -3,8 +3,14 @@
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Block
  */
 export class Block {
+    /**
+     * The absolute x of the block, relative to the world and not to the chunk.
+     */
     readonly x: number;
     readonly y: number;
+    /**
+     * The absolute z of the block, relative to the world and not to the chunk.
+     */
     readonly z: number;
 
     readonly block: blockName; //todo: rename block to name
