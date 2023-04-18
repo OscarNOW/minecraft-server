@@ -91,10 +91,10 @@ console.log('Generating output...')
 let out = '';
 
 for (const exportClass of exportClasses)
-    out += `export ${exportClass}`;
+    out += exportClass.replace('class ', 'export class ');
 
 for (const utilClass of utilClasses)
-    out += `declare ${utilClass}`;
+    out += utilClass.replace('class ', 'declare class ');
 
 for (const [name, value] of Object.entries(types))
     out += `type ${name}=${value};`
@@ -109,15 +109,18 @@ console.log('Replacing version...')
 out = out.replaceAll('{version}', version);
 typesOut = typesOut.replaceAll('{version}', version);
 
-console.log('Minifying output...')
-out = minifyTypeFile(out);
-typesOut = minifyTypeFile(typesOut);
+(async () => {
+    console.log('Minifying output...');
+    [out, typesOut] = /*await Promise.all*/([minifyTypeFile(out), minifyTypeFile(typesOut)]);
 
-console.log('Saving output...')
-fs.writeFileSync(path.resolve(__dirname, '../index.d.ts'), out);
-fs.writeFileSync(path.resolve(__dirname, '../src/types.d.ts'), typesOut);
+    console.log('Saving output...')
+    await Promise.all([
+        fs.promises.writeFile(path.resolve(__dirname, '../index.d.ts'), out),
+        fs.promises.writeFile(path.resolve(__dirname, '../src/types.d.ts'), typesOut)
+    ]);
 
-console.log('Done generating types')
+    console.log('Done generating types')
+})();
 
 function minifyTypeFile(typeFile) {
     typeFile = typeFile.replaceAll('\r\n', '\n');
@@ -131,8 +134,8 @@ function minifyTypeFile(typeFile) {
 
     const regexString = `${preventJSDoc}(((?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${normalCharacters}]))|((?<=[${normalCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}]))|((?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}])))`;
     const regex = new RegExp(regexString, 'gm');
-    console.log(regex)
 
+    //todo: make replacing async
     typeFile = typeFile.replace(regex, '');
     typeFile = typeFile.replaceAll('/**', '\n/**');
 
@@ -151,20 +154,23 @@ function removeComments(text) {
 function extractClass(text) {
     text = removeComments(text)
 
-    let startIndex = text.indexOf('export class ') + 7;
+    let startIndex = text.indexOf('export class ');
     if (
         text.lastIndexOf('*/', startIndex) !== -1 &&
         startIndex - text.lastIndexOf('*/', startIndex) < 10
     )
         startIndex = text.lastIndexOf('/**', startIndex);
 
-    text = text.substring(startIndex).split('');
+    text = text.substring(startIndex);
+    text.replace('export class ', 'class ')
 
+    text = text.split('')
+    let letterIndex = text.indexOf('class ');
     let braceCount = 0;
     let started = false;
     let end;
 
-    for (const letterIndex in text) {
+    for (; letterIndex < text.length; letterIndex++) {
         const letter = text[letterIndex]
 
         if (letter === '{') braceCount++;
