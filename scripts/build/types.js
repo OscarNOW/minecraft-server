@@ -2,7 +2,10 @@ const { fork } = require('child_process');
 const path = require('path');
 const package = require('../../package.json');
 
-module.exports = async function types(update, _, error) {
+module.exports = async function types(update, { jobs, promises }, error) {
+    const versionFilesIndex = jobs.findIndex(({ name }) => name === 'updateVersionFiles');
+
+    await promises[versionFilesIndex];
     return await runPackageScript('types', update, error)
 }
 

@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const { getAllIndexes } = require('../src/functions/getAllIndexes.js');
+const version = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')).toString()).version;
 
 console.log('Getting export classes...')
 
@@ -103,6 +104,10 @@ let typesOut = '';
 
 for (const [name, value] of Object.entries(dataTypes))
     typesOut += `export type ${name}=${value};`
+
+console.log('Replacing version...')
+out = out.replaceAll('{version}', version);
+typesOut = typesOut.replaceAll('{version}', version);
 
 console.log('Minifying output...')
 out = minifyTypeFile(out);
