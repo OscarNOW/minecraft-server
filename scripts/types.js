@@ -125,7 +125,7 @@ function minifyTypeFile(typeFile) {
     typeFile = removeComments(typeFile);
 
     const specialCharacters = '<>=?:,|&;{}()\\\\\'"\\[\\]\\n/';
-    const normalCharacters = 'a-zA-Z0-9';
+    const normalCharacters = 'a-zA-Z0-9_';
     const whitespaceCharacters = ' \\t\\n';
     const preventJSDoc = '(?<=^[^*]*)';
 
