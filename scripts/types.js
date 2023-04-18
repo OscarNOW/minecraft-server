@@ -167,13 +167,10 @@ function minifyTypeFile(typeFile) {
 }
 
 function removeComments(text) {
-    if (text.includes('/**'))
-        debugger; //todo-imp: remove
     text = text.replaceAll('\r\n', '\n')
-    text = text.replaceAll('//', '\n//')
 
     text = text.replace(/\/\*[^\*](.|\n)*?\*\//g, ''); // matches multiline comments except for docstring
-    text = text.split('\n').filter(a => !a.startsWith('//')).join('\n')
+    text = text.replace(/(?<!http(s?):)\/\/.+?\n/g, ''); // matches single line comments except for urls
 
     return text;
 }
