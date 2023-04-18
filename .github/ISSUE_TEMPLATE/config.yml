@@ -3,3 +3,9 @@ contact_links:
   - name: Question
     url: https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions
     about: Ask a question
+  - name: Show and tell
+    url: https://github.com/OscarNOW/minecraft-server/discussions/new?category=show-and-tell
+    about: Show and tell about what you've made
+  - name: Problem
+    url: https://github.com/OscarNOW/minecraft-server/discussions/new?category=problem
+    about: Report a problem that's not related to the code
