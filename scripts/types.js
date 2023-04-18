@@ -150,7 +150,15 @@ function removeComments(text) {
 
 function extractClass(text) {
     text = removeComments(text)
-    text = text.substring(text.indexOf('export class ') + 7).split('')
+
+    let startIndex = text.indexOf('export class ') + 7;
+    if (
+        text.lastIndexOf('*/', startIndex) !== -1 &&
+        startIndex - text.lastIndexOf('*/', startIndex) < 10
+    )
+        startIndex = text.lastIndexOf('/**', startIndex);
+
+    text = text.substring(startIndex).split('');
 
     let braceCount = 0;
     let started = false;
