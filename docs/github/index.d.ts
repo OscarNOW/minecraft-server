@@ -1,6 +1,6 @@
 
 /**
- * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Chunk
+ * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Chunk *
  */
 export export class Chunk{private chunk:unknown;constructor();
 /**
@@ -14,6 +14,10 @@ readonly blocks:relativeBlocksSegment;readonly hash:string;private readonly chun
 updateBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;
 /**
  * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
+ * @example for (let x = 0; x < 16; x++)
+ *  for (let z = 0; z < 16; z++)
+ *      for (let y = 0; y < 100; y++)
+ *          chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
  */
 setBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;}
 /**
@@ -22,12 +26,97 @@ setBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},sta
 export export class ProxyClient{constructor(information?:{latency?:number;username?:string;uuid?:string;ip?:string;host?:string;port?:number;skinTextureUrl?:string;capeTextureUrl?:string;});latency:number;end():void;sendPacket(name:string,packet:object):void;onPacket(callback:(name:string,packet:object)=>void):void;removeAllListeners():void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Server
+ * @example const server = new Server({
+ *
+ *      serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
+ *          description: `Hi there!\n${legacy ? "You've sent a legacy ping" : "You've sent a normal ping"}`,
+ *          players: {
+ *              online: server.clients.length,
+ *              max: 100,  *              hover: [ip, `${host}: ${port}`, version].join('\n')
+ *          },
+ *          version: {
+ *              wrongText: 'Please use version 1.16.3',
+ *              correct: '1.16.3'  *          },
+ *          favicon: fs.readFileSync('./favicon.png')
+ *      }),
+ *
+ *      wrongVersionConnect: ({ ip, connection: { host, port }, version, legacy }) =>
+ *          `You've connected with the wrong version!\nExtra info:\nip: ${ip}, host: ${host}, port: ${port}, version: $1.3.2, legacy: ${legacy ? 'yes' : 'no'}`,
+ *
+ *      defaultClientProperties: client => ({
+ *          clearSky: true,
+ *          difficulty: client.username === 'notch' ? 'hard' : 'normal',
+ *          food: 20,
+ *          foodSaturation: 5,
+ *          gamemode: 'survival',
+ *          health: 20,
+ *          reducedDebugInfo: false,
+ *          showRespawnScreen: true,
+ *          slot: 0
+ *      })
+ *
+ *  });
  */
-export export class Server{constructor(serverOptions:{serverList?(info:{ip:string,version:version|null,connection:{host:string|null,port:number|null},legacy:boolean}):{version?:{wrongText?:string|Text;correct?:version;};players?:{online?:number;max?:number;hover?:string|{name:string;uuid:string;}[];};description?:Text|textInput;favicon?:Buffer;};wrongVersionConnect?(info:{ip:string,version:newVersion|'legacy',connection:{host:string|null,port:number|null},legacy:boolean}):string|Text|null;defaultClientProperties?(client:Client):defaultClientProperties;});readonly clients:Client[];joinProxyClient(proxyClient:ProxyClient):void;close():Promise<void>;on(event:'listening',callback:()=>void):void;on(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;on(event:'error',callback:(customError:CustomError)=>void):void;once(event:'listening',callback:()=>void):void;once(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;once(event:'error',callback:(customError:CustomError)=>void):void;}
+export export class Server{constructor(serverOptions:{
+/**
+ * @example serverList: ({ ip }) => ({
+         *
+ *      description: `A minecraft server\nYour ip is ${ip}`,
+ *      players: {
+ *          online: server.clients.length,
+ *          max: 100
+ *      },
+ *      version: {
+ *          wrongText: 'Please use 1.16.3'
+ *      }
+         *
+ * })         *
+ * @example serverList: ({ ip, connection: { host, port }, version }) => ({
+         *
+ *      description: new Text([
+ *          { text: 'Connected through: ', color: 'gray' },
+ *          { text: `${host}:${port}`, color: 'white', modifiers: ['bold'] },
+ *          { text: '\nYour ip: ', color: 'gray' },
+ *          { text: ip, color: 'white', modifiers: ['bold'] }
+ *      ]),
+         *
+ *      players: {
+ *          online: server.clients.length + 5,
+ *          max: Math.floor(Math.random() * 100) + 5,
+ *          hover: 'More\nthan\n1\nline!'
+ *      },
+         *
+ *      version: {
+ *          wrongText: 'Wrong version!',
+         *
+ *
+serverList?(info:{ip:string,version:version|null,connection:{host:string|null,port:number|null},legacy:boolean}):{version?:{wrongText?:string|Text;correct?:version;};players?:{online?:number;max?:number;hover?:string|{name:string;uuid:string;}[];};description?:Text|textInput;favicon?:Buffer;};wrongVersionConnect?(info:{ip:string,version:newVersion|'legacy',connection:{host:string|null,port:number|null},legacy:boolean}):string|Text|null;defaultClientProperties?(client:Client):defaultClientProperties;});readonly clients:Client[];joinProxyClient(proxyClient:ProxyClient):void;close():Promise<void>;on(event:'listening',callback:()=>void):void; *
+on(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;on(event:'error',callback:(customError:CustomError)=>void):void;once(event:'listening',callback:()=>void):void;once(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;once(event:'error',callback:(customError:CustomError)=>void):void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Text
  */
-export export class Text{constructor(text:textInput);array:textArrayComponent[];string:string;uncolored:string;readonly chat:chatComponent;readonly hash:string;[Symbol.toPrimitive](hint:'string'):string;[Symbol.toPrimitive](hint:'number'):number;[Symbol.toPrimitive](hint:'default'):textArrayComponent[];removeAllListeners(event?:'change'):void;on(event:'change',listener:(text:Text)=>void):void;once(event:'change',listener:(text:Text)=>void):void;static stringToArray(text:string):textArrayComponent[];static stringToUncolored(text:string):string;static parseArray(text:optionalTextArray):textArrayComponent[];static arrayToString(text:optionalTextArray):string;static arrayToChat(text:optionalTextArray):chatComponent;static parseChat(text:chatComponent):chatComponent;static minifyChat(text:chatComponent):chatComponent;}
+export export class Text{
+/**
+ * @example const message = new Text([
+ *      {
+ *          text: 'Hello ',
+ *          color: 'darkGreen',
+ *          modifiers: [
+ *              'bold',
+ *              'italic'
+ *          ]
+ *      },
+ *      {
+ *          text: 'world',
+ *          color: 'purple',
+ *          modifiers: [
+ *              'underline',
+ *              'strike'
+ *          ]
+ *      }
+ *  ]);
+ */
+constructor(text:textInput);array:textArrayComponent[];string:string;uncolored:string;readonly chat:chatComponent;readonly hash:string;[Symbol.toPrimitive](hint:'string'):string;[Symbol.toPrimitive](hint:'number'):number;[Symbol.toPrimitive](hint:'default'):textArrayComponent[];removeAllListeners(event?:'change'):void;on(event:'change',listener:(text:Text)=>void):void;once(event:'change',listener:(text:Text)=>void):void;static stringToArray(text:string):textArrayComponent[];static stringToUncolored(text:string):string;static parseArray(text:optionalTextArray):textArrayComponent[];static arrayToString(text:optionalTextArray):string;static arrayToChat(text:optionalTextArray):chatComponent;static parseChat(text:chatComponent):chatComponent;static minifyChat(text:chatComponent):chatComponent;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Block
  */
@@ -64,7 +153,13 @@ setBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockStat
  * Set a block without sending a packet to the client.
  * @param location The absolute location of the block, not relative to a chunk.
  */
-updateBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockState):this;title(properties:{fadeIn?:number;stay?:number;fadeOut?:number;title?:textInput|Text;subTitle?:textInput|Text;}|textInput|Text):void;actionBar(text?:textInput|Text):void;chunk(chunk:Chunk,chunkPosition:{x:number;z:number;}):void;entity<name extends defaultArgumentEntityName>(entity:name,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;}):EntityConditional<name>;entity(entity:'experience_orb',position:{x:number;y:number;z:number;},experienceOrbInfo?:{experience?:number;}):Promise<EntityConditional<'experience_orb'>>;entity(entity:'player',position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},playerInfo?:{tabItem?:TabItem;name?:string;uuid?:string;gamemode?:gamemode;}):Promise<EntityConditional<'player'>>;tabItem(tabItemOptions?:{name?:textInput|Text;uuid?:string;ping?:number|null;}):Promise<TabItem>;window(windowType:nonEntityWindowName):void;closeWindow():void;signEditor(signLocation:{x:number;y:number;z:number;}):void;bossBar(bossBarInfo?:optionalBossBarInfo):BossBar;sound(soundInfo:{sound:soundName;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;customSound(soundInfo:{sound:string;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;stopSounds(filter:{soundName:soundName|string;}):void;stopSounds(filter:{channel:soundChannel;}):void;stopSounds(filter:{soundName:soundName|string;channel:soundChannel;}):void;pufferFishSound():void;noRespawnBlock():void;playerArrowHitSound():void;kill(deathMessage?:textInput|Text):void;acknowledgeDigStart(location:{x:number;y:number;z:number;},successful:boolean):void;acknowledgeDigCancel(location:{x:number;y:number;z:number;},successful:boolean):void;removeAllListeners(event?:'itemUse'|'armSwing'|'misbehavior'|'chat'|'signEditorClose'|'itemHandSwap'|'connect'|'join'|'leave'|'windowClose'|'inventoryClose'|'digStart'|'digCancel'|'blockBreak'|'itemDrop'|'leftClick'|'rightClick'):void;on<currentChangeEventType extends changeEventType>(event:'change',type:currentChangeEventType,callback:(newValue:changeEventReturn<currentChangeEventType>,oldValue:changeEventReturn<currentChangeEventType>)=>void):void;on(event:'itemUse'|'armSwing',callback:(isMainHand:boolean)=>void):void;on(event:'misbehavior',callback:(customError:CustomError)=>void):void;on(event:'chat',callback:(message:string)=>void):void;on(event:'signEditorClose',callback:(signText:string[],location:{x:number;y:number;z:number;})=>void):void;on(event:'connect'|'join'|'brandReceive'|'leave'|'windowClose'|'inventoryClose'|'leftClick'|'respawn'|'itemHandSwap',callback:()=>void):void;on(event:'digStart',callback:(location:{x:number;y:number;z:number;},blockFace:blockFace)=>void):void;on(event:'digCancel',callback:(location:{x:number;y:number;z:number;})=>void):void;on(event:'blockBreak',callback:(location:{x:number;y:number;z:number;},previousBlock:Block)=>void):void;on(event:'itemDrop',callback:(stack:boolean)=>void):void;on(event:'rightClick',callback:(clickInfo:{position:{x:number;y:number;z:number;};isMainHand:boolean})=>void):void;on(event:'blockPlace',callback:(placeInfo:{clickedLocation:{x:number;y:number;z:number;};clickedFace:blockFace;isMainHand:boolean;headInsideBlock:boolean;})=>void):void;once<currentChangeEventType extends changeEventType>(event:'change',type:currentChangeEventType,callback:(newValue:changeEventReturn<currentChangeEventType>,oldValue:changeEventReturn<currentChangeEventType>)=>void):void;once(event:'itemUse'|'armSwing',callback:(isMainHand:boolean)=>void):void;once(event:'misbehavior',callback:(customError:CustomError)=>void):void;once(event:'chat',callback:(message:string)=>void):void;once(event:'signEditorClose',callback:(signText:string[],location:{x:number;y:number;z:number;})=>void):void;once(event:'connect'|'join'|'brandReceive'|'leave'|'windowClose'|'inventoryClose'|'leftClick'|'respawn'|'itemHandSwap',callback:()=>void):void;once(event:'digStart',callback:(location:{x:number;y:number;z:number;},blockFace:blockFace)=>void):void;once(event:'digCancel',callback:(location:{x:number;y:number;z:number;})=>void):void;once(event:'blockBreak',callback:(location:{x:number;y:number;z:number;},previousBlock:Block)=>void):void;once(event:'itemDrop',callback:(stack:boolean)=>void):void;once(event:'rightClick',callback:(clickInfo:{position:{x:number;y:number;z:number;};isMainHand:boolean})=>void):void;once(event:'blockPlace',callback:(placeInfo:{clickedLocation:{x:number;y:number;z:number;};clickedFace:blockFace;isMainHand:boolean;headInsideBlock:boolean;})=>void):void;}
+updateBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockState):this;title(properties:{fadeIn?:number;stay?:number;fadeOut?:number;title?:textInput|Text;subTitle?:textInput|Text;}|textInput|Text):void;actionBar(text?:textInput|Text):void;chunk(chunk:Chunk,chunkPosition:{x:number;z:number;}):void;entity<name extends defaultArgumentEntityName>(entity:name,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;}):EntityConditional<name>;entity(entity:'experience_orb',position:{x:number;y:number;z:number;},experienceOrbInfo?:{experience?:number;}):Promise<EntityConditional<'experience_orb'>>;entity(entity:'player',position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},playerInfo?:{tabItem?:TabItem;name?:string;uuid?:string;gamemode?:gamemode;}):Promise<EntityConditional<'player'>>;tabItem(tabItemOptions?:{name?:textInput|Text;uuid?:string;ping?:number|null;}):Promise<TabItem>;window(windowType:nonEntityWindowName):void;closeWindow():void;signEditor(signLocation:{x:number;y:number;z:number;}):void;bossBar(bossBarInfo?:optionalBossBarInfo):BossBar;sound(soundInfo:{sound:soundName;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;customSound(soundInfo:{sound:string;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;stopSounds(filter:{soundName:soundName|string;}):void;stopSounds(filter:{channel:soundChannel;}):void;stopSounds(filter:{soundName:soundName|string;channel:soundChannel;}):void;pufferFishSound():void;noRespawnBlock():void;playerArrowHitSound():void;kill(deathMessage?:textInput|Text):void;acknowledgeDigStart(location:{x:number;y:number;z:number;},successful:boolean):void;acknowledgeDigCancel(location:{x:number;y:number;z:number;},successful:boolean):void;removeAllListeners(event?:'itemUse'|'armSwing'|'misbehavior'|'chat'|'signEditorClose'|'itemHandSwap'|'connect'|'join'|'leave'|'windowClose'|'inventoryClose'|'digStart'|'digCancel'|'blockBreak'|'itemDrop'|'leftClick'|'rightClick'):void;
+/**
+ * @example client.on('change', 'slot', slot => {
+ *      console.log(`${client.username} switched slot to ${slot}`)
+ *  });
+ */
+on<currentChangeEventType extends changeEventType>(event:'change',type:currentChangeEventType,callback:(newValue:changeEventReturn<currentChangeEventType>,oldValue:changeEventReturn<currentChangeEventType>)=>void):void;on(event:'itemUse'|'armSwing',callback:(isMainHand:boolean)=>void):void;on(event:'misbehavior',callback:(customError:CustomError)=>void):void;on(event:'chat',callback:(message:string)=>void):void;on(event:'signEditorClose',callback:(signText:string[],location:{x:number;y:number;z:number;})=>void):void;on(event:'connect'|'join'|'brandReceive'|'leave'|'windowClose'|'inventoryClose'|'leftClick'|'respawn'|'itemHandSwap',callback:()=>void):void;on(event:'digStart',callback:(location:{x:number;y:number;z:number;},blockFace:blockFace)=>void):void;on(event:'digCancel',callback:(location:{x:number;y:number;z:number;})=>void):void;on(event:'blockBreak',callback:(location:{x:number;y:number;z:number;},previousBlock:Block)=>void):void;on(event:'itemDrop',callback:(stack:boolean)=>void):void;on(event:'rightClick',callback:(clickInfo:{position:{x:number;y:number;z:number;};isMainHand:boolean})=>void):void;on(event:'blockPlace',callback:(placeInfo:{clickedLocation:{x:number;y:number;z:number;};clickedFace:blockFace;isMainHand:boolean;headInsideBlock:boolean;})=>void):void;once<currentChangeEventType extends changeEventType>(event:'change',type:currentChangeEventType,callback:(newValue:changeEventReturn<currentChangeEventType>,oldValue:changeEventReturn<currentChangeEventType>)=>void):void;once(event:'itemUse'|'armSwing',callback:(isMainHand:boolean)=>void):void;once(event:'misbehavior',callback:(customError:CustomError)=>void):void;once(event:'chat',callback:(message:string)=>void):void;once(event:'signEditorClose',callback:(signText:string[],location:{x:number;y:number;z:number;})=>void):void;once(event:'connect'|'join'|'brandReceive'|'leave'|'windowClose'|'inventoryClose'|'leftClick'|'respawn'|'itemHandSwap',callback:()=>void):void;once(event:'digStart',callback:(location:{x:number;y:number;z:number;},blockFace:blockFace)=>void):void;once(event:'digCancel',callback:(location:{x:number;y:number;z:number;})=>void):void;once(event:'blockBreak',callback:(location:{x:number;y:number;z:number;},previousBlock:Block)=>void):void;once(event:'itemDrop',callback:(stack:boolean)=>void):void;once(event:'rightClick',callback:(clickInfo:{position:{x:number;y:number;z:number;};isMainHand:boolean})=>void):void;once(event:'blockPlace',callback:(placeInfo:{clickedLocation:{x:number;y:number;z:number;};clickedFace:blockFace;isMainHand:boolean;headInsideBlock:boolean;})=>void):void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/CustomError
  */
