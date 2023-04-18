@@ -5,22 +5,22 @@
 export class Text {
     /**
      * @example const message = new Text([
-     *      {
-     *          text: 'Hello ',
-     *          color: 'darkGreen',
-     *          modifiers: [
-     *              'bold',
-     *              'italic'
-     *          ]
-     *      },
-     *      {
-     *          text: 'world',
-     *          color: 'purple',
-     *          modifiers: [
-     *              'underline',
-     *              'strike'
-     *          ]
-     *      }
+     *              {
+     *                  text: 'Hello ',
+     *                  color: 'darkGreen',
+     *                  modifiers: [
+     *                      'bold',
+     *                      'italic'
+     *                  ]
+     *              },
+     *              {
+     *                  text: 'world',
+     *                  color: 'purple',
+     *                  modifiers: [
+     *                      'underline',
+     *                      'strike'
+     *                  ]
+     *              }
      *  ]);
      */
     constructor(text: textInput);

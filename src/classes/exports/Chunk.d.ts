@@ -37,9 +37,9 @@ export class Chunk {
     /**
      * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
      * @example for (let x = 0; x < 16; x++)
-     *  for (let z = 0; z < 16; z++)
-     *      for (let y = 0; y < 100; y++)
-     *          chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
+     *              for (let z = 0; z < 16; z++)
+     *                  for (let y = 0; y < 100; y++)
+     *                      chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
      */
     setBlock(block: blockName, chunkRelativeLocation: {
         x: number;
