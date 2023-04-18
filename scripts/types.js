@@ -119,49 +119,30 @@ fs.writeFileSync(path.resolve(__dirname, '../src/types.d.ts'), typesOut);
 
 console.log('Done generating types')
 
+const whitespaceRegex = Object.freeze({
+    specialCharacters: '<>=?:,|&;{}()\\\'"\[\]\n/',
+    normalCharacters: 'a-zA-Z0-9',
+    whitespaceCharacters: ' \t\n',
+    preventJSDoc: '(?<=^[^*]*)'
+});
+
 function minifyTypeFile(typeFile) {
     typeFile = typeFile.replaceAll('\r\n', '\n');
 
     typeFile = removeComments(typeFile);
 
-    typeFile = typeFile.split('\n');
-    typeFile = typeFile.filter(a => a.trim().length > 0);
-    typeFile = typeFile.map(a => a.trim());
-    typeFile = typeFile.join('\n');
+    const { specialCharacters, normalCharacters, whitespaceCharacters, preventJSDoc } = whitespaceRegex;
 
-    typeFile = typeFile.replaceAll(' =>', '=>');
-    typeFile = typeFile.replaceAll('=> ', '=>');
-    typeFile = typeFile.replaceAll(' ?', '?');
-    typeFile = typeFile.replaceAll('? ', '?');
-    typeFile = typeFile.replaceAll(' :', ':');
-    typeFile = typeFile.replaceAll(': ', ':');
-    typeFile = typeFile.replaceAll(' ,', ',');
-    // typeFile = typeFile.replaceAll(', ', ','); //disabled because of jsdoc
-    typeFile = typeFile.replaceAll(' |', '|');
-    typeFile = typeFile.replaceAll('| ', '|');
-    typeFile = typeFile.replaceAll(' &', '&');
-    typeFile = typeFile.replaceAll('& ', '&');
+    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${specialCharacters}])[${whitespaceCharacters}]+(?=[${normalCharacters}])`, 'gm'), ''); // remove whitespace before text
+    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${normalCharacters}])[${whitespaceCharacters}]+(?=[${specialCharacters}])`, 'gm'), ''); // remove whitespace after text
+    typeFile = typeFile.replace(new RegExp(`${preventJSDoc}(?<=[${specialCharacters}])[${whitespaceCharacters}]+(${specialCharacters}])`, 'gm'), ''); // remove whitespace between special characters
 
-    typeFile = typeFile.replaceAll('|\n', '|');
-    typeFile = typeFile.replaceAll('\n|', '|');
-    typeFile = typeFile.replaceAll(':\n', ':');
-    typeFile = typeFile.replaceAll(';\n', ';');
-    typeFile = typeFile.replaceAll('\n;', ';');
-    typeFile = typeFile.replaceAll(',\n', ',');
-    typeFile = typeFile.replaceAll('{\n', '{');
-    typeFile = typeFile.replaceAll('\n}', '}');
-    typeFile = typeFile.replaceAll('(\n', '(');
-    typeFile = typeFile.replaceAll('\n)', ')');
+    // typeFile = typeFile.replaceAll('/**', '\n/**');
 
-    typeFile = typeFile.replaceAll('}\n', '};');
-    typeFile = typeFile.replaceAll(';}\n', '};');
-
-    typeFile = typeFile.replaceAll('readonly [', 'readonly[');
-    typeFile = typeFile.replaceAll("extends '", "extends'");
-
-    typeFile = typeFile.replaceAll('/**', '\n/**');
-
-    typeFile = typeFile.replace(/(?<=class [a-zA-Z]+(?: extends [a-zA-Z]+)?) (?={)/g, '');
+    // typeFile = typeFile.split('\n');
+    // typeFile = typeFile.map(a => a.trim());
+    // typeFile = typeFile.filter(a => a.length > 0);
+    // typeFile = typeFile.join('\n');
 
     return typeFile;
 }
