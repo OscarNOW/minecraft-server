@@ -169,7 +169,7 @@ function extractClass(text) {
         startIndex = text.lastIndexOf('/**', startIndex);
 
     text = text.substring(startIndex);
-    text.replace('export class ', 'class ')
+    text = text.replace('export class ', 'class ')
 
     let letterIndex = text.indexOf('class ');
     text = text.split('')
