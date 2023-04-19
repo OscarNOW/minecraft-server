@@ -1,2 +1,1 @@
-Use Partial and separate getter and setters where needed
 remove the updateBlock function
