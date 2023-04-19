@@ -1,3 +1,8 @@
+type textColor = import('../../types').textColor;
+type textModifier = import('../../types').textModifier;
+type keycode = import('../../types').keycode;
+type chatTranslate = import('../../types').chatTranslate;
+type minecraftTextColor = import('../../types').minecraftTextColor;
 
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Text
