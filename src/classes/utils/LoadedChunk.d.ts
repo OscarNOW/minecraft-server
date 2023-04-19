@@ -7,9 +7,18 @@ type Server = import('../exports/Server').Server;
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/LoadedChunk
  */
 export class LoadedChunk extends Chunk {
-    private constructor(client: Client, pChunk: unknown, chunkPosition: { x: number; z: number });
-    private sendPacket(name: string, contents: object): void;
-    private readonly blocksX: number[];
+    /**
+     * @package
+     */
+    constructor(client: Client, pChunk: unknown, chunkPosition: { x: number; z: number });
+    /**
+     * @package
+     */
+    sendPacket(name: string, contents: object): void;
+    /**
+     * @package
+     */
+    readonly blocksX: number[];
 
     readonly client: Client;
     readonly server: Server;

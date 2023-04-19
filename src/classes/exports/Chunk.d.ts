@@ -7,16 +7,22 @@ type blockState = import('../../types').blockState;
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk *
  */
 export class Chunk {
-    private chunk: unknown;
-
     constructor();
 
     /**
      * The blocks in the chunk relative to the chunk.
-     */
+    */
     readonly blocks: relativeBlocksSegment;
     readonly hash: string;
-    private readonly chunkData: {
+
+    /**
+     * @package
+     */
+    readonly chunk: unknown;
+    /**
+     * @package
+     */
+    readonly chunkData: {
         biomes: unknown,
         bitMap: unknown,
         chunkData: unknown

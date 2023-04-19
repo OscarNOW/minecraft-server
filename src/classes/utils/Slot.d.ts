@@ -7,15 +7,20 @@ type itemDisplayName = import('../../types').itemDisplayName;
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Slot
  */
 export class Slot {
-    private constructor(info: {
+    /**
+     * @package
+     */
+    constructor(info: {
         id: number, //todo: make explicit
         amount: number,
         nbt: unknown //todo: make known
     });
+    /**
+     * @package
+     */
+    readonly id?: number;
 
     readonly empty: boolean;
-
-    private readonly id?: number;
 
     readonly amount?: number;
     readonly name?: itemName;

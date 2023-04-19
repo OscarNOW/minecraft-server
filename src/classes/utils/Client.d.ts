@@ -139,7 +139,10 @@ type state = 'connecting' | 'connected' | 'loginSent' | 'settingsReceived' | 'af
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Client
  */
 export class Client {
-    private constructor(client: unknown, server: Server, earlyInfo: {
+    /**
+     * @package
+     */
+    constructor(client: unknown, server: Server, earlyInfo: {
         version: newVersion; //todo: change to protocolVersion
         ip: string;
         connection: {
@@ -191,7 +194,10 @@ export class Client {
     readonly reducedDebugInfo: boolean;
 
     /* Readonly changing */
-    private readonly p: { // todo: make more explicitly typed
+    /**
+     * @package
+     */
+    readonly p: { // todo: make more explicitly typed
         client: unknown;
         defaultClientProperties: (client: Client) => defaultClientProperties;
         changeEvents: {
@@ -217,7 +223,7 @@ export class Client {
         changeEventHasListeners: (changeEvent: string) => boolean;
         clientOn: (name: string, callback: (...args: unknown[]) => void) => void;
         emit: (name: string, ...args: unknown[]) => void;
-        emitChange: (type: string, oldValue: unknown) => void;
+        emitChange: (type: string, oldValue: unknown) => void; //todo: change to changeEventType
         emitError: (customError: CustomError) => void;
         emitMove: (info: {
             x: number;
