@@ -2,11 +2,19 @@
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Chunk *
  */
-export class Chunk{private chunk:unknown;constructor();
+export class Chunk{constructor();
 /**
  * The blocks in the chunk relative to the chunk.
  */
-readonly blocks:relativeBlocksSegment;readonly hash:string;private readonly chunkData:{biomes:unknown,bitMap:unknown,chunkData:unknown};
+readonly blocks:relativeBlocksSegment;readonly hash:string;
+/**
+ * @package
+ */
+readonly chunk:unknown;
+/**
+ * @package
+ */
+readonly chunkData:{biomes:unknown,bitMap:unknown,chunkData:unknown};
 /**
  * Set a block without sending a packet to the client.
  * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
@@ -14,7 +22,8 @@ readonly blocks:relativeBlocksSegment;readonly hash:string;private readonly chun
 updateBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;
 /**
  * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
- * @example for (let x = 0; x < 16; x++)
+ * @example
+ *          for (let x = 0; x < 16; x++)
  *              for (let z = 0; z < 16; z++)
  *                  for (let y = 0; y < 100; y++)
  *                      chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
@@ -27,7 +36,8 @@ setBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},sta
 export class ProxyClient{constructor(information?:{latency?:number;username?:string;uuid?:string;ip?:string;host?:string;port?:number;skinTextureUrl?:string;capeTextureUrl?:string;});latency:number;end():void;sendPacket(name:string,packet:object):void;onPacket(callback:(name:string,packet:object)=>void):void;removeAllListeners():void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Server
- * @example const server = new Server({
+ * @example
+ *          const server = new Server({
  *
  *              serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
  *                  description: `Hi there!\n${legacy ? "You've sent a legacy ping" : "You've sent a normal ping"}`,
@@ -61,7 +71,8 @@ export class ProxyClient{constructor(information?:{latency?:number;username?:str
  */
 export class Server{constructor(serverOptions:{
 /**
- * @example serverList: ({ ip }) => ({
+ * @example
+ *          serverList: ({ ip }) => ({
  *
  *              description: `A minecraft server\nYour ip is ${ip}`,
  *              players: {
@@ -74,7 +85,8 @@ export class Server{constructor(serverOptions:{
  *
  *         })
  *
- * @example serverList: ({ ip, connection: { host, port }, version }) => ({
+ * @example
+ *          serverList: ({ ip, connection: { host, port }, version }) => ({
  *
  *              description: new Text([
  *                  { text: 'Connected through: ', color: 'gray' },
@@ -103,14 +115,14 @@ export class Server{constructor(serverOptions:{
  *          })
  *
  */
-serverList?(info:{ip:string,version:version|null,connection:{host:string|null,port:number|null},legacy:boolean}):{version?:{wrongText?:string|Text;correct?:version;};players?:{online?:number;max?:number;hover?:string|{name:string;uuid:string;}[];};description?:Text|textInput;favicon?:Buffer;};wrongVersionConnect?(info:{ip:string,version:newVersion|'legacy',connection:{host:string|null,port:number|null},legacy:boolean}):string|Text|null;defaultClientProperties?(client:Client):defaultClientProperties;});readonly clients:Client[];joinProxyClient(proxyClient:ProxyClient):void;close():Promise<void>;on(event:'listening',callback:()=>void):void; *
-on(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;on(event:'error',callback:(customError:CustomError)=>void):void;once(event:'listening',callback:()=>void):void;once(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;once(event:'error',callback:(customError:CustomError)=>void):void;}
+serverList?(info:{ip:string,version:version|null,connection:{host:string|null,port:number|null},legacy:boolean}):{version?:{wrongText?:string|Text;correct?:version;};players?:{online?:number;max?:number;hover?:string|{name:string;uuid:string;}[];};description?:Text|textInput;favicon?:Buffer;};wrongVersionConnect?(info:{ip:string,version:newVersion|'legacy',connection:{host:string|null,port:number|null},legacy:boolean}):string|Text|null;defaultClientProperties?(client:Client):defaultClientProperties;});readonly clients:Client[];joinProxyClient(proxyClient:ProxyClient):void;close():Promise<void>;on(event:'listening',callback:()=>void):void;on(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;on(event:'error',callback:(customError:CustomError)=>void):void;once(event:'listening',callback:()=>void):void;once(event:'join'|'leave'|'connect',callback:(client:Client)=>void):void;once(event:'error',callback:(customError:CustomError)=>void):void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Text
  */
 export class Text{
 /**
- * @example const message = new Text([
+ * @example
+ *          const message = new Text([
  *              {
  *                  text: 'Hello ',
  *                  color: 'darkGreen',
@@ -154,7 +166,15 @@ declare class Changable{constructor(changeCallback:(values:{[valueName:string|sy
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Client
  */
-declare class Client{private constructor(client:unknown,server:Server,earlyInfo:{version:newVersion;ip:string;connection:{host:string;port:number;}},defaultClientProperties?:(client:Client)=>defaultClientProperties);readonly server:Server;readonly username:string;readonly uuid:string;readonly entityId:number;readonly version:newVersion;readonly ip:string;readonly brand:string|null;readonly connection:{readonly host:string;readonly port:number};readonly textures:{readonly skin:string;readonly cape?:string;};readonly locale:{readonly langCode:langCode;readonly englishName:langEnglishName;readonly menuName:langMenuName;readonly serious:boolean;readonly version?:langVersion;readonly region?:langRegion;};readonly chatSettings:{readonly visible:'all'|'commands'|'none';readonly colors:boolean;};readonly visibleSkinParts:{readonly cape:boolean;readonly torso:boolean;readonly leftArm:boolean;readonly rightArm:boolean;readonly leftLeg:boolean;readonly rightLeg:boolean;readonly hat:boolean;};readonly rightHanded:boolean;readonly viewDistance:number;readonly reducedDebugInfo:boolean;private readonly p:{client:unknown;defaultClientProperties:(client:Client)=>defaultClientProperties;changeEvents:{[event:string]:((newValue:unknown,oldValue:unknown)=>void)[];};events:{[event:string]:((...args:unknown[])=>void)[];};intervals:NodeJS.Timeout[];shutdownCallbacks:(()=>void)[];state:state;stateHandler:{checkReady:()=>boolean;init:()=>void;handleNewState:(currentState:state)=>void;updateState:{set:(stateName:state)=>void;close:()=>void;packetReceived:(packetName:string)=>void;};};timeouts:NodeJS.Timeout[];changeEventHasListeners:(changeEvent:string)=>boolean;clientOn:(name:string,callback:(...args:unknown[])=>void)=>void;emit:(name:string, ...args:unknown[])=>void;emitChange:(type:string,oldValue:unknown)=>void;emitError:(customError:CustomError)=>void;emitMove:(info:{x:number;y:number;z:number;yaw:number;pitch:number;})=>void;receivePacket:(name:string,packet:object)=>void;sendAfterLoginPackets:()=>void;sendLoginPacket:()=>void;sendPacket:(name:string,packet:object)=>void;setInterval:(callback:()=>void,time:number)=>void;setTimeout:(callback:()=>void,delay:number)=>void;shutdown:()=>void;bossBars:BossBar[];_brand:string|null;_chatSettings:{visible:'all'|'commands'|'none';colors:boolean;};_difficulty:difficulty;entities:entities;_experience:{bar:number;level:number;};_food:number;_foodSaturation:0|1|2|3|4|5;_gamemode:gamemode;_health:number;_inventory:inventory;_locale:unknown;onGround:boolean;positionSet:boolean;_position:{x:number;y:number;z:number;yaw:number;pitch:number;};oldPositions:{x:number;y:number;z:number;yaw:number;pitch:number;isFirst:boolean;};_raining:boolean;_reducedDebugInfo:boolean;_rightHanded:boolean;_showRespawnScreen:boolean;_slot:0|1|2|3|4|5|6|7|8;_sneaking:boolean;_sprinting:boolean;_tabFooter:Text;_tabHeader:Text;_tabItems:TabItem[];_toxicRainLevel:number;_viewDistance:number;_visibleSkinParts:{cape:boolean;torso:boolean;leftArm:boolean;rightArm:boolean;leftLeg:boolean;rightLeg:boolean;hat:boolean;};pubDynProperties:{[property:string]:{info?:{preventSet?:boolean;defaultable?:false;defaultSetTime?:'afterLogin'|'loginPacket';loginPacket:{name:string;minecraftName:string;}[];};get?:()=>unknown;set?:(newValue:unknown,beforeReady?:boolean,loginPacket?:boolean)=>void|{[minecraftName:string]:unknown};init?:()=>void;[otherProperty:string|symbol]:unknown;}};mpEvents:{[event:string]:((...args:unknown[])=>void)[];};defaultProperties:{[property:string]:unknown;};chunksGenerated:boolean;blocksGenerated:boolean;_chunks:(LoadedChunk[])|((()=>LoadedChunk)[]);_blocks:(blocksSegment)|((()=>blocksSegment)[]);};readonly worldBorder:WorldBorder;readonly inventory:inventory;readonly sneaking:boolean;readonly sprinting:boolean;readonly onGround:boolean;readonly online:boolean;readonly ping:number;readonly entities:entities;
+declare class Client{
+/**
+ * @package
+ */
+constructor(client:unknown,server:Server,earlyInfo:{version:newVersion;ip:string;connection:{host:string;port:number;}},defaultClientProperties?:(client:Client)=>defaultClientProperties);readonly server:Server;readonly username:string;readonly uuid:string;readonly entityId:number;readonly version:newVersion;readonly ip:string;readonly brand:string|null;readonly connection:{readonly host:string;readonly port:number};readonly textures:{readonly skin:string;readonly cape?:string;};readonly locale:{readonly langCode:langCode;readonly englishName:langEnglishName;readonly menuName:langMenuName;readonly serious:boolean;readonly version?:langVersion;readonly region?:langRegion;};readonly chatSettings:{readonly visible:'all'|'commands'|'none';readonly colors:boolean;};readonly visibleSkinParts:{readonly cape:boolean;readonly torso:boolean;readonly leftArm:boolean;readonly rightArm:boolean;readonly leftLeg:boolean;readonly rightLeg:boolean;readonly hat:boolean;};readonly rightHanded:boolean;readonly viewDistance:number;readonly reducedDebugInfo:boolean;
+/**
+ * @package
+ */
+readonly p:{client:unknown;defaultClientProperties:(client:Client)=>defaultClientProperties;changeEvents:{[currentChangeEventType in changeEventType]:((newValue:changeEventReturn<currentChangeEventType>,oldValue:changeEventReturn<currentChangeEventType>)=>void)[];};events:{[event:string]:((...args:unknown[])=>void)[];};intervals:NodeJS.Timeout[];shutdownCallbacks:(()=>void)[];state:state;stateHandler:{checkReady:()=>boolean;init:()=>void;handleNewState:(currentState:state)=>void;updateState:{set:(stateName:state)=>void;close:()=>void;packetReceived:(packetName:string)=>void;};};timeouts:NodeJS.Timeout[];changeEventHasListeners:(changeEvent:string)=>boolean;clientOn:(name:string,callback:(...args:unknown[])=>void)=>void;emit:(name:string, ...args:unknown[])=>void;emitChange:<currentChangeEventType extends changeEventType>(type:currentChangeEventType,oldValue:changeEventReturn<currentChangeEventType>)=>void;emitError:(customError:CustomError)=>void;emitMove:(info:{x:number;y:number;z:number;yaw:number;pitch:number;})=>void;receivePacket:(name:string,packet:object)=>void;sendAfterLoginPackets:()=>void;sendLoginPacket:()=>void;sendPacket:(name:string,packet:object)=>void;setInterval:(callback:()=>void,time:number)=>void;setTimeout:(callback:()=>void,delay:number)=>void;shutdown:()=>void;bossBars:BossBar[];_brand:string|null;_chatSettings:{visible:'all'|'commands'|'none';colors:boolean;};_difficulty:difficulty;entities:entities;_experience:{bar:number;level:number;};_food:number;_foodSaturation:0|1|2|3|4|5;_gamemode:gamemode;_health:number;_inventory:inventory;_locale:{langCode:langCode;englishName:langEnglishName;menuName:langMenuName;serious:boolean;version?:langVersion;region?:langRegion;};onGround:boolean;positionSet:boolean;_position:{x:number;y:number;z:number;yaw:number;pitch:number;};oldPositions:{x:number;y:number;z:number;yaw:number;pitch:number;isFirst:boolean;};_raining:boolean;_reducedDebugInfo:boolean;_rightHanded:boolean;_showRespawnScreen:boolean;_slot:0|1|2|3|4|5|6|7|8;_sneaking:boolean;_sprinting:boolean;_tabFooter:Text;_tabHeader:Text;_tabItems:TabItem[];_toxicRainLevel:number;_viewDistance:number;_visibleSkinParts:{cape:boolean;torso:boolean;leftArm:boolean;rightArm:boolean;leftLeg:boolean;rightLeg:boolean;hat:boolean;};pubDynProperties:{[property:string]:{info?:{preventSet?:boolean;defaultable?:false;defaultSetTime?:'afterLogin'|'loginPacket';loginPacket:{name:string;minecraftName:string;}[];};get?:()=>unknown;set?:(newValue:unknown,beforeReady?:boolean,loginPacket?:boolean)=>void|{[minecraftName:string]:unknown};init?:()=>void;[otherProperty:string|symbol]:unknown;}};mpEvents:{[event:string]:((...args:unknown[])=>void)[];};defaultProperties:{[property:string]:unknown;};chunksGenerated:boolean;blocksGenerated:boolean;_chunks:(LoadedChunk[])|((()=>LoadedChunk)[]);_blocks:(blocksSegment)|((()=>blocksSegment)[]);};readonly worldBorder:WorldBorder;readonly inventory:inventory;readonly sneaking:boolean;readonly sprinting:boolean;readonly onGround:boolean;readonly online:boolean;readonly ping:number;readonly entities:entities;
 /**
  * The blocks in the world, not relative to a chunk.
  */
@@ -169,7 +189,8 @@ setBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockStat
  */
 updateBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockState):this;title(properties:{fadeIn?:number;stay?:number;fadeOut?:number;title?:textInput|Text;subTitle?:textInput|Text;}|textInput|Text):void;actionBar(text?:textInput|Text):void;chunk(chunk:Chunk,chunkPosition:{x:number;z:number;}):void;entity<name extends defaultArgumentEntityName>(entity:name,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;}):EntityConditional<name>;entity(entity:'experience_orb',position:{x:number;y:number;z:number;},experienceOrbInfo?:{experience?:number;}):Promise<EntityConditional<'experience_orb'>>;entity(entity:'player',position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},playerInfo?:{tabItem?:TabItem;name?:string;uuid?:string;gamemode?:gamemode;}):Promise<EntityConditional<'player'>>;tabItem(tabItemOptions?:{name?:textInput|Text;uuid?:string;ping?:number|null;}):Promise<TabItem>;window(windowType:nonEntityWindowName):void;closeWindow():void;signEditor(signLocation:{x:number;y:number;z:number;}):void;bossBar(bossBarInfo?:optionalBossBarInfo):BossBar;sound(soundInfo:{sound:soundName;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;customSound(soundInfo:{sound:string;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;stopSounds(filter:{soundName:soundName|string;}):void;stopSounds(filter:{channel:soundChannel;}):void;stopSounds(filter:{soundName:soundName|string;channel:soundChannel;}):void;pufferFishSound():void;noRespawnBlock():void;playerArrowHitSound():void;kill(deathMessage?:textInput|Text):void;acknowledgeDigStart(location:{x:number;y:number;z:number;},successful:boolean):void;acknowledgeDigCancel(location:{x:number;y:number;z:number;},successful:boolean):void;removeAllListeners(event?:'itemUse'|'armSwing'|'misbehavior'|'chat'|'signEditorClose'|'itemHandSwap'|'connect'|'join'|'leave'|'windowClose'|'inventoryClose'|'digStart'|'digCancel'|'blockBreak'|'itemDrop'|'leftClick'|'rightClick'):void;
 /**
- * @example client.on('change', 'slot', slot => {
+ * @example
+ *          client.on('change', 'slot', slot => {
  *              console.log(`${client.username} switched slot to ${slot}`)
  *          });
  *
@@ -194,7 +215,19 @@ declare class Horse extends Entity{window():void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/LoadedChunk
  */
-declare class LoadedChunk extends Chunk{private constructor(client:Client,pChunk:unknown,chunkPosition:{x:number;z:number});private sendPacket(name:string,contents:object):void;private readonly blocksX:number[];readonly client:Client;readonly server:Server;x:number;z:number;remove():void;}
+declare class LoadedChunk extends Chunk{
+/**
+ * @package
+ */
+constructor(client:Client,pChunk:unknown,chunkPosition:{x:number;z:number});
+/**
+ * @package
+ */
+sendPacket(name:string,contents:object):void;
+/**
+ * @package
+ */
+readonly blocksX:number[];readonly client:Client;readonly server:Server;x:number;z:number;remove():void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Player
  */
@@ -202,7 +235,15 @@ declare class Player extends Entity{constructor(client:Client,type:entityName,id
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/Slot
  */
-declare class Slot{private constructor(info:{id:number,amount:number,nbt:unknown});readonly empty:boolean;private readonly id?:number;readonly amount?:number;readonly name?:itemName;readonly maxStackSize?:number;readonly displayName?:itemDisplayName;static newEmpty():Slot;static stackable(slot1:Slot,slot2:Slot):boolean;static stack(from:Slot,to:Slot):{stack:Slot,rest:Slot};static split(slot:Slot):{bigger:Slot,smaller:Slot};static moveOne(from:Slot,to:Slot):{from:Slot,to:Slot};}
+declare class Slot{
+/**
+ * @package
+ */
+constructor(info:{id:number,amount:number,nbt:unknown});
+/**
+ * @package
+ */
+readonly id?:number;readonly empty:boolean;readonly amount?:number;readonly name?:itemName;readonly maxStackSize?:number;readonly displayName?:itemDisplayName;static newEmpty():Slot;static stackable(slot1:Slot,slot2:Slot):boolean;static stack(from:Slot,to:Slot):{stack:Slot,rest:Slot};static split(slot:Slot):{bigger:Slot,smaller:Slot};static moveOne(from:Slot,to:Slot):{from:Slot,to:Slot};}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.3.2/classes/TabItem
  */
