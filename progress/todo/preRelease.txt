@@ -1,3 +1,2 @@
--Fix todo in <Client>.chunks
 Use Partial and separate getter and setters where needed
 remove the updateBlock function
