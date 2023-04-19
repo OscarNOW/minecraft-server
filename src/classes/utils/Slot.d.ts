@@ -1,5 +1,8 @@
 //todo: maybe split into loadedSlot and Slot and move to exports?
 
+type itemName = import('../../types').itemName;
+type itemDisplayName = import('../../types').itemDisplayName;
+
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Slot
  */
