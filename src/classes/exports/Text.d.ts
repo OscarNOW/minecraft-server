@@ -9,7 +9,8 @@ type minecraftTextColor = import('../../types').minecraftTextColor;
  */
 export class Text {
     /**
-     * @example const message = new Text([
+     * @example
+     *          const message = new Text([
      *              {
      *                  text: 'Hello ',
      *                  color: 'darkGreen',

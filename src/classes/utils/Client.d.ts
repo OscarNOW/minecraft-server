@@ -539,7 +539,8 @@ export class Client {
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 
     /**
-     * @example client.on('change', 'slot', slot => {
+     * @example
+     *          client.on('change', 'slot', slot => {
      *              console.log(`${client.username} switched slot to ${slot}`)
      *          });
      *

@@ -3,9 +3,16 @@ type ProxyClient = import('./ProxyClient').ProxyClient;
 type Client = import('../utils/Client').Client;
 type CustomError = import('../utils/CustomError').CustomError;
 
+type textInput = import('./Text').textInput;
+type defaultClientProperties = import('../utils/Client').defaultClientProperties;
+
+type version = import('../../types').version;
+type newVersion = import('../../types').newVersion;
+
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Server
- * @example const server = new Server({
+ * @example
+ *          const server = new Server({
  *
  *              serverList: ({ ip, connection: { host, port }, version, legacy }) => ({
  *                  description: `Hi there!\n${legacy ? "You've sent a legacy ping" : "You've sent a normal ping"}`,
@@ -42,7 +49,8 @@ type CustomError = import('../utils/CustomError').CustomError;
 export class Server {
     constructor(serverOptions: {
         /**
-         * @example serverList: ({ ip }) => ({
+         * @example
+         *          serverList: ({ ip }) => ({
          *
          *              description: `A minecraft server\nYour ip is ${ip}`,
          *              players: {
@@ -55,7 +63,8 @@ export class Server {
          *
          *         })
          *
-         * @example serverList: ({ ip, connection: { host, port }, version }) => ({
+         * @example
+         *          serverList: ({ ip, connection: { host, port }, version }) => ({
          *
          *              description: new Text([
          *                  { text: 'Connected through: ', color: 'gray' },
@@ -126,8 +135,8 @@ export class Server {
 
     close(): Promise<void>;
 
-    on(event: 'listening', callback: () => void): void; *
-        on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
+    on(event: 'listening', callback: () => void): void;
+    on(event: 'join' | 'leave' | 'connect', callback: (client: Client) => void): void;
     on(event: 'error', callback: (customError: CustomError) => void): void;
 
     once(event: 'listening', callback: () => void): void;
