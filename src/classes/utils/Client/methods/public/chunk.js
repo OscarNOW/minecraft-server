@@ -22,6 +22,7 @@ module.exports = function (chunk, { x, z }) {
         blockEntities: []
     });
 
+    //todo: if the user passes a chunk and then changes the chunk, we'll be copying the new chunk instead of the old one
     const generateLoadedChunk = () => new LoadedChunk(this, chunk, { x, z }, this.p.sendPacket);
 
     if (this.p.generatedChunks)
