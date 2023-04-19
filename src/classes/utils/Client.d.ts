@@ -197,14 +197,14 @@ export class Client {
     /**
      * @package
      */
-    readonly p: { // todo: make more explicitly typed
+    readonly p: {
         client: unknown;
         defaultClientProperties: (client: Client) => defaultClientProperties;
         changeEvents: {
-            [event: string]: ((newValue: unknown, oldValue: unknown) => void)[];
+            [currentChangeEventType in changeEventType]: ((newValue: changeEventReturn<currentChangeEventType>, oldValue: changeEventReturn<currentChangeEventType>) => void)[];
         };
         events: {
-            [event: string]: ((...args: unknown[]) => void)[];
+            [event: string]: ((...args: unknown[]) => void)[]; //todo?
         };
         intervals: NodeJS.Timeout[];
         shutdownCallbacks: (() => void)[];
@@ -222,8 +222,8 @@ export class Client {
         timeouts: NodeJS.Timeout[];
         changeEventHasListeners: (changeEvent: string) => boolean;
         clientOn: (name: string, callback: (...args: unknown[]) => void) => void;
-        emit: (name: string, ...args: unknown[]) => void;
-        emitChange: (type: string, oldValue: unknown) => void; //todo: change to changeEventType
+        emit: (name: string, ...args: unknown[]) => void; //todo?
+        emitChange: <currentChangeEventType extends changeEventType>(type: currentChangeEventType, oldValue: changeEventReturn<currentChangeEventType>) => void;
         emitError: (customError: CustomError) => void;
         emitMove: (info: {
             x: number;
@@ -256,7 +256,15 @@ export class Client {
         _gamemode: gamemode;
         _health: number;
         _inventory: inventory;
-        _locale: unknown; // todo: create locale type
+        _locale: {
+            langCode: langCode;
+            englishName: langEnglishName;
+            menuName: langMenuName;
+            serious: boolean;
+
+            version?: langVersion;
+            region?: langRegion;
+        };
         onGround: boolean;
         positionSet: boolean;
         _position: {
@@ -316,12 +324,13 @@ export class Client {
             [event: string]: ((...args: unknown[]) => void)[]; // todo: make more explicit
         };
         defaultProperties: {
-            [property: string]: unknown;
+            [property: string]: unknown; //todo
         };
         chunksGenerated: boolean;
         blocksGenerated: boolean;
         _chunks: (LoadedChunk[]) | ((() => LoadedChunk)[]);
         _blocks: (blocksSegment) | ((() => blocksSegment)[]);
+        //todo: check if there are new properties
     };
 
     readonly worldBorder: WorldBorder;
