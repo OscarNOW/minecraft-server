@@ -1,5 +1,3 @@
-Fix todo in <Client>.chunks
--Add JSDoc to type files
-    -Add examples from example folder to JSDoc
+-Fix todo in <Client>.chunks
 Use Partial and separate getter and setters where needed
-remove the updateBlock function 
+remove the updateBlock function
