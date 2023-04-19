@@ -26,7 +26,7 @@ export class Text {
      *                      'strike'
      *                  ]
      *              }
-     *  ]);
+     *         ]);
      *
      */
     constructor(text: textInput);
