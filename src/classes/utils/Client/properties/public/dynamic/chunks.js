@@ -21,9 +21,8 @@ module.exports = {
             let oldValue;
             let changed;
 
-            //todo: what if chunks aren't generated, but there are listeners?
             if (this.p.changeEventHasListeners('chunks')) {
-                oldValue = [...this.chunks];
+                oldValue = [...this.chunks]; //this.chunks will generate chunks if not already generated
 
                 changed =
                     value.length !== this.p._chunks?.length ||
@@ -38,7 +37,14 @@ module.exports = {
         init() {
             this.p.chunksGenerated = false;
             this.p._chunks = Object.freeze([]);
-            //todo: use onFirstChangeEventListener like in <Client>.blocks
+            this.p.onFirstChangeEventListener('blocks', () => {
+                if (!this.p.chunksGenerated) {
+                    this.p._chunks = Object.freeze(
+                        this.p._chunks.map(generator => generator()) //generator calls (new LoadedChunk(...)) for every LoadedChunk
+                    );
+                    this.p.chunksGenerated = true;
+                };
+            });
         }
     }
 }
