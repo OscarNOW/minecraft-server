@@ -55,7 +55,6 @@ export class Text {
     static parseChat(text: chatComponent): chatComponent;
     static minifyChat(text: chatComponent): chatComponent;
 }
-type textInput = string | optionalTextArray;
 
 type textArrayComponent = {
     text: string;
@@ -103,53 +102,9 @@ type textArrayComponent = {
     };
 };
 
-//todo: maybe use Partial type?
+type textInput = optionalTextArray;
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
-type optionalTextArrayComponent = string | number | boolean | {
-    text?: string;
-    color?: textColor;
-    modifiers?: textModifier[];
-
-    insertion?: string;
-    clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
-        value: string | number;
-    };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: optionalTextArray;
-    };
-} | {
-    keybind?: keycode;
-    color?: textColor;
-    modifiers?: textModifier[];
-
-    insertion?: string;
-    clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
-        value: string | number;
-    };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: optionalTextArray;
-    };
-} | {
-    translate?: chatTranslate;
-    with?: optionalTextArrayComponent[]; //todo: maybe give better name
-
-    color?: textColor;
-    modifiers?: textModifier[];
-
-    insertion?: string;
-    clickEvent?: {
-        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better name
-        value: string | number;
-    };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: optionalTextArray;
-    };
-};
+type optionalTextArrayComponent = string | number | boolean | Partial<textArrayComponent>;
 
 type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;
