@@ -11,12 +11,7 @@ module.exports = {
             return this.p._blocks;
         },
         setBlocks(blocks) {
-            if (!this.p.blocksGenerated) {
-                this.p._blocks = generateBlocks.call(this);
-                this.p.blocksGenerated = true;
-            }
-
-            const oldBlocks = deepCopyBlocksSegment(this.blocks);
+            const oldBlocks = deepCopyBlocksSegment(this.blocks); //this.blocks will generate blocks if not already generated
 
             for (const x in blocks) {
                 if (!this.blocks[x])
