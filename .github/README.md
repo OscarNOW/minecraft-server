@@ -19,8 +19,8 @@
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
-| :warning: WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New package updates will change the API and add more coverage. |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| This package does not cover the full Minecraft Java protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [Excel packet spreadsheet](https://github.com/OscarNOW/minecraft-server/blob/main/progress/spreadsheet/spreadsheet.xlsx) and the [docs](https://oscarnow.github.io/minecraft-server/). |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 Create Minecraft Servers with an easy to use API and with full control
 
