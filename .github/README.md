@@ -15,6 +15,7 @@
     </a>
 </p>
 
+Resources:
 [Github](https://github.com/OscarNOW/minecraft-server/)
 [NPM](https://www.npmjs.com/package/minecraft-server)
 [Docs](https://oscarnow.github.io/minecraft-server/)
