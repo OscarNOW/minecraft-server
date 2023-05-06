@@ -6,7 +6,7 @@
 
 ## How do I get the client to spawn at a certain location?
 ```js
-const { Server } = require('minecraft-server')
+const { Server } = require('@boem312/minecraft-server')
 const server = new Server({
     defaultClientProperties: client => ({
         position: {
@@ -20,7 +20,7 @@ const server = new Server({
 
 ## How do I set a different spawn location for different clients?
 ```js
-const { Server } = require('minecraft-server')
+const { Server } = require('@boem312/minecraft-server')
 const server = new Server({
     defaultClientProperties: client => ({
         position: client.username === 'notch' ? {
