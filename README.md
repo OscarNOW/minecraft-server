@@ -1,5 +1,12 @@
 # ![Banner Image](https://github.com/OscarNOW/minecraft-server/blob/main/assets/Minecraft%20Server.png?raw=true)
 
+**A pure JS library to create Minecraft Java 1.16.3 servers**
+
+Resources:
+[Github](https://github.com/OscarNOW/minecraft-server/)
+[NPM](https://www.npmjs.com/package/minecraft-server)
+[Docs](https://oscarnow.github.io/minecraft-server/)
+
 <p align="center">
     <a href="https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
         <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod">
@@ -15,16 +22,10 @@
     </a>
 </p>
 
-[Github](https://github.com/OscarNOW/minecraft-server/)
-[NPM](https://www.npmjs.com/package/minecraft-server)
-[Docs](https://oscarnow.github.io/minecraft-server/)
+| This package does not cover the full Minecraft Java protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [Excel packet spreadsheet](https://github.com/OscarNOW/minecraft-server/blob/main/progress/spreadsheet/spreadsheet.xlsx) and the [docs](https://oscarnow.github.io/minecraft-server/). |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| :warning: WARNING: This package is not finished and does not cover the full Minecraft protocol yet. It only covers parts of the 1.16.3 protocol. To check what parts of the protocol are covered, see the [docs](https://oscarnow.github.io/minecraft-server/). New package updates will change the API and add more coverage. |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-
-Create Minecraft Servers with an easy to use API and with full control
-
-This is a library that gives you access to an easy to use API that you can use to create Minecraft Java Edition servers. This package includes types so that your IDE has autocomplete. You have full control over the protocol and everything that is being sent to the client in an easy way. This means you have full control of what is being sent to each Client, and that you can send different information to different Clients.
+This is a pure JS library that gives you access to an easy to use API that you can use to create Minecraft Java 1.16.3 servers. This package has types built in. You have full control over the packets that are being sent to the Clients in an easy to use way. This means you can send different information to each Client, so that for example, for one Client it is raining and for a different one it's not.
 
 ## **Installation and usage**
 1. Install with `npm i @boem312/minecraft-server`.
@@ -42,9 +43,9 @@ server.on('connect', client => {
 ```
 3. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
 
-If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
-
 For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
+
+If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
 If you have any questions please first read the [FAQ](https://github.com/OscarNOW/minecraft-server/blob/main/FAQ.md). If your question isn't in there, you can [ask a question in discussions](https://github.com/OscarNOW/minecraft-server/discussions/new?category=questions).
 
