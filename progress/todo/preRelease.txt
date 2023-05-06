@@ -1,2 +1,2 @@
 remove the updateBlock function
-add pure JavaScript to slogan
+-add pure JavaScript to slogan
