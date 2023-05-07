@@ -17,9 +17,11 @@ None
 * [WorldBorder](https://oscarnow.github.io/minecraft-server/{version}/classes/WorldBorder)
 * [<Client>.worldBorder](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#worldBorder)
 
-## Documentation / Types
-None
-
 ## Issues fixed
 * Fixed bug where [the blockBreak event](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#on) would not get emitted when the player was in creative mode
 * Fixed bug when connecting to the server with a legacy client.
+
+## Documentation / Types
+* Updated the Readme with better language
+* Fixed the imports of the FAQ
+* Added descriptions to some functions and parameters
