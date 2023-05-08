@@ -28,6 +28,8 @@ Tests
 Move shared functions between TabItem and Player (like getSkin) to separate function file
 Rewrite scripts/build
 Rewrite js files in src/docs/
+    Move all related files out of src folder
+    Move (some or all) to /scripts where all other scripts are also located
 Add checks to check if input from constructor is valid with errors when wrong in BossBar class
 Add good first issue label to issues
 Move scripts/build/*.js npmRun function to separate function file
