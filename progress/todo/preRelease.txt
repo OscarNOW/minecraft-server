@@ -1,0 +1,1 @@
+Add step to clear changelog and commit in gh action after release
