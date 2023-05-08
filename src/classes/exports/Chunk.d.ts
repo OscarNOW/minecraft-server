@@ -32,6 +32,7 @@ export class Chunk {
     /**
      * Set a block without sending a packet to the client.
      * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
+     * @package
      */
     updateBlock(block: blockName, chunkRelativeLocation: {
         x: number;

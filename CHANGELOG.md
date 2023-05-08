@@ -7,9 +7,6 @@ None
 * [<Client>.blocks](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#blocks)
 * [previousBlock argument in <Client>.on('blockBreak', location, previousBlock)](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#on)
 
-* [<Chunk>.updateBlock(](https://oscarnow.github.io/minecraft-server/{version}/classes/Chunk#updateBlock)
-* [<Client>.updateBlock(](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#updateBlock)
-
 * [<Client>.acknowledgeBlockBreak](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#acknowledgeBlockBreak)
 * [<Client>.acknowledgeAcknowledgeDigCancel](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#acknowledgeDigCancel)
 * [<Client>.acknowledgeAcknowledgeDigStart](https://oscarnow.github.io/minecraft-server/{version}/classes/Client#acknowledgeDigStart)
