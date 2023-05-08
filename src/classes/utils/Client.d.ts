@@ -544,12 +544,17 @@ export class Client {
         x: number;
         y: number;
         z: number;
-    }, successful: boolean): void;
+    }, successful: boolean, blockName: blockName, blockState: blockState): void;
     acknowledgeDigCancel(location: {
         x: number;
         y: number;
         z: number;
-    }, successful: boolean): void;
+    }, successful: boolean, blockName: blockName, blockState: blockState): void;
+    acknowledgeBlockBreak(location: {
+        x: number;
+        y: number;
+        z: number;
+    }, successful: boolean, blockName: blockName, blockState: blockState): void;
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 

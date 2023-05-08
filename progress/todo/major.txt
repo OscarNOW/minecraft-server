@@ -14,3 +14,6 @@ Implement <Entity>.on('change', ...
     Remove <Entity>.observe(
 Rename leftClick to something else (because in air doesn't trigger)
     Test if mainHand is rightHand same event is triggered
+change 'blockBreak' event to 'change' 'blocks'
+change 'blockPlace' event to 'change 'blocks'
+Replace all blockName and blockState parameters to functions with the user creating new Block(blockName, blockState, location)
