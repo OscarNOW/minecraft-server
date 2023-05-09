@@ -131,6 +131,8 @@ export class Server {
 
     readonly clients: Client[];
 
+    //todo: make privates typed
+
     joinProxyClient(proxyClient: ProxyClient): void;
 
     close(): Promise<void>;
