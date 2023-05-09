@@ -1,3 +1,5 @@
+const { chunkSize } = require('../../../../../functions/loader/data.js');
+
 module.exports = function (block, { x, y, z }, state) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
@@ -9,9 +11,9 @@ module.exports = function (block, { x, y, z }, state) {
     if (!chunk)
         return;
 
-    let blockX = x % 16; //todo: use chunkSize instead of 16
+    let blockX = x % (chunkSize.x.max - chunkSize.x.min);
     let blockY = y;
-    let blockZ = z % 16; //todo: use chunkSize instead of 16
+    let blockZ = z % (chunkSize.z.max - chunkSize.z.min);
 
     if (blockX < 0) blockX += 16;
     if (blockY < 0) blockY += 16;

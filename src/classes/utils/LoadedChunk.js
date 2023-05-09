@@ -3,6 +3,8 @@ const Chunk = require('../exports/Chunk.js');
 const { chunks } = require('./Client/properties/public/dynamic/chunks.js');
 const { blocks } = require('./Client/properties/public/dynamic/blocks.js');
 
+const { chunkSize } = require('../../functions/loader/data.js');
+
 function updateBlock(block) {
     const { x, y, z, stateId } = block;
 
@@ -15,7 +17,7 @@ function updateBlock(block) {
         type: stateId
     })
 
-    const absoluteX = x + this.x * 16; //todo: use chunkSize
+    const absoluteX = x + this.x * (chunkSize.x.max - chunkSize.x.min);
     if (!this.blocksX.includes(absoluteX)) this.blocksX.push(absoluteX);
 
     blocks.setBlocks.call(this.client, { [x]: { [y]: { [z]: block } } });
@@ -56,7 +58,7 @@ function generateBlocksX(chunk) {
 
     for (let relativeX in chunk.blocks) {
         relativeX = parseInt(relativeX);
-        const x = relativeX + this.x * 16; //todo: use chunkSize
+        const x = relativeX + this.x * (chunkSize.x.max - chunkSize.x.min);
 
         if (!blocksX.includes(x))
             blocksX.push(x);

@@ -5,6 +5,8 @@ const faces = Object.fromEntries(
     require('../../../../functions/loader/data.js').blockFaces.map((name, ind) => [ind, name])
 );
 
+const { chunkSize } = require('../../../../functions/loader/data.js');
+
 module.exports = {
     block_dig({ status, location: { x, y, z }, face }) {
         if (status === 0)
@@ -47,9 +49,9 @@ function emitBlockBreak({ x, y, z }) {
 
     const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
 
-    let chunkRelativeX = x % 16; //todo: use chunkSize instead of 16
+    let chunkRelativeX = x % (chunkSize.x.max - chunkSize.x.min);
     let chunkRelativeY = y;
-    let chunkRelativeZ = z % 16; //todo: use chunkSize instead of 16
+    let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min);
 
     if (chunkRelativeX < 0) chunkRelativeX += 16;
     if (chunkRelativeY < 0) chunkRelativeY += 16;
