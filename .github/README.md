@@ -51,7 +51,6 @@ If you have any questions please first read the [FAQ](https://github.com/OscarNO
 
 ## Key features
 
-* **Fast**, starting a server with this library is way faster than using the default Java server.
 * **Easy to use**, you can create servers in an intuitive way.
 * **Everything is per Client**, meaning you can send different information to different Clients.
 
