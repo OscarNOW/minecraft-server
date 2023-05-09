@@ -1,6 +1,5 @@
-
-//todo: add description
 /**
+ * @description Create a fake Client that can connect to a server where you can control the packets sent and received.
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/ProxyClient
  */
 export class ProxyClient {
