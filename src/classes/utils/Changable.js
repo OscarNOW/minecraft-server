@@ -3,6 +3,7 @@ const valuesSymbol = Symbol('values');
 class Changable {
     constructor(changeCallback, startValues) {
         // todo: add option to define custom name, so that console.log shows for example 'position {' instead of 'Changable {'
+        // todo: or maybe instead change name to "" so that console.log shows ' {'
 
         Object.defineProperty(this, valuesSymbol, {
             configurable: false,
