@@ -66,7 +66,7 @@ class Server {
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
-        this.server = mc().createServer({ //todo: change to private property
+        this.p.server = mc().createServer({
             encryption: true,
             version: settings.version,
             motd: settings.defaults.serverList.motd,
@@ -142,9 +142,9 @@ class Server {
             }
         });
 
-        this.server.on('listening', () => this.p.emit('listening'));
+        this.p.server.on('listening', () => this.p.emit('listening'));
 
-        this.server.on('connection', client => {
+        this.p.server.on('connection', client => {
             this.p.clientInformation.set(client, {});
 
             let clientState = null;
@@ -198,7 +198,7 @@ class Server {
 
         });
 
-        this.server.on('login', client => {
+        this.p.server.on('login', client => {
             new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
         });
 
@@ -270,7 +270,7 @@ class Server {
         await wait(500); //to avoid weird bugs
 
         for (const client of this.clients) client.p.shutdown();
-        this.server.close();
+        this.p.server.close();
     }
 }
 
