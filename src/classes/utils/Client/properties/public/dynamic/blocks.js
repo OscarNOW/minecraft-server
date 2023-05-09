@@ -104,7 +104,7 @@ function getBlocksY(x) {
     let blocksY = [];
 
     for (const chunk of this.chunks) {
-        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min + 1); // +1 because min is 0 and is included
+        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
         if (!chunk.blocks[relativeX]) continue;
 
         for (let relativeY in chunk.blocks[relativeX]) {
@@ -121,7 +121,7 @@ function getBlocksZ(x, y) {
     let blocksZ = [];
 
     for (const chunk of this.chunks) {
-        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min + 1); // +1 because min is 0 and is included
+        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
         if (!chunk.blocks[relativeX]) continue;
 
         const relativeY = y;
@@ -129,7 +129,7 @@ function getBlocksZ(x, y) {
 
         for (let relativeZ in chunk.blocks[relativeX][relativeY]) {
             relativeZ = parseInt(relativeZ);
-            const z = chunk.z * (chunkSize.z.max - chunkSize.z.min + 1) + relativeZ; // +1 because min is 0 and is included
+            const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
             if (!blocksZ.includes(z)) blocksZ.push(z);
         }
     }
@@ -143,9 +143,9 @@ function getSpecificBlock(x, y, z) {
 
     const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
 
-    let chunkRelativeX = x % (chunkSize.x.max - chunkSize.x.min + 1); // +1 because min is 0 and is included
-    let chunkRelativeY = y % (chunkSize.y.max - chunkSize.y.min + 1); // +1 because min is 0 and is included
-    let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min + 1); // +1 because min is 0 and is included
+    let chunkRelativeX = x % (chunkSize.x.max - chunkSize.x.min);
+    let chunkRelativeY = y % (chunkSize.y.max - chunkSize.y.min);
+    let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min);
 
     if (chunkRelativeX < 0) chunkRelativeX += 16;
     if (chunkRelativeY < 0) chunkRelativeY += 16;
