@@ -1,3 +1,4 @@
 Add step to clear changelog and commit in gh action after release
 Fix all chunkSize todo's
-    Replace 16 with chunkSize
+    -Replace 16 with chunkSize
+    Also add checks for y
