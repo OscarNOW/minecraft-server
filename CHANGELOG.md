@@ -5,7 +5,7 @@ None
 None
 
 ## Issues fixed
-None
+* Fixed issues and inconsistencies for the y position of blocks in chunks.
 
 ## Documentation / Types
 None
