@@ -44,8 +44,8 @@ module.exports = {
 }
 
 function emitBlockBreak({ x, y, z }) {
-    const chunkX = Math.floor(x / 16);
-    const chunkZ = Math.floor(z / 16);
+    const chunkX = Math.floor(x / (chunkSize.x.max - chunkSize.x.min));
+    const chunkZ = Math.floor(z / (chunkSize.z.max - chunkSize.z.min));
 
     const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
 

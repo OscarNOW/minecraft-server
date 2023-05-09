@@ -1,6 +1,8 @@
 const { onGround } = require('../../properties/public/dynamic/onGround.js');
 const { position } = require('../../properties/public/dynamic/position.js');
 
+const { chunkSize } = require('../../../../../functions/loader/data.js');
+
 module.exports = {
     emitMove(info) {
         if (!this.p.positionSet)
@@ -9,8 +11,8 @@ module.exports = {
         const oldPosition = this.p._position.raw;
 
         let oldChunk = {
-            x: Math.floor(this.position.x / 16),
-            z: Math.floor(this.position.z / 16)
+            x: Math.floor(this.position.x / (chunkSize.x.max - chunkSize.x.min)),
+            z: Math.floor(this.position.z / (chunkSize.z.max - chunkSize.z.min))
         }
 
         let oldY = parseInt(this.position.y);
@@ -31,8 +33,8 @@ module.exports = {
         onGround.set.call(this, info.onGround);
 
         let newChunk = {
-            x: Math.floor(this.position.x / 16),
-            z: Math.floor(this.position.z / 16)
+            x: Math.floor(this.position.x / (chunkSize.x.max - chunkSize.x.min)),
+            z: Math.floor(this.position.z / (chunkSize.z.max - chunkSize.z.min))
         }
 
         let newY = parseInt(this.position.y);

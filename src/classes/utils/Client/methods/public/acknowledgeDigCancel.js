@@ -4,8 +4,8 @@ module.exports = function ({ x, y, z }, successful, blockName, blockState) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
-    const chunkX = Math.floor(x / 16);
-    const chunkZ = Math.floor(z / 16);
+    const chunkX = Math.floor(x / (chunkSize.x.max - chunkSize.x.min));
+    const chunkZ = Math.floor(z / (chunkSize.z.max - chunkSize.z.min));
 
     const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
     if (!chunk)
