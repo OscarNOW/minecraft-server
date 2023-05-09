@@ -12,7 +12,7 @@ module.exports = function ({ x, y, z }, successful, blockName, blockState) {
         return;
 
     let blockX = x % (chunkSize.x.max - chunkSize.x.min);
-    let blockY = y;
+    let blockY = y % (chunkSize.y.max - chunkSize.y.min);
     let blockZ = z % (chunkSize.z.max - chunkSize.z.min);
 
     if (blockX < 0) blockX += (chunkSize.x.max - chunkSize.x.min);

@@ -121,7 +121,7 @@ function getBlocksZ(x, y) {
     let blocksZ = [];
 
     for (const chunk of this.chunks) {
-        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min);
+        const relativeX = x - chunk.x * (chunkSize.x.max - chunkSize.x.min); //todo: maybe just use mod chunkSize?
         if (!chunk.blocks[relativeX]) continue;
 
         const relativeY = y;
@@ -129,7 +129,7 @@ function getBlocksZ(x, y) {
 
         for (let relativeZ in chunk.blocks[relativeX][relativeY]) {
             relativeZ = parseInt(relativeZ);
-            const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ;
+            const z = chunk.z * (chunkSize.z.max - chunkSize.z.min) + relativeZ; //todo: maybe just use mod chunkSize?
             if (!blocksZ.includes(z)) blocksZ.push(z);
         }
     }

@@ -50,7 +50,7 @@ function emitBlockBreak({ x, y, z }) {
     const chunk = this.chunks.find(({ x, z }) => x === chunkX && z === chunkZ);
 
     let chunkRelativeX = x % (chunkSize.x.max - chunkSize.x.min);
-    let chunkRelativeY = y;
+    let chunkRelativeY = y % (chunkSize.y.max - chunkSize.y.min);
     let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min);
 
     if (chunkRelativeX < 0) chunkRelativeX += (chunkSize.x.max - chunkSize.x.min);
