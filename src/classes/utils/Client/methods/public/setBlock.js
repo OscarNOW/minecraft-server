@@ -15,9 +15,9 @@ module.exports = function (block, { x, y, z }, state) {
     let blockY = y;
     let blockZ = z % (chunkSize.z.max - chunkSize.z.min);
 
-    if (blockX < 0) blockX += 16;
-    if (blockY < 0) blockY += 16;
-    if (blockZ < 0) blockZ += 16;
+    if (blockX < 0) blockX += (chunkSize.x.max - chunkSize.x.min);
+    if (blockY < 0) blockY += (chunkSize.y.max - chunkSize.y.min);
+    if (blockZ < 0) blockZ += (chunkSize.z.max - chunkSize.z.min);
 
     chunk.setBlock(block, { x: blockX, y: blockY, z: blockZ }, state);
 

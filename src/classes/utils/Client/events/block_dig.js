@@ -53,9 +53,9 @@ function emitBlockBreak({ x, y, z }) {
     let chunkRelativeY = y;
     let chunkRelativeZ = z % (chunkSize.z.max - chunkSize.z.min);
 
-    if (chunkRelativeX < 0) chunkRelativeX += 16;
-    if (chunkRelativeY < 0) chunkRelativeY += 16;
-    if (chunkRelativeZ < 0) chunkRelativeZ += 16;
+    if (chunkRelativeX < 0) chunkRelativeX += (chunkSize.x.max - chunkSize.x.min);
+    if (chunkRelativeY < 0) chunkRelativeY += (chunkSize.y.max - chunkSize.y.min);
+    if (chunkRelativeZ < 0) chunkRelativeZ += (chunkSize.z.max - chunkSize.z.min);
 
     const oldBlock = chunk.blocks[chunkRelativeX][chunkRelativeY][chunkRelativeZ];
 
