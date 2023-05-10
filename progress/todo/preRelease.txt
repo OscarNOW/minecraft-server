@@ -1,2 +1,8 @@
 Add step to clear changelog and commit in gh action after release
 Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
+Update data
+    Add types to data
+    Move data\keybinds[any].default to language specific
+        Create folder for language specific?
+    Create data converter in data loader
+        Make data converter convert data\items to array with object with useful keys

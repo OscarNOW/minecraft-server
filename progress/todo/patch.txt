@@ -1,13 +1,6 @@
 Create benchmark and add documentation file for that.
 Add slot data file
 Test when playing a sound if the played sound is correct
-Update data
-    Change data\particles to array where id is index
-    Add types to data
-    Move data\keybinds[any].default to language specific
-        Create folder for language specific?
-    Create data converter in data loader
-        Make data converter convert data\items to array with object with useful keys
 Create PR for minecraft-protocol to exclude optional files from npm build
 Improve quality score on NPM
     https://itnext.io/increasing-an-npm-packages-search-score-fb557f859300
