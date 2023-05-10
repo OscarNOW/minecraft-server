@@ -6,14 +6,14 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
-    if (!particles[particleName])
+    if (!particles.find(({ name }) => name === particleName))
         this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {
             got: particleName,
             expectationType: 'value',
             expectation: Object.keys(particles)
         }, this.demo, { server: this.server, client: this }));
 
-    if (!particles[particleName].requireData)
+    if (!particles.find(({ name }) => name === particleName).requireData)
         this.p.sendPacket('world_particles', {
             particleId: particles[particleName].id,
             longDistance: visibleFromFar,
@@ -26,6 +26,8 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
             particleData: 0,
             particles: particleAmount
         })
+    else
+        throw new Error('Expected noDataParticle got dataParticle instead.')
 
 
     // else if (['block', 'block_marker', 'falling_dust'].includes(particleName))
