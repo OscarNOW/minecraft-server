@@ -1,3 +1,2 @@
 Add step to clear changelog and commit in gh action after release
 Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
-Reverse Release commit
