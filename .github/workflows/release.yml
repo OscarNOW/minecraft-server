@@ -51,7 +51,7 @@ jobs:
           max_attempts: 3
           command: npm run build
 
-      - name: Commit and push
+      - name: Commit Release
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Release ${{ github.event.inputs.version }}"
@@ -78,3 +78,31 @@ jobs:
           check-version: true
 
           tag: latest
+
+      - name: Clear CHANGELOG
+        uses: DamianReeves/write-file-action@v1.2
+        with:
+          path: CHANGELOG.md
+          contents: |
+            ## Existing API changes
+            None
+
+            ## New API
+            None
+
+            ## Issues fixed
+            * Fixed issues and inconsistencies for the y position of blocks in chunks.
+
+            ## Documentation / Types
+            None
+          write-mode: overwrite
+
+      - name: Commit after Release
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Release ${{ github.event.inputs.version }}"
+          branch: main
+
+          commit_user_name: Doc-bot
+          commit_user_email: actions@github.com
+          commit_author: Doc-bot <actions@github.com>
