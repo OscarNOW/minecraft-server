@@ -11,6 +11,15 @@ let data =
 let cachedData = {};
 let lazyData = {};
 
+const dataConverters = {
+    'items': items => items.map(item => ({
+        id: item[0],
+        displayName: item[1],
+        name: item[2],
+        maxStackSize: item[3]
+    }))
+};
+
 for (const datum of data) {
     const name = datum.split('.js')[0].split('\\').pop().split('/').pop();
 
@@ -22,6 +31,9 @@ for (const datum of data) {
                 return cachedData[name];
 
             cachedData[name] = CJSON.parse(fs.readFileSync(datum).toString());
+            if (dataConverters[name])
+                cachedData[name] = dataConverters[name](cachedData[name]);
+
             return cachedData[name];
         }
     })
