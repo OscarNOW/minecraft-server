@@ -1,6 +1,6 @@
 const { convertToType } = require('../functions/convertToType.js');
 
 module.exports = {
-    itemName: convertToType(require('./items.json').map(a => a[2])),
-    itemDisplayName: convertToType(require('./items.json').map(a => a[1]))
+    itemName: convertToType(require('./items.json').map(({ name }) => name)),
+    itemDisplayName: convertToType(require('./items.json').map(({ displayName }) => displayName))
 }

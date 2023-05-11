@@ -12,11 +12,11 @@ class Slot {
             this.id = id;
             this.amount = amount;
 
-            let itemInfo = items.find(item => item[0] === this.id);
+            let itemInfo = items.find(({ id }) => id === this.id);
 
-            this.name = itemInfo[2];
-            this.displayName = itemInfo[1];
-            this.maxStackSize = itemInfo[3];
+            this.name = itemInfo.name;
+            this.displayName = itemInfo.displayName;
+            this.maxStackSize = itemInfo.maxStackSize;
         };
     };
 
