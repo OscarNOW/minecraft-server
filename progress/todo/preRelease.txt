@@ -5,4 +5,4 @@ Update data
     Move data\keybinds[any].default to language specific
         Create folder for language specific?
     -Create data converter in data loader
-        -Make data converter convert data\items to array with object with useful keys
+        -Make data/file.types.js use data loader
