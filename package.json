@@ -43,7 +43,7 @@
         "mineflayer": "^4.8.1",
         "eslint": "^8.40.0",
         "typedoc": "^0.23.28",
-        "typedoc-theme-hierarchy": "^3.1.0"
+        "typedoc-theme-hierarchy": "^3.2.0"
     },
     "overrides": {
         "jsonwebtoken": "9.0.0"
