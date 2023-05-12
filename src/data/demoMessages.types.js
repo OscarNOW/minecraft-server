@@ -1,5 +1,6 @@
 const { convertToType } = require('../functions/convertToType.js');
+const { demoMessages } = require('../functions/loader/data.js');
 
 module.exports = {
-    demoMessage: convertToType(require('./demoMessages.json').map(({ name }) => name))
+    demoMessage: convertToType(demoMessages.map(({ name }) => name))
 }

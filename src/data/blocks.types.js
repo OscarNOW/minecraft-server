@@ -1,6 +1,7 @@
 const { convertToType } = require('../functions/convertToType.js');
+const { blocks } = require('../functions/loader/data.js');
 
-let blockStates = require('./blocks.json').map(a => a[2] || []).flat().map(a => [a.name, a.values])
+let blockStates = blocks.map(a => a[2] || []).flat().map(a => [a.name, a.values])
 let newBlockStates = [];
 
 for (const [name, values] of blockStates)
@@ -10,6 +11,6 @@ for (const [name, values] of blockStates)
         newBlockStates.push([name, values])
 
 module.exports = {
-    blockName: convertToType(require('./blocks.json').map(a => a[0])),
+    blockName: convertToType(blocks.map(a => a[0])),
     blockState: `{${newBlockStates.map(([name, values]) => `${name}?:${convertToType(values)};`).join('')}}`
 }

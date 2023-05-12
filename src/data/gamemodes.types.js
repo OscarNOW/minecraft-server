@@ -1,5 +1,6 @@
 const { convertToType } = require('../functions/convertToType.js');
+const { gamemodes } = require('../functions/loader/data.js');
 
 module.exports = {
-    gamemode: convertToType(require('./gamemodes.json'))
+    gamemode: convertToType(gamemodes)
 }

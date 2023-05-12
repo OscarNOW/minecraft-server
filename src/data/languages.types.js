@@ -1,5 +1,5 @@
 const { convertToType } = require('../functions/convertToType.js');
-const languages = require('./languages.json');
+const { languages } = require('../functions/loader/data.js');
 
 module.exports = {
     langCode: convertToType(Object.keys(languages)),
