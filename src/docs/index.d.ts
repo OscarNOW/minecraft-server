@@ -32,6 +32,7 @@ updateBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},
  */
 setBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;}
 /**
+ * @description Create a fake Client that can connect to a server where you can control the packets sent and received.
  * @see https://oscarnow.github.io/minecraft-server/1.4.0/classes/ProxyClient
  */
 export class ProxyClient{constructor(information?:{latency?:number;username?:string;uuid?:string;ip?:string;host?:string;port?:number;skinTextureUrl?:string;capeTextureUrl?:string;});latency:number;end():void;sendPacket(name:string,packet:object):void;onPacket(callback:(name:string,packet:object)=>void):void;removeAllListeners():void;}
