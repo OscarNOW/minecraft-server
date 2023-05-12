@@ -5,13 +5,13 @@
     "main": "index.js",
     "types": "index.d.ts",
     "scripts": {
-        "updateVersionFiles": "node ./scripts/updateVersionFiles",
-        "readme": "node ./scripts/readme",
-        "minify": "node ./scripts/minify",
-        "types": "node ./scripts/types",
-        "docs": "node ./src/docs/generate",
-        "test": "node ./scripts/test",
         "build": "node ./scripts/build",
+        "minify": "node ./scripts/minify",
+        "readme": "node ./scripts/readme",
+        "test": "node ./scripts/test",
+        "types": "node ./scripts/types",
+        "updateVersionFiles": "node ./scripts/updateVersionFiles",
+        "docs": "node ./src/docs/generate",
         "eslint": "npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0"
     },
     "keywords": [
