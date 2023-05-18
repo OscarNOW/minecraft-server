@@ -90,10 +90,10 @@ jobs:
             ## New API
             None
 
-            ## Issues fixed
-            * Fixed issues and inconsistencies for the y position of blocks in chunks.
+            ## Code issues fixed
+            None
 
-            ## Documentation / Types
+            ## Non-code issues fixed
             None
           write-mode: overwrite
 
