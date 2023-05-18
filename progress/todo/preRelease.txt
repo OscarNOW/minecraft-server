@@ -6,3 +6,4 @@ Update data
         Create folder for language specific?
 Prevent test buildable light from running on pull requests
 Implement errorCheck in index.d.ts
+Rename build script in package.json because npm will execute that script every time this package is installed
