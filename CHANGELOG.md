@@ -4,8 +4,8 @@ None
 ## New API
 None
 
-## Issues fixed
+## Code issues fixed
 * Fixed issues and inconsistencies for the y position of blocks in chunks.
 
-## Documentation / Types
+## Non-code issues fixed
 None
