@@ -4,3 +4,4 @@ Update data
     Add types to data
     Move data\keybinds[any].default to language specific
         Create folder for language specific?
+Prevent test buildable light from running on pull requests
