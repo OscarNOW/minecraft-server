@@ -1,4 +1,3 @@
-Add step to clear changelog and commit in gh action after release
 Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
 Update data
     Add types to data
@@ -8,6 +7,5 @@ Prevent test buildable light from running on pull requests
 Implement errorCheck in index.d.ts
 Rename build script in package.json because npm will execute that script every time this package is installed
 Test release action now that it uses node 20
-Test buildable light action now that it uses node 20
-Test buildable action now that it uses node 20
 Check that test and test light actions are both present on pull requests and are both required
+Add unknown spell checker words to workspace settings
