@@ -2,117 +2,19 @@ name: Test buildable
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   pull_request:
+    types: [opened, reopened]
 
 permissions: {}
 
 jobs:
-  update-version-files:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    name: Update version files
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - name: Check if changed
-        uses: MarceloPrado/has-changed-path@v1.0
-        id: changed
-        with:
-          paths: . :^**.txt :^**.xlsx :^**.yml .github/workflows/test-buildable.yml
-
-      - name: Use Node 20.x
-        if: steps.changed.outputs.changed == 'true'
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-          cache: npm
-      - name: Install Dependencies
-        if: steps.changed.outputs.changed == 'true'
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 2
-          max_attempts: 3
-          command: npm ci
-
-      - name: Build-updateVersionFiles
-        if: steps.changed.outputs.changed == 'true'
-        run: npm run updateVersionFiles
-  readme:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    name: Run readme
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - name: Check if changed
-        uses: MarceloPrado/has-changed-path@v1.0
-        id: changed
-        with:
-          paths: . :^**.txt :^**.xlsx :^**.yml .github/workflows/test-buildable.yml
-
-      - name: Use Node 20.x
-        if: steps.changed.outputs.changed == 'true'
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-          cache: npm
-      - name: Install Dependencies
-        if: steps.changed.outputs.changed == 'true'
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 2
-          max_attempts: 3
-          command: npm ci
-
-      - name: Build-readme
-        if: steps.changed.outputs.changed == 'true'
-        run: npm run readme
-  minify:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    name: Minify
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - name: Check if changed
-        uses: MarceloPrado/has-changed-path@v1.0
-        id: changed
-        with:
-          paths: . :^**.txt :^**.xlsx :^**.yml .github/workflows/test-buildable.yml
-
-      - name: Use Node 20.x
-        if: steps.changed.outputs.changed == 'true'
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-          cache: npm
-      - name: Install Dependencies
-        if: steps.changed.outputs.changed == 'true'
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 2
-          max_attempts: 3
-          command: npm ci
-
-      - name: Build-minify
-        if: steps.changed.outputs.changed == 'true'
-        run: npm run minify
-  type-docs:
+  test-buildable:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    name: Generate types and docs
+    name: Test buildable
 
     steps:
       - name: Checkout Repository
@@ -124,7 +26,7 @@ jobs:
         uses: MarceloPrado/has-changed-path@v1.0
         id: changed
         with:
-          paths: . :^**.txt :^**.xlsx :^**.yml .github/workflows/test-buildable.yml
+          paths: . :^**.txt :^**.xlsx :^**.yml .github/workflows/test-buildable-light.yml
 
       - name: Use Node 20.x
         if: steps.changed.outputs.changed == 'true'
@@ -140,7 +42,6 @@ jobs:
           max_attempts: 3
           command: npm ci
 
-      - run: npm run types
+      - name: Build
         if: steps.changed.outputs.changed == 'true'
-      - run: npm run docs
-        if: steps.changed.outputs.changed == 'true'
+        run: npm run build
