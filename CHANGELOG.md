@@ -5,7 +5,7 @@ None
 None
 
 ## Code issues fixed
-* Fixed issues and inconsistencies for the y position of blocks in chunks.
+* Fixed issues and inconsistencies for the y position of blocks in chunks
 
 ## Non-code issues fixed
-None
+* Made package.json more complete

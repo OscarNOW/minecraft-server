@@ -21,16 +21,19 @@
         "protocol",
         "wrapper"
     ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/OscarNOW/minecraft-server.git"
+    "repository": "github:OscarNOW/minecraft-server",
+    "engines": {
+        "node": "^16 || ^18 || ^20"
     },
-    "author": "Oscar",
+    "author": {
+        "name": "Oscar Knap",
+        "url": "https://github.com/OscarNOW"
+    },
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/OscarNOW/minecraft-server/issues/new/choose"
     },
-    "homepage": "https://github.com/OscarNOW/minecraft-server#readme",
+    "homepage": "https://oscarnow.github.io/minecraft-server/",
     "dependencies": {
         "axios": "^1.4.0",
         "endian-toggle": "^0.0.0",
