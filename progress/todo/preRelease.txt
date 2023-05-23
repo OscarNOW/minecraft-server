@@ -1,4 +1,5 @@
 Implement errorCheck in index.d.ts (when building?)
+Fix Changable type (should be Changeable)
 -Add unknown spell checker words to workspace settings
 Test release
     Test release action now that it uses node 20
