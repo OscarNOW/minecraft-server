@@ -38,4 +38,4 @@ class Changable {
     }
 }
 
-module.exports = Changable
+module.exports = Changable;
