@@ -1,11 +1,18 @@
-Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
+Test release
+    Test release action now that it uses node 20
+    Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
+        Test with draft release action if the issue still occurs
 Update data
-    Add types to data
-    Move data\keybinds[any].default to language specific
+    Add types to data?
+        Add types to data exporter
+    Think about language and data
+        Move data\keybinds[any].default to language specific
         Create folder for language specific?
 Prevent test buildable light from running on pull requests
-Implement errorCheck in index.d.ts
-Rename build script in package.json because npm will execute that script every time this package is installed
-Test release action now that it uses node 20
-Check that test and test light actions are both present on pull requests and are both required
+Implement errorCheck in index.d.ts (when building?)
+Test new user experience
+    Install package in clean dir
+    Test examples
+    Rename build script in package.json because npm will execute that script every time this package is installed
+    Let someone else test it
 Add unknown spell checker words to workspace settings
