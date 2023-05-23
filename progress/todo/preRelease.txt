@@ -1,4 +1,5 @@
 Implement errorCheck in index.d.ts (when building?)
+Move functions that are in Text class file to separate function files
 Fix Changable type (should be Changeable)
 -Add unknown spell checker words to workspace settings
 Test release
