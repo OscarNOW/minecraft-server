@@ -1,6 +1,6 @@
 Implement errorCheck in index.d.ts (when building?)
 Move functions that are in Text class file to separate function files
-Fix Changable type (should be Changeable)
+Fix Changable typo (should be Changeable)
 Test release
     Test release action now that it uses node 20
     Fix {version} in @see JSDOC being incorrect in docs for 1.4.0
