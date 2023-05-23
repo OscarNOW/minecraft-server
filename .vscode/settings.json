@@ -1,5 +1,28 @@
 {
     "search.exclude": {
         "docs/": true
-    }
+    },
+    "cSpell.words": [
+        "boem",
+        "chestplate",
+        "CJSON",
+        "cooldown",
+        "defaultable",
+        "gamemode",
+        "gamemodes",
+        "heightmaps",
+        "hotbar",
+        "infiniburn",
+        "Jeroen",
+        "keybind",
+        "keybinds",
+        "overworld",
+        "piglin",
+        "playerlist",
+        "prismarine",
+        "protodef",
+        "serverlist",
+        "stackable",
+        "ultrawarm"
+    ]
 }
