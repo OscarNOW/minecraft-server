@@ -40,7 +40,7 @@ module.exports = expect => {
             'd'
         ]
     })
-    expect(Text.arrayToChat([{ //todo-imp: failing
+    expect(Text.arrayToChat([{
         text: 'true'
     }]), true)
     expect(Text.arrayToChat(0), 0)
