@@ -5,7 +5,7 @@ const path = require('path');
 
 const { uuid } = require('../../functions/uuid.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
-const Changable = require('./Changable.js');
+const Changeable = require('./Changeable.js');
 const Text = require('../exports/Text.js');
 const { bossBars } = require('./Client/properties/public/dynamic/bossBars.js');
 
@@ -65,7 +65,7 @@ const defaultPrivate = {
         else if (key === 'divisionAmount')
             return `${value}`
         else if (key === 'flags')
-            return new Changable(this.p.updateFlags, {
+            return new Changeable(this.p.updateFlags, {
                 darkenSky: value.darkenSky,
                 playEndMusic: value.playEndMusic,
                 createFog: value.createFog

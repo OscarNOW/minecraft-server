@@ -1,4 +1,4 @@
-const Changable = require('../../../../Changable.js');
+const Changeable = require('../../../../Changeable.js');
 
 module.exports = {
     experience: {
@@ -39,7 +39,7 @@ module.exports = {
                 this.p.emitChange('experience', oldValue);
         },
         init() {
-            this.p._experience = new Changable((function (i) { this.experience = i }).bind(this), {
+            this.p._experience = new Changeable((function (i) { this.experience = i }).bind(this), {
                 bar: 0,
                 level: 0
             });

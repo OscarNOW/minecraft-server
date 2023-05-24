@@ -1,8 +1,8 @@
 const valuesSymbol = Symbol('values');
 
-class Changable {
+class Changeable {
     constructor(changeCallback, startValues) {
-        // todo: add option to define custom name, so that console.log shows for example 'position {' instead of 'Changable {'
+        // todo: add option to define custom name, so that console.log shows for example 'position {' instead of 'Changeable {'
         // todo: or maybe instead change name to "" so that console.log shows ' {'
 
         Object.defineProperty(this, valuesSymbol, {
@@ -38,4 +38,4 @@ class Changable {
     }
 }
 
-module.exports = Changable;
+module.exports = Changeable;

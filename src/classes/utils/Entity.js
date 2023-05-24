@@ -7,7 +7,7 @@ const { uuid } = require('../../functions/uuid.js');
 const path = require('path');
 
 const CustomError = require('./CustomError.js')
-const Changable = require('./Changable.js');
+const Changeable = require('./Changeable.js');
 const Text = require('../exports/Text.js');
 
 const _p = Symbol('private');
@@ -154,7 +154,7 @@ class Entity {
         this.p.typeId = e.id;
         this.p.observables = Object.fromEntries(observables.map(a => [a, []]));
         this.p.sendPacket = sendPacket;
-        this.p._position = new Changable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch }) //todo: add changePosition to private
+        this.p._position = new Changeable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch }) //todo: add changePosition to private
         this.p.events = Object.fromEntries(events.map(a => [a, []]));
 
         if (sendSpawnPacket !== false)

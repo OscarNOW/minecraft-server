@@ -2,7 +2,7 @@
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Changable
  */
-export class Changable {
+export class Changeable {
     constructor(
         changeCallback: (values: {
             [valueName: string | symbol]: unknown;

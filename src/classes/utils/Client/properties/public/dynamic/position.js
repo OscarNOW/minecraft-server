@@ -1,6 +1,6 @@
 const { timing: { teleportConfirmationTimeout }, defaults } = require('../../../../../../settings.json');
 
-const Changable = require('../../../../Changable.js');
+const Changeable = require('../../../../Changeable.js');
 const CustomError = require('../../../../CustomError.js');
 
 module.exports = {
@@ -97,7 +97,7 @@ module.exports = {
         },
         init() {
             this.p.positionSet = false;
-            this.p._position = new Changable((function (i) { this.position = i }).bind(this), defaults.position);
+            this.p._position = new Changeable((function (i) { this.position = i }).bind(this), defaults.position);
 
             this.p.oldPositions = Object.freeze({ // todo: rename <Client>.p.oldPositions to <Client>.p.lastPosition
                 x: this.p._position.x,

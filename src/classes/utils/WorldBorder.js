@@ -1,4 +1,4 @@
-const Changable = require('./Changable.js');
+const Changeable = require('./Changeable.js');
 
 const { worldBorder: defaultWorldBorder } = require('../../functions/loader/data.js');
 
@@ -38,7 +38,7 @@ class WorldBorder {
         this.server = client.server;
         this.p.sendPacket = sendPacket;
 
-        this.p._center = new Changable((value, oldValue) => this.p.updateCenter(value, oldValue), defaultWorldBorder.center);
+        this.p._center = new Changeable((value, oldValue) => this.p.updateCenter(value, oldValue), defaultWorldBorder.center);
     }
 
     transitionRadius(radius, time) {
@@ -115,7 +115,7 @@ class WorldBorder {
     }
 
     set center(newValue) {
-        let oldValue = this.center.raw; // "get <Changable>.raw" returns a copy of the object
+        let oldValue = this.center.raw; // "get <Changeable>.raw" returns a copy of the object
         this.position.setRaw(newValue);
 
         this.p.updateCenter(newValue, oldValue);
