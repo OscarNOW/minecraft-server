@@ -1,4 +1,5 @@
 -Fix some todo's
+Add semicolon rule to eslint
 Implement errorCheck in index.d.ts (when building?)
 Move functions that are in Text class file to separate function files
 Test release
