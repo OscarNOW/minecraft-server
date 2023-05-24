@@ -1,5 +1,3 @@
-//todo: remove unneeded braces
-
 const { textModifiers, textColors, keybinds } = require('../../functions/loader/data');
 const { language } = require('../../settings.json');
 
@@ -417,9 +415,8 @@ function deMinifyChatComponent(chat) {
         typeof chat === 'object' &&
         !Array.isArray(chat) &&
         chat !== null
-    ) {
+    )
         obj = chat;
-    }
 
     for (const extra in obj.extra || [])
         obj.extra[extra] = deMinifyChatComponent(obj.extra[extra]);
