@@ -1,8 +1,7 @@
-//todo: add more semicolons in this file
 //todo: remove unneeded braces
 
 const { textModifiers, textColors, keybinds } = require('../../functions/loader/data');
-const { language } = require('../../settings.json')
+const { language } = require('../../settings.json');
 
 const fs = require('fs');
 const path = require('path');
@@ -50,7 +49,7 @@ class Text {
                 enumerable: false,
                 value: null,
                 writable: true
-            })
+            });
 
         this._input = text;
 
@@ -134,7 +133,7 @@ class Text {
             out += char;
         }
 
-        return out
+        return out;
     }
 
     static arrayToString(a) {
@@ -164,27 +163,27 @@ class Text {
                 if (modCanExtend) {
                     currentModifiers = component.modifiers;
                     for (const v of newMod)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`
+                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
 
-                    text += componentText
+                    text += componentText;
                 } else {
                     currentModifiers = component.modifiers;
-                    text += '§r'
+                    text += '§r';
                     if (component.color !== 'default')
-                        text += `§${textColors.find(({ name }) => name === component.color).char}`
+                        text += `§${textColors.find(({ name }) => name === component.color).char}`;
 
                     for (const modifier of component.modifiers)
-                        text += `§${textModifiers.find(({ name }) => name === modifier).char}`
+                        text += `§${textModifiers.find(({ name }) => name === modifier).char}`;
 
-                    text += componentText
+                    text += componentText;
                 }
             else if (component.color === 'default') {
-                currentColor = 'default'
-                currentModifiers = component.modifiers
-                text += '§r'
+                currentColor = 'default';
+                currentModifiers = component.modifiers;
+                text += '§r';
 
                 for (const modifier of component.modifiers)
-                    text += `§${textModifiers.find(({ name }) => name === modifier).char}`
+                    text += `§${textModifiers.find(({ name }) => name === modifier).char}`;
 
                 text += componentText;
 
@@ -193,17 +192,17 @@ class Text {
                 currentModifiers = component.modifiers;
 
                 if (modCanExtend) {
-                    text += `§${textColors.find(({ name }) => name === component.color).char}`
+                    text += `§${textColors.find(({ name }) => name === component.color).char}`;
 
                     for (const v of newMod)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`
+                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
 
                     text += componentText;
                 } else {
-                    text += `§r§${textColors.find(({ name }) => name === component.color).char}`
+                    text += `§r§${textColors.find(({ name }) => name === component.color).char}`;
 
                     for (const v of component.modifiers)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`
+                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
 
                     text += componentText;
                 }
@@ -245,9 +244,9 @@ class Text {
                             text: current,
                             color: currentColor,
                             modifiers: copy
-                        })
-                        current = ''
-                        currentColor = textColors.find(({ char }) => char === val).name
+                        });
+                        current = '';
+                        currentColor = textColors.find(({ char }) => char === val).name;
                     } else if (textModifiers.find(({ char }) => char === val).name === 'reset') {
                         let copy = Object.assign([], currentModifiers);
                         arr.push({
@@ -265,9 +264,9 @@ class Text {
                                 text: current,
                                 color: currentColor,
                                 modifiers: copy
-                            })
+                            });
                             current = '';
-                            currentModifiers.push(textModifiers.find(({ char }) => char === val).name)
+                            currentModifiers.push(textModifiers.find(({ char }) => char === val).name);
                         }
                     }
                 }
@@ -286,7 +285,7 @@ class Text {
             text: current,
             color: currentColor,
             modifiers: currentModifiers
-        })
+        });
 
         return Text.parseArray(arr);
     }
@@ -314,7 +313,7 @@ class Text {
                     break;
 
                 lastLevel = lastLevel.extra[lastLevel.extra.length - 1];
-                levels.push(lastLevel)
+                levels.push(lastLevel);
             }
 
             for (const levelIndex in levels) {
@@ -334,7 +333,7 @@ class Text {
         }
 
         if (out === undefined)
-            out = { text: '' }
+            out = { text: '' };
 
         return Text.minifyChat(out);
     }
@@ -366,7 +365,7 @@ function parseArrayComponent(component) {
         out = {
             color: component.color || 'default',
             modifiers: [...new Set(component.modifiers || [])].sort()
-        };
+        }
 
         const [type, value] = getTextComponentTypeValue(component);
         out[type] = value;
@@ -375,7 +374,7 @@ function parseArrayComponent(component) {
             out.with = component.with.map(parseArrayComponent);
 
         if (component.insertion)
-            out.insertion = component.insertion
+            out.insertion = component.insertion;
 
         if (
             component.clickEvent &&
@@ -402,7 +401,7 @@ function parseArrayComponent(component) {
             }
     }
 
-    return out
+    return out;
 }
 
 function deMinifyChatComponent(chat) {
@@ -439,16 +438,16 @@ function minifyChatComponent(chat, inherited) {
     let overwrittenProperties = {}
     for (const name in properties)
         if (!compareChatComponentInheritableProperty(properties[name], inherited[name], name))
-            overwrittenProperties[name] = properties[name]
+            overwrittenProperties[name] = properties[name];
 
     for (const name in properties)
         if (overwrittenProperties[name] === undefined)
-            delete chat[name]
+            delete chat[name];
         else
-            chat[name] = overwrittenProperties[name]
+            chat[name] = overwrittenProperties[name];
 
     if (chat.hoverEvent)
-        chat.hoverEvent.value = minifyChatComponent(chat.hoverEvent.value, defaultInheritedChatProperties)
+        chat.hoverEvent.value = minifyChatComponent(chat.hoverEvent.value, defaultInheritedChatProperties);
 
     if (chat.with)
         chat.with = chat.with.map(a => minifyChatComponent(a, properties));
@@ -477,7 +476,7 @@ function minifyChatComponent(chat, inherited) {
         else
             chat = chat.text;
 
-    return chat
+    return chat;
 }
 
 function convertArrayComponentToChatComponent({ with: wit, color, modifiers, insertion, clickEvent, hoverEvent } = {}) {
