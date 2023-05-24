@@ -4,8 +4,18 @@ const { language } = require('../../settings.json');
 const fs = require('fs');
 const path = require('path');
 
-//todo: spread over multiple lines
-const englishMessages = Object.assign({}, JSON.parse(fs.readFileSync(path.join(__dirname, `../../data/messages/game/${language}.json`)).toString()), JSON.parse(fs.readFileSync(path.join(__dirname, `../../data/messages/realms/${language}.json`)).toString()));
+const englishMessages = Object.assign({},
+    JSON.parse(
+        fs.readFileSync(
+            path.join(__dirname, `../../data/messages/game/${language}.json`)
+        ).toString()
+    ),
+    JSON.parse(
+        fs.readFileSync(
+            path.join(__dirname, `../../data/messages/realms/${language}.json`)
+        ).toString()
+    )
+);
 
 const CustomError = require('../utils/CustomError.js');
 const { formatJavaString } = require('../../functions/formatJavaString.js');
