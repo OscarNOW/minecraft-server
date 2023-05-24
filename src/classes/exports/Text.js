@@ -215,12 +215,9 @@ class Text {
     }
 
     static parseArray(arr) {
-        if (!Array.isArray(arr))
-            arr = [arr];
-
+        if (!Array.isArray(arr)) arr = [arr];
         arr = arr.map(parseArrayComponent);
-
-        arr = arr.filter(val => val.text !== '')
+        arr = arr.filter(val => val.text !== '');
 
         return arr;
     }
