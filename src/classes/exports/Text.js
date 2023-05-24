@@ -530,7 +530,7 @@ function convertChatComponentTextToPrimitive(text) {
     if (!isNaN(parseInt(text)))
         return parseInt(text);
     else if (text === 'true' || text === 'false')
-        return text === true;
+        return text === 'true';
     else
         return text;
 }
