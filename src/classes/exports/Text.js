@@ -466,22 +466,10 @@ function minifyChatComponent(chat, inherited) {
         delete chat[0].extra;
 
         if (Object.keys(overwrittenProperties).length === 0 && chat.text !== undefined)
-            //todo: create a separate function for this. Maybe call it smth like convertChatComponentTextToPrimitive
-            if (!isNaN(parseInt(chat[0].text)))
-                chat[0] = parseInt(chat[0].text)
-            else if (chat[0].text === 'true' || chat[0].text === 'false')
-                chat[0] = chat[0].text === true
-            else
-                chat[0] = chat[0].text;
+            chat[0] = convertChatComponentTextToPrimitive(chat[0].text);
 
     } else if (Object.keys(overwrittenProperties).length === 0 && chat.text !== undefined)
-        //todo: create a separate function for this. Maybe call it smth like convertChatComponentTextToPrimitive
-        if (!isNaN(parseInt(chat.text)))
-            chat = parseInt(chat.text)
-        else if (chat.text === 'true' || chat.text === 'false')
-            chat = Boolean(chat.text)
-        else
-            chat = chat.text;
+        chat = convertChatComponentTextToPrimitive(chat.text);
 
     return chat;
 }
@@ -536,6 +524,15 @@ function convertModifierArrayToObject(modifiers) {
             .map(({ name }) => name)
             .map(a => [a, modifiers.includes(a)])
     );
+}
+
+function convertChatComponentTextToPrimitive(text) {
+    if (!isNaN(parseInt(text)))
+        return parseInt(text);
+    else if (text === 'true' || text === 'false')
+        return text === true;
+    else
+        return text;
 }
 
 function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
