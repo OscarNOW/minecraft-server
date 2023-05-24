@@ -13,7 +13,7 @@ Update data
         Move data\keybinds[any].default to language specific
         Create folder for language specific?
 -Test new user experience
-    -Install package in clean dir
-    Test examples
-    Rename build script in package.json because npm will execute that script every time this package is installed
+    Install package in clean dir
+        See /programmeren/minecraft-server-test
+    -Test examples
     Let someone else test it
