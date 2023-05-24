@@ -1,4 +1,4 @@
--Fix some todo's
+Fix some todo's
 Add semicolon rule to eslint
 Implement errorCheck in index.d.ts (when building?)
 Move functions that are in Text class file to separate function files
@@ -12,8 +12,8 @@ Update data
     Think about language and data
         Move data\keybinds[any].default to language specific
         Create folder for language specific?
-Test new user experience
-    Install package in clean dir
+-Test new user experience
+    -Install package in clean dir
     Test examples
     Rename build script in package.json because npm will execute that script every time this package is installed
     Let someone else test it
