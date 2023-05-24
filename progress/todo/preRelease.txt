@@ -1,3 +1,4 @@
+Fix todo-imp
 Fix some todo's
 Add semicolon rule to eslint
 Implement errorCheck in index.d.ts (when building?)
