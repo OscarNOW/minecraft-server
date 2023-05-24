@@ -1,3 +1,6 @@
+//todo: add more semicolons in this file
+//todo: remove unneeded braces
+
 const { textModifiers, textColors, keybinds } = require('../../functions/loader/data');
 const { language } = require('../../settings.json')
 
@@ -459,6 +462,7 @@ function minifyChatComponent(chat, inherited) {
         delete chat[0].extra;
 
         if (Object.keys(overwrittenProperties).length === 0 && chat.text !== undefined)
+            //todo: create a separate function for this. Maybe call it smth like convertChatComponentTextToPrimitive
             if (!isNaN(parseInt(chat[0].text)))
                 chat[0] = parseInt(chat[0].text)
             else if (chat[0].text === 'true' || chat[0].text === 'false')
@@ -467,6 +471,7 @@ function minifyChatComponent(chat, inherited) {
                 chat[0] = chat[0].text;
 
     } else if (Object.keys(overwrittenProperties).length === 0 && chat.text !== undefined)
+        //todo: create a separate function for this. Maybe call it smth like convertChatComponentTextToPrimitive
         if (!isNaN(parseInt(chat.text)))
             chat = parseInt(chat.text)
         else if (chat.text === 'true' || chat.text === 'false')
@@ -482,6 +487,8 @@ function convertArrayComponentToChatComponent({ with: wit, color, modifiers, ins
         color: textColorsWithDefault.find(({ name }) => name === color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
     };
+
+    //todo: split following code into separate function
 
     const [type, value] = getTextComponentTypeValue(arguments[0]);
     out[type] = value;
@@ -530,10 +537,10 @@ function convertModifierArrayToObject(modifiers) {
 function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     let difference = 0;
 
-    if (a.color !== b.color) difference += `,color:"${b.color}"`.length;
+    if (a.color !== b.color) difference += `,color:"${b.color}"`.length; //todo: value is not being escaped. Use JSON.stringify instead
     if (a.insertion !== b.insertion)
         if (b.insertion !== undefined)
-            difference += `,insertion:"${b.insertion}"`.length;
+            difference += `,insertion:"${b.insertion}"`.length; //todo: value is not being escaped. Use JSON.stringify instead
         else
             difference += ',insertion:""'.length;
 
@@ -542,7 +549,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         (a.clickEvent?.value !== b.clickEvent?.value)
     )
         if (b.clickEvent !== undefined)
-            difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length;
+            difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length; //todo: values are not being escaped. Use JSON.stringify instead
         else
             difference += ',clickEvent:{action:"change_page",value:0}'.length;
 
@@ -552,7 +559,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         ((a.hoverEvent && b.hoverEvent) ? !compareChatComponentInheritableProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         if (b.hoverEvent !== undefined)
-            difference += `,hoverEvent:{action:"${b.hoverEvent?.action}",value:${JSON.stringify(b.hoverEvent?.value)}}`.length;
+            difference += `,hoverEvent:{action:"${b.hoverEvent?.action}",value:${JSON.stringify(b.hoverEvent?.value)}}`.length; //todo: b.hoverEvent.action is not being escaped. Use JSON.stringify instead
         else
             difference += ',hoverEvent:{action:"show_text",value:""}'.length;
 
@@ -580,7 +587,7 @@ function compareChatComponentInheritableProperties(a, b) {
     return true;
 }
 
-function compareChatComponentInheritableProperty(a, b, name) {
+function compareChatComponentInheritableProperty(a, b, name) { //todo: make more clear what this function returns. Maybe rename to chatComponentInheritablePropertyEquals
     if (typeof a !== typeof b) return false;
 
     if (
@@ -611,7 +618,7 @@ function getTextComponentTypeValue(component) {
 }
 
 function getTextComponentDefaultText(component) {
-    let [type, value] = getTextComponentTypeValue(component);
+    let [type, value] = getTextComponentTypeValue(component); //todo: why is this function being used?
 
     if (type === 'text')
         return value;
