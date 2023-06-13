@@ -1,4 +1,11 @@
 Fix todo-imp
+Make sure Changelog includes all package updates
+-Test new user experience
+    Install package in clean dir
+        See /programmeren/minecraft-server-test
+    -Test examples
+    Let someone else test it
+
 Fix some todo's
 Add Microsoft credentials
     Also add to github action
@@ -15,8 +22,3 @@ Update data
     Think about language and data
         Move data\keybinds[any].default to language specific
         Create folder for language specific?
--Test new user experience
-    Install package in clean dir
-        See /programmeren/minecraft-server-test
-    -Test examples
-    Let someone else test it
