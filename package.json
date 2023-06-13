@@ -38,14 +38,14 @@
         "axios": "^1.4.0",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
-        "minecraft-protocol": "^1.41.2",
+        "minecraft-protocol": "^1.42.0",
         "prismarine-chunk": "^1.33.1",
         "protodef": "^1.15.0"
     },
     "devDependencies": {
         "eslint": "^8.42.0",
-        "mineflayer": "^4.8.1",
         "typedoc": "^0.24.8",
+        "mineflayer": "^4.9.0",
         "typedoc-theme-hierarchy": "^3.2.0"
     },
     "overrides": {
