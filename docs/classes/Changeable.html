@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changeable x.x.x docs @boem312/minecraft-server</title>
+
+    <script>
+        function getParam(paramName) {
+            let value = location.search
+                .substr(1)
+                .split("&")
+                .find(item => item.split('=')[0] === paramName);
+
+            if (value)
+                return decodeURIComponent(value.split('=')[1]);
+            else
+                return null;
+        }
+
+        let path = '../1.4.0/classes/Changeable';
+
+        if (getParam('unstable') === 'true')
+            path = '../github/classes/Changeable';
+
+        location = path;
+
+    </script>
+</head>
+
+<body>
+    Redirecting...
+</body>
+
+</html>
