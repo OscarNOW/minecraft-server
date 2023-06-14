@@ -1,9 +1,7 @@
-Fix todo-imp
-Make sure Changelog includes all package updates
--Test new user experience
++Test new user experience
     Install package in clean dir
         See /programmeren/minecraft-server-test
-    -Test examples
+    +Test examples
     Let someone else test it
 
 Fix some todo's
