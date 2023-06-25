@@ -21,7 +21,6 @@ const server = new Server({
         `You've connected with the wrong version!\nExtra info:\nip: ${ip}, host: ${host}, port: ${port}, version: ${version}, legacy: ${legacy ? 'yes' : 'no'}`,
 
     defaultClientProperties: client => ({
-        clearSky: true,
         difficulty: client.username === 'notch' ? 'hard' : 'normal',
         food: 20,
         foodSaturation: 5,
