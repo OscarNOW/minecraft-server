@@ -6,7 +6,11 @@ const message = new Text([
         modifiers: [
             'bold',
             'italic'
-        ]
+        ],
+        clickEvent: {
+            action: 'open_url',
+            value: 'https://example.com'
+        }
     },
     {
         text: 'world',
@@ -14,7 +18,11 @@ const message = new Text([
         modifiers: [
             'underline',
             'strike'
-        ]
+        ],
+        clickEvent: {
+            action: 'suggest_command',
+            value: '/example'
+        }
     }
 ]);
 
@@ -23,3 +31,5 @@ const server = new Server();
 server.on('connect', client => {
     client.chat(message)
 });
+
+server.on('listening', () => console.log('Listening on localhost:25565'));
