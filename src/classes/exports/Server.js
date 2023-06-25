@@ -84,7 +84,7 @@ class Server {
                 }));
 
                 let infoVersionWrongText = `${info.version?.wrongText ?? info.version?.correct ?? versions.find(a => a.legacy === false && a.protocol === settings.version).version}`;
-                let infoVersionProtocol = info.version?.correct ? versions.find(a => a.legacy === false && a.version === infoVersionWrongText).protocol : settings.version;
+                let infoVersionProtocol = info.version?.correct ? versions.find(a => a.legacy === false && a.version === info.version.correct).protocol : settings.version;
 
                 //todo: use applyDefaults?
                 if (!info) info = {};
