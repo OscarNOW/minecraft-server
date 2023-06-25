@@ -2,7 +2,7 @@ const { blocks } = require('./loader/data.js');
 const CustomError = require('../classes/utils/CustomError.js');
 
 function getBlockStateId(blockName, state = {}, { function: func } = {}) {
-    //todo: implement cache
+    if (findInCache(blockName, state)) return findInCache(blockName, state);
 
     let block = getBlock.call(this, blockName, { function: func })
     if (!block[2]) return block[1];
@@ -36,7 +36,47 @@ function getBlockStateId(blockName, state = {}, { function: func } = {}) {
         stateId += currentStateIdAndBefore
     })
 
-    return stateId
+    setInCache(blockName, state, stateId);
+    return stateId;
+}
+
+const cache = {
+    'blockName': [
+        {
+            stateId: 1,
+            state: {}
+        }
+    ]
+};
+
+function findInCache(oBlockName, oState) {
+    if (!cache[oBlockName]) return null;
+
+    for (const { stateId, state } of cache[oBlockName])
+        if (compareStates(state, oState))
+            return stateId;
+
+    return null;
+}
+
+//a compareState function that compares two states
+function compareStates(state1, state2) {
+    if (Object.keys(state1).length !== Object.keys(state2).length) return false;
+
+    for (const key of Object.keys(state1))
+        if (state1[key] !== state2[key]) return false;
+
+    return true;
+}
+
+function setInCache(blockName, state, stateId) {
+    if (findInCache(blockName, state) !== null) return;
+
+    if (!cache[blockName]) cache[blockName] = [];
+    cache[blockName].push({
+        stateId,
+        state
+    });
 }
 
 function getBlock(blockName, { function: func } = {}) {
