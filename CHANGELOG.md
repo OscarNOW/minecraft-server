@@ -8,4 +8,4 @@ None
 None
 
 ## Non-code issues fixed
-(Hopefully) fixed readme on npm
+None
