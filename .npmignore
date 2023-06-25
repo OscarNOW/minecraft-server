@@ -23,9 +23,7 @@ progress/
 user/
 
 # Documentation files
-CHANGELOG.md
 FAQ.md
-SECURITY.md
 CONTRIBUTING.md
 CODE_OF_CONDUCT.md
 
