@@ -46,6 +46,9 @@ module.exports = {
         for (const [name, value] of Object.entries(this.p.defaultProperties)) {
             let file = this.p.pubDynProperties[name];
 
+            if (!file)
+                throw new Error(`Unknown defaultProperty "${name}"`)
+
             if (file.info?.defaultAble && file.info.defaultSetTime === 'loginPacket')
                 customLoginProperties[name] = value;
         };
