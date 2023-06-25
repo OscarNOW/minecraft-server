@@ -5,7 +5,8 @@ None
 None
 
 ## Code issues fixed
-None
+* Fixed bug with serverList correct version
+* Added extra user input checks with errors
 
 ## Non-code issues fixed
-* Improved examples
+* Improved and fixed examples
