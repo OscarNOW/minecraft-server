@@ -8,4 +8,4 @@ None
 None
 
 ## Non-code issues fixed
-None
+* Improved examples
