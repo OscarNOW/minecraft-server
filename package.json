@@ -1,6 +1,6 @@
 {
     "name": "@boem312/minecraft-server",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "A pure JS library to create Minecraft Java 1.16.3 servers",
     "main": "index.js",
     "types": "index.d.ts",
@@ -46,7 +46,7 @@
         "eslint": "^8.43.0",
         "mineflayer": "^4.9.0",
         "typedoc": "^0.23.28",
-        "typedoc-theme-hierarchy": "^3.2.0"
+        "typedoc-theme-hierarchy": "^3.2.1"
     },
     "overrides": {
         "jsonwebtoken": "9.0.0"
