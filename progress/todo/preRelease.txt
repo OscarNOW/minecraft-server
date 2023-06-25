@@ -1,7 +1,7 @@
-+Test new user experience
-    Install package in clean dir
-        See /programmeren/minecraft-server-test
-    +Test examples
+-Test new user experience
+    -Test examples
+        examples/server_constructor_advanced not working
+        examples/serverList_advanced not working (even when favicon line is removed)
     Let someone else test it
 
 Fix some todo's
