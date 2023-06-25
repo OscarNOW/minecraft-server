@@ -1,9 +1,5 @@
--Test new user experience
-    -Test examples
-        examples/server_constructor_advanced not working
-        examples/serverList_advanced not working (even when favicon line is removed)
+Test new user experience
     Let someone else test it
-
 Fix some todo's
 Add Microsoft credentials
     Also add to github action
