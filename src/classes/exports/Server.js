@@ -338,7 +338,7 @@ function parseLegacyPing(requestLeft) {
     let request = [];
 
     /* 0 */ request.push(requestLeft.splice(0, 2).join('')) //fe
-    /* 1 */ request.push(hexToNumber(requestLeft.splice(0, requestLeft.join('').indexOf('fa')).join(''))) //payload
+    /* 1 */ request.push(hexToNumber(requestLeft.splice(0, requestLeft.join('').indexOf('fa')).join(''))) //payload //todo: "payload" is unclear, what does this mean?
     /* 2 */ request.push(requestLeft.splice(0, 2).join('')) //fa
 
     //todo: add checks to see if sent information is what we expect
