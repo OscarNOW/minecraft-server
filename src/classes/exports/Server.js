@@ -309,7 +309,6 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
 
         legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
     });
-    let infoVersion = info.version?.correct ?? settings.version; //todo: maybe use "info.version.correct =" like below?
 
     if (!info) info = {};
     if (!info.players) info.players = {};
@@ -317,11 +316,13 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     if (info.players.online === undefined) info.players.online = this.clients.length;
     if (info.description === undefined) info.description = settings.defaults.serverList.motd;
     if (!(info.description instanceof Text)) info.description = new Text(info.description);
+    if (!info.version) info.version = {};
+    if (!info.version.correct) info.version.correct = settings.version;
 
     const responseString = '\xa7' + [
         1,
-        parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
-        `${info.version?.wrongText ?? infoVersion}`,
+        parseInt(versions.find(a => a.legacy === true && a.version === info.version.correct)?.protocol ?? 127),
+        `${info.version?.wrongText ?? info.version.correct}`,
         info.description.string.split('\n')[0], // legacy version only supports one line
         `${info.players.online}`,
         `${info.players.max}`
