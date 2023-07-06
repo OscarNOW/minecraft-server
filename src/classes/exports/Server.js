@@ -318,7 +318,8 @@ function respondToLegacyPing({ protocol, hostname, port }, client, serverList) {
     if (info.description === undefined) info.description = settings.defaults.serverList.motd;
     if (!(info.description instanceof Text)) info.description = new Text(info.description);
 
-    const responseString = '\xa7' + [1,
+    const responseString = '\xa7' + [
+        1,
         parseInt(versions.find(a => a.legacy === true && a.version === infoVersion)?.protocol ?? 127),
         `${info.version?.wrongText ?? infoVersion}`,
         info.description.string.split('\n')[0], // legacy version only supports one line
