@@ -58,7 +58,12 @@ class Server {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
 
         this.serverList = serverList ?? (() => ({}));
-        this.wrongVersionConnect = wrongVersionConnect ?? (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}', settings.version));
+        this.wrongVersionConnect = wrongVersionConnect ??
+            (() => settings.defaults.serverList.wrongVersionConnectMessage.replace('{version}',
+                versions.find(a => a.legacy === false && a.protocol === settings.version)?.version ??
+                versions.find(a => a.legacy === true && a.protocol === settings.version)?.version ??
+                settings.version
+            ));
         this.defaultClientProperties = defaultClientProperties;
         this.p.proxy = proxy;
 
