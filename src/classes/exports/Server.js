@@ -82,7 +82,7 @@ class Server {
                 let info = Object.assign({}, this.serverList({
                     ...this.p.clientInformation.get(client).clientEarlyInformation,
                     version: //todo: give protocolVersion instead of versionName
-                        versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ||
+                        versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ??
                         versions.find(a => a.legacy === !this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version,
 
                     legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
