@@ -13,7 +13,9 @@ None
 * Fixed bug when version name is an empty string
 
 ## Updated dependencies
-None
+* Updated `minecraft-protocol` to `1.43.1` (minor)
+* Updated `mineflayer` to `4.10.0` (minor)
+* Updated `eslint` to `8.44.0` (minor)
 
 ## Non-code issues fixed
 * Improved and fixed examples
