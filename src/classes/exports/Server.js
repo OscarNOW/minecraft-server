@@ -178,7 +178,7 @@ class Server {
                 };
                 this.p.clientInformation.get(client).clientLegacyPing = false;
 
-                if ((clientState === 'login' && (this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy)) {
+                if ((clientState === 'login' && (this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy)) { //todo: is it (clientState && version) || isLegacy or clientState && (version || isLegacy)
                     let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
 
                     if (typeof endReason === 'string')
