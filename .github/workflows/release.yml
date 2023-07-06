@@ -93,6 +93,9 @@ jobs:
             ## Code issues fixed
             None
 
+            ## Updated dependencies
+            None
+
             ## Non-code issues fixed
             None
           write-mode: overwrite

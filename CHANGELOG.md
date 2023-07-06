@@ -12,5 +12,8 @@ None
 * Fixed wrongVersionConnect to display version name
 * Fixed bug when version name is an empty string
 
+## Updated dependencies
+None
+
 ## Non-code issues fixed
 * Improved and fixed examples
