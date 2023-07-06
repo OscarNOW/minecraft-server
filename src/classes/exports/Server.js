@@ -341,6 +341,7 @@ function parseLegacyPing(requestLeft) {
     /* 1 */ request.push(hexToNumber(requestLeft.splice(0, requestLeft.join('').indexOf('fa')).join(''))) //payload
     /* 2 */ request.push(requestLeft.splice(0, 2).join('')) //fa
 
+    //todo: add checks to see if sent information is what we expect
     if (requestLeft.length === 0) return { protocol: null, hostname: null, port: null } //The client didn't send any information
 
     /* 3 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //000b (=11) length of following string
@@ -350,6 +351,7 @@ function parseLegacyPing(requestLeft) {
     /* 7 */ request.push(hexToNumber(requestLeft.splice(0, 4).join(''))) //length of following string
     /* 8 */ request.push(hexToString(requestLeft.splice(0, request[7] * 4).join(''))) //hostname
     /* 9 */ request.push(hexToNumber(requestLeft.splice(0, 8).join(''))) //port
+    //todo: add checks to see if sent information is what we expect
 
     return {
         protocol: request[6],
