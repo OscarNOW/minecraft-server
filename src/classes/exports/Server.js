@@ -52,10 +52,24 @@ const events = Object.freeze([
     'error'
 ]);
 
-const privates = new WeakMap();
+const _p = Symbol('_privates');
 
 class Server {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
+        Object.defineProperty(this, _p, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: {}
+        });
+
+        for (const [key, value] of Object.entries(defaultPrivate)) {
+            let newValue = value;
+            if (typeof newValue === 'function')
+                newValue = newValue.bind(this);
+
+            this[_p][key] = newValue;
+        };
 
         this.serverList = serverList ?? (() => ({}));
         this.wrongVersionConnect = wrongVersionConnect ??
@@ -224,21 +238,7 @@ class Server {
         if (!callPath.startsWith(folderPath))
             console.warn('(minecraft-server) WARNING: Detected access to private properties from outside of the module. This is not recommended and may cause unexpected behavior.');
 
-        if (!privates.get(this)) { //todo: create private when instantiating class
-            let newPrivate = {};
-
-            for (const [key, value] of Object.entries(defaultPrivate)) {
-                let newValue = value;
-                if (typeof newValue === 'function')
-                    newValue = newValue.bind(this);
-
-                newPrivate[key] = newValue;
-            }
-
-            privates.set(this, newPrivate);
-        }
-
-        return privates.get(this);
+        return this[_p];
     }
 
     set p(value) {
