@@ -16,6 +16,8 @@ export class Block {
     readonly block: blockName; //todo: rename block to name
     readonly state: blockState;
     readonly stateId: number;
+
+    //todo: add types for property p
 }
 
 type relativeBlocksSegment = {
