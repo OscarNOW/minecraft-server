@@ -8,6 +8,9 @@ Resources:
 [Docs](https://oscarnow.github.io/minecraft-server/)
 
 <p align="center">
+    <a href='https://codespaces.new/OscarNOW/minecraft-server'>
+        <img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces'>
+    </a>
     <a href="https://gitpod.io/#https://github.com/OscarNOW/minecraft-server">
         <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod">
     </a>
