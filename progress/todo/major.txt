@@ -1,5 +1,7 @@
 Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
-    Make <Server>.server private and not show up in console.log(
+    Block
+    Text
+    Slot
 Change supplied earlyInfo version to protocolVersion
 Change src\settings.defaults.serverList.maxPlayers to 0?
 Change <Client>.brand

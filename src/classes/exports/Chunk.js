@@ -1,6 +1,13 @@
 const { version } = require('../../settings.json');
 const { chunkSize } = require('../../functions/loader/data.js');
 
+const crypto = require('crypto');
+const path = require('path');
+
+const CustomError = require('../utils/CustomError.js');
+const Block = require('../utils/Block.js');
+const { getBlockStateId } = require('../../functions/getBlockStateId.js');
+
 let cachedPChunk;
 const PChunk = () => {
     if (cachedPChunk === undefined)
@@ -9,11 +16,7 @@ const PChunk = () => {
     return cachedPChunk;
 };
 
-const crypto = require('crypto');
-const CustomError = require('../utils/CustomError.js');
-const Block = require('../utils/Block.js');
-const { getBlockStateId } = require('../../functions/getBlockStateId.js');
-
+const _p = Symbol('_privates');
 let chunkDataCache = {};
 
 class Chunk {
@@ -21,18 +24,40 @@ class Chunk {
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
-        this._hash = chunk?.hash || null;
-        this._chunk = null;
-        this._blocks = null;
+        this.p._hash = chunk?.hash || null;
+        this.p._chunk = null;
+        this.p._blocks = null;
 
         this.inheritedChunk = chunk;
     }
 
-    get blocks() {
-        if (this._blocks)
-            return this._blocks;
+    get p() {
+        let callPath = new Error().stack.split('\n')[2];
 
-        this._blocks = {};
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (!callPath.startsWith(folderPath))
+            console.warn('(minecraft-server) WARNING: Detected access to private properties from outside of the module. This is not recommended and may cause unexpected behavior.');
+
+        return this[_p];
+    }
+
+    set p(value) {
+        console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
+    }
+
+    get blocks() {
+        if (this.p._blocks)
+            return this.p._blocks;
+
+        this.p._blocks = {};
 
         //copy prismarine chunk to allow new chunk to be changed without affecting the original
         if (this.inheritedChunk?.blocks)
@@ -40,37 +65,37 @@ class Chunk {
             for (const x in this.inheritedChunk.blocks)
                 for (const y in this.inheritedChunk.blocks[x])
                     for (const z in this.inheritedChunk.blocks[x][y]) {
-                        if (!this._blocks[x])
-                            this._blocks[x] = {};
+                        if (!this.p._blocks[x])
+                            this.p._blocks[x] = {};
 
-                        if (!this._blocks[x][y])
-                            this._blocks[x][y] = {};
+                        if (!this.p._blocks[x][y])
+                            this.p._blocks[x][y] = {};
 
-                        this._blocks[x][y][z] = new Block(this.inheritedChunk.blocks[x][y][z].block, this.inheritedChunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
+                        this.p._blocks[x][y][z] = new Block(this.inheritedChunk.blocks[x][y][z].block, this.inheritedChunk.blocks[x][y][z].state, { x: parseInt(x) + this.blocksOffset.x, y: parseInt(y) + this.blocksOffset.y, z: parseInt(z) + this.blocksOffset.z });
                     };
 
-        return this._blocks;
+        return this.p._blocks;
     }
 
     get chunk() {
-        if (this._chunk)
-            return this._chunk;
+        if (this.p._chunk)
+            return this.p._chunk;
 
-        this._chunk = new (PChunk())();
+        this.p._chunk = new (PChunk())();
 
         for (const x in this.blocks)
             for (const y in this.blocks[x])
                 for (const z in this.blocks[x][y])
-                    this._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
+                    this.p._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
 
-        return this._chunk;
+        return this.p._chunk;
     }
 
     get hash() {
-        if (this._hash === null)
-            this._hash = crypto.createHash('sha256').update(this.chunk.toJson()).digest('base64');
+        if (this.p._hash === null)
+            this.p._hash = crypto.createHash('sha256').update(this.chunk.toJson()).digest('base64');
 
-        return this._hash;
+        return this.p._hash;
     }
 
     get chunkData() {
@@ -118,7 +143,7 @@ class Chunk {
     updateBlock(blockName, { x, y, z }, state = {}) {
         this.checkNewBlock(blockName, { x, y, z });
 
-        if (this._chunk)
+        if (this.p._chunk)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
 
         if (blockName === 'air') {

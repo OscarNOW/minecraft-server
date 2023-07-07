@@ -55,4 +55,6 @@ export class Chunk {
         y: number;
         z: number;
     }, state?: blockState): this;
+
+    //todo: add types for property p
 }
