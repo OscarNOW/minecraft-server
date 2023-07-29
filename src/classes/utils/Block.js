@@ -5,9 +5,16 @@ const _p = Symbol('_privates');
 
 class Block {
     constructor(name, state = {}, { x, y, z }) {
-        this._block = name;
-        this._state = state;
-        this._stateId = null;
+        Object.defineProperty(this, _p, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: {}
+        });
+
+        this.p._block = name;
+        this.p._state = state;
+        this.p._stateId = null;
 
         this.x = x;
         this.y = y;
@@ -37,18 +44,18 @@ class Block {
     }
 
     get stateId() {
-        if (this._stateId === null)
-            this._stateId = getBlockStateId(this.block, this.state);
+        if (this.p._stateId === null)
+            this.p._stateId = getBlockStateId(this.block, this.state);
 
-        return this._stateId;
+        return this.p._stateId;
     }
 
     get block() {
-        return this._block;
+        return this.p._block;
     }
 
     get state() {
-        return this._state;
+        return this.p._state;
     }
 }
 
