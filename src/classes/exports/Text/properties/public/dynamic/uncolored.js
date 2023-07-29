@@ -2,14 +2,14 @@ module.exports = {
     get() {
         const Text = require('../../../../Text.js');
 
-        if (this._uncolored === null)
-            this._uncolored = Text.stringToUncolored(this.string)
+        if (this.p._uncolored === null)
+            this.p._uncolored = Text.stringToUncolored(this.string)
 
-        return this._uncolored;
+        return this.p._uncolored;
     },
     set(val) {
-        this.__reset();
-        this._input = val;
-        this.__emitChange();
+        this.p.reset();
+        this.p._input = val;
+        this.p.emitChange();
     }
 }

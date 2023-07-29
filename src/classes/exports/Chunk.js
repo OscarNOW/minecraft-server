@@ -21,6 +21,13 @@ let chunkDataCache = {};
 
 class Chunk {
     constructor(chunk, blockUpdateCallback, blocksOffset) {
+        Object.defineProperty(this, _p, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: {}
+        });
+
         this.blockUpdateCallback = blockUpdateCallback || chunk?.blockUpdateCallback || undefined;
         this.blocksOffset = blocksOffset || chunk?.blocksOffset || { x: 0, y: 0, z: 0 };
 
