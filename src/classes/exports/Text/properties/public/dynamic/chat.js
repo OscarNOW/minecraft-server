@@ -2,9 +2,9 @@ module.exports = {
     get() {
         const Text = require('../../../../Text.js');
 
-        if (this._chat === null)
-            this._chat = Text.arrayToChat(this.array);
+        if (this.p._chat === null)
+            this.p._chat = Text.arrayToChat(this.array);
 
-        return this._chat;
+        return this.p._chat;
     }
 }

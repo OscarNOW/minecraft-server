@@ -2,14 +2,14 @@ module.exports = {
     get() {
         const Text = require('../../../../Text.js');
 
-        if (this._string === null)
-            this._string = Text.arrayToString(this.array)
+        if (this.p._string === null)
+            this.p._string = Text.arrayToString(this.array)
 
-        return this._string;
+        return this.p._string;
     },
     set(val) {
-        this.__reset();
-        this._input = val;
-        this.__emitChange();
+        this.p.reset();
+        this.p._input = val;
+        this.p.emitChange();
     }
 }
