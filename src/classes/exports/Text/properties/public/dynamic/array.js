@@ -2,21 +2,21 @@ module.exports = {
     get() {
         const Text = require('../../../../Text.js');
 
-        let inp = this._input;
+        let inp = this.p._input;
         if (inp !== null)
             if (typeof inp === 'string') {
-                this.__reset();
-                this._array = Text.stringToArray(inp);
+                this.p.reset();
+                this.p._array = Text.stringToArray(inp);
             } else {
-                this.__reset();
-                this._array = Text.parseArray(inp);
+                this.p.reset();
+                this.p._array = Text.parseArray(inp);
             }
 
-        return this._array;
+        return this.p._array;
     },
     set(val) {
-        this.__reset();
-        this._input = val;
-        this.__emitChange();
+        this.p.reset();
+        this.p._input = val;
+        this.p.emitChange();
     }
 }
