@@ -1,3 +1,2 @@
 Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
-    -Text
     Slot
