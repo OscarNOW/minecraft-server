@@ -32,6 +32,7 @@ const hiddenProperties = [
     '_hash'
 ];
 
+const _p = Symbol('_privates')
 const events = Object.freeze([
     'change'
 ]);
@@ -51,15 +52,17 @@ const defaultInheritedChatProperties = Object.freeze({
 
 class Text {
     constructor(text = '') {
-        for (const hiddenProperty of hiddenProperties)
-            Object.defineProperty(this, hiddenProperty, {
-                configurable: false,
-                enumerable: false,
-                value: null,
-                writable: true
-            });
+        Object.defineProperty(this, _p, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: {}
+        });
 
-        this._input = text;
+        for (const hiddenProperty of hiddenProperties)
+            this.p[hiddenProperty] = null;
+
+        this.p._input = text;
 
         this.events = Object.freeze(Object.fromEntries(events.map(a => [a, []])));
 
@@ -70,16 +73,38 @@ class Text {
                 get,
                 set
             });
+
+        this.p.reset = () => {
+            for (const hiddenProperty of hiddenProperties)
+                this[hiddenProperty] = null;
+        };
+
+        this.p.emitChange = () => {
+            for (const { callback } of this.events.change)
+                callback(this);
+        };
     }
 
-    __reset() {
-        for (const hiddenProperty of hiddenProperties)
-            this[hiddenProperty] = null;
+    get p() {
+        let callPath = new Error().stack.split('\n')[2];
+
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (!callPath.startsWith(folderPath))
+            console.warn('(minecraft-server) WARNING: Detected access to private properties from outside of the module. This is not recommended and may cause unexpected behavior.');
+
+        return this[_p];
     }
 
-    __emitChange() {
-        for (const { callback } of this.events.change)
-            callback(this);
+    set p(value) {
+        console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
     }
 
     removeAllListeners(event) {

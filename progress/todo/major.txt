@@ -1,7 +1,3 @@
-Add better private properties to all classes that need it (Chunk, Block, Text, Slot)
-    -Block
-    Text
-    Slot
 Change supplied earlyInfo version to protocolVersion
 Change src\settings.defaults.serverList.maxPlayers to 0?
 Change <Client>.brand
