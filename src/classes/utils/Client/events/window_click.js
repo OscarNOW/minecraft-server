@@ -3,7 +3,7 @@ const { inventory } = require('../properties/public/dynamic/inventory.js');
 
 const cursorSlotId = -1; //todo: move to data file
 
-// https://minecraft.fandom.com/wiki/Inventory#Managing_inventory
+// https://minecraft.wiki/w/Inventory#Managing_inventory
 
 module.exports = {
     // window_click({ windowId, slot: clickedSlotId, mouseButton, mode, item: claimedClickedSlot }) {
