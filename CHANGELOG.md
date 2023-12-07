@@ -1,5 +1,5 @@
 ## Existing API changes
-None
+- Removed support for node 16
 
 ## New API
 None
