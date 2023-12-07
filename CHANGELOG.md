@@ -8,7 +8,7 @@ None
 None
 
 ## Updated dependencies
-None
+- Updated several dependencies
 
 ## Non-code issues fixed
 None
