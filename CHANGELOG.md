@@ -1,5 +1,5 @@
 ## Existing API changes
-None
+- Removed support for node 16
 
 ## New API
 None
@@ -8,7 +8,7 @@ None
 None
 
 ## Updated dependencies
-None
+- Updated several dependencies
 
 ## Non-code issues fixed
 None
