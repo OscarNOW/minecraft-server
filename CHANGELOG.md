@@ -1,5 +1,5 @@
 ## Existing API changes
-- Removed support for node 16
+None
 
 ## New API
 None
@@ -8,8 +8,7 @@ None
 None
 
 ## Updated dependencies
-- Updated several dependencies
-- Updated axios because of security vulnerability
+None
 
 ## Non-code issues fixed
 None
