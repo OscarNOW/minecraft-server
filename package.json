@@ -35,7 +35,7 @@
     },
     "homepage": "https://oscarnow.github.io/minecraft-server/",
     "dependencies": {
-        "axios": "^1.6.2",
+        "axios": "^1.6.3",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.0.2",
         "minecraft-protocol": "^1.45.0",
