@@ -37,7 +37,7 @@
     "dependencies": {
         "axios": "^1.6.3",
         "endian-toggle": "^0.0.0",
-        "image-size": "^1.1.0",
+        "image-size": "^1.1.1",
         "minecraft-protocol": "^1.45.0",
         "prismarine-chunk": "^1.35.0",
         "protodef": "^1.15.0"
