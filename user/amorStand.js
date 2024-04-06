@@ -4,7 +4,7 @@ let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++)
         for (let y = 0; y < 100; y++)
-            chunk.setBlock({ x, y, z }, 'dirt')
+            chunk.setBlock('dirt', { x, y, z })
 
 const server = new Server({
     defaultClientProperties: () => ({
@@ -25,7 +25,7 @@ server.on('connect', client => {
     let isFirst = server.clients.length === 1;
 
     if (isFirst)
-        client.observe('position', pos => {
+        client.on('change', 'position', pos => {
             console.log(pos.yaw)
             if (armorStand) {
                 armorStand.position = pos;
@@ -33,7 +33,7 @@ server.on('connect', client => {
         })
     else {
         armorStand = client.entity('armor_stand', { x: 3, y: 101, z: 3 });
-        client.observe('slot', () => {
+        client.on('change', 'slot', () => {
             armorStand.camera();
             client.on('leave', process.exit)
         })
