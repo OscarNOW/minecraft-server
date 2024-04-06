@@ -62,8 +62,6 @@ const defaultPrivate = {
                 return new Text(value);
             else
                 return value;
-        else if (key === 'divisionAmount')
-            return `${value}`
         else if (key === 'flags')
             return new Changeable(this.p.updateFlags, {
                 darkenSky: value.darkenSky,
