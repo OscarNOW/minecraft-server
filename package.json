@@ -1,6 +1,6 @@
 {
     "name": "@boem312/minecraft-server",
-    "version": "1.4.5",
+    "version": "1.4.6",
     "description": "A pure JS library to create Minecraft Java 1.16.3 servers",
     "main": "index.js",
     "types": "index.d.ts",
@@ -35,16 +35,16 @@
     },
     "homepage": "https://oscarnow.github.io/minecraft-server/",
     "dependencies": {
-        "axios": "^1.6.7",
+        "axios": "^1.6.8",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.1.1",
-        "minecraft-protocol": "^1.45.0",
+        "minecraft-protocol": "^1.46.0",
         "prismarine-chunk": "^1.35.0",
         "protodef": "^1.15.0"
     },
     "devDependencies": {
-        "mineflayer": "^4.18.0",
-        "eslint": "^8.56.0",
+        "mineflayer": "^4.20.0",
+        "eslint": "^8.57.0",
         "typedoc": "^0.23.28",
         "typedoc-theme-hierarchy": "^3.2.1"
     },
