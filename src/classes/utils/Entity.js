@@ -134,8 +134,8 @@ class Entity {
         this.sever = client.server;
         this.p.beforeRemove = beforeRemove;
 
-        let e = getEntity(type);
-        if (e === undefined)
+        let [typeId, e] = getEntity(type) || [];
+        if (!e)
             this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
                 got: type,
                 expectationType: 'type',
@@ -151,7 +151,7 @@ class Entity {
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        this.p.typeId = e.id;
+        this.p.typeId = typeId;
         this.p.observables = Object.fromEntries(observables.map(a => [a, []]));
         this.p.sendPacket = sendPacket;
         this.p._position = new Changeable((value, oldValue) => changePosition.call(this, value, oldValue), { x, y, z, yaw, pitch }) //todo: add changePosition to private
@@ -353,7 +353,11 @@ class Entity {
 }
 
 function getEntity(searchName) {
-    return entities.find(({ name }) => name === searchName) ?? undefined;
+    const index = entities.findIndex(({ name }) => name === searchName);
+    if (index === -1)
+        return undefined;
+
+    return [index, entities[index]];
 }
 
 module.exports = Entity
