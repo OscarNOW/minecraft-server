@@ -26,7 +26,6 @@ server.on('connect', client => {
 
     if (isFirst)
         client.on('change', 'position', pos => {
-            console.log(pos.yaw)
             if (armorStand) {
                 armorStand.position = pos;
             }
@@ -39,3 +38,5 @@ server.on('connect', client => {
         })
     }
 })
+
+server.on('listening', () => console.log('Listening on localhost:25565'));
