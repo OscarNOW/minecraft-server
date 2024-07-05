@@ -45,8 +45,8 @@
     "devDependencies": {
         "mineflayer": "^4.20.1",
         "eslint": "^9.6.0",
-        "typedoc": "^0.23.28",
-        "typedoc-theme-hierarchy": "^3.2.1"
+        "typedoc": "^0.26.3",
+        "typedoc-theme-hierarchy": "^5.0.3"
     },
     "overrides": {
         "jsonwebtoken": "9.0.0"
