@@ -1,1 +1,95 @@
-{"version":753,"language":"en_us","typedoc":{"arguments":[],"namedSettings":{"theme":"hierarchy","name":"@boem312/minecraft-server","gitRemote":"origin","logLevel":"Verbose"},"settings":["disableSources","hideGenerator","skipErrorChecking"],"paths":{"types":"./src/docs/index.d.ts","readme":"./src/docs/README.md","tsconfig":"./src/docs/tsconfig.json","out":"./docs/github/","plugin":"./node_modules/typedoc-theme-hierarchy/dist/index.js"},"sort":["visibility","static-first","required-first","alphabetical"]},"timing":{"keepAliveTimeout":30000,"sendKeepAliveInterval":3000,"teleportConfirmationTimeout":5000,"skinFetchTimeout":3000},"defaults":{"gamemode":"survival","showRespawnScreen":true,"reducedDebugInfo":false,"serverList":{"maxPlayers":100,"motd":"","wrongVersionConnectMessage":"{version}"},"position":{"x":0,"y":0,"z":0,"yaw":0,"pitch":0},"experienceOrb":{"experience":1},"bossBar":{"title":"","health":1,"color":"purple","divisionAmount":0,"flags":{"darkenSky":false,"playEndMusic":false,"createFog":false}},"entity":{"position":{"yaw":0,"pitch":0}},"title":{"fadeIn":10,"stay":40,"fadeOut":10,"title":"","subTitle":""},"tabItem":{"name":"","uuid":null,"ping":null},"player":{"gamemode":null,"name":null,"uuid":null,"tabItem":null}},"links":{"docs":"https://oscarnow.github.io/minecraft-server"}}
+{
+    "version": 753,
+    "language": "en_us",
+    "typedoc": {
+        "arguments": [],
+        "namedSettings": {
+            "theme": "hierarchy",
+            "name": "@boem312/minecraft-server",
+            "gitRemote": "origin",
+            "logLevel": "Verbose"
+        },
+        "settings": [
+            "disableSources",
+            "hideGenerator",
+            "skipErrorChecking"
+        ],
+        "paths": {
+            "types": "./src/docs/index.d.ts",
+            "readme": "./src/docs/README.md",
+            "tsconfig": "./src/docs/tsconfig.json",
+            "out": "./docs/github/",
+            "plugin": "./node_modules/typedoc-theme-hierarchy/dist/index.js"
+        },
+        "sort": [
+            "visibility",
+            "static-first",
+            "required-first",
+            "alphabetical"
+        ]
+    },
+    "timing": {
+        "keepAliveTimeout": 30000,
+        "sendKeepAliveInterval": 3000,
+        "teleportConfirmationTimeout": 5000,
+        "skinFetchTimeout": 3000
+    },
+    "defaults": {
+        "gamemode": "survival",
+        "showRespawnScreen": true,
+        "reducedDebugInfo": false,
+        "serverList": {
+            "maxPlayers": 100,
+            "motd": "",
+            "wrongVersionConnectMessage": "{version}"
+        },
+        "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "yaw": 0,
+            "pitch": 0
+        },
+        "experienceOrb": {
+            "experience": 1
+        },
+        "bossBar": {
+            "title": "",
+            "health": 1,
+            "color": "purple",
+            "divisionAmount": 0,
+            "flags": {
+                "darkenSky": false,
+                "playEndMusic": false,
+                "createFog": false
+            }
+        },
+        "entity": {
+            "position": {
+                "yaw": 0,
+                "pitch": 0
+            }
+        },
+        "title": {
+            "fadeIn": 10,
+            "stay": 40,
+            "fadeOut": 10,
+            "title": "",
+            "subTitle": ""
+        },
+        "tabItem": {
+            "name": "",
+            "uuid": null,
+            "ping": null
+        },
+        "player": {
+            "gamemode": null,
+            "name": null,
+            "uuid": null,
+            "tabItem": null
+        }
+    },
+    "links": {
+        "docs": "https://oscarnow.github.io/minecraft-server"
+    }
+}
