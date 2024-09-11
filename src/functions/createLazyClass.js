@@ -32,4 +32,4 @@ function createLazyClass(loadTarget, name) {
 
 };
 
-module.exports = Object.freeze({ createLazyClass });
+module.exports = { createLazyClass };

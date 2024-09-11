@@ -10,7 +10,7 @@ const replaceableStrings = Object.freeze([
     }
 ])
 
-module.exports = Object.freeze({
+module.exports = {
     formatJavaString: (string, ...args) => {
         for (const { code, validInputTypes, validInputs } of replaceableStrings) {
             let replaceableStringIndex = 0;
@@ -63,4 +63,4 @@ module.exports = Object.freeze({
 
         return string;
     }
-})
+}

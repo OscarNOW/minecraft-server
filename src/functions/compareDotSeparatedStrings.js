@@ -12,4 +12,4 @@ function compareDotSeparatedStrings(a, b) {
     return 0;
 };
 
-module.exports = Object.freeze({ compareDotSeparatedStrings });
+module.exports = { compareDotSeparatedStrings };

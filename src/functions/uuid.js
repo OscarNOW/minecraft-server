@@ -14,4 +14,4 @@ function uuid() {
         lut[d3 & 0xff] + lut[d3 >> 8 & 0xff] + lut[d3 >> 16 & 0xff] + lut[d3 >> 24 & 0xff];
 }
 
-module.exports = Object.freeze({ uuid });
+module.exports = { uuid };
