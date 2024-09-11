@@ -13,7 +13,7 @@ const defaults = require('../../settings.json').defaults;
 const playerDefaults = defaults.player;
 const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
-const _p = Symbol('private (Player)'); //todo: make the name of this symbol consistent with the other names of privates
+const _p = Symbol('_privates');
 const defaultPrivate = {
     parseProperty(key, value) {
         if (key === 'name' && !(value instanceof Text))
