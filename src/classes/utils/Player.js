@@ -144,69 +144,63 @@ class Player extends Entity {
             })]
         });
 
-        // applyDefaults
-        extraInfo = applyDefaults(extraInfo, playerDefaults);
-        if (extraInfo.tabItem !== null)
-            this.tabItem = extraInfo.tabItem;
+        (async () => {
+            // applyDefaults
+            extraInfo = applyDefaults(extraInfo, playerDefaults);
+            if (extraInfo.tabItem !== null)
+                this.tabItem = extraInfo.tabItem;
 
-        if (extraInfo.gamemode === null)
-            extraInfo.gamemode = defaults.gamemode;
+            if (extraInfo.gamemode === null)
+                extraInfo.gamemode = defaults.gamemode;
 
-        if (extraInfo.name === null)
-            if (this.tabItem)
-                if (this.tabItem.name.string.slice(2).length <= 16)
-                    extraInfo.name = this.tabItem.name.string.slice(2);
-                else if (this.tabItem.name.uncolored.length <= 16)
-                    extraInfo.name = this.tabItem.name.uncolored;
+            if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
+                extraInfo.uuid = this.tabItem.uuid;
+                this.p2.skinAccountUuid = extraInfo.uuid
+            }
+            else if (extraInfo.uuid !== null)
+                this.p2.skinAccountUuid = extraInfo.uuid;
+            else if (extraInfo.uuid === null) {
+                extraInfo.uuid = uuid().split('');
+                extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+                extraInfo.uuid = extraInfo.uuid.join('');
+
+                this.p2.skinAccountUuid = null;
+            };
+
+            if (!this.tabItem)
+                this.tabItem = await new Promise(res => {
+                    console.log('player uuid', extraInfo.uuid)
+                    new TabItem({ uuid: extraInfo.uuid }, this.client, this.client.p.sendPacket, res, { sendSpawnPacket: false });
+                });
+
+            if (extraInfo.name === null)
+                if (this.tabItem)
+                    if (this.tabItem.name.string.slice(2).length <= 16)
+                        extraInfo.name = this.tabItem.name.string.slice(2);
+                    else if (this.tabItem.name.uncolored.length <= 16)
+                        extraInfo.name = this.tabItem.name.uncolored;
+                    else
+                        extraInfo.name = '';
                 else
                     extraInfo.name = '';
-            else
-                extraInfo.name = '';
 
-        if (extraInfo.name.length > 16)
-            return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
-                got: extraInfo.name,
-                expectationType: 'type',
-                expectation: 'string.length <= 16'
-            }, null, { server: this.server, client: this.client }))
+            if (extraInfo.name.length > 16)
+                return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
+                    got: extraInfo.name,
+                    expectationType: 'type',
+                    expectation: 'string.length <= 16'
+                }, null, { server: this.server, client: this.client }))
 
-        if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
-            extraInfo.uuid = this.tabItem.uuid;
-            this.p2.skinAccountUuid = extraInfo.uuid
-        }
-        else if (extraInfo.uuid !== null)
-            this.p2.skinAccountUuid = extraInfo.uuid;
-        else if (extraInfo.uuid === null) {
-            extraInfo.uuid = uuid().split('');
-            extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
-            extraInfo.uuid = extraInfo.uuid.join('');
+            // parseProperties
+            extraInfo = this.p2.parseProperties.call(this, extraInfo);
 
-            this.p2.skinAccountUuid = null;
-        };
+            // set private properties
+            this.p2._ = {};
+            for (const propertyName of writablePropertyNames)
+                this.p2._[propertyName] = extraInfo[propertyName];
 
-        // parseProperties
-        extraInfo = this.p2.parseProperties.call(this, extraInfo);
-
-        // set private properties
-        this.p2._ = {};
-        for (const propertyName of writablePropertyNames)
-            this.p2._[propertyName] = extraInfo[propertyName];
-
-        if (this.tabItem)
-            this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
-
-        (async () => {
-            // update properties if not same as tabItem
-            if (this.tabItem) {
-                if (extraInfo.gamemode !== this.tabItem.p.gamemode)
-                    await this.p2.updateProperty.call(this, 'gamemode');
-
-                if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
-                    await this.p2.updateProperty.call(this, 'name');
-
-                if (extraInfo.uuid !== this.tabItem.uuid)
-                    await this.p2.updateProperty.call(this, 'uuid');
-            }
+            if (this.tabItem)
+                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
 
             // define getters and setters
             for (const propertyName of writablePropertyNames)
@@ -222,12 +216,16 @@ class Player extends Entity {
                     }
                 });
 
-            const tabItem = await new Promise(res => {
-                new TabItem({ uuid: this.uuid }, this.client, this.client.p.sendPacket, res, { sendSpawnPacket: false })
-            });
+            if (this.tabItem) {
+                if (extraInfo.gamemode !== this.tabItem.p.gamemode)
+                    await this.p2.updateProperty.call(this, 'gamemode');
 
-            this.tabItem = tabItem;
-            this.tabItem.player = this;
+                if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
+                    await this.p2.updateProperty.call(this, 'name');
+
+                if (extraInfo.uuid !== this.tabItem.uuid)
+                    await this.p2.updateProperty.call(this, 'uuid');
+            }
 
             await this.p2.spawn.call(this);
             cb(this);

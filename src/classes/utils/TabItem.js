@@ -87,7 +87,7 @@ const defaultPrivate = {
         this.p.sendPacket('player_info', {
             action: 4,
             data: [{
-                UUID: oldUuid
+                UUID: oldUuid ?? this.uuid
             }]
         });
     },
@@ -179,7 +179,7 @@ class TabItem {
             this.player.tabItem = null;
             this.player = null;
         }
-        this.p.remove.call(this, this.uuid);
+        this.p.remove.call(this);
         tabItems.set.call(this.client,
             Object.freeze(
                 sortTabItems(
