@@ -49,17 +49,14 @@ server.on('connect', async client => {
 
     // client.on('chat', a => { console.log(a); eval(a) })
 
-    console.log(1, client.tabItems)
-
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     });
 
-    console.log(2, client.tabItems)
-
-    client.on('chat', () => { player.playerInfo.name = 'Hi' })
+    client.on('chat', (a) => { player.name = a });
+    client.on('change', 'slot', () => { player.tabItem.name = 'Test' });
 
     // client.on('armSwing', () => {
     //     player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
