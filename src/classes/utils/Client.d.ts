@@ -489,7 +489,7 @@ export class Client {
                 gamemode?: gamemode;
             } :
             never
-    ): EntityConditional<name>;
+    ): name extends 'player' ? Promise<EntityConditional<name>> : EntityConditional<name>;
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;
