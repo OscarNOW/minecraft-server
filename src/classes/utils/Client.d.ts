@@ -469,32 +469,27 @@ export class Client {
         x: number;
         z: number;
     }): void;
-    entity<name extends defaultArgumentEntityName>(entity: name, position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw?: number;
-        pitch?: number;
-    }): EntityConditional<name>;
-    entity(entity: 'experience_orb', position: {
-        x: number;
-        y: number;
-        z: number;
-    }, experienceOrbInfo?: {
-        experience?: number;
-    }): Promise<EntityConditional<'experience_orb'>>;
-    entity(entity: 'player', position: {
-        x: number;
-        y: number;
-        z: number;
-        yaw?: number;
-        pitch?: number;
-    }, playerInfo?: {
-        tabItem?: TabItem;
-        name?: string;
-        uuid?: string;
-        gamemode?: gamemode;
-    }): Promise<EntityConditional<'player'>>;
+    entity<name extends defaultArgumentEntityName | 'experience_orb' | 'player'>(
+        entity: name,
+        position: {
+            x: number;
+            y: number;
+            z: number;
+            yaw?: number;
+            pitch?: number;
+        },
+        extraInfo:
+            name extends 'experience_orb' ? {
+                experience?: number;
+            } :
+            name extends 'player' ? {
+                tabItem?: TabItem;
+                name?: string;
+                uuid?: string;
+                gamemode?: gamemode;
+            } :
+            never
+    ): EntityConditional<name>;
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;
