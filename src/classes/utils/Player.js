@@ -2,6 +2,7 @@ const path = require('path');
 const axios = require('axios').default;
 
 const Entity = require('./Entity.js');
+const TabItem = require('./TabItem.js');
 const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
@@ -128,7 +129,7 @@ const writablePropertyNames = Object.freeze([
 ]);
 
 class Player extends Entity {
-    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
+    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, cb) {
         //todo: pass extraInfo to super
         //todo: also call overwrites.beforeRemove when player is removed
         //todo: don't send spawn packet if sendSpawnPacket is false
@@ -220,9 +221,15 @@ class Player extends Entity {
                     }
                 });
 
-            await this.p2.spawn.call(this);
+            const tabItem = await new Promise(res => {
+                new TabItem(undefined, this.client, this.client.p.sendPacket, res)
+            });
 
-            whenDone(this);
+            this.tabItem = tabItem;
+            this.tabItem.player = this;
+
+            await this.p2.spawn.call(this);
+            cb(this);
         })();
     }
 
