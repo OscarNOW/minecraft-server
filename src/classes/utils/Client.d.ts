@@ -437,6 +437,10 @@ export class Client {
     kick(reason: textInput | Text): void; //todo: rename to remove, for consistency
     chat(message?: textInput | Text): void;
     /**
+     * Crashes the Minecraft client instance
+     */
+    crash(): void;
+    /**
      * @param location The absolute location of the block, not relative to a chunk.
      */
     setBlock(block: blockName, location: { //todo: add overwrite where you can pass a Block class
