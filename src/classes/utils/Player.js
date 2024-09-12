@@ -8,7 +8,7 @@ const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { uuid } = require('../../functions/uuid.js');
 
-const { gamemodes } = require('../../functions/loader/data.js');
+const { gamemodes, entities } = require('../../functions/loader/data.js');
 
 const defaults = require('../../settings.json').defaults;
 const playerDefaults = defaults.player;
@@ -79,22 +79,31 @@ const defaultPrivate = {
         return textures;
     },
     remove() {
+        //sends player_info action 4 (=remove) packet
+        this.tabItem.p.remove.call(this.tabItem);
+
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
         });
     },
     async spawn(textures) {
-        if (!this.tabItem)
-            this.p.sendPacket('player_info', { //create temporary tabItem
-                action: 0,
-                data: [{
-                    UUID: this.uuid,
-                    name: this.name.string.slice(2),
-                    properties: (textures || await this.p2.getTextures.call(this)).properties,
-                    gamemode: gamemodes.indexOf(this.gamemode),
-                    ping: -1
-                }]
-            });
+        this.p.sendPacket('spawn_entity_living', {
+            entityId: this.id,
+            entityUUID: this.uuid,
+            type: entities.findIndex(({ name }) => name === 'player'),
+            x: this.position.x,
+            y: this.position.y,
+            z: this.position.z,
+            yaw: this.position.yaw,
+            pitch: this.position.pitch,
+            headPitch: 0, //todo
+            velocityX: 0, //todo
+            velocityY: 0, //todo
+            velocityZ: 0, //todo
+        });
+
+        //sends player_info packet
+        await this.tabItem.p.spawn.call(this.tabItem, textures);
 
         this.p.sendPacket('named_entity_spawn', {
             entityId: this.id,
@@ -105,14 +114,6 @@ const defaultPrivate = {
             yaw: this.position.yaw,
             pitch: this.position.pitch
         });
-
-        if (!this.tabItem)
-            this.p.sendPacket('player_info', { //remove temporary tabItem
-                action: 4,
-                data: [{
-                    UUID: this.uuid
-                }]
-            });
     },
     async respawn() {
         const textures = await this.p2.getTextures.call(this);
@@ -222,7 +223,7 @@ class Player extends Entity {
                 });
 
             const tabItem = await new Promise(res => {
-                new TabItem(undefined, this.client, this.client.p.sendPacket, res)
+                new TabItem({ uuid: this.uuid }, this.client, this.client.p.sendPacket, res, { sendSpawnPacket: false })
             });
 
             this.tabItem = tabItem;

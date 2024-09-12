@@ -9,11 +9,17 @@ type textInput = import('../exports/Text').textInput;
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/TabItem
  */
 export class TabItem {
-    constructor(tabItemOptions: {
-        name?: textInput | Text;
-        uuid?: string;
-        ping?: number | null;
-    }, client: Client, sendPacket: (packetName: string, packet: object) => void, finishedCallback: () => void);
+    constructor(
+        tabItemOptions: {
+            name?: textInput | Text;
+            uuid?: string;
+            ping?: number | null;
+        },
+        client: Client,
+        sendPacket: (packetName: string, packet: object) => void,
+        finishedCallback: () => void,
+        { sendSpawnPacket }: { sendSpawnPacket: boolean }
+    );
 
     readonly client: Client;
     readonly server: Server;

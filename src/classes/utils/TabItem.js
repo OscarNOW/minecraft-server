@@ -106,7 +106,7 @@ const writablePropertyNames = Object.freeze([
 ]);
 
 class TabItem {
-    constructor(p, client, sendPacket, cb) {
+    constructor(p, client, sendPacket, cb, { sendSpawnPacket = true } = {}) {
         this.client = client;
         this.server = client.server;
         this.p.sendPacket = sendPacket;
@@ -154,17 +154,21 @@ class TabItem {
         else
             this.p.name = '';
 
-
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        this
-            .p.spawn.call(this)
-            .then(() => {
-                tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-                cb(this);
-            })
-            .catch(e => { throw e });
+        if (sendSpawnPacket)
+            this
+                .p.spawn.call(this)
+                .then(() => {
+                    tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+                    cb(this);
+                })
+                .catch(e => { throw e });
+        else {
+            tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+            cb(this);
+        }
     }
 
     remove() {
