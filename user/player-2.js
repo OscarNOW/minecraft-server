@@ -49,11 +49,15 @@ server.on('connect', async client => {
 
     // client.on('chat', a => { console.log(a); eval(a) })
 
-    let player = client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
+    console.log(1, client.tabItems)
+
+    let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
         skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
     });
+
+    console.log(2, client.tabItems)
 
     client.on('chat', () => { player.playerInfo.name = 'Hi' })
 
