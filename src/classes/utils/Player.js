@@ -169,7 +169,6 @@ class Player extends Entity {
 
             if (!this.tabItem)
                 this.tabItem = await new Promise(res => {
-                    console.log('player uuid', extraInfo.uuid)
                     new TabItem({ uuid: extraInfo.uuid }, this.client, this.client.p.sendPacket, res, { sendSpawnPacket: false });
                 });
 
