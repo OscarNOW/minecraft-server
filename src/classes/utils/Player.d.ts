@@ -30,6 +30,7 @@ export class Player extends Entity {
     readonly tabItem: TabItem; //todo: make writable
 
     uuid: string;
-    name: string;
+    get name(): Text;
+    set name(name: textInput | Text);
     gamemode: gamemode;
 }
