@@ -109,7 +109,7 @@ const defaultPrivate = {
                     displayName: JSON.stringify(this.name.chat),
                     properties: (textures || await getSkinTextures(this.p2.skinAccountUuid)).properties,
                     gamemode: gamemodes.indexOf(this.p.gamemode),
-                    ping: this.ping === null ? -1 : this.ping
+                    ping: -1
                 }]
             });
         }
