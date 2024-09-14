@@ -20,6 +20,7 @@ const server = new Server({
 });
 
 const uuid = {
+    'boem231': '4e251f1b-5d8f-42a4-8d09-15e08ebb575a',
     'Jeroen64': '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
     'Notch': '069a79f4-44e9-4726-a5be-fca90e38aaf5',
     'Dream': 'ec70bcaf-702f-4bb8-b48d-276fa52a780c'
@@ -51,8 +52,8 @@ server.on('connect', async client => {
 
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
-        uuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813',
-        skinAccountUuid: '57c28f3e-47f6-4b2d-9b32-1ce0e078f813'
+        uuid: uuid.boem231,
+        skinAccountUuid: uuid.Notch
     });
 
     client.on('chat', (a) => { player.name = a });
