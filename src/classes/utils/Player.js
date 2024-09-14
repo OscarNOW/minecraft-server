@@ -109,7 +109,7 @@ const defaultPrivate = {
                     UUID: this.uuid,
                     name,
                     displayName: JSON.stringify(this.name.chat),
-                    properties: (textures || await getSkinTextures(this.p2.skinAccountUuid)).properties,
+                    properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
                     gamemode: gamemodes.indexOf(this.p.gamemode),
                     ping: -1
                 }]
@@ -138,7 +138,7 @@ const defaultPrivate = {
         }
     },
     async respawn() {
-        const textures = await getSkinTextures(this.p2.skinAccountUuid);
+        const textures = await getSkinTextures(this.skinAccountUuid);
 
         this.p2.remove.call(this);
         await this.p2.spawn.call(this, textures);
