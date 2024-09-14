@@ -56,7 +56,6 @@ server.on('connect', async client => {
     });
 
     client.on('chat', (a) => { player.name = a });
-    client.on('change', 'slot', () => { player.tabItem.name = 'Test' });
 
     // client.on('armSwing', () => {
     //     player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
