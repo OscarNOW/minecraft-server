@@ -1,4 +1,5 @@
 const { versions } = require('../../functions/loader/data.js');
+const { compareDotSeparatedStrings } = require('../../functions/compareDotSeparatedStrings.js');
 const settings = require('../../settings.json');
 
 //lazy load minecraft-protocol
@@ -56,6 +57,9 @@ const _p = Symbol('_privates');
 
 class Server {
     constructor({ serverList, wrongVersionConnect, defaultClientProperties, proxy } = {}) {
+        if (compareDotSeparatedStrings(process.versions.node, settings.maxNodeVersion) > 0)
+            console.warn(`(minecraft-server) WARNING: Node.js version ${process.versions.node} is above the maximum supported version ${settings.maxNodeVersion}. Clients may be unable to join the server.`);
+
         Object.defineProperty(this, _p, {
             configurable: false,
             enumerable: false,

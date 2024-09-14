@@ -1,5 +1,6 @@
 {
     "version": 753,
+    "maxNodeVersion": "18.19.0",
     "language": "en_us",
     "typedoc": {
         "arguments": [],
