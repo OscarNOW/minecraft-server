@@ -1,18 +1,17 @@
 const path = require('path');
-const axios = require('axios').default;
 
 const Entity = require('./Entity.js');
 const TabItem = require('./TabItem.js');
 const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
+const { getSkinTextures } = require('../../functions/getSkinTextures');
 const { uuid } = require('../../functions/uuid.js');
 
 const { gamemodes, entities } = require('../../functions/loader/data.js');
 
 const defaults = require('../../settings.json').defaults;
 const playerDefaults = defaults.player;
-const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
 const _p = Symbol('_privates');
 const defaultPrivate = {
@@ -63,21 +62,6 @@ const defaultPrivate = {
             } else
                 await this.p2.respawn.call(this);
     },
-    async getTextures() {
-        if (this.p2.textures)
-            return this.p2.textures;
-
-        const isValidUuid = (typeof this.p2.skinAccountUuid === 'string') && this.p2.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
-        let textures;
-
-        if (!isValidUuid)
-            textures = { properties: [] }
-        else
-            textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p2.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
-
-        this.p2.textures = textures;
-        return textures;
-    },
     remove() {
         if (this.tabItem) {
             //sends player_info action 4 (=remove) packet
@@ -108,7 +92,25 @@ const defaultPrivate = {
             //sends player_info packet
             await this.tabItem.p.spawn.call(this.tabItem, textures);
         } else {
-            //todo: send player_info packet manually
+            let name;
+            if (this.name.string.slice(2).length <= 16)
+                name = this.name.string.slice(2);
+            else if (this.name.uncolored.length <= 16)
+                name = this.name.uncolored;
+            else
+                name = '';
+
+            this.p.sendPacket('player_info', {
+                action: 0,
+                data: [{
+                    UUID: this.uuid,
+                    name,
+                    displayName: JSON.stringify(this.name.chat),
+                    properties: (textures || await getSkinTextures(this.p2.skinAccountUuid)).properties,
+                    gamemode: gamemodes.indexOf(this.p.gamemode),
+                    ping: this.ping === null ? -1 : this.ping
+                }]
+            });
         }
 
         this.p.sendPacket('named_entity_spawn', {
@@ -122,11 +124,17 @@ const defaultPrivate = {
         });
 
         if (!this.tabItem) {
-            //todo: wait for some time and send remove player_info packet (same as removing tabItem)
+            //todo: wait for some time
+            this.p.sendPacket('player_info', {
+                action: 4,
+                data: [{
+                    UUID: this.uuid
+                }]
+            });
         }
     },
     async respawn() {
-        const textures = await this.p2.getTextures.call(this);
+        const textures = await getSkinTextures(this.p2.skinAccountUuid);
 
         this.p2.remove.call(this);
         await this.p2.spawn.call(this, textures);
@@ -260,13 +268,6 @@ class Player extends Entity {
     set p2(value) {
         this.p2._p = value;
     }
-}
-
-async function get(url) {
-    const resp = await axios.get(url, { timeout: skinFetchTimeout });
-    const data = await resp.data;
-
-    return data;
 }
 
 module.exports = Player;
