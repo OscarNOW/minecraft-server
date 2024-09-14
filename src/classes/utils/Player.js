@@ -42,6 +42,7 @@ const defaultPrivate = {
                 });
                 this.tabItem.p.gamemode = this.gamemode;
             } else
+                //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
 
         if (name === 'uuid') {
@@ -61,6 +62,7 @@ const defaultPrivate = {
                 await this.tabItem.p.respawn.call(this.tabItem);
                 await this.p2.respawn.call(this);
             } else
+                //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
     },
     remove() {
