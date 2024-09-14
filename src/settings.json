@@ -34,7 +34,7 @@
         "sendKeepAliveInterval": 3000,
         "teleportConfirmationTimeout": 5000,
         "skinFetchTimeout": 3000,
-        "skinLoadTime": 500
+        "skinLoadTime": 300
     },
     "defaults": {
         "gamemode": "survival",
