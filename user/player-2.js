@@ -32,24 +32,6 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    // let tabItem1 = await client.tabItem({
-    //     name: 'bbb'
-    // });
-
-    // let player = await client.entity('player', {
-    //     x: 3,
-    //     y: 100,
-    //     z: 3
-    // }, { tabItem });
-
-    // client.on('change', 'slot', () => {
-    // tabItem1.uuid = uuid.Dream;
-    // });
-
-    // console.log(require('util').inspect(player, { depth: 0, colors: true }))
-
-    // client.on('chat', a => { console.log(a); eval(a) })
-
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: uuid.boem231,
@@ -57,69 +39,4 @@ server.on('connect', async client => {
     });
 
     client.on('chat', (a) => { player.name = a });
-
-    // client.on('armSwing', () => {
-    //     player.playerInfo = player.playerInfo === tabItem1 ? tabItem2 : tabItem1;
-    // })
-
-    // while (client.online) {
-    //     player.position.z += 0.2;
-    //     await wait(100);
-    // }
-
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: uuid.Notch,
-    //         name: 'bbb',
-    //         properties: [],
-    //         gamemode: 1,
-    //         ping: 5,
-    //         displayName: '"ccc"'
-    //         // displayName: JSON.stringify([{ text: 'World', bold: true }])
-    //     }]
-    // })
-
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: uuid.Jeroen64,
-    //         name: 'aaa',
-    //         properties: [],
-    //         gamemode: 1,
-    //         ping: 5,
-    //         displayName: '"ddd"'
-    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
-    //     }]
-    // })
-
-    // client.raw('named_entity_spawn', {
-    //     entityId: 10,
-    //     playerUUID: uuid.Jeroen64,
-    //     x: 3,
-    //     y: 101,
-    //     z: 3,
-    //     yaw: 0,
-    //     pitch: 0
-    // });
-
-    // client.raw('player_info', {
-    //     action: 4,
-    //     data: [{
-    //         UUID: uuid.Jeroen64
-    //     }]
-    // });
-
-    // client.raw('player_info', {
-    //     action: 0,
-    //     data: [{
-    //         UUID: uuid.Jeroen64,
-    //         name: 'Hello world',
-    //         properties: [],
-    //         gamemode: 1,
-    //         ping: 5,
-    //         // displayName: JSON.stringify([{ text: 'Hello', bold: true }])
-    //     }]
-    // })
-
 });
