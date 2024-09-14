@@ -148,7 +148,8 @@ const defaultPrivate = {
 const writablePropertyNames = Object.freeze([
     'name',
     'gamemode',
-    'uuid'
+    'uuid',
+    'skinAccountUuid'
 ]);
 
 class Player extends Entity {
@@ -177,16 +178,16 @@ class Player extends Entity {
 
             if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
                 extraInfo.uuid = this.tabItem.uuid;
-                this.p2.skinAccountUuid = extraInfo.uuid
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid
             }
-            else if (extraInfo.uuid !== null)
-                this.p2.skinAccountUuid = extraInfo.uuid;
-            else if (extraInfo.uuid === null) {
+            else if (extraInfo.uuid !== null) {
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
+            } else if (extraInfo.uuid === null) {
                 extraInfo.uuid = uuid().split('');
                 extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
                 extraInfo.uuid = extraInfo.uuid.join('');
 
-                this.p2.skinAccountUuid = null;
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
             };
 
             if (extraInfo.name === null)
@@ -233,14 +234,19 @@ class Player extends Entity {
                 });
 
             if (this.tabItem) {
-                if (extraInfo.gamemode !== this.tabItem.p.gamemode)
+                if (this.gamemode !== this.tabItem.p.gamemode)
                     await this.p2.updateProperty.call(this, 'gamemode');
 
-                if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
+                if (this.name.string.slice(2) !== this.tabItem.p.name)
                     await this.p2.updateProperty.call(this, 'name');
 
-                if (extraInfo.uuid !== this.tabItem.uuid)
+                if (this.uuid !== this.tabItem.uuid)
                     await this.p2.updateProperty.call(this, 'uuid');
+
+                if (this.skinAccountUuid !== this.tabItem.p.skinAccountUuid) {
+                    this.tabItem.p.skinAccountUuid = this.skinAccountUuid;
+                    await this.tabItem.p.respawn();
+                }
             }
 
             await this.p2.spawn.call(this);
