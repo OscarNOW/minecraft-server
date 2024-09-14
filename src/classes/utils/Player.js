@@ -7,6 +7,7 @@ const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { getSkinTextures } = require('../../functions/getSkinTextures');
 const { uuid } = require('../../functions/uuid.js');
+const settings = require('../../settings.json');
 
 const { gamemodes, entities } = require('../../functions/loader/data.js');
 
@@ -124,7 +125,8 @@ const defaultPrivate = {
         });
 
         if (!this.tabItem) {
-            //todo: wait for some time
+            await new Promise(res => setTimeout(res, settings.timing.skinLoadTime));
+
             this.p.sendPacket('player_info', {
                 action: 4,
                 data: [{
