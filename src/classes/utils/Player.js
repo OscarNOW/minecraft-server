@@ -79,8 +79,10 @@ const defaultPrivate = {
         return textures;
     },
     remove() {
-        //sends player_info action 4 (=remove) packet
-        this.tabItem.p.remove.call(this.tabItem);
+        if (this.tabItem) {
+            //sends player_info action 4 (=remove) packet
+            this.tabItem.p.remove.call(this.tabItem);
+        }
 
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
@@ -102,8 +104,12 @@ const defaultPrivate = {
             velocityZ: 0, //todo
         });
 
-        //sends player_info packet
-        await this.tabItem.p.spawn.call(this.tabItem, textures);
+        if (this.tabItem) {
+            //sends player_info packet
+            await this.tabItem.p.spawn.call(this.tabItem, textures);
+        } else {
+            //todo: send player_info packet manually
+        }
 
         this.p.sendPacket('named_entity_spawn', {
             entityId: this.id,
@@ -114,6 +120,10 @@ const defaultPrivate = {
             yaw: this.position.yaw,
             pitch: this.position.pitch
         });
+
+        if (!this.tabItem) {
+            //todo: wait for some time and send remove player_info packet (same as removing tabItem)
+        }
     },
     async respawn() {
         const textures = await this.p2.getTextures.call(this);
@@ -166,11 +176,6 @@ class Player extends Entity {
 
                 this.p2.skinAccountUuid = null;
             };
-
-            if (!this.tabItem)
-                this.tabItem = await new Promise(res => {
-                    new TabItem({ uuid: extraInfo.uuid }, this.client, this.client.p.sendPacket, res, { sendSpawnPacket: false });
-                });
 
             if (extraInfo.name === null)
                 if (this.tabItem)

@@ -31,7 +31,7 @@ export class Player extends Entity {
         whenDone?: (instance: Player) => void
     );
 
-    readonly tabItem: TabItem; //todo: make writable
+    readonly tabItem?: TabItem; //todo: make writable
 
     uuid: string;
     get name(): Text;
