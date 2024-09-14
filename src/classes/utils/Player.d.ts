@@ -1,5 +1,9 @@
+import { Entity } from "./Entity";
 type Client = import('./Client').Client;
 type TabItem = import('./TabItem').TabItem;
+type entityName = import('../../types').entityName;
+type gamemode = import('../../types').gamemode;
+type textInput = import('../exports/Text').textInput;
 
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Player
