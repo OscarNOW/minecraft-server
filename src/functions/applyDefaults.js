@@ -14,4 +14,4 @@ function applyDefaults(properties, defaults) {
     return properties;
 }
 
-module.exports = Object.freeze({ applyDefaults });
+module.exports = { applyDefaults };

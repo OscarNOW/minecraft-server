@@ -1,19 +1,20 @@
 const path = require('path');
-const axios = require('axios').default;
 
 const Entity = require('./Entity.js');
+const TabItem = require('./TabItem.js');
 const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
+const { getSkinTextures } = require('../../functions/getSkinTextures');
 const { uuid } = require('../../functions/uuid.js');
+const settings = require('../../settings.json');
 
-const { gamemodes } = require('../../functions/loader/data.js');
+const { gamemodes, entities } = require('../../functions/loader/data.js');
 
 const defaults = require('../../settings.json').defaults;
 const playerDefaults = defaults.player;
-const { timing: { skinFetchTimeout } } = require('../../settings.json');
 
-const _p = Symbol('private (Player)'); //todo: make the name of this symbol consistent with the other names of privates
+const _p = Symbol('_privates');
 const defaultPrivate = {
     parseProperty(key, value) {
         if (key === 'name' && !(value instanceof Text))
@@ -41,6 +42,7 @@ const defaultPrivate = {
                 });
                 this.tabItem.p.gamemode = this.gamemode;
             } else
+                //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
 
         if (name === 'uuid') {
@@ -60,40 +62,59 @@ const defaultPrivate = {
                 await this.tabItem.p.respawn.call(this.tabItem);
                 await this.p2.respawn.call(this);
             } else
+                //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
     },
-    async getTextures() {
-        if (this.p2.textures)
-            return this.p2.textures;
-
-        const isValidUuid = (typeof this.p2.skinAccountUuid === 'string') && this.p2.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
-        let textures;
-
-        if (!isValidUuid)
-            textures = { properties: [] }
-        else
-            textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p2.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
-
-        this.p2.textures = textures;
-        return textures;
-    },
     remove() {
+        if (this.tabItem) {
+            //sends player_info action 4 (=remove) packet
+            this.tabItem.p.remove.call(this.tabItem);
+        }
+
         this.p.sendPacket('entity_destroy', {
             entityIds: [this.id]
         });
     },
     async spawn(textures) {
-        if (!this.tabItem)
-            this.p.sendPacket('player_info', { //create temporary tabItem
+        this.p.sendPacket('spawn_entity_living', {
+            entityId: this.id,
+            entityUUID: this.uuid,
+            type: entities.findIndex(({ name }) => name === 'player'),
+            x: this.position.x,
+            y: this.position.y,
+            z: this.position.z,
+            yaw: this.position.yaw,
+            pitch: this.position.pitch,
+            headPitch: 0, //todo
+            velocityX: 0, //todo
+            velocityY: 0, //todo
+            velocityZ: 0, //todo
+        });
+
+        if (this.tabItem) {
+            //sends player_info packet
+            await this.tabItem.p.spawn.call(this.tabItem, textures);
+        } else {
+            let name;
+            if (this.name.string.slice(2).length <= 16)
+                name = this.name.string.slice(2);
+            else if (this.name.uncolored.length <= 16)
+                name = this.name.uncolored;
+            else
+                name = '';
+
+            this.p.sendPacket('player_info', {
                 action: 0,
                 data: [{
                     UUID: this.uuid,
-                    name: this.name.string.slice(2),
-                    properties: (textures || await this.p2.getTextures.call(this)).properties,
-                    gamemode: gamemodes.indexOf(this.gamemode),
+                    name,
+                    displayName: JSON.stringify(this.name.chat),
+                    properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
+                    gamemode: gamemodes.indexOf(this.p.gamemode),
                     ping: -1
                 }]
             });
+        }
 
         this.p.sendPacket('named_entity_spawn', {
             entityId: this.id,
@@ -105,16 +126,19 @@ const defaultPrivate = {
             pitch: this.position.pitch
         });
 
-        if (!this.tabItem)
-            this.p.sendPacket('player_info', { //remove temporary tabItem
+        if (!this.tabItem) {
+            await new Promise(res => setTimeout(res, settings.timing.skinLoadTime));
+
+            this.p.sendPacket('player_info', {
                 action: 4,
                 data: [{
                     UUID: this.uuid
                 }]
             });
+        }
     },
     async respawn() {
-        const textures = await this.p2.getTextures.call(this);
+        const textures = await getSkinTextures(this.skinAccountUuid);
 
         this.p2.remove.call(this);
         await this.p2.spawn.call(this, textures);
@@ -124,11 +148,12 @@ const defaultPrivate = {
 const writablePropertyNames = Object.freeze([
     'name',
     'gamemode',
-    'uuid'
+    'uuid',
+    'skinAccountUuid'
 ]);
 
 class Player extends Entity {
-    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, whenDone) {
+    constructor(client, type, id, position, sendPacket, extraInfo, overwrites, cb) {
         //todo: pass extraInfo to super
         //todo: also call overwrites.beforeRemove when player is removed
         //todo: don't send spawn packet if sendSpawnPacket is false
@@ -142,69 +167,57 @@ class Player extends Entity {
             })]
         });
 
-        // applyDefaults
-        extraInfo = applyDefaults(extraInfo, playerDefaults);
-        if (extraInfo.tabItem !== null)
-            this.tabItem = extraInfo.tabItem;
+        (async () => {
+            // applyDefaults
+            extraInfo = applyDefaults(extraInfo, playerDefaults);
+            if (extraInfo.tabItem !== null)
+                this.tabItem = extraInfo.tabItem;
 
-        if (extraInfo.gamemode === null)
-            extraInfo.gamemode = defaults.gamemode;
+            if (extraInfo.gamemode === null)
+                extraInfo.gamemode = defaults.gamemode;
 
-        if (extraInfo.name === null)
-            if (this.tabItem)
-                if (this.tabItem.name.string.slice(2).length <= 16)
-                    extraInfo.name = this.tabItem.name.string.slice(2);
-                else if (this.tabItem.name.uncolored.length <= 16)
-                    extraInfo.name = this.tabItem.name.uncolored;
+            if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
+                extraInfo.uuid = this.tabItem.uuid;
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid
+            }
+            else if (extraInfo.uuid !== null) {
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
+            } else if (extraInfo.uuid === null) {
+                extraInfo.uuid = uuid().split('');
+                extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+                extraInfo.uuid = extraInfo.uuid.join('');
+
+                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
+            };
+
+            if (extraInfo.name === null)
+                if (this.tabItem)
+                    if (this.tabItem.name.string.slice(2).length <= 16)
+                        extraInfo.name = this.tabItem.name.string.slice(2);
+                    else if (this.tabItem.name.uncolored.length <= 16)
+                        extraInfo.name = this.tabItem.name.uncolored;
+                    else
+                        extraInfo.name = '';
                 else
                     extraInfo.name = '';
-            else
-                extraInfo.name = '';
 
-        if (extraInfo.name.length > 16)
-            return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
-                got: extraInfo.name,
-                expectationType: 'type',
-                expectation: 'string.length <= 16'
-            }, null, { server: this.server, client: this.client }))
+            if (extraInfo.name.length > 16)
+                return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
+                    got: extraInfo.name,
+                    expectationType: 'type',
+                    expectation: 'string.length <= 16'
+                }, null, { server: this.server, client: this.client }))
 
-        if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
-            extraInfo.uuid = this.tabItem.uuid;
-            this.p2.skinAccountUuid = extraInfo.uuid
-        }
-        else if (extraInfo.uuid !== null)
-            this.p2.skinAccountUuid = extraInfo.uuid;
-        else if (extraInfo.uuid === null) {
-            extraInfo.uuid = uuid().split('');
-            extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
-            extraInfo.uuid = extraInfo.uuid.join('');
+            // parseProperties
+            extraInfo = this.p2.parseProperties.call(this, extraInfo);
 
-            this.p2.skinAccountUuid = null;
-        };
+            // set private properties
+            this.p2._ = {};
+            for (const propertyName of writablePropertyNames)
+                this.p2._[propertyName] = extraInfo[propertyName];
 
-        // parseProperties
-        extraInfo = this.p2.parseProperties.call(this, extraInfo);
-
-        // set private properties
-        this.p2._ = {};
-        for (const propertyName of writablePropertyNames)
-            this.p2._[propertyName] = extraInfo[propertyName];
-
-        if (this.tabItem)
-            this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
-
-        (async () => {
-            // update properties if not same as tabItem
-            if (this.tabItem) {
-                if (extraInfo.gamemode !== this.tabItem.p.gamemode)
-                    await this.p2.updateProperty.call(this, 'gamemode');
-
-                if (extraInfo.name.string.slice(2) !== this.tabItem.p.name)
-                    await this.p2.updateProperty.call(this, 'name');
-
-                if (extraInfo.uuid !== this.tabItem.uuid)
-                    await this.p2.updateProperty.call(this, 'uuid');
-            }
+            if (this.tabItem)
+                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
 
             // define getters and setters
             for (const propertyName of writablePropertyNames)
@@ -220,9 +233,24 @@ class Player extends Entity {
                     }
                 });
 
-            await this.p2.spawn.call(this);
+            if (this.tabItem) {
+                if (this.gamemode !== this.tabItem.p.gamemode)
+                    await this.p2.updateProperty.call(this, 'gamemode');
 
-            whenDone(this);
+                if (this.name.string.slice(2) !== this.tabItem.p.name)
+                    await this.p2.updateProperty.call(this, 'name');
+
+                if (this.uuid !== this.tabItem.uuid)
+                    await this.p2.updateProperty.call(this, 'uuid');
+
+                if (this.skinAccountUuid !== this.tabItem.p.skinAccountUuid) {
+                    this.tabItem.p.skinAccountUuid = this.skinAccountUuid;
+                    await this.tabItem.p.respawn();
+                }
+            }
+
+            await this.p2.spawn.call(this);
+            cb(this);
         })();
     }
 
@@ -250,13 +278,6 @@ class Player extends Entity {
     set p2(value) {
         this.p2._p = value;
     }
-}
-
-async function get(url) {
-    const resp = await axios.get(url, { timeout: skinFetchTimeout });
-    const data = await resp.data;
-
-    return data;
 }
 
 module.exports = Player;

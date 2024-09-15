@@ -1,5 +1,6 @@
 const { applyDefaults } = require('../../functions/applyDefaults');
 const { uuid } = require('../../functions/uuid');
+const { getSkinTextures } = require('../../functions/getSkinTextures');
 const { gamemodes } = require('../../functions/loader/data.js');
 const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
@@ -8,7 +9,6 @@ const tabItemDefaults = settings.defaults.tabItem;
 const skinFetchTimeout = settings.timing.skinFetchTimeout;
 
 const Text = require('../exports/Text.js');
-const axios = require('axios').default;
 const path = require('path');
 
 const _p = Symbol('private');
@@ -55,21 +55,6 @@ const defaultPrivate = {
             }
         }
     },
-    async getTextures() {
-        if (this.p.textures)
-            return this.p.textures;
-
-        const isValidUuid = (typeof this.p.skinAccountUuid === 'string') && this.p.skinAccountUuid.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/g);
-        let textures;
-
-        if (!isValidUuid)
-            textures = { properties: [] }
-        else
-            textures = await get(`https://sessionserver.mojang.com/session/minecraft/profile/${this.p.skinAccountUuid}?unsigned=false`); //todo: add try catch and emit CustomError
-
-        this.p.textures = textures;
-        return textures;
-    },
     async spawn(textures) {
         this.p.sendPacket('player_info', {
             action: 0,
@@ -77,7 +62,7 @@ const defaultPrivate = {
                 UUID: this.uuid,
                 name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
-                properties: (textures || await this.p.getTextures.call(this)).properties,
+                properties: (textures || await getSkinTextures(this.p.skinAccountUuid)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
@@ -87,12 +72,12 @@ const defaultPrivate = {
         this.p.sendPacket('player_info', {
             action: 4,
             data: [{
-                UUID: oldUuid
+                UUID: oldUuid ?? this.uuid
             }]
         });
     },
     async respawn(oldUuid) {
-        const textures = await this.p.getTextures.call(this); //load textures before removing tabItem
+        const textures = await getSkinTextures(this.p.skinAccountUuid); //load textures before removing tabItem
 
         this.p.remove.call(this, oldUuid);
         await this.p.spawn.call(this, textures);
@@ -106,7 +91,7 @@ const writablePropertyNames = Object.freeze([
 ]);
 
 class TabItem {
-    constructor(p, client, sendPacket, cb) {
+    constructor(p, client, sendPacket, cb, { sendSpawnPacket = true } = {}) {
         this.client = client;
         this.server = client.server;
         this.p.sendPacket = sendPacket;
@@ -154,17 +139,21 @@ class TabItem {
         else
             this.p.name = '';
 
-
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
 
-        this
-            .p.spawn.call(this)
-            .then(() => {
-                tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-                cb(this);
-            })
-            .catch(e => { throw e });
+        if (sendSpawnPacket)
+            this
+                .p.spawn.call(this)
+                .then(() => {
+                    tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+                    cb(this);
+                })
+                .catch(e => { throw e });
+        else {
+            tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+            cb(this);
+        }
     }
 
     remove() {
@@ -175,7 +164,7 @@ class TabItem {
             this.player.tabItem = null;
             this.player = null;
         }
-        this.p.remove.call(this, this.uuid);
+        this.p.remove.call(this);
         tabItems.set.call(this.client,
             Object.freeze(
                 sortTabItems(
@@ -210,13 +199,6 @@ class TabItem {
     set p(value) {
         console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
     }
-}
-
-async function get(url) {
-    const resp = await axios.get(url, { timeout: skinFetchTimeout });
-    const data = await resp.data;
-
-    return data;
 }
 
 function sortTabItems(t) {

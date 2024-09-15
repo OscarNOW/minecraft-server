@@ -7,9 +7,9 @@ const customEntityClasses = Object.fromEntries(
     ]
         .map(([minecraftName, className]) => [minecraftName, require(`../../../${className}.js`)]));
 
-const asyncEntityClasses = Object.freeze([
+const asyncEntityClasses = [
     'player'
-]);
+];
 
 const { entities } = require('../../properties/public/dynamic/entities.js');
 

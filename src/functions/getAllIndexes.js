@@ -1,4 +1,4 @@
-module.exports = Object.freeze({
+module.exports = {
     getAllIndexes: (str, val) => {
         let indexes = [];
         let i = 0;
@@ -12,4 +12,4 @@ module.exports = Object.freeze({
 
         return indexes;
     }
-})
+}

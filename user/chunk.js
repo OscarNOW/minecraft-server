@@ -18,8 +18,13 @@ const server = new Server({
 });
 
 server.on('listening', () => console.log('Listening'))
-server.on('connect', client => {
+server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
+
+    const player = await client.entity('player', { x: 0, y: 100, z: 0 }, {
+        uuid: client.uuid,
+        name: client.username
+    });
 });

@@ -91,4 +91,4 @@ function getBlock(blockName, { function: func } = {}) {
     }, func ? this[func] : getBlock).toString()
 }
 
-module.exports = Object.freeze({ getBlockStateId });
+module.exports = { getBlockStateId };

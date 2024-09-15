@@ -1,5 +1,9 @@
+import { Entity } from "./Entity";
 type Client = import('./Client').Client;
 type TabItem = import('./TabItem').TabItem;
+type entityName = import('../../types').entityName;
+type gamemode = import('../../types').gamemode;
+type textInput = import('../exports/Text').textInput;
 
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Player
@@ -19,8 +23,9 @@ export class Player extends Entity {
         sendPacket: (packetName: string, packet: object) => void,
         extraInfo?: {
             tabItem?: TabItem;
-            name?: string;
             uuid?: string;
+            skinAccountUuid?: string;
+            name?: string;
             gamemode?: gamemode;
         },
         overwrites?: undefined,
@@ -30,6 +35,8 @@ export class Player extends Entity {
     readonly tabItem?: TabItem; //todo: make writable
 
     uuid: string;
-    name: string;
+    skinAccountUuid?: string;
+    get name(): Text;
+    set name(name: textInput | Text);
     gamemode: gamemode;
 }
