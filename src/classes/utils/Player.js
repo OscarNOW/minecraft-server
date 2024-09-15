@@ -243,8 +243,8 @@ class Player extends Entity {
                 if (this.uuid !== this.tabItem.uuid)
                     await this.p2.updateProperty.call(this, 'uuid');
 
-                if (this.skinAccountUuid !== this.tabItem.p.skinAccountUuid) {
-                    this.tabItem.p.skinAccountUuid = this.skinAccountUuid;
+                if (this.skinAccountUuid !== this.tabItem.skinAccountUuid) {
+                    this.tabItem.skinAccountUuid = this.skinAccountUuid;
                     await this.tabItem.p.respawn();
                 }
             }

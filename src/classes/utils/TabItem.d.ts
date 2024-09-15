@@ -13,6 +13,7 @@ export class TabItem {
         tabItemOptions: {
             name?: textInput | Text;
             uuid?: string;
+            skinAccountUuid?: string;
             ping?: number | null;
         },
         client: Client,
@@ -27,6 +28,7 @@ export class TabItem {
     readonly player?: Player; //todo: make writable
 
     uuid: string;
+    skinAccountUuid?: string;
     get name(): Text;
     set name(name: textInput | Text);
     ping: number | null;

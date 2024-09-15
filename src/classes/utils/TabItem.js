@@ -62,7 +62,7 @@ const defaultPrivate = {
                 UUID: this.uuid,
                 name: this.p.name,
                 displayName: JSON.stringify(this.name.chat),
-                properties: (textures || await getSkinTextures(this.p.skinAccountUuid)).properties,
+                properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
                 ping: this.ping === null ? -1 : this.ping
             }]
@@ -77,7 +77,7 @@ const defaultPrivate = {
         });
     },
     async respawn(oldUuid) {
-        const textures = await getSkinTextures(this.p.skinAccountUuid); //load textures before removing tabItem
+        const textures = await getSkinTextures(this.skinAccountUuid); //load textures before removing tabItem
 
         this.p.remove.call(this, oldUuid);
         await this.p.spawn.call(this, textures);
@@ -87,7 +87,8 @@ const defaultPrivate = {
 const writablePropertyNames = Object.freeze([
     'ping',
     'name',
-    'uuid'
+    'uuid',
+    'skinAccountUuid'
 ]);
 
 class TabItem {
@@ -104,9 +105,9 @@ class TabItem {
             properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
             properties.uuid = properties.uuid.join('');
 
-            this.p.skinAccountUuid = null;
-        } else
-            this.p.skinAccountUuid = properties.uuid;
+            if (!properties.skinAccountUuid) properties.skinAccountUuid = null;
+        } else if (!properties.skinAccountUuid)
+            properties.skinAccountUuid = properties.uuid;
         this.p.gamemode = settings.defaults.gamemode;
 
         // parseProperties
