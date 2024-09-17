@@ -82,12 +82,14 @@
         "tabItem": {
             "name": "",
             "uuid": null,
+            "skinAccountUuid": null,
             "ping": null
         },
         "player": {
             "gamemode": null,
             "name": null,
             "uuid": null,
+            "skinAccountUuid": null,
             "tabItem": null
         }
     },
