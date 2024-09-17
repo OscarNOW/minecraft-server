@@ -54,6 +54,15 @@ const defaultPrivate = {
                 this.player.p2.respawn.call(this.player);
             }
         }
+        else if (name === 'skinAccountUuid') {
+            this.p.textures = null;
+
+            this.p.respawn.call(this, oldValue);
+            if (this.player) {
+                this.player.p2._.skinAccountUuid = this.skinAccountUuid;
+                this.player.p2.respawn.call(this.player);
+            }
+        }
     },
     async spawn(textures) {
         this.p.sendPacket('player_info', {
