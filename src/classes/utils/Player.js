@@ -145,6 +145,33 @@ const defaultPrivate = {
     }
 };
 
+function getUuids({ uuid: givenUuid, skinAccountUuid: givenSkinAccountUuid, tabItem }) {
+    let skinAccountUuid = null;
+    let uuid = null;
+
+    if (givenSkinAccountUuid)
+        skinAccountUuid = givenSkinAccountUuid;
+
+    if (givenUuid) {
+        uuid = givenUuid;
+        if (!skinAccountUuid)
+            skinAccountUuid = givenUuid;
+    }
+
+    if (tabItem?.skinAccountUuid && !skinAccountUuid)
+        skinAccountUuid = tabItem.skinAccountUuid;
+    if (tabItem?.uuid && !uuid)
+        uuid = tabItem.uuid;
+
+    if (!uuid) {
+        uuid = uuid().split('');
+        uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+        uuid = uuid.join('');
+    }
+
+    return { uuid, skinAccountUuid };
+}
+
 const writablePropertyNames = Object.freeze([
     'name',
     'gamemode',
@@ -176,19 +203,13 @@ class Player extends Entity {
             if (extraInfo.gamemode === null)
                 extraInfo.gamemode = defaults.gamemode;
 
-            if (this.tabItem && (extraInfo.uuid === null || extraInfo.uuid === this.tabItem.uuid)) {
-                extraInfo.uuid = this.tabItem.uuid;
-                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid
-            }
-            else if (extraInfo.uuid !== null) {
-                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
-            } else if (extraInfo.uuid === null) {
-                extraInfo.uuid = uuid().split('');
-                extraInfo.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
-                extraInfo.uuid = extraInfo.uuid.join('');
-
-                if (!extraInfo.skinAccountUuid) extraInfo.skinAccountUuid = extraInfo.uuid;
-            };
+            let { uuid, skinAccountUuid } = getUuids({
+                uuid: extraInfo.uuid,
+                skinAccountUuid: extraInfo.skinAccountUuid,
+                tabItem: this.tabItem
+            });
+            extraInfo.uuid = uuid;
+            extraInfo.skinAccountUuid = skinAccountUuid;
 
             if (extraInfo.name === null)
                 if (this.tabItem)
