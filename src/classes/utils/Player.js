@@ -252,9 +252,11 @@ class Player extends Entity {
 
             if (this.tabItem) {
                 if (this.skinAccountUuid !== this.tabItem.skinAccountUuid || this.uuid !== this.tabItem.uuid) {
+                    const oldTabItemUuid = this.tabItem.uuid;
+
                     this.tabItem.p._.skinAccountUuid = this.skinAccountUuid;
                     this.tabItem.p._.uuid = this.uuid;
-                    await this.tabItem.p.respawn.call(this.tabItem);
+                    await this.tabItem.p.respawn.call(this.tabItem, oldTabItemUuid);
                 } else {
                     if (this.gamemode !== this.tabItem.gamemode)
                         this.tabItem.gamemode = this.gamemode;
