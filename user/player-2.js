@@ -32,6 +32,9 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
+    // todo: decouple Player.name from TabItem.name, because TabItem and Player can have different names (TabItem uses displayName and Player uses name)
+    // todo: test with creating Player first and then creating TabItem
+
     let tabItem = await client.tabItem({
         name: 'Hoi',
         ping: 0,
