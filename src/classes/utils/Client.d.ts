@@ -484,8 +484,9 @@ export class Client {
             } :
             name extends 'player' ? {
                 tabItem?: TabItem;
-                name?: string;
                 uuid?: string;
+                skinAccountUuid?: string;
+                name?: string;
                 gamemode?: gamemode;
             } :
             never
@@ -493,6 +494,7 @@ export class Client {
     tabItem(tabItemOptions?: {
         name?: textInput | Text;
         uuid?: string;
+        skinAccountUuid?: string;
         ping?: number | null;
     }): Promise<TabItem>;
     window(windowType: nonEntityWindowName): void;
