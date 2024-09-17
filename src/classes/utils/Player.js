@@ -32,36 +32,34 @@ const defaultPrivate = {
             return;
 
         if (name === 'gamemode')
-            if (this.tabItem) {
-                this.p.sendPacket('player_info', {
-                    action: 1,
-                    data: [{
-                        UUID: this.uuid,
-                        gamemode: gamemodes.indexOf(this.gamemode)
-                    }]
-                });
-                this.tabItem.p.gamemode = this.gamemode;
-            } else
+            if (this.tabItem)
+                this.tabItem.gamemode = this.gamemode;
+            else
                 //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
 
         if (name === 'uuid') {
             this.p2.textures = null;
 
-            if (this.tabItem) {
-                this.tabItem.p._.uuid = this.uuid;
-                await this.tabItem.p.respawn.call(this.tabItem);
+            if (this.tabItem)
+                this.tabItem.uuid = this.uuid;
+            else
                 await this.p2.respawn.call(this);
-            } else
+        }
+
+        if (name === 'skinAccountUuid') {
+            this.p2.textures = null;
+
+            if (this.tabItem)
+                this.tabItem.skinAccountUuid = this.skinAccountUuid;
+            else
                 await this.p2.respawn.call(this);
         }
 
         if (name === 'name')
-            if (this.tabItem) {
-                this.tabItem.p.name = this.name.string.slice(2);
-                await this.tabItem.p.respawn.call(this.tabItem);
-                await this.p2.respawn.call(this);
-            } else
+            if (this.tabItem)
+                this.tabItem.name = this.name;
+            else
                 //we have to respawn, because client doesn't accept change packet
                 await this.p2.respawn.call(this);
     },
