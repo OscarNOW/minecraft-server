@@ -266,7 +266,7 @@ class Player extends Entity {
                 this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
             }
 
-            await this.p2.spawn.call(this, true);
+            await this.p2.spawn.call(this, undefined, true);
             cb(this);
         })();
     }
