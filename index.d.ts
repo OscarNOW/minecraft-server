@@ -237,7 +237,7 @@ readonly blocksX:number[];readonly client:Client;readonly server:Server;x:number
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.6/classes/Player
  */
-declare class Player extends Entity{constructor(client:Client,type:entityName,id:number,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},sendPacket:(packetName:string,packet:object)=>void,extraInfo?:{tabItem?:TabItem;name?:string;uuid?:string;gamemode?:gamemode;},overwrites?:undefined,whenDone?:(instance:Player)=>void);readonly tabItem:TabItem;uuid:string;get name():Text;set name(name:textInput|Text);gamemode:gamemode;}
+declare class Player extends Entity{constructor(client:Client,type:entityName,id:number,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},sendPacket:(packetName:string,packet:object)=>void,extraInfo?:{tabItem?:TabItem;uuid?:string;skinAccountUuid?:string;name?:string;gamemode?:gamemode;},overwrites?:undefined,whenDone?:(instance:Player)=>void);readonly tabItem?:TabItem;uuid:string;skinAccountUuid?:string;get name():Text;set name(name:textInput|Text);gamemode:gamemode;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.6/classes/Slot
  */
@@ -253,7 +253,7 @@ readonly id?:number;readonly empty:boolean;readonly amount?:number;readonly name
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.6/classes/TabItem
  */
-declare class TabItem{constructor(tabItemOptions:{name?:textInput|Text;uuid?:string;ping?:number|null;},client:Client,sendPacket:(packetName:string,packet:object)=>void,finishedCallback:()=>void,{sendSpawnPacket}:{sendSpawnPacket:boolean});readonly client:Client;readonly server:Server;readonly player?:Player;uuid:string;get name():Text;set name(name:textInput|Text);ping:number|null;remove():void;}
+declare class TabItem{constructor(tabItemOptions:{name?:textInput|Text;uuid?:string;skinAccountUuid?:string;ping?:number|null;},client:Client,sendPacket:(packetName:string,packet:object)=>void,finishedCallback:()=>void,{sendSpawnPacket}:{sendSpawnPacket:boolean});readonly client:Client;readonly server:Server;readonly player?:Player;uuid:string;skinAccountUuid?:string;get name():Text;set name(name:textInput|Text);ping:number|null;remove():void;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.6/classes/WorldBorder
  */
