@@ -216,9 +216,6 @@ class Player extends Entity {
             for (const propertyName of writablePropertyNames)
                 this.p2._[propertyName] = extraInfo[propertyName];
 
-            if (this.tabItem)
-                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
-
             // define getters and setters
             for (const propertyName of writablePropertyNames)
                 Object.defineProperty(this, propertyName, {
@@ -234,6 +231,8 @@ class Player extends Entity {
                 });
 
             if (this.tabItem) {
+                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
+
                 if (this.gamemode !== this.tabItem.p.gamemode)
                     await this.p2.updateProperty.call(this, 'gamemode');
 
