@@ -245,7 +245,7 @@ class Player extends Entity {
 
                 if (this.skinAccountUuid !== this.tabItem.skinAccountUuid) {
                     this.tabItem.skinAccountUuid = this.skinAccountUuid;
-                    await this.tabItem.p.respawn();
+                    await this.tabItem.p.respawn.call(this.tabItem);
                 }
             }
 
