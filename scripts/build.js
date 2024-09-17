@@ -1,3 +1,8 @@
+if (parseInt(process.versions.node.split('.')[0]) < 20) {
+    console.error(`Current node version ${process.versions.node} is too low to build. Use major version 20 or higher`);
+    process.exit(1);
+}
+
 const colors = {
     reset: '\x1b[0m',
     bright: '\x1b[1m',
