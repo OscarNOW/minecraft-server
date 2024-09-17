@@ -3,7 +3,7 @@ const { Server, Chunk } = require('../');
 let chunk = new Chunk();
 for (let x = 0; x < 16; x++)
     for (let z = 0; z < 16; z++)
-        for (let y = 0; y < 100; y++)
+        for (let y = 90; y < 100; y++)
             chunk.setBlock('dirt', { x, y, z })
 
 const server = new Server({
