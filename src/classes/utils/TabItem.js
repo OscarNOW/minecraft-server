@@ -36,16 +36,21 @@ const defaultPrivate = {
                     ping: this.ping === null ? -1 : this.ping
                 }]
             })
-        else if (name === 'name')
-            //todo: use <Text> onChange event
-            this.p.sendPacket('player_info', {
-                action: 3,
-                data: [{
-                    UUID: this.uuid,
-                    displayName: JSON.stringify(this.name.chat)
-                }]
-            })
-        else if (name === 'uuid') {
+        else if (name === 'name') {
+            if (this.player) {
+                this.player.p2._.name = this.name;
+                this.player.p2.respawn.call(this.player);
+            } else {
+                //todo: use <Text> onChange event
+                this.p.sendPacket('player_info', {
+                    action: 3,
+                    data: [{
+                        UUID: this.uuid,
+                        displayName: JSON.stringify(this.name.chat)
+                    }]
+                })
+            }
+        } else if (name === 'uuid') {
             this.p.textures = null;
 
             if (this.player) {
