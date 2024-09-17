@@ -73,7 +73,7 @@ const defaultPrivate = {
             entityIds: [this.id]
         });
     },
-    async spawn(textures) {
+    async spawn(textures, preventTabItemPacket = false) {
         this.p.sendPacket('spawn_entity_living', {
             entityId: this.id,
             entityUUID: this.uuid,
@@ -89,30 +89,31 @@ const defaultPrivate = {
             velocityZ: 0, //todo
         });
 
-        if (this.tabItem) {
-            //sends player_info packet
-            await this.tabItem.p.spawn.call(this.tabItem, textures);
-        } else {
-            let name;
-            if (this.name.string.slice(2).length <= 16)
-                name = this.name.string.slice(2);
-            else if (this.name.uncolored.length <= 16)
-                name = this.name.uncolored;
-            else
-                name = '';
+        if (!preventTabItemPacket)
+            if (this.tabItem) {
+                //sends player_info packet
+                await this.tabItem.p.spawn.call(this.tabItem, textures);
+            } else {
+                let name;
+                if (this.name.string.slice(2).length <= 16)
+                    name = this.name.string.slice(2);
+                else if (this.name.uncolored.length <= 16)
+                    name = this.name.uncolored;
+                else
+                    name = '';
 
-            this.p.sendPacket('player_info', {
-                action: 0,
-                data: [{
-                    UUID: this.uuid,
-                    name,
-                    displayName: JSON.stringify(this.name.chat),
-                    properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
-                    gamemode: gamemodes.indexOf(this.p.gamemode),
-                    ping: -1
-                }]
-            });
-        }
+                this.p.sendPacket('player_info', {
+                    action: 0,
+                    data: [{
+                        UUID: this.uuid,
+                        name,
+                        displayName: JSON.stringify(this.name.chat),
+                        properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
+                        gamemode: gamemodes.indexOf(this.p.gamemode),
+                        ping: -1
+                    }]
+                });
+            }
 
         this.p.sendPacket('named_entity_spawn', {
             entityId: this.id,
@@ -124,7 +125,7 @@ const defaultPrivate = {
             pitch: this.position.pitch
         });
 
-        if (!this.tabItem) {
+        if (!this.tabItem && !preventTabItemPacket) {
             await new Promise(res => setTimeout(res, settings.timing.skinLoadTime));
 
             this.p.sendPacket('player_info', {
@@ -250,24 +251,22 @@ class Player extends Entity {
                 });
 
             if (this.tabItem) {
-                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
-
-                if (this.gamemode !== this.tabItem.p.gamemode)
-                    await this.p2.updateProperty.call(this, 'gamemode');
-
-                if (this.name.string.slice(2) !== this.tabItem.p.name)
-                    await this.p2.updateProperty.call(this, 'name');
-
-                if (this.uuid !== this.tabItem.uuid)
-                    await this.p2.updateProperty.call(this, 'uuid');
-
-                if (this.skinAccountUuid !== this.tabItem.skinAccountUuid) {
-                    this.tabItem.skinAccountUuid = this.skinAccountUuid;
+                if (this.skinAccountUuid !== this.tabItem.skinAccountUuid || this.uuid !== this.tabItem.uuid) {
+                    this.tabItem.p._.skinAccountUuid = this.skinAccountUuid;
+                    this.tabItem.p._.uuid = this.uuid;
                     await this.tabItem.p.respawn.call(this.tabItem);
+                } else {
+                    if (this.gamemode !== this.tabItem.gamemode)
+                        this.tabItem.gamemode = this.gamemode;
+
+                    if (this.name.hash !== this.tabItem.name.hash)
+                        this.tabItem.name = this.name;
                 }
+
+                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
             }
 
-            await this.p2.spawn.call(this);
+            await this.p2.spawn.call(this, true);
             cb(this);
         })();
     }
