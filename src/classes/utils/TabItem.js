@@ -48,11 +48,11 @@ const defaultPrivate = {
         else if (name === 'uuid') {
             this.p.textures = null;
 
-            this.p.respawn.call(this, oldValue);
             if (this.player) {
                 this.player.p2._.uuid = this.uuid;
                 this.player.p2.respawn.call(this.player);
-            }
+            } else
+                this.p.respawn.call(this, oldValue);
         }
         else if (name === 'skinAccountUuid') {
             this.p.textures = null;
