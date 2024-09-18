@@ -51,7 +51,7 @@ const defaultInheritedChatProperties = Object.freeze({
 });
 
 class Text {
-    constructor(text = '') {
+    constructor(text) {
         Object.defineProperty(this, _p, {
             configurable: false,
             enumerable: false,
@@ -62,7 +62,7 @@ class Text {
         for (const hiddenProperty of hiddenProperties)
             this.p[hiddenProperty] = null;
 
-        this.p._input = text;
+        this.p._input = text || '';
 
         this.events = Object.freeze(Object.fromEntries(events.map(a => [a, []])));
 
