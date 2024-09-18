@@ -11,6 +11,7 @@ type textInput = import('../exports/Text').textInput;
 export class TabItem {
     constructor(
         tabItemOptions: {
+            player?: Player;
             name?: textInput | Text;
             uuid?: string;
             skinAccountUuid?: string;
