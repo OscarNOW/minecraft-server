@@ -37,19 +37,14 @@ const defaultPrivate = {
                 }]
             })
         else if (name === 'name') {
-            if (this.player) {
-                this.player.p2._.name = this.name;
-                this.player.p2.respawn.call(this.player);
-            } else {
-                //todo: use <Text> onChange event
-                this.p.sendPacket('player_info', {
-                    action: 3,
-                    data: [{
-                        UUID: this.uuid,
-                        displayName: JSON.stringify(this.name.chat)
-                    }]
-                })
-            }
+            //todo: use <Text> onChange event
+            this.p.sendPacket('player_info', {
+                action: 3,
+                data: [{
+                    UUID: this.uuid,
+                    displayName: JSON.stringify(this.name.chat)
+                }]
+            })
         } else if (name === 'uuid') {
             this.p.textures = null;
 
@@ -74,7 +69,7 @@ const defaultPrivate = {
             action: 0,
             data: [{
                 UUID: this.uuid,
-                name: this.p.name,
+                name: this.p.name, // this the name used if a Player is spawned
                 displayName: JSON.stringify(this.name.chat),
                 properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
                 gamemode: gamemodes.indexOf(this.p.gamemode),
@@ -91,6 +86,7 @@ const defaultPrivate = {
         });
     },
     async respawn(oldUuid) {
+        //todo: why can't we get the skinTextures after the TabItem is removed?
         const textures = await getSkinTextures(this.skinAccountUuid); //load textures before removing tabItem
 
         this.p.remove.call(this, oldUuid);
@@ -146,13 +142,8 @@ class TabItem {
                 }
             });
 
-        // set name
-        if (this.name.string.slice(2).length <= 16)
-            this.p.name = this.name.string.slice(2);
-        else if (this.name.uncolored.length <= 16)
-            this.p.name = this.name.uncolored;
-        else
-            this.p.name = '';
+        //todo: implement sorting TabItems (ie setIndex functions), because MC Client sorts tabItems based on name
+        this.p.name = '';
 
         if (!this.client.p.stateHandler.checkReady.call(this.client))
             return;
