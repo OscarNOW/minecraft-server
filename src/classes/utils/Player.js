@@ -6,7 +6,7 @@ const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { getSkinTextures } = require('../../functions/getSkinTextures');
-const { uuid } = require('../../functions/uuid.js');
+const { uuid: generateUuid } = require('../../functions/uuid.js');
 const settings = require('../../settings.json');
 
 const { gamemodes, entities } = require('../../functions/loader/data.js');
@@ -163,7 +163,7 @@ function getUuids({ uuid: givenUuid, skinAccountUuid: givenSkinAccountUuid, tabI
         uuid = tabItem.uuid;
 
     if (!uuid) {
-        uuid = uuid().split('');
+        uuid = generateUuid().split('');
         uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
         uuid = uuid.join('');
     }
