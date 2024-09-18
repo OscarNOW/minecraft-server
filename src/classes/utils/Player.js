@@ -60,7 +60,7 @@ const defaultPrivate = {
             if (this.tabItem) {
                 //todo: check if string is more than 16 characters
                 this.tabItem.p.name = this.name.string.slice(2);
-                this.tabItem.p.respawn.call(this.tabItem);
+                this.p2.respawn.call(this);
             } else
                 await this.p2.respawn.call(this);
         }
