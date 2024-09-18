@@ -56,12 +56,14 @@ const defaultPrivate = {
                 await this.p2.respawn.call(this);
         }
 
-        if (name === 'name')
-            if (this.tabItem)
-                this.tabItem.name = this.name;
-            else
-                //we have to respawn, because client doesn't accept change packet
+        if (name === 'name') {
+            if (this.tabItem) {
+                //todo: check if string is more than 16 characters
+                this.tabItem.p.name = this.name.string.slice(2);
+                this.tabItem.p.respawn.call(this.tabItem);
+            } else
                 await this.p2.respawn.call(this);
+        }
     },
     remove() {
         if (this.tabItem) {
@@ -94,20 +96,26 @@ const defaultPrivate = {
                 //sends player_info packet
                 await this.tabItem.p.spawn.call(this.tabItem, textures);
             } else {
-                let name;
-                if (this.name.string.slice(2).length <= 16)
-                    name = this.name.string.slice(2);
-                else if (this.name.uncolored.length <= 16)
-                    name = this.name.uncolored;
-                else
-                    name = '';
+                //slice 2 to remove the reset characters
+                let name = '';
 
+                if (this.name) {
+                    name = this.name.string.slice(2);
+                    if (name.length > 16)
+                        return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  Player.name (=) ${require('util').inspect(extraInfo.name)}  `, {
+                            got: name,
+                            expectationType: 'type',
+                            expectation: 'string.length <= 16'
+                        }, null, { server: this.server, client: this.client }))
+                }
+
+                //no displayName, because that is only displayed in the TabItem
                 this.p.sendPacket('player_info', {
                     action: 0,
                     data: [{
                         UUID: this.uuid,
                         name,
-                        displayName: JSON.stringify(this.name.chat),
+                        displayName: '""',
                         properties: (textures || await getSkinTextures(this.skinAccountUuid)).properties,
                         gamemode: gamemodes.indexOf(this.p.gamemode),
                         ping: -1
@@ -210,24 +218,6 @@ class Player extends Entity {
             extraInfo.uuid = uuid;
             extraInfo.skinAccountUuid = skinAccountUuid;
 
-            if (extraInfo.name === null)
-                if (this.tabItem)
-                    if (this.tabItem.name.string.slice(2).length <= 16)
-                        extraInfo.name = this.tabItem.name.string.slice(2);
-                    else if (this.tabItem.name.uncolored.length <= 16)
-                        extraInfo.name = this.tabItem.name.uncolored;
-                    else
-                        extraInfo.name = '';
-                else
-                    extraInfo.name = '';
-
-            if (extraInfo.name.length > 16)
-                return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  new ${this.constructor.name}(.., .., .., .., .., { name: ${require('util').inspect(extraInfo.name)} })  `, {
-                    got: extraInfo.name,
-                    expectationType: 'type',
-                    expectation: 'string.length <= 16'
-                }, null, { server: this.server, client: this.client }))
-
             // parseProperties
             extraInfo = this.p2.parseProperties.call(this, extraInfo);
 
@@ -268,7 +258,7 @@ class Player extends Entity {
                 this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
             }
 
-            await this.p2.spawn.call(this, undefined, true);
+            await this.p2.spawn.call(this, undefined, !!this.tabItem);
             cb(this);
         })();
     }
