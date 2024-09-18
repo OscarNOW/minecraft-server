@@ -134,7 +134,7 @@ const defaultPrivate = {
         });
 
         if (!this.tabItem && !preventTabItemPacket) {
-            await new Promise(res => setTimeout(res, settings.timing.skinLoadTime));
+            await new Promise(res => setTimeout(res, this.skinAccountUuid ? settings.timing.skinLoadTime : 0));
 
             this.p.sendPacket('player_info', {
                 action: 4,
