@@ -240,11 +240,16 @@ class Player extends Entity {
                 });
 
             if (this.tabItem) {
-                if (this.skinAccountUuid !== this.tabItem.skinAccountUuid || this.uuid !== this.tabItem.uuid) {
+                if (
+                    this.skinAccountUuid !== this.tabItem.skinAccountUuid ||
+                    this.uuid !== this.tabItem.uuid ||
+                    this.name.string.slice(2) !== this.tabItem.p.name
+                ) {
                     const oldTabItemUuid = this.tabItem.uuid;
 
                     this.tabItem.p._.skinAccountUuid = this.skinAccountUuid;
                     this.tabItem.p._.uuid = this.uuid;
+                    this.tabItem.p.name = this.name.string.slice(2);
                     await this.tabItem.p.respawn.call(this.tabItem, oldTabItemUuid);
                 } else {
                     if (this.gamemode !== this.tabItem.gamemode)
