@@ -250,9 +250,6 @@ class Player extends Entity {
                 } else {
                     if (this.gamemode !== this.tabItem.gamemode)
                         this.tabItem.gamemode = this.gamemode;
-
-                    if (this.name.hash !== this.tabItem.name.hash)
-                        this.tabItem.name = this.name;
                 }
 
                 this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
