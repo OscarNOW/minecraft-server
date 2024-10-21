@@ -40,7 +40,7 @@
         "image-size": "^1.1.1",
         "minecraft-protocol": "^1.47.0",
         "prismarine-chunk": "^1.35.0",
-        "protodef": "^1.15.0"
+        "protodef": "^1.17.0"
     },
     "devDependencies": {
         "mineflayer": "^4.20.1",
