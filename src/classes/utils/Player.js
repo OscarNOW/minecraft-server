@@ -95,10 +95,10 @@ const defaultPrivate = {
                 //sends player_info packet
                 await this.tabItem.p.spawn.call(this.tabItem, textures);
             } else {
-                //slice 2 to remove the reset characters
                 let name = '';
 
                 if (this.name) {
+                    //slice 2 to remove the reset characters
                     name = this.name.string.slice(2);
                     if (name.length > 16)
                         return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  Player.name (=) ${require('util').inspect(extraInfo.name)}  `, {
