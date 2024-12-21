@@ -49,7 +49,7 @@ module.exports = {
             if (!file)
                 throw new Error(`Unknown defaultProperty "${name}"`)
 
-            if (file.info?.defaultAble && file.info.defaultSetTime === 'loginPacket')
+            if (file.info?.defaultable && file.info.defaultSetTime === 'loginPacket')
                 customLoginProperties[name] = value;
         };
 
