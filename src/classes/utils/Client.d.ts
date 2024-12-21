@@ -492,6 +492,7 @@ export class Client {
             never
     ): name extends 'player' ? Promise<EntityConditional<name>> : EntityConditional<name>;
     tabItem(tabItemOptions?: {
+        player?: Player;
         name?: textInput | Text;
         uuid?: string;
         skinAccountUuid?: string;
