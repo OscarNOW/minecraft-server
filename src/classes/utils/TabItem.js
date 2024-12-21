@@ -146,6 +146,7 @@ class TabItem {
             //todo: implement sorting TabItems (ie setIndex functions), because MC Client sorts tabItems based on name
             this.p.name = '';
 
+            let spawned = false;
             if (this.player) {
                 //todo: check if player already has tabItem and throw error
 
@@ -160,7 +161,9 @@ class TabItem {
 
                     this.player.p2._.skinAccountUuid = this.skinAccountUuid;
                     this.player.p2._.uuid = this.uuid;
+
                     await this.player.p2.respawn.call(this.player, oldPlayerUuid);
+                    spawned = true;
                 } else {
                     //todo: update other player properties?
                 }
@@ -171,18 +174,11 @@ class TabItem {
             if (!this.client.p.stateHandler.checkReady.call(this.client))
                 return;
 
-            if (sendSpawnPacket)
-                this
-                    .p.spawn.call(this)
-                    .then(() => {
-                        tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-                        cb(this);
-                    })
-                    .catch(e => { throw e });
-            else {
-                tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-                cb(this);
-            }
+            if (sendSpawnPacket && !spawned)
+                await this.p.spawn.call(this)
+
+            tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+            cb(this);
         })();
     }
 
