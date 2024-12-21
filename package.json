@@ -35,12 +35,12 @@
     },
     "homepage": "https://oscarnow.github.io/minecraft-server/",
     "dependencies": {
-        "axios": "^1.7.7",
+        "axios": "^1.7.9",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.1.1",
         "minecraft-protocol": "^1.51.0",
         "prismarine-chunk": "^1.35.0",
-        "protodef": "^1.17.0"
+        "protodef": "^1.18.0"
     },
     "devDependencies": {
         "mineflayer": "^4.23.0",
