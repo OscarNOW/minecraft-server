@@ -5,10 +5,10 @@ None
 None
 
 ## Code issues fixed
-None
+* Improved connection between TabItem and Player
 
 ## Updated dependencies
-None
+* Updated several dependencies
 
 ## Non-code issues fixed
-None
+* Improved Readme
