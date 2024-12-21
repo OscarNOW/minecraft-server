@@ -1,5 +1,5 @@
 const { applyDefaults } = require('../../functions/applyDefaults');
-const { uuid } = require('../../functions/uuid');
+const { uuid: generateUuid } = require('../../functions/uuid');
 const { getSkinTextures } = require('../../functions/getSkinTextures');
 const { gamemodes } = require('../../functions/loader/data.js');
 const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
