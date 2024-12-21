@@ -111,20 +111,18 @@ class TabItem {
             let properties = typeof p === 'object' ? Object.assign({}, p) : p;
             properties = applyDefaults(properties, tabItemDefaults);
 
-            // parseProperties
-            properties = this.p.parseProperties.call(this, properties);
-
-            if (properties.uuid === null) { //todo: maybe move to parseProperties
-                properties.uuid = uuid().split('');
-                properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
-                properties.uuid = properties.uuid.join('');
-
-                if (!properties.skinAccountUuid) properties.skinAccountUuid = null;
-            } else if (!properties.skinAccountUuid)
-                properties.skinAccountUuid = properties.uuid;
+            this.player = properties.player;
             this.p.gamemode = settings.defaults.gamemode;
 
-            this.player = properties.player;
+            let { uuid, skinAccountUuid } = getUuids({
+                uuid: properties.uuid,
+                skinAccountUuid: properties.skinAccountUuid,
+                player: this.player
+            });
+            properties.uuid = uuid;
+            properties.skinAccountUuid = skinAccountUuid;
+
+            properties = this.p.parseProperties.call(this, properties);
 
             // set private properties
             this.p._ = {};
@@ -239,6 +237,33 @@ function sortTabItems(t) {
     tabItems.sort((a, b) => a.p.name === b.p.name ? 0 : a.p.name < b.p.name ? -1 : 1);
 
     return tabItems;
+}
+
+function getUuids({ uuid: givenUuid, skinAccountUuid: givenSkinAccountUuid, player }) {
+    let skinAccountUuid = null;
+    let uuid = null;
+
+    if (givenSkinAccountUuid)
+        skinAccountUuid = givenSkinAccountUuid;
+
+    if (givenUuid) {
+        uuid = givenUuid;
+        if (!skinAccountUuid)
+            skinAccountUuid = givenUuid;
+    }
+
+    if (player?.skinAccountUuid && !skinAccountUuid)
+        skinAccountUuid = player.skinAccountUuid;
+    if (player?.uuid && !uuid)
+        uuid = player.uuid;
+
+    if (!uuid) {
+        uuid = generateUuid().split('');
+        uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+        uuid = uuid.join('');
+    }
+
+    return { uuid, skinAccountUuid };
 }
 
 module.exports = TabItem;
