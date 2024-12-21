@@ -49,6 +49,9 @@ module.exports = {
             if (!file)
                 throw new Error(`Unknown defaultProperty "${name}"`)
 
+            if (!file.info?.defaultable)
+                throw new Error(`Property "${name}" given to defaultClientProperties is not defaultable`);
+
             if (file.info?.defaultable && file.info.defaultSetTime === 'loginPacket')
                 customLoginProperties[name] = value;
         };
