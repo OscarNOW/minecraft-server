@@ -5,6 +5,8 @@ type Server = import('../exports/Server').Server;
 type Text = import('../exports/Text').Text;
 type textInput = import('../exports/Text').textInput;
 
+type gamemode = import('../../types').gamemode;
+
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/TabItem
  */
@@ -27,6 +29,7 @@ export class TabItem {
     readonly server: Server;
 
     readonly player?: Player; //todo: make writable
+    readonly gamemode: gamemode;
 
     uuid: string;
     skinAccountUuid?: string;

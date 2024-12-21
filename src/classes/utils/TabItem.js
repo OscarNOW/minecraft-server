@@ -107,60 +107,85 @@ class TabItem {
         this.server = client.server;
         this.p.sendPacket = sendPacket;
 
-        let properties = typeof p === 'object' ? Object.assign({}, p) : p;
-        properties = applyDefaults(properties, tabItemDefaults);
-        if (properties.uuid === null) { //todo: maybe move to parseProperties
-            properties.uuid = uuid().split('');
-            properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
-            properties.uuid = properties.uuid.join('');
+        (async () => {
+            let properties = typeof p === 'object' ? Object.assign({}, p) : p;
+            properties = applyDefaults(properties, tabItemDefaults);
 
-            if (!properties.skinAccountUuid) properties.skinAccountUuid = null;
-        } else if (!properties.skinAccountUuid)
-            properties.skinAccountUuid = properties.uuid;
-        this.p.gamemode = settings.defaults.gamemode;
+            // parseProperties
+            properties = this.p.parseProperties.call(this, properties);
 
-        //todo: use properties.player
+            if (properties.uuid === null) { //todo: maybe move to parseProperties
+                properties.uuid = uuid().split('');
+                properties.uuid[14] = '2'; // set uuid to version 2 so that it can't be a valid client uuid
+                properties.uuid = properties.uuid.join('');
 
-        // parseProperties
-        properties = this.p.parseProperties.call(this, properties);
+                if (!properties.skinAccountUuid) properties.skinAccountUuid = null;
+            } else if (!properties.skinAccountUuid)
+                properties.skinAccountUuid = properties.uuid;
+            this.p.gamemode = settings.defaults.gamemode;
 
-        // set private properties
-        this.p._ = {};
-        for (const propertyName of writablePropertyNames)
-            this.p._[propertyName] = properties[propertyName];
+            this.player = properties.player;
 
-        // define getters and setters
-        for (const propertyName of writablePropertyNames)
-            Object.defineProperty(this, propertyName, {
-                configurable: false,
-                enumerable: true,
-                get: () => this.p._[propertyName],
-                set: newValue => {
-                    let oldValue = this.p._[propertyName];
-                    this.p._[propertyName] = this.p.parseProperty.call(this, propertyName, newValue);
+            // set private properties
+            this.p._ = {};
+            for (const propertyName of writablePropertyNames)
+                this.p._[propertyName] = properties[propertyName];
 
-                    this.p.updateProperty.call(this, propertyName, oldValue);
+            // define getters and setters
+            for (const propertyName of writablePropertyNames)
+                Object.defineProperty(this, propertyName, {
+                    configurable: false,
+                    enumerable: true,
+                    get: () => this.p._[propertyName],
+                    set: newValue => {
+                        let oldValue = this.p._[propertyName];
+                        this.p._[propertyName] = this.p.parseProperty.call(this, propertyName, newValue);
+
+                        this.p.updateProperty.call(this, propertyName, oldValue);
+                    }
+                });
+
+            //todo: implement sorting TabItems (ie setIndex functions), because MC Client sorts tabItems based on name
+            this.p.name = '';
+
+            if (this.player) {
+                //todo: check if player already has tabItem and throw error
+
+                this.p.name = this.player.name.string.slice(2);
+                this.gamemode = this.player.gamemode;
+
+                if (
+                    this.skinAccountUuid !== this.player.skinAccountUuid ||
+                    this.uuid !== this.player.uuid
+                ) {
+                    const oldPlayerUuid = this.player.uuid;
+
+                    this.player.p2._.skinAccountUuid = this.skinAccountUuid;
+                    this.player.p2._.uuid = this.uuid;
+                    await this.player.p2.respawn.call(this.player, oldPlayerUuid);
+                } else {
+                    //todo: update other player properties?
                 }
-            });
 
-        //todo: implement sorting TabItems (ie setIndex functions), because MC Client sorts tabItems based on name
-        this.p.name = '';
+                this.player.tabItem = this;
+            }
 
-        if (!this.client.p.stateHandler.checkReady.call(this.client))
-            return;
+            if (!this.client.p.stateHandler.checkReady.call(this.client))
+                return;
 
-        if (sendSpawnPacket)
-            this
-                .p.spawn.call(this)
-                .then(() => {
-                    tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-                    cb(this);
-                })
-                .catch(e => { throw e });
-        else {
-            tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
-            cb(this);
-        }
+            if (sendSpawnPacket)
+                this
+                    .p.spawn.call(this)
+                    .then(() => {
+                        tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+                        cb(this);
+                    })
+                    .catch(e => { throw e });
+            else {
+                tabItems.set.call(this.client, Object.freeze(sortTabItems([...this.client.tabItems, this])));
+                cb(this);
+            }
+        })();
     }
 
     remove() {

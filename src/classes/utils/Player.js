@@ -64,10 +64,10 @@ const defaultPrivate = {
                 await this.p2.respawn.call(this);
         }
     },
-    remove() {
+    remove(oldUuid) {
         if (this.tabItem) {
             //sends player_info action 4 (=remove) packet
-            this.tabItem.p.remove.call(this.tabItem);
+            this.tabItem.p.remove.call(this.tabItem, oldUuid);
         }
 
         this.p.sendPacket('entity_destroy', {
@@ -143,10 +143,10 @@ const defaultPrivate = {
             });
         }
     },
-    async respawn() {
+    async respawn(oldUuid) {
         const textures = await getSkinTextures(this.skinAccountUuid);
 
-        this.p2.remove.call(this);
+        this.p2.remove.call(this, oldUuid);
         await this.p2.spawn.call(this, textures);
     }
 };
@@ -203,8 +203,7 @@ class Player extends Entity {
         (async () => {
             // applyDefaults
             extraInfo = applyDefaults(extraInfo, playerDefaults);
-            if (extraInfo.tabItem !== null)
-                this.tabItem = extraInfo.tabItem;
+            this.tabItem = extraInfo.tabItem;
 
             if (extraInfo.gamemode === null)
                 extraInfo.gamemode = defaults.gamemode;
@@ -240,6 +239,8 @@ class Player extends Entity {
                 });
 
             if (this.tabItem) {
+                //todo: check if tabItem already has Player and throw error
+
                 if (
                     this.skinAccountUuid !== this.tabItem.skinAccountUuid ||
                     this.uuid !== this.tabItem.uuid ||
@@ -250,13 +251,14 @@ class Player extends Entity {
                     this.tabItem.p._.skinAccountUuid = this.skinAccountUuid;
                     this.tabItem.p._.uuid = this.uuid;
                     this.tabItem.p.name = this.name.string.slice(2);
+                    this.tabItem.gamemode = this.gamemode;
                     await this.tabItem.p.respawn.call(this.tabItem, oldTabItemUuid);
                 } else {
                     if (this.gamemode !== this.tabItem.gamemode)
                         this.tabItem.gamemode = this.gamemode;
                 }
 
-                this.tabItem.player = this; //todo: check if tabItem already has Player and throw error
+                this.tabItem.player = this;
             }
 
             await this.p2.spawn.call(this, undefined, !!this.tabItem);
