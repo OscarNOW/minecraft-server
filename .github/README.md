@@ -58,6 +58,8 @@ If you have any questions please first read the [FAQ](https://github.com/OscarNO
 
 * **Easy to use**, you can create servers in an intuitive way.
 * **Everything is per Client**, meaning you can send different information to different Clients.
+* **Pure NODE-JS**, this isn't a java server wrapper, the actual Minecraft protocol is implemented in JS.
+* **Control**, because only an api for the protocol is implemented, you have much greater control.
 
 ## **Terms**
 These are some terms that are used in the code and documentation.
