@@ -48,7 +48,7 @@ server.on('listening', () => console.log('Listening on localhost:25565'));
 ```
 3. Join the server with Minecraft Java Edition version `1.16.3` on host `localhost` and on port `25565`. Different versions and ports are currently not supported.
 
-For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples).
+For more examples, please see [the examples folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples). There are also some code examples in [the users folder](https://github.com/OscarNOW/minecraft-server/tree/main/examples), but these are used for testing and development. Because this package is still in development, the examples may not always be up to date, so check the documentation for the latest API.
 
 If you want to now how to use the rest of the library, please see [the documentation](https://oscarnow.github.io/minecraft-server/).
 
