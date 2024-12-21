@@ -46,10 +46,12 @@ server.on('connect', async client => {
 
     let tabItem = await client.tabItem({
         player,
-        // name: 'Hoi',
+        name: 'Hoi',
         // ping: 0,
         // skinAccountUuid: uuid.Jeroen64
     });
+
+    player.name = 'Player';
 
     client.on('chat', (a) => { player.name = a });
 });
