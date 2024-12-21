@@ -207,7 +207,6 @@ export class Client {
             [event: string]: ((...args: unknown[]) => void)[]; //todo?
         };
         intervals: NodeJS.Timeout[];
-        shutdownCallbacks: (() => void)[];
         state: state;
         stateHandler: {
             checkReady: () => boolean;
