@@ -34,7 +34,7 @@ server.on('connect', async client => {
 
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
-        uuid: uuid.boem231,
+        uuid: uuid.Jeroen64,
         skinAccountUuid: uuid.Notch,
     });
 
