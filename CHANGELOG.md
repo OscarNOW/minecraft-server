@@ -5,7 +5,8 @@ None
 None
 
 ## Code issues fixed
-None
+* Improved bugs in defaultClientProperties
+* Added skinAccountUuid to Client (and Client.skinAccountUuid)
 
 ## Updated dependencies
 None
