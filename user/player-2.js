@@ -32,13 +32,10 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
-    // todo: -test with creating Player first and then creating TabItem
-    // todo: add Client.skinAccountUuid that sends player_info with Client uuid so that the Client skin loads in
-
     let player = await client.entity('player', { x: 3, y: 100, z: 3, yaw: 0, pitch: 0 }, {
         name: 'Jeroen64',
         uuid: uuid.boem231,
-        // skinAccountUuid: uuid.Notch,
+        skinAccountUuid: uuid.Notch,
     });
 
     await wait(2000);
@@ -50,8 +47,6 @@ server.on('connect', async client => {
         // ping: 0,
         // skinAccountUuid: uuid.Jeroen64
     });
-
-    player.name = 'Player';
 
     client.on('chat', (a) => { player.name = a });
 });
