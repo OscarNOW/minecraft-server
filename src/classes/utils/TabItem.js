@@ -107,7 +107,6 @@ class TabItem {
         this.server = client.server;
         this.p.sendPacket = sendPacket;
 
-        // applyDefaults
         let properties = typeof p === 'object' ? Object.assign({}, p) : p;
         properties = applyDefaults(properties, tabItemDefaults);
         if (properties.uuid === null) { //todo: maybe move to parseProperties
@@ -119,6 +118,8 @@ class TabItem {
         } else if (!properties.skinAccountUuid)
             properties.skinAccountUuid = properties.uuid;
         this.p.gamemode = settings.defaults.gamemode;
+
+        //todo: use properties.player
 
         // parseProperties
         properties = this.p.parseProperties.call(this, properties);
