@@ -49,6 +49,7 @@
         "typedoc-theme-hierarchy": "^3.2.1"
     },
     "overrides": {
-        "jsonwebtoken": "9.0.0"
+        "jsonwebtoken": "9.0.0",
+        "axios": "^1.7.9"
     }
 }
