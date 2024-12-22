@@ -17,6 +17,7 @@ const changes = [ // if this is changed, make sure to also change changeEvent in
     'slot',
     'sneaking',
     'sprinting',
+    'statistics',
     'tabFooter',
     'tabHeader',
     'tabItems',

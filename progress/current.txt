@@ -1,12 +1,11 @@
-client status actionId=1
-statistics
-
-Create a <Client>.statistics that is changeable at any time.
++Create a <Client>.statistics that is changeable at any time.
++    When changed, store and wait for Client to request changes
 When Client requests statistics (by sending client status with actionId=1)
     Convert statistic names
     Convert statistic units (ie blocks to cm and seconds to ticks)
 
-    send all statistics first time
-    send changes with previous all other times
-Test if we can just send changed statistics anytime, instead of waiting for Client to request them
+    Send only statistics that have changed
++Implement changeEvent for statistics
 Create a statisticsOpened event (or something similarly named) that fires when Client requests statistics
+
+Fix changeEvent types (see todos in Client.d.ts for ChangeEventType)
