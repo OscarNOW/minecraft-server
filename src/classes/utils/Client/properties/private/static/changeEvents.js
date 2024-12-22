@@ -1,5 +1,5 @@
 const changes = [ // if this is changed, make sure to also change changeEvent in Client.d.ts
-    'blocks'
+    'blocks',
     'bossBars',
     'chunks',
     'difficulty',
