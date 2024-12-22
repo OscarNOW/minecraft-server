@@ -8,6 +8,7 @@ type BossBar = import('./BossBar').BossBar;
 type WorldBorder = import('./WorldBorder').WorldBorder;
 type Block = import('./Block').Block;
 type CustomError = import('./CustomError').CustomError;
+type Player = import('./Player').Player;
 
 type EntityConditional<a> = import('./Entity').EntityConditional<a>;
 type optionalBossBarInfo = import('./BossBar').optionalBossBarInfo;
