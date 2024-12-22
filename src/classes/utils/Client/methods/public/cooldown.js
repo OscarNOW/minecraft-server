@@ -2,7 +2,7 @@ const { items } = require('../../../../../functions/loader/data.js');
 
 const CustomError = require('../../../CustomError.js');
 
-module.exports = function (item, length = 60) {
+module.exports = function (item, seconds = 3) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
@@ -14,8 +14,10 @@ module.exports = function (item, length = 60) {
             externalLink: '{docs}/types/itemName'
         }, this.cooldown, { server: this.server, client: this }));
 
+    const ticks = seconds * 20;
+
     this.p.sendPacket('set_cooldown', {
         itemID: items.find(({ name }) => name === item).id,
-        cooldownTicks: length
-    })
+        cooldownTicks: ticks
+    });
 }

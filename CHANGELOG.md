@@ -1,5 +1,5 @@
 ## Existing API changes
-None
+* <Client>.cooldown( now uses seconds instead of ticks for consistency
 
 ## New API
 None
