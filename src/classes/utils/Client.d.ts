@@ -49,24 +49,24 @@ type blocksSegment = {
 };
 
 type changeEventType =
-    'entities' |
-    'chunks' |
     'bossBars' |
-    'tabItems' |
-    'slot' |
-    'health' |
+    'chunks' |
+    'difficulty' |
+    'entities' |
     'food' |
     'foodSaturation' |
-    'toxicRainLevel' |
-    'raining' |
-    'showRespawnScreen' |
-    'sneaking' |
-    'sprinting' |
+    'gamemode' |
+    'health' |
+    'inventory' |
     'onGround' |
     'position' |
-    'gamemode' |
-    'difficulty' |
-    'inventory';
+    'raining' |
+    'showRespawnScreen' |
+    'slot' |
+    'sneaking' |
+    'sprinting' |
+    'tabItems' |
+    'toxicRainLevel';
 
 type changeEventReturn<currentChangeEventType extends changeEventType> =
     currentChangeEventType extends 'entities' ? entities :
