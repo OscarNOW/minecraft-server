@@ -25,9 +25,9 @@ server.on('connect', async client => {
 
     client.statistics = [
         {
-            category: 'custom',
-            statistic: 'damageDealt',
-            value: 11.28
+            category: 'mined',
+            statistic: 'water',
+            value: 40
         }
     ];
 
