@@ -26,28 +26,46 @@ server.on('connect', async client => {
     client.statistics = [
         {
             category: 'custom',
-            statistic: 'jumps',
-            value: 1000
+            statistic: 'damageDealt',
+            value: 11.28
         }
     ];
 
-    client.on('statisticsOpen', () => {
-        console.log('statisticsOpen');
-    });
-
-    // client.p.sendPacket('statistics', {
-    //     entries: new Array(45).fill(null).map((_, i) => ({
-    //         categoryId: 8,
-    //         statisticId: i,
-    //         value: 5
-    //     }))
+    // client.on('statisticsOpen', () => {
+    //     console.log('statisticsOpen');
     // });
+
     // client.p.clientOn('client_command', ({ actionId }) => {
     //     if (actionId !== 1) return;
 
-    //     console.log('statistics')
     //     client.p.sendPacket('statistics', {
-    //         entries: []
+    //         // entries: new Array(15).fill(null).map((_, i) => ({
+    //         //     categoryId: 8,
+    //         //     statisticId: i + 55,
+    //         //     value: (i + 55)
+    //         // }))
+    //         entries: [
+    //             {
+    //                 categoryId: 8,
+    //                 statisticId: 70,
+    //                 value: 70
+    //             },
+    //             {
+    //                 categoryId: 8,
+    //                 statisticId: 71,
+    //                 value: 71
+    //             },
+    //             {
+    //                 categoryId: 8,
+    //                 statisticId: 72,
+    //                 value: 72
+    //             },
+    //             {
+    //                 categoryId: 8,
+    //                 statisticId: 73,
+    //                 value: 73
+    //             },
+    //         ]
     //     });
     // });
 });
