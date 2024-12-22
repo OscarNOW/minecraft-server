@@ -75,7 +75,7 @@ module.exports = {
                     } else
                         throw new Error(`Unknown custom statistic unit in customStatistics data: ${unit}`);
                 } else if (categoryUsing === 'blocks') {
-                    statisticId = blocks.find(([name]) === statisticName)[1];
+                    statisticId = blocks.find(([name]) => name === statisticName)[1];
                 } else if (categoryUsing === 'entities') {
                     statisticId = entities.findIndex(({ name }) => name === statisticName);
                 } else if (categoryUsing === 'items') {
