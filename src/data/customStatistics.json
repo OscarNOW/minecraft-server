@@ -1,6 +1,6 @@
 [
     {
-        "name": "leaveGame",
+        "name": "gameLeaves",
         "unit": null
     },
     {
@@ -9,6 +9,10 @@
     },
     {
         "name": "secondsAlive",
+        "unit": "time"
+    },
+    {
+        "name": "secondsNotSlept",
         "unit": "time"
     },
     {
@@ -28,7 +32,7 @@
         "unit": "distance"
     },
     {
-        "name": "blocksSwam",
+        "name": "blocksWalkedOnWater",
         "unit": "distance"
     },
     {
@@ -40,31 +44,39 @@
         "unit": "distance"
     },
     {
-        "name": "blocksFlied",
+        "name": "blocksFlown",
         "unit": "distance"
     },
     {
-        "name": "blocksDived",
+        "name": "blocksWalkedUnderWater",
         "unit": "distance"
     },
     {
-        "name": "blocksInMinecart",
+        "name": "blocksByMinecart",
         "unit": "distance"
     },
     {
-        "name": "blocksInBoat",
+        "name": "blocksByBoat",
         "unit": "distance"
     },
     {
-        "name": "blocksOnPig",
+        "name": "blocksByPig",
         "unit": "distance"
     },
     {
-        "name": "blocksOnHorse",
+        "name": "blocksByHorse",
         "unit": "distance"
     },
     {
-        "name": "blocksWithElytra",
+        "name": "blocksByElytra",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksSwum",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksByStrider",
         "unit": "distance"
     },
     {
@@ -80,7 +92,27 @@
         "unit": "damage"
     },
     {
+        "name": "damageDealtAbsorbed",
+        "unit": "damage"
+    },
+    {
+        "name": "damageDealtResisted",
+        "unit": "damage"
+    },
+    {
         "name": "damageTaken",
+        "unit": "damage"
+    },
+    {
+        "name": "damageBlockedByShield",
+        "unit": "damage"
+    },
+    {
+        "name": "damageAbsorbed",
+        "unit": "damage"
+    },
+    {
+        "name": "damageResisted",
         "unit": "damage"
     },
     {
@@ -104,11 +136,11 @@
         "unit": null
     },
     {
-        "name": "talkedToVillager",
+        "name": "villagerTalks",
         "unit": null
     },
     {
-        "name": "tradedWithVillager",
+        "name": "villagerTraded",
         "unit": null
     },
     {
@@ -129,6 +161,10 @@
     },
     {
         "name": "bannerCleans",
+        "unit": null
+    },
+    {
+        "name": "shulkerBoxCleans",
         "unit": null
     },
     {
@@ -176,7 +212,7 @@
         "unit": null
     },
     {
-        "name": "recordsPlayed",
+        "name": "musicDiskPlays",
         "unit": null
     },
     {
@@ -197,6 +233,66 @@
     },
     {
         "name": "shulkerBoxOpens",
+        "unit": null
+    },
+    {
+        "name": "barrelOpens",
+        "unit": null
+    },
+    {
+        "name": "blastFurnaceInteractions",
+        "unit": null
+    },
+    {
+        "name": "smokerInteractions",
+        "unit": null
+    },
+    {
+        "name": "lecternInteractions",
+        "unit": null
+    },
+    {
+        "name": "campfireInteractions",
+        "unit": null
+    },
+    {
+        "name": "cartographyTableInteractions",
+        "unit": null
+    },
+    {
+        "name": "loomInteractions",
+        "unit": null
+    },
+    {
+        "name": "stonecutterInteractions",
+        "unit": null
+    },
+    {
+        "name": "bellRings",
+        "unit": null
+    },
+    {
+        "name": "raidTriggers",
+        "unit": null
+    },
+    {
+        "name": "raidWins",
+        "unit": null
+    },
+    {
+        "name": "anvilInteractions",
+        "unit": null
+    },
+    {
+        "name": "grindstoneInteractions",
+        "unit": null
+    },
+    {
+        "name": "targetHits",
+        "unit": null
+    },
+    {
+        "name": "smithingTableInteractions",
         "unit": null
     }
 ]
