@@ -2,7 +2,7 @@ const events = [
     'armSwing',
     'blockBreak',
     'blockPlace',
-    'brandReceive'
+    'brandReceive',
     'chat',
     'connect',
     'digCancel',
@@ -18,7 +18,7 @@ const events = [
     'respawn',
     'rightClick',
     'signEditorClose',
-    'windowClose',
+    'windowClose'
 ];
 
 module.exports = {
