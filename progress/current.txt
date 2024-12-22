@@ -11,5 +11,6 @@
 +Test custom damage statistics
 +Fix data (because the order is currently incorrect)
 Test all statistic types and units
+Use Changeable so that you can do <Client>.statistics[1].value = 10
 
 Fix changeEvent types (see todos in Client.d.ts for ChangeEventType)
