@@ -1,5 +1,5 @@
 const CustomError = require('../../../../CustomError.js');
-const { customStatistics, statisticCategories } = require('../../../../../../functions/loader/data.js');
+const { customStatistics, statisticCategories, blocks, entities, items } = require('../../../../../../functions/loader/data.js');
 
 module.exports = {
     statistics: {
@@ -73,11 +73,11 @@ module.exports = {
                     } else
                         throw new Error(`Unknown custom statistic unit in customStatistics data: ${unit}`);
                 } else if (categoryUsing === 'blocks') {
-                    //todo: statisticName (blockName) to blockId (without state)
+                    statisticId = blocks.find(([name]) === statisticName)[1];
                 } else if (categoryUsing === 'entities') {
-                    //todo: statisticName (entityName) to entityId
+                    statisticId = entities.findIndex(({ name }) => name === statisticName);
                 } else if (categoryUsing === 'items') {
-                    //todo: statisticName (itemName) to itemId
+                    statisticId = items.find(({ name }) => name === statisticName).id;
                 } else
                     throw new Error(`Unknown statistic category using in statisticCategories data: ${categoryUsing}`);
 
