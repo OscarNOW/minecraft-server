@@ -617,7 +617,20 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    on(event: 'connect' | 'join' | 'brandReceive' | 'leave' | 'windowClose' | 'inventoryClose' | 'leftClick' | 'respawn' | 'itemHandSwap', callback: () => void): void;
+    on(
+        event:
+            'brandReceive' |
+            'connect' |
+            'inventoryClose' |
+            'itemHandSwap' |
+            'join' |
+            'leave' |
+            'leftClick' |
+            'respawn' |
+            'statisticsOpen' |
+            'windowClose',
+        callback: () => void
+    ): void;
     on(event: 'digStart', callback: (location: {
         x: number;
         y: number;
@@ -663,7 +676,20 @@ export class Client {
         y: number;
         z: number;
     }) => void): void;
-    once(event: 'connect' | 'join' | 'brandReceive' | 'leave' | 'windowClose' | 'inventoryClose' | 'leftClick' | 'respawn' | 'itemHandSwap', callback: () => void): void;
+    once(
+        event:
+            'brandReceive' |
+            'connect' |
+            'inventoryClose' |
+            'itemHandSwap' |
+            'join' |
+            'leave' |
+            'leftClick' |
+            'respawn' |
+            'statisticsOpen' |
+            'windowClose',
+        callback: () => void
+    ): void;
     once(event: 'digStart', callback: (location: {
         x: number;
         y: number;

@@ -1,4 +1,5 @@
 const CustomError = require('../../../../CustomError.js');
+const { customStatistics, statisticCategories } = require('../../../../../../functions/loader/data.js');
 
 module.exports = {
     statistics: {
@@ -22,6 +23,66 @@ module.exports = {
         init() {
             this.p._statistics = [];
             this.p.clientStatistics = [];
+        },
+        sendToClient() {
+            if (!this.p.stateHandler.checkReady.call(this))
+                return;
+
+            let changedStatistics = [];
+
+            // add all changed statistics to changedStatistics
+            for (const statistic of this.p._statistics) {
+                const clientStatistic = this.p.clientStatistics.find(s => s.category === statistic.category && s.statistic === statistic.statistic);
+                if (!clientStatistic || clientStatistic.value !== statistic.value)
+                    changedStatistics.push(statistic);
+            }
+
+            // if a statistic was removed, we set its value to 0
+            for (const clientStatistic of this.p.clientStatistics) {
+                const statistic = this.p._statistics.find(s => s.category === clientStatistic.category && s.statistic === clientStatistic.statistic);
+                const changedStatistic = changedStatistics.find(s => s.category === clientStatistic.category && s.statistic === clientStatistic.statistic);
+
+                if (!statistic && !changedStatistic)
+                    changedStatistic.push({
+                        category: clientStatistic.category,
+                        statistic: clientStatistic.statistic,
+                        value: 0
+                    });
+            }
+
+            const minecraftStatistics = changedStatistics.map(({ category, statistic, value }) => {
+                const categoryId = statisticCategories.indexOf(category);
+                if (category === 'custom') {
+                    const statisticId = customStatistics.findIndex(s => s.name === statistic);
+                    const unit = customStatistics[statisticId].unit;
+
+                    let value = value;
+                    if (unit === null) { }
+                    else if (unit === 'distance') {
+                        // blocks to centimeters
+                        value = value * 100;
+                    } else if (unit === 'time') {
+                        // seconds to ticks
+                        value = value * 20;
+                    } else if (unit === 'damage') {
+                        // damage to weird statistic damage
+                        value = value * 10;
+                    } else
+                        throw new Error(`Unknown custom statistic unit in customStatistics data: ${unit}`);
+
+                    return {
+                        categoryId,
+                        statisticId,
+                        value
+                    };
+                } else
+                    throw new Error('todo')
+            });
+
+            console.log('sendToClient')
+            //todo: send statistics packet
+
+            this.p.clientStatistics = this.p._statistics;
         }
     }
 }

@@ -1,1 +1,202 @@
-["leaveGame","secondsPlayed","secondsAlive","secondsSneaking","blocksWalked","blocksCrouched","blocksSprinted","blocksSwam","blocksFallen","blocksClimbed","blocksFlied","blocksDived","blocksInMinecart","blocksInBoat","blocksOnPig","blocksOnHorse","blocksWithElytra","jumps","itemsDropped","damageDealt","damageTaken","deaths","mobKills","animalsBred","playerKills","fishCaught","talkedToVillager","tradedWithVillager","cakeSlicesEaten","cauldronFills","cauldronUses","armorCleans","bannerCleans","brewingStandInteractions","beaconInteractions","dropperInteractions","hopperInteractions","dispenserInteractions","noteblockPlays","noteblockTunes","plansPotted","trappedChestTriggers","enderChestOpens","itemEnchants","recordsPlayed","furnaceInteractions","craftingTableInteractions","chestOpens","bedSleeps","shulkerBoxOpens"]
+[
+    {
+        "name": "leaveGame",
+        "unit": null
+    },
+    {
+        "name": "secondsPlayed",
+        "unit": "time"
+    },
+    {
+        "name": "secondsAlive",
+        "unit": "time"
+    },
+    {
+        "name": "secondsSneaking",
+        "unit": "time"
+    },
+    {
+        "name": "blocksWalked",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksCrouched",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksSprinted",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksSwam",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksFallen",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksClimbed",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksFlied",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksDived",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksInMinecart",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksInBoat",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksOnPig",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksOnHorse",
+        "unit": "distance"
+    },
+    {
+        "name": "blocksWithElytra",
+        "unit": "distance"
+    },
+    {
+        "name": "jumps",
+        "unit": null
+    },
+    {
+        "name": "itemsDropped",
+        "unit": null
+    },
+    {
+        "name": "damageDealt",
+        "unit": "damage"
+    },
+    {
+        "name": "damageTaken",
+        "unit": "damage"
+    },
+    {
+        "name": "deaths",
+        "unit": null
+    },
+    {
+        "name": "mobKills",
+        "unit": null
+    },
+    {
+        "name": "animalsBred",
+        "unit": null
+    },
+    {
+        "name": "playerKills",
+        "unit": null
+    },
+    {
+        "name": "fishCaught",
+        "unit": null
+    },
+    {
+        "name": "talkedToVillager",
+        "unit": null
+    },
+    {
+        "name": "tradedWithVillager",
+        "unit": null
+    },
+    {
+        "name": "cakeSlicesEaten",
+        "unit": null
+    },
+    {
+        "name": "cauldronFills",
+        "unit": null
+    },
+    {
+        "name": "cauldronUses",
+        "unit": null
+    },
+    {
+        "name": "armorCleans",
+        "unit": null
+    },
+    {
+        "name": "bannerCleans",
+        "unit": null
+    },
+    {
+        "name": "brewingStandInteractions",
+        "unit": null
+    },
+    {
+        "name": "beaconInteractions",
+        "unit": null
+    },
+    {
+        "name": "dropperInteractions",
+        "unit": null
+    },
+    {
+        "name": "hopperInteractions",
+        "unit": null
+    },
+    {
+        "name": "dispenserInteractions",
+        "unit": null
+    },
+    {
+        "name": "noteblockPlays",
+        "unit": null
+    },
+    {
+        "name": "noteblockTunes",
+        "unit": null
+    },
+    {
+        "name": "plansPotted",
+        "unit": null
+    },
+    {
+        "name": "trappedChestTriggers",
+        "unit": null
+    },
+    {
+        "name": "enderChestOpens",
+        "unit": null
+    },
+    {
+        "name": "itemEnchants",
+        "unit": null
+    },
+    {
+        "name": "recordsPlayed",
+        "unit": null
+    },
+    {
+        "name": "furnaceInteractions",
+        "unit": null
+    },
+    {
+        "name": "craftingTableInteractions",
+        "unit": null
+    },
+    {
+        "name": "chestOpens",
+        "unit": null
+    },
+    {
+        "name": "bedSleeps",
+        "unit": null
+    },
+    {
+        "name": "shulkerBoxOpens",
+        "unit": null
+    }
+]

@@ -18,6 +18,7 @@ const events = [
     'respawn',
     'rightClick',
     'signEditorClose',
+    'statisticsOpen',
     'windowClose'
 ];
 
