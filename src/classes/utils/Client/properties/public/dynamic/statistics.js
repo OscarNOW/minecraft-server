@@ -50,13 +50,16 @@ module.exports = {
                     });
             }
 
-            const minecraftStatistics = changedStatistics.map(({ category, statistic, value }) => {
-                const categoryId = statisticCategories.indexOf(category);
-                if (category === 'custom') {
-                    const statisticId = customStatistics.findIndex(s => s.name === statistic);
+            const minecraftStatistics = changedStatistics.map(({ category: categoryName, statistic: statisticName, value }) => {
+                const categoryId = statisticCategories.findIndex(c => c.name === categoryName);
+                let statisticId = null;
+
+                const categoryUsing = statisticCategories[categoryId].using;
+
+                if (categoryUsing === 'custom') {
+                    statisticId = customStatistics.findIndex(s => s.name === statisticName);
                     const unit = customStatistics[statisticId].unit;
 
-                    let value = value;
                     if (unit === null) { }
                     else if (unit === 'distance') {
                         // blocks to centimeters
@@ -69,18 +72,25 @@ module.exports = {
                         value = value * 10;
                     } else
                         throw new Error(`Unknown custom statistic unit in customStatistics data: ${unit}`);
-
-                    return {
-                        categoryId,
-                        statisticId,
-                        value
-                    };
+                } else if (categoryUsing === 'blocks') {
+                    //todo: statisticName (blockName) to blockId (without state)
+                } else if (categoryUsing === 'entities') {
+                    //todo: statisticName (entityName) to entityId
+                } else if (categoryUsing === 'items') {
+                    //todo: statisticName (itemName) to itemId
                 } else
-                    throw new Error('todo')
+                    throw new Error(`Unknown statistic category using in statisticCategories data: ${categoryUsing}`);
+
+                return {
+                    categoryId,
+                    statisticId,
+                    value
+                };
             });
 
-            console.log('sendToClient')
-            //todo: send statistics packet
+            this.p.sendPacket('statistics', {
+                entries: minecraftStatistics
+            });
 
             this.p.clientStatistics = this.p._statistics;
         }
