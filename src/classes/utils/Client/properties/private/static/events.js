@@ -1,24 +1,24 @@
 const events = [
-    'chat',
-    'digStart',
-    'digCancel',
+    'armSwing',
     'blockBreak',
+    'blockPlace',
+    'brandReceive'
+    'chat',
+    'connect',
+    'digCancel',
+    'digStart',
+    'inventoryClose',
     'itemDrop',
     'itemHandSwap',
-    'leftClick',
-    'rightClick',
-    'connect',
+    'itemUse',
     'join',
     'leave',
+    'leftClick',
+    'misbehavior',
+    'respawn',
+    'rightClick',
     'signEditorClose',
     'windowClose',
-    'itemUse',
-    'inventoryClose',
-    'misbehavior',
-    'blockPlace',
-    'armSwing',
-    'respawn',
-    'brandReceive'
 ];
 
 module.exports = {
