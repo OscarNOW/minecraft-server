@@ -1,0 +1,11 @@
+[
+    "mined",
+    "crafted",
+    "used",
+    "broken",
+    "pickedUp",
+    "dropped",
+    "killed",
+    "killedBy",
+    "custom"
+]
