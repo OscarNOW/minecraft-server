@@ -51,6 +51,8 @@ module.exports = {
             }
 
             const minecraftStatistics = changedStatistics.map(({ category: categoryName, statistic: statisticName, value }) => {
+                //todo: check for isNaN and throw error
+
                 const categoryId = statisticCategories.findIndex(c => c.name === categoryName);
                 let statisticId = null;
 
@@ -80,6 +82,8 @@ module.exports = {
                     statisticId = items.find(({ name }) => name === statisticName).id;
                 } else
                     throw new Error(`Unknown statistic category using in statisticCategories data: ${categoryUsing}`);
+
+                value = Math.round(value);
 
                 return {
                     categoryId,
