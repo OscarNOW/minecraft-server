@@ -48,7 +48,9 @@ type blocksSegment = {
     };
 };
 
+// if this is changed, make sure to also change in changeEvent.js
 type changeEventType =
+    'blocks' |
     'bossBars' |
     'chunks' |
     'difficulty' |
@@ -65,27 +67,23 @@ type changeEventType =
     'slot' |
     'sneaking' |
     'sprinting' |
+    'tabFooter' |
+    'tabHeader' |
     'tabItems' |
     'toxicRainLevel';
 
 type changeEventReturn<currentChangeEventType extends changeEventType> =
-    currentChangeEventType extends 'entities' ? entities :
     currentChangeEventType extends 'blocks' ? blocksSegment :
-    currentChangeEventType extends 'chunks' ? LoadedChunk[] :
     currentChangeEventType extends 'bossBars' ? BossBar[] :
-    currentChangeEventType extends 'tabItems' ? TabItem[] :
-    currentChangeEventType extends 'gamemode' ? gamemode :
+    currentChangeEventType extends 'chunks' ? LoadedChunk[] :
     currentChangeEventType extends 'difficulty' ? difficulty :
-    currentChangeEventType extends 'inventory' ? inventory :
-    currentChangeEventType extends 'slot' ? number :
-    currentChangeEventType extends 'health' ? number :
+    currentChangeEventType extends 'entities' ? entities :
+    //todo: experience
     currentChangeEventType extends 'food' ? number :
     currentChangeEventType extends 'foodSaturation' ? number :
-    currentChangeEventType extends 'toxicRainLevel' ? number :
-    currentChangeEventType extends 'raining' ? boolean :
-    currentChangeEventType extends 'showRespawnScreen' ? boolean :
-    currentChangeEventType extends 'sneaking' ? boolean :
-    currentChangeEventType extends 'sprinting' ? boolean :
+    currentChangeEventType extends 'gamemode' ? gamemode :
+    currentChangeEventType extends 'health' ? number :
+    currentChangeEventType extends 'inventory' ? inventory :
     currentChangeEventType extends 'onGround' ? boolean :
     currentChangeEventType extends 'position' ? {
         x: number;
@@ -94,6 +92,15 @@ type changeEventReturn<currentChangeEventType extends changeEventType> =
         yaw: number;
         pitch: number;
     } :
+    currentChangeEventType extends 'raining' ? boolean :
+    currentChangeEventType extends 'showRespawnScreen' ? boolean :
+    currentChangeEventType extends 'slot' ? number :
+    currentChangeEventType extends 'sneaking' ? boolean :
+    currentChangeEventType extends 'sprinting' ? boolean :
+    //todo: tabFooter
+    //todo: tabHeader
+    currentChangeEventType extends 'tabItems' ? TabItem[] :
+    currentChangeEventType extends 'toxicRainLevel' ? number :
     never;
 
 type entities = {
