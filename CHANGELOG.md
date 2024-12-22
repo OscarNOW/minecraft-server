@@ -1,8 +1,9 @@
 ## Existing API changes
-* <Client>.cooldown( now uses seconds instead of ticks for consistency
+* `<Client>.cooldown(` now uses seconds instead of ticks for consistency
 
 ## New API
-None
+* `<Client>.statistics` (which is changeable) which sets the Client statistics
+* `statisticsOpen` event for Client, which triggers when the Client opens the statistics menu
 
 ## Code issues fixed
 * Improved bugs in defaultClientProperties
