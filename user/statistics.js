@@ -23,7 +23,17 @@ server.on('connect', async client => {
         for (let z = -5; z < 5; z++)
             client.chunk(chunk, { x, z });
 
+    client.statistics = [
+        {
+            category: 'custom',
+            statistic: 'jumps',
+            value: 1000
+        }
+    ];
 
+    client.on('statisticsOpen', () => {
+        console.log('statisticsOpen');
+    });
 
     // client.p.sendPacket('statistics', {
     //     entries: new Array(45).fill(null).map((_, i) => ({
