@@ -37,6 +37,8 @@ type nonEntityWindowName = import('../../types').nonEntityWindowName;
 type soundName = import('../../types').soundName;
 type soundChannel = import('../../types').soundChannel;
 type blockFace = import('../../types').blockFace;
+type customStatistic = import('../../types').customStatistic;
+type entityName = import('../../types').entityName;
 
 type blocksSegment = {
     [x: number]: {
@@ -392,6 +394,29 @@ export class Client {
     health: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     food: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
     foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
+
+    statistics: (
+        {
+            category: 'mined';
+            statistic: blockName;
+            value: number;
+        } |
+        {
+            category: 'crafted' | 'used' | 'broken' | 'pickedUp' | 'dropped';
+            statistic: itemName;
+            value: number;
+        } |
+        {
+            category: 'killed' | 'killedBy';
+            statistic: entityName;
+            value: number;
+        } |
+        {
+            category: 'custom';
+            statistic: customStatistic;
+            value: number;
+        }
+    )[];
 
     // methods
 
