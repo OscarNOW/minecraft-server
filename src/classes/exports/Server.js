@@ -89,141 +89,151 @@ class Server {
         this.p.events = Object.fromEntries(events.map(event => [event, []]));
         this.p.clientInformation = new WeakMap();
 
-        this.p.server = mc().createServer({
-            encryption: true,
-            version: settings.version,
-            motd: settings.defaults.serverList.motd,
-            maxPlayers: settings.defaults.serverList.maxPlayers,
-            keepAlive: false,
-            hideErrors: true,
-            beforePing: (response, client) => {
-                let info = Object.assign({}, this.serverList({
-                    ...this.p.clientInformation.get(client).clientEarlyInformation,
-                    version: //todo: give protocolVersion instead of versionName
-                        versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ??
-                        versions.find(a => a.legacy === !this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version,
+        // this will get called when <Server>.listen() is called
+        this.p.listen = () => {
+            this.p.listen = null;
 
-                    legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
-                }));
+            return new Promise(res => {
+                this.p.server = mc().createServer({
+                    encryption: true,
+                    version: settings.version,
+                    motd: settings.defaults.serverList.motd,
+                    maxPlayers: settings.defaults.serverList.maxPlayers,
+                    keepAlive: false,
+                    hideErrors: true,
+                    beforePing: (response, client) => {
+                        let info = Object.assign({}, this.serverList({
+                            ...this.p.clientInformation.get(client).clientEarlyInformation,
+                            version: //todo: give protocolVersion instead of versionName
+                                versions.find(a => a.legacy === this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version ??
+                                versions.find(a => a.legacy === !this.p.clientInformation.get(client).clientLegacyPing && a.protocol === this.p.clientInformation.get(client).clientEarlyInformation.version)?.version,
 
-                let infoVersionWrongText = `${info.version?.wrongText ?? info.version?.correct ?? versions.find(a => a.legacy === false && a.protocol === settings.version).version}`;
-                let infoVersionProtocol = info.version?.correct ? versions.find(a => a.legacy === false && a.version === info.version.correct).protocol : settings.version;
+                            legacy: this.p.clientInformation.get(client).clientLegacyPing //todo: add legacy to clientEarlyInformation?
+                        }));
 
-                //todo: use applyDefaults?
-                if (!info) info = {};
-                if (!info.players) info.players = {};
-                if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
-                if (info.players.online === undefined) info.players.online = this.clients.length;
-                if (info.description === undefined) info.description = settings.defaults.serverList.motd;
+                        let infoVersionWrongText = `${info.version?.wrongText ?? info.version?.correct ?? versions.find(a => a.legacy === false && a.protocol === settings.version).version}`;
+                        let infoVersionProtocol = info.version?.correct ? versions.find(a => a.legacy === false && a.version === info.version.correct).protocol : settings.version;
 
-                if (info.description !== undefined && !(info.description instanceof Text))
-                    info.description = new Text(info.description);
+                        //todo: use applyDefaults?
+                        if (!info) info = {};
+                        if (!info.players) info.players = {};
+                        if (info.players.max === undefined) info.players.max = settings.defaults.serverList.maxPlayers;
+                        if (info.players.online === undefined) info.players.online = this.clients.length;
+                        if (info.description === undefined) info.description = settings.defaults.serverList.motd;
 
-                let playerHover = [];
-                if (info?.players?.hover === undefined)
-                    playerHover = undefined;
-                else if (typeof info?.players?.hover === 'string')
-                    playerHover = info.players.hover.split('\n').map(val => {
-                        return { name: `${val}`, id: '00000000-0000-4000-8000-000000000000' }
-                    })
-                else
-                    for (const value of Object.values(info.players.hover))
-                        playerHover.push({ name: value.name, id: value.uuid })
+                        if (info.description !== undefined && !(info.description instanceof Text))
+                            info.description = new Text(info.description);
 
-                if (info.favicon) {
-                    let imageInfo = imageSize()(info.favicon);
+                        let playerHover = [];
+                        if (info?.players?.hover === undefined)
+                            playerHover = undefined;
+                        else if (typeof info?.players?.hover === 'string')
+                            playerHover = info.players.hover.split('\n').map(val => {
+                                return { name: `${val}`, id: '00000000-0000-4000-8000-000000000000' }
+                            })
+                        else
+                            for (const value of Object.values(info.players.hover))
+                                playerHover.push({ name: value.name, id: value.uuid })
 
-                    if (imageInfo.type !== 'png')
-                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
-                            got: imageInfo.type,
-                            expectationType: 'value',
-                            expectation: ['png']
-                        }, this.constructor, { server: this }))
+                        if (info.favicon) {
+                            let imageInfo = imageSize()(info.favicon);
 
-                    if (imageInfo.width !== 64 || imageInfo.height !== 64)
-                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
-                            got: `${imageInfo.width}x${imageInfo.height}`,
-                            expectationType: 'value',
-                            expectation: ['64x64']
-                        }, this.constructor, { server: this }))
+                            if (imageInfo.type !== 'png')
+                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
+                                    got: imageInfo.type,
+                                    expectationType: 'value',
+                                    expectation: ['png']
+                                }, this.constructor, { server: this }))
 
-                };
+                            if (imageInfo.width !== 64 || imageInfo.height !== 64)
+                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
+                                    got: `${imageInfo.width}x${imageInfo.height}`,
+                                    expectationType: 'value',
+                                    expectation: ['64x64']
+                                }, this.constructor, { server: this }))
 
-                return {
-                    version: {
-                        name: infoVersionWrongText,
-                        protocol: infoVersionProtocol
-                    },
-                    players: {
-                        online: info.players.online,
-                        max: info.players.max,
-                        sample: playerHover
-                    },
-                    description: info.description.chat,
-                    favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
-                };
-            }
-        });
+                        };
 
-        this.p.server.on('listening', () => this.p.emit('listening'));
-
-        this.p.server.on('connection', client => {
-            this.p.clientInformation.set(client, {});
-
-            let clientState = null;
-
-            client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
-                if (
-                    name === 'legacy_server_list_ping' &&
-                    state === 'handshaking' &&
-                    payload === 1
-                )
-                    handleLegacyPing.call(this, buffer, client, this.serverList); //todo: check which versions are included in "legacy" and maybe add support for older serverlist versions?
-            });
-
-            client.on('state', state => { clientState = state });
-
-            client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
-                const isLegacy = serverHost === '';
-
-                this.p.clientInformation.get(client).clientEarlyInformation = {
-                    ip: client.socket.remoteAddress,
-                    version: protocolVersion,
-                    connection: {
-                        host: isLegacy ? null : serverHost,
-                        port: isLegacy ? null : serverPort
+                        return {
+                            version: {
+                                name: infoVersionWrongText,
+                                protocol: infoVersionProtocol
+                            },
+                            players: {
+                                online: info.players.online,
+                                max: info.players.max,
+                                sample: playerHover
+                            },
+                            description: info.description.chat,
+                            favicon: info.favicon ? `data:image/png;base64,${info.favicon.toString('base64')}` : undefined
+                        };
                     }
-                };
-                this.p.clientInformation.get(client).clientLegacyPing = false;
+                });
 
-                if ((clientState === 'login' && (this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy)) { //todo: is it (clientState && version) || isLegacy or clientState && (version || isLegacy)
-                    let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
+                this.p.server.on('listening', () => {
+                    res();
+                    this.p.emit('listening');
+                });
 
-                    if (typeof endReason === 'string')
-                        if (isLegacy) {
-                            const buffer = Buffer.alloc(2);
-                            buffer.writeUInt16BE(endReason.length);
+                this.p.server.on('connection', client => {
+                    this.p.clientInformation.set(client, {});
 
-                            const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(endReason, 'utf16le'), 16)])
+                    let clientState = null;
 
-                            return client.socket.write(responseBuffer)
-                        } else
-                            client.end(endReason)
-                    else if (endReason !== null)
-                        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => endReason })  `, {
-                            got: endReason,
-                            expectationType: 'type',
-                            expectation: 'string | null'
-                        }, this.constructor, { server: this }))
-                };
+                    client.on('packet', ({ payload } = {}, { name, state } = {}, _, buffer) => {
+                        if (
+                            name === 'legacy_server_list_ping' &&
+                            state === 'handshaking' &&
+                            payload === 1
+                        )
+                            handleLegacyPing.call(this, buffer, client, this.serverList); //todo: check which versions are included in "legacy" and maybe add support for older serverlist versions?
+                    });
 
+                    client.on('state', state => { clientState = state });
+
+                    client.on('set_protocol', ({ protocolVersion, serverHost, serverPort }) => {
+                        const isLegacy = serverHost === '';
+
+                        this.p.clientInformation.get(client).clientEarlyInformation = {
+                            ip: client.socket.remoteAddress,
+                            version: protocolVersion,
+                            connection: {
+                                host: isLegacy ? null : serverHost,
+                                port: isLegacy ? null : serverPort
+                            }
+                        };
+                        this.p.clientInformation.get(client).clientLegacyPing = false;
+
+                        if ((clientState === 'login' && (this.p.clientInformation.get(client).clientEarlyInformation.version !== settings.version) || isLegacy)) { //todo: is it (clientState && version) || isLegacy or clientState && (version || isLegacy)
+                            let endReason = this.wrongVersionConnect({ ...this.p.clientInformation.get(client).clientEarlyInformation, legacy: isLegacy });
+
+                            if (typeof endReason === 'string')
+                                if (isLegacy) {
+                                    const buffer = Buffer.alloc(2);
+                                    buffer.writeUInt16BE(endReason.length);
+
+                                    const responseBuffer = Buffer.concat([Buffer.from('ff', 'hex'), buffer, endianToggle(Buffer.from(endReason, 'utf16le'), 16)])
+
+                                    return client.socket.write(responseBuffer)
+                                } else
+                                    client.end(endReason)
+                            else if (endReason !== null)
+                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => endReason })  `, {
+                                    got: endReason,
+                                    expectationType: 'type',
+                                    expectation: 'string | null'
+                                }, this.constructor, { server: this }))
+                        };
+
+                    });
+
+                });
+
+                this.p.server.on('login', client => {
+                    new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
+                });
             });
-
-        });
-
-        this.p.server.on('login', client => {
-            new Client(client, this, this.p.clientInformation.get(client).clientEarlyInformation, this.defaultClientProperties);
-        });
+        };
 
     }
 
@@ -247,6 +257,14 @@ class Server {
 
     set p(value) {
         console.error('(minecraft-server) ERROR: Setting private properties is not supported. Action ignored.');
+    }
+
+    listen() {
+        // when calling this.p.listen, it will be set to null
+        if (!this.p.listen)
+            throw new Error('<Server>.listen has already been called');
+
+        return this.p.listen();
     }
 
     joinProxyClient(proxyClient) {
