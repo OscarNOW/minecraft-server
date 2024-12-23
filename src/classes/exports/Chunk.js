@@ -93,7 +93,7 @@ class Chunk {
         for (const x in this.blocks)
             for (const y in this.blocks[x])
                 for (const z in this.blocks[x][y])
-                    this.p._chunk.setBlockStateId({ x, y, z }, getBlockStateId(this.blocks[x][y][z].block, this.blocks[x][y][z].state));
+                    this.p._chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, this.blocks[x][y][z].block, this.blocks[x][y][z].state, { function: 'setBlock' }));
 
         return this.p._chunk;
     }
