@@ -15,3 +15,4 @@ fix blocks data (if I send water, the client thinks it's nether gold ore)
 Use Changeable so that you can do <Client>.statistics[1].value = 10
 
 Fix changeEvent types (see todos in Client.d.ts for ChangeEventType)
+Implement toString function for Changeable so that console.log appears like a normal object

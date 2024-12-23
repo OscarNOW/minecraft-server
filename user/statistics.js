@@ -31,9 +31,9 @@ server.on('connect', async client => {
         }
     ];
 
-    // client.on('statisticsOpen', () => {
-    //     console.log('statisticsOpen');
-    // });
+    client.on('statisticsOpen', () => {
+        client.statistics[0].value = Math.floor(Math.random() * 100);
+    });
 
     // client.p.clientOn('client_command', ({ actionId }) => {
     //     if (actionId !== 1) return;
