@@ -19,5 +19,17 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Use Node 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Install Dependencies
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 2
+          max_attempts: 3
+          command: npm ci
+
       - name: Run ESLint
         run: npm run eslint
