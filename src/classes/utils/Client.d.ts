@@ -40,6 +40,11 @@ type blockFace = import('../../types').blockFace;
 type customStatisticName = import('../../types').customStatisticName;
 type entityName = import('../../types').entityName;
 
+type experience = {
+    bar: number;
+    level: number;
+};
+
 type statistic = (
     {
         category: 'mined';
@@ -103,7 +108,7 @@ type changeEventReturn<currentChangeEventType extends changeEventType> =
     currentChangeEventType extends 'chunks' ? LoadedChunk[] :
     currentChangeEventType extends 'difficulty' ? difficulty :
     currentChangeEventType extends 'entities' ? entities :
-    //todo: experience
+    currentChangeEventType extends 'experience' ? experience :
     currentChangeEventType extends 'food' ? number :
     currentChangeEventType extends 'foodSaturation' ? number :
     currentChangeEventType extends 'gamemode' ? gamemode :
@@ -123,8 +128,8 @@ type changeEventReturn<currentChangeEventType extends changeEventType> =
     currentChangeEventType extends 'sneaking' ? boolean :
     currentChangeEventType extends 'sprinting' ? boolean :
     currentChangeEventType extends 'statistics' ? statistics :
-    //todo: tabFooter
-    //todo: tabHeader
+    currentChangeEventType extends 'tabFooter' ? Text :
+    currentChangeEventType extends 'tabHeader' ? Text :
     currentChangeEventType extends 'tabItems' ? TabItem[] :
     currentChangeEventType extends 'toxicRainLevel' ? number :
     never;
@@ -283,10 +288,7 @@ export class Client {
         };
         _difficulty: difficulty;
         entities: entities; // todo: add underscore before <Client>.p.entities so that it becomes <Client>.p._entities
-        _experience: {
-            bar: number;
-            level: number;
-        };
+        _experience: experience;
         _food: number;
         _foodSaturation: 0 | 1 | 2 | 3 | 4 | 5;
         _gamemode: gamemode;
@@ -393,10 +395,7 @@ export class Client {
     /* Writable changing */
     get tabHeader(): Text;
     get tabFooter(): Text;
-    get experience(): {
-        bar: number;
-        level: number;
-    };
+    get experience(): experience;
     get position(): {
         x: number;
         y: number;
@@ -407,10 +406,7 @@ export class Client {
 
     set tabHeader(text: textInput | Text);
     set tabFooter(text: textInput | Text);
-    set experience(experience: Partial<{
-        bar: number;
-        level: number;
-    }>);
+    set experience(experience: Partial<experience>);
     set position(position: Partial<{
         x: number;
         y: number;
