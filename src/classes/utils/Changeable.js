@@ -1,5 +1,6 @@
 const valuesSymbol = Symbol('values');
 const util = require('util');
+const path = require('path');
 
 class Changeable {
     constructor(changeCallback, startValues) {
@@ -28,6 +29,20 @@ class Changeable {
     }
 
     setRaw(valuesOrKey, value) {
+        let callPath = new Error().stack.split('\n')[2];
+
+        if (callPath.includes('('))
+            callPath = callPath.split('(')[1].split(')')[0];
+        else
+            callPath = callPath.split('at ')[1];
+
+        callPath = callPath.split(':').slice(0, 2).join(':');
+
+        let folderPath = path.resolve(__dirname, '../../');
+
+        if (!callPath.startsWith(folderPath))
+            console.warn('(minecraft-server) WARNING: Detected set raw call from outside of the module. This is not recommended and may cause unexpected behavior.');
+
         if (value !== undefined)
             this[valuesSymbol][valuesOrKey] = value
         else
