@@ -1,4 +1,5 @@
 const valuesSymbol = Symbol('values');
+const util = require('util');
 
 class Changeable {
     constructor(changeCallback, startValues) {
@@ -35,6 +36,14 @@ class Changeable {
 
     get raw() {
         return Object.assign({}, this[valuesSymbol])
+    }
+
+    toString() {
+        return util.inspect(this.raw, { colors: true });
+    }
+
+    [util.inspect.custom]() {
+        return this.toString();
     }
 }
 
