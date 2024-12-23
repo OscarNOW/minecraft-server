@@ -28,6 +28,7 @@
                 "SwitchCase": 1
             }
         ],
+        "no-useless-computed-key": "warn",
         "no-dupe-else-if": "warn",
         "no-unneeded-ternary": "warn",
         "no-return-assign": "warn",
@@ -41,7 +42,6 @@
             }
         ],
         "no-unreachable": "warn",
-        "eqeqeq": "warn",
         "no-extra-boolean-cast": "warn",
         "arrow-parens": [
             "warn",
@@ -57,16 +57,21 @@
             {
                 "avoidEscape": true
             }
+        ],
+        "quote-props": [
+            "warn",
+            "as-needed"
         ]
     },
     "globals": {
-        "WeakMap": true,
-        "Promise": true,
         "BigInt": true,
-        "Symbol": true,
-        "Set": true,
-        "WeakSet": true,
+        "Map": true,
+        "Promise": true,
         "Proxy": true,
-        "Reflect": true
+        "Reflect": true,
+        "Set": true,
+        "Symbol": true,
+        "WeakMap": true,
+        "WeakSet": true
     }
 }
