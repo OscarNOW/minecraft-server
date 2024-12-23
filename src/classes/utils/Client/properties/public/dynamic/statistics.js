@@ -1,4 +1,5 @@
 const CustomError = require('../../../../CustomError.js');
+const Changeable = require('../../../../Changeable.js');
 const { customStatistics, statisticCategories, blocks, entities, items } = require('../../../../../../functions/loader/data.js');
 
 module.exports = {
@@ -15,7 +16,17 @@ module.exports = {
                 return;
 
             const oldValue = JSON.parse(JSON.stringify(this.statistics));
-            this.p._statistics = newValue;
+
+            let newStatistics = [];
+            for (const statistic of newValue) {
+                if (statistic instanceof Changeable)
+                    newStatistics.push(statistic);
+                else
+                    // when a specific object changes, we set the statistics to itself, so it updates
+                    newStatistics.push(new Changeable(() => this.statistics = this.statistics, statistic));
+            }
+
+            this.p._statistics = newStatistics;
 
             if (!beforeReady)
                 this.p.emitChange('statistics', oldValue);
