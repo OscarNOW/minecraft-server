@@ -12,7 +12,7 @@ let cachedData = {};
 let lazyData = {};
 
 const dataConverters = {
-    'items': items => items.map(item => ({
+    items: items => items.map(item => ({
         id: item[0],
         displayName: item[1],
         name: item[2],

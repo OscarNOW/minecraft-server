@@ -55,7 +55,7 @@ function blockStatesTypeEqual(a, b) {
         return false;
 
     // Create a Map to store blockStates for fast lookup
-    const createBlockStateMap = (blockStates) => {
+    const createBlockStateMap = blockStates => {
         const map = new Map();
         for (const { name, values } of blockStates) {
             map.set(name, new Set(values));

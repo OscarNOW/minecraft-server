@@ -6,7 +6,6 @@ const { tabItems } = require('./Client/properties/public/dynamic/tabItems.js');
 
 const settings = require('../../settings.json');
 const tabItemDefaults = settings.defaults.tabItem;
-const skinFetchTimeout = settings.timing.skinFetchTimeout;
 
 const Text = require('../exports/Text.js');
 const path = require('path');

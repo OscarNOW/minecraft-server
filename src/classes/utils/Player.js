@@ -1,7 +1,6 @@
 const path = require('path');
 
 const Entity = require('./Entity.js');
-const TabItem = require('./TabItem.js');
 const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
@@ -87,7 +86,7 @@ const defaultPrivate = {
             headPitch: 0, //todo
             velocityX: 0, //todo
             velocityY: 0, //todo
-            velocityZ: 0, //todo
+            velocityZ: 0 //todo
         });
 
         if (!preventTabItemPacket)
@@ -101,7 +100,7 @@ const defaultPrivate = {
                     //slice 2 to remove the reset characters
                     name = this.name.string.slice(2);
                     if (name.length > 16)
-                        return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  Player.name (=) ${require('util').inspect(extraInfo.name)}  `, {
+                        return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  Player.name (=) ${require('util').inspect(name)}  `, {
                             got: name,
                             expectationType: 'type',
                             expectation: 'string.length <= 16'

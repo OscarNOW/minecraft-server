@@ -41,7 +41,7 @@ function getBlockStateId(blockName, state = {}, { function: func } = {}) {
 }
 
 const cache = {
-    'blockName': [
+    blockName: [
         {
             stateId: 1,
             state: {}

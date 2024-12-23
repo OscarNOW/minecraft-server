@@ -1,4 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
 const Changeable = require('../../../../Changeable.js');
 const { customStatistics, statisticCategories, blocks, entities, items } = require('../../../../../../functions/loader/data.js');
 
@@ -23,7 +22,7 @@ module.exports = {
                     newStatistics.push(statistic);
                 else
                     // when a specific object changes, we set the statistics to itself, so it updates
-                    newStatistics.push(new Changeable(() => this.statistics = this.statistics, statistic));
+                    newStatistics.push(new Changeable(() => { this.statistics = this.statistics }, statistic));
             }
 
             this.p._statistics = newStatistics;
@@ -76,13 +75,13 @@ module.exports = {
                     if (unit === null) { }
                     else if (unit === 'distance') {
                         // blocks to centimeters
-                        value = value * 100;
+                        value *= 100;
                     } else if (unit === 'time') {
                         // seconds to ticks
-                        value = value * 20;
+                        value *= 20;
                     } else if (unit === 'damage') {
                         // damage to weird statistic damage
-                        value = value * 10;
+                        value *= 10;
                     } else
                         throw new Error(`Unknown custom statistic unit in customStatistics data: ${unit}`);
                 } else if (categoryUsing === 'blocks') {

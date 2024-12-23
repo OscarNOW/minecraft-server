@@ -21,7 +21,7 @@ const changes = [ // if this is changed, make sure to also change changeEvent in
     'tabFooter',
     'tabHeader',
     'tabItems',
-    'toxicRainLevel',
+    'toxicRainLevel'
 ];
 
 module.exports = {
