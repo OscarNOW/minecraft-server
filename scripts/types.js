@@ -66,11 +66,10 @@ types = {
     )
 }
 
-let dataTypes = Object.assign({}, ...fs
+let dataTypes = fs
     .readdirSync(path.resolve(__dirname, '../src/data/'))
     .filter(a => a.endsWith('.types.js'))
-    .map(a => require(`../src/data/${a}`))
-);
+    .map(a => require(`../src/data/${a}`));
 
 // in these, the  type foo=  is included
 let dataTypesWithDeclaration = [];
@@ -80,6 +79,8 @@ for (const dataType of dataTypes)
             dataTypesWithDeclaration.push(value);
             delete dataType[key];
         }
+
+dataTypes = Object.assign({}, ...dataTypes);
 
 types = {
     ...types, ...dataTypes
