@@ -72,6 +72,15 @@ let dataTypes = Object.assign({}, ...fs
     .map(a => require(`../src/data/${a}`))
 );
 
+// in these, the  type foo=  is included
+let dataTypesWithDeclaration = [];
+for (const dataType of dataTypes)
+    for (const [key, value] of Object.entries(dataType))
+        if (key === '_') {
+            dataTypesWithDeclaration.push(value);
+            delete dataType[key];
+        }
+
 types = {
     ...types, ...dataTypes
 }
@@ -82,6 +91,8 @@ console.log('Sorting types...')
 dataTypes = Object.fromEntries(Object.entries(dataTypes)
     .sort((a, b) => a[1].length - b[1].length)
 )
+
+dataTypesWithDeclaration.sort((a, b) => a.length - b.length);
 
 types = Object.fromEntries(Object.entries(types)
     .sort((a, b) => a[1].length - b[1].length)
@@ -99,11 +110,15 @@ for (const utilClass of utilClasses)
 for (const [name, value] of Object.entries(types))
     out += `type ${name}=${value};`
 
+out += dataTypesWithDeclaration.join('');
 
 let typesOut = '';
 
 for (const [name, value] of Object.entries(dataTypes))
     typesOut += `export type ${name}=${value};`
+
+for (const value of dataTypesWithDeclaration)
+    typesOut += `export ${value}`;
 
 console.log('Replacing version...')
 out = out.replaceAll('{version}', version);
