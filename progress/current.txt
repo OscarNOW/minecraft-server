@@ -1,2 +1,7 @@
-Correctly type <Chunk>.setBlock (with states only for specific blocks)
-add server.listen instead of listening in constructor
+-add server.listen instead of listening in constructor
+add server.listen calls in all documentation
+    changelog
+    readme
+    examples
+    user
+    etc?
