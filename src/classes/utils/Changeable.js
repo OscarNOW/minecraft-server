@@ -28,6 +28,7 @@ class Changeable {
 
     }
 
+    // not set raw(...) , because we could also set by key value
     setRaw(valuesOrKey, value) {
         let callPath = new Error().stack.split('\n')[2];
 
@@ -41,7 +42,7 @@ class Changeable {
         let folderPath = path.resolve(__dirname, '../../');
 
         if (!callPath.startsWith(folderPath))
-            console.warn('(minecraft-server) WARNING: Detected set raw call from outside of the module. This is not recommended and may cause unexpected behavior.');
+            console.warn('(minecraft-server) WARNING: Detected setRaw call from outside of the module. This is not recommended and may cause unexpected behavior.');
 
         if (value !== undefined)
             this[valuesSymbol][valuesOrKey] = value
