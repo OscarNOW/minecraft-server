@@ -34,11 +34,15 @@ export class Chunk {
      * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
      * @package
      */
-    updateBlock(block: blockName, chunkRelativeLocation: {
-        x: number;
-        y: number;
-        z: number;
-    }, state?: blockState): this;
+    updateBlock<currentBlockName extends blockName>(
+        block: currentBlockName,
+        chunkRelativeLocation: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        state?: blockState<currentBlockName>
+    ): this;
 
     //todo: add overwrite where you can pass a Block class
     /**
@@ -50,11 +54,15 @@ export class Chunk {
      *                      chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
      *
      */
-    setBlock(block: blockName, chunkRelativeLocation: {
-        x: number;
-        y: number;
-        z: number;
-    }, state?: blockState): this;
+    setBlock<currentBlockName extends blockName>(
+        block: currentBlockName,
+        chunkRelativeLocation: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        state?: blockState<currentBlockName>
+    ): this;
 
     //todo: add types for property p
 }

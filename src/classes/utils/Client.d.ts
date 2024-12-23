@@ -480,20 +480,28 @@ export class Client {
     /**
      * @param location The absolute location of the block, not relative to a chunk.
      */
-    setBlock(block: blockName, location: { //todo: add overwrite where you can pass a Block class
-        x: number;
-        y: number;
-        z: number;
-    }, state?: blockState): this;
+    setBlock<currentBlockName extends blockName>(
+        block: currentBlockName,
+        location: { //todo: add overwrite where you can pass a Block class
+            x: number;
+            y: number;
+            z: number;
+        },
+        state?: blockState<currentBlockName>
+    ): this;
     /**
      * Set a block without sending a packet to the client.
      * @param location The absolute location of the block, not relative to a chunk.
      */
-    updateBlock(block: blockName, location: {
-        x: number;
-        y: number;
-        z: number;
-    }, state?: blockState): this;
+    updateBlock<currentBlockName extends blockName>(
+        block: currentBlockName,
+        location: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        state?: blockState<currentBlockName>
+    ): this;
     title(properties: {
         fadeIn?: number;
         stay?: number;
@@ -579,21 +587,36 @@ export class Client {
     noRespawnBlock(): void;
     playerArrowHitSound(): void;
     kill(deathMessage?: textInput | Text): void;
-    acknowledgeDigStart(location: {
-        x: number;
-        y: number;
-        z: number;
-    }, successful: boolean, blockName: blockName, blockState: blockState): void;
-    acknowledgeDigCancel(location: {
-        x: number;
-        y: number;
-        z: number;
-    }, successful: boolean, blockName: blockName, blockState: blockState): void;
-    acknowledgeBlockBreak(location: {
-        x: number;
-        y: number;
-        z: number;
-    }, successful: boolean, blockName: blockName, blockState: blockState): void;
+    acknowledgeDigStart<currentBlockName extends blockName>(
+        location: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        successful: boolean,
+        blockName: currentBlockName,
+        blockState: blockState<currentBlockName>
+    ): void;
+    acknowledgeDigCancel<currentBlockName extends blockName>(
+        location: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        successful: boolean,
+        blockName: currentBlockName,
+        blockState: blockState<currentBlockName>
+    ): void;
+    acknowledgeBlockBreak<currentBlockName extends blockName>(
+        location: {
+            x: number;
+            y: number;
+            z: number;
+        },
+        successful: boolean,
+        blockName: currentBlockName,
+        blockState: blockState<currentBlockName>
+    ): void;
 
     removeAllListeners(event?: 'itemUse' | 'armSwing' | 'misbehavior' | 'chat' | 'signEditorClose' | 'itemHandSwap' | 'connect' | 'join' | 'leave' | 'windowClose' | 'inventoryClose' | 'digStart' | 'digCancel' | 'blockBreak' | 'itemDrop' | 'leftClick' | 'rightClick'): void;
 

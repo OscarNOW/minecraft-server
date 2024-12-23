@@ -2,7 +2,7 @@
 /**
  * @see https://oscarnow.github.io/minecraft-server/{version}/classes/Block
  */
-export class Block {
+export class Block<currentBlockName extends blockName> {
     /**
      * The absolute x of the block, relative to the world and not to the chunk.
      */
@@ -13,8 +13,8 @@ export class Block {
      */
     readonly z: number;
 
-    readonly block: blockName; //todo: rename block to name
-    readonly state: blockState;
+    readonly block: currentBlockName; //todo: rename block to name
+    readonly state: blockState<currentBlockName>;
     readonly stateId: number;
 
     //todo: add types for property p
