@@ -20,7 +20,7 @@ readonly chunkData:{biomes:unknown,bitMap:unknown,chunkData:unknown};
  * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
  * @package
  */
-updateBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;
+updateBlock<currentBlockName extends blockName>(blockName:currentBlockName,chunkRelativeLocation:{x:number;y:number;z:number;},blockState:blockState<currentBlockName>):this;
 /**
  * @param chunkRelativeLocation The location relative to the chunk. Must be between 0 and 15.
  * @example
@@ -30,7 +30,7 @@ updateBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},
  *                      chunk.setBlock('grass_block', { x, y, z }, { snowy: false });
  *
  */
-setBlock(block:blockName,chunkRelativeLocation:{x:number;y:number;z:number;},state?:blockState):this;}
+setBlock<currentBlockName extends blockName>(blockName:currentBlockName,chunkRelativeLocation:{x:number;y:number;z:number;},blockState:blockState<currentBlockName>):this;}
 /**
  * @description Create a fake Client that can connect to a server where you can control the packets sent and received.
  * @see https://oscarnow.github.io/minecraft-server/1.4.7/classes/ProxyClient
@@ -148,7 +148,7 @@ constructor(text:textInput);array:textArrayComponent[];string:string;uncolored:s
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.7/classes/Block
  */
-declare class Block{
+declare class Block<currentBlockName extends blockName>{
 /**
  * The absolute x of the block, relative to the world and not to the chunk.
  */
@@ -156,7 +156,7 @@ readonly x:number;readonly y:number;
 /**
  * The absolute z of the block, relative to the world and not to the chunk.
  */
-readonly z:number;readonly block:blockName;readonly state:blockState;readonly stateId:number;}
+readonly z:number;readonly block:currentBlockName;readonly state:blockState<currentBlockName>;readonly stateId:number;}
 /**
  * @see https://oscarnow.github.io/minecraft-server/1.4.7/classes/BossBar
  */
@@ -188,12 +188,12 @@ crash():void;
 /**
  * @param location The absolute location of the block, not relative to a chunk.
  */
-setBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockState):this;
+setBlock<currentBlockName extends blockName>(blockName:currentBlockName,location:{x:number;y:number;z:number;},blockState:blockState<currentBlockName>):this;
 /**
  * Set a block without sending a packet to the client.
  * @param location The absolute location of the block, not relative to a chunk.
  */
-updateBlock(block:blockName,location:{x:number;y:number;z:number;},state?:blockState):this;title(properties:{fadeIn?:number;stay?:number;fadeOut?:number;title?:textInput|Text;subTitle?:textInput|Text;}|textInput|Text):void;actionBar(text?:textInput|Text):void;chunk(chunk:Chunk,chunkPosition:{x:number;z:number;}):void;entity<name extends defaultArgumentEntityName|'experience_orb'|'player'>(entity:name,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},extraInfo:name extends'experience_orb'?{experience?:number;}:name extends'player'?{tabItem?:TabItem;uuid?:string;skinAccountUuid?:string;name?:string;gamemode?:gamemode;}:never):name extends'player'?Promise<EntityConditional<name>>:EntityConditional<name>;tabItem(tabItemOptions?:{player?:Player;name?:textInput|Text;uuid?:string;skinAccountUuid?:string;ping?:number|null;}):Promise<TabItem>;window(windowType:nonEntityWindowName):void;closeWindow():void;signEditor(signLocation:{x:number;y:number;z:number;}):void;bossBar(bossBarInfo?:optionalBossBarInfo):BossBar;sound(soundInfo:{sound:soundName;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;customSound(soundInfo:{sound:string;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;stopSounds(filter:{soundName:soundName|string;}):void;stopSounds(filter:{channel:soundChannel;}):void;stopSounds(filter:{soundName:soundName|string;channel:soundChannel;}):void;pufferFishSound():void;noRespawnBlock():void;playerArrowHitSound():void;kill(deathMessage?:textInput|Text):void;acknowledgeDigStart(location:{x:number;y:number;z:number;},successful:boolean,blockName:blockName,blockState:blockState):void;acknowledgeDigCancel(location:{x:number;y:number;z:number;},successful:boolean,blockName:blockName,blockState:blockState):void;acknowledgeBlockBreak(location:{x:number;y:number;z:number;},successful:boolean,blockName:blockName,blockState:blockState):void;removeAllListeners(event?:'itemUse'|'armSwing'|'misbehavior'|'chat'|'signEditorClose'|'itemHandSwap'|'connect'|'join'|'leave'|'windowClose'|'inventoryClose'|'digStart'|'digCancel'|'blockBreak'|'itemDrop'|'leftClick'|'rightClick'):void;
+updateBlock<currentBlockName extends blockName>(blockName:currentBlockName,location:{x:number;y:number;z:number;},blockState:blockState<currentBlockName>):this;title(properties:{fadeIn?:number;stay?:number;fadeOut?:number;title?:textInput|Text;subTitle?:textInput|Text;}|textInput|Text):void;actionBar(text?:textInput|Text):void;chunk(chunk:Chunk,chunkPosition:{x:number;z:number;}):void;entity<name extends defaultArgumentEntityName|'experience_orb'|'player'>(entity:name,position:{x:number;y:number;z:number;yaw?:number;pitch?:number;},extraInfo:name extends'experience_orb'?{experience?:number;}:name extends'player'?{tabItem?:TabItem;uuid?:string;skinAccountUuid?:string;name?:string;gamemode?:gamemode;}:never):name extends'player'?Promise<EntityConditional<name>>:EntityConditional<name>;tabItem(tabItemOptions?:{player?:Player;name?:textInput|Text;uuid?:string;skinAccountUuid?:string;ping?:number|null;}):Promise<TabItem>;window(windowType:nonEntityWindowName):void;closeWindow():void;signEditor(signLocation:{x:number;y:number;z:number;}):void;bossBar(bossBarInfo?:optionalBossBarInfo):BossBar;sound(soundInfo:{sound:soundName;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;customSound(soundInfo:{sound:string;channel:soundChannel;position:{x:number;y:number;z:number;};volume:number;pitch:number;}):void;stopSounds(filter:{soundName:soundName|string;}):void;stopSounds(filter:{channel:soundChannel;}):void;stopSounds(filter:{soundName:soundName|string;channel:soundChannel;}):void;pufferFishSound():void;noRespawnBlock():void;playerArrowHitSound():void;kill(deathMessage?:textInput|Text):void;acknowledgeDigStart<currentBlockName extends blockName>(location:{x:number;y:number;z:number;},successful:boolean,blockName:currentBlockName,blockState:blockState<currentBlockName>):void;acknowledgeDigCancel<currentBlockName extends blockName>(location:{x:number;y:number;z:number;},successful:boolean,blockName:currentBlockName,blockState:blockState<currentBlockName>):void;acknowledgeBlockBreak<currentBlockName extends blockName>(location:{x:number;y:number;z:number;},successful:boolean,blockName:currentBlockName,blockState:blockState<currentBlockName>):void;removeAllListeners(event?:'itemUse'|'armSwing'|'misbehavior'|'chat'|'signEditorClose'|'itemHandSwap'|'connect'|'join'|'leave'|'windowClose'|'inventoryClose'|'digStart'|'digCancel'|'blockBreak'|'itemDrop'|'leftClick'|'rightClick'):void;
 /**
  * @example
  *          client.on('change', 'slot', slot => {
