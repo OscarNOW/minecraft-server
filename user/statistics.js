@@ -28,6 +28,16 @@ server.on('connect', async client => {
             category: 'mined',
             statistic: 'water',
             value: 40
+        },
+        {
+            category: 'pickedUp',
+            statistic: 'water_bucket',
+            value: 10
+        },
+        {
+            category: 'mined',
+            statistic: 'acacia_button',
+            value: 80
         }
     ];
 

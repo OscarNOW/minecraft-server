@@ -1,18 +1,2 @@
-+Create a <Client>.statistics that is changeable at any time.
-+    When changed, store and wait for Client to request changes
-+When Client requests statistics (by sending client status with actionId=1)
-+    Convert statistic names
-+    Convert statistic units (ie blocks to cm and seconds to ticks)
-
-+    Send only statistics that have changed
-+Implement changeEvent for statistics
-+Create a statisticsOpened event (or something similarly named) that fires when Client requests statistics
-
-+Test custom damage statistics
-+Fix data (because the order is currently incorrect)
-+Test all statistic types and units
-+Use Changeable so that you can do <Client>.statistics[1].value = 10
-
-+Implement toString function for Changeable so that console.log appears like a normal object
--Fix changeEvent types (see todos in Client.d.ts for ChangeEventType)
-fix blocks data (if I send water, the client thinks it's nether gold ore)
+Correctly type <Chunk>.setBlock (with states only for specific blocks)
+add server.listen instead of listening in constructor
