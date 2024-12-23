@@ -96,7 +96,7 @@ module.exports = {
                 entries: minecraftStatistics
             });
 
-            this.p.clientStatistics = this.p._statistics;
+            this.p.clientStatistics = JSON.parse(JSON.stringify(this.p._statistics));
         }
     }
 }
