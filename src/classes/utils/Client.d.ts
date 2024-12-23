@@ -481,26 +481,26 @@ export class Client {
      * @param location The absolute location of the block, not relative to a chunk.
      */
     setBlock<currentBlockName extends blockName>(
-        block: currentBlockName,
+        blockName: currentBlockName,
         location: { //todo: add overwrite where you can pass a Block class
             x: number;
             y: number;
             z: number;
         },
-        state?: blockState<currentBlockName>
+        blockState: blockState<currentBlockName>
     ): this;
     /**
      * Set a block without sending a packet to the client.
      * @param location The absolute location of the block, not relative to a chunk.
      */
     updateBlock<currentBlockName extends blockName>(
-        block: currentBlockName,
+        blockName: currentBlockName,
         location: {
             x: number;
             y: number;
             z: number;
         },
-        state?: blockState<currentBlockName>
+        blockState: blockState<currentBlockName>
     ): this;
     title(properties: {
         fadeIn?: number;

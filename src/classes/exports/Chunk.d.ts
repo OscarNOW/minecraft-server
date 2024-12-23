@@ -35,13 +35,13 @@ export class Chunk {
      * @package
      */
     updateBlock<currentBlockName extends blockName>(
-        block: currentBlockName,
+        blockName: currentBlockName,
         chunkRelativeLocation: {
             x: number;
             y: number;
             z: number;
         },
-        state?: blockState<currentBlockName>
+        blockState: blockState<currentBlockName>
     ): this;
 
     //todo: add overwrite where you can pass a Block class
@@ -55,13 +55,13 @@ export class Chunk {
      *
      */
     setBlock<currentBlockName extends blockName>(
-        block: currentBlockName,
+        blockName: currentBlockName,
         chunkRelativeLocation: {
             x: number;
             y: number;
             z: number;
         },
-        state?: blockState<currentBlockName>
+        blockState: blockState<currentBlockName>
     ): this;
 
     //todo: add types for property p
