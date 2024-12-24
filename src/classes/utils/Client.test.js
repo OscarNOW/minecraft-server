@@ -5,7 +5,7 @@ const Server = require('../exports/Server.js');
 const ProxyClient = require('../exports/ProxyClient.js');
 
 module.exports = (expect, warn) => {
-    return new Promise(res => {
+    return new Promise(async res => {
         const server = new Server();
         const proxyClient = new ProxyClient();
 
@@ -51,9 +51,9 @@ module.exports = (expect, warn) => {
                 })
         })
 
+        await server.listen();
         server.joinProxyClient(proxyClient);
-
-    })
+    });
 }
 
 function cleanup({ client, proxyClient }) {
