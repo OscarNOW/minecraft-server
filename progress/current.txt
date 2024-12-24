@@ -1,7 +1,3 @@
--add server.listen instead of listening in constructor
-add server.listen calls in all documentation
-    changelog
-    readme
-    examples
-    user
-    etc?
+make sure textArrayComponent.with doesn't have to be array, but can also just be the component itself
+fix that with also becomes partial for partialArrayComponent
+only use CustomError for Client misbehaviors, and just do throw new Error for all others
