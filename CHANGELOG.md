@@ -2,6 +2,10 @@
 * `<Client>.cooldown(` now uses seconds instead of ticks for consistency
 * A `<Server>.listen(` call is required for the server to start listening
 * Text arrayComponent `hoverEvent` is changed to `hoverText`
+* When setting `<Client>.food`, the new value is now strictly checked
+* When setting `<Client>.foodSaturation`, the new value is now strictly checked
+* When setting `<Client>.slot`, the new value is now strictly checked
+* When setting `<Client>.health`, the new value is now strictly checked
 
 ## New API
 * `<Client>.statistics` (which is changeable) which sets the Client statistics
