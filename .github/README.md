@@ -106,7 +106,7 @@ For the full license, see [`license.md`](https://github.com/OscarNOW/minecraft-s
 ![Explanation of ISC license](https://github.com/OscarNOW/minecraft-server/blob/main/assets/ISC%20license/github/light.png?raw=true#gh-light-mode-only)
 
 ## **Special thanks**
-* [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol.
+* [wiki.vg](https://wiki.vg) for documenting the full Minecraft protocol. (Unfortunately, wiki.vg is no longer up. A snapshot of the wiki can be found at [https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Main_Page](https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Main_Page))
 * [minecraft-protocol](https://github.com/PrismarineJS/node-minecraft-protocol) for parsing all the packets and helping with the login process.
 * [All the contributors](https://github.com/OscarNOW/minecraft-server/graphs/contributors) for helping improve the package.
 * [Typedoc](https://typedoc.org/) for generating part of the documentation.

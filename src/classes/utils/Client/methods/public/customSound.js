@@ -10,7 +10,7 @@ module.exports = function ({ sound, channel, position: { x, y, z }, volume, pitc
     if (typeof volume !== 'number' || isNaN(volume) || volume < 0 || volume > 1)
         throw new Error(`Volume must be a number between 0 and 1, received ${volume} (${typeof volume})`);
 
-    // Multiplying by 8 is needed, see https://wiki.vg/index.php?title=Protocol&oldid=16091#Sound_Effect
+    // Multiplying by 8 is needed, see https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol?oldid=2772553#Sound_Effect
     this.p.sendPacket('named_sound_effect', {
         soundName: sound,
         soundCategory: soundChannels.indexOf(channel),
