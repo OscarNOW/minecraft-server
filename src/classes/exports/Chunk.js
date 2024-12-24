@@ -4,7 +4,6 @@ const { chunkSize } = require('../../functions/loader/data.js');
 const crypto = require('crypto');
 const path = require('path');
 
-const CustomError = require('../utils/CustomError.js');
 const Block = require('../utils/Block.js');
 const { getBlockStateId } = require('../../functions/getBlockStateId.js');
 
