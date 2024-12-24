@@ -16,7 +16,7 @@ proxyClient.onPacket((name, packet) => {
             skinParts: 0,
             mainHand: 0
         })
-})
+});
 
 const server = new Server({
     defaultClientProperties: () => ({
@@ -29,9 +29,9 @@ const server = new Server({
     })
 });
 
-server.on('listening', () => console.log('Listening'))
 server.on('connect', client => {
     client.on('misbehavior', a => console.log(a.toString()))
-})
+});
 
-server.joinProxyClient(proxyClient);
+server.on('listening', () => console.log('Listening'));
+server.listen().then(() => server.joinProxyClient(proxyClient));

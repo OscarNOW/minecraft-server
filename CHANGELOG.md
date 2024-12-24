@@ -1,5 +1,6 @@
 ## Existing API changes
 * `<Client>.cooldown(` now uses seconds instead of ticks for consistency
+* A `<Server>.listen(` call is required for the server to start listening
 
 ## New API
 * `<Client>.statistics` (which is changeable) which sets the Client statistics

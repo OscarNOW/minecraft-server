@@ -29,3 +29,6 @@ const server = new Server({
     })
 
 });
+
+server.on('listening', () => console.log('Listening'));
+server.listen();

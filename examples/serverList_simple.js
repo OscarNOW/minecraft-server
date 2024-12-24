@@ -17,3 +17,4 @@ const server = new Server({
 });
 
 server.on('listening', () => console.log('Listening on localhost:25565'));
+server.listen();

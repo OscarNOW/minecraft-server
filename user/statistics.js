@@ -17,7 +17,6 @@ const server = new Server({
     })
 });
 
-server.on('listening', () => console.log('Listening'))
 server.on('connect', async client => {
     for (let x = -5; x < 5; x++)
         for (let z = -5; z < 5; z++)
@@ -81,3 +80,6 @@ server.on('connect', async client => {
     //     });
     // });
 });
+
+server.on('listening', () => console.log('Listening'));
+server.listen();

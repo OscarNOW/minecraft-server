@@ -28,4 +28,6 @@ server.on('join', client => {
     }
     // client.on('chat', a => eval(a))
 
-})
+});
+
+server.listen();

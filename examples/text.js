@@ -29,7 +29,8 @@ const message = new Text([
 const server = new Server();
 
 server.on('connect', client => {
-    client.chat(message)
+    client.chat(message);
 });
 
 server.on('listening', () => console.log('Listening on localhost:25565'));
+server.listen();

@@ -32,6 +32,8 @@ let startJoinTime;
 let joinTimes = [];
 
 console.time('listen  ')
+server.listen();
+
 server.on('connect', client => {
     joinCount++;
 

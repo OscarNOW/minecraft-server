@@ -1,16 +1,20 @@
 const { Server } = require('../');
 
-console.time('server  ')
-const server = new Server({
-    defaultClientProperties: () => ({
-        gamemode: 'creative',
-        position: {
-            x: 5,
-            y: 101,
-            z: 5
-        }
-    })
-});
-console.timeEnd('server  ')
+main();
+async function main() {
+    console.time('server  ');
+    const server = new Server({
+        defaultClientProperties: () => ({
+            gamemode: 'creative',
+            position: {
+                x: 5,
+                y: 101,
+                z: 5
+            }
+        })
+    });
+    await server.listen();
+    console.timeEnd('server  ');
 
-server.close();
+    server.close();
+};

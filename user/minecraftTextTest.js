@@ -12,4 +12,7 @@ server.on('connect', client => {
         position: 0,
         sender: '0'
     })
-})
+});
+
+server.on('listening', () => console.log('Listening'));
+server.listen();

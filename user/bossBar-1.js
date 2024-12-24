@@ -21,4 +21,6 @@ server.on('join', async client => {
 
     client.chat(2)
     bossBar.divisionAmount = 10;
-})
+});
+
+server.listen();
