@@ -190,7 +190,8 @@ class Text {
             currentColor = component.color;
         }
 
-        // when using translate component with with, unnecessary change characters could be left,
+        // when using translate component with 'with', unnecessary change characters could be left
+        // at the end of 'with' components, because they don't know their outside modifiers,
         // so we reparse it to an array and back so those unnecessary characters are removed
         if (array.some(component => {
             const [type] = getTextComponentTypeValue(component);
