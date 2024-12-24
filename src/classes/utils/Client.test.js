@@ -33,7 +33,6 @@ module.exports = (expect, warn) => {
                         cleanUp
                     });
                 } catch (e) {
-                    console.error(e);
                     expect(e, 'no error', testFileName);
                 }
                 cleanup({ client, proxyClient });
