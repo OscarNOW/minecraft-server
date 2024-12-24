@@ -33,29 +33,7 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     sentChangeEvents = [];
     sentPackets = [];
-    client.slot = '2';
-
-    expect(client.slot, 2);
-    expect(sentChangeEvents, [2]);
-    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
-        name === 'held_item_slot' &&
-        slot === 2
-    ), true);
-
-    sentChangeEvents = [];
-    sentPackets = [];
-    client.slot = 10;
-
-    expect(client.slot, 1);
-    expect(sentChangeEvents, [1]);
-    expect(!!sentPackets.find(({ name, packet: { slot } }) =>
-        name === 'held_item_slot' &&
-        slot === 1
-    ), true);
-
-    sentChangeEvents = [];
-    sentPackets = [];
-    client.slot = '12';
+    client.slot = 3;
 
     expect(client.slot, 3);
     expect(sentChangeEvents, [3]);
@@ -64,4 +42,31 @@ module.exports = ({ expect, client, proxyClient }) => {
         slot === 3
     ), true);
 
+    sentChangeEvents = [];
+    sentPackets = [];
+    let error = false;
+    try {
+        client.slot = 10;
+    } catch {
+        error = true;
+    }
+
+    expect(error, true);
+    expect(client.slot, 3);
+    expect(sentChangeEvents, []);
+    expect(sentPackets, []);
+
+    sentChangeEvents = [];
+    sentPackets = [];
+    error = false;
+    try {
+        client.slot = '6';
+    } catch {
+        error = true;
+    }
+
+    expect(error, true);
+    expect(client.slot, 3);
+    expect(sentChangeEvents, []);
+    expect(sentPackets, []);
 }

@@ -33,24 +33,29 @@ module.exports = ({ expect, client, proxyClient }) => {
 
     sentChangeEvents = [];
     sentPackets = [];
-    client.health = '23';
+    let error = false;
+    try {
+        client.health = '23';
+    } catch {
+        error = true;
+    }
 
-    expect(client.health, 20);
-    expect(sentChangeEvents, [20]);
-    expect(!!sentPackets.find(({ name, packet: { health } }) =>
-        name === 'update_health' &&
-        health === 20
-    ), true);
+    expect(error, true);
+    expect(client.health, 6);
+    expect(sentChangeEvents, []);
+    expect(sentPackets, []);
 
     sentChangeEvents = [];
     sentPackets = [];
-    client.health = '-2';
+    error = false;
+    try {
+        client.health = '13';
+    } catch {
+        error = true;
+    }
 
-    expect(client.health, 0);
-    expect(sentChangeEvents, [0]);
-    expect(!!sentPackets.find(({ name, packet: { health } }) =>
-        name === 'update_health' &&
-        health === 0
-    ), true);
-
+    expect(error, true);
+    expect(client.health, 6);
+    expect(sentChangeEvents, []);
+    expect(sentPackets, []);
 }
