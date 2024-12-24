@@ -12,17 +12,17 @@ let a = new Text([
             {
                 translate: 'item.durability',
                 color: 'green',
-                modifiers: ['bold'],
+                modifiers: 'bold',
                 with: [
                     {
                         text: 'Hello',
-                        modifiers: ['bold'],
+                        modifiers: 'bold',
                         color: 'red'
                     },
                     {
                         translate: 'options.graphics.warning.vendor',
                         color: 'purple',
-                        modifiers: ['italic'],
+                        modifiers: 'italic',
                         with: [
                             {
                                 text: 'World',
