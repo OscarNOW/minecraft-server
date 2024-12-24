@@ -6,6 +6,7 @@
 * When setting `<Client>.foodSaturation`, the new value is now strictly checked
 * When setting `<Client>.slot`, the new value is now strictly checked
 * When setting `<Client>.health`, the new value is now strictly checked
+* When passing incorrect values to functions (or when setting variables), they will now throw instead of using `CustomError`
 
 ## New API
 * `<Client>.statistics` (which is changeable) which sets the Client statistics
