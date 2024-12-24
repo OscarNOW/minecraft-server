@@ -18,10 +18,7 @@ module.exports = expect => {
     }]), { text: 'Hello world', clickEvent: { action: 'open_url', value: 'https://google.com' } })
     expect(Text.arrayToChat([{
         text: 'Hello world',
-        hoverEvent: {
-            action: 'show_text',
-            value: 'Hello world'
-        }
+        hoverText: 'Hello world'
     }]), { text: 'Hello world', hoverEvent: { action: 'show_text', value: 'Hello world' } })
     expect(Text.arrayToChat({
         translate: 'demo.help.movementShort',
