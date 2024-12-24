@@ -46,7 +46,7 @@ const defaultInheritedChatProperties = Object.freeze({
     color: 'reset',
     insertion: '',
     clickEvent: { action: 'change_page', value: 0 },
-    hoverText: '',
+    hoverEvent: { action: 'show_text', value: '' },
     ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
 });
 
