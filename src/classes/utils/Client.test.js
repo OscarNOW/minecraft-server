@@ -20,17 +20,22 @@ module.exports = (expect, warn) => {
             ) {
                 let count = 0;
 
-                testFileFunction({
-                    expect: (a, b) => {
-                        expect(a, b, `${testFileName}-${count}`);
-                        count++;
-                    },
-                    warn,
-                    server,
-                    proxyClient,
-                    client,
-                    cleanUp
-                });
+                try {
+                    testFileFunction({
+                        expect: (a, b) => {
+                            expect(a, b, `${testFileName}-${count}`);
+                            count++;
+                        },
+                        warn,
+                        server,
+                        proxyClient,
+                        client,
+                        cleanUp
+                    });
+                } catch (e) {
+                    console.error(e);
+                    expect(e, 'no error', testFileName);
+                }
                 cleanup({ client, proxyClient });
             }
 
