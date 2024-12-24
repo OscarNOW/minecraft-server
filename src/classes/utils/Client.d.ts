@@ -6,7 +6,7 @@ type Entity = import('./Entity').Entity;
 type EntityLike = import('./Entity').EntityLike;
 type BossBar = import('./BossBar').BossBar;
 type WorldBorder = import('./WorldBorder').WorldBorder;
-type Block = import('./Block').Block;
+type Block<a extends blockName> = import('./Block').Block<a>;
 type CustomError = import('./CustomError').CustomError;
 type Player = import('./Player').Player;
 
@@ -31,7 +31,7 @@ type noDataParticle = import('../../types').noDataParticle;
 type itemName = import('../../types').itemName;
 type demoMessage = import('../../types').demoMessage;
 type blockName = import('../../types').blockName;
-type blockState = import('../../types').blockState;
+type blockState<a extends blockName> = import('../../types').blockState<a>;
 type defaultArgumentEntityName = import('../../types').defaultArgumentEntityName;
 type nonEntityWindowName = import('../../types').nonEntityWindowName;
 type soundName = import('../../types').soundName;
@@ -72,7 +72,7 @@ type statistics = statistic[];
 type blocksSegment = {
     [x: number]: {
         [y: number]: {
-            [z: number]: Block;
+            [z: number]: Block<blockName>;
         };
     };
 };
@@ -664,7 +664,7 @@ export class Client {
         x: number;
         y: number;
         z: number;
-    }, previousBlock: Block) => void): void;
+    }, previousBlock: Block<blockName>) => void): void;
     on(event: 'itemDrop', callback: (stack: boolean) => void): void;
     on(event: 'rightClick', callback: (clickInfo: {
         position: {
@@ -723,7 +723,7 @@ export class Client {
         x: number;
         y: number;
         z: number;
-    }, previousBlock: Block) => void): void;
+    }, previousBlock: Block<blockName>) => void): void;
     once(event: 'itemDrop', callback: (stack: boolean) => void): void;
     once(event: 'rightClick', callback: (clickInfo: {
         position: {
