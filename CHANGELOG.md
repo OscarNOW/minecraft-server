@@ -7,6 +7,7 @@
 * When setting `<Client>.slot`, the new value is now strictly checked
 * When setting `<Client>.health`, the new value is now strictly checked
 * When passing incorrect values to functions (or when setting variables), they will now throw instead of using `CustomError`
+* Removed `<Client>.window()` as it was not yet implemented
 
 ## New API
 * `<Client>.statistics` (which is changeable) which sets the Client statistics
