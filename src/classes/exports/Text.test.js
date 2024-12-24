@@ -91,7 +91,7 @@ module.exports = expect => {
     temp = new Text('')
     temp.array = 'Foo bar 123';
     expect(temp.string, '§rFoo bar 123')
-    expect(temp.array, [{ color: 'default', modifiers: [], text: 'Foo bar 123' }])
+    expect(temp.array, [{ text: 'Foo bar 123', color: 'default', modifiers: [] }])
     expect(temp.uncolored, 'Foo bar 123')
     expect(temp.chat, 'Foo bar 123')
 }
