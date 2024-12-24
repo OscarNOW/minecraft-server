@@ -1,4 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
 const { getSkinTextures } = require('../../../../../../functions/getSkinTextures');
 const settings = require('../../../../../../settings.json');
 
@@ -13,22 +12,18 @@ module.exports = {
         get() {
             return this.p._skinAccountUuid;
         },
-        async set(value, beforeReady) {
+        async set(newValue, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
             // if there is no skinAccountUuid, we can simply not load in a skin for the Client
-            if (value === null)
+            if (newValue === null)
                 return;
 
-            if (typeof value !== 'string')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `skinAccountUuid in  <${this.constructor.name}>.skinAccountUuid = ${require('util').inspect(value)}  `, {
-                    got: value,
-                    expectationType: 'type',
-                    expectation: 'string'
-                }, null, { server: this.server, client: this }));
+            if (typeof newValue !== 'string')
+                throw new Error(`Expected skinAccountUuid to be a string or null, received ${newValue} (${typeof newValue})`);
 
-            this.p._skinAccountUuid = value;
+            this.p._skinAccountUuid = newValue;
 
             // we spawn a temporary tabItem with the same uuid as the Client, this will change the Client skin
             this.p.sendPacket('player_info', {

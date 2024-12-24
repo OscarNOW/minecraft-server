@@ -1,5 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
-
 const { difficulties } = require('../../../../../../functions/loader/data.js');
 
 module.exports = {
@@ -16,11 +14,7 @@ module.exports = {
                 return;
 
             if (!difficulties.includes(newValue))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `difficulty in  <${this.constructor.name}>.difficulty = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'value',
-                    expectation: difficulties
-                }, null, { server: this.server, client: this }));
+                throw new Error(`Unknown difficulty "${newValue}"`);
 
             const oldValue = this.difficulty;
             this.p._difficulty = newValue;

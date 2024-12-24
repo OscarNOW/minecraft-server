@@ -1,5 +1,4 @@
 const { defaults } = require('../../../../../../settings.json');
-const CustomError = require('../../../../CustomError.js');
 
 module.exports = {
     showRespawnScreen: {
@@ -21,11 +20,7 @@ module.exports = {
                 return;
 
             if (typeof newValue !== 'boolean')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `showRespawnScreen in  <${this.constructor.name}>.showRespawnScreen = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'type',
-                    expectation: 'boolean'
-                }, null, { server: this.server, client: this }));
+                throw new Error(`Expected showRespawnScreen to be a boolean, received ${newValue} (${typeof newValue})`);
 
             const oldValue = this.showRespawnScreen;
             this.p._showRespawnScreen = newValue;

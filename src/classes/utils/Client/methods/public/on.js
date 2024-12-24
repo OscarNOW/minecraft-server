@@ -1,4 +1,3 @@
-const CustomError = require('../../../CustomError.js');
 const { firstChangeEventListenerListeners } = require('../private/onFirstChangeEventListener.js');
 
 module.exports = function (event) {
@@ -7,11 +6,7 @@ module.exports = function (event) {
         const callback = arguments[2];
 
         if (!this.p.changeEvents[type])
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  <${this.constructor.name}>.on('change', ${require('util').inspect(type)}, ...)  `, {
-                got: type,
-                expectationType: 'value',
-                expectation: Object.keys(this.p.changeEvents)
-            }, this.on, { server: this.server, client: this }));
+            throw new Error(`Unknown change event type "${type}"`);
 
         if (this.p.changeEvents[type].length === 0) firstChangeEventListenerListeners[type]?.forEach?.(cb => cb({ callback, once: false }))
         this.p.changeEvents[type].push({ callback, once: false });
@@ -20,11 +15,7 @@ module.exports = function (event) {
         const callback = arguments[1];
 
         if (!this.p.events[event])
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: Object.keys(this.p.events)
-            }, this.on, { server: this.server, client: this }));
+            throw new Error(`Unknown event "${event}"`);
 
         this.p.events[event].push({ callback, once: false });
 

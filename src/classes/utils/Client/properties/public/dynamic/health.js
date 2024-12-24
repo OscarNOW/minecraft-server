@@ -1,5 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
-
 module.exports = {
     health: {
         info: {
@@ -9,20 +7,12 @@ module.exports = {
         get() {
             return this.p._health;
         },
-        set(v, beforeReady) {
+        set(newValue, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
-            let newValue = Math.round(parseFloat(v));
-            if (newValue < 0) newValue = 0;
-            if (newValue > 20) newValue = 20;
-
-            if (Number.isNaN(newValue))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `health in  <${this.constructor.name}>.health = ${require('util').inspect(newValue)}  `, {
-                    got: arguments[0],
-                    expectationType: 'type',
-                    expectation: 'number'
-                }, null, { server: this.server, client: this }));
+            if (typeof newValue !== 'number' || isNaN(newValue) || newValue < 0 || newValue > 20)
+                throw new Error(`health must be an integer between 0 and 20, received ${newValue} (${typeof newValue})`);
 
             const oldValue = this.health;
             this.p._health = newValue;

@@ -1,5 +1,4 @@
 const { blocks } = require('./loader/data.js');
-const CustomError = require('../classes/utils/CustomError.js');
 
 function getBlockStateId(blockName, state = {}, { function: func } = {}) {
     if (findInCache(blockName, state)) return findInCache(blockName, state);
@@ -10,15 +9,7 @@ function getBlockStateId(blockName, state = {}, { function: func } = {}) {
     let stateIds = [];
     for (const { name, values } of block[2]) {
         if (values.indexOf(state[name]) === -1)
-            throw new CustomError('expectationNotMet', 'libraryUser', `stateValue in   <${this.constructor.name}>.${func}(${require('util').inspect(blockName)}, ..., { ${name}: stateValue })  `, [true, false].sort().join(',') === values.sort().join(',') ? {
-                got: state[name],
-                expectationType: 'type',
-                expectation: 'boolean'
-            } : {
-                got: state[name],
-                expectationType: 'value',
-                expectation: values
-            }, func ? this[func] : getBlockStateId).toString()
+            throw new Error(`Unknown state value "${state[name]}", expected one of ${values.join(', ')}`);
 
         stateIds.push(values.indexOf(state[name]))
     }
@@ -81,14 +72,10 @@ function setInCache(blockName, state, stateId) {
 
 function getBlock(blockName, { function: func } = {}) {
     let block = blocks.find(a => a[0] === blockName)
-    if (block) return block
+    if (!block)
+        throw new Error(`Unknown block name "${blockName}"`);
 
-    throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  <${this.constructor.name}>.${func}(..., ${require('util').inspect(blockName)}, ...)  `, {
-        got: blockName,
-        expectationType: 'type',
-        expectation: 'blockName',
-        externalLink: '{docs}/types/blockName'
-    }, func ? this[func] : getBlock).toString()
+    return block;
 }
 
 module.exports = { getBlockStateId };

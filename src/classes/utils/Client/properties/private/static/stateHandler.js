@@ -82,20 +82,12 @@ module.exports = {
                 const oldIndex = states.indexOf(this.p.state);
 
                 if (!states.includes(stateName))
-                    this.p.emitError(new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
-                        got: stateName,
-                        expectationType: 'value',
-                        expectation: states.slice(oldIndex)
-                    }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
+                    throw new Error(`Unknown new state name "${stateName}"`);
 
                 const newIndex = states.indexOf(stateName);
 
                 if (newIndex <= oldIndex)
-                    this.p.emitError(new CustomError('expectationNotMet', 'library', `stateName in  <${this.constructor.name}>.p.stateHandler.updateState.set(${require('util').inspect(stateName)})  `, {
-                        got: stateName,
-                        expectationType: 'value',
-                        expectation: states.slice(oldIndex + 1)
-                    }, this.p.stateHandler.updateState.set, { server: this.server, client: this }));
+                    throw new Error(`New state must be later than previous state, newIndex ${newIndex}, oldIndex ${oldIndex}`);
 
                 this.p.state = stateName;
                 this.p.stateHandler.handleNewState.call(this, stateName);
@@ -112,11 +104,7 @@ module.exports = {
                 else if (packet === 'brand')
                     this.p.stateHandler.updateState.set.call(this, 'brandReceived');
                 else
-                    this.p.emitError(new CustomError('expectationNotMet', 'library', `packet in  <${this.constructor.name}>.p.stateHandler.updateState.packetReceived(${require('util').inspect(packet)})  `, {
-                        got: packet,
-                        expectationType: 'value',
-                        expectation: ['settings']
-                    }, this.p.stateHandler.updateState.packetReceived, { server: this.server, client: this }));
+                    throw new Error(`Don't know what to do with stateHandler packetReceived "${packet}"`);
             }
 
         }

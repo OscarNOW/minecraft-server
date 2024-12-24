@@ -1,5 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
-
 module.exports = {
     raining: {
         info: {
@@ -14,11 +12,7 @@ module.exports = {
                 return;
 
             if (typeof newValue !== 'boolean')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `raining in  <${this.constructor.name}>.raining = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'type',
-                    expectation: 'boolean'
-                }, null, { server: this.server, client: this }));
+                throw new Error(`Expected raining to be a boolean, received ${newValue} (${typeof newValue})`);
 
             const oldValue = this.raining;
             this.p._raining = newValue;

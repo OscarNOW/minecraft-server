@@ -1,5 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
-
 module.exports = {
     toxicRainLevel: {
         info: {
@@ -13,12 +11,8 @@ module.exports = {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
-            if (typeof newValue !== 'number')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `toxicRainLevel in  <${this.constructor.name}>.toxicRainLevel = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'type',
-                    expectation: 'number'
-                }, null, { server: this.server, client: this }));
+            if (typeof newValue !== 'number' || isNaN(newValue) || newValue < 0)
+                throw new Error(`toxicRainLevel must be a number bigger than 0, received ${newValue} (${typeof newValue})`);
 
             const oldValue = this.toxicRainLevel;
             this.p._toxicRainLevel = newValue;

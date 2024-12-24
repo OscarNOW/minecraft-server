@@ -26,7 +26,6 @@ const path = require('path');
 const Text = require('./Text.js');
 
 const Client = require('../utils/Client.js');
-const CustomError = require('../utils/CustomError.js');
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
@@ -139,19 +138,10 @@ class Server {
                             let imageInfo = imageSize()(info.favicon);
 
                             if (imageInfo.type !== 'png')
-                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <typeof ${imageInfo.type}> }) })  `, {
-                                    got: imageInfo.type,
-                                    expectationType: 'value',
-                                    expectation: ['png']
-                                }, this.constructor, { server: this }))
+                                throw new Error(`Favicon image type must be png, currently is ${imageInfo.type}`);
 
                             if (imageInfo.width !== 64 || imageInfo.height !== 64)
-                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `image type in  new ${this.constructor.name}({ serverList: () => ({ favicon: <dimensions of ${imageInfo.width}x${imageInfo.height}> }) })  `, {
-                                    got: `${imageInfo.width}x${imageInfo.height}`,
-                                    expectationType: 'value',
-                                    expectation: ['64x64']
-                                }, this.constructor, { server: this }))
-
+                                throw new Error(`Favicon image must be 64x64, currently is ${imageInfo.width}x${imageInfo.height}`);
                         };
 
                         return {
@@ -218,11 +208,7 @@ class Server {
                                 } else
                                     client.end(endReason)
                             else if (endReason !== null)
-                                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `endReason in  new ${this.constructor.name}({ wrongVersionConnect: () => endReason })  `, {
-                                    got: endReason,
-                                    expectationType: 'type',
-                                    expectation: 'string | null'
-                                }, this.constructor, { server: this }))
+                                throw new Error(`wrongVersionConnect endReason must be either a string or null, received ${endReason} (${typeof endReason})`);
                         };
 
                     });
@@ -276,22 +262,14 @@ class Server {
 
     on(event, callback) {
         if (!events.includes(event))
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)`, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.on, { server: this }))
+            throw new Error(`Unknown event "${event}"`);
 
         this.p.events[event].push({ callback, once: false })
     }
 
     once(event, callback) {
         if (!events.includes(event))
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)`, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.on, { server: this }))
+            throw new Error(`Unknown even "${event}"`);
 
         this.p.events[event].push({ callback, once: true })
     }

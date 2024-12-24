@@ -6,7 +6,6 @@ const { entities: clientEntities } = require('./Client/properties/public/dynamic
 const { uuid } = require('../../functions/uuid.js');
 const path = require('path');
 
-const CustomError = require('./CustomError.js')
 const Changeable = require('./Changeable.js');
 const Text = require('../exports/Text.js');
 
@@ -134,14 +133,9 @@ class Entity {
         this.sever = client.server;
         this.p.beforeRemove = beforeRemove;
 
-        let [typeId, e] = getEntity(type) || [];
+        let [typeId, e] = getEntity(type);
         if (!e)
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `type in  new ${this.constructor.name}(..., ${require('util').inspect(type)}, ..., ...)  `, {
-                got: type,
-                expectationType: 'type',
-                expectation: 'entityName',
-                externalLink: '{docs}/types/entityName'
-            }, this.constructor, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown entity type "${type}"`);
 
         this.type = type;
         this.living = e.living;
@@ -228,11 +222,7 @@ class Entity {
 
     observe(observable, cb) {
         if (!this.p.observables[observable])
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `observable in  <${this.constructor.name}>.observe(${require('util').inspect(observable)}, ...)  `, {
-                got: observable,
-                expectationType: 'value',
-                expectation: Object.keys(this.p.observables)
-            }, this.observe, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown observable "${observable}"`);
 
         this.p.observables[observable].push(cb)
     }
@@ -242,11 +232,7 @@ class Entity {
             return;
 
         if (!entityAnimations.includes(animationType))
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `animationType in  <${this.constructor.name}>.animation(${require('util').inspect(animationType)})  `, {
-                got: animationType,
-                expectationType: 'value',
-                expectation: entityAnimations
-            }, this.rawListeners, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown animation type "${animationType}"`);
 
         this.p.sendPacket('animation', {
             entityId: this.id,
@@ -268,18 +254,10 @@ class Entity {
             return;
 
         if (!sounds.find(a => a.name === sound))
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `sound in  <${this.constructor.name}>.sound({ sound: ${require('util').inspect(sound)} })  `, {
-                got: sound,
-                expectationType: 'type',
-                expectation: 'soundName',
-                externalLink: '{docs}/types/soundName'
-            }, this.sound, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown sound "${sound}"`);
+
         if (!soundChannels.includes(channel))
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `channel in  <${this.constructor.name}>.sound({ channel: ${require('util').inspect(channel)} })  `, {
-                got: channel,
-                expectationType: 'value',
-                expectation: soundChannels
-            }, this.sound, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown sound channel "${channel}"`);
 
         this.p.sendPacket('entity_sound_effect', {
             soundId: sounds.find(a => a.name === sound).id,
@@ -287,7 +265,7 @@ class Entity {
             entityId: this.id,
             volume,
             pitch
-        })
+        });
     }
 
     remove() {
@@ -331,22 +309,14 @@ class Entity {
 
     on(event, callback) {
         if (!events.includes(event))
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.on, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown event "${event}"`);
 
         this.p.events[event].push({ callback, once: false });
     }
 
     once(event, callback) {
         if (!events.includes(event))
-            this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: events
-            }, this.on, { server: this.client.server, client: this.client }))
+            throw new Error(`Unknown event "${event}"`);
 
         this.p.events[event].push({ callback, once: true });
     }
@@ -355,7 +325,7 @@ class Entity {
 function getEntity(searchName) {
     const index = entities.findIndex(({ name }) => name === searchName);
     if (index === -1)
-        return undefined;
+        return [null, null];
 
     return [index, entities[index]];
 }

@@ -1,5 +1,4 @@
 const { defaults } = require('../../../../../../settings.json');
-const CustomError = require('../../../../CustomError.js');
 
 module.exports = {
     reducedDebugInfo: {
@@ -23,11 +22,7 @@ module.exports = {
                 return;
 
             if (typeof newValue !== 'boolean')
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `reducedDebugInfo in  <${this.constructor.name}>.reducedDebugInfo = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'type',
-                    expectation: 'boolean'
-                }, null, { server: this.server, client: this }));
+                throw new Error(`Expected reducedDebugInfo to be a boolean, received ${newValue} (${typeof newValue})`);
 
             this.p._reducedDebugInfo = newValue;
 

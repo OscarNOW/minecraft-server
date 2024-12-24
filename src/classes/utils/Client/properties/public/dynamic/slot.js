@@ -1,5 +1,3 @@
-const CustomError = require('../../../../CustomError.js');
-
 module.exports = {
     slot: {
         info: {
@@ -9,19 +7,12 @@ module.exports = {
         get() {
             return this.p._slot;
         },
-        set(v, beforeReady) {
+        set(newValue, beforeReady) {
             if ((!beforeReady) && (!this.p.stateHandler.checkReady.call(this)))
                 return;
 
-            let newValue = parseInt(v);
-            newValue %= 9;
-
-            if (Number.isNaN(newValue))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `slot in  <${this.constructor.name}>.slot = ${require('util').inspect(newValue)}  `, {
-                    got: v,
-                    expectationType: 'type',
-                    expectation: 'number'
-                }, null, { server: this.server, client: this }));
+            if (typeof newValue !== 'number' || isNaN(newValue) || newValue < 0 || newValue > 9)
+                throw new Error(`slot must be an integer between 0 and 9, received ${newValue} (${typeof newValue})`);
 
             const oldValue = this.slot;
             this.p._slot = newValue;

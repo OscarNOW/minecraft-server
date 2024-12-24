@@ -1,5 +1,4 @@
 const { defaults } = require('../../../../../../settings.json');
-const CustomError = require('../../../../CustomError.js');
 
 const { gamemodes } = require('../../../../../../functions/loader/data.js');
 
@@ -23,11 +22,7 @@ module.exports = {
                 return;
 
             if (!gamemodes.includes(newValue))
-                this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `gamemode in  <${this.constructor.name}>.gamemode = ${require('util').inspect(newValue)}  `, {
-                    got: newValue,
-                    expectationType: 'value',
-                    expectation: gamemodes
-                }, null, { server: this.server, client: this }));
+                throw new Error(`Unknown gamemode "${newValue}"`);
 
             const oldValue = this.gamemode;
             this.p._gamemode = newValue;

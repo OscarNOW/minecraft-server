@@ -4,7 +4,6 @@ const { language } = require('../../settings.json');
 const fs = require('fs');
 const path = require('path');
 
-const CustomError = require('../utils/CustomError.js');
 const { formatJavaString } = require('../../functions/formatJavaString.js');
 
 const englishMessages = Object.assign({},
@@ -117,22 +116,14 @@ class Text {
 
     on(event, callback) {
         if (!this.events[event])
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.on(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: Object.keys(this.events)
-            }, this.on));
+            throw new Error(`Unknown even "${event}"`);
 
         this.events[event].push({ callback, once: false });
     }
 
     once(event, callback) {
         if (!this.events[event])
-            this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `event in  <${this.constructor.name}>.once(${require('util').inspect(event)}, ...)  `, {
-                got: event,
-                expectationType: 'value',
-                expectation: Object.keys(this.events)
-            }, this.on));
+            throw new Error(`Unknown even "${event}"`);
 
         this.events[event].push({ callback, once: true });
     }
@@ -221,11 +212,7 @@ class Text {
         for (const val of text.split('')) {
             if (isModifier) {
                 if (!textColors.find(({ char }) => char === val) && !textModifiers.find(({ char }) => char === val))
-                    throw new CustomError('expectationNotMet', 'libraryUser', `colorLetter in  ${this.constructor.name}.stringToArray(<includes colorLetter ${val}>)  `, {
-                        got: val,
-                        expectationType: 'value',
-                        expectation: [...textColors.map(({ char }) => char), ...textModifiers.map(({ char }) => char)]
-                    }, Text.stringToArray).toString()
+                    throw new Error(`Unknown special character "§${val}"`);
                 else {
                     if (textColors.find(({ char }) => char === val)) {
                         let copy = Object.assign([], currentModifiers);

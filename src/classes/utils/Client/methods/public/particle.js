@@ -1,17 +1,11 @@
 const { particles } = require('../../../../../functions/loader/data.js');
 
-const CustomError = require('../../../CustomError.js');
-
 module.exports = function (particleName, visibleFromFar, particleAmount, { x, y, z }, spread) {
     if (!this.p.stateHandler.checkReady.call(this))
         return;
 
     if (!particles.find(({ name }) => name === particleName))
-        this.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `particleName in  <${this.constructor.name}>.particle(${require('util').inspect(particleName)}, ..., ..., ..., ...)  `, {
-            got: particleName,
-            expectationType: 'value',
-            expectation: Object.keys(particles)
-        }, this.demo, { server: this.server, client: this }));
+        throw new Error(`Unknown particle name "${particleName}"`);
 
     if (!particles.find(({ name }) => name === particleName).requireData)
         this.p.sendPacket('world_particles', {
@@ -27,7 +21,7 @@ module.exports = function (particleName, visibleFromFar, particleAmount, { x, y,
             particles: particleAmount
         })
     else
-        throw new Error('Expected noDataParticle got dataParticle instead.')
+        throw new Error('Only noDataParticles are currently implemented, got a dataParticle instead');
 
 
     // else if (['block', 'block_marker', 'falling_dust'].includes(particleName))

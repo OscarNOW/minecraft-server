@@ -116,39 +116,9 @@ class Chunk {
         return chunkDataCache[this.hash];
     }
 
-    // setBlockChecks(blockName, { x, y, z }, state = {}) {
-    checkNewBlock(blockName, { x, y, z }) {
-        if (blockName === undefined)
-            throw new CustomError('expectationNotMet', 'libraryUser', `blockName in  ${this.constructor.name}.setBlock(blockName, ..., ...)  `, {
-                got: blockName,
-                expectationType: 'type',
-                expectation: 'blockName'
-            }, this.setBlock).toString()
-
-        if (x < chunkSize.x.min || x > chunkSize.x.max)
-            throw new CustomError('expectationNotMet', 'libraryUser', `x in  ${this.constructor.name}.setBlock(..., {x: x, ... }, ...)  `, {
-                got: x,
-                expectationType: 'value',
-                expectation: new Array(chunkSize.x.max - chunkSize.x.min).fill(0).map((_, i) => i + chunkSize.x.min)
-            }, this.setBlock).toString()
-
-        if (y < chunkSize.y.min || y > chunkSize.y.max)
-            throw new CustomError('expectationNotMet', 'libraryUser', `y in  ${this.constructor.name}.setBlock(..., {y: y, ... }, ...)  `, {
-                got: y,
-                expectationType: 'value',
-                expectation: new Array(chunkSize.y.max - chunkSize.y.min).fill(0).map((_, i) => i + chunkSize.y.min)
-            }, this.setBlock).toString()
-
-        if (z < chunkSize.z.min || z > chunkSize.z.max)
-            throw new CustomError('expectationNotMet', 'libraryUser', `z in  ${this.constructor.name}.setBlock(..., {z: z, ... }, ...)  `, {
-                got: z,
-                expectationType: 'value',
-                expectation: new Array(chunkSize.z.max - chunkSize.z.min).fill(0).map((_, i) => i + chunkSize.z.min)
-            }, this.setBlock).toString()
-    }
-
     updateBlock(blockName, { x, y, z }, state = {}) {
-        this.checkNewBlock(blockName, { x, y, z });
+        //will throw on fail
+        checkNewBlock(blockName, { x, y, z });
 
         if (this.p._chunk)
             this.chunk.setBlockStateId({ x, y, z }, getBlockStateId.call(this, blockName, state, { function: 'setBlock' }));
@@ -183,6 +153,20 @@ class Chunk {
 
         return this;
     }
+}
+
+function checkNewBlock(blockName, { x, y, z }) {
+    if (blockName === undefined)
+        throw new Error('blockName is undefined');
+
+    if (x < chunkSize.x.min || x > chunkSize.x.max)
+        throw new Error(`block x (${x}) is below ${chunkSize.x.min} or above ${chunkSize.x.max}`);
+
+    if (y < chunkSize.y.min || y > chunkSize.y.max)
+        throw new Error(`block y (${y}) is below ${chunkSize.y.min} or above ${chunkSize.y.max}`);
+
+    if (z < chunkSize.z.min || z > chunkSize.z.max)
+        throw new Error(`block z (${z}) is below ${chunkSize.z.min} or above ${chunkSize.z.max}`);
 }
 
 module.exports = Chunk;

@@ -1,7 +1,6 @@
 const path = require('path');
 
 const Entity = require('./Entity.js');
-const CustomError = require('./CustomError.js');
 const Text = require('../exports/Text.js');
 const { applyDefaults } = require('../../functions/applyDefaults.js');
 const { getSkinTextures } = require('../../functions/getSkinTextures');
@@ -100,11 +99,7 @@ const defaultPrivate = {
                     //slice 2 to remove the reset characters
                     name = this.name.string.slice(2);
                     if (name.length > 16)
-                        return this.client.p.emitError(new CustomError('expectationNotMet', 'libraryUser', `name in  Player.name (=) ${require('util').inspect(name)}  `, {
-                            got: name,
-                            expectationType: 'type',
-                            expectation: 'string.length <= 16'
-                        }, null, { server: this.server, client: this.client }))
+                        throw new Error(`Player name is too long for a tabItem, max length is 16, got ${name} (${name.length})`);
                 }
 
                 //no displayName, because that is only displayed in the TabItem
