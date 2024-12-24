@@ -23,7 +23,6 @@ const textModifiersWithoutReset = textModifiers.filter(({ name }) => name !== 'r
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
 
 const hiddenProperties = [
-    '_input',
     '_string',
     '_uncolored',
     '_array',
@@ -50,7 +49,7 @@ const defaultInheritedChatProperties = Object.freeze({
 });
 
 class Text {
-    constructor(text) {
+    constructor(input) {
         Object.defineProperty(this, _p, {
             configurable: false,
             enumerable: false,
@@ -60,8 +59,6 @@ class Text {
 
         for (const hiddenProperty of hiddenProperties)
             this.p[hiddenProperty] = null;
-
-        this.p._input = text || '';
 
         this.events = Object.freeze(Object.fromEntries(events.map(a => [a, []])));
 
@@ -82,6 +79,17 @@ class Text {
             for (const { callback } of this.events.change)
                 callback(this);
         };
+
+        if (!input && typeof input !== 'string')
+            throw new Error('No input received when creating Text instance');
+
+        if (typeof input === 'string') {
+            this.p.reset();
+            this.p._array = Text.stringToArray(input);
+        } else {
+            this.p.reset();
+            this.p._array = Text.parseArray(input);
+        }
     }
 
     get p() {
