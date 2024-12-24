@@ -268,6 +268,9 @@ class Server {
     }
 
     joinProxyClient(proxyClient) {
+        if (this.p.listen)
+            throw new Error('Server is not yet listening, call <Server>.listen( first');
+
         new Client(proxyClient.client, this, proxyClient.earlyInformation, this.defaultClientProperties);
     }
 
@@ -294,6 +297,10 @@ class Server {
     }
 
     async close() {
+        // if the server is not yet listening, we can just return
+        if (this.p.listen)
+            return;
+
         await wait(500); //to avoid weird bugs
 
         for (const client of this.clients) client.p.shutdown();
@@ -388,7 +395,5 @@ function parseLegacyPing(requestLeft) {
         port: request[9]
     }
 }
-
-
 
 module.exports = Server;
