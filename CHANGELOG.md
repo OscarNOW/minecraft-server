@@ -10,6 +10,7 @@
 * Improved bugs in defaultClientProperties
 * Added skinAccountUuid to Client (and Client.skinAccountUuid)
 * Optimized the Text packet output to be smaller
+* Fixed a Text bug where colors would be discarded inside a translate array component when converted to a string
 
 ## Updated dependencies
 None

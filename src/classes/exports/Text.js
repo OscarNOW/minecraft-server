@@ -177,39 +177,14 @@ class Text {
         let currentColor = 'default';
 
         for (const component of array) {
-            const componentText = getTextComponentDefaultText(component);
+            const innerText = getTextComponentDefaultInnerText(component);
+            if (innerText === '') continue;
 
-            if (componentText === '') continue;
-
-            let canExtend = true;
-            for (const currentModifier of currentModifiers)
-                if (!component.modifiers.includes(currentModifier))
-                    canExtend = false;
-
-            if (component.color !== currentColor && component.color === 'default')
-                canExtend = false;
-
-            let newMod = [];
-            if (canExtend) {
-                for (const modifier of component.modifiers)
-                    if (!currentModifiers.includes(modifier))
-                        newMod.push(modifier);
-            } else
-                newMod = component.modifiers;
-
-            if (canExtend) {
-                if (component.color !== currentColor)
-                    text += `§${textColors.find(({ name }) => name === component.color).char}`;
-            } else {
-                text += '§r';
-                if (component.color !== 'default')
-                    text += `§${textColors.find(({ name }) => name === component.color).char}`;
-            }
-
-            for (const mod of newMod)
-                text += `§${textModifiers.find(({ name }) => name === mod).char}`;
-
-            text += componentText;
+            text += getStringChangeCharacters({
+                color: currentColor,
+                modifiers: currentModifiers
+            }, component);
+            text += innerText;
 
             currentModifiers = component.modifiers;
             currentColor = component.color;
@@ -355,6 +330,45 @@ class Text {
     static parseChat(chat) {
         return deMinifyChatComponent(chat);
     }
+}
+
+function stringCanExtend(currentComponent, newComponent) {
+    for (const currentModifier of currentComponent.modifiers)
+        if (!newComponent.modifiers.includes(currentModifier))
+            return false;
+
+    if (newComponent.color !== currentComponent.color && newComponent.color === 'default')
+        return false;
+
+    return true;
+}
+
+function getStringChangeCharacters(currentComponent, newComponent) {
+    let text = '';
+
+    const canExtend = stringCanExtend(currentComponent, newComponent);
+
+    let newMod = [];
+    if (canExtend) {
+        for (const modifier of newComponent.modifiers)
+            if (!currentComponent.modifiers.includes(modifier))
+                newMod.push(modifier);
+    } else
+        newMod = newComponent.modifiers;
+
+    if (canExtend) {
+        if (newComponent.color !== currentComponent.color)
+            text += `§${textColors.find(({ name }) => name === newComponent.color).char}`;
+    } else {
+        text += '§r';
+        if (newComponent.color !== 'default')
+            text += `§${textColors.find(({ name }) => name === newComponent.color).char}`;
+    }
+
+    for (const mod of newMod)
+        text += `§${textModifiers.find(({ name }) => name === mod).char}`;
+
+    return text;
 }
 
 function parseArrayComponent(component) {
@@ -615,14 +629,23 @@ function getTextComponentTypeValue(component) {
         return ['text', ''];
 }
 
-function getTextComponentDefaultText(component) {
+function getTextComponentDefaultInnerText(component) {
     let [type, value] = getTextComponentTypeValue(component);
 
     if (type === 'text')
         return value;
 
-    if (type === 'translate')
-        return formatJavaString(englishMessages[value] ?? value, ...((component.with || []).map(getTextComponentDefaultText)));
+    if (type === 'translate') {
+        const withTexts = (component.with || []).map(currentComponent => {
+            let text = Text.arrayToString(currentComponent);
+
+            // add reset characters at the end of the string, so that the style returns to the original text
+            text += getStringChangeCharacters(currentComponent, component);
+
+            return text;
+        });
+        return formatJavaString(englishMessages[value] ?? value, ...withTexts);
+    }
 
     if (type === 'keybind')
         return keybinds.find(({ code }) => code === component.keybind).default;
