@@ -1,3 +1,8 @@
-rename <Text>.hoverEvent to <Text>.hoverText
++only use CustomError for Client misbehaviors, and just do throw new Error for all others
+    Create a better system for Client misbehaviors
+    Make sure the code doesn't continue
 
-only use CustomError for Client misbehaviors, and just do throw new Error for all others
+remove .p.input (or something like that) from Text, and just immediately parse and check the input
+Replace dead wiki.vg links in codebase with active ones
+Remove <Client>.window as it's not implemented
+don't check for client ready everywhere, but check it in sendPacket and just wait to send the packets that where sent before the client was ready after the client is ready
