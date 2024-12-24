@@ -102,7 +102,7 @@ if (debug) {
                         expected: stringify(expected),
                         index,
                         id
-                    })
+                    });
                 } else {
 
                     if (verbose)
@@ -133,7 +133,20 @@ if (debug) {
                 console.log('TEST RESULTED IN ERROR:')
             }
 
-            throw err
+            jsonOut.failed.push({
+                got: err,
+                expected: 'no error',
+                class: val.class,
+                index,
+                id: undefined
+            });
+            testsFailed.push({
+                class: val.class,
+                got: stringify(err),
+                expected: stringify('no error'),
+                index,
+                id: undefined
+            });
         }
     }
 
