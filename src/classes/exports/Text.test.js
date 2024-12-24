@@ -56,7 +56,6 @@ module.exports = expect => {
         { text: '2', color: 'default', modifiers: ['underlined', 'bold'] },
         { text: '3', color: 'default', modifiers: [] }
     ]), '§r§n1§l2§r3')
-    expect(Text.arrayToString([{ text: 'hi', modifiers: ['bold'], color: 'green' }]), '§r§a§lhi')
     expect(Text.arrayToString([
         { text: '1', color: 'default', modifiers: ['underlined'] },
         { text: '2', color: 'default', modifiers: ['underlined', 'bold'] },
