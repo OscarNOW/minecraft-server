@@ -543,7 +543,6 @@ export class Client {
         skinAccountUuid?: string;
         ping?: number | null;
     }): Promise<TabItem>;
-    window(windowType: nonEntityWindowName): void;
     closeWindow(): void;
     signEditor(signLocation: {
         x: number;
