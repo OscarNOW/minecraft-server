@@ -390,9 +390,14 @@ function parseArrayComponent(component) {
             modifiers: []
         }
     else {
+        let modifiers = component.modifiers;
+        if (!modifiers) modifiers = [];
+        if (!Array.isArray(modifiers)) modifiers = [modifiers];
+        modifiers = [...new Set(modifiers)].sort();
+
         out = {
             color: component.color || 'default',
-            modifiers: [...new Set(component.modifiers || [])].sort()
+            modifiers
         }
 
         const [type, value] = getTextComponentTypeValue(component);

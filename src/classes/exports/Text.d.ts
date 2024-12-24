@@ -109,7 +109,7 @@ type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayCompone
 type optionalTextArrayComponent = string | number | boolean | {
     text: string;
     color?: textColor;
-    modifiers?: textModifier[];
+    modifiers?: textModifier[] | textModifier;
 
     insertion?: string;
     clickEvent?: {
@@ -123,7 +123,7 @@ type optionalTextArrayComponent = string | number | boolean | {
 } | {
     keybind: keycode;
     color?: textColor;
-    modifiers?: textModifier[];
+    modifiers?: textModifier[] | textModifier;
 
     insertion?: string;
     clickEvent?: {
@@ -139,7 +139,7 @@ type optionalTextArrayComponent = string | number | boolean | {
     with?: optionalTextArray; //todo: maybe give better name
 
     color?: textColor;
-    modifiers?: textModifier[];
+    modifiers?: textModifier[] | textModifier;
 
     insertion?: string;
     clickEvent?: {
