@@ -105,7 +105,52 @@ type textArrayComponent = {
 
 type textInput = optionalTextArray;
 type optionalTextArray = optionalTextArrayComponent[] | optionalTextArrayComponent;
-type optionalTextArrayComponent = string | number | boolean | Partial<textArrayComponent>;
+
+type optionalTextArrayComponent = string | number | boolean | {
+    text: string;
+    color?: textColor;
+    modifiers?: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: textArrayComponent[];
+    };
+} | {
+    keybind: keycode;
+    color?: textColor;
+    modifiers?: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: textArrayComponent[];
+    };
+} | {
+    translate: chatTranslate;
+    with?: optionalTextArray; //todo: maybe give better name
+
+    color?: textColor;
+    modifiers?: textModifier[];
+
+    insertion?: string;
+    clickEvent?: {
+        action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
+        value: string | number;
+    };
+    hoverEvent?: { //todo: change to hoverText
+        action: 'show_text';
+        value: textArrayComponent[];
+    };
+};
 
 type chatComponent = string | number | boolean | chatComponent[] | {
     text: string;

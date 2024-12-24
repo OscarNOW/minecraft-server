@@ -398,8 +398,12 @@ function parseArrayComponent(component) {
         const [type, value] = getTextComponentTypeValue(component);
         out[type] = value;
 
-        if (type === 'translate' && component.with)
+        if (type === 'translate' && component.with) {
+            if (!Array.isArray(out.with))
+                out.with = [out.with];
+
             out.with = component.with.map(parseArrayComponent);
+        }
 
         if (component.insertion)
             out.insertion = component.insertion;
