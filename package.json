@@ -12,7 +12,7 @@
         "types": "node ./scripts/types",
         "updateVersionFiles": "node ./scripts/updateVersionFiles",
         "docs": "node ./src/docs/generate",
-        "eslint": "npx eslint ./src/ ./examples/ ./scripts/ index.js --max-warnings 0"
+        "eslint": "npx eslint ./src/ ./examples/ ./scripts/ index.js"
     },
     "keywords": [
         "minecraft",
