@@ -67,10 +67,7 @@ type textArrayComponent = {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: textArrayComponent[];
 } | {
     keybind: keycode;
     color: textColor;
@@ -81,10 +78,7 @@ type textArrayComponent = {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: textArrayComponent[];
 } | {
     translate: chatTranslate;
     with: textArrayComponent[]; //todo: maybe give better name
@@ -97,10 +91,7 @@ type textArrayComponent = {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: textArrayComponent[];
 };
 
 type textInput = optionalTextArray;
@@ -116,10 +107,7 @@ type optionalTextArrayComponent = string | number | boolean | {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: optionalTextArray;
 } | {
     keybind: keycode;
     color?: textColor;
@@ -130,10 +118,7 @@ type optionalTextArrayComponent = string | number | boolean | {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: optionalTextArray;
 } | {
     translate: chatTranslate;
     with?: optionalTextArray; //todo: maybe give better name
@@ -146,10 +131,7 @@ type optionalTextArrayComponent = string | number | boolean | {
         action: 'open_url' | 'run_command' | 'suggest_command' | 'change_page'; //todo: convert to better names
         value: string | number;
     };
-    hoverEvent?: { //todo: change to hoverText
-        action: 'show_text';
-        value: textArrayComponent[];
-    };
+    hoverText: optionalTextArray;
 };
 
 type chatComponent = string | number | boolean | chatComponent[] | {

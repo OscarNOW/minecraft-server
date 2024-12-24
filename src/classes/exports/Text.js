@@ -46,7 +46,7 @@ const defaultInheritedChatProperties = Object.freeze({
     color: 'reset',
     insertion: '',
     clickEvent: { action: 'change_page', value: 0 },
-    hoverEvent: { action: 'show_text', value: '' },
+    hoverText: '',
     ...Object.fromEntries(textModifiersWithoutReset.map(({ name }) => [name, false]))
 });
 
@@ -425,17 +425,8 @@ function parseArrayComponent(component) {
                 value: component.clickEvent.value
             }
 
-        if (
-            component.hoverEvent &&
-            component.hoverEvent.action &&
-            ['show_text'].includes(component.hoverEvent.action) &&
-            component.hoverEvent.value &&
-            component.hoverEvent.value !== undefined
-        )
-            out.hoverEvent = {
-                action: component.hoverEvent.action,
-                value: Text.parseArray(component.hoverEvent.value)
-            }
+        if (component.hoverText)
+            out.hoverText = Text.parseArray(component.hoverText);
     }
 
     return out;
@@ -503,7 +494,7 @@ function minifyChatComponent(chat, inherited) {
     return chat;
 }
 
-function convertArrayComponentToChatComponent({ with: wit, color, modifiers, insertion, clickEvent, hoverEvent } = {}) {
+function convertArrayComponentToChatComponent({ with: wit, color, modifiers, insertion, clickEvent, hoverText } = {}) {
     let out = {
         color: textColorsWithDefault.find(({ name }) => name === color).minecraftName,
         ...convertModifierArrayToObject(modifiers)
@@ -533,10 +524,10 @@ function convertArrayComponentToChatComponent({ with: wit, color, modifiers, ins
             value: 0
         }
 
-    if (hoverEvent)
+    if (hoverText)
         out.hoverEvent = {
-            action: hoverEvent.action,
-            value: Text.arrayToChat(hoverEvent.value)
+            action: 'show_text',
+            value: Text.arrayToChat(hoverText)
         }
     else
         out.hoverEvent = {
