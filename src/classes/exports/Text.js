@@ -181,66 +181,38 @@ class Text {
 
             if (componentText === '') continue;
 
-            let modCanExtend = true;
+            let canExtend = true;
             for (const currentModifier of currentModifiers)
                 if (!component.modifiers.includes(currentModifier))
-                    modCanExtend = false;
+                    canExtend = false;
+
+            if (component.color !== currentColor && component.color === 'default')
+                canExtend = false;
 
             let newMod = [];
-            if (modCanExtend)
+            if (canExtend) {
                 for (const modifier of component.modifiers)
                     if (!currentModifiers.includes(modifier))
                         newMod.push(modifier);
+            } else
+                newMod = component.modifiers;
 
-            if (component.color === currentColor)
-                if (modCanExtend) {
-                    currentModifiers = component.modifiers;
-                    for (const v of newMod)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
-
-                    text += componentText;
-                } else {
-                    currentModifiers = component.modifiers;
-                    text += '§r';
-                    if (component.color !== 'default')
-                        text += `§${textColors.find(({ name }) => name === component.color).char}`;
-
-                    for (const modifier of component.modifiers)
-                        text += `§${textModifiers.find(({ name }) => name === modifier).char}`;
-
-                    text += componentText;
-                }
-            else if (component.color === 'default') {
-                currentColor = 'default';
-                currentModifiers = component.modifiers;
-                text += '§r';
-
-                for (const modifier of component.modifiers)
-                    text += `§${textModifiers.find(({ name }) => name === modifier).char}`;
-
-                text += componentText;
-
-            } else {
-                currentColor = component.color;
-                currentModifiers = component.modifiers;
-
-                if (modCanExtend) {
+            if (canExtend) {
+                if (component.color !== currentColor)
                     text += `§${textColors.find(({ name }) => name === component.color).char}`;
-
-                    for (const v of newMod)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
-
-                    text += componentText;
-                } else {
-                    text += `§r§${textColors.find(({ name }) => name === component.color).char}`;
-
-                    for (const v of component.modifiers)
-                        text += `§${textModifiers.find(({ name }) => name === v).char}`;
-
-                    text += componentText;
-                }
-
+            } else {
+                text += '§r';
+                if (component.color !== 'default')
+                    text += `§${textColors.find(({ name }) => name === component.color).char}`;
             }
+
+            for (const mod of newMod)
+                text += `§${textModifiers.find(({ name }) => name === mod).char}`;
+
+            text += componentText;
+
+            currentModifiers = component.modifiers;
+            currentColor = component.color;
         }
 
         return text;
