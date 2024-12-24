@@ -9,6 +9,7 @@
 ## Code issues fixed
 * Improved bugs in defaultClientProperties
 * Added skinAccountUuid to Client (and Client.skinAccountUuid)
+* Optimized the Text packet output to be smaller
 
 ## Updated dependencies
 None

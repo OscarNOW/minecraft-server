@@ -4,6 +4,9 @@ const { language } = require('../../settings.json');
 const fs = require('fs');
 const path = require('path');
 
+const CustomError = require('../utils/CustomError.js');
+const { formatJavaString } = require('../../functions/formatJavaString.js');
+
 const englishMessages = Object.assign({},
     JSON.parse(
         fs.readFileSync(
@@ -16,9 +19,6 @@ const englishMessages = Object.assign({},
         ).toString()
     )
 );
-
-const CustomError = require('../utils/CustomError.js');
-const { formatJavaString } = require('../../functions/formatJavaString.js');
 
 const textModifiersWithoutReset = textModifiers.filter(({ name }) => name !== 'reset');
 const textColorsWithDefault = [...textColors, { char: 'r', name: 'default', minecraftName: 'reset' }];
@@ -563,10 +563,10 @@ function convertChatComponentTextToPrimitive(text) {
 function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
     let difference = 0;
 
-    if (a.color !== b.color) difference += `,color:"${b.color}"`.length; //todo: value is not being escaped. Use JSON.stringify instead
+    if (a.color !== b.color) difference += `,color:${JSON.stringify(b.color)}`.length;
     if (a.insertion !== b.insertion)
         if (b.insertion !== undefined)
-            difference += `,insertion:"${b.insertion}"`.length; //todo: value is not being escaped. Use JSON.stringify instead
+            difference += `,insertion:${JSON.stringify(b.insertion)}`.length;
         else
             difference += ',insertion:""'.length;
 
@@ -575,7 +575,7 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         (a.clickEvent?.value !== b.clickEvent?.value)
     )
         if (b.clickEvent !== undefined)
-            difference += `,clickEvent:{action:"${b.clickEvent?.action}",value:"${b.clickEvent?.value}"}`.length; //todo: values are not being escaped. Use JSON.stringify instead
+            difference += `,clickEvent:{action:${JSON.stringify(b.clickEvent?.action)},value:${JSON.stringify(b.clickEvent?.value)}}`.length;
         else
             difference += ',clickEvent:{action:"change_page",value:0}'.length;
 
@@ -585,13 +585,13 @@ function chatComponentInheritablePropertiesDifferenceAmount(a, b) {
         ((a.hoverEvent && b.hoverEvent) ? !compareChatComponentInheritableProperties(a.hoverEvent?.value, b.hoverEvent?.value) : false)
     )
         if (b.hoverEvent !== undefined)
-            difference += `,hoverEvent:{action:"${b.hoverEvent?.action}",value:${JSON.stringify(b.hoverEvent?.value)}}`.length; //todo: b.hoverEvent.action is not being escaped. Use JSON.stringify instead
+            difference += `,hoverEvent:{action:${JSON.stringify(b.hoverEvent?.action)},value:${JSON.stringify(b.hoverEvent?.value)}}`.length;
         else
             difference += ',hoverEvent:{action:"show_text",value:""}'.length;
 
     for (const { name } of textModifiersWithoutReset)
         if (a[name] !== b[name])
-            difference += `,${name}:${b[name]}`.length;
+            difference += `,${name}:${JSON.stringify(b[name])}`.length;
 
     return difference;
 }
@@ -613,7 +613,7 @@ function compareChatComponentInheritableProperties(a, b) {
     return true;
 }
 
-function compareChatComponentInheritableProperty(a, b, name) { //todo: make more clear what this function returns. Maybe rename to chatComponentInheritablePropertyEquals
+function compareChatComponentInheritableProperty(a, b, name) {
     if (typeof a !== typeof b) return false;
 
     if (
@@ -644,7 +644,7 @@ function getTextComponentTypeValue(component) {
 }
 
 function getTextComponentDefaultText(component) {
-    let [type, value] = getTextComponentTypeValue(component); //todo: why is this function being used?
+    let [type, value] = getTextComponentTypeValue(component);
 
     if (type === 'text')
         return value;
