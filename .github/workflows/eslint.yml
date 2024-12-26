@@ -29,7 +29,7 @@ jobs:
         with:
           timeout_minutes: 2
           max_attempts: 3
-          command: npm ci
+          command: npm i
 
       - name: Run ESLint
         run: npm run eslint

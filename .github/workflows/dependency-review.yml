@@ -14,12 +14,5 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Check if changed
-        uses: MarceloPrado/has-changed-path@v1.0
-        id: changed
-        with:
-          paths: package.json package-lock.json .github/workflows/dependency-review.yml
-
       - name: Dependency Review
-        if: steps.changed.outputs.changed == 'true'
         uses: actions/dependency-review-action@v2
