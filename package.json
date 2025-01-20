@@ -38,7 +38,7 @@
         "axios": "^1.7.9",
         "endian-toggle": "^0.0.0",
         "image-size": "^1.2.0",
-        "minecraft-protocol": "^1.51.0",
+        "minecraft-protocol": "^1.54.0",
         "prismarine-chunk": "^1.38.1",
         "protodef": "^1.18.0"
     },
